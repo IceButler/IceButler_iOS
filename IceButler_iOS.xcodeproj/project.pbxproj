@@ -274,7 +274,6 @@
 		A28A763D29D54D6F00D127EA /* Cart */ = {
 			isa = PBXGroup;
 			children = (
-				A28A765329D749AC00D127EA /* Cells */,
 				A28A763E29D54DEF00D127EA /* Cart.storyboard */,
 				A28A764129D54EFA00D127EA /* CartViewController.swift */,
 			);
@@ -293,6 +292,10 @@
 		A28A764A29D6F00500D127EA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				A28A765429D749C700D127EA /* CartMainTableViewCell.swift */,
+				A28A765529D749C700D127EA /* CartMainTableViewCell.xib */,
+				A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */,
+				A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -319,17 +322,6 @@
 			children = (
 			);
 			path = Cart;
-			sourceTree = "<group>";
-		};
-		A28A765329D749AC00D127EA /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				A28A765429D749C700D127EA /* CartMainTableViewCell.swift */,
-				A28A765529D749C700D127EA /* CartMainTableViewCell.xib */,
-				A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */,
-				A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
