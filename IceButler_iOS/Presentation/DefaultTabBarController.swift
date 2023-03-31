@@ -33,8 +33,6 @@ class DefaultTabBarController: UITabBarController {
     }
     
     private func setLayoutTabBar() {
-        tabBar.layer.borderWidth = 0.5
-        tabBar.layer.borderColor = UIColor.blue.cgColor // TODO: 디자인 확정되면 border color 수정 예정
         tabBar.clipsToBounds = true
         
         tabBar.unselectedItemTintColor = .black

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="FPG-05-qZe">
+            <objects>
+                <navigationController id="CG3-pf-V1a" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HKN-HZ-WxC">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="CJy-Vd-mfx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P3x-Xq-AZn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-673" y="-2"/>
+        </scene>
+        <!--Cart View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="CartViewController" id="Y6W-OH-hqX" customClass="CartViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jik-K7-b5P">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUh-AB-WlM">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1650"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4rK-Xs-Q3R">
+                                                <rect key="frame" x="16" y="9" width="361" height="1641"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="STO-Ox-bLF" customClass="CartMainTableViewCell" customModule="IceButler_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="50" width="361" height="43.666667938232422"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="STO-Ox-bLF" id="SpX-hZ-VAi">
+                                                            <rect key="frame" x="0.0" y="0.0" width="361" height="43.666667938232422"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="4rK-Xs-Q3R" firstAttribute="leading" secondItem="OUh-AB-WlM" secondAttribute="leading" constant="16" id="Cxx-aT-OrP"/>
+                                            <constraint firstItem="4rK-Xs-Q3R" firstAttribute="top" secondItem="OUh-AB-WlM" secondAttribute="top" constant="9" id="QgV-ay-FA4"/>
+                                            <constraint firstAttribute="height" constant="1650" id="m25-41-3Se"/>
+                                            <constraint firstAttribute="bottom" secondItem="4rK-Xs-Q3R" secondAttribute="bottom" id="wps-qK-OI1"/>
+                                            <constraint firstAttribute="trailing" secondItem="4rK-Xs-Q3R" secondAttribute="trailing" constant="16" id="zOd-Qv-uEA"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="OUh-AB-WlM" firstAttribute="width" secondItem="3dM-hU-VfC" secondAttribute="width" id="kIz-Fl-yTo"/>
+                                    <constraint firstItem="OUh-AB-WlM" firstAttribute="trailing" secondItem="Fwo-TO-Kr0" secondAttribute="trailing" constant="240" id="kIz-eA-i5r"/>
+                                    <constraint firstItem="OUh-AB-WlM" firstAttribute="bottom" secondItem="Fwo-TO-Kr0" secondAttribute="bottom" constant="128" id="lws-ub-OKq"/>
+                                    <constraint firstItem="OUh-AB-WlM" firstAttribute="leading" secondItem="Fwo-TO-Kr0" secondAttribute="leading" id="nyt-eD-7I0"/>
+                                    <constraint firstItem="OUh-AB-WlM" firstAttribute="top" secondItem="Fwo-TO-Kr0" secondAttribute="top" id="x37-9M-SWG"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Fwo-TO-Kr0"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="3dM-hU-VfC"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiL-ij-FjJ">
+                                <rect key="frame" x="325" y="740" width="48" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="EVX-1p-L4k"/>
+                                    <constraint firstAttribute="width" constant="48" id="Wmy-Th-9rc"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
+                                <connections>
+                                    <action selector="didTapAddFoodButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zqn-R0-dO8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="jik-K7-b5P" secondAttribute="bottom" id="3D1-WB-Pv8"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="tiL-ij-FjJ" secondAttribute="trailing" constant="20" id="DZA-vn-2dV"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jik-K7-b5P" secondAttribute="trailing" id="OTU-zj-bbo"/>
+                            <constraint firstItem="jik-K7-b5P" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="QN3-eC-yPf"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="tiL-ij-FjJ" secondAttribute="bottom" constant="30" id="n2o-6r-nl5"/>
+                            <constraint firstItem="jik-K7-b5P" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="w8P-Mc-fZO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="psB-QL-6uc">
+                        <barButtonItem key="leftBarButtonItem" image="cartBarTitle" id="0yu-Jq-qUU">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="map" id="2Ge-a1-suB">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addFoodButton" destination="tiL-ij-FjJ" id="ci0-hE-ddF"/>
+                        <outlet property="cartMainTableView" destination="4rK-Xs-Q3R" id="rrR-D0-tbR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138.1679389312977" y="-2.1126760563380285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="cartBarTitle" width="61" height="17"/>
+        <image name="map" width="21" height="22"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
