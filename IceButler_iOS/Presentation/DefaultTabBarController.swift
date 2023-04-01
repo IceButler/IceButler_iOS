@@ -35,8 +35,8 @@ class DefaultTabBarController: UITabBarController {
     private func setLayoutTabBar() {
         tabBar.clipsToBounds = true
         
-        tabBar.unselectedItemTintColor = .black
-        tabBar.tintColor = .black
+        tabBar.unselectedItemTintColor = .lightGray
+        tabBar.tintColor = .signatureBlue
         tabBar.barTintColor = .white
     }
     
