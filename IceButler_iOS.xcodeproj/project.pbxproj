@@ -18,6 +18,15 @@
 		73F0D27E29D3569E0038BD0C /* Basket.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F0D27D29D3569E0038BD0C /* Basket.storyboard */; };
 		73F0D28029D356AC0038BD0C /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D27F29D356AC0038BD0C /* BasketViewController.swift */; };
 		7593A9D6AB4309D589AD972D /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236010665AA2D8D3B10A8DC6 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
+		A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */; };
+		A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */; };
+		A28A763F29D54DEF00D127EA /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A28A763E29D54DEF00D127EA /* Cart.storyboard */; };
+		A28A764229D54EFA00D127EA /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A764129D54EFA00D127EA /* CartViewController.swift */; };
+		A28A764429D54F1C00D127EA /* DefaultTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A764329D54F1C00D127EA /* DefaultTabBarController.swift */; };
+		A28A764729D5527A00D127EA /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A764629D5527A00D127EA /* UIDevice+.swift */; };
+		A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A764829D6B36E00D127EA /* UIColor+.swift */; };
+		A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A765429D749C700D127EA /* CartMainTableViewCell.swift */; };
+		A28A765729D749C700D127EA /* CartMainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A28A765529D749C700D127EA /* CartMainTableViewCell.xib */; };
 		A3161DBC2E056703BF1932B1 /* Pods_IceButler_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +68,15 @@
 		73F0D27F29D356AC0038BD0C /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
 		802F4E91FBD50A88599AD4EE /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
+		A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCollectionViewCell.xib; sourceTree = "<group>"; };
+		A28A763E29D54DEF00D127EA /* Cart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cart.storyboard; sourceTree = "<group>"; };
+		A28A764129D54EFA00D127EA /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		A28A764329D54F1C00D127EA /* DefaultTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabBarController.swift; sourceTree = "<group>"; };
+		A28A764629D5527A00D127EA /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
+		A28A764829D6B36E00D127EA /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		A28A765429D749C700D127EA /* CartMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartMainTableViewCell.swift; sourceTree = "<group>"; };
+		A28A765529D749C700D127EA /* CartMainTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartMainTableViewCell.xib; sourceTree = "<group>"; };
 		D28456CA7BE41F836612B66E /* Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E470A0018DCDEB6D049D1645 /* Pods-IceButler_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,11 +158,10 @@
 			isa = PBXGroup;
 			children = (
 				73F0D26929D2E0500038BD0C /* App */,
-				73F0D26A29D2E05A0038BD0C /* Domain */,
 				73F0D27029D2E1260038BD0C /* Global */,
 				73F0D24729D2E0000038BD0C /* Info.plist */,
-				73F0D26B29D2E0600038BD0C /* Network */,
-				73F0D26F29D2E1130038BD0C /* Scene */,
+				73F0D26B29D2E0600038BD0C /* Data */,
+				73F0D26F29D2E1130038BD0C /* Presentation */,
 			);
 			path = IceButler_iOS;
 			sourceTree = "<group>";
@@ -175,28 +192,21 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		73F0D26A29D2E05A0038BD0C /* Domain */ = {
+		73F0D26B29D2E0600038BD0C /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				73F0D26E29D2E1070038BD0C /* ViewModel */,
 				73F0D26C29D2E0BF0038BD0C /* Service */,
-			);
-			path = Domain;
-			sourceTree = "<group>";
-		};
-		73F0D26B29D2E0600038BD0C /* Network */ = {
-			isa = PBXGroup;
-			children = (
 				73F0D26D29D2E0CA0038BD0C /* Model */,
 			);
-			path = Network;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		73F0D26C29D2E0BF0038BD0C /* Service */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Service;
+			name = Service;
+			path = ../Domain/IceButler_iOS/Data/Service;
 			sourceTree = "<group>";
 		};
 		73F0D26D29D2E0CA0038BD0C /* Model */ = {
@@ -206,25 +216,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		73F0D26E29D2E1070038BD0C /* ViewModel */ = {
+		73F0D26F29D2E1130038BD0C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		73F0D26F29D2E1130038BD0C /* Scene */ = {
-			isa = PBXGroup;
-			children = (
+				A28A764C29D6F01F00D127EA /* ViewModels */,
+				A28A764B29D6F01200D127EA /* ViewControllers */,
+				A28A764A29D6F00500D127EA /* Cells */,
 				73F0D27729D2E2DC0038BD0C /* Basket */,
-				73F0D27629D2E2D60038BD0C /* Auth */,
+				A28A764329D54F1C00D127EA /* DefaultTabBarController.swift */,
 			);
-			path = Scene;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		73F0D27029D2E1260038BD0C /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				A28A764529D5526D00D127EA /* Extensions */,
 				73F0D27229D2E1380038BD0C /* Splash */,
 				73F0D27129D2E12C0038BD0C /* Resource */,
 			);
@@ -251,7 +258,8 @@
 			isa = PBXGroup;
 			children = (
 			);
-			path = Auth;
+			name = Auth;
+			path = ../Auth;
 			sourceTree = "<group>";
 		};
 		73F0D27729D2E2DC0038BD0C /* Basket */ = {
@@ -261,6 +269,59 @@
 				73F0D27F29D356AC0038BD0C /* BasketViewController.swift */,
 			);
 			path = Basket;
+			sourceTree = "<group>";
+		};
+		A28A763D29D54D6F00D127EA /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				A28A763E29D54DEF00D127EA /* Cart.storyboard */,
+				A28A764129D54EFA00D127EA /* CartViewController.swift */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		A28A764529D5526D00D127EA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A28A764629D5527A00D127EA /* UIDevice+.swift */,
+				A28A764829D6B36E00D127EA /* UIColor+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A28A764A29D6F00500D127EA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A28A765429D749C700D127EA /* CartMainTableViewCell.swift */,
+				A28A765529D749C700D127EA /* CartMainTableViewCell.xib */,
+				A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */,
+				A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		A28A764B29D6F01200D127EA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				73F0D27629D2E2D60038BD0C /* Auth */,
+				A28A763D29D54D6F00D127EA /* Cart */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A28A764C29D6F01F00D127EA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A28A764D29D6F0CD00D127EA /* Cart */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A28A764D29D6F0CD00D127EA /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,9 +433,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */,
+				A28A763F29D54DEF00D127EA /* Cart.storyboard in Resources */,
 				73F0D24629D2E0000038BD0C /* LaunchScreen.storyboard in Resources */,
 				73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */,
 				73F0D27E29D3569E0038BD0C /* Basket.storyboard in Resources */,
+				A28A765729D749C700D127EA /* CartMainTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,9 +566,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */,
+				A28A764429D54F1C00D127EA /* DefaultTabBarController.swift in Sources */,
+				A28A764729D5527A00D127EA /* UIDevice+.swift in Sources */,
+				A28A764229D54EFA00D127EA /* CartViewController.swift in Sources */,
 				73F0D28029D356AC0038BD0C /* BasketViewController.swift in Sources */,
 				73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */,
 				73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */,
+				A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */,
+				A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
