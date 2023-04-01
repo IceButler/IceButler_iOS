@@ -16,6 +16,7 @@ class CartViewController: UIViewController {
 
     @IBOutlet weak var cartMainTableView: UITableView!
     @IBOutlet weak var addFoodButton: UIButton!
+    @IBOutlet weak var alertView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,18 @@ class CartViewController: UIViewController {
     @IBAction func didTapAddFoodButton(_ sender: UIButton) {
         // TODO: 식품 추가 커스텀 팝업 띄우기
     }
+    
+    
+    @IBAction func didTapDeleteFoodButton(_ sender: UIButton) {
+        // TODO: 선택된 식품 삭제 (커스텀 alert 화면으로 전환)
+        print("didTapDeleteFoodButton")
+    }
+    
+    @IBAction func didTapCompleteButton(_ sender: UIButton) {
+        // TODO: 장보기 완료 로직 추가 (커스텀 alert 화면으로 전환)
+        print("didTapCompleteButton")
+    }
+    
     
     private func setupNavigationBar() {
         /// setting status bar background color
@@ -58,6 +71,7 @@ class CartViewController: UIViewController {
     }
     
     private func setupLayout() {
+        self.alertView.layer.cornerRadius = 15
         self.addFoodButton.backgroundColor = UIColor.signatureDeepBlue
         self.addFoodButton.backgroundColor = UIColor.signatureDeepBlue
         self.addFoodButton.layer.cornerRadius = self.addFoodButton.frame.width / 2
@@ -80,9 +94,24 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartMainTableViewCell", for: indexPath) as? CartMainTableViewCell else { return UITableViewCell() }
+        cell.delegate = self
         cell.setTitle(title: categoryTitleArr[indexPath.row])
         return cell
     }
-    
-    
+}
+
+extension CartViewController: MainTableViewDelegate {
+    func setEditMode(edit: Bool) {
+        if edit {
+//            self.tabBarController?.tabBar.isHidden = true
+            self.addFoodButton.isHidden = true
+            self.alertView.backgroundColor = .signatureDeepBlue
+            self.alertView.isHidden = false
+        } else {
+//            self.tabBarController?.tabBar.isHidden = false
+            self.addFoodButton.isHidden = false
+            self.alertView.isHidden = true
+        }
+        
+    }
 }

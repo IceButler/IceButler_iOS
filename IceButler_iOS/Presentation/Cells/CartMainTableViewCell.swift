@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol MainTableViewDelegate {
+    func setEditMode(edit: Bool)
+}
+
 class CartMainTableViewCell: UITableViewCell {
+    
+    var delegate: MainTableViewDelegate?
     
     @IBOutlet weak var categoryTitleView: UIView!
     @IBOutlet weak var categoryTitleLabel: UILabel!
@@ -56,7 +62,8 @@ extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = foodCollectionView.dequeueReusableCell(withReuseIdentifier: "FoodCollectionViewCell", for: indexPath) as? FoodCollectionViewCell else { return UICollectionViewCell() }
-        cell.foodImageView.layer.cornerRadius = cell.foodImageView.frame.width / 2
+        cell.delegate = self
+        cell.foodImageButton.layer.cornerRadius = cell.foodImageButton.frame.width / 2
         return cell
     }
     
@@ -65,4 +72,13 @@ extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectio
     }
     
     
+}
+
+
+extension CartMainTableViewCell: FoodCellDelegate {
+    func setEditMode(edit: Bool) {
+        if let delegate = self.delegate {
+            delegate.setEditMode(edit: edit)
+        }
+    }
 }
