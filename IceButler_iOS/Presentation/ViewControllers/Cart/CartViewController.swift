@@ -31,13 +31,23 @@ class CartViewController: UIViewController {
     
     
     @IBAction func didTapDeleteFoodButton(_ sender: UIButton) {
-        // TODO: 선택된 식품 삭제 (커스텀 alert 화면으로 전환)
-        print("didTapDeleteFoodButton")
+        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
+        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
+        alertViewController.configure(title: "식품 삭제",
+                                      content: "선택하신 식품을 정말 삭제하시겠습니까?",
+                                      leftButtonTitle: "취소", righttButtonTitle: "삭제")
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        present(alertViewController, animated: true)
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        // TODO: 장보기 완료 로직 추가 (커스텀 alert 화면으로 전환)
-        print("didTapCompleteButton")
+        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
+        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
+        alertViewController.configure(title: "장보기 완료",
+                                      content: "선택하신 식품 장보기를 완료하셨습니까?",
+                                      leftButtonTitle: "취소", righttButtonTitle: "확인")
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        present(alertViewController, animated: true)
     }
     
     
