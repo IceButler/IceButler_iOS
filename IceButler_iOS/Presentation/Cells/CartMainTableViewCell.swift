@@ -15,7 +15,6 @@ class CartMainTableViewCell: UITableViewCell {
     
     var delegate: MainTableViewDelegate?
     
-    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var categoryTitleView: UIView!
     @IBOutlet weak var categoryTitleLabel: UILabel!
     @IBOutlet weak var foodCollectionView: UICollectionView!

@@ -84,6 +84,7 @@ class CartViewController: UIViewController {
         }
         
         self.navigationController?.navigationBar.backgroundColor = .signatureLightBlue
+        self.tabBarController?.tabBar.isHidden = false
         
     }
     
