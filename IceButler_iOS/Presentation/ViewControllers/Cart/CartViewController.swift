@@ -36,6 +36,8 @@ class CartViewController: UIViewController {
         alertViewController.configure(title: "식품 삭제",
                                       content: "선택하신 식품을 정말 삭제하시겠습니까?",
                                       leftButtonTitle: "취소", righttButtonTitle: "삭제")
+//        alertViewController.setLeftButtonAction(action: #selector(cancelAction(alertViewController)))
+//        alertViewController.setRightButtonAction(action: #selector(deleteAction(alertViewController)))
         alertViewController.modalPresentationStyle = .overCurrentContext
         present(alertViewController, animated: true)
     }
@@ -50,6 +52,11 @@ class CartViewController: UIViewController {
         present(alertViewController, animated: true)
     }
     
+    func cancelAction(_ sender: UIViewController) { sender.dismiss(animated: true) }
+    @objc func deleteAction(_ sender: UIViewController) {
+        print("식품 삭제 로직 추가 예정")
+        sender.dismiss(animated: true)
+    }
     
     private func setupNavigationBar() {
         /// setting status bar background color
@@ -81,6 +88,7 @@ class CartViewController: UIViewController {
     }
     
     private func setupLayout() {
+        self.cartMainTableView.backgroundColor = .clear
         self.alertView.layer.cornerRadius = 15
         self.addFoodButton.backgroundColor = UIColor.signatureDeepBlue
         self.addFoodButton.backgroundColor = UIColor.signatureDeepBlue
@@ -106,6 +114,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartMainTableViewCell", for: indexPath) as? CartMainTableViewCell else { return UITableViewCell() }
         cell.delegate = self
         cell.setTitle(title: categoryTitleArr[indexPath.row])
+        cell.backgroundColor = cell.contentView.backgroundColor
         return cell
     }
 }

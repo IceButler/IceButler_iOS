@@ -14,6 +14,9 @@ class AlertViewController: UIViewController {
     private var leftButtonTitle: String = ""
     private var righttButtonTitle: String = ""
     
+    private var leftButtonAction: Selector?
+    private var rightButtonAction: Selector?
+    
 
     @IBOutlet weak var containerView: UIView!
     
@@ -55,9 +58,16 @@ class AlertViewController: UIViewController {
         self.contentLabel.text = contentText
         self.leftButton.setTitle(self.leftButtonTitle, for: .normal)
         self.rightButton.setTitle(self.righttButtonTitle, for: .normal)
+        
+        if let _ = self.leftButtonAction,
+           let _ = self.rightButtonAction {
+            self.leftButton.addTarget(self, action: self.leftButtonAction!, for: .touchUpInside)
+            self.rightButton.addTarget(self, action: self.rightButtonAction!, for: .touchUpInside)
+        }
+        
     }
     
-//    public func setLeftButtonAction(action: ()->()) {
-//        self.leftButton.addTarget(self, action: #selector(action), for: .touchUpInside)
-//    }
+    public func setLeftButtonAction(action: Selector) { self.leftButtonAction = action }
+    public func setRightButtonAction(action: Selector) { self.rightButtonAction = action }
+    
 }

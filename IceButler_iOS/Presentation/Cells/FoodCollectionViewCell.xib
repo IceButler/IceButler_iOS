@@ -34,7 +34,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0i-SO-FV6">
-                                <rect key="frame" x="23.666666666666671" y="70" width="23" height="12"/>
+                                <rect key="frame" x="23.666666666666671" y="68" width="23" height="12"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -49,7 +49,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="S0i-SO-FV6" firstAttribute="top" secondItem="itA-xo-6RP" secondAttribute="bottom" constant="6" id="Czo-8t-mcZ"/>
+                            <constraint firstItem="S0i-SO-FV6" firstAttribute="top" secondItem="itA-xo-6RP" secondAttribute="bottom" constant="4" id="Czo-8t-mcZ"/>
                             <constraint firstItem="XWM-IY-AU5" firstAttribute="centerX" secondItem="itA-xo-6RP" secondAttribute="centerX" id="g3c-80-wVS"/>
                             <constraint firstItem="XWM-IY-AU5" firstAttribute="centerY" secondItem="itA-xo-6RP" secondAttribute="centerY" id="kpY-kf-R0K"/>
                             <constraint firstItem="S0i-SO-FV6" firstAttribute="centerX" secondItem="VT3-lo-Zia" secondAttribute="centerX" id="pMt-Jn-IUD"/>

@@ -33,14 +33,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jik-K7-b5P">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="jik-K7-b5P">
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUh-AB-WlM">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1650"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4rK-Xs-Q3R">
-                                                <rect key="frame" x="16" y="9" width="361" height="1641"/>
+                                                <rect key="frame" x="16" y="22" width="361" height="1628"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="STO-Ox-bLF" customClass="CartMainTableViewCell" customModule="IceButler_iOS" customModuleProvider="target">
@@ -49,12 +49,14 @@
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="STO-Ox-bLF" id="SpX-hZ-VAi">
                                                             <rect key="frame" x="0.0" y="0.0" width="361" height="43.666667938232422"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                         </tableViewCellContentView>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffF-Gn-RU2">
-                                                <rect key="frame" x="0.0" y="754" width="393" height="129"/>
+                                                <rect key="frame" x="0.0" y="668" width="393" height="129"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5F-r1-jze">
                                                         <rect key="frame" x="0.0" y="15" width="393" height="79"/>
@@ -103,11 +105,11 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="ffF-Gn-RU2" secondAttribute="trailing" id="AOO-eB-TCH"/>
                                             <constraint firstItem="4rK-Xs-Q3R" firstAttribute="leading" secondItem="OUh-AB-WlM" secondAttribute="leading" constant="16" id="Cxx-aT-OrP"/>
-                                            <constraint firstItem="4rK-Xs-Q3R" firstAttribute="top" secondItem="OUh-AB-WlM" secondAttribute="top" constant="9" id="QgV-ay-FA4"/>
+                                            <constraint firstItem="4rK-Xs-Q3R" firstAttribute="top" secondItem="OUh-AB-WlM" secondAttribute="top" constant="22" id="QgV-ay-FA4"/>
                                             <constraint firstItem="ffF-Gn-RU2" firstAttribute="leading" secondItem="OUh-AB-WlM" secondAttribute="leading" id="Z6B-zs-YVh"/>
                                             <constraint firstAttribute="height" constant="1650" id="m25-41-3Se"/>
                                             <constraint firstAttribute="bottom" secondItem="4rK-Xs-Q3R" secondAttribute="bottom" id="wps-qK-OI1"/>
@@ -115,6 +117,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstItem="OUh-AB-WlM" firstAttribute="width" secondItem="3dM-hU-VfC" secondAttribute="width" id="kIz-Fl-yTo"/>
                                     <constraint firstItem="OUh-AB-WlM" firstAttribute="trailing" secondItem="Fwo-TO-Kr0" secondAttribute="trailing" constant="240" id="kIz-eA-i5r"/>
@@ -141,7 +144,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="jik-K7-b5P" secondAttribute="bottom" id="3D1-WB-Pv8"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="tiL-ij-FjJ" secondAttribute="trailing" constant="20" id="DZA-vn-2dV"/>
@@ -177,9 +180,6 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="white_cart_icon" width="30" height="30"/>
         <image name="white_trash_icon" width="21" height="27"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

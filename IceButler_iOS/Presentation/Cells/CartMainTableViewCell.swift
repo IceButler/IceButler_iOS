@@ -15,6 +15,7 @@ class CartMainTableViewCell: UITableViewCell {
     
     var delegate: MainTableViewDelegate?
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var categoryTitleView: UIView!
     @IBOutlet weak var categoryTitleLabel: UILabel!
     @IBOutlet weak var foodCollectionView: UICollectionView!
@@ -29,6 +30,11 @@ class CartMainTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }      
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0))
+    }
+    
     private func setupCollectionView() {
         foodCollectionView.dataSource = self
         foodCollectionView.delegate = self
@@ -37,17 +43,12 @@ class CartMainTableViewCell: UITableViewCell {
     
     private func setupLayout() {
         selectionStyle = .none
-        categoryTitleView.layer.cornerRadius = 16
-        categoryTitleView.layer.borderWidth = 1.0
+        categoryTitleView.layer.cornerRadius = 13
+        categoryTitleView.layer.borderWidth = 1.3
         categoryTitleView.layer.borderColor = UIColor.signatureBlue.cgColor
         categoryTitleLabel.textColor = .signatureBlue
         
-        self.layer.cornerRadius = 22
-        self.layer.shadowColor = UIColor.systemGray.cgColor
-//        cell.layer.shadowColor = UIColor(red: 152/255, green: 113/255, blue: 113/255, alpha: 1).cgColor
-        self.contentView.layer.shadowRadius = 4
-        self.layer.shadowOffset = CGSize(width: 4, height: 4)
-        self.layer.shadowOpacity = 0.7
+        contentView.layer.cornerRadius = 16
     }
     
     public func setTitle(title: String) {
