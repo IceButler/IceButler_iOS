@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		66CF0EC13B3373BB87EC99CC /* Pods_IceButler_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71520AB6EE790D9359A21DBB /* Pods_IceButler_iOSTests.framework */; };
+		7339BE6D29D9898700FC7642 /* Refrigerator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7339BE6C29D9898700FC7642 /* Refrigerator.storyboard */; };
+		7339BE6F29D9899E00FC7642 /* RefrigeratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339BE6E29D9899E00FC7642 /* RefrigeratorViewController.swift */; };
+		7339BE7229D9B6C400FC7642 /* WasteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339BE7029D9B6C400FC7642 /* WasteCell.swift */; };
+		7339BE7329D9B6C400FC7642 /* WasteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7339BE7129D9B6C400FC7642 /* WasteCell.xib */; };
 		73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */; };
 		73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D23B29D2DFFE0038BD0C /* SceneDelegate.swift */; };
 		73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73F0D24229D2E0000038BD0C /* Assets.xcassets */; };
@@ -53,6 +57,10 @@
 		6C2264B9924DFAFE47B1F678 /* Pods-IceButler_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		71520AB6EE790D9359A21DBB /* Pods_IceButler_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71A4557F1B0043751FF6453B /* Pods-IceButler_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOSTests.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOSTests/Pods-IceButler_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		7339BE6C29D9898700FC7642 /* Refrigerator.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Refrigerator.storyboard; sourceTree = "<group>"; };
+		7339BE6E29D9899E00FC7642 /* RefrigeratorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefrigeratorViewController.swift; sourceTree = "<group>"; };
+		7339BE7029D9B6C400FC7642 /* WasteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasteCell.swift; sourceTree = "<group>"; };
+		7339BE7129D9B6C400FC7642 /* WasteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WasteCell.xib; sourceTree = "<group>"; };
 		73F0D23629D2DFFE0038BD0C /* IceButler_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceButler_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73F0D23B29D2DFFE0038BD0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +138,15 @@
 				71520AB6EE790D9359A21DBB /* Pods_IceButler_iOSTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7339BE6B29D9896F00FC7642 /*  Refrigerator */ = {
+			isa = PBXGroup;
+			children = (
+				7339BE6C29D9898700FC7642 /* Refrigerator.storyboard */,
+				7339BE6E29D9899E00FC7642 /* RefrigeratorViewController.swift */,
+			);
+			path = " Refrigerator";
 			sourceTree = "<group>";
 		};
 		73F0D22D29D2DFFE0038BD0C = {
@@ -296,6 +313,8 @@
 				A28A765529D749C700D127EA /* CartMainTableViewCell.xib */,
 				A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */,
 				A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */,
+				7339BE7029D9B6C400FC7642 /* WasteCell.swift */,
+				7339BE7129D9B6C400FC7642 /* WasteCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -303,6 +322,7 @@
 		A28A764B29D6F01200D127EA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7339BE6B29D9896F00FC7642 /*  Refrigerator */,
 				73F0D27629D2E2D60038BD0C /* Auth */,
 				A28A763D29D54D6F00D127EA /* Cart */,
 			);
@@ -434,6 +454,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */,
+				7339BE6D29D9898700FC7642 /* Refrigerator.storyboard in Resources */,
+				7339BE7329D9B6C400FC7642 /* WasteCell.xib in Resources */,
 				A28A763F29D54DEF00D127EA /* Cart.storyboard in Resources */,
 				73F0D24629D2E0000038BD0C /* LaunchScreen.storyboard in Resources */,
 				73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */,
@@ -572,8 +594,10 @@
 				A28A764229D54EFA00D127EA /* CartViewController.swift in Sources */,
 				73F0D28029D356AC0038BD0C /* BasketViewController.swift in Sources */,
 				73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */,
+				7339BE7229D9B6C400FC7642 /* WasteCell.swift in Sources */,
 				73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */,
 				A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */,
+				7339BE6F29D9899E00FC7642 /* RefrigeratorViewController.swift in Sources */,
 				A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
