@@ -38,6 +38,7 @@ class DefaultTabBarController: UITabBarController {
         tabBar.unselectedItemTintColor = .lightGray
         tabBar.tintColor = .signatureBlue
         tabBar.barTintColor = .white
+        tabBar.backgroundColor = .white
     }
     
     private func configureTabBar() {

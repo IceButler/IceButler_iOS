@@ -122,12 +122,12 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
 extension CartViewController: MainTableViewDelegate {
     func setEditMode(edit: Bool) {
         if edit {
-//            self.tabBarController?.tabBar.isHidden = true
+            self.tabBarController?.tabBar.isHidden = true
             self.addFoodButton.isHidden = true
             self.alertView.backgroundColor = .signatureDeepBlue
             self.alertView.isHidden = false
         } else {
-//            self.tabBarController?.tabBar.isHidden = false
+            self.tabBarController?.tabBar.isHidden = false
             self.addFoodButton.isHidden = false
             self.alertView.isHidden = true
         }
