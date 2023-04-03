@@ -13,7 +13,8 @@ class CartManager {
     
     var cartViewController: CartViewController? = nil
     var alertViewController: AlertViewController? = nil
-    var foodCollectionView: UICollectionView? = nil
+    var cartMainTV: CartMainTableViewCell? = nil
+    
     
     
     func setCartVC(cartVC: CartViewController) {
@@ -24,8 +25,8 @@ class CartManager {
         alertViewController = alertVC
     }
     
-    func setFoodCV(foodCV: UICollectionView) {
-        foodCollectionView = foodCV
+    func setCartMainTV(cartTV: CartMainTableViewCell) {
+        cartMainTV = cartTV
     }
     
     
@@ -34,7 +35,6 @@ class CartManager {
     }
     
     func reloadFoodCV() {
-        CartViewModel.shared.getCart(cartId: 1)
-        foodCollectionView?.reloadData()
+        cartMainTV?.reloadCV()
     }
 }

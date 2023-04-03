@@ -28,7 +28,7 @@ class CartViewController: UIViewController {
     }
     
     private func setupObserver() {
-        CartViewModel.shared.isremoveFoodIdxes { edit in
+        CartViewModel.shared.isRemoveFoodIdxes { edit in
             if edit {
                 self.tabBarController?.tabBar.isHidden = true
                 self.addFoodButton.isHidden = true
@@ -53,7 +53,6 @@ class CartViewController: UIViewController {
         alertViewController.configure(title: "식품 삭제",
                                       content: "선택하신 식품을 정말 삭제하시겠습니까?",
                                       leftButtonTitle: "취소", righttButtonTitle: "삭제")
-        alertViewController.delegate = self
         
 //        alertViewController.setLeftButtonAction(action: #selector(cancelAction(alertViewController)))
 //        alertViewController.setRightButtonAction(action: #selector(deleteAction(alertViewController)))
@@ -140,42 +139,8 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartMainTableViewCell", for: indexPath) as? CartMainTableViewCell else { return UITableViewCell() }
-        cell.delegate = self
         cell.setTitle(title: "전체")
         cell.backgroundColor = cell.contentView.backgroundColor
         return cell
-    }
-}
-
-extension CartViewController: MainTableViewDelegate {
-    func deleteFood(index: Int, row: Int) {
-//        print("CartViewController :: deleteFood called")
-//        let category = CartManager.shared.categoryTitleArr[row]
-//        CartManager.shared.tempFoods[category]?.remove(at: index)
-//        self.cartMainTableView.reloadData()
-    }
-    
-    func setEditMode(edit: Bool) {
-        if edit {
-            self.tabBarController?.tabBar.isHidden = true
-            self.addFoodButton.isHidden = true
-            self.alertView.backgroundColor = .signatureDeepBlue
-            self.alertView.isHidden = false
-        } else {
-            self.tabBarController?.tabBar.isHidden = false
-            self.addFoodButton.isHidden = false
-            self.alertView.isHidden = true
-        }
-        
-    }
-}
-
-extension CartViewController: AlertDelegate {
-    func deleteFoodsAction() {
-        print("deleteFoodsAction called")
-//        CartManager.shared.deleteFood()
-//        self.cartMainTableView.reloadData()
-//        self.setEditMode(edit: false)
-//        CartManager.shared.status = .done
     }
 }
