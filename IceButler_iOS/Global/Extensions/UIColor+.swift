@@ -35,4 +35,11 @@ extension UIColor{
         blue: 185/255,
         alpha: 1
     )
+
+    static let signatureDustBlue = UIColor(
+        red: 41/255,
+        green: 103/255,
+        blue: 185/255,
+        alpha: 0.2
+    )
 }

@@ -20,27 +20,41 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VT3-lo-Zia">
                         <rect key="frame" x="0.0" y="0.0" width="70" height="90"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6XY-L0-d2I">
-                                <rect key="frame" x="5.6666666666666643" y="5.6666666666666643" width="58.999999999999993" height="58.999999999999993"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itA-xo-6RP">
+                                <rect key="frame" x="6" y="6" width="58" height="58"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="59" id="AAF-Gw-9gr"/>
-                                    <constraint firstAttribute="height" constant="59" id="a0i-Be-cgW"/>
+                                    <constraint firstAttribute="width" constant="58" id="NPn-4f-xWg"/>
+                                    <constraint firstAttribute="height" constant="58" id="skD-k0-Yce"/>
                                 </constraints>
-                            </imageView>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="didTapImageButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="bgC-q7-AAU"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0i-SO-FV6">
-                                <rect key="frame" x="23.666666666666671" y="70.666666666666671" width="23" height="12"/>
+                                <rect key="frame" x="23.666666666666671" y="68" width="23" height="12"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectedCheck" translatesAutoresizingMaskIntoConstraints="NO" id="XWM-IY-AU5">
+                                <rect key="frame" x="24" y="24" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="S93-qp-Sfw"/>
+                                    <constraint firstAttribute="width" constant="22" id="TPi-t1-idw"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6XY-L0-d2I" firstAttribute="centerY" secondItem="VT3-lo-Zia" secondAttribute="centerY" constant="-10" id="Jwz-2H-9T4"/>
-                            <constraint firstItem="6XY-L0-d2I" firstAttribute="centerX" secondItem="VT3-lo-Zia" secondAttribute="centerX" id="NeR-aV-rUF"/>
-                            <constraint firstItem="S0i-SO-FV6" firstAttribute="top" secondItem="6XY-L0-d2I" secondAttribute="bottom" constant="6" id="oSm-an-pH1"/>
+                            <constraint firstItem="S0i-SO-FV6" firstAttribute="top" secondItem="itA-xo-6RP" secondAttribute="bottom" constant="4" id="Czo-8t-mcZ"/>
+                            <constraint firstItem="XWM-IY-AU5" firstAttribute="centerX" secondItem="itA-xo-6RP" secondAttribute="centerX" id="g3c-80-wVS"/>
+                            <constraint firstItem="XWM-IY-AU5" firstAttribute="centerY" secondItem="itA-xo-6RP" secondAttribute="centerY" id="kpY-kf-R0K"/>
                             <constraint firstItem="S0i-SO-FV6" firstAttribute="centerX" secondItem="VT3-lo-Zia" secondAttribute="centerX" id="pMt-Jn-IUD"/>
+                            <constraint firstItem="itA-xo-6RP" firstAttribute="centerY" secondItem="VT3-lo-Zia" secondAttribute="centerY" constant="-10" id="tQc-mE-6AB"/>
+                            <constraint firstItem="itA-xo-6RP" firstAttribute="centerX" secondItem="VT3-lo-Zia" secondAttribute="centerX" id="xy3-v1-vhl"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -53,10 +67,14 @@
                 <constraint firstAttribute="trailing" secondItem="VT3-lo-Zia" secondAttribute="trailing" id="upa-dy-LNh"/>
             </constraints>
             <connections>
-                <outlet property="foodImageView" destination="6XY-L0-d2I" id="tJc-3O-l8F"/>
+                <outlet property="foodImageButton" destination="itA-xo-6RP" id="Tiy-K8-sbB"/>
                 <outlet property="foodTitleLabel" destination="S0i-SO-FV6" id="LyN-0w-tr8"/>
+                <outlet property="selectedImageView" destination="XWM-IY-AU5" id="MTX-m9-hRH"/>
             </connections>
             <point key="canvasLocation" x="-50.381679389312978" y="19.718309859154932"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="selectedCheck" width="23" height="23"/>
+    </resources>
 </document>

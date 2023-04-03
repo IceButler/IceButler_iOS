@@ -7,19 +7,70 @@
 
 import UIKit
 
+protocol FoodCellDelegate {
+    func setEditMode(edit: Bool)
+    func deleteFoodsAction(index: Int, row: Int)
+}
+
 class FoodCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var foodImageView: UIImageView!
+    var isSelectedFood: Bool = false
+    var delegate: FoodCellDelegate?
+    
+    @IBOutlet weak var foodImageButton: UIButton!
+    @IBOutlet weak var selectedImageView: UIImageView!
     @IBOutlet weak var foodTitleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupGestureHandler()
         setupLayout()
     }
     
+    private func setupGestureHandler() {
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction(_:)))
+        self.foodImageButton.addGestureRecognizer(longPressGesture)
+    }
+    
     private func setupLayout() {
-        self.foodImageView.backgroundColor = UIColor.signatureSkyBlue
-        self.foodImageView.layer.cornerRadius = self.foodImageView.frame.width / 2
+        self.foodImageButton.backgroundColor = UIColor.signatureSkyBlue
+        self.foodImageButton.layer.cornerRadius = self.foodImageButton.frame.width / 2
+    }
+    
+    @objc func longPressAction(_ guesture: UILongPressGestureRecognizer) {
+        if guesture.state == UIGestureRecognizer.State.began {
+            self.isSelectedFood = !self.isSelectedFood
+            
+            if self.isSelectedFood && CartManager.shared.status == .processing {
+                self.foodImageButton.backgroundColor = .signatureDustBlue
+                self.selectedImageView.isHidden = false
+                self.delegate?.setEditMode(edit: true)
+                CartManager.shared.selectedRow = 0
+                CartManager.shared.selectedIndex = self.tag
+                
+            } else {
+                self.foodImageButton.backgroundColor = .signatureSkyBlue
+                self.selectedImageView.isHidden = true
+                self.delegate?.setEditMode(edit: false)
+            }
+        }
     }
 
+    @IBAction func didTapImageButton(_ sender: UIButton) {
+        if self.isSelectedFood {
+            self.foodImageButton.backgroundColor = .signatureSkyBlue
+            self.selectedImageView.isHidden = true
+            self.delegate?.setEditMode(edit: false)
+        }
+    }
+}
+
+extension FoodCollectionViewCell: AlertDelegate {
+    func deleteFoodsAction() {
+        print("tag : \(self.tag)")
+        print("FoodCollectionViewCell :: deleteFoodsAction called")
+        delegate?.deleteFoodsAction(index: self.tag, row: 0)    //  TODO:
+        CartManager.shared.status = .done
+        delegate?.setEditMode(edit: false)
+    }
 }
