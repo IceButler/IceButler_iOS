@@ -9,8 +9,8 @@ import Foundation
 
 struct GeneralResponseModel<T: Codable>: Codable {
     let data: T?
-    let transactionTime, status, description: String
-    let statusCode: Int
+    let transactionTime, status, description: String?
+    let statusCode: Int?
 
     enum CodingKeys: String, CodingKey {
         case data

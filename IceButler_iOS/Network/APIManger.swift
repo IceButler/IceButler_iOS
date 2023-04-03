@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-private let BASE_URL = "http://localhost:8080"
+private let BASE_URL = "http://43.201.26.60:8080"
 
 class APIManger {
     static let shared = APIManger()

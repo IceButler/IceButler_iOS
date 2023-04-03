@@ -40,18 +40,16 @@ class FoodCollectionViewCell: UICollectionViewCell {
     @objc func longPressAction(_ guesture: UILongPressGestureRecognizer) {
         if guesture.state == UIGestureRecognizer.State.began {
             self.isSelectedFood = !self.isSelectedFood
-            
-            if self.isSelectedFood && CartManager.shared.status == .processing {
+//            && CartManager.shared.status == .processing
+            if self.isSelectedFood  {
                 self.foodImageButton.backgroundColor = .signatureDustBlue
                 self.selectedImageView.isHidden = false
-                self.delegate?.setEditMode(edit: true)
-                CartManager.shared.selectedRow = 0
-                CartManager.shared.selectedIndex = self.tag
+                CartViewModel.shared.addRemoveIdx(removeIdx: self.tag)
                 
             } else {
+                CartViewModel.shared.removeRemoveIdx(removeIdx: self.tag)
                 self.foodImageButton.backgroundColor = .signatureSkyBlue
                 self.selectedImageView.isHidden = true
-                self.delegate?.setEditMode(edit: false)
             }
         }
     }
@@ -68,9 +66,9 @@ class FoodCollectionViewCell: UICollectionViewCell {
 extension FoodCollectionViewCell: AlertDelegate {
     func deleteFoodsAction() {
         print("tag : \(self.tag)")
-        print("FoodCollectionViewCell :: deleteFoodsAction called")
-        delegate?.deleteFoodsAction(index: self.tag, row: 0)    //  TODO:
-        CartManager.shared.status = .done
-        delegate?.setEditMode(edit: false)
+//        print("FoodCollectionViewCell :: deleteFoodsAction called")
+//        delegate?.deleteFoodsAction(index: self.tag, row: 0)    //  TODO:
+//        CartManager.shared.status = .done
+//        delegate?.setEditMode(edit: false)
     }
 }

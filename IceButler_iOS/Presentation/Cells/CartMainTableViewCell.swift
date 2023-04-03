@@ -14,7 +14,7 @@ protocol MainTableViewDelegate {
 
 class CartMainTableViewCell: UITableViewCell {
     
-    var tempFoods: [String] = []
+    var foodList: [Food] = []
     
     var delegate: MainTableViewDelegate?
     
@@ -24,9 +24,19 @@ class CartMainTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        setupObserver()
         setupCollectionView()
         setupLayout()
     }
+    
+    private func setupObserver() {
+        CartViewModel.shared.cart { foodList in
+            self.foodList = foodList!
+            self.foodCollectionView.reloadData()
+        }
+    }
+
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -41,6 +51,8 @@ class CartMainTableViewCell: UITableViewCell {
         foodCollectionView.dataSource = self
         foodCollectionView.delegate = self
         foodCollectionView.register(UINib(nibName: "FoodCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FoodCollectionViewCell")
+        
+        CartManager.shared.setFoodCV(foodCV: foodCollectionView)
     }
     
     private func setupLayout() {
@@ -53,6 +65,8 @@ class CartMainTableViewCell: UITableViewCell {
         contentView.layer.cornerRadius = 16
     }
     
+
+    
     public func setTitle(title: String) {
         self.categoryTitleLabel.text = title
     }
@@ -64,15 +78,17 @@ class CartMainTableViewCell: UITableViewCell {
 
 extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tempFoods.count
+        return foodList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = foodCollectionView.dequeueReusableCell(withReuseIdentifier: "FoodCollectionViewCell", for: indexPath) as? FoodCollectionViewCell else { return UICollectionViewCell() }
+        
         cell.delegate = self
         cell.foodImageButton.layer.cornerRadius = cell.foodImageButton.frame.width / 2
-        cell.foodTitleLabel.text = tempFoods[indexPath.row]
-        cell.tag = indexPath.row
+        cell.foodTitleLabel.text = foodList[indexPath.row].foodName
+        cell.tag = foodList[indexPath.row].foodIdx
+
         return cell
     }
     

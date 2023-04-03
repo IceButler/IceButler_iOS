@@ -7,17 +7,39 @@
 
 import UIKit
 
-class CartViewController: UIViewController {
 
+class CartViewController: UIViewController {
     @IBOutlet weak var cartMainTableView: UITableView!
     @IBOutlet weak var addFoodButton: UIButton!
     @IBOutlet weak var alertView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setup()
         setupNavigationBar()
         setupLayout()
         setupTableView()
+        setupObserver()
+    }
+    
+    func setup() {
+        CartManager.shared.setCartVC(cartVC: self)
+    }
+    
+    private func setupObserver() {
+        CartViewModel.shared.isremoveFoodIdxes { edit in
+            if edit {
+                self.tabBarController?.tabBar.isHidden = true
+                self.addFoodButton.isHidden = true
+                self.alertView.backgroundColor = .signatureDeepBlue
+                self.alertView.isHidden = false
+            } else {
+                self.tabBarController?.tabBar.isHidden = false
+                self.addFoodButton.isHidden = false
+                self.alertView.isHidden = true
+            }
+        }
     }
     
     @IBAction func didTapAddFoodButton(_ sender: UIButton) {
@@ -54,6 +76,14 @@ class CartViewController: UIViewController {
         print("식품 삭제 로직 추가 예정")
         sender.dismiss(animated: true)
     }
+    
+    func showTabBar() {
+        self.tabBarController?.tabBar.isHidden = false
+        self.addFoodButton.isHidden = false
+        self.alertView.isHidden = true
+    }
+    
+    
     
     private func setupNavigationBar() {
         /// setting status bar background color
@@ -105,15 +135,13 @@ class CartViewController: UIViewController {
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CartManager.shared.categoryTitleArr.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartMainTableViewCell", for: indexPath) as? CartMainTableViewCell else { return UITableViewCell() }
         cell.delegate = self
-        cell.setTitle(title: CartManager.shared.categoryTitleArr[indexPath.row])
-        cell.tempFoods = CartManager.shared.tempFoods[CartManager.shared.categoryTitleArr[indexPath.row]] ?? []
-        print("cartViewController => \(cell.tempFoods)")
+        cell.setTitle(title: "전체")
         cell.backgroundColor = cell.contentView.backgroundColor
         return cell
     }
@@ -121,10 +149,10 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CartViewController: MainTableViewDelegate {
     func deleteFood(index: Int, row: Int) {
-        print("CartViewController :: deleteFood called")
-        let category = CartManager.shared.categoryTitleArr[row]
-        CartManager.shared.tempFoods[category]?.remove(at: index)
-        self.cartMainTableView.reloadData()
+//        print("CartViewController :: deleteFood called")
+//        let category = CartManager.shared.categoryTitleArr[row]
+//        CartManager.shared.tempFoods[category]?.remove(at: index)
+//        self.cartMainTableView.reloadData()
     }
     
     func setEditMode(edit: Bool) {
@@ -145,9 +173,9 @@ extension CartViewController: MainTableViewDelegate {
 extension CartViewController: AlertDelegate {
     func deleteFoodsAction() {
         print("deleteFoodsAction called")
-        CartManager.shared.deleteFood()
-        self.cartMainTableView.reloadData()
-        self.setEditMode(edit: false)
-        CartManager.shared.status = .done
+//        CartManager.shared.deleteFood()
+//        self.cartMainTableView.reloadData()
+//        self.setEditMode(edit: false)
+//        CartManager.shared.status = .done
     }
 }
