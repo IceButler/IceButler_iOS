@@ -29,6 +29,7 @@
 		A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A764829D6B36E00D127EA /* UIColor+.swift */; };
 		A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A765429D749C700D127EA /* CartMainTableViewCell.swift */; };
 		A28A765729D749C700D127EA /* CartMainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A28A765529D749C700D127EA /* CartMainTableViewCell.xib */; };
+		A2C257A029DA71680040A987 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2579F29DA71680040A987 /* CartManager.swift */; };
 		A3161DBC2E056703BF1932B1 /* Pods_IceButler_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		A28A764829D6B36E00D127EA /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		A28A765429D749C700D127EA /* CartMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartMainTableViewCell.swift; sourceTree = "<group>"; };
 		A28A765529D749C700D127EA /* CartMainTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartMainTableViewCell.xib; sourceTree = "<group>"; };
+		A2C2579F29DA71680040A987 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		D28456CA7BE41F836612B66E /* Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E470A0018DCDEB6D049D1645 /* Pods-IceButler_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -289,6 +291,7 @@
 			children = (
 				A28A763E29D54DEF00D127EA /* Cart.storyboard */,
 				A28A764129D54EFA00D127EA /* CartViewController.swift */,
+				A2C2579F29DA71680040A987 /* CartManager.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */,
 				A28A764429D54F1C00D127EA /* DefaultTabBarController.swift in Sources */,
 				A28A764729D5527A00D127EA /* UIDevice+.swift in Sources */,
+				A2C257A029DA71680040A987 /* CartManager.swift in Sources */,
 				A27302E829D853160060944D /* AlertViewController.swift in Sources */,
 				A28A764229D54EFA00D127EA /* CartViewController.swift in Sources */,
 				73F0D28029D356AC0038BD0C /* BasketViewController.swift in Sources */,

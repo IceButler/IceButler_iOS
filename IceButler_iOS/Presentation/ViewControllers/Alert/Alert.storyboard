@@ -42,6 +42,9 @@
                                                 <buttonConfiguration key="configuration" style="plain" title="취소">
                                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="didTapLeftButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cEH-KB-2a0"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmf-RB-uyk">
                                                 <rect key="frame" x="131.66666666666666" y="0.0" width="111.33333333333334" height="33.333333333333336"/>
@@ -49,6 +52,9 @@
                                                 <buttonConfiguration key="configuration" style="plain" title="확인">
                                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="didTapRightButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nNt-6n-ZjM"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

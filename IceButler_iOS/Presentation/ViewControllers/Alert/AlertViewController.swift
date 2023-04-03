@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol AlertDelegate {
+    func deleteFoodsAction()
+}
+
 class AlertViewController: UIViewController {
+    
+    var delegate: AlertDelegate?
     
     private var titleText: String = ""
     private var contentText: String = ""
@@ -30,6 +36,16 @@ class AlertViewController: UIViewController {
         super.viewDidLoad()
         setupLayouts()
         setupContents()
+    }
+    
+    // TODO: 이후 Selector 인자를 통해 탭 이벤트 처리할 예정 (임시로 IBAction 사용)
+    @IBAction func didTapLeftButton(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    
+    @IBAction func didTapRightButton(_ sender: UIButton) {
+        delegate?.deleteFoodsAction()
+        self.dismiss(animated: true)
     }
     
     private func setupLayouts() {

@@ -9,6 +9,7 @@ import UIKit
 
 protocol FoodCellDelegate {
     func setEditMode(edit: Bool)
+    func deleteFoodsAction(index: Int, row: Int)
 }
 
 class FoodCollectionViewCell: UICollectionViewCell {
@@ -40,10 +41,12 @@ class FoodCollectionViewCell: UICollectionViewCell {
         if guesture.state == UIGestureRecognizer.State.began {
             self.isSelectedFood = !self.isSelectedFood
             
-            if self.isSelectedFood {
+            if self.isSelectedFood && CartManager.shared.status == .processing {
                 self.foodImageButton.backgroundColor = .signatureDustBlue
                 self.selectedImageView.isHidden = false
                 self.delegate?.setEditMode(edit: true)
+                CartManager.shared.selectedRow = 0
+                CartManager.shared.selectedIndex = self.tag
                 
             } else {
                 self.foodImageButton.backgroundColor = .signatureSkyBlue
@@ -59,5 +62,15 @@ class FoodCollectionViewCell: UICollectionViewCell {
             self.selectedImageView.isHidden = true
             self.delegate?.setEditMode(edit: false)
         }
+    }
+}
+
+extension FoodCollectionViewCell: AlertDelegate {
+    func deleteFoodsAction() {
+        print("tag : \(self.tag)")
+        print("FoodCollectionViewCell :: deleteFoodsAction called")
+        delegate?.deleteFoodsAction(index: self.tag, row: 0)    //  TODO:
+        CartManager.shared.status = .done
+        delegate?.setEditMode(edit: false)
     }
 }

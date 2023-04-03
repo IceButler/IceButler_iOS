@@ -9,9 +9,12 @@ import UIKit
 
 protocol MainTableViewDelegate {
     func setEditMode(edit: Bool)
+    func deleteFood(index: Int, row: Int)
 }
 
 class CartMainTableViewCell: UITableViewCell {
+    
+    var tempFoods: [String] = []
     
     var delegate: MainTableViewDelegate?
     
@@ -53,17 +56,23 @@ class CartMainTableViewCell: UITableViewCell {
     public func setTitle(title: String) {
         self.categoryTitleLabel.text = title
     }
+    
+    public func deleteFood() {
+        
+    }
 }
 
 extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return tempFoods.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = foodCollectionView.dequeueReusableCell(withReuseIdentifier: "FoodCollectionViewCell", for: indexPath) as? FoodCollectionViewCell else { return UICollectionViewCell() }
         cell.delegate = self
         cell.foodImageButton.layer.cornerRadius = cell.foodImageButton.frame.width / 2
+        cell.foodTitleLabel.text = tempFoods[indexPath.row]
+        cell.tag = indexPath.row
         return cell
     }
     
@@ -76,6 +85,13 @@ extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectio
 
 
 extension CartMainTableViewCell: FoodCellDelegate {
+    func deleteFoodsAction(index: Int, row: Int) {
+        if let delegate = self.delegate {
+            print("CartMainTableViewCell :: deleteFoodsAction called")
+            delegate.deleteFood(index: index, row: row)
+        }
+    }
+    
     func setEditMode(edit: Bool) {
         if let delegate = self.delegate {
             delegate.setEditMode(edit: edit)

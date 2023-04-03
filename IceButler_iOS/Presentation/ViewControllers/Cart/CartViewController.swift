@@ -8,11 +8,6 @@
 import UIKit
 
 class CartViewController: UIViewController {
-    
-    // 임시 데이터
-    let categoryTitleArr = [
-        "육류", "과일", "채소", "음료", "수산물", "반찬", "간식", "식재료", "가공식품", "기타"
-    ]
 
     @IBOutlet weak var cartMainTableView: UITableView!
     @IBOutlet weak var addFoodButton: UIButton!
@@ -36,6 +31,8 @@ class CartViewController: UIViewController {
         alertViewController.configure(title: "식품 삭제",
                                       content: "선택하신 식품을 정말 삭제하시겠습니까?",
                                       leftButtonTitle: "취소", righttButtonTitle: "삭제")
+        alertViewController.delegate = self
+        
 //        alertViewController.setLeftButtonAction(action: #selector(cancelAction(alertViewController)))
 //        alertViewController.setRightButtonAction(action: #selector(deleteAction(alertViewController)))
         alertViewController.modalPresentationStyle = .overCurrentContext
@@ -108,19 +105,28 @@ class CartViewController: UIViewController {
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryTitleArr.count
+        return CartManager.shared.categoryTitleArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartMainTableViewCell", for: indexPath) as? CartMainTableViewCell else { return UITableViewCell() }
         cell.delegate = self
-        cell.setTitle(title: categoryTitleArr[indexPath.row])
+        cell.setTitle(title: CartManager.shared.categoryTitleArr[indexPath.row])
+        cell.tempFoods = CartManager.shared.tempFoods[CartManager.shared.categoryTitleArr[indexPath.row]] ?? []
+        print("cartViewController => \(cell.tempFoods)")
         cell.backgroundColor = cell.contentView.backgroundColor
         return cell
     }
 }
 
 extension CartViewController: MainTableViewDelegate {
+    func deleteFood(index: Int, row: Int) {
+        print("CartViewController :: deleteFood called")
+        let category = CartManager.shared.categoryTitleArr[row]
+        CartManager.shared.tempFoods[category]?.remove(at: index)
+        self.cartMainTableView.reloadData()
+    }
+    
     func setEditMode(edit: Bool) {
         if edit {
             self.tabBarController?.tabBar.isHidden = true
@@ -133,5 +139,15 @@ extension CartViewController: MainTableViewDelegate {
             self.alertView.isHidden = true
         }
         
+    }
+}
+
+extension CartViewController: AlertDelegate {
+    func deleteFoodsAction() {
+        print("deleteFoodsAction called")
+        CartManager.shared.deleteFood()
+        self.cartMainTableView.reloadData()
+        self.setEditMode(edit: false)
+        CartManager.shared.status = .done
     }
 }
