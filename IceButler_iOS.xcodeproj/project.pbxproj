@@ -12,6 +12,9 @@
 		7339BE6F29D9899E00FC7642 /* RefrigeratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339BE6E29D9899E00FC7642 /* RefrigeratorViewController.swift */; };
 		7339BE7229D9B6C400FC7642 /* WasteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339BE7029D9B6C400FC7642 /* WasteCell.swift */; };
 		7339BE7329D9B6C400FC7642 /* WasteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7339BE7129D9B6C400FC7642 /* WasteCell.xib */; };
+		7339BE7529D9CDEF00FC7642 /* RefrigeratorAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7339BE7429D9CDEF00FC7642 /* RefrigeratorAdd.storyboard */; };
+		7339BE7729D9CDFE00FC7642 /* RefrigeratorAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339BE7629D9CDFE00FC7642 /* RefrigeratorAddViewController.swift */; };
+		73D2ACB429DA8F0E00B78E76 /* RefrigeratorTabMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D2ACB329DA8F0E00B78E76 /* RefrigeratorTabMan.swift */; };
 		73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */; };
 		73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D23B29D2DFFE0038BD0C /* SceneDelegate.swift */; };
 		73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73F0D24229D2E0000038BD0C /* Assets.xcassets */; };
@@ -61,6 +64,9 @@
 		7339BE6E29D9899E00FC7642 /* RefrigeratorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefrigeratorViewController.swift; sourceTree = "<group>"; };
 		7339BE7029D9B6C400FC7642 /* WasteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasteCell.swift; sourceTree = "<group>"; };
 		7339BE7129D9B6C400FC7642 /* WasteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WasteCell.xib; sourceTree = "<group>"; };
+		7339BE7429D9CDEF00FC7642 /* RefrigeratorAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RefrigeratorAdd.storyboard; sourceTree = "<group>"; };
+		7339BE7629D9CDFE00FC7642 /* RefrigeratorAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefrigeratorAddViewController.swift; sourceTree = "<group>"; };
+		73D2ACB329DA8F0E00B78E76 /* RefrigeratorTabMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefrigeratorTabMan.swift; sourceTree = "<group>"; };
 		73F0D23629D2DFFE0038BD0C /* IceButler_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceButler_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73F0D23B29D2DFFE0038BD0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,13 +146,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7339BE6B29D9896F00FC7642 /*  Refrigerator */ = {
+		7339BE6B29D9896F00FC7642 /* Refrigerator */ = {
 			isa = PBXGroup;
 			children = (
 				7339BE6C29D9898700FC7642 /* Refrigerator.storyboard */,
 				7339BE6E29D9899E00FC7642 /* RefrigeratorViewController.swift */,
+				7339BE7429D9CDEF00FC7642 /* RefrigeratorAdd.storyboard */,
+				7339BE7629D9CDFE00FC7642 /* RefrigeratorAddViewController.swift */,
+				73D2ACB329DA8F0E00B78E76 /* RefrigeratorTabMan.swift */,
 			);
-			path = " Refrigerator";
+			path = Refrigerator;
 			sourceTree = "<group>";
 		};
 		73F0D22D29D2DFFE0038BD0C = {
@@ -322,7 +331,7 @@
 		A28A764B29D6F01200D127EA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7339BE6B29D9896F00FC7642 /*  Refrigerator */,
+				7339BE6B29D9896F00FC7642 /* Refrigerator */,
 				73F0D27629D2E2D60038BD0C /* Auth */,
 				A28A763D29D54D6F00D127EA /* Cart */,
 			);
@@ -456,6 +465,7 @@
 				A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */,
 				7339BE6D29D9898700FC7642 /* Refrigerator.storyboard in Resources */,
 				7339BE7329D9B6C400FC7642 /* WasteCell.xib in Resources */,
+				7339BE7529D9CDEF00FC7642 /* RefrigeratorAdd.storyboard in Resources */,
 				A28A763F29D54DEF00D127EA /* Cart.storyboard in Resources */,
 				73F0D24629D2E0000038BD0C /* LaunchScreen.storyboard in Resources */,
 				73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */,
@@ -590,6 +600,7 @@
 			files = (
 				A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */,
 				A28A764429D54F1C00D127EA /* DefaultTabBarController.swift in Sources */,
+				7339BE7729D9CDFE00FC7642 /* RefrigeratorAddViewController.swift in Sources */,
 				A28A764729D5527A00D127EA /* UIDevice+.swift in Sources */,
 				A28A764229D54EFA00D127EA /* CartViewController.swift in Sources */,
 				73F0D28029D356AC0038BD0C /* BasketViewController.swift in Sources */,
@@ -597,6 +608,7 @@
 				7339BE7229D9B6C400FC7642 /* WasteCell.swift in Sources */,
 				73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */,
 				A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */,
+				73D2ACB429DA8F0E00B78E76 /* RefrigeratorTabMan.swift in Sources */,
 				7339BE6F29D9899E00FC7642 /* RefrigeratorViewController.swift in Sources */,
 				A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */,
 			);
