@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		66CF0EC13B3373BB87EC99CC /* Pods_IceButler_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71520AB6EE790D9359A21DBB /* Pods_IceButler_iOSTests.framework */; };
+		73DC2F3D29DAA6A400F47ECD /* APIManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC2F3C29DAA6A400F47ECD /* APIManger.swift */; };
 		73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */; };
 		73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D23B29D2DFFE0038BD0C /* SceneDelegate.swift */; };
 		73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73F0D24229D2E0000038BD0C /* Assets.xcassets */; };
@@ -17,6 +18,11 @@
 		73F0D25D29D2E0000038BD0C /* IceButler_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D25C29D2E0000038BD0C /* IceButler_iOSUITestsLaunchTests.swift */; };
 		73F0D27E29D3569E0038BD0C /* Basket.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F0D27D29D3569E0038BD0C /* Basket.storyboard */; };
 		73F0D28029D356AC0038BD0C /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D27F29D356AC0038BD0C /* BasketViewController.swift */; };
+		73F26FC129DAA735009E364B /* GeneralResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F26FC029DAA735009E364B /* GeneralResponseModel.swift */; };
+		73F26FC429DAA8EB009E364B /* CartResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F26FC329DAA8EB009E364B /* CartResponseModel.swift */; };
+		73F26FC629DAA94B009E364B /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F26FC529DAA94B009E364B /* CartService.swift */; };
+		73F26FCC29DAACC3009E364B /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F26FCB29DAACC3009E364B /* CartViewModel.swift */; };
+		73F62A3829DAB1A5003D779F /* CartRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A3729DAB1A5003D779F /* CartRequestModel.swift */; };
 		7593A9D6AB4309D589AD972D /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236010665AA2D8D3B10A8DC6 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
 		A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */; };
 		A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */; };
@@ -56,6 +62,7 @@
 		6C2264B9924DFAFE47B1F678 /* Pods-IceButler_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		71520AB6EE790D9359A21DBB /* Pods_IceButler_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71A4557F1B0043751FF6453B /* Pods-IceButler_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOSTests.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOSTests/Pods-IceButler_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		73DC2F3C29DAA6A400F47ECD /* APIManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManger.swift; sourceTree = "<group>"; };
 		73F0D23629D2DFFE0038BD0C /* IceButler_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceButler_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73F0D23B29D2DFFE0038BD0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +76,11 @@
 		73F0D25C29D2E0000038BD0C /* IceButler_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceButler_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		73F0D27D29D3569E0038BD0C /* Basket.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Basket.storyboard; sourceTree = "<group>"; };
 		73F0D27F29D356AC0038BD0C /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
+		73F26FC029DAA735009E364B /* GeneralResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponseModel.swift; sourceTree = "<group>"; };
+		73F26FC329DAA8EB009E364B /* CartResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartResponseModel.swift; sourceTree = "<group>"; };
+		73F26FC529DAA94B009E364B /* CartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
+		73F26FCB29DAACC3009E364B /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
+		73F62A3729DAB1A5003D779F /* CartRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRequestModel.swift; sourceTree = "<group>"; };
 		802F4E91FBD50A88599AD4EE /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -138,6 +150,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		73DC2F3A29DAA69200F47ECD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				73F26FBE29DAA71B009E364B /* Service */,
+				73F26FBD29DAA716009E364B /* Model */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		73DC2F3B29DAA69800F47ECD /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				73DC2F3C29DAA6A400F47ECD /* APIManger.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		73F0D22D29D2DFFE0038BD0C = {
 			isa = PBXGroup;
 			children = (
@@ -164,9 +193,10 @@
 			isa = PBXGroup;
 			children = (
 				73F0D26929D2E0500038BD0C /* App */,
+				73DC2F3A29DAA69200F47ECD /* Data */,
 				73F0D27029D2E1260038BD0C /* Global */,
 				73F0D24729D2E0000038BD0C /* Info.plist */,
-				73F0D26B29D2E0600038BD0C /* Data */,
+				73DC2F3B29DAA69800F47ECD /* Network */,
 				73F0D26F29D2E1130038BD0C /* Presentation */,
 			);
 			path = IceButler_iOS;
@@ -198,34 +228,10 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		73F0D26B29D2E0600038BD0C /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				73F0D26C29D2E0BF0038BD0C /* Service */,
-				73F0D26D29D2E0CA0038BD0C /* Model */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		73F0D26C29D2E0BF0038BD0C /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Service;
-			path = ../Domain/IceButler_iOS/Data/Service;
-			sourceTree = "<group>";
-		};
-		73F0D26D29D2E0CA0038BD0C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		73F0D26F29D2E1130038BD0C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				A28A764C29D6F01F00D127EA /* ViewModels */,
+				73F26FC929DAACB2009E364B /* ViewModel */,
 				A28A764B29D6F01200D127EA /* ViewControllers */,
 				A28A764A29D6F00500D127EA /* Cells */,
 				73F0D27729D2E2DC0038BD0C /* Basket */,
@@ -260,14 +266,6 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
-		73F0D27629D2E2D60038BD0C /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Auth;
-			path = ../Auth;
-			sourceTree = "<group>";
-		};
 		73F0D27729D2E2DC0038BD0C /* Basket */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +273,56 @@
 				73F0D27F29D356AC0038BD0C /* BasketViewController.swift */,
 			);
 			path = Basket;
+			sourceTree = "<group>";
+		};
+		73F26FBD29DAA716009E364B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				73F26FBF29DAA723009E364B /* Cart */,
+				73F26FC029DAA735009E364B /* GeneralResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		73F26FBE29DAA71B009E364B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				73F26FC229DAA7E1009E364B /* Cart */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		73F26FBF29DAA723009E364B /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				73F26FC329DAA8EB009E364B /* CartResponseModel.swift */,
+				73F62A3729DAB1A5003D779F /* CartRequestModel.swift */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		73F26FC229DAA7E1009E364B /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				73F26FC529DAA94B009E364B /* CartService.swift */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		73F26FC929DAACB2009E364B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				73F26FCA29DAACBC009E364B /* Cart */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		73F26FCA29DAACBC009E364B /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				73F26FCB29DAACC3009E364B /* CartViewModel.swift */,
+			);
+			path = Cart;
 			sourceTree = "<group>";
 		};
 		A27302E429D852F20060944D /* Alert */ = {
@@ -320,25 +368,9 @@
 			isa = PBXGroup;
 			children = (
 				A27302E429D852F20060944D /* Alert */,
-				73F0D27629D2E2D60038BD0C /* Auth */,
 				A28A763D29D54D6F00D127EA /* Cart */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		A28A764C29D6F01F00D127EA /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				A28A764D29D6F0CD00D127EA /* Cart */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		A28A764D29D6F0CD00D127EA /* Cart */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -587,10 +619,16 @@
 				A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */,
 				A28A764429D54F1C00D127EA /* DefaultTabBarController.swift in Sources */,
 				A28A764729D5527A00D127EA /* UIDevice+.swift in Sources */,
+				73F26FC629DAA94B009E364B /* CartService.swift in Sources */,
+				73F26FCC29DAACC3009E364B /* CartViewModel.swift in Sources */,
 				A2C257A029DA71680040A987 /* CartManager.swift in Sources */,
+				73F62A3829DAB1A5003D779F /* CartRequestModel.swift in Sources */,
 				A27302E829D853160060944D /* AlertViewController.swift in Sources */,
 				A28A764229D54EFA00D127EA /* CartViewController.swift in Sources */,
+				73F26FC429DAA8EB009E364B /* CartResponseModel.swift in Sources */,
+				73DC2F3D29DAA6A400F47ECD /* APIManger.swift in Sources */,
 				73F0D28029D356AC0038BD0C /* BasketViewController.swift in Sources */,
+				73F26FC129DAA735009E364B /* GeneralResponseModel.swift in Sources */,
 				73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */,
 				73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */,
 				A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */,

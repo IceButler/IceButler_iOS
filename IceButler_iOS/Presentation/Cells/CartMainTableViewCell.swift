@@ -7,16 +7,7 @@
 
 import UIKit
 
-protocol MainTableViewDelegate {
-    func setEditMode(edit: Bool)
-    func deleteFood(index: Int, row: Int)
-}
-
 class CartMainTableViewCell: UITableViewCell {
-    
-    var tempFoods: [String] = []
-    
-    var delegate: MainTableViewDelegate?
     
     @IBOutlet weak var categoryTitleView: UIView!
     @IBOutlet weak var categoryTitleLabel: UILabel!
@@ -24,10 +15,16 @@ class CartMainTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        setup()
         setupCollectionView()
         setupLayout()
     }
-
+    
+    private func setup() {
+        CartManager.shared.setCartMainTV(cartTV: self)
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }      
@@ -52,7 +49,7 @@ class CartMainTableViewCell: UITableViewCell {
         
         contentView.layer.cornerRadius = 16
     }
-    
+        
     public func setTitle(title: String) {
         self.categoryTitleLabel.text = title
     }
@@ -60,19 +57,30 @@ class CartMainTableViewCell: UITableViewCell {
     public func deleteFood() {
         
     }
+    
+    func reloadCV() {
+        foodCollectionView.reloadData()
+    }
 }
 
 extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tempFoods.count
+        return CartViewModel.shared.getCartCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = foodCollectionView.dequeueReusableCell(withReuseIdentifier: "FoodCollectionViewCell", for: indexPath) as? FoodCollectionViewCell else { return UICollectionViewCell() }
-        cell.delegate = self
+        
         cell.foodImageButton.layer.cornerRadius = cell.foodImageButton.frame.width / 2
-        cell.foodTitleLabel.text = tempFoods[indexPath.row]
-        cell.tag = indexPath.row
+        cell.isSelectedFood = false
+        
+        CartViewModel.shared.getFoodName(index: indexPath.row, store: &cell.cancellabels) { foodName in
+            cell.foodTitleLabel.text = foodName
+        }
+        CartViewModel.shared.getFoodIdx(index: indexPath.row, store: &cell.cancellabels) { foodIdx in
+            cell.tag = foodIdx
+        }
+
         return cell
     }
     
@@ -83,18 +91,3 @@ extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectio
     
 }
 
-
-extension CartMainTableViewCell: FoodCellDelegate {
-    func deleteFoodsAction(index: Int, row: Int) {
-        if let delegate = self.delegate {
-            print("CartMainTableViewCell :: deleteFoodsAction called")
-            delegate.deleteFood(index: index, row: row)
-        }
-    }
-    
-    func setEditMode(edit: Bool) {
-        if let delegate = self.delegate {
-            delegate.setEditMode(edit: edit)
-        }
-    }
-}

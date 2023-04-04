@@ -41,11 +41,14 @@ class AlertViewController: UIViewController {
     // TODO: 이후 Selector 인자를 통해 탭 이벤트 처리할 예정 (임시로 IBAction 사용)
     @IBAction func didTapLeftButton(_ sender: UIButton) {
         self.dismiss(animated: true)
+        CartManager.shared.showCartCVTabBar()
     }
     
     @IBAction func didTapRightButton(_ sender: UIButton) {
-        delegate?.deleteFoodsAction()
+        CartViewModel.shared.deleteFood(cartId: 1)
         self.dismiss(animated: true)
+        CartManager.shared.reloadFoodCV()
+        CartManager.shared.showCartCVTabBar()
     }
     
     private func setupLayouts() {

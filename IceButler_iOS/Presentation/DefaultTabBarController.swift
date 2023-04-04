@@ -9,6 +9,8 @@ import UIKit
 
 class DefaultTabBarController: UITabBarController {
     
+    private var isFirst = true
+    
     private let homeTab = UITabBarItem(title: nil, image: UIImage(named: "main"), selectedImage: UIImage(named: "main")) // TODO: .fill 아이콘으로 변경
     private let recipeTab = UITabBarItem(title: nil, image: UIImage(named: "recipe"), selectedImage: UIImage(named: "recipe.fill"))
     private let cartTab = UITabBarItem(title: nil, image: UIImage(named: "cart"), selectedImage: UIImage(named: "cart.fill"))
@@ -17,6 +19,13 @@ class DefaultTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBar()
+        setup()
+    }
+    private func setup() {
+        if isFirst {
+            CartViewModel.shared.getCart(cartId: 1)
+            isFirst = false
+        }
     }
     
     override func viewDidLayoutSubviews() {
