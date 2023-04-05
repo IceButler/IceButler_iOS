@@ -16,13 +16,17 @@
 		73F0D25129D2E0000038BD0C /* IceButler_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D25029D2E0000038BD0C /* IceButler_iOSTests.swift */; };
 		73F0D25B29D2E0000038BD0C /* IceButler_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D25A29D2E0000038BD0C /* IceButler_iOSUITests.swift */; };
 		73F0D25D29D2E0000038BD0C /* IceButler_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D25C29D2E0000038BD0C /* IceButler_iOSUITestsLaunchTests.swift */; };
-		73F0D27E29D3569E0038BD0C /* Basket.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F0D27D29D3569E0038BD0C /* Basket.storyboard */; };
-		73F0D28029D356AC0038BD0C /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D27F29D356AC0038BD0C /* BasketViewController.swift */; };
 		73F26FC129DAA735009E364B /* GeneralResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F26FC029DAA735009E364B /* GeneralResponseModel.swift */; };
 		73F26FC429DAA8EB009E364B /* CartResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F26FC329DAA8EB009E364B /* CartResponseModel.swift */; };
 		73F26FC629DAA94B009E364B /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F26FC529DAA94B009E364B /* CartService.swift */; };
 		73F26FCC29DAACC3009E364B /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F26FCB29DAACC3009E364B /* CartViewModel.swift */; };
 		73F62A3829DAB1A5003D779F /* CartRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A3729DAB1A5003D779F /* CartRequestModel.swift */; };
+		73F62A3C29DCFD52003D779F /* Fridge.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F62A3B29DCFD52003D779F /* Fridge.storyboard */; };
+		73F62A3E29DCFD7B003D779F /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A3D29DCFD7B003D779F /* FridgeViewController.swift */; };
+		73F62A4029DD01CA003D779F /* BarCodeAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F62A3F29DD01CA003D779F /* BarCodeAdd.storyboard */; };
+		73F62A4229DD01DE003D779F /* BarCodeAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A4129DD01DE003D779F /* BarCodeAddViewController.swift */; };
+		73F62A4429DD11C4003D779F /* BarCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A4329DD11C4003D779F /* BarCodeView.swift */; };
+		73F62A4629DD6015003D779F /* FoodAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F62A4529DD6015003D779F /* FoodAdd.storyboard */; };
 		7593A9D6AB4309D589AD972D /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236010665AA2D8D3B10A8DC6 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
 		A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */; };
 		A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */; };
@@ -74,13 +78,17 @@
 		73F0D25629D2E0000038BD0C /* IceButler_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IceButler_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		73F0D25A29D2E0000038BD0C /* IceButler_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceButler_iOSUITests.swift; sourceTree = "<group>"; };
 		73F0D25C29D2E0000038BD0C /* IceButler_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceButler_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		73F0D27D29D3569E0038BD0C /* Basket.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Basket.storyboard; sourceTree = "<group>"; };
-		73F0D27F29D356AC0038BD0C /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
 		73F26FC029DAA735009E364B /* GeneralResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponseModel.swift; sourceTree = "<group>"; };
 		73F26FC329DAA8EB009E364B /* CartResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartResponseModel.swift; sourceTree = "<group>"; };
 		73F26FC529DAA94B009E364B /* CartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
 		73F26FCB29DAACC3009E364B /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		73F62A3729DAB1A5003D779F /* CartRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRequestModel.swift; sourceTree = "<group>"; };
+		73F62A3B29DCFD52003D779F /* Fridge.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Fridge.storyboard; sourceTree = "<group>"; };
+		73F62A3D29DCFD7B003D779F /* FridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
+		73F62A3F29DD01CA003D779F /* BarCodeAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BarCodeAdd.storyboard; sourceTree = "<group>"; };
+		73F62A4129DD01DE003D779F /* BarCodeAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeAddViewController.swift; sourceTree = "<group>"; };
+		73F62A4329DD11C4003D779F /* BarCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeView.swift; sourceTree = "<group>"; };
+		73F62A4529DD6015003D779F /* FoodAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FoodAdd.storyboard; sourceTree = "<group>"; };
 		802F4E91FBD50A88599AD4EE /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -234,7 +242,6 @@
 				73F26FC929DAACB2009E364B /* ViewModel */,
 				A28A764B29D6F01200D127EA /* ViewControllers */,
 				A28A764A29D6F00500D127EA /* Cells */,
-				73F0D27729D2E2DC0038BD0C /* Basket */,
 				A28A764329D54F1C00D127EA /* DefaultTabBarController.swift */,
 			);
 			path = Presentation;
@@ -264,15 +271,6 @@
 				73F0D24429D2E0000038BD0C /* LaunchScreen.storyboard */,
 			);
 			path = Splash;
-			sourceTree = "<group>";
-		};
-		73F0D27729D2E2DC0038BD0C /* Basket */ = {
-			isa = PBXGroup;
-			children = (
-				73F0D27D29D3569E0038BD0C /* Basket.storyboard */,
-				73F0D27F29D356AC0038BD0C /* BasketViewController.swift */,
-			);
-			path = Basket;
 			sourceTree = "<group>";
 		};
 		73F26FBD29DAA716009E364B /* Model */ = {
@@ -325,6 +323,26 @@
 			path = Cart;
 			sourceTree = "<group>";
 		};
+		73F62A3929DCF7D9003D779F /* Food */ = {
+			isa = PBXGroup;
+			children = (
+				73F62A3F29DD01CA003D779F /* BarCodeAdd.storyboard */,
+				73F62A4129DD01DE003D779F /* BarCodeAddViewController.swift */,
+				73F62A4329DD11C4003D779F /* BarCodeView.swift */,
+				73F62A4529DD6015003D779F /* FoodAdd.storyboard */,
+			);
+			path = Food;
+			sourceTree = "<group>";
+		};
+		73F62A3A29DCFD2E003D779F /* Fridge */ = {
+			isa = PBXGroup;
+			children = (
+				73F62A3B29DCFD52003D779F /* Fridge.storyboard */,
+				73F62A3D29DCFD7B003D779F /* FridgeViewController.swift */,
+			);
+			path = Fridge;
+			sourceTree = "<group>";
+		};
 		A27302E429D852F20060944D /* Alert */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,6 +387,8 @@
 			children = (
 				A27302E429D852F20060944D /* Alert */,
 				A28A763D29D54D6F00D127EA /* Cart */,
+				73F62A3929DCF7D9003D779F /* Food */,
+				73F62A3A29DCFD2E003D779F /* Fridge */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -483,11 +503,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */,
+				73F62A3C29DCFD52003D779F /* Fridge.storyboard in Resources */,
 				A28A763F29D54DEF00D127EA /* Cart.storyboard in Resources */,
 				73F0D24629D2E0000038BD0C /* LaunchScreen.storyboard in Resources */,
 				73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */,
-				73F0D27E29D3569E0038BD0C /* Basket.storyboard in Resources */,
 				A27302E629D853090060944D /* Alert.storyboard in Resources */,
+				73F62A4029DD01CA003D779F /* BarCodeAdd.storyboard in Resources */,
+				73F62A4629DD6015003D779F /* FoodAdd.storyboard in Resources */,
 				A28A765729D749C700D127EA /* CartMainTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,16 +645,18 @@
 				73F26FCC29DAACC3009E364B /* CartViewModel.swift in Sources */,
 				A2C257A029DA71680040A987 /* CartManager.swift in Sources */,
 				73F62A3829DAB1A5003D779F /* CartRequestModel.swift in Sources */,
+				73F62A4429DD11C4003D779F /* BarCodeView.swift in Sources */,
+				73F62A4229DD01DE003D779F /* BarCodeAddViewController.swift in Sources */,
 				A27302E829D853160060944D /* AlertViewController.swift in Sources */,
 				A28A764229D54EFA00D127EA /* CartViewController.swift in Sources */,
 				73F26FC429DAA8EB009E364B /* CartResponseModel.swift in Sources */,
 				73DC2F3D29DAA6A400F47ECD /* APIManger.swift in Sources */,
-				73F0D28029D356AC0038BD0C /* BasketViewController.swift in Sources */,
 				73F26FC129DAA735009E364B /* GeneralResponseModel.swift in Sources */,
 				73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */,
 				73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */,
 				A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */,
 				A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */,
+				73F62A3E29DCFD7B003D779F /* FridgeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,7 +831,7 @@
 				INFOPLIST_FILE = IceButler_iOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Basket;
+				INFOPLIST_KEY_UIMainStoryboardFile = BarCodeAdd;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -839,7 +863,7 @@
 				INFOPLIST_FILE = IceButler_iOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Basket;
+				INFOPLIST_KEY_UIMainStoryboardFile = BarCodeAdd;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (

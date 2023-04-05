@@ -9,7 +9,6 @@ import UIKit
 
 class DefaultTabBarController: UITabBarController {
     
-    private var isFirst = true
     
     private let homeTab = UITabBarItem(title: nil, image: UIImage(named: "main"), selectedImage: UIImage(named: "main")) // TODO: .fill 아이콘으로 변경
     private let recipeTab = UITabBarItem(title: nil, image: UIImage(named: "recipe"), selectedImage: UIImage(named: "recipe.fill"))
@@ -22,10 +21,7 @@ class DefaultTabBarController: UITabBarController {
         setup()
     }
     private func setup() {
-        if isFirst {
-            CartViewModel.shared.getCart(cartId: 1)
-            isFirst = false
-        }
+        CartViewModel.shared.getCart(cartId: 1)
     }
     
     override func viewDidLayoutSubviews() {
@@ -54,8 +50,8 @@ class DefaultTabBarController: UITabBarController {
         self.tabBarController?.tabBar.tintColor = .black
         
         // TODO: 레시피, 마이페이지 관련 화면 생성 후 instatiate 관련 내용 수정
-        var storyboard = UIStoryboard.init(name: "Basket", bundle: nil)
-        guard let homeViewController = storyboard.instantiateViewController(withIdentifier: "BasketViewController") as? BasketViewController else { return }
+        var storyboard = UIStoryboard.init(name: "Fridge", bundle: nil)
+        guard let homeViewController = storyboard.instantiateViewController(withIdentifier: "FridgeViewController") as? FridgeViewController else { return }
         let home = UINavigationController(rootViewController: homeViewController)
         home.tabBarItem = homeTab
         
