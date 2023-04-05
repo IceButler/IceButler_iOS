@@ -19,6 +19,8 @@ class FridgeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        foodAddButton.isHidden = false
+        
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
     }
@@ -32,17 +34,23 @@ class FridgeViewController: UIViewController {
     func setupLayout() {
         self.view.backgroundColor = .white
         
-        foodAddButton.layer.cornerRadius = foodAddButton.frame.width / 2
         foodAddButton.backgroundColor = .signatureDeepBlue
+        
+        foodAddButton.layer.cornerRadius = foodAddButton.frame.width / 2
+        foodAddButton.layer.shadowColor = CGColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 1)
+        foodAddButton.layer.shadowOpacity = 1
+        foodAddButton.layer.shadowOffset = CGSize(width: 0, height: 4)
     }
 
     @IBAction func foodAdd(_ sender: Any) {
-        let barCodeAddVC = UIStoryboard(name: "BarCodeAdd", bundle: nil).instantiateViewController(identifier: "BarCodeAddViewController") as! BarCodeAddViewController
+        foodAddButton.isHidden = true
         
-        barCodeAddVC.modalTransitionStyle = .coverVertical
-        barCodeAddVC.modalPresentationStyle = .fullScreen
+        let foodAddVC = UIStoryboard(name: "FoodAddSelect", bundle: nil).instantiateViewController(identifier: "FoodAddSelectViewController") as! FoodAddSelectViewController
         
-        self.present(barCodeAddVC, animated: true)
+        foodAddVC.modalTransitionStyle = .coverVertical
+        foodAddVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(foodAddVC, animated: true)
     }
     
 
