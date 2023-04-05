@@ -14,6 +14,8 @@ class FridgeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,8 +30,9 @@ class FridgeViewController: UIViewController {
     
     
     func setupLayout() {
-        foodAddButton.layer.cornerRadius = foodAddButton.frame.width / 2
+        self.view.backgroundColor = .white
         
+        foodAddButton.layer.cornerRadius = foodAddButton.frame.width / 2
         foodAddButton.backgroundColor = .signatureDeepBlue
     }
 

@@ -28,6 +28,7 @@
 		73F62A4029DD01CA003D779F /* BarCodeAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F62A3F29DD01CA003D779F /* BarCodeAdd.storyboard */; };
 		73F62A4229DD01DE003D779F /* BarCodeAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A4129DD01DE003D779F /* BarCodeAddViewController.swift */; };
 		73F62A4429DD11C4003D779F /* BarCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A4329DD11C4003D779F /* BarCodeView.swift */; };
+		73F62A4629DD6015003D779F /* FoodAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F62A4529DD6015003D779F /* FoodAdd.storyboard */; };
 		7593A9D6AB4309D589AD972D /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236010665AA2D8D3B10A8DC6 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
 		A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */; };
 		A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */; };
@@ -91,6 +92,7 @@
 		73F62A3F29DD01CA003D779F /* BarCodeAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BarCodeAdd.storyboard; sourceTree = "<group>"; };
 		73F62A4129DD01DE003D779F /* BarCodeAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeAddViewController.swift; sourceTree = "<group>"; };
 		73F62A4329DD11C4003D779F /* BarCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeView.swift; sourceTree = "<group>"; };
+		73F62A4529DD6015003D779F /* FoodAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FoodAdd.storyboard; sourceTree = "<group>"; };
 		802F4E91FBD50A88599AD4EE /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				73F62A3F29DD01CA003D779F /* BarCodeAdd.storyboard */,
 				73F62A4129DD01DE003D779F /* BarCodeAddViewController.swift */,
 				73F62A4329DD11C4003D779F /* BarCodeView.swift */,
+				73F62A4529DD6015003D779F /* FoodAdd.storyboard */,
 			);
 			path = Food;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				73F0D27E29D3569E0038BD0C /* Basket.storyboard in Resources */,
 				A27302E629D853090060944D /* Alert.storyboard in Resources */,
 				73F62A4029DD01CA003D779F /* BarCodeAdd.storyboard in Resources */,
+				73F62A4629DD6015003D779F /* FoodAdd.storyboard in Resources */,
 				A28A765729D749C700D127EA /* CartMainTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -47,21 +47,32 @@
                                     <action selector="backToScene:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="GUd-F6-6nX"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s41-Uh-eef">
+                                <rect key="frame" x="68" y="403.66666666666669" width="253" height="1"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="14M-2o-tR9"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="42s-EQ-rMj" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="68" id="Bjs-rE-Buy"/>
+                            <constraint firstAttribute="trailing" secondItem="s41-Uh-eef" secondAttribute="trailing" constant="72" id="Ctp-xp-7nI"/>
                             <constraint firstItem="hYc-Gj-XmO" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="171" id="FHG-H1-b6t"/>
+                            <constraint firstItem="s41-Uh-eef" firstAttribute="top" secondItem="CmX-ft-ugW" secondAttribute="bottom" constant="193.5" id="ZhT-Kx-dFI"/>
                             <constraint firstItem="42s-EQ-rMj" firstAttribute="top" secondItem="CmX-ft-ugW" secondAttribute="bottom" constant="62" id="e1n-0Y-uIo"/>
                             <constraint firstItem="hYc-Gj-XmO" firstAttribute="top" secondItem="42s-EQ-rMj" secondAttribute="bottom" constant="224" id="nfL-SR-g3A"/>
                             <constraint firstItem="CmX-ft-ugW" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="190" id="oi5-5L-xUd"/>
                             <constraint firstItem="CmX-ft-ugW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="106" id="tIR-Ii-2uT"/>
+                            <constraint firstItem="s41-Uh-eef" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="68" id="yk9-Lm-nOo"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="barCodeView" destination="42s-EQ-rMj" id="HRb-ZO-B2F"/>
                         <outlet property="cancelButton" destination="hYc-Gj-XmO" id="TAG-V7-Ap6"/>
+                        <outlet property="centerGuideLineView" destination="s41-Uh-eef" id="98T-Hh-4by"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
