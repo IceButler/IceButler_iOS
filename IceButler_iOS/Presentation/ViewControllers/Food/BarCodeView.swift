@@ -107,7 +107,9 @@ class BarCodeView: UIView {
 
 extension BarCodeView {
     func start() {
-        self.captureSession?.startRunning()
+        DispatchQueue.global(qos: .background).async {
+            self.captureSession?.startRunning()
+        }
     }
     
     func stop() {
