@@ -47,7 +47,7 @@ class FridgeViewController: UIViewController {
         
         let foodAddVC = UIStoryboard(name: "FoodAddSelect", bundle: nil).instantiateViewController(identifier: "FoodAddSelectViewController") as! FoodAddSelectViewController
         
-        foodAddVC.modalTransitionStyle = .coverVertical
+        foodAddVC.modalTransitionStyle = .crossDissolve
         foodAddVC.modalPresentationStyle = .overFullScreen
         
         self.present(foodAddVC, animated: true)

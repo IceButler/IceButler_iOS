@@ -66,5 +66,24 @@ extension FoodAddSelectViewController: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            let barCodeAddVC = UIStoryboard(name: "BarCodeAdd", bundle: nil).instantiateViewController(identifier: "BarCodeAddViewController") as! BarCodeAddViewController
+            
+            barCodeAddVC.modalTransitionStyle = .coverVertical
+            barCodeAddVC.modalPresentationStyle = .fullScreen
+            
+            present(barCodeAddVC, animated: true)
+            break
+        case 1:
+            break
+        case 2:
+            break
+        default:
+            break
+        }
+    }
+    
     
 }
