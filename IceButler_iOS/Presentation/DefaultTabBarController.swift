@@ -55,8 +55,8 @@ class DefaultTabBarController: UITabBarController {
         let home = UINavigationController(rootViewController: homeViewController)
         home.tabBarItem = homeTab
         
-        storyboard = UIStoryboard.init(name: "Basket", bundle: nil)
-        guard let recipeViewController = storyboard.instantiateViewController(withIdentifier: "BasketViewController") as? BasketViewController else { return }
+        storyboard = UIStoryboard.init(name: "Fridge", bundle: nil)
+        guard let recipeViewController = storyboard.instantiateViewController(withIdentifier: "FridgeViewController") as? FridgeViewController else { return }
         let recipe = UINavigationController(rootViewController: recipeViewController)
         recipe.tabBarItem = recipeTab
         
@@ -65,8 +65,8 @@ class DefaultTabBarController: UITabBarController {
         let cart = UINavigationController(rootViewController: cartViewController)
         cart.tabBarItem = cartTab
         
-        storyboard = UIStoryboard.init(name: "Basket", bundle: nil)
-        guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "BasketViewController") as? BasketViewController else { return }
+        storyboard = UIStoryboard.init(name: "Fridge", bundle: nil)
+        guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "FridgeViewController") as? FridgeViewController else { return }
         let mypage = UINavigationController(rootViewController: mypageViewController)
         mypage.tabBarItem = mypageTab
         
