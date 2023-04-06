@@ -27,7 +27,7 @@
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qbi-gi-nxO">
-                                <rect key="frame" x="325" y="673" width="47" height="47"/>
+                                <rect key="frame" x="325" y="664" width="47" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="nlk-pJ-f08"/>
                                     <constraint firstAttribute="width" constant="47" id="o8j-x0-nhr"/>
@@ -45,7 +45,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="uBq-Hg-PXF" secondAttribute="trailing" constant="19" id="blq-hQ-qex"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="uBq-Hg-PXF" secondAttribute="bottom" constant="170" id="bqe-W3-X6a"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Qbi-gi-nxO" secondAttribute="trailing" constant="21" id="gBj-Fy-H4E"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Qbi-gi-nxO" secondAttribute="bottom" constant="98" id="iZH-5U-0EH"/>
+                            <constraint firstItem="Qbi-gi-nxO" firstAttribute="top" secondItem="uBq-Hg-PXF" secondAttribute="bottom" constant="16" id="t8h-aP-iKx"/>
                         </constraints>
                     </view>
                     <connections>

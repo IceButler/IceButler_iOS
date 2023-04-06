@@ -7,15 +7,16 @@
 
 import UIKit
 
-protocol FoodAddSelectViewControllerDelgate: AnyObject {
+protocol FoodAddSelectDelgate: AnyObject {
     func showFoodAddButton()
+    func moveToFoodAddViewController(foodAddVC: FoodAddViewController)
 }
 
 class FoodAddSelectViewController: UIViewController {
     @IBOutlet weak var foodAddSelectTableView: UITableView!
     @IBOutlet weak var cancelButton: UIButton!
     
-    var delegate: FoodAddSelectViewControllerDelgate?
+    var delegate: FoodAddSelectDelgate?
     
 
     override func viewDidLoad() {
@@ -45,7 +46,7 @@ class FoodAddSelectViewController: UIViewController {
         cancelButton.layer.shadowOpacity = 1
     }
     
-    func setupDelegate(delegate: FoodAddSelectViewControllerDelgate) {
+    func setupDelegate(delegate: FoodAddSelectDelgate) {
         self.delegate = delegate
     }
     
@@ -92,8 +93,17 @@ extension FoodAddSelectViewController: UITableViewDelegate, UITableViewDataSourc
             present(barCodeAddVC, animated: true)
             break
         case 1:
+            
             break
         case 2:
+            guard let PVC = self.presentingViewController else {return}
+            
+            let foodAddVC = UIStoryboard(name: "FoodAdd", bundle: nil).instantiateViewController(identifier: "FoodAddViewController") as! FoodAddViewController
+            
+            self.dismiss(animated: true) {
+                self.delegate?.showFoodAddButton()
+                self.delegate?.moveToFoodAddViewController(foodAddVC: foodAddVC)
+            }
             break
         default:
             break

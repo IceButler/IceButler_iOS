@@ -31,6 +31,7 @@
 		73F62A4A29DD7F45003D779F /* FoodAddSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A4929DD7F45003D779F /* FoodAddSelectViewController.swift */; };
 		73F62A4D29DD81AC003D779F /* FoodAddSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A4B29DD81AC003D779F /* FoodAddSelectCell.swift */; };
 		73F62A4E29DD81AC003D779F /* FoodAddSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F62A4C29DD81AC003D779F /* FoodAddSelectCell.xib */; };
+		73F62A5029DE9F5E003D779F /* FoodAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A4F29DE9F5E003D779F /* FoodAddViewController.swift */; };
 		7593A9D6AB4309D589AD972D /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236010665AA2D8D3B10A8DC6 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
 		A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */; };
 		A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */; };
@@ -97,6 +98,7 @@
 		73F62A4929DD7F45003D779F /* FoodAddSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAddSelectViewController.swift; sourceTree = "<group>"; };
 		73F62A4B29DD81AC003D779F /* FoodAddSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAddSelectCell.swift; sourceTree = "<group>"; };
 		73F62A4C29DD81AC003D779F /* FoodAddSelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodAddSelectCell.xib; sourceTree = "<group>"; };
+		73F62A4F29DE9F5E003D779F /* FoodAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAddViewController.swift; sourceTree = "<group>"; };
 		802F4E91FBD50A88599AD4EE /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				73F62A4129DD01DE003D779F /* BarCodeAddViewController.swift */,
 				73F62A4329DD11C4003D779F /* BarCodeView.swift */,
 				73F62A4529DD6015003D779F /* FoodAdd.storyboard */,
+				73F62A4F29DE9F5E003D779F /* FoodAddViewController.swift */,
 			);
 			path = Food;
 			sourceTree = "<group>";
@@ -670,6 +673,7 @@
 				73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */,
 				73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */,
 				A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */,
+				73F62A5029DE9F5E003D779F /* FoodAddViewController.swift in Sources */,
 				A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */,
 				73F62A3E29DCFD7B003D779F /* FridgeViewController.swift in Sources */,
 				73F62A4D29DD81AC003D779F /* FoodAddSelectCell.swift in Sources */,

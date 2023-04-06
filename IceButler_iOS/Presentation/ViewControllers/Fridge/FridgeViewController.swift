@@ -11,7 +11,6 @@ class FridgeViewController: UIViewController {
 
     @IBOutlet weak var foodAddButton: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,8 +55,27 @@ class FridgeViewController: UIViewController {
 }
 
 
-extension FridgeViewController: FoodAddSelectViewControllerDelgate {
+extension FridgeViewController: FoodAddSelectDelgate {
     func showFoodAddButton() {
         foodAddButton.isHidden = false
+    }
+    
+    func moveToFoodAddViewController(foodAddVC: FoodAddViewController) {
+        foodAddVC.setDelegate(delegate: self)
+        navigationController?.pushViewController(foodAddVC, animated: true)
+    }
+}
+
+extension FridgeViewController: FoodAddDelegate {
+    func moveToFoodAddSelect() {
+        foodAddButton.isHidden = true
+        
+        let foodAddVC = UIStoryboard(name: "FoodAddSelect", bundle: nil).instantiateViewController(identifier: "FoodAddSelectViewController") as! FoodAddSelectViewController
+        foodAddVC.setupDelegate(delegate: self)
+        
+        foodAddVC.modalTransitionStyle = .crossDissolve
+        foodAddVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(foodAddVC, animated: true)
     }
 }

@@ -42,4 +42,11 @@ extension UIColor{
         blue: 185/255,
         alpha: 0.2
     )
+    
+    static let navigationColor = UIColor(
+        red: 163/255,
+        green: 199/255,
+        blue: 247/255,
+        alpha: 1
+    )
 }
