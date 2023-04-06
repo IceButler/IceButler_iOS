@@ -10,7 +10,7 @@ import UIKit
 class DefaultTabBarController: UITabBarController {
     
     
-    private let homeTab = UITabBarItem(title: nil, image: UIImage(named: "main"), selectedImage: UIImage(named: "main")) // TODO: .fill 아이콘으로 변경
+    private let fridgeTab = UITabBarItem(title: nil, image: UIImage(named: "main"), selectedImage: UIImage(named: "main")) // TODO: .fill 아이콘으로 변경
     private let recipeTab = UITabBarItem(title: nil, image: UIImage(named: "recipe"), selectedImage: UIImage(named: "recipe.fill"))
     private let cartTab = UITabBarItem(title: nil, image: UIImage(named: "cart"), selectedImage: UIImage(named: "cart.fill"))
     private let mypageTab = UITabBarItem(title: nil, image: UIImage(named: "mypage"), selectedImage: UIImage(named: "mypage.fill"))
@@ -51,9 +51,9 @@ class DefaultTabBarController: UITabBarController {
         
         // TODO: 레시피, 마이페이지 관련 화면 생성 후 instatiate 관련 내용 수정
         var storyboard = UIStoryboard.init(name: "Fridge", bundle: nil)
-        guard let homeViewController = storyboard.instantiateViewController(withIdentifier: "FridgeViewController") as? FridgeViewController else { return }
-        let home = UINavigationController(rootViewController: homeViewController)
-        home.tabBarItem = homeTab
+        guard let fridgeViewController = storyboard.instantiateViewController(withIdentifier: "FridgeViewController") as? FridgeViewController else { return }
+        let fridge = UINavigationController(rootViewController: fridgeViewController)
+        fridge.tabBarItem = fridgeTab
         
         storyboard = UIStoryboard.init(name: "Fridge", bundle: nil)
         guard let recipeViewController = storyboard.instantiateViewController(withIdentifier: "FridgeViewController") as? FridgeViewController else { return }
@@ -71,7 +71,7 @@ class DefaultTabBarController: UITabBarController {
         mypage.tabBarItem = mypageTab
         
         viewControllers = [
-            home,
+            fridge,
             recipe,
             cart,
             mypage

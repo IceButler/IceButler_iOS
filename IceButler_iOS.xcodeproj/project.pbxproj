@@ -845,9 +845,11 @@
 				DEVELOPMENT_TEAM = 643M65W7HH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceButler_iOS/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "냉집사 앱 사용 중 바코드로 식품 추가를 위해 카메라 접근을 허용해주세요!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = BarCodeAdd;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -877,9 +879,11 @@
 				DEVELOPMENT_TEAM = 643M65W7HH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceButler_iOS/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "냉집사 앱 사용 중 바코드로 식품 추가를 위해 카메라 접근을 허용해주세요!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = BarCodeAdd;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (

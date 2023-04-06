@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol FoodAddSelectViewControllerDelgate: AnyObject {
+    func showFoodAddButton()
+}
+
 class FoodAddSelectViewController: UIViewController {
-    
     @IBOutlet weak var foodAddSelectTableView: UITableView!
     @IBOutlet weak var cancelButton: UIButton!
+    
+    var delegate: FoodAddSelectViewControllerDelgate?
     
 
     override func viewDidLoad() {
@@ -29,6 +34,9 @@ class FoodAddSelectViewController: UIViewController {
     }
     
     private func setupLayout() {
+        foodAddSelectTableView.layer.cornerRadius = 20
+        
+        
         cancelButton.backgroundColor = .white
         
         cancelButton.layer.cornerRadius = cancelButton.frame.width / 2
@@ -37,9 +45,14 @@ class FoodAddSelectViewController: UIViewController {
         cancelButton.layer.shadowOpacity = 1
     }
     
+    func setupDelegate(delegate: FoodAddSelectViewControllerDelgate) {
+        self.delegate = delegate
+    }
+    
     
     @IBAction func backToScene(_ sender: Any) {
         self.dismiss(animated: true)
+        delegate?.showFoodAddButton()
     }
     
 }
@@ -51,6 +64,8 @@ extension FoodAddSelectViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoodAddSelectCell") as! FoodAddSelectCell
+        
+        cell.selectionStyle = .none
         
         switch indexPath.row {
         case 0 :

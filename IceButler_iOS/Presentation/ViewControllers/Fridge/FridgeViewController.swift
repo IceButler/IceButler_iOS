@@ -19,8 +19,6 @@ class FridgeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        foodAddButton.isHidden = false
-        
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
     }
@@ -46,6 +44,7 @@ class FridgeViewController: UIViewController {
         foodAddButton.isHidden = true
         
         let foodAddVC = UIStoryboard(name: "FoodAddSelect", bundle: nil).instantiateViewController(identifier: "FoodAddSelectViewController") as! FoodAddSelectViewController
+        foodAddVC.setupDelegate(delegate: self)
         
         foodAddVC.modalTransitionStyle = .crossDissolve
         foodAddVC.modalPresentationStyle = .overFullScreen
@@ -54,4 +53,11 @@ class FridgeViewController: UIViewController {
     }
     
 
+}
+
+
+extension FridgeViewController: FoodAddSelectViewControllerDelgate {
+    func showFoodAddButton() {
+        foodAddButton.isHidden = false
+    }
 }
