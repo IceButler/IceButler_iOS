@@ -11,6 +11,8 @@ import UIKit
 class CartManager {
     static let shared = CartManager()
     
+    var cartIndex: String?
+    
     var cartViewController: CartViewController? = nil
     var alertViewController: AlertViewController? = nil
     var cartMainTV: CartMainTableViewCell? = nil
@@ -36,5 +38,15 @@ class CartManager {
     
     func reloadFoodCV() {
         cartMainTV?.reloadCV()
+    }
+    
+    func fetchData() {
+        APIManger.shared.getData(urlEndpointString: "/carts/\(cartIndex)/foods",
+                                 responseDataType: GeneralResponseModel<CartResponseModel>.self,
+                                 requestDataType: GeneralResponseModel<CartResponseModel>.self,
+                                 parameter: nil,
+                                 completionHandler: { _ in
+            // TODO: 장바구니 식품 조회 결과 처리
+        })
     }
 }

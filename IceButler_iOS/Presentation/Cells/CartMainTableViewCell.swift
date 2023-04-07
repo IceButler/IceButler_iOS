@@ -50,22 +50,19 @@ class CartMainTableViewCell: UITableViewCell {
         contentView.layer.cornerRadius = 16
     }
         
-    public func setTitle(title: String) {
-        self.categoryTitleLabel.text = title
-    }
+    public func setTitle(title: String) { self.categoryTitleLabel.text = title }
     
     public func deleteFood() {
         
     }
     
-    func reloadCV() {
-        foodCollectionView.reloadData()
-    }
+    func reloadCV() { foodCollectionView.reloadData() }
 }
 
 extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return CartViewModel.shared.getCartCount()
+//        return CartViewModel.shared.getCartCount()
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

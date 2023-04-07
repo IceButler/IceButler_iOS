@@ -85,6 +85,7 @@ class FoodCollectionViewCell: UICollectionViewCell {
     }
     
     func setSelect() {
+        self.isSelectedFood = !self.isSelectedFood
         if self.isSelectedFood  {
             self.foodImageButton.backgroundColor = .signatureSkyBlue
             self.selectedImageView.isHidden = true
@@ -94,11 +95,13 @@ class FoodCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    @IBAction func didTapImageButton(_ sender: UIButton) {
-        if self.isSelectedFood {
-            CartViewModel.shared.removeRemoveIdx(removeIdx: self.tag)
-            self.foodImageButton.backgroundColor = .signatureSkyBlue
-            self.selectedImageView.isHidden = true
-        }
-    }
+//    @IBAction func didTapImageButton(_ sender: UIButton) {
+//        if self.isSelectedFood {
+//            CartViewModel.shared.removeRemoveIdx(removeIdx: self.tag)
+//            self.foodImageButton.backgroundColor = .signatureSkyBlue
+//            self.selectedImageView.isHidden = true
+//        } else {
+//
+//        }
+//    }
 }

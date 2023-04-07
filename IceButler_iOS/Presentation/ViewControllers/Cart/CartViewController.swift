@@ -53,9 +53,7 @@ class CartViewController: UIViewController {
         alertViewController.configure(title: "식품 삭제",
                                       content: "선택하신 식품을 정말 삭제하시겠습니까?",
                                       leftButtonTitle: "취소", righttButtonTitle: "삭제")
-        
-//        alertViewController.setLeftButtonAction(action: #selector(cancelAction(alertViewController)))
-//        alertViewController.setRightButtonAction(action: #selector(deleteAction(alertViewController)))
+        alertViewController.todo = .delete
         alertViewController.modalPresentationStyle = .overCurrentContext
         present(alertViewController, animated: true)
     }
@@ -66,15 +64,11 @@ class CartViewController: UIViewController {
         alertViewController.configure(title: "장보기 완료",
                                       content: "선택하신 식품 장보기를 완료하셨습니까?",
                                       leftButtonTitle: "취소", righttButtonTitle: "확인")
+        alertViewController.todo = .completeBuying
         alertViewController.modalPresentationStyle = .overCurrentContext
         present(alertViewController, animated: true)
     }
     
-    func cancelAction(_ sender: UIViewController) { sender.dismiss(animated: true) }
-    @objc func deleteAction(_ sender: UIViewController) {
-        print("식품 삭제 로직 추가 예정")
-        sender.dismiss(animated: true)
-    }
     
     func showTabBar() {
         self.tabBarController?.tabBar.isHidden = false
@@ -134,7 +128,7 @@ class CartViewController: UIViewController {
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
