@@ -28,6 +28,8 @@
 		73F62A4429DD11C4003D779F /* BarCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A4329DD11C4003D779F /* BarCodeView.swift */; };
 		73F62A4629DD6015003D779F /* FoodAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F62A4529DD6015003D779F /* FoodAdd.storyboard */; };
 		7593A9D6AB4309D589AD972D /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236010665AA2D8D3B10A8DC6 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
+		A2459F1B29DFE26700D12089 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */; };
+		A2459F1D29DFF7A800D12089 /* AddFoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2459F1C29DFF7A800D12089 /* AddFoodCollectionViewCell.swift */; };
 		A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */; };
 		A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */; };
 		A27302E629D853090060944D /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A27302E529D853090060944D /* Alert.storyboard */; };
@@ -93,6 +95,8 @@
 		73F62A4529DD6015003D779F /* FoodAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FoodAdd.storyboard; sourceTree = "<group>"; };
 		802F4E91FBD50A88599AD4EE /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
+		A2459F1C29DFF7A800D12089 /* AddFoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodCollectionViewCell.swift; sourceTree = "<group>"; };
 		A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
 		A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCollectionViewCell.xib; sourceTree = "<group>"; };
 		A27302E529D853090060944D /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
@@ -363,6 +367,7 @@
 				A28A763E29D54DEF00D127EA /* Cart.storyboard */,
 				A28A764129D54EFA00D127EA /* CartViewController.swift */,
 				A2C2579F29DA71680040A987 /* CartManager.swift */,
+				A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */,
 				A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */,
 				A2CA99FD29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift */,
+				A2459F1C29DFF7A800D12089 /* AddFoodCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -646,6 +652,7 @@
 			files = (
 				A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */,
 				A28A764429D54F1C00D127EA /* DefaultTabBarController.swift in Sources */,
+				A2459F1D29DFF7A800D12089 /* AddFoodCollectionViewCell.swift in Sources */,
 				A28A764729D5527A00D127EA /* UIDevice+.swift in Sources */,
 				73F26FC629DAA94B009E364B /* CartService.swift in Sources */,
 				73F26FCC29DAACC3009E364B /* CartViewModel.swift in Sources */,
@@ -664,6 +671,7 @@
 				73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */,
 				A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */,
 				A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */,
+				A2459F1B29DFE26700D12089 /* AddFoodViewController.swift in Sources */,
 				73F62A3E29DCFD7B003D779F /* FridgeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -23,6 +23,10 @@ class CartViewController: UIViewController {
         setupObserver()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     func setup() {
         CartManager.shared.setCartVC(cartVC: self)
     }
@@ -44,6 +48,9 @@ class CartViewController: UIViewController {
     
     @IBAction func didTapAddFoodButton(_ sender: UIButton) {
         // TODO: 식품 추가 커스텀 팝업 띄우기
+        let storyboard = UIStoryboard.init(name: "Cart", bundle: nil)
+        guard let addFoodViewController = storyboard.instantiateViewController(withIdentifier: "AddFoodViewController") as? AddFoodViewController else { return }
+        self.navigationController?.pushViewController(addFoodViewController, animated: true)
     }
     
     
