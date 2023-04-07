@@ -11,7 +11,6 @@ class FridgeViewController: UIViewController {
 
     @IBOutlet weak var foodAddButton: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,18 +31,51 @@ class FridgeViewController: UIViewController {
     func setupLayout() {
         self.view.backgroundColor = .white
         
-        foodAddButton.layer.cornerRadius = foodAddButton.frame.width / 2
         foodAddButton.backgroundColor = .signatureDeepBlue
+        
+        foodAddButton.layer.cornerRadius = foodAddButton.frame.width / 2
+        foodAddButton.layer.shadowColor = CGColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 1)
+        foodAddButton.layer.shadowOpacity = 1
+        foodAddButton.layer.shadowOffset = CGSize(width: 0, height: 4)
     }
 
     @IBAction func foodAdd(_ sender: Any) {
-        let barCodeAddVC = UIStoryboard(name: "BarCodeAdd", bundle: nil).instantiateViewController(identifier: "BarCodeAddViewController") as! BarCodeAddViewController
+        foodAddButton.isHidden = true
         
-        barCodeAddVC.modalTransitionStyle = .coverVertical
-        barCodeAddVC.modalPresentationStyle = .fullScreen
+        let foodAddVC = UIStoryboard(name: "FoodAddSelect", bundle: nil).instantiateViewController(identifier: "FoodAddSelectViewController") as! FoodAddSelectViewController
+        foodAddVC.setupDelegate(delegate: self)
         
-        self.present(barCodeAddVC, animated: true)
+        foodAddVC.modalTransitionStyle = .crossDissolve
+        foodAddVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(foodAddVC, animated: true)
     }
     
 
+}
+
+
+extension FridgeViewController: FoodAddSelectDelgate {
+    func showFoodAddButton() {
+        foodAddButton.isHidden = false
+    }
+    
+    func moveToFoodAddViewController(foodAddVC: FoodAddViewController) {
+        foodAddVC.setDelegate(delegate: self)
+        navigationController?.pushViewController(foodAddVC, animated: true)
+    }
+}
+
+extension FridgeViewController: FoodAddDelegate {
+    func moveToFoodAddSelect() {
+        foodAddButton.isHidden = true
+        
+        let foodAddVC = UIStoryboard(name: "FoodAddSelect", bundle: nil).instantiateViewController(identifier: "FoodAddSelectViewController") as! FoodAddSelectViewController
+        foodAddVC.setupDelegate(delegate: self)
+        
+        foodAddVC.modalTransitionStyle = .crossDissolve
+        foodAddVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(foodAddVC, animated: true)
+    }
 }
