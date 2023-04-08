@@ -40,6 +40,10 @@ class FridgeViewController: UIViewController {
     }
 
     @IBAction func foodAdd(_ sender: Any) {
+        moveToFoodAddSelectVC(animate: true)
+    }
+    
+    private func moveToFoodAddSelectVC(animate: Bool) {
         foodAddButton.isHidden = true
         
         let foodAddVC = UIStoryboard(name: "FoodAddSelect", bundle: nil).instantiateViewController(identifier: "FoodAddSelectViewController") as! FoodAddSelectViewController
@@ -48,7 +52,7 @@ class FridgeViewController: UIViewController {
         foodAddVC.modalTransitionStyle = .crossDissolve
         foodAddVC.modalPresentationStyle = .overFullScreen
         
-        self.present(foodAddVC, animated: true)
+        self.present(foodAddVC, animated: animate)
     }
     
 
@@ -68,14 +72,6 @@ extension FridgeViewController: FoodAddSelectDelgate {
 
 extension FridgeViewController: FoodAddDelegate {
     func moveToFoodAddSelect() {
-        foodAddButton.isHidden = true
-        
-        let foodAddVC = UIStoryboard(name: "FoodAddSelect", bundle: nil).instantiateViewController(identifier: "FoodAddSelectViewController") as! FoodAddSelectViewController
-        foodAddVC.setupDelegate(delegate: self)
-        
-        foodAddVC.modalTransitionStyle = .crossDissolve
-        foodAddVC.modalPresentationStyle = .overFullScreen
-        
-        self.present(foodAddVC, animated: true)
+        moveToFoodAddSelectVC(animate: false)
     }
 }
