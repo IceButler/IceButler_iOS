@@ -74,13 +74,38 @@
                                             <constraint firstAttribute="width" constant="50" id="IvZ-2a-UvA"/>
                                         </constraints>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제일 많이 낭비한 곳은?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqf-VM-9uG">
+                                        <rect key="frame" x="89" y="31" width="146" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유제품류" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Bn-do-EOB">
+                                        <rect key="frame" x="89" y="63" width="45" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrow" translatesAutoresizingMaskIntoConstraints="NO" id="1ma-cv-0kn">
+                                        <rect key="frame" x="324.66666666666669" y="32" width="9" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="9.0199999999999996" id="duj-Rt-SX1"/>
+                                            <constraint firstAttribute="height" constant="15.81" id="ibP-O5-I4X"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43529411759999997" green="0.63137254899999995" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="cqf-VM-9uG" firstAttribute="top" secondItem="eDq-AZ-PyD" secondAttribute="top" constant="31" id="7h6-Sv-fDy"/>
+                                    <constraint firstItem="1ma-cv-0kn" firstAttribute="top" secondItem="eDq-AZ-PyD" secondAttribute="top" constant="32.079999999999998" id="BfJ-CT-KOP"/>
+                                    <constraint firstItem="7Bn-do-EOB" firstAttribute="top" secondItem="cqf-VM-9uG" secondAttribute="bottom" constant="12" id="DuA-Vb-SiH"/>
+                                    <constraint firstItem="cqf-VM-9uG" firstAttribute="leading" secondItem="ZMv-sx-Fy7" secondAttribute="trailing" constant="15" id="Fnj-02-kfj"/>
                                     <constraint firstItem="ZMv-sx-Fy7" firstAttribute="leading" secondItem="eDq-AZ-PyD" secondAttribute="leading" constant="24" id="HFu-zO-gMQ"/>
                                     <constraint firstItem="ZMv-sx-Fy7" firstAttribute="top" secondItem="eDq-AZ-PyD" secondAttribute="top" constant="28" id="QCm-Og-zUx"/>
                                     <constraint firstAttribute="height" constant="106" id="Qmx-xL-PAV"/>
                                     <constraint firstAttribute="bottom" secondItem="ZMv-sx-Fy7" secondAttribute="bottom" constant="28" id="qYY-0f-ILh"/>
+                                    <constraint firstAttribute="trailing" secondItem="1ma-cv-0kn" secondAttribute="trailing" constant="27.329999999999998" id="skO-2c-VRp"/>
+                                    <constraint firstItem="7Bn-do-EOB" firstAttribute="leading" secondItem="ZMv-sx-Fy7" secondAttribute="trailing" constant="15" id="yG5-oS-l68"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Lbj-Vf-FVS">
@@ -489,6 +514,7 @@
     </scenes>
     <resources>
         <image name="addButtonIcon" width="20.333333969116211" height="20.333333969116211"/>
+        <image name="rightArrow" width="9.3333330154418945" height="16"/>
         <image name="wasteIcon" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

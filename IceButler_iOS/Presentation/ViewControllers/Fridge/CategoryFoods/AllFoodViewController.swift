@@ -20,6 +20,10 @@ class AllFoodViewController: UIViewController {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+//        FridgeViewModel.shared.getAllFoodList(fridgeIdx: 1)
+    }
+    
     private func setup() {
         foodCollectionView.delegate = self
         foodCollectionView.dataSource = self
@@ -37,8 +41,6 @@ class AllFoodViewController: UIViewController {
         wasteInfoView.layer.shadowColor = CGColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.1)
         wasteInfoView.layer.shadowOpacity = 1
         
-        
-        
         foodCollectionView.collectionViewLayout = FoodCollectionViewLeftAlignFlowLayout()
         
         if let flowLayout = foodCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -47,17 +49,25 @@ class AllFoodViewController: UIViewController {
     }
     
     @objc private func moveToWasteVC() {
-        
+        foodCollectionView.reloadData()
     }
 }
 
 extension AllFoodViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return FridgeViewModel.shared.allFoodListCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCell", for: indexPath) as! FoodCell
+        
+        FridgeViewModel.shared.allFoodListFoodDday(index: indexPath.row, store: &cell.cancellabels) { foodDday in
+            cell.setDday(foodDday: foodDday)
+        }
+        
+        FridgeViewModel.shared.allFoodListFoodName(index: indexPath.row, store: &cell.cancellabels) { foodName in
+            cell.setFoodName(foodName: foodName)
+        }
         
         return cell
     }

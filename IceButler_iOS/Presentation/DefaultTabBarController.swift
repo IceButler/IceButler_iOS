@@ -21,7 +21,8 @@ class DefaultTabBarController: UITabBarController {
         setup()
     }
     private func setup() {
-        CartViewModel.shared.getCart(cartId: 1)
+//        CartViewModel.shared.getCart(cartId: 1)
+        
     }
     
     override func viewDidLayoutSubviews() {

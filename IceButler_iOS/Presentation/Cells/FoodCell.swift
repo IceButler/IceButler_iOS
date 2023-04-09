@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 class FoodCell: UICollectionViewCell {
-    
-    
     @IBOutlet weak var foodImageView: UIImageView!
     @IBOutlet weak var foodNameLabel: UILabel!
     @IBOutlet weak var foodDdayLabel: UILabel!
+    
+    var cancellabels: Set<AnyCancellable> = []
     
     
     override func awakeFromNib() {
@@ -22,14 +23,22 @@ class FoodCell: UICollectionViewCell {
     }
     
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cancellabels.removeAll()
+    }
     
     private func setupLayout() {
         foodImageView.layer.cornerRadius = foodImageView.frame.width / 2
     }
     
-    func configure(foodName: String, foodDday: String) {
+    func setFoodName(foodName: String) {
         foodNameLabel.text = foodName
+    }
+    
+    func setDday(foodDday: String) {
         foodDdayLabel.text = foodDday
     }
+    
 
 }
