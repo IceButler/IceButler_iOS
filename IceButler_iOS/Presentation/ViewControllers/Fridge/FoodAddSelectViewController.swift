@@ -96,8 +96,6 @@ extension FoodAddSelectViewController: UITableViewDelegate, UITableViewDataSourc
             
             break
         case 2:
-            guard let PVC = self.presentingViewController else {return}
-            
             let foodAddVC = UIStoryboard(name: "FoodAdd", bundle: nil).instantiateViewController(identifier: "FoodAddViewController") as! FoodAddViewController
             
             self.dismiss(animated: true) {

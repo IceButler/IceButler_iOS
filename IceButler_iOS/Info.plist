@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>&quot;냉집사&quot;에서 바코드 인식을 위해 카메라 접근을 허용해주세요.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>&quot;냉집사&quot;에서 음식 사진 추가를 위해 사진 접근을 허용해주세요.</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>UIApplicationSceneManifest</key>
