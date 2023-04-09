@@ -20,8 +20,14 @@ class ETCViewController: UIViewController {
         foodCollectionView.delegate = self
         foodCollectionView.dataSource = self
         
-        let foodCell = UINib(nibName: "FoodCollectionViewCell", bundle: nil)
-        foodCollectionView.register(foodCell, forCellWithReuseIdentifier: "FoodCollectionViewCell")
+        let foodCell = UINib(nibName: "FoodCell", bundle: nil)
+        foodCollectionView.register(foodCell, forCellWithReuseIdentifier: "FoodCell")
+        
+        foodCollectionView.collectionViewLayout = FoodCollectionViewLeftAlignFlowLayout()
+        
+        if let flowLayout = foodCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
     }
 }
 
@@ -31,9 +37,10 @@ extension ETCViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCollectionViewCell", for: indexPath)
+        let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCell", for: indexPath) as! FoodCell
         
         return cell
     }
+    
     
 }

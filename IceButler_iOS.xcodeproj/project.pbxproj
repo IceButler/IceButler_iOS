@@ -25,6 +25,8 @@
 		73B7373A29E250680097806F /* ProcessedFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7373929E250680097806F /* ProcessedFoodViewController.swift */; };
 		73B7373C29E250700097806F /* ETCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7373B29E250700097806F /* ETCViewController.swift */; };
 		73B7373E29E2507A0097806F /* AllFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7373D29E2507A0097806F /* AllFoodViewController.swift */; };
+		73B7374529E293520097806F /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7374329E293520097806F /* FoodCell.swift */; };
+		73B7374629E293520097806F /* FoodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B7374429E293520097806F /* FoodCell.xib */; };
 		73DC2F3D29DAA6A400F47ECD /* APIManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC2F3C29DAA6A400F47ECD /* APIManger.swift */; };
 		73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */; };
 		73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D23B29D2DFFE0038BD0C /* SceneDelegate.swift */; };
@@ -108,6 +110,8 @@
 		73B7373929E250680097806F /* ProcessedFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedFoodViewController.swift; sourceTree = "<group>"; };
 		73B7373B29E250700097806F /* ETCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETCViewController.swift; sourceTree = "<group>"; };
 		73B7373D29E2507A0097806F /* AllFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFoodViewController.swift; sourceTree = "<group>"; };
+		73B7374329E293520097806F /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
+		73B7374429E293520097806F /* FoodCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCell.xib; sourceTree = "<group>"; };
 		73DC2F3C29DAA6A400F47ECD /* APIManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManger.swift; sourceTree = "<group>"; };
 		73F0D23629D2DFFE0038BD0C /* IceButler_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceButler_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -469,6 +473,8 @@
 				73B7371C29E1427A0097806F /* FoodAddImageCell.xib */,
 				73B7372129E1B2040097806F /* FoodOwnerCell.swift */,
 				73B7372229E1B2040097806F /* FoodOwnerCell.xib */,
+				73B7374329E293520097806F /* FoodCell.swift */,
+				73B7374429E293520097806F /* FoodCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -605,6 +611,7 @@
 				73F62A4829DD7F30003D779F /* FoodAddSelect.storyboard in Resources */,
 				A28A765729D749C700D127EA /* CartMainTableViewCell.xib in Resources */,
 				73B7371E29E1427A0097806F /* FoodAddImageCell.xib in Resources */,
+				73B7374629E293520097806F /* FoodCell.xib in Resources */,
 				73F62A5429DFDADF003D779F /* FoodCategoryCell.xib in Resources */,
 				73B7372429E1B2040097806F /* FoodOwnerCell.xib in Resources */,
 			);
@@ -751,6 +758,7 @@
 				73F62A4429DD11C4003D779F /* BarCodeView.swift in Sources */,
 				73B7373829E2505B0097806F /* SeasoningViewController.swift in Sources */,
 				73B7372C29E250010097806F /* FruitViewController.swift in Sources */,
+				73B7374529E293520097806F /* FoodCell.swift in Sources */,
 				73B7372829E24F510097806F /* FoodCategory.swift in Sources */,
 				73F62A4229DD01DE003D779F /* BarCodeAddViewController.swift in Sources */,
 				A27302E829D853160060944D /* AlertViewController.swift in Sources */,

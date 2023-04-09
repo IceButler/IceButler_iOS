@@ -24,8 +24,8 @@ class AllFoodViewController: UIViewController {
         foodCollectionView.delegate = self
         foodCollectionView.dataSource = self
         
-        let foodCell = UINib(nibName: "FoodCollectionViewCell", bundle: nil)
-        foodCollectionView.register(foodCell, forCellWithReuseIdentifier: "FoodCollectionViewCell")
+        let foodCell = UINib(nibName: "FoodCell", bundle: nil)
+        foodCollectionView.register(foodCell, forCellWithReuseIdentifier: "FoodCell")
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(moveToWasteVC))
         wasteInfoView.addGestureRecognizer(tapGesture)
@@ -36,6 +36,14 @@ class AllFoodViewController: UIViewController {
         wasteInfoView.layer.shadowOffset = CGSize(width: 0, height: 4)
         wasteInfoView.layer.shadowColor = CGColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.1)
         wasteInfoView.layer.shadowOpacity = 1
+        
+        
+        
+        foodCollectionView.collectionViewLayout = FoodCollectionViewLeftAlignFlowLayout()
+        
+        if let flowLayout = foodCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
     }
     
     @objc private func moveToWasteVC() {
@@ -49,14 +57,9 @@ extension AllFoodViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCollectionViewCell", for: indexPath) as! FoodCollectionViewCell
-        cell.foodImageButton.layer.cornerRadius = cell.foodImageButton.frame.width / 2
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCell", for: indexPath) as! FoodCell
         
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 70, height: 90)
     }
     
 }
