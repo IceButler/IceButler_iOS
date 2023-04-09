@@ -14,6 +14,7 @@ class MarineProductsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupObserver()
     }
     
     private func setup() {
@@ -29,17 +30,40 @@ class MarineProductsViewController: UIViewController {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
+    
+    private func setupObserver() {
+        FridgeViewModel.shared.isChangeAllFoodList(foodListIdx:5) {
+            self.foodCollectionView.reloadData()
+        }
+    }
 }
 
 extension MarineProductsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return FridgeViewModel.shared.allFoodListCount(foodListIdx: 5)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCell", for: indexPath) as! FoodCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCell", for: indexPath) as! FoodCell
+        
+        FridgeViewModel.shared.allFoodListFoodDday(foodListIdx: 5, index: indexPath.row, store: &cell.cancellabels) { foodDday in
+            cell.setDday(foodDday: foodDday)
+        }
+        
+        FridgeViewModel.shared.allFoodListFoodName(foodListIdx: 5, index: indexPath.row, store: &cell.cancellabels) { foodName in
+            cell.setFoodName(foodName: foodName)
+        }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let foodIdx = FridgeViewModel.shared.foodIdx(foodListIdx: 5, index: indexPath.row)
+        FoodViewModel.shared.getFoodDetail(fridgeIdx: 1, foodIdx: foodIdx)
+        
+        let foodDetailVC = UIStoryboard(name: "FoodDetail", bundle: nil).instantiateViewController(identifier: "FoodDetailViewController") as! FoodDetailViewController
+        
+        self.navigationController?.pushViewController(foodDetailVC, animated: true)
     }
     
     

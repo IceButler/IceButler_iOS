@@ -33,7 +33,8 @@ class FridgeViewController: TabmanViewController {
     }
     
     private func setup() {
-        
+        FridgeViewModel.shared.getAllFoodList(fridgeIdx: 1)
+        FridgeViewModel.shared.getCategorFoodList(fridgeIdx: 1)
     }
     
     private func setupTabman() {
@@ -145,7 +146,7 @@ class FridgeViewController: TabmanViewController {
         let alarmItem = UIBarButtonItem(image: UIImage(named: "alarmIcon"), style: .done, target: self, action: #selector(moveToAlarmVC))
         alarmItem.tintColor = .white
         
-        self.navigationItem.rightBarButtonItems = [searchItem, alarmItem]
+        self.navigationItem.rightBarButtonItems = [alarmItem, searchItem]
     }
     
     @objc private func selectFridge() {
