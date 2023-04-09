@@ -39,6 +39,10 @@ class FridgeViewModel: ObservableObject {
         return allFoodList.count
     }
     
+    func foodIdx(index: Int) -> Int {
+        return allFoodList[index].fridgeFoodIdx
+    }
+    
     func getAllFoodList(fridgeIdx: Int) {
         fridgeService.getAllFood(fridgeIdx: fridgeIdx) { response in
             self.allFoodList.removeAll()
