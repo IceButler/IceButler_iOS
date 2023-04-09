@@ -14,11 +14,16 @@ class FoodCategoryCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        setupLayout()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    func setupLayout() {
+        self.contentView.backgroundColor = .focusTableViewSkyBlue
     }
     
     

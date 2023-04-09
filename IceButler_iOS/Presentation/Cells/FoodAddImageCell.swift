@@ -7,11 +7,21 @@
 
 import UIKit
 
-class foodAddImageCell: UICollectionViewCell {
-
+class FoodAddImageCell: UICollectionViewCell {
+    @IBOutlet weak var foodImageView: UIImageView!
+    @IBOutlet weak var foodImageAddImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    }
+    
+    func configure(image: UIImage) {
+        foodImageView.image = image
+    }
+    
+    
+    func hiddenFoodImageAddIcon() {
+        foodImageAddImageView.isHidden = true
     }
 
 }

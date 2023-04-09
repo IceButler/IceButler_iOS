@@ -10,7 +10,7 @@ import UIKit
 
 extension UIButton {
     func alignTextLeft() {
-        contentHorizontalAlignment = .leading
-        titleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        contentHorizontalAlignment = .left
+        configuration?.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0)
     }
 }
