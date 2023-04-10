@@ -11,9 +11,16 @@ protocol AlertDelegate {
     func deleteFoodsAction()
 }
 
+enum Todo {
+    case cancel
+    case delete
+    case completeBuying
+}
+
 class AlertViewController: UIViewController {
     
     var delegate: AlertDelegate?
+    var todo: Todo?
     
     private var titleText: String = ""
     private var contentText: String = ""
@@ -36,18 +43,12 @@ class AlertViewController: UIViewController {
         super.viewDidLoad()
         setupLayouts()
         setupContents()
+        setButtonAction()
     }
     
     // TODO: 이후 Selector 인자를 통해 탭 이벤트 처리할 예정 (임시로 IBAction 사용)
     @IBAction func didTapLeftButton(_ sender: UIButton) {
         self.dismiss(animated: true)
-        CartManager.shared.showCartCVTabBar()
-    }
-    
-    @IBAction func didTapRightButton(_ sender: UIButton) {
-        CartViewModel.shared.deleteFood(cartId: 1)
-        self.dismiss(animated: true)
-        CartManager.shared.reloadFoodCV()
         CartManager.shared.showCartCVTabBar()
     }
     
@@ -78,15 +79,40 @@ class AlertViewController: UIViewController {
         self.leftButton.setTitle(self.leftButtonTitle, for: .normal)
         self.rightButton.setTitle(self.righttButtonTitle, for: .normal)
         
-        if let _ = self.leftButtonAction,
-           let _ = self.rightButtonAction {
-            self.leftButton.addTarget(self, action: self.leftButtonAction!, for: .touchUpInside)
-            self.rightButton.addTarget(self, action: self.rightButtonAction!, for: .touchUpInside)
-        }
+//        if let _ = self.leftButtonAction,
+//           let _ = self.rightButtonAction {
+//            self.leftButton.addTarget(self, action: self.leftButtonAction!, for: .touchUpInside)
+//            self.rightButton.addTarget(self, action: self.rightButtonAction!, for: .touchUpInside)
+//        }
         
     }
     
     public func setLeftButtonAction(action: Selector) { self.leftButtonAction = action }
     public func setRightButtonAction(action: Selector) { self.rightButtonAction = action }
     
+    
+    func setButtonAction() {
+        leftButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+        switch todo {
+        case .delete:
+            rightButton.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
+        case .completeBuying:
+            rightButton.addTarget(self, action: #selector(completeBuying), for: .touchUpInside)
+        default: return
+        }
+    }
+    
+    // MARK: @objc methods
+    @objc func cancelAction() { self.dismiss(animated: true) }
+    @objc func deleteAction() {
+        print("식품 삭제 로직 추가 예정")
+        self.dismiss(animated: true)
+    }
+    
+    @objc func completeBuying() {
+        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
+        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "SelectAlertViewController") as? CompleteBuyingViewController else { return }
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        present(alertViewController, animated: true)
+    }
 }
