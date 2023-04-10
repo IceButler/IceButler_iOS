@@ -24,7 +24,6 @@ class APIManger {
         AF
             .request(url, method: .get, parameters: parameter, headers: nil)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-                print(response)
                 switch response.result {
                 case .success(let success):
                     completionHandler(success)
@@ -46,7 +45,6 @@ class APIManger {
         AF
             .request(url, method: .get, parameters: parameter, headers: nil)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-                print(response)
                 switch response.result {
                 case .success(let success):
                     completionHandler(success)
