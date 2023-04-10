@@ -52,7 +52,11 @@ class FoodAddViewController: UIViewController {
     
     private var selectedFoodCategory: FoodCategory?
     
+    private var foodOwnerIdx: Int?
+    
     private var foodImage: UIImage?
+    
+    private var date: Date?
     
     
     override func viewDidLoad() {
@@ -61,9 +65,12 @@ class FoodAddViewController: UIViewController {
         setup()
         setupLayout()
         setupNavgationBar()
+        setupObserver()
     }
     
     private func setup() {
+        FoodViewModel.shared.getFoodOwnerList(fridgeIdx: 1)
+        
         let textViewList = [foodNameTextView, foodDetailTextView, foodOwnerTextView, foodMemoTextView]
         for i in 0..<textViewList.count {
             textViewList[i]?.delegate = self
@@ -90,6 +97,8 @@ class FoodAddViewController: UIViewController {
         
         let foodAddImageCell = UINib(nibName: "FoodAddImageCell", bundle: nil)
         foodImageCollectionView.register(foodAddImageCell, forCellWithReuseIdentifier: "FoodAddImageCell")
+        
+        foodDatePicker.addTarget(self, action: #selector(selectDate), for: .valueChanged)
     }
     
     private func setupLayout() {
@@ -159,6 +168,29 @@ class FoodAddViewController: UIViewController {
     }
     
     private func setupNavgationBar() {
+        if #available(iOS 13.0, *) {
+            let app = UIApplication.shared
+            let statusBarHeight: CGFloat = app.statusBarFrame.size.height
+            
+            let statusbarView = UIView()
+            statusbarView.backgroundColor = UIColor.navigationColor
+            view.addSubview(statusbarView)
+          
+            statusbarView.translatesAutoresizingMaskIntoConstraints = false
+            statusbarView.heightAnchor
+                .constraint(equalToConstant: statusBarHeight).isActive = true
+            statusbarView.widthAnchor
+                .constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
+            statusbarView.topAnchor
+                .constraint(equalTo: view.topAnchor).isActive = true
+            statusbarView.centerXAnchor
+                .constraint(equalTo: view.centerXAnchor).isActive = true
+          
+        } else {
+            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+            statusBar?.backgroundColor = UIColor.red
+        }
+        
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
         
         let backItem = UIBarButtonItem(image: UIImage(named: "backIcon"), style: .done, target: self, action: #selector(backToScene))
@@ -176,6 +208,12 @@ class FoodAddViewController: UIViewController {
         self.navigationItem.leftBarButtonItems = [backItem, titleItem]
     }
     
+    private func setupObserver() {
+        FoodViewModel.shared.foodOwnerList {
+            self.foodOwnerTableView.reloadData()
+        }
+    }
+    
     @objc private func backToScene() {
         navigationController?.popViewController(animated: true)
         delegate?.moveToFoodAddSelect()
@@ -183,6 +221,16 @@ class FoodAddViewController: UIViewController {
     
     func setDelegate(delegate: FoodAddDelegate) {
         self.delegate = delegate
+    }
+    
+    @objc func selectDate() {
+        let dateFromat = DateFormatter()
+        dateFromat.dateFormat = "yyyy-MM-dd"
+
+        datePickerOpenButton.setTitle(dateFromat.string(from: foodDatePicker.date), for: .normal)
+        datePickerOpenButton.backgroundColor = .focusSkyBlue
+        
+        date = foodDatePicker.date
     }
     
     
@@ -268,8 +316,72 @@ class FoodAddViewController: UIViewController {
             
             self.foodImageCollectionView.reloadData()
         }
-
     }
+    
+    @IBAction func foodAdd(_ sender: Any) {
+        if date == nil {
+            showAlert(title: "유통기한 오류", message: "유통 기한을 입력해주세요.")
+            return
+        }else if date! < Date() {
+            showAlert(title: "유통기한 오류", message: "유통기한이 지난 제품은 등록 할 수 없습니다.")
+            return
+        }
+        
+        if foodNameTextView.text == "" || foodNameTextView.text == "식품명을 입력해주세요." {
+            showAlert(title: "오류", message: "식품명을 입력해주세요.")
+            return
+        }
+        
+        if foodDetailTextView.text == "" || foodDetailTextView.text == "식품 상세명을 입력해주세요." {
+            showAlert(title: "오류", message: "식품 상세명을 입력해주세요.")
+            return
+        }
+        
+        if selectedFoodCategory == nil {
+            showAlert(title: "오류", message: "카테고리를 선택해주세요.")
+            return
+        }
+        
+        if foodOwnerIdx == nil {
+            showAlert(title: "오류", message: "음식 소유자를 선택해주세요.")
+            return
+        }
+        
+        let memo: String?
+        
+        if foodMemoTextView.text == "" || foodMemoTextView.text == "메모내용 or 없음" {
+            memo = nil
+        }else {
+            memo = foodMemoTextView.text
+        }
+        
+        let dateFromat = DateFormatter()
+        dateFromat.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFromat.string(from: date!)
+
+        
+        FoodViewModel.shared.postFood(fridgeIdx: 1, foodName: foodNameTextView.text, foodDetail: foodDetailTextView.text, foodCategory: selectedFoodCategory!.rawValue, foodShelfLife: dateString, foodOwnerIdx: foodOwnerIdx!, memo: memo, imgUrl: nil) { result in
+            if result {
+                let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                self.present(alert, animated: true)
+            }else {
+                self.showAlert(title: "실패", message: "음식 등록에 실패하셨습니다. 다시 시도해주세요.")
+            }
+        }
+        
+        
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
+    }
+    
+    
 }
 
 extension FoodAddViewController: UITableViewDelegate, UITableViewDataSource {
@@ -279,7 +391,7 @@ extension FoodAddViewController: UITableViewDelegate, UITableViewDataSource {
             return FoodCategory.allCases.count
         case 1:
             // user api 받으면 바꿀 예정
-            return FoodCategory.allCases.count
+            return FoodViewModel.shared.foodOwnerListCount()
         default:
             return 0
         }
@@ -298,7 +410,10 @@ extension FoodAddViewController: UITableViewDelegate, UITableViewDataSource {
             // user api 받으면 바꿀 예정
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FoodOwnerCell", for: indexPath) as? FoodOwnerCell else {return UITableViewCell()}
             
-            cell.configure(name: FoodCategory.allCases[indexPath.row].rawValue)
+            FoodViewModel.shared.foodOwnerListName(index: indexPath.row, store: &cell.cancellabels) { ownerName in
+                cell.configure(name: ownerName)
+            }
+            
             cell.selectionStyle = .none
             cell.isFocus(focus: isOpenOwnerTableView)
             
@@ -313,8 +428,13 @@ extension FoodAddViewController: UITableViewDelegate, UITableViewDataSource {
         case 0 :
             selectFoodCategory(index: indexPath.row)
         case 1:
-            // user api 받으면 바꿀 예정
             guard let cell = tableView.cellForRow(at: indexPath)! as? FoodOwnerCell else {return}
+            FoodViewModel.shared.foodOwnerListName(index: indexPath.row, store: &cell.cancellabels) { ownerName in
+                self.foodOwnerTextView.text = ownerName
+            }
+            FoodViewModel.shared.foodOwnerListIdx(index: indexPath.row, store: &cell.cancellabels) { foodOwnerIdx in
+                self.foodOwnerIdx = foodOwnerIdx
+            }
             
             cell.selectedOwnerCell()
         default:

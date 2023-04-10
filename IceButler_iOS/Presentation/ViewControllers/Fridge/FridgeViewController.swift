@@ -34,7 +34,6 @@ class FridgeViewController: TabmanViewController {
     
     private func setup() {
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: 1)
-        FridgeViewModel.shared.getCategorFoodList(fridgeIdx: 1)
     }
     
     private func setupTabman() {
@@ -92,10 +91,10 @@ class FridgeViewController: TabmanViewController {
     private func setupLayout() {
         self.view.backgroundColor = .white
         
-        foodAddButton.backgroundColor = .signatureDeepBlue
+        foodAddButton.backgroundColor = .white
         
         foodAddButton.layer.cornerRadius = foodAddButton.frame.width / 2
-        foodAddButton.layer.shadowColor = CGColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 1)
+        foodAddButton.layer.shadowColor = CGColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0.1)
         foodAddButton.layer.shadowOpacity = 1
         foodAddButton.layer.shadowOffset = CGSize(width: 0, height: 4)
     }

@@ -18,3 +18,13 @@ struct FoodDetailResponseModel: Codable {
         case imgURL = "imgUrl"
     }
 }
+
+
+struct FoodOwnerResponseModel: Codable {
+    let userList: [FoodOwner]
+}
+
+struct FoodOwner: Codable {
+    let userIdx: Int
+    let nickName, profileImage: String?
+}

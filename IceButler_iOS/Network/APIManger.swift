@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-private let BASE_URL = "http://43.200.102.188:8080"
+private let BASE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/dev/dev-ice-bulter-main"
 
 class APIManger {
     static let shared = APIManger()

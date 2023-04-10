@@ -80,6 +80,9 @@
                                                 <buttonConfiguration key="configuration" style="plain" title="완료">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="foodAdd:" destination="Grg-M9-nl7" eventType="touchUpInside" id="Pds-0d-WIY"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="소유자" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOC-ZD-n2P">
                                                 <rect key="frame" x="16" y="376" width="37" height="22"/>
@@ -302,6 +305,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HN5-Hl-pER" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Grg-M9-nl7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-2347.3282442748091" y="-483.45070422535213"/>
         </scene>

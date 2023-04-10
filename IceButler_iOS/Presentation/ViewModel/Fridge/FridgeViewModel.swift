@@ -92,57 +92,79 @@ class FridgeViewModel: ObservableObject {
     func isChangeAllFoodList(foodListIdx: Int, completion: @escaping () -> Void) {
         switch foodListIdx {
         case 0:
-            $allFoodList.sink { allFoodList in
+            $allFoodList.filter { allFoodList in
+                allFoodList.count > 0
+            }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
             break
         case 1:
-            $meatFoodList.sink { allFoodList in
+            $meatFoodList.filter { allFoodList in
+                allFoodList.count > 0
+            }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
             break
         case 2:
-            $fruitFoodList.sink { allFoodList in
+            $fruitFoodList.filter { allFoodList in
+                allFoodList.count > 0
+            }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
             break
         case 3:
-            $vegetableFoodList.sink { allFoodList in
+            $vegetableFoodList.filter { allFoodList in
+                allFoodList.count > 0
+            }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
             break
         case 4:
-            $drinkFoodList.sink { allFoodList in
+            $drinkFoodList.filter { allFoodList in
+                allFoodList.count > 0
+            }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
             break
         case 5:
-            $marineProductsFoodList.sink { allFoodList in
+            $marineProductsFoodList.filter { allFoodList in
+                allFoodList.count > 0
+            }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
             break
         case 6:
-            $sideFoodList.sink { allFoodList in
+            $sideFoodList.filter { allFoodList in
+                allFoodList.count > 0
+            }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
             break
         case 7:
-            $snackFoodList.sink { allFoodList in
+            $snackFoodList.filter { allFoodList in
+                allFoodList.count > 0
+            }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
             break
         case 8:
-            $seasoningFoodList.sink { allFoodList in
+            $seasoningFoodList.filter { allFoodList in
+                allFoodList.count > 0
+            }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
             break
         case 9:
-            $processedFoodList.sink { allFoodList in
+            $processedFoodList.filter { allFoodList in
+                allFoodList.count > 0
+            }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
             break
         case 10:
-            $etcFoodList.sink { allFoodList in
+            $etcFoodList.filter { allFoodList in
+                allFoodList.count > 0
+            }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
             break
@@ -154,59 +176,81 @@ class FridgeViewModel: ObservableObject {
     func allFoodListFoodName(foodListIdx:Int, index: Int, store: inout Set<AnyCancellable>, completion: @escaping (String)-> Void) {
         switch foodListIdx {
         case 0:
-            $allFoodList.sink { allFoodList in
+            $allFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].foodName)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 1:
-            $meatFoodList.sink { allFoodList in
+            $meatFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].foodName)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 2:
-            $fruitFoodList.sink { allFoodList in
+            $fruitFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].foodName)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 3:
-            $vegetableFoodList.sink { allFoodList in
+            $vegetableFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].foodName)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 4:
-            $drinkFoodList.sink { allFoodList in
+            $drinkFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].foodName)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 5:
-            $marineProductsFoodList.sink { allFoodList in
+            $marineProductsFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].foodName)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 6:
-            $sideFoodList.sink { allFoodList in
+            $sideFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].foodName)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 7:
-            $snackFoodList.sink { allFoodList in
+            $snackFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].foodName)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 8:
-            $seasoningFoodList.sink { allFoodList in
+            $seasoningFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].foodName)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 9:
-            $processedFoodList.sink { allFoodList in
+            $processedFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].foodName)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 10:
-            $etcFoodList.sink { allFoodList in
+            $etcFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].foodName)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         default:
             break
@@ -216,59 +260,81 @@ class FridgeViewModel: ObservableObject {
     func allFoodListFoodDday(foodListIdx: Int, index: Int, store: inout Set<AnyCancellable>, completion: @escaping (String)-> Void) {
         switch foodListIdx {
         case 0:
-            $allFoodList.sink { allFoodList in
+            $allFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].shelfLife)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 1:
-            $meatFoodList.sink { allFoodList in
+            $meatFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].shelfLife)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 2:
-            $fruitFoodList.sink { allFoodList in
+            $fruitFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].shelfLife)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 3:
-            $vegetableFoodList.sink { allFoodList in
+            $vegetableFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].shelfLife)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 4:
-            $drinkFoodList.sink { allFoodList in
+            $drinkFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].shelfLife)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 5:
-            $marineProductsFoodList.sink { allFoodList in
+            $marineProductsFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].shelfLife)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 6:
-            $sideFoodList.sink { allFoodList in
+            $sideFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].shelfLife)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 7:
-            $snackFoodList.sink { allFoodList in
+            $snackFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].shelfLife)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 8:
-            $seasoningFoodList.sink { allFoodList in
+            $seasoningFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].shelfLife)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 9:
-            $processedFoodList.sink { allFoodList in
+            $processedFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].shelfLife)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         case 10:
-            $etcFoodList.sink { allFoodList in
+            $etcFoodList.filter { allFoodList in
+                allFoodList.count > index
+            }.sink { allFoodList in
                 completion(allFoodList[index].shelfLife)
-            }.store(in: &cancelLabels)
+            }.store(in: &store)
             break
         default:
             break
@@ -340,11 +406,6 @@ class FridgeViewModel: ObservableObject {
                 self.allFoodList.append(food)
             })
         }
-    }
-    
-    func getCategorFoodList(fridgeIdx: Int) {
-//        var foodLists = [meatFoodList, fruitFoodList, vegetableFoodList, drinkFoodList, marineProductsFoodList, sideFoodList, snackFoodList, seasoningFoodList, processedFoodList, etcFoodList]
-        
         
         fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Meat.rawValue) { response in
             self.meatFoodList.removeAll()

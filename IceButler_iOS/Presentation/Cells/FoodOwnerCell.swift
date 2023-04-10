@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class FoodOwnerCell: UITableViewCell {
     
@@ -14,13 +15,19 @@ class FoodOwnerCell: UITableViewCell {
     
     private var focus: Bool = false
     
+    var cancellabels: Set<AnyCancellable> = []
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         setupLayout(focus: focus)
     }
-
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cancellabels.removeAll()
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

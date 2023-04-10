@@ -35,6 +35,7 @@
 		73B7374929E2DCE60097806F /* FridgeResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7374829E2DCE60097806F /* FridgeResponseModel.swift */; };
 		73B7374C29E2EB570097806F /* FridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7374B29E2EB570097806F /* FridgeService.swift */; };
 		73B7374F29E2EC5A0097806F /* FridgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7374E29E2EC5A0097806F /* FridgeViewModel.swift */; };
+		73C18A4529E3F0440037FE3A /* FoodRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C18A4429E3F0440037FE3A /* FoodRequestModel.swift */; };
 		73DC2F3D29DAA6A400F47ECD /* APIManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC2F3C29DAA6A400F47ECD /* APIManger.swift */; };
 		73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */; };
 		73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D23B29D2DFFE0038BD0C /* SceneDelegate.swift */; };
@@ -132,6 +133,7 @@
 		73B7374829E2DCE60097806F /* FridgeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeResponseModel.swift; sourceTree = "<group>"; };
 		73B7374B29E2EB570097806F /* FridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeService.swift; sourceTree = "<group>"; };
 		73B7374E29E2EC5A0097806F /* FridgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewModel.swift; sourceTree = "<group>"; };
+		73C18A4429E3F0440037FE3A /* FoodRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRequestModel.swift; sourceTree = "<group>"; };
 		73DC2F3C29DAA6A400F47ECD /* APIManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManger.swift; sourceTree = "<group>"; };
 		73F0D23629D2DFFE0038BD0C /* IceButler_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceButler_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				738CAC8D29E32817009EF9D2 /* FoodResponseModel.swift */,
+				73C18A4429E3F0440037FE3A /* FoodRequestModel.swift */,
 			);
 			path = Food;
 			sourceTree = "<group>";
@@ -560,7 +563,6 @@
 				73B7372229E1B2040097806F /* FoodOwnerCell.xib */,
 				73B7374329E293520097806F /* FoodCell.swift */,
 				73B7374429E293520097806F /* FoodCell.xib */,
-
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -859,6 +861,7 @@
 				A28A764229D54EFA00D127EA /* CartViewController.swift in Sources */,
 				73F26FC429DAA8EB009E364B /* CartResponseModel.swift in Sources */,
 				73F62A4A29DD7F45003D779F /* FoodAddSelectViewController.swift in Sources */,
+				73C18A4529E3F0440037FE3A /* FoodRequestModel.swift in Sources */,
 				738CAC8E29E32817009EF9D2 /* FoodResponseModel.swift in Sources */,
 				73B7371D29E1427A0097806F /* FoodAddImageCell.swift in Sources */,
 				73DC2F3D29DAA6A400F47ECD /* APIManger.swift in Sources */,
