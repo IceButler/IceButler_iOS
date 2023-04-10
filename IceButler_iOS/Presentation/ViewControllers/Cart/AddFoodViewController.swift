@@ -34,9 +34,12 @@ class AddFoodViewController: UIViewController {
     
     // MARK: helper methods
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        
+        // TODO: 장바구니 식품 추가 API 호출
     }
     
+    @IBAction func didTapBackItem(_ sender: UIBarButtonItem) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
     
     // MARK: helper methods
     private func setupNavigationBar() {
