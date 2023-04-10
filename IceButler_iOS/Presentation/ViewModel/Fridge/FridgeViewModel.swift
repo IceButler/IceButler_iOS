@@ -343,15 +343,77 @@ class FridgeViewModel: ObservableObject {
     }
     
     func getCategorFoodList(fridgeIdx: Int) {
-        var foodLists = [meatFoodList, fruitFoodList, vegetableFoodList, drinkFoodList, marineProductsFoodList, sideFoodList, snackFoodList, seasoningFoodList, processedFoodList, etcFoodList]
+//        var foodLists = [meatFoodList, fruitFoodList, vegetableFoodList, drinkFoodList, marineProductsFoodList, sideFoodList, snackFoodList, seasoningFoodList, processedFoodList, etcFoodList]
         
-        for i in 0..<foodLists.count {
-            fridgeService.getCategoryFood(fridgeIdx: 1, category: FoodCategory.allCases[i].rawValue) { response in
-                foodLists[i].removeAll()
-                response?.foodList.forEach({ food in
-                    foodLists[i].append(food)
-                })
-            }
+        
+        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Meat.rawValue) { response in
+            self.meatFoodList.removeAll()
+            response?.foodList.forEach({ food in
+                self.meatFoodList.append(food)
+            })
+        }
+        
+        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Fruit.rawValue) { response in
+            self.fruitFoodList.removeAll()
+            response?.foodList.forEach({ food in
+                self.fruitFoodList.append(food)
+            })
+        }
+        
+        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Vegetable.rawValue) { response in
+            self.vegetableFoodList.removeAll()
+            response?.foodList.forEach({ food in
+                self.vegetableFoodList.append(food)
+            })
+        }
+        
+        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Drink.rawValue) { response in
+            self.drinkFoodList.removeAll()
+            response?.foodList.forEach({ food in
+                self.drinkFoodList.append(food)
+            })
+        }
+        
+        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.MarineProducts.rawValue) { response in
+            self.marineProductsFoodList.removeAll()
+            response?.foodList.forEach({ food in
+                self.marineProductsFoodList.append(food)
+            })
+        }
+        
+        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Side.rawValue) { response in
+            self.sideFoodList.removeAll()
+            response?.foodList.forEach({ food in
+                self.sideFoodList.append(food)
+            })
+        }
+        
+        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Snack.rawValue) { response in
+            self.snackFoodList.removeAll()
+            response?.foodList.forEach({ food in
+                self.snackFoodList.append(food)
+            })
+        }
+        
+        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Seasoning.rawValue) { response in
+            self.seasoningFoodList.removeAll()
+            response?.foodList.forEach({ food in
+                self.seasoningFoodList.append(food)
+            })
+        }
+        
+        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.ProcessedFood.rawValue) { response in
+            self.processedFoodList.removeAll()
+            response?.foodList.forEach({ food in
+                self.processedFoodList.append(food)
+            })
+        }
+        
+        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.ETC.rawValue) { response in
+            self.etcFoodList.removeAll()
+            response?.foodList.forEach({ food in
+                self.etcFoodList.append(food)
+            })
         }
     }
 }
