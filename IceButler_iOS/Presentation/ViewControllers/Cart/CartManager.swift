@@ -36,6 +36,10 @@ class CartManager {
         cartViewController?.showTabBar()
     }
     
+    func showCartVCAlertView() {
+        cartViewController?.showAlertView()
+    }
+    
     func reloadFoodCV() {
         cartMainTV?.reloadCV()
     }

@@ -83,6 +83,12 @@ class CartViewController: UIViewController {
         self.alertView.isHidden = true
     }
     
+    func showAlertView() {
+        self.tabBarController?.tabBar.isHidden = true
+        self.addFoodButton.isHidden = true
+        self.alertView.backgroundColor = .signatureBlue
+        self.alertView.isHidden = false
+    }
     
     
     private func setupNavigationBar() {
