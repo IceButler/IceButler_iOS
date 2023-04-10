@@ -42,7 +42,7 @@
                                     <constraint firstAttribute="height" constant="48" id="flk-eU-FsJ"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="cancelButtonIcon"/>
                                 <connections>
                                     <action selector="backToScene:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="GUd-F6-6nX"/>
                                 </connections>
@@ -56,7 +56,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="42s-EQ-rMj" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="68" id="Bjs-rE-Buy"/>
                             <constraint firstAttribute="trailing" secondItem="s41-Uh-eef" secondAttribute="trailing" constant="72" id="Ctp-xp-7nI"/>
@@ -81,6 +81,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cancelButtonIcon" width="15" height="15"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

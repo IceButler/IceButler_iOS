@@ -17,6 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4HG-QS-PTu">
+                                <rect key="frame" x="0.0" y="59" width="393" height="39"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="520-ub-vRH"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1RL-eN-Gn3">
                                 <rect key="frame" x="324" y="736" width="48" height="48"/>
                                 <constraints>
@@ -24,7 +31,7 @@
                                     <constraint firstAttribute="width" constant="48" id="qus-dd-CUa"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="addButtonIcon"/>
                                 <connections>
                                     <action selector="foodAdd:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pUX-Lb-AIP"/>
                                 </connections>
@@ -33,20 +40,482 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4HG-QS-PTu" secondAttribute="trailing" id="Can-1z-p8a"/>
+                            <constraint firstItem="4HG-QS-PTu" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Lbo-X5-sml"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="1RL-eN-Gn3" secondAttribute="bottom" constant="34" id="Lby-9j-nAA"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1RL-eN-Gn3" secondAttribute="trailing" constant="21" id="Lkr-c2-BgR"/>
+                            <constraint firstItem="4HG-QS-PTu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="SO7-dr-IbU"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="barView" destination="4HG-QS-PTu" id="VPX-V8-4MH"/>
                         <outlet property="foodAddButton" destination="1RL-eN-Gn3" id="heZ-1L-nSq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="-34"/>
+            <point key="canvasLocation" x="-726" y="-521"/>
+        </scene>
+        <!--All Food View Controller-->
+        <scene sceneID="Zz7-EC-xbF">
+            <objects>
+                <viewController storyboardIdentifier="AllFoodViewController" id="ISD-SD-nmE" customClass="AllFoodViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ro6-Cn-wDP">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDq-AZ-PyD">
+                                <rect key="frame" x="16" y="79" width="361" height="106"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wasteIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ZMv-sx-Fy7">
+                                        <rect key="frame" x="24" y="28" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Ev0-SS-128"/>
+                                            <constraint firstAttribute="width" constant="50" id="IvZ-2a-UvA"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제일 많이 낭비한 곳은?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqf-VM-9uG">
+                                        <rect key="frame" x="89" y="31" width="146" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유제품류" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Bn-do-EOB">
+                                        <rect key="frame" x="89" y="63" width="45" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrow" translatesAutoresizingMaskIntoConstraints="NO" id="1ma-cv-0kn">
+                                        <rect key="frame" x="324.66666666666669" y="32" width="9" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="9.0199999999999996" id="duj-Rt-SX1"/>
+                                            <constraint firstAttribute="height" constant="15.81" id="ibP-O5-I4X"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.43529411759999997" green="0.63137254899999995" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="cqf-VM-9uG" firstAttribute="top" secondItem="eDq-AZ-PyD" secondAttribute="top" constant="31" id="7h6-Sv-fDy"/>
+                                    <constraint firstItem="1ma-cv-0kn" firstAttribute="top" secondItem="eDq-AZ-PyD" secondAttribute="top" constant="32.079999999999998" id="BfJ-CT-KOP"/>
+                                    <constraint firstItem="7Bn-do-EOB" firstAttribute="top" secondItem="cqf-VM-9uG" secondAttribute="bottom" constant="12" id="DuA-Vb-SiH"/>
+                                    <constraint firstItem="cqf-VM-9uG" firstAttribute="leading" secondItem="ZMv-sx-Fy7" secondAttribute="trailing" constant="15" id="Fnj-02-kfj"/>
+                                    <constraint firstItem="ZMv-sx-Fy7" firstAttribute="leading" secondItem="eDq-AZ-PyD" secondAttribute="leading" constant="24" id="HFu-zO-gMQ"/>
+                                    <constraint firstItem="ZMv-sx-Fy7" firstAttribute="top" secondItem="eDq-AZ-PyD" secondAttribute="top" constant="28" id="QCm-Og-zUx"/>
+                                    <constraint firstAttribute="height" constant="106" id="Qmx-xL-PAV"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZMv-sx-Fy7" secondAttribute="bottom" constant="28" id="qYY-0f-ILh"/>
+                                    <constraint firstAttribute="trailing" secondItem="1ma-cv-0kn" secondAttribute="trailing" constant="27.329999999999998" id="skO-2c-VRp"/>
+                                    <constraint firstItem="7Bn-do-EOB" firstAttribute="leading" secondItem="ZMv-sx-Fy7" secondAttribute="trailing" constant="15" id="yG5-oS-l68"/>
+                                </constraints>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Lbj-Vf-FVS">
+                                <rect key="frame" x="0.0" y="207" width="393" height="611"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2vG-fn-V4s">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jJ2-4A-Mv6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jJ2-4A-Mv6" firstAttribute="trailing" secondItem="eDq-AZ-PyD" secondAttribute="trailing" constant="16" id="Bf3-af-vXh"/>
+                            <constraint firstItem="jJ2-4A-Mv6" firstAttribute="bottom" secondItem="Lbj-Vf-FVS" secondAttribute="bottom" id="Tlg-EA-kdf"/>
+                            <constraint firstItem="jJ2-4A-Mv6" firstAttribute="trailing" secondItem="Lbj-Vf-FVS" secondAttribute="trailing" id="Yev-7s-cIn"/>
+                            <constraint firstItem="Lbj-Vf-FVS" firstAttribute="leading" secondItem="jJ2-4A-Mv6" secondAttribute="leading" id="g3O-Pv-aoO"/>
+                            <constraint firstItem="eDq-AZ-PyD" firstAttribute="leading" secondItem="Ro6-Cn-wDP" secondAttribute="leading" constant="16" id="jT2-nY-Mke"/>
+                            <constraint firstItem="eDq-AZ-PyD" firstAttribute="top" secondItem="jJ2-4A-Mv6" secondAttribute="top" constant="20" id="k4s-Jo-zGU"/>
+                            <constraint firstItem="Lbj-Vf-FVS" firstAttribute="top" secondItem="eDq-AZ-PyD" secondAttribute="bottom" constant="22" id="oks-Ku-eeS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodCollectionView" destination="Lbj-Vf-FVS" id="UGv-lV-LhL"/>
+                        <outlet property="wasteInfoView" destination="eDq-AZ-PyD" id="wkP-TM-X40"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ew5-07-4oa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-752" y="166"/>
+        </scene>
+        <!--Meat View Controller-->
+        <scene sceneID="pB2-IX-QxY">
+            <objects>
+                <viewController storyboardIdentifier="MeatViewController" id="Zev-qE-mIh" customClass="MeatViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Oqx-Oe-pRk">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Nug-5X-r5A">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QJL-32-eVa">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WYm-IK-kaC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Nug-5X-r5A" firstAttribute="leading" secondItem="WYm-IK-kaC" secondAttribute="leading" id="KAn-Ab-GZN"/>
+                            <constraint firstItem="Nug-5X-r5A" firstAttribute="top" secondItem="WYm-IK-kaC" secondAttribute="top" id="O3t-9d-nhr"/>
+                            <constraint firstItem="WYm-IK-kaC" firstAttribute="bottom" secondItem="Nug-5X-r5A" secondAttribute="bottom" id="UHa-Sc-4ob"/>
+                            <constraint firstItem="WYm-IK-kaC" firstAttribute="trailing" secondItem="Nug-5X-r5A" secondAttribute="trailing" id="rN7-aR-V9G"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodCollectionView" destination="Nug-5X-r5A" id="wXF-qH-75V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hUY-qV-nFT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="71" y="165"/>
+        </scene>
+        <!--Drink View Controller-->
+        <scene sceneID="oSf-11-zMl">
+            <objects>
+                <viewController storyboardIdentifier="DrinkViewController" id="6v0-O3-SQN" customClass="DrinkViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XMx-mp-VDw">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="akT-TQ-XFt">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="z8c-FE-DHa">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tnm-6e-6Mi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tnm-6e-6Mi" firstAttribute="trailing" secondItem="akT-TQ-XFt" secondAttribute="trailing" id="GfB-UX-JvE"/>
+                            <constraint firstItem="tnm-6e-6Mi" firstAttribute="bottom" secondItem="akT-TQ-XFt" secondAttribute="bottom" id="O7c-ut-NTH"/>
+                            <constraint firstItem="akT-TQ-XFt" firstAttribute="leading" secondItem="tnm-6e-6Mi" secondAttribute="leading" id="fHz-5m-4F6"/>
+                            <constraint firstItem="akT-TQ-XFt" firstAttribute="top" secondItem="tnm-6e-6Mi" secondAttribute="top" id="xJy-yq-8bY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodCollectionView" destination="akT-TQ-XFt" id="5Ry-Rj-QQ5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fw5-9X-2as" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2286" y="165"/>
+        </scene>
+        <!--Marine Products View Controller-->
+        <scene sceneID="Ksh-pJ-rJ8">
+            <objects>
+                <viewController storyboardIdentifier="MarineProductsViewController" id="rD4-rA-YPB" customClass="MarineProductsViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vRu-oF-DTB">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3Tv-4X-kNu">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tLC-qd-7Av">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Edi-dF-4tu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3Tv-4X-kNu" firstAttribute="leading" secondItem="Edi-dF-4tu" secondAttribute="leading" id="NXH-AF-bs8"/>
+                            <constraint firstItem="3Tv-4X-kNu" firstAttribute="top" secondItem="Edi-dF-4tu" secondAttribute="top" id="rW0-Qc-ta3"/>
+                            <constraint firstItem="Edi-dF-4tu" firstAttribute="bottom" secondItem="3Tv-4X-kNu" secondAttribute="bottom" id="sMc-Rw-0Gc"/>
+                            <constraint firstItem="Edi-dF-4tu" firstAttribute="trailing" secondItem="3Tv-4X-kNu" secondAttribute="trailing" id="sY2-4f-qry"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodCollectionView" destination="3Tv-4X-kNu" id="3H8-AE-kdh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9zn-tD-LSS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3011" y="165"/>
+        </scene>
+        <!--Side View Controller-->
+        <scene sceneID="XYK-1H-Y3R">
+            <objects>
+                <viewController storyboardIdentifier="SideViewController" id="GOB-Su-ujR" customClass="SideViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jgo-tg-5zS">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zW3-BP-zhD">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ku3-HF-XG8">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="oyD-zF-3ol"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oyD-zF-3ol" firstAttribute="trailing" secondItem="zW3-BP-zhD" secondAttribute="trailing" id="YUF-80-r37"/>
+                            <constraint firstItem="zW3-BP-zhD" firstAttribute="leading" secondItem="oyD-zF-3ol" secondAttribute="leading" id="dd4-pQ-VxU"/>
+                            <constraint firstItem="oyD-zF-3ol" firstAttribute="bottom" secondItem="zW3-BP-zhD" secondAttribute="bottom" id="rVV-M2-AMy"/>
+                            <constraint firstItem="zW3-BP-zhD" firstAttribute="top" secondItem="oyD-zF-3ol" secondAttribute="top" id="yOf-vG-GmW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodCollectionView" destination="zW3-BP-zhD" id="kyd-Yq-PvY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EfA-gu-Gp6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3683" y="165"/>
+        </scene>
+        <!--Vegetable View Controller-->
+        <scene sceneID="0qd-3d-dis">
+            <objects>
+                <viewController storyboardIdentifier="VegetableViewController" id="eJH-7W-xLW" customClass="VegetableViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1v1-Rk-Jd3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JfI-on-9xZ">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kFb-62-NVc">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pBQ-DD-mZP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JfI-on-9xZ" firstAttribute="top" secondItem="pBQ-DD-mZP" secondAttribute="top" id="0YE-oI-Zod"/>
+                            <constraint firstItem="pBQ-DD-mZP" firstAttribute="trailing" secondItem="JfI-on-9xZ" secondAttribute="trailing" id="Brw-0y-14Y"/>
+                            <constraint firstItem="pBQ-DD-mZP" firstAttribute="bottom" secondItem="JfI-on-9xZ" secondAttribute="bottom" id="P6a-sr-YVu"/>
+                            <constraint firstItem="JfI-on-9xZ" firstAttribute="leading" secondItem="pBQ-DD-mZP" secondAttribute="leading" id="S1M-aB-qBN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodCollectionView" destination="JfI-on-9xZ" id="B9A-Cp-hcZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FHG-o5-adn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1541" y="165"/>
+        </scene>
+        <!--Snack View Controller-->
+        <scene sceneID="ECM-d1-JzE">
+            <objects>
+                <viewController storyboardIdentifier="SnackViewController" id="zl6-y4-8lJ" customClass="SnackViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MRh-Pv-hhY">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oVs-fR-pDI">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SUv-1I-RmC">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Zqf-mO-tgc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Zqf-mO-tgc" firstAttribute="bottom" secondItem="oVs-fR-pDI" secondAttribute="bottom" id="4bv-yi-bun"/>
+                            <constraint firstItem="oVs-fR-pDI" firstAttribute="top" secondItem="Zqf-mO-tgc" secondAttribute="top" id="9eG-wt-0kE"/>
+                            <constraint firstItem="oVs-fR-pDI" firstAttribute="leading" secondItem="Zqf-mO-tgc" secondAttribute="leading" id="f8P-Uv-egD"/>
+                            <constraint firstItem="Zqf-mO-tgc" firstAttribute="trailing" secondItem="oVs-fR-pDI" secondAttribute="trailing" id="gKR-tY-kJ3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodCollectionView" destination="oVs-fR-pDI" id="f1e-aY-xtS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3yX-bM-0UF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4411" y="165"/>
+        </scene>
+        <!--Processed Food View Controller-->
+        <scene sceneID="CkO-Pv-1ep">
+            <objects>
+                <viewController storyboardIdentifier="ProcessedFoodViewController" id="cAj-bw-gmj" customClass="ProcessedFoodViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fyu-m4-ZaV">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="00i-W9-LGZ">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xLl-3p-ZpA">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ikP-0q-Jhe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="00i-W9-LGZ" firstAttribute="top" secondItem="ikP-0q-Jhe" secondAttribute="top" id="2i7-Q4-D1C"/>
+                            <constraint firstItem="ikP-0q-Jhe" firstAttribute="bottom" secondItem="00i-W9-LGZ" secondAttribute="bottom" id="9R3-14-LsX"/>
+                            <constraint firstItem="00i-W9-LGZ" firstAttribute="leading" secondItem="ikP-0q-Jhe" secondAttribute="leading" id="Ldg-IP-oLV"/>
+                            <constraint firstItem="ikP-0q-Jhe" firstAttribute="trailing" secondItem="00i-W9-LGZ" secondAttribute="trailing" id="sCP-2i-ain"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodCollectionView" destination="00i-W9-LGZ" id="yZ3-aS-EaH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3zQ-qP-jjx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5845" y="165"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="J7g-DI-YoB">
+            <objects>
+                <viewController storyboardIdentifier="ETCViewController" id="MXT-NV-Eu9" customClass="ETCViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jle-Zz-wDC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4Q9-mC-9Gv">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="B6e-DD-feb">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6iM-ye-ykK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6iM-ye-ykK" firstAttribute="bottom" secondItem="4Q9-mC-9Gv" secondAttribute="bottom" id="Lpf-OA-nZO"/>
+                            <constraint firstItem="6iM-ye-ykK" firstAttribute="trailing" secondItem="4Q9-mC-9Gv" secondAttribute="trailing" id="ehY-pz-AXJ"/>
+                            <constraint firstItem="4Q9-mC-9Gv" firstAttribute="leading" secondItem="6iM-ye-ykK" secondAttribute="leading" id="gTg-A1-uCw"/>
+                            <constraint firstItem="4Q9-mC-9Gv" firstAttribute="top" secondItem="6iM-ye-ykK" secondAttribute="top" id="kVR-GW-CVx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodCollectionView" destination="4Q9-mC-9Gv" id="HXX-km-yS9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hnp-p9-72G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6570" y="165"/>
+        </scene>
+        <!--Fruit View Controller-->
+        <scene sceneID="ASy-Mm-3GB">
+            <objects>
+                <viewController storyboardIdentifier="FruitViewController" id="Zg4-TL-ouv" customClass="FruitViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Y2I-lj-MJ1">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tyR-YY-gy6">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XqQ-P0-ZEo">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="GKa-YR-dXH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tyR-YY-gy6" firstAttribute="leading" secondItem="GKa-YR-dXH" secondAttribute="leading" id="2kS-QI-fwW"/>
+                            <constraint firstItem="GKa-YR-dXH" firstAttribute="trailing" secondItem="tyR-YY-gy6" secondAttribute="trailing" id="KXc-Sn-hEm"/>
+                            <constraint firstItem="tyR-YY-gy6" firstAttribute="top" secondItem="GKa-YR-dXH" secondAttribute="top" id="oNk-34-2ya"/>
+                            <constraint firstItem="GKa-YR-dXH" firstAttribute="bottom" secondItem="tyR-YY-gy6" secondAttribute="bottom" id="rEC-7J-eE5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodCollectionView" destination="tyR-YY-gy6" id="0gu-Cn-ceL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Faf-uN-Q1N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="824" y="165"/>
+        </scene>
+        <!--Seasoning View Controller-->
+        <scene sceneID="tek-IR-wmv">
+            <objects>
+                <viewController storyboardIdentifier="SeasoningViewController" id="Oaa-hT-VTF" customClass="SeasoningViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hhQ-qv-xW8">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AuH-vi-bHj">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7hZ-xC-6Ut">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="boa-Wz-6PZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="AuH-vi-bHj" firstAttribute="leading" secondItem="boa-Wz-6PZ" secondAttribute="leading" id="Rxr-CG-OLK"/>
+                            <constraint firstItem="boa-Wz-6PZ" firstAttribute="bottom" secondItem="AuH-vi-bHj" secondAttribute="bottom" id="ZqA-k5-iwq"/>
+                            <constraint firstItem="AuH-vi-bHj" firstAttribute="top" secondItem="boa-Wz-6PZ" secondAttribute="top" id="j2r-2Q-oId"/>
+                            <constraint firstItem="boa-Wz-6PZ" firstAttribute="trailing" secondItem="AuH-vi-bHj" secondAttribute="trailing" id="r3Y-Db-VxF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodCollectionView" destination="AuH-vi-bHj" id="O6l-AL-Vul"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ch8-b4-Vhv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5098" y="165"/>
         </scene>
     </scenes>
     <resources>
+        <image name="addButtonIcon" width="20.333333969116211" height="20.333333969116211"/>
+        <image name="rightArrow" width="9.3333330154418945" height="16"/>
+        <image name="wasteIcon" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
