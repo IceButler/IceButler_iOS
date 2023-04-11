@@ -93,6 +93,8 @@ class FoodAddViewController: UIViewController {
     }
     
     private func setupLayout() {
+        self.navigationController?.isNavigationBarHidden = false
+        
         categoryViewHeight.priority = UILayoutPriority(1000)
         foodOwnerViewHeight.priority = UILayoutPriority(1000)
         

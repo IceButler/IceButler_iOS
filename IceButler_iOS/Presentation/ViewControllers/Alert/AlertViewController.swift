@@ -53,6 +53,7 @@ class AlertViewController: UIViewController {
     }
     
     private func setupLayouts() {
+        self.navigationController?.isNavigationBarHidden = true
         self.containerView.layer.cornerRadius = 15
         self.titleLabel.textColor = .signatureBlue
         
@@ -110,14 +111,14 @@ class AlertViewController: UIViewController {
     
     @objc func completeBuying() {
         // 장보기 완료 API 호출
-        CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
+//        CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
         
         // 선택된 셀들(장보기 완료된 식품 정보 배열)을 alertVC로 전달
-        // TODO: alertVC에서 '냉장고로 식품 추가' API 호출
         let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
         guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "SelectAlertViewController") as? CompleteBuyingViewController else { return }
         alertViewController.completeFoods = CartViewModel.shared.removeFoodNames
-        alertViewController.modalPresentationStyle = .overCurrentContext
-        present(alertViewController, animated: true)
+        self.navigationController?.pushViewController(alertViewController, animated: true)
+//        alertViewController.modalPresentationStyle = .overCurrentContext
+//        present(alertViewController, animated: true)
     }
 }
