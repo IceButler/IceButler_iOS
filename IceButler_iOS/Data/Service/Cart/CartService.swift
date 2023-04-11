@@ -9,8 +9,11 @@ import Foundation
 
 
 class CartService {
-    func getCartFoodList(cartId: Int, completion: @escaping (CartResponseModel?) -> Void) {
-        APIManger.shared.getData(urlEndpointString: "/carts/\(cartId)/foods", responseDataType: CartResponseModel.self, requestDataType: CartResponseModel.self, parameter: nil) { response in
+    func getCartFoodList(cartId: Int, completion: @escaping ([CartResponseModel]?) -> Void) {
+        APIManger.shared.getData(urlEndpointString: "/carts/\(cartId)/foods",
+                                 responseDataType: [CartResponseModel].self,
+                                 requestDataType: [CartResponseModel].self,
+                                 parameter: nil) { response in
             completion(response.data)
         }
     }

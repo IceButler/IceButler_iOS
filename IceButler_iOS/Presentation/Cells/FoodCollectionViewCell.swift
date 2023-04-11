@@ -74,10 +74,11 @@ class FoodCollectionViewCell: UICollectionViewCell {
         if guesture.state == UIGestureRecognizer.State.began {
             self.isSelectedFood = !self.isSelectedFood
             if self.isSelectedFood {
-//                print("isSelectedFood")
+                print("isSelectedFood")
                 self.foodImageButton.backgroundColor = .signatureDustBlue
                 self.selectedImageView.isHidden = false
                 CartManager.shared.showCartVCAlertView()
+                CartViewModel.shared.addRemoveIdx(removeIdx: self.tag)
             } else {
                 print("isSelectedFood NOT")
             }

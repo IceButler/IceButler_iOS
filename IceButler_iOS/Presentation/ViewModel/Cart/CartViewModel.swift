@@ -84,6 +84,7 @@ class CartViewModel: ObservableObject {
     
     func addRemoveIdx(removeIdx: Int) {
         removeFoodIdxes?.append(removeIdx)
+//        print("삭제될 식품 index 리스트 --> \(self.removeFoodIdxes)")
     }
     
     func removeRemoveIdx(removeIdx: Int) {
@@ -101,17 +102,14 @@ class CartViewModel: ObservableObject {
         }.store(in: &removeCancelLabels)
     }
     
-    
-    
-    
-    func getCart(cartId: Int) {
-        cart?.removeAll()
-        cartService.getCartFoodList(cartId: cartId) { cart in
-            cart?.cartFoods.forEach({ food in
-                self.cart?.append(food)
-            })
-        }
-    }
+//    func getCart(cartId: Int) {
+//        cart?.removeAll()
+//        cartService.getCartFoodList(cartId: cartId) { cart in
+//            cart?.cartFoods.forEach({ food in
+//                self.cart?.append(food)
+//            })
+//        }
+//    }
     
     func deleteFood(cartId: Int) {
         cartCancelLabels.removeAll()
@@ -123,13 +121,9 @@ class CartViewModel: ObservableObject {
     }
 
     func fetchData() {
-//        APIManger.shared.getData(urlEndpointString: "/carts/\(cartIndex)/foods",
-        APIManger.shared.getData(urlEndpointString: "/carts/1/foods",   // 1은 임시 fridgeIdx
-                                 responseDataType: [CartResponseModel].self,
-                                 requestDataType: [CartResponseModel].self,
-                                 parameter: nil,
-                                 completionHandler: { [weak self] response in
-            self?.cartFoods = response.data ?? []
+        let cartIdx = 1 // 임시 cartId
+        cartService.getCartFoodList(cartId: cartIdx, completion: { [weak self] response in
+            self?.cartFoods = response ?? []
         })
     }
     

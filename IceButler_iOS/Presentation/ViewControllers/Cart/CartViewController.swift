@@ -38,9 +38,7 @@ class CartViewController: UIViewController {
         }
     }
     
-    func setup() {
-        CartManager.shared.setCartVC(cartVC: self)
-    }
+    func setup() { CartManager.shared.setCartVC(cartVC: self) }
     
     private func setupObserver() {
         CartViewModel.shared.isRemoveFoodIdxes { edit in
