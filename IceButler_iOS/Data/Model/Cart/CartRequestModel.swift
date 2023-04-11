@@ -8,5 +8,5 @@
 import Foundation
 
 struct CartRemoveRequestModel: Codable {
-    let removeFoodIdxes: [Int]
+    let foodIdxes: [Int]
 }

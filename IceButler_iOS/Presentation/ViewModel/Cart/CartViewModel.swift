@@ -72,20 +72,17 @@ class CartViewModel: ObservableObject {
         }.store(in: &longGestureCancellabels)
     }
     
-    func isRemoveFoodIdxes(completion: @escaping (Bool) -> Void) {
-        $removeFoodIdxes.sink { removeFoodIdxes in
-            if removeFoodIdxes?.count != 0 {
-                completion(true)
-            }else {
-                completion(false)
-            }
-        }.store(in: &removeCancelLabels)
-    }
+//    func isRemoveFoodIdxes(completion: @escaping (Bool) -> Void) {
+//        $removeFoodIdxes.sink { removeFoodIdxes in
+//            if removeFoodIdxes?.count != 0 {
+//                completion(true)
+//            }else {
+//                completion(false)
+//            }
+//        }.store(in: &removeCancelLabels)
+//    }
     
-    func addRemoveIdx(removeIdx: Int) {
-        removeFoodIdxes?.append(removeIdx)
-//        print("삭제될 식품 index 리스트 --> \(self.removeFoodIdxes)")
-    }
+    func addRemoveIdx(removeIdx: Int) { if removeIdx != -1 { removeFoodIdxes?.append(removeIdx) } }
     
     func removeRemoveIdx(removeIdx: Int) {
         if let removeIndex = removeFoodIdxes?.firstIndex(where: { removeIndex in
@@ -113,8 +110,10 @@ class CartViewModel: ObservableObject {
     
     func deleteFood(cartId: Int) {
         cartCancelLabels.removeAll()
-        cartService.deleteCartFood(cartId: cartId, removeFoodIdxes: removeFoodIdxes ?? []) { cart in
-            self.cart = cart?.cartFoods
+        cartService.deleteCartFood(cartId: cartId, removeFoodIdxes: removeFoodIdxes ?? []) { _ in
+//            self.cart = cart?.cartFoods
+//            self.cartFoods = cart ?? []
+            self.fetchData()
             CartManager.shared.reloadFoodCV()
         }
         

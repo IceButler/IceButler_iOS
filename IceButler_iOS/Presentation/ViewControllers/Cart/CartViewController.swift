@@ -41,18 +41,18 @@ class CartViewController: UIViewController {
     func setup() { CartManager.shared.setCartVC(cartVC: self) }
     
     private func setupObserver() {
-        CartViewModel.shared.isRemoveFoodIdxes { edit in
-            if edit {
-                self.tabBarController?.tabBar.isHidden = true
-                self.addFoodButton.isHidden = true
-                self.alertView.backgroundColor = .signatureDeepBlue
-                self.alertView.isHidden = false
-            } else {
-                self.tabBarController?.tabBar.isHidden = false
-                self.addFoodButton.isHidden = false
-                self.alertView.isHidden = true
-            }
-        }
+//        CartViewModel.shared.isRemoveFoodIdxes { edit in
+//            if edit {
+//                self.tabBarController?.tabBar.isHidden = true
+//                self.addFoodButton.isHidden = true
+//                self.alertView.backgroundColor = .signatureDeepBlue
+//                self.alertView.isHidden = false
+//            } else {
+//                self.tabBarController?.tabBar.isHidden = false
+//                self.addFoodButton.isHidden = false
+//                self.alertView.isHidden = true
+//            }
+//        }
     }
     
     @IBAction func didTapAddFoodButton(_ sender: UIButton) {

@@ -35,25 +35,25 @@ class FoodCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupObserver() {
-        CartViewModel.shared.getRemoveIdx { removeIdx in
-            print(removeIdx)
-            removeIdx.forEach { idx in
-                if idx == self.tag{
-                    self.foodImageButton.backgroundColor = .signatureDustBlue
-                    self.selectedImageView.isHidden = false
-                    self.isSelectedFood = true
-                    return
-                }else {
-                    self.isSelectedFood = false
-                }
-            }
-        }
-        
-        CartViewModel.shared.isRemoveFoodIdxes { checkIdx in
-            if checkIdx == false {
-                CartViewModel.shared.setIsLongGesture(longGesture: false)
-            }
-        }
+//        CartViewModel.shared.getRemoveIdx { removeIdx in
+//            print(removeIdx)
+//            removeIdx.forEach { idx in
+//                if idx == self.tag{
+//                    self.foodImageButton.backgroundColor = .signatureDustBlue
+//                    self.selectedImageView.isHidden = false
+//                    self.isSelectedFood = true
+//                    return
+//                }else {
+//                    self.isSelectedFood = false
+//                }
+//            }
+//        }
+//
+//        CartViewModel.shared.isRemoveFoodIdxes { checkIdx in
+//            if checkIdx == false {
+//                CartViewModel.shared.setIsLongGesture(longGesture: false)
+//            }
+//        }
     }
     
     private func setupGestureHandler() {
@@ -74,7 +74,6 @@ class FoodCollectionViewCell: UICollectionViewCell {
         if guesture.state == UIGestureRecognizer.State.began {
             self.isSelectedFood = !self.isSelectedFood
             if self.isSelectedFood {
-                print("isSelectedFood")
                 self.foodImageButton.backgroundColor = .signatureDustBlue
                 self.selectedImageView.isHidden = false
                 CartManager.shared.showCartVCAlertView()

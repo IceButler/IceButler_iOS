@@ -68,10 +68,7 @@ extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectio
         cell.foodImageButton.layer.cornerRadius = cell.foodImageButton.frame.width / 2
         cell.isSelectedFood = false
         cell.foodTitleLabel.text = cartFoods[indexPath.row].foodName
-        CartViewModel.shared.getFoodIdx(index: indexPath.row, store: &cell.cancellabels) { foodIdx in
-            cell.tag = foodIdx
-        }
-
+        cell.tag = cartFoods[indexPath.row].foodIdx ?? -1
         return cell
     }
     
