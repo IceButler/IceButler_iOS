@@ -63,6 +63,10 @@ class FoodAddViewController: UIViewController {
         setupNavgationBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
     private func setup() {
         let textViewList = [foodNameTextView, foodDetailTextView, foodOwnerTextView, foodMemoTextView]
         for i in 0..<textViewList.count {

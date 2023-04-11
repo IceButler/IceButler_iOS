@@ -22,6 +22,10 @@ class CompleteBuyingViewController: UIViewController {
         setupLayouts()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     @IBAction func didTapCancelButton(_ sender: UIButton) {
         // TODO: 취소 시 장바구니 메인 화면으로 전환
         self.dismiss(animated: true)
