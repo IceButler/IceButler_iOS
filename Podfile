@@ -13,6 +13,8 @@ target 'IceButler_iOS' do
   pod 'IQKeyboardManager'
   pod 'Firebase/Analytics'
   pod "BSImagePicker", "~> 3.1"
+  pod 'KakaoSDKUser'
+  pod 'KakaoSDKAuth'
 
   target 'IceButler_iOSTests' do
     inherit! :search_paths
