@@ -77,6 +77,17 @@ PODS:
   - GoogleUtilities/UserDefaults (7.11.0):
     - GoogleUtilities/Logger
   - IQKeyboardManager (6.5.11)
+  - KakaoSDKAuth (2.14.0):
+    - KakaoSDKCommon (= 2.14.0)
+  - KakaoSDKCommon (2.14.0):
+    - KakaoSDKCommon/Common (= 2.14.0)
+    - KakaoSDKCommon/Network (= 2.14.0)
+  - KakaoSDKCommon/Common (2.14.0)
+  - KakaoSDKCommon/Network (2.14.0):
+    - Alamofire (~> 5.1)
+    - KakaoSDKCommon/Common (= 2.14.0)
+  - KakaoSDKUser (2.14.0):
+    - KakaoSDKAuth (= 2.14.0)
   - Kingfisher (7.6.2)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
@@ -94,6 +105,8 @@ DEPENDENCIES:
   - BSImagePicker (~> 3.1)
   - Firebase/Analytics
   - IQKeyboardManager
+  - KakaoSDKAuth
+  - KakaoSDKUser
   - Kingfisher
   - Tabman (~> 3.0)
   - Toast-Swift (~> 5.0.1)
@@ -110,6 +123,9 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - IQKeyboardManager
+    - KakaoSDKAuth
+    - KakaoSDKCommon
+    - KakaoSDKUser
     - Kingfisher
     - nanopb
     - Pageboy
@@ -128,6 +144,9 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: fe17c92a32207dd5cdd4e8d742767f2da74857f6
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
   IQKeyboardManager: ef43ce1ba1e5aaf4adf222c0a46f39761f246879
+  KakaoSDKAuth: 8fca87815de22062a23297983f327613b087b8bb
+  KakaoSDKCommon: 0ce638f7a2e49704943c0b74a087a9f8067bba1c
+  KakaoSDKUser: 2ca18314ce72e6690f76cb1f6f9fbc771d31a803
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   Pageboy: 34ff11e8d1041b81769d5bcde9b19a0cb7218bd9
@@ -135,6 +154,6 @@ SPEC CHECKSUMS:
   Tabman: a5880789298f81d3f2cdd6510b54ae637cfd8e09
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 7a8be72d1831f76592e1bd253cab6766a2a4d4de
+PODFILE CHECKSUM: 017676e97089b9fca45e45e4a859c0c129d9ee52
 
 COCOAPODS: 1.11.3

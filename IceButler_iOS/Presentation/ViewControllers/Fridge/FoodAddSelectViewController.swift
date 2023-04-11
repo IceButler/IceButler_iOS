@@ -42,7 +42,7 @@ class FoodAddSelectViewController: UIViewController {
         
         cancelButton.layer.cornerRadius = cancelButton.frame.width / 2
         cancelButton.layer.shadowOffset = CGSize(width: 0, height: 4)
-        cancelButton.layer.shadowColor = CGColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 1)
+        cancelButton.layer.shadowColor = CGColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0.1)
         cancelButton.layer.shadowOpacity = 1
     }
     
