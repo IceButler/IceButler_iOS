@@ -85,4 +85,46 @@ extension UIColor{
         blue: 255/255,
         alpha: 1
     )
+    
+    static let pinkCell = UIColor(
+        red: 249,
+        green: 198,
+        blue: 216,
+        alpha: 1
+    )
+    
+    static let orangeCell = UIColor(
+        red: 252,
+        green: 199,
+        blue: 170,
+        alpha: 1
+    )
+    
+    static let greenCell = UIColor(
+        red: 196,
+        green: 232,
+        blue: 169,
+        alpha: 1
+    )
+    
+    static let yellowCell = UIColor(
+        red: 255,
+        green: 233,
+        blue: 156,
+        alpha: 1
+    )
+    
+    static let purpleCell = UIColor(
+        red: 206,
+        green: 208,
+        blue: 242,
+        alpha: 1
+    )
+    
+    static let crimsonCell = UIColor(
+        red: 255,
+        green: 184,
+        blue: 174,
+        alpha: 1
+    )
 }
