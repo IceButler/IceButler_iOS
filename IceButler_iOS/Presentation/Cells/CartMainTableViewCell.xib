@@ -62,11 +62,19 @@
                             <constraint firstItem="O0j-Th-OMC" firstAttribute="top" secondItem="Mbm-8H-dVh" secondAttribute="top" constant="11" id="uod-4b-YdL"/>
                         </constraints>
                     </stackView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장바구니에 담긴 식품이 없어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNz-9g-JZd">
+                        <rect key="frame" x="79.666666666666686" y="7.333333333333333" width="161" height="15.666666666666668"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="lNz-9g-JZd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="15" id="0WW-DE-0nY"/>
                     <constraint firstItem="Mbm-8H-dVh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="31I-GE-k4j"/>
                     <constraint firstAttribute="trailing" secondItem="Mbm-8H-dVh" secondAttribute="trailing" id="BB3-Lc-OeA"/>
+                    <constraint firstItem="lNz-9g-JZd" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="JP4-kp-X9V"/>
                     <constraint firstItem="Mbm-8H-dVh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="L4e-mW-A32"/>
                     <constraint firstAttribute="bottom" secondItem="Mbm-8H-dVh" secondAttribute="bottom" id="qtW-4G-zxi"/>
                 </constraints>
@@ -76,6 +84,7 @@
                 <outlet property="categoryTitleLabel" destination="MmN-NK-Npn" id="CRy-45-mPT"/>
                 <outlet property="categoryTitleView" destination="O0j-Th-OMC" id="dFX-C1-68E"/>
                 <outlet property="foodCollectionView" destination="1Aa-6m-Bm0" id="Pxg-Y6-7MW"/>
+                <outlet property="nothingLabel" destination="lNz-9g-JZd" id="5oK-Xv-mJF"/>
             </connections>
             <point key="canvasLocation" x="135.87786259541986" y="19.366197183098592"/>
         </tableViewCell>
