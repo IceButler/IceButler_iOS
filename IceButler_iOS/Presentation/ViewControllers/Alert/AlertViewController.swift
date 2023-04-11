@@ -50,6 +50,11 @@ class AlertViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        CartViewModel.shared.removeFoodNames.removeAll()
+    }
+    
     // TODO: 이후 Selector 인자를 통해 탭 이벤트 처리할 예정 (임시로 IBAction 사용)
     @IBAction func didTapLeftButton(_ sender: UIButton) {
         self.dismiss(animated: true)
@@ -114,15 +119,11 @@ class AlertViewController: UIViewController {
     }
     
     @objc func completeBuying() {
-        // 장보기 완료 API 호출
-//        CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
+        CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
         
-        // 선택된 셀들(장보기 완료된 식품 정보 배열)을 alertVC로 전달
         let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
         guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "SelectAlertViewController") as? CompleteBuyingViewController else { return }
         alertViewController.completeFoods = CartViewModel.shared.removeFoodNames
         self.navigationController?.pushViewController(alertViewController, animated: true)
-//        alertViewController.modalPresentationStyle = .overCurrentContext
-//        present(alertViewController, animated: true)
     }
 }

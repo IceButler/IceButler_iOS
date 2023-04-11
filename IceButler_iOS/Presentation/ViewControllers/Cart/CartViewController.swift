@@ -67,8 +67,6 @@ class CartViewController: UIViewController {
                                       leftButtonTitle: "취소", righttButtonTitle: "확인")
         alertViewController.todo = .completeBuying
         self.navigationController?.pushViewController(alertViewController, animated: true)
-//        alertViewController.modalPresentationStyle = .overCurrentContext
-//        present(alertViewController, animated: true)
     }
     
     
