@@ -13,41 +13,33 @@ class CartViewController: UIViewController {
     @IBOutlet weak var addFoodButton: UIButton!
     @IBOutlet weak var alertView: UIView!
     
+    private var cartFoods: [CartResponseModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        congifure()
         setup()
         setupNavigationBar()
         setupLayout()
         setupTableView()
-        setupObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    func setup() {
-        CartManager.shared.setCartVC(cartVC: self)
-    }
-    
-    private func setupObserver() {
-        CartViewModel.shared.isRemoveFoodIdxes { edit in
-            if edit {
-                self.tabBarController?.tabBar.isHidden = true
-                self.addFoodButton.isHidden = true
-                self.alertView.backgroundColor = .signatureDeepBlue
-                self.alertView.isHidden = false
-            } else {
-                self.tabBarController?.tabBar.isHidden = false
-                self.addFoodButton.isHidden = false
-                self.alertView.isHidden = true
-            }
+    func congifure() {
+        CartViewModel.shared.fetchData()
+        CartViewModel.shared.getCartFoods { cartFoods in
+            self.cartFoods = cartFoods
+            self.cartMainTableView.reloadData()
         }
     }
     
+    func setup() { CartManager.shared.setCartVC(cartVC: self) }
+    
     @IBAction func didTapAddFoodButton(_ sender: UIButton) {
-        // TODO: 식품 추가 커스텀 팝업 띄우기
         let storyboard = UIStoryboard.init(name: "Cart", bundle: nil)
         guard let addFoodViewController = storyboard.instantiateViewController(withIdentifier: "AddFoodViewController") as? AddFoodViewController else { return }
         self.navigationController?.pushViewController(addFoodViewController, animated: true)
@@ -140,13 +132,12 @@ class CartViewController: UIViewController {
 }
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.cartFoods.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartMainTableViewCell", for: indexPath) as? CartMainTableViewCell else { return UITableViewCell() }
-        cell.setTitle(title: "전체")
+        cell.setTitle(title: self.cartFoods[indexPath.row].category)
+        cell.cartFoods = CartViewModel.shared.getCartFoodsWithCategory(index: indexPath.row)
         cell.backgroundColor = cell.contentView.backgroundColor
         return cell
     }

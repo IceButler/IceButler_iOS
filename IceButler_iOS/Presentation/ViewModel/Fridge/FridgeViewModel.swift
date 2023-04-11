@@ -406,8 +406,7 @@ class FridgeViewModel: ObservableObject {
                 self.allFoodList.append(food)
             })
         }
-        
-        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Meat.rawValue) { response in
+fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Meat.rawValue) { response in
             self.meatFoodList.removeAll()
             response?.foodList.forEach({ food in
                 self.meatFoodList.append(food)
@@ -476,5 +475,6 @@ class FridgeViewModel: ObservableObject {
                 self.etcFoodList.append(food)
             })
         }
-    }
+        
+    } 
 }

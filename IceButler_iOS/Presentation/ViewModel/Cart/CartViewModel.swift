@@ -13,8 +13,10 @@ class CartViewModel: ObservableObject {
     
     private let cartService = CartService()
     
-    @Published var cart: [Food]? = []
+    @Published var cart: [CartFood]? = []
+    @Published var cartFoods: [CartResponseModel] = []
     @Published var removeFoodIdxes: [Int]? = []
+    @Published var removeFoodNames: [String] = []
     @Published var isLongGesture = false
     
     private var cartCancelLabels: Set<AnyCancellable> = []
@@ -22,7 +24,7 @@ class CartViewModel: ObservableObject {
     private var longGestureCancellabels: Set<AnyCancellable> = []
     
     
-    func cart(completion: @escaping ([Food]?) -> Void) {
+    func cart(completion: @escaping ([CartFood]?) -> Void) {
         $cart.sink { cart in
             if cart != nil {
                 completion(cart)
@@ -30,7 +32,7 @@ class CartViewModel: ObservableObject {
         }.store(in: &cartCancelLabels)
     }
     
-    func getFood(index: Int, completion: @escaping (Food) -> Void) {
+    func getFood(index: Int, completion: @escaping (CartFood) -> Void) {
         $cart.filter({ food in
             index < food!.count
         }).sink { cart in
@@ -56,13 +58,14 @@ class CartViewModel: ObservableObject {
         }.store(in: &store)
     }
     
-    func getCartCount() -> Int {
-        return cart!.count
+    func getCategoryTitleWithIndex(index: Int) -> String {
+        if self.cartFoods.count > index { return self.cartFoods[index].category }
+        else { return "알 수 없음" }
     }
     
-    func setIsLongGesture(longGesture: Bool) {
-        isLongGesture = longGesture
-    }
+    func getCartFoodsWithCategory(index: Int) -> [CartFood] { return cartFoods[index].cartFoods }
+    
+    func setIsLongGesture(longGesture: Bool) { isLongGesture = longGesture }
     
     func getIsLongGesture(completion: @escaping (Bool) -> Void) {
         $isLongGesture.sink { isLongGesture in
@@ -70,27 +73,17 @@ class CartViewModel: ObservableObject {
         }.store(in: &longGestureCancellabels)
     }
     
-    func isRemoveFoodIdxes(completion: @escaping (Bool) -> Void) {
-        $removeFoodIdxes.sink { removeFoodIdxes in
-            if removeFoodIdxes?.count != 0 {
-                completion(true)
-            }else {
-                completion(false)
-            }
-        }.store(in: &removeCancelLabels)
-    }
-    
-    func addRemoveIdx(removeIdx: Int) {
-        removeFoodIdxes?.append(removeIdx)
+    func addRemoveIdx(removeIdx: Int, removeName: String) {
+        if removeIdx != -1 {
+            removeFoodIdxes?.append(removeIdx)
+            removeFoodNames.append(removeName)
+        }
     }
     
     func removeRemoveIdx(removeIdx: Int) {
         if let removeIndex = removeFoodIdxes?.firstIndex(where: { removeIndex in
             removeIndex == removeIdx
-        }) {
-//            removeCancelLabels.removeAll()
-            removeFoodIdxes?.remove(at: removeIndex)
-        }
+        }) { removeFoodIdxes?.remove(at: removeIndex) }
     }
     
     func getRemoveIdx(completion: @escaping ([Int]) -> Void) {
@@ -98,26 +91,26 @@ class CartViewModel: ObservableObject {
             completion(removeIdx ?? [])
         }.store(in: &removeCancelLabels)
     }
-    
-    
-    
-    
-    func getCart(cartId: Int) {
-        cart?.removeAll()
-        cartService.getCartFoodList(cartId: cartId) { cart in
-            cart?.foods.forEach({ food in
-                self.cart?.append(food)
-            })
-        }
-    }
-    
+
     func deleteFood(cartId: Int) {
         cartCancelLabels.removeAll()
-        cartService.deleteCartFood(cartId: cartId, removeFoodIdxes: removeFoodIdxes ?? []) { cart in
-            self.cart = cart?.foods
-            CartManager.shared.reloadFoodCV()
+        cartService.deleteCartFood(cartId: cartId, removeFoodIdxes: removeFoodIdxes ?? []) { _ in
+            self.fetchData()
         }
         
     }
 
+    func fetchData() {
+        let cartIdx = 1 // 임시 cartId
+        cartService.getCartFoodList(cartId: cartIdx, completion: { [weak self] response in
+            self?.cartFoods = response ?? []
+            CartManager.shared.reloadFoodCV()
+        })
+    }
+    
+    func getCartFoods(completion: @escaping ([CartResponseModel]) -> Void) {
+        $cartFoods.sink { cartFoods in
+            completion(cartFoods)
+        }.store(in: &cartCancelLabels)
+    }
 }
