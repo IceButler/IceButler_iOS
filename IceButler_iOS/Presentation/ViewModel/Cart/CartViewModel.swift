@@ -15,7 +15,6 @@ class CartViewModel: ObservableObject {
     
     @Published var cart: [CartFood]? = []
     @Published var cartFoods: [CartResponseModel] = []
-    @Published var categoryTitles: [String] = []
     @Published var removeFoodIdxes: [Int]? = []
     @Published var isLongGesture = false
     
@@ -59,16 +58,13 @@ class CartViewModel: ObservableObject {
     }
     
     func getCategoryTitleWithIndex(index: Int) -> String {
-        if self.categoryTitles.count > index { return self.categoryTitles[index] }
+        if self.cartFoods.count > index { return self.cartFoods[index].category }
         else { return "알 수 없음" }
     }
     
-    func getCartCetegoryCount() -> Int { return self.categoryTitles.count }
     func getCartFoodsWithCategory(index: Int) -> [CartFood] { return cartFoods[index].cartFoods }
     
-    func setIsLongGesture(longGesture: Bool) {
-        isLongGesture = longGesture
-    }
+    func setIsLongGesture(longGesture: Bool) { isLongGesture = longGesture }
     
     func getIsLongGesture(completion: @escaping (Bool) -> Void) {
         $isLongGesture.sink { isLongGesture in
@@ -133,16 +129,8 @@ class CartViewModel: ObservableObject {
                                  requestDataType: [CartResponseModel].self,
                                  parameter: nil,
                                  completionHandler: { [weak self] response in
-            // TODO: 장바구니 식품 조회 결과 처리
-            response.data?.forEach { self?.categoryTitles.append($0.category) }
             self?.cartFoods = response.data ?? []
         })
-    }
-    
-    func getCategories(completion: @escaping ([String]) -> Void) {
-        $categoryTitles.sink { categoryTitles in
-            completion(categoryTitles)
-        }.store(in: &cartCancelLabels)
     }
     
     func getCartFoods(completion: @escaping ([CartResponseModel]) -> Void) {

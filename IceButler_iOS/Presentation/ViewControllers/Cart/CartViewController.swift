@@ -13,7 +13,6 @@ class CartViewController: UIViewController {
     @IBOutlet weak var addFoodButton: UIButton!
     @IBOutlet weak var alertView: UIView!
     
-    private var categories: [String] = []
     private var cartFoods: [CartResponseModel] = []
     
     override func viewDidLoad() {
@@ -33,12 +32,9 @@ class CartViewController: UIViewController {
     
     func congifure() {
         CartViewModel.shared.fetchData()
-        CartViewModel.shared.getCategories { categories in
-            self.categories = categories
-            self.cartMainTableView.reloadData()
-        }
         CartViewModel.shared.getCartFoods { cartFoods in
             self.cartFoods = cartFoods
+            self.cartMainTableView.reloadData()
         }
     }
     
@@ -62,7 +58,6 @@ class CartViewController: UIViewController {
     }
     
     @IBAction func didTapAddFoodButton(_ sender: UIButton) {
-        // TODO: 식품 추가 커스텀 팝업 띄우기
         let storyboard = UIStoryboard.init(name: "Cart", bundle: nil)
         guard let addFoodViewController = storyboard.instantiateViewController(withIdentifier: "AddFoodViewController") as? AddFoodViewController else { return }
         self.navigationController?.pushViewController(addFoodViewController, animated: true)
@@ -155,13 +150,11 @@ class CartViewController: UIViewController {
 }
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.categories.count
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.cartFoods.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartMainTableViewCell", for: indexPath) as? CartMainTableViewCell else { return UITableViewCell() }
-        cell.setTitle(title: self.categories[indexPath.row])
+        cell.setTitle(title: self.cartFoods[indexPath.row].category)
         cell.cartFoods = CartViewModel.shared.getCartFoodsWithCategory(index: indexPath.row)
         cell.backgroundColor = cell.contentView.backgroundColor
         return cell
