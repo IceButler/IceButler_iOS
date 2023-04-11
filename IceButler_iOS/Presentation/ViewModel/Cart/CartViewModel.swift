@@ -13,7 +13,9 @@ class CartViewModel: ObservableObject {
     
     private let cartService = CartService()
     
-    @Published var cart: [Food]? = []
+    @Published var cart: [CartFood]? = []
+    @Published var cartFoods: [CartResponseModel] = []
+    @Published var categoryTitles: [String] = []
     @Published var removeFoodIdxes: [Int]? = []
     @Published var isLongGesture = false
     
@@ -22,7 +24,7 @@ class CartViewModel: ObservableObject {
     private var longGestureCancellabels: Set<AnyCancellable> = []
     
     
-    func cart(completion: @escaping ([Food]?) -> Void) {
+    func cart(completion: @escaping ([CartFood]?) -> Void) {
         $cart.sink { cart in
             if cart != nil {
                 completion(cart)
@@ -30,7 +32,7 @@ class CartViewModel: ObservableObject {
         }.store(in: &cartCancelLabels)
     }
     
-    func getFood(index: Int, completion: @escaping (Food) -> Void) {
+    func getFood(index: Int, completion: @escaping (CartFood) -> Void) {
         $cart.filter({ food in
             index < food!.count
         }).sink { cart in
@@ -56,9 +58,13 @@ class CartViewModel: ObservableObject {
         }.store(in: &store)
     }
     
-    func getCartCount() -> Int {
-        return cart!.count
+    func getCategoryTitleWithIndex(index: Int) -> String {
+        if self.categoryTitles.count > index { return self.categoryTitles[index] }
+        else { return "알 수 없음" }
     }
+    
+    func getCartCetegoryCount() -> Int { return self.categoryTitles.count }
+    func getCartFoodsWithCategory(index: Int) -> [CartFood] { return cartFoods[index].cartFoods }
     
     func setIsLongGesture(longGesture: Bool) {
         isLongGesture = longGesture
@@ -105,7 +111,7 @@ class CartViewModel: ObservableObject {
     func getCart(cartId: Int) {
         cart?.removeAll()
         cartService.getCartFoodList(cartId: cartId) { cart in
-            cart?.foods.forEach({ food in
+            cart?.cartFoods.forEach({ food in
                 self.cart?.append(food)
             })
         }
@@ -114,10 +120,34 @@ class CartViewModel: ObservableObject {
     func deleteFood(cartId: Int) {
         cartCancelLabels.removeAll()
         cartService.deleteCartFood(cartId: cartId, removeFoodIdxes: removeFoodIdxes ?? []) { cart in
-            self.cart = cart?.foods
+            self.cart = cart?.cartFoods
             CartManager.shared.reloadFoodCV()
         }
         
     }
 
+    func fetchData() {
+//        APIManger.shared.getData(urlEndpointString: "/carts/\(cartIndex)/foods",
+        APIManger.shared.getData(urlEndpointString: "/carts/1/foods",   // 1은 임시 fridgeIdx
+                                 responseDataType: [CartResponseModel].self,
+                                 requestDataType: [CartResponseModel].self,
+                                 parameter: nil,
+                                 completionHandler: { [weak self] response in
+            // TODO: 장바구니 식품 조회 결과 처리
+            response.data?.forEach { self?.categoryTitles.append($0.category) }
+            self?.cartFoods = response.data ?? []
+        })
+    }
+    
+    func getCategories(completion: @escaping ([String]) -> Void) {
+        $categoryTitles.sink { categoryTitles in
+            completion(categoryTitles)
+        }.store(in: &cartCancelLabels)
+    }
+    
+    func getCartFoods(completion: @escaping ([CartResponseModel]) -> Void) {
+        $cartFoods.sink { cartFoods in
+            completion(cartFoods)
+        }.store(in: &cartCancelLabels)
+    }
 }

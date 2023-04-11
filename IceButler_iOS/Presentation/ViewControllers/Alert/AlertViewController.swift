@@ -106,7 +106,9 @@ class AlertViewController: UIViewController {
     @objc func cancelAction() { self.dismiss(animated: true) }
     @objc func deleteAction() {
         print("식품 삭제 로직 추가 예정")
+        CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
         self.dismiss(animated: true)
+        CartManager.shared.showCartCVTabBar()
     }
     
     @objc func completeBuying() {

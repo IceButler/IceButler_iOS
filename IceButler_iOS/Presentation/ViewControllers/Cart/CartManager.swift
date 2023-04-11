@@ -17,40 +17,14 @@ class CartManager {
     var alertViewController: AlertViewController? = nil
     var cartMainTV: CartMainTableViewCell? = nil
     
+    var cartFoodData: [String : [String]] = [:]
     
+    func setCartVC(cartVC: CartViewController) { cartViewController = cartVC }
+    func setAlertVC(alertVC: AlertViewController) { alertViewController = alertVC }
+    func setCartMainTV(cartTV: CartMainTableViewCell) { cartMainTV = cartTV }
     
-    func setCartVC(cartVC: CartViewController) {
-        cartViewController = cartVC
-    }
+    func showCartCVTabBar() { cartViewController?.showTabBar() }
+    func showCartVCAlertView() { cartViewController?.showAlertView() }
     
-    func setAlertVC(alertVC: AlertViewController) {
-        alertViewController = alertVC
-    }
-    
-    func setCartMainTV(cartTV: CartMainTableViewCell) {
-        cartMainTV = cartTV
-    }
-    
-    
-    func showCartCVTabBar() {
-        cartViewController?.showTabBar()
-    }
-    
-    func showCartVCAlertView() {
-        cartViewController?.showAlertView()
-    }
-    
-    func reloadFoodCV() {
-        cartMainTV?.reloadCV()
-    }
-    
-    func fetchData() {
-        APIManger.shared.getData(urlEndpointString: "/carts/\(cartIndex)/foods",
-                                 responseDataType: GeneralResponseModel<CartResponseModel>.self,
-                                 requestDataType: GeneralResponseModel<CartResponseModel>.self,
-                                 parameter: nil,
-                                 completionHandler: { _ in
-            // TODO: 장바구니 식품 조회 결과 처리
-        })
-    }
+    func reloadFoodCV() { cartMainTV?.reloadCV() }
 }

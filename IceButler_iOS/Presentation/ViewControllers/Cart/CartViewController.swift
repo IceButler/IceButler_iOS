@@ -13,9 +13,13 @@ class CartViewController: UIViewController {
     @IBOutlet weak var addFoodButton: UIButton!
     @IBOutlet weak var alertView: UIView!
     
+    private var categories: [String] = []
+    private var cartFoods: [CartResponseModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        congifure()
         setup()
         setupNavigationBar()
         setupLayout()
@@ -25,6 +29,17 @@ class CartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    func congifure() {
+        CartViewModel.shared.fetchData()
+        CartViewModel.shared.getCategories { categories in
+            self.categories = categories
+            self.cartMainTableView.reloadData()
+        }
+        CartViewModel.shared.getCartFoods { cartFoods in
+            self.cartFoods = cartFoods
+        }
     }
     
     func setup() {
@@ -141,12 +156,13 @@ class CartViewController: UIViewController {
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartMainTableViewCell", for: indexPath) as? CartMainTableViewCell else { return UITableViewCell() }
-        cell.setTitle(title: "전체")
+        cell.setTitle(title: self.categories[indexPath.row])
+        cell.cartFoods = CartViewModel.shared.getCartFoodsWithCategory(index: indexPath.row)
         cell.backgroundColor = cell.contentView.backgroundColor
         return cell
     }

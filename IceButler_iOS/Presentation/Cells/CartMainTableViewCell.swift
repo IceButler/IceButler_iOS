@@ -13,6 +13,8 @@ class CartMainTableViewCell: UITableViewCell {
     @IBOutlet weak var categoryTitleLabel: UILabel!
     @IBOutlet weak var foodCollectionView: UICollectionView!
     
+    var cartFoods: [CartFood] = []
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -52,17 +54,12 @@ class CartMainTableViewCell: UITableViewCell {
         
     public func setTitle(title: String) { self.categoryTitleLabel.text = title }
     
-    public func deleteFood() {
-        
-    }
-    
     func reloadCV() { foodCollectionView.reloadData() }
 }
 
 extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return CartViewModel.shared.getCartCount()
-        return 5
+        return cartFoods.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -70,10 +67,7 @@ extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectio
         
         cell.foodImageButton.layer.cornerRadius = cell.foodImageButton.frame.width / 2
         cell.isSelectedFood = false
-        
-        CartViewModel.shared.getFoodName(index: indexPath.row, store: &cell.cancellabels) { foodName in
-            cell.foodTitleLabel.text = foodName
-        }
+        cell.foodTitleLabel.text = cartFoods[indexPath.row].foodName
         CartViewModel.shared.getFoodIdx(index: indexPath.row, store: &cell.cancellabels) { foodIdx in
             cell.tag = foodIdx
         }

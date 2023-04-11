@@ -8,10 +8,10 @@
 import Foundation
 
 struct CartResponseModel: Codable {
-    let foods: [Food]
+    let category: String
+    let cartFoods: [CartFood]
 }
-
-struct Food: Codable {
-    let foodIdx: Int
-    let foodName, foodCategory: String
+struct CartFood: Codable {
+    let foodIdx: Int?
+    let foodName, foodIconName: String?
 }
