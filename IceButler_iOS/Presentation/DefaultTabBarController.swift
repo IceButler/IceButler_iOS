@@ -66,8 +66,8 @@ class DefaultTabBarController: UITabBarController {
         let cart = UINavigationController(rootViewController: cartViewController)
         cart.tabBarItem = cartTab
         
-        storyboard = UIStoryboard.init(name: "Fridge", bundle: nil)
-        guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "FridgeViewController") as? FridgeViewController else { return }
+        storyboard = UIStoryboard.init(name: "AuthMain", bundle: nil)
+        guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "AuthMainViewController") as? AuthMainViewController else { return }
         let mypage = UINavigationController(rootViewController: mypageViewController)
         mypage.tabBarItem = mypageTab
         
