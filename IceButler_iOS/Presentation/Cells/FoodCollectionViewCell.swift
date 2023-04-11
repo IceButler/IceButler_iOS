@@ -26,34 +26,11 @@ class FoodCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         setupGestureHandler()
         setupLayout()
-        setupObserver()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         cancellabels.removeAll()
-    }
-    
-    private func setupObserver() {
-//        CartViewModel.shared.getRemoveIdx { removeIdx in
-//            print(removeIdx)
-//            removeIdx.forEach { idx in
-//                if idx == self.tag{
-//                    self.foodImageButton.backgroundColor = .signatureDustBlue
-//                    self.selectedImageView.isHidden = false
-//                    self.isSelectedFood = true
-//                    return
-//                }else {
-//                    self.isSelectedFood = false
-//                }
-//            }
-//        }
-//
-//        CartViewModel.shared.isRemoveFoodIdxes { checkIdx in
-//            if checkIdx == false {
-//                CartViewModel.shared.setIsLongGesture(longGesture: false)
-//            }
-//        }
     }
     
     private func setupGestureHandler() {
@@ -77,53 +54,20 @@ class FoodCollectionViewCell: UICollectionViewCell {
                 self.foodImageButton.backgroundColor = .signatureDustBlue
                 self.selectedImageView.isHidden = false
                 CartManager.shared.showCartVCAlertView()
-//                CartViewModel.shared.addRemoveIdx(removeIdx: self.tag)
                 CartViewModel.shared.addRemoveIdx(removeIdx: self.tag, removeName: self.foodTitleLabel.text!)
             } else {
                 print("isSelectedFood NOT")
             }
         }
-        
-        
-//        if guesture.state == UIGestureRecognizer.State.began {
-//            CartViewModel.shared.setIsLongGesture(longGesture: true)
-//            setSelect()
-//        }
-//        if guesture.state == UIGestureRecognizer.State.began {
-//             self.isSelectedFood = !self.isSelectedFood
-//
-//             if self.isSelectedFood {
-//                 CartViewModel.shared.setIsLongGesture(longGesture: true)
-//                 self.foodImageButton.backgroundColor = .signatureDustBlue
-//                 self.selectedImageView.isHidden = false
-//                 self.setSelect(isSelect: true)
-////                 self.delegate?.setEditMode(edit: true)
-////                 CartManager.shared.selectedRow = 0
-////                 CartManager.shared.selectedIndex = self.tag
-//
-//             } else {
-//                 self.foodImageButton.backgroundColor = .signatureSkyBlue
-//                 self.selectedImageView.isHidden = true
-//                 self.setSelect(isSelect: false)
-//             }
-//         }
     }
     
     @objc func tapAction(_ guesture: UITapGestureRecognizer) {
-//        print("tapAction Called")
         if self.isSelectedFood {
             // TODO: 체크된 상태라면 해제
             self.foodImageButton.backgroundColor = .signatureSkyBlue
             self.selectedImageView.isHidden = true
             CartManager.shared.showCartCVTabBar()
         }
-//        if guesture.state == UIGestureRecognizer.State.ended {
-//            CartViewModel.shared.getIsLongGesture { isLongGesture in
-//                if isLongGesture {
-//                    self.setSelect()
-//                }
-//            }
-//        }
     }
     
     func setSelect() {
@@ -132,19 +76,7 @@ class FoodCollectionViewCell: UICollectionViewCell {
             self.foodImageButton.backgroundColor = .signatureSkyBlue
             self.selectedImageView.isHidden = true
             CartViewModel.shared.removeRemoveIdx(removeIdx: self.tag)
-        } else {
-//            CartViewModel.shared.addRemoveIdx(removeIdx: self.tag)
-            CartViewModel.shared.addRemoveIdx(removeIdx: self.tag, removeName: self.foodTitleLabel.text!)
         }
+        else { CartViewModel.shared.addRemoveIdx(removeIdx: self.tag, removeName: self.foodTitleLabel.text!) }
     }
-
-//    @IBAction func didTapImageButton(_ sender: UIButton) {
-//        if self.isSelectedFood {
-//            CartViewModel.shared.removeRemoveIdx(removeIdx: self.tag)
-//            self.foodImageButton.backgroundColor = .signatureSkyBlue
-//            self.selectedImageView.isHidden = true
-//        } else {
-//
-//        }
-//    }
 }

@@ -54,10 +54,7 @@ class CompleteBuyingViewController: UIViewController {
 }
 
 extension CompleteBuyingViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10    // TODO: 장바구니에서 선택된 식품(셀)들의 개수로 설정되도록 구현
-        return completeFoods.count
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return completeFoods.count }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 32 }
     

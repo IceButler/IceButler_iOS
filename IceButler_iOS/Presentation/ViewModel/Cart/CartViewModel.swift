@@ -73,16 +73,6 @@ class CartViewModel: ObservableObject {
         }.store(in: &longGestureCancellabels)
     }
     
-//    func isRemoveFoodIdxes(completion: @escaping (Bool) -> Void) {
-//        $removeFoodIdxes.sink { removeFoodIdxes in
-//            if removeFoodIdxes?.count != 0 {
-//                completion(true)
-//            }else {
-//                completion(false)
-//            }
-//        }.store(in: &removeCancelLabels)
-//    }
-    
     func addRemoveIdx(removeIdx: Int, removeName: String) {
         if removeIdx != -1 {
             removeFoodIdxes?.append(removeIdx)
@@ -93,10 +83,7 @@ class CartViewModel: ObservableObject {
     func removeRemoveIdx(removeIdx: Int) {
         if let removeIndex = removeFoodIdxes?.firstIndex(where: { removeIndex in
             removeIndex == removeIdx
-        }) {
-//            removeCancelLabels.removeAll()
-            removeFoodIdxes?.remove(at: removeIndex)
-        }
+        }) { removeFoodIdxes?.remove(at: removeIndex) }
     }
     
     func getRemoveIdx(completion: @escaping ([Int]) -> Void) {
@@ -104,23 +91,11 @@ class CartViewModel: ObservableObject {
             completion(removeIdx ?? [])
         }.store(in: &removeCancelLabels)
     }
-    
-//    func getCart(cartId: Int) {
-//        cart?.removeAll()
-//        cartService.getCartFoodList(cartId: cartId) { cart in
-//            cart?.cartFoods.forEach({ food in
-//                self.cart?.append(food)
-//            })
-//        }
-//    }
-    
+
     func deleteFood(cartId: Int) {
         cartCancelLabels.removeAll()
         cartService.deleteCartFood(cartId: cartId, removeFoodIdxes: removeFoodIdxes ?? []) { _ in
-//            self.cart = cart?.cartFoods
-//            self.cartFoods = cart ?? []
             self.fetchData()
-            CartManager.shared.reloadFoodCV()
         }
         
     }
@@ -129,6 +104,7 @@ class CartViewModel: ObservableObject {
         let cartIdx = 1 // 임시 cartId
         cartService.getCartFoodList(cartId: cartIdx, completion: { [weak self] response in
             self?.cartFoods = response ?? []
+            CartManager.shared.reloadFoodCV()
         })
     }
     
