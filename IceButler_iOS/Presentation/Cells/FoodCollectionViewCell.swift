@@ -77,7 +77,8 @@ class FoodCollectionViewCell: UICollectionViewCell {
                 self.foodImageButton.backgroundColor = .signatureDustBlue
                 self.selectedImageView.isHidden = false
                 CartManager.shared.showCartVCAlertView()
-                CartViewModel.shared.addRemoveIdx(removeIdx: self.tag)
+//                CartViewModel.shared.addRemoveIdx(removeIdx: self.tag)
+                CartViewModel.shared.addRemoveIdx(removeIdx: self.tag, removeName: self.foodTitleLabel.text!)
             } else {
                 print("isSelectedFood NOT")
             }
@@ -132,7 +133,8 @@ class FoodCollectionViewCell: UICollectionViewCell {
             self.selectedImageView.isHidden = true
             CartViewModel.shared.removeRemoveIdx(removeIdx: self.tag)
         } else {
-            CartViewModel.shared.addRemoveIdx(removeIdx: self.tag)
+//            CartViewModel.shared.addRemoveIdx(removeIdx: self.tag)
+            CartViewModel.shared.addRemoveIdx(removeIdx: self.tag, removeName: self.foodTitleLabel.text!)
         }
     }
 

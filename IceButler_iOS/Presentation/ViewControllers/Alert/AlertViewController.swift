@@ -78,13 +78,6 @@ class AlertViewController: UIViewController {
         self.contentLabel.text = contentText
         self.leftButton.setTitle(self.leftButtonTitle, for: .normal)
         self.rightButton.setTitle(self.righttButtonTitle, for: .normal)
-        
-//        if let _ = self.leftButtonAction,
-//           let _ = self.rightButtonAction {
-//            self.leftButton.addTarget(self, action: self.leftButtonAction!, for: .touchUpInside)
-//            self.rightButton.addTarget(self, action: self.rightButtonAction!, for: .touchUpInside)
-//        }
-        
     }
     
     public func setLeftButtonAction(action: Selector) { self.leftButtonAction = action }
@@ -103,17 +96,27 @@ class AlertViewController: UIViewController {
     }
     
     // MARK: @objc methods
-    @objc func cancelAction() { self.dismiss(animated: true) }
-    @objc func deleteAction() {
-        print("식품 삭제 로직 추가 예정")
-        CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
+    @objc func cancelAction() {
         self.dismiss(animated: true)
         CartManager.shared.showCartCVTabBar()
     }
+    @objc func deleteAction() {
+        CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
+        self.dismiss(animated: true)
+        CartManager.shared.showCartCVTabBar()
+        CartViewModel.shared.fetchData()
+        CartManager.shared.reloadFoodCV()
+    }
     
     @objc func completeBuying() {
+        // 장보기 완료 API 호출
+        CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
+        
+        // 선택된 셀들(장보기 완료된 식품 정보 배열)을 alertVC로 전달
+        // TODO: alertVC에서 '냉장고로 식품 추가' API 호출
         let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
         guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "SelectAlertViewController") as? CompleteBuyingViewController else { return }
+        alertViewController.completeFoods = CartViewModel.shared.removeFoodNames
         alertViewController.modalPresentationStyle = .overCurrentContext
         present(alertViewController, animated: true)
     }

@@ -16,6 +16,7 @@ class CartViewModel: ObservableObject {
     @Published var cart: [CartFood]? = []
     @Published var cartFoods: [CartResponseModel] = []
     @Published var removeFoodIdxes: [Int]? = []
+    @Published var removeFoodNames: [String] = []
     @Published var isLongGesture = false
     
     private var cartCancelLabels: Set<AnyCancellable> = []
@@ -82,7 +83,12 @@ class CartViewModel: ObservableObject {
 //        }.store(in: &removeCancelLabels)
 //    }
     
-    func addRemoveIdx(removeIdx: Int) { if removeIdx != -1 { removeFoodIdxes?.append(removeIdx) } }
+    func addRemoveIdx(removeIdx: Int, removeName: String) {
+        if removeIdx != -1 {
+            removeFoodIdxes?.append(removeIdx)
+            removeFoodNames.append(removeName)
+        }
+    }
     
     func removeRemoveIdx(removeIdx: Int) {
         if let removeIndex = removeFoodIdxes?.firstIndex(where: { removeIndex in
