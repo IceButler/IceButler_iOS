@@ -22,12 +22,20 @@ class CompleteBuyingViewController: UIViewController {
         setupLayouts()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     @IBAction func didTapCancelButton(_ sender: UIButton) {
-        // TODO: 취소 시 장바구니 메인 화면으로 전환
-        self.dismiss(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     @IBAction func didTapRightButton(_ sender: UIButton) {
-        // TODO: 추가 시 식품 추가 메인 화면으로 전환
+        print("didTapRightButton called")
+        let storyboard = UIStoryboard.init(name: "FoodAdd", bundle: nil)
+        guard let foodAddViewController = storyboard.instantiateViewController(withIdentifier: "FoodAddViewController") as? FoodAddViewController else { return }
+        
+        // TODO: 식품 추가 화면에 추가할 식품의 이름,인덱스 정보 배열 넘기기
+        self.navigationController?.pushViewController(foodAddViewController, animated: true)
     }
     
     private func setupTableView() {

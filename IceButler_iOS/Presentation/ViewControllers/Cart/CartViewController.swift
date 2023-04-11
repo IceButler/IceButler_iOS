@@ -26,6 +26,8 @@ class CartViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.alertView.isHidden = true
+        self.addFoodButton.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -64,8 +66,7 @@ class CartViewController: UIViewController {
                                       content: "선택하신 식품 장보기를 완료하셨습니까?",
                                       leftButtonTitle: "취소", righttButtonTitle: "확인")
         alertViewController.todo = .completeBuying
-        alertViewController.modalPresentationStyle = .overCurrentContext
-        present(alertViewController, animated: true)
+        self.navigationController?.pushViewController(alertViewController, animated: true)
     }
     
     

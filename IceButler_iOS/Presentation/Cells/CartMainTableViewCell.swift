@@ -12,6 +12,7 @@ class CartMainTableViewCell: UITableViewCell {
     @IBOutlet weak var categoryTitleView: UIView!
     @IBOutlet weak var categoryTitleLabel: UILabel!
     @IBOutlet weak var foodCollectionView: UICollectionView!
+    @IBOutlet weak var nothingLabel: UILabel!
     
     var cartFoods: [CartFood] = []
     
@@ -55,10 +56,16 @@ class CartMainTableViewCell: UITableViewCell {
     public func setTitle(title: String) { self.categoryTitleLabel.text = title }
     
     func reloadCV() { foodCollectionView.reloadData() }
+    
+    func checkFoodsCount() {
+        if cartFoods.count == 0 { nothingLabel.isHidden = false }
+        else { nothingLabel.isHidden = true }
+    }
 }
 
 extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        checkFoodsCount()
         return cartFoods.count
     }
     

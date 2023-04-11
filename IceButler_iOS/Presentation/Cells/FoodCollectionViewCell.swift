@@ -55,19 +55,26 @@ class FoodCollectionViewCell: UICollectionViewCell {
                 self.selectedImageView.isHidden = false
                 CartManager.shared.showCartVCAlertView()
                 CartViewModel.shared.addRemoveIdx(removeIdx: self.tag, removeName: self.foodTitleLabel.text!)
-            } else {
-                print("isSelectedFood NOT")
             }
         }
     }
     
     @objc func tapAction(_ guesture: UITapGestureRecognizer) {
         if self.isSelectedFood {
-            // TODO: 체크된 상태라면 해제
             self.foodImageButton.backgroundColor = .signatureSkyBlue
             self.selectedImageView.isHidden = true
-            CartManager.shared.showCartCVTabBar()
+            CartViewModel.shared.removeRemoveIdx(removeIdx: self.tag)
+            
+            if CartViewModel.shared.removeFoodIdxes?.count == 0 {
+                CartManager.shared.showCartCVTabBar()
+            }
+            
+        } else {
+            self.foodImageButton.backgroundColor = .signatureDustBlue
+            self.selectedImageView.isHidden = false
+            CartViewModel.shared.addRemoveIdx(removeIdx: self.tag, removeName: self.foodTitleLabel.text!)
         }
+        self.isSelectedFood = !self.isSelectedFood
     }
     
     func setSelect() {

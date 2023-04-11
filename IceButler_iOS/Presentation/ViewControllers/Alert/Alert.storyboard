@@ -9,6 +9,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="4jU-Ye-CsU">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="lVR-Jy-eJu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HJc-T0-fFr">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="oNU-HP-2hi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fz2-on-0cL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-824" y="-2"/>
+        </scene>
         <!--Alert View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
@@ -74,6 +89,7 @@
                             <constraint firstItem="cs5-wK-1uQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="zET-UM-lMy"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="D1k-o4-h2G"/>
                     <connections>
                         <outlet property="containerView" destination="cs5-wK-1uQ" id="ohH-29-hvp"/>
                         <outlet property="contentLabel" destination="xNY-C3-TrT" id="NZb-P2-biC"/>
@@ -206,6 +222,7 @@
                             <constraint firstItem="ZeX-Xe-2KW" firstAttribute="trailing" secondItem="4vA-Fv-w88" secondAttribute="trailing" constant="25" id="gh2-vQ-5QB"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ag7-mq-oCf"/>
                     <connections>
                         <outlet property="containerView" destination="4vA-Fv-w88" id="UTG-Nc-HYU"/>
                         <outlet property="leftButton" destination="4ik-wq-bNW" id="qFX-h4-cAb"/>
@@ -215,7 +232,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIG-UK-gaq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1110.6870229007634" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="242" y="693"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Fex-fY-rgi">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="TyZ-J0-YnU" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="h0L-94-Jgj">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="e03-iN-Dkc" kind="relationship" relationship="rootViewController" id="4eZ-ge-egH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cCf-eT-7Ru" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-825" y="693"/>
         </scene>
     </scenes>
     <resources>
