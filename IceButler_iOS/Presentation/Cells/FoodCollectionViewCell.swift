@@ -63,7 +63,7 @@ class FoodCollectionViewCell: UICollectionViewCell {
     
     @objc func tapAction(_ guesture: UITapGestureRecognizer) {
         if self.isSelectedFood {
-            // TODO: 체크된 상태라면 해제
+            self.isSelectedFood = !self.isSelectedFood
             self.foodImageButton.backgroundColor = .signatureSkyBlue
             self.selectedImageView.isHidden = true
             CartManager.shared.showCartCVTabBar()
