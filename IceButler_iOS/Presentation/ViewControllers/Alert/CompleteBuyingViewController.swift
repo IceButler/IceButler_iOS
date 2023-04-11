@@ -9,6 +9,8 @@ import UIKit
 
 class CompleteBuyingViewController: UIViewController {
     
+    var completeFoods: [String] = []
+    
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var leftButton: UIButton!
@@ -52,14 +54,13 @@ class CompleteBuyingViewController: UIViewController {
 }
 
 extension CompleteBuyingViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10    // TODO: 장바구니에서 선택된 식품(셀)들의 개수로 설정되도록 구현
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return completeFoods.count }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 32 }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CompleteBuyingTableViewCell", for: indexPath) as? CompleteBuyingTableViewCell else { return UITableViewCell() }
+        cell.foodTitleLabel.text = completeFoods[indexPath.row]
         return cell
     }
     
