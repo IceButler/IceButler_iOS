@@ -26,6 +26,8 @@ class CartViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.alertView.isHidden = true
+        self.addFoodButton.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
     }
     

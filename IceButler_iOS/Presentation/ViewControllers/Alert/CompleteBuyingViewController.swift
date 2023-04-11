@@ -27,8 +27,7 @@ class CompleteBuyingViewController: UIViewController {
     }
     
     @IBAction func didTapCancelButton(_ sender: UIButton) {
-        // TODO: 취소 시 장바구니 메인 화면으로 전환
-        self.dismiss(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     @IBAction func didTapRightButton(_ sender: UIButton) {
         print("didTapRightButton called")
