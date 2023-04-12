@@ -9,11 +9,12 @@ import UIKit
 
 class MyPageViewController: UIViewController {
     
+    private let sectionList = ["My", "내 결제", "계정 설정", "앱 정보"]
     private let menuList = [
-        "My" : ["마이 냉장고", "마이 레시피"],
-        "내 결제" : ["Pro 버전"],
-        "계정 설정" : ["로그아웃", "회원탈퇴"],
-        "앱 정보" : ["약관 안내", "개인 정보 처리 방침"]
+        ["마이 냉장고", "마이 레시피"],
+        ["Pro 버전"],
+        ["로그아웃", "회원탈퇴"],
+        ["약관 안내", "개인 정보 처리 방침"]
     ]
 
     @IBOutlet weak var profileContainerView: UIView!
@@ -76,27 +77,61 @@ class MyPageViewController: UIViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
     }
     
     @IBAction func didTapEditProfileButton(_ sender: UIButton) {
         // TODO: 프로필 편집 화면으로 이동
+        print("프로필 편집 화면으로 이동")
     }
 }
 
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-//        return menuList.count
-        return 4
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { return self.sectionList.count }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2    // TODO: 각 섹션의 아이템 개수만큼 반환
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.menuList[section].count }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? { return self.sectionList[section] }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MypageMenuTableViewCell", for: indexPath) as? MypageMenuTableViewCell else { return UITableViewCell() }
+        cell.menuNameLabel.text = self.menuList[indexPath.section][indexPath.row]
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: 섹션/행 별로 화면 전환 구분
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                print("마이 냉장고 화면으로 전환")
+            case 1:
+                print("마이 레시피 화면으로 전환")
+            default: return
+            }
+        case 1:
+            print("Pro 결제 화면으로 전환")
+        case 2:
+            switch indexPath.row {
+            case 0:
+                print("로그아웃 팝업 띄우기")
+            case 1:
+                print("회원탈퇴 팝업 띄우기")
+            default: return
+            }
+        case 3:
+            switch indexPath.row {
+            case 0:
+                // TODO: 약관안내 화면으로 전환
+                print("약관안내 화면으로 전환")
+            case 1:
+                // TODO: 개인정보처리방침 화면으로 전환
+                print("개인정보처리방침 화면으로 전환")
+            default: return
+            }
+        default: return
+        }
+    }
     
 }
