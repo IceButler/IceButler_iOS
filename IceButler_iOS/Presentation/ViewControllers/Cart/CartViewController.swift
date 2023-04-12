@@ -12,6 +12,7 @@ class CartViewController: UIViewController {
     @IBOutlet weak var cartMainTableView: UITableView!
     @IBOutlet weak var addFoodButton: UIButton!
     @IBOutlet weak var alertView: UIView!
+    @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
     
     private var cartFoods: [CartResponseModel] = []
     
@@ -36,6 +37,7 @@ class CartViewController: UIViewController {
         CartViewModel.shared.getCartFoods { cartFoods in
             self.cartFoods = cartFoods
             self.cartMainTableView.reloadData()
+            self.viewHeightConstraint.constant = CGFloat(170 * self.cartFoods.count)
         }
     }
     
