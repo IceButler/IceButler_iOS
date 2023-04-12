@@ -12,6 +12,7 @@ class CartViewController: UIViewController {
     @IBOutlet weak var cartMainTableView: UITableView!
     @IBOutlet weak var addFoodButton: UIButton!
     @IBOutlet weak var alertView: UIView!
+    @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
     
     private var cartFoods: [CartResponseModel] = []
     
@@ -26,6 +27,8 @@ class CartViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.alertView.isHidden = true
+        self.addFoodButton.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -34,6 +37,7 @@ class CartViewController: UIViewController {
         CartViewModel.shared.getCartFoods { cartFoods in
             self.cartFoods = cartFoods
             self.cartMainTableView.reloadData()
+            self.viewHeightConstraint.constant = CGFloat(170 * self.cartFoods.count)
         }
     }
     
@@ -64,8 +68,7 @@ class CartViewController: UIViewController {
                                       content: "선택하신 식품 장보기를 완료하셨습니까?",
                                       leftButtonTitle: "취소", righttButtonTitle: "확인")
         alertViewController.todo = .completeBuying
-        alertViewController.modalPresentationStyle = .overCurrentContext
-        present(alertViewController, animated: true)
+        self.navigationController?.pushViewController(alertViewController, animated: true)
     }
     
     

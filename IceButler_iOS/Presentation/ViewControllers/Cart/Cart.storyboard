@@ -168,6 +168,7 @@
                         <outlet property="addFoodButton" destination="tiL-ij-FjJ" id="ci0-hE-ddF"/>
                         <outlet property="alertView" destination="ffF-Gn-RU2" id="n9s-Gi-kQh"/>
                         <outlet property="cartMainTableView" destination="4rK-Xs-Q3R" id="rrR-D0-tbR"/>
+                        <outlet property="viewHeightConstraint" destination="m25-41-3Se" id="hEj-Rx-dPA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

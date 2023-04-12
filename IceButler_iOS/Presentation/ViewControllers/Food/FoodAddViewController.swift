@@ -68,6 +68,10 @@ class FoodAddViewController: UIViewController {
         setupObserver()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
     private func setup() {
         FoodViewModel.shared.getFoodOwnerList(fridgeIdx: 1)
         
@@ -102,6 +106,8 @@ class FoodAddViewController: UIViewController {
     }
     
     private func setupLayout() {
+        self.navigationController?.isNavigationBarHidden = false
+        
         categoryViewHeight.priority = UILayoutPriority(1000)
         foodOwnerViewHeight.priority = UILayoutPriority(1000)
         
