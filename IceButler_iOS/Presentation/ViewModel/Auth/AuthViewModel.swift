@@ -13,6 +13,7 @@ class AuthViewModel: ObservableObject {
     private let authService = AuthService()
     
     @Published var userEmail: String?
+    @Published var isCheckNickName: Bool?
     
     private var cancelLabels: Set<AnyCancellable> = []
     
@@ -38,6 +39,13 @@ class AuthViewModel: ObservableObject {
     func loginWithKakao() {
         authService.loginWithKakao { userEmail in
             self.userEmail = userEmail
+        }
+    }
+    
+    func checkNickName(nickName: String) {
+        let parameter = AuthNickNameRequsetModel(nickname: nickName)
+        authService.requestCheckNickName(parameter: parameter) { result in
+            self.isCheckNickName = result
         }
     }
 }

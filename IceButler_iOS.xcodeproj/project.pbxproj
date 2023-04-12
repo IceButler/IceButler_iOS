@@ -12,6 +12,10 @@
 		7339CD6F29E5B39D002A6D78 /* AuthMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD6E29E5B39D002A6D78 /* AuthMainViewController.swift */; };
 		7339CD7229E5B56A002A6D78 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD7129E5B56A002A6D78 /* AuthService.swift */; };
 		7339CD7529E5B6B0002A6D78 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD7429E5B6B0002A6D78 /* AuthViewModel.swift */; };
+		7339CD7F29E671B0002A6D78 /* AuthUserInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7339CD7E29E671B0002A6D78 /* AuthUserInfo.storyboard */; };
+		7339CD8129E67406002A6D78 /* AuthUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD8029E67406002A6D78 /* AuthUserInfoViewController.swift */; };
+		7339CD8329E67F22002A6D78 /* AuthRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD8229E67F22002A6D78 /* AuthRequestModel.swift */; };
+		7339CD8629E68818002A6D78 /* AuthResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD8529E68818002A6D78 /* AuthResponseModel.swift */; };
 		738CAC8529E310CF009EF9D2 /* FoodDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 738CAC8429E310CF009EF9D2 /* FoodDetail.storyboard */; };
 		738CAC8729E31349009EF9D2 /* FoodDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CAC8629E31349009EF9D2 /* FoodDetailViewController.swift */; };
 		738CAC8A29E32773009EF9D2 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CAC8929E32773009EF9D2 /* FoodViewModel.swift */; };
@@ -114,6 +118,10 @@
 		7339CD6E29E5B39D002A6D78 /* AuthMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMainViewController.swift; sourceTree = "<group>"; };
 		7339CD7129E5B56A002A6D78 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		7339CD7429E5B6B0002A6D78 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		7339CD7E29E671B0002A6D78 /* AuthUserInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthUserInfo.storyboard; sourceTree = "<group>"; };
+		7339CD8029E67406002A6D78 /* AuthUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserInfoViewController.swift; sourceTree = "<group>"; };
+		7339CD8229E67F22002A6D78 /* AuthRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestModel.swift; sourceTree = "<group>"; };
+		7339CD8529E68818002A6D78 /* AuthResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponseModel.swift; sourceTree = "<group>"; };
 		738CAC8429E310CF009EF9D2 /* FoodDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FoodDetail.storyboard; sourceTree = "<group>"; };
 		738CAC8629E31349009EF9D2 /* FoodDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailViewController.swift; sourceTree = "<group>"; };
 		738CAC8929E32773009EF9D2 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
@@ -251,6 +259,8 @@
 			children = (
 				7339CD6C29E5B390002A6D78 /* AuthMain.storyboard */,
 				7339CD6E29E5B39D002A6D78 /* AuthMainViewController.swift */,
+				7339CD7E29E671B0002A6D78 /* AuthUserInfo.storyboard */,
+				7339CD8029E67406002A6D78 /* AuthUserInfoViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -267,6 +277,15 @@
 			isa = PBXGroup;
 			children = (
 				7339CD7429E5B6B0002A6D78 /* AuthViewModel.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		7339CD8429E67FC6002A6D78 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				7339CD8229E67F22002A6D78 /* AuthRequestModel.swift */,
+				7339CD8529E68818002A6D78 /* AuthResponseModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -466,6 +485,7 @@
 		73F26FBD29DAA716009E364B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7339CD8429E67FC6002A6D78 /* Auth */,
 				738CAC8C29E3280C009EF9D2 /* Food */,
 				73B7374729E2DCD10097806F /* Fridge */,
 				73F26FBF29DAA723009E364B /* Cart */,
@@ -724,6 +744,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */,
+				7339CD7F29E671B0002A6D78 /* AuthUserInfo.storyboard in Resources */,
 				73F62A4E29DD81AC003D779F /* FoodAddSelectCell.xib in Resources */,
 				73F62A3C29DCFD52003D779F /* Fridge.storyboard in Resources */,
 				A28A763F29D54DEF00D127EA /* Cart.storyboard in Resources */,
@@ -867,6 +888,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7339CD8629E68818002A6D78 /* AuthResponseModel.swift in Sources */,
 				73B7373A29E250680097806F /* ProcessedFoodViewController.swift in Sources */,
 				A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */,
 				A28A764429D54F1C00D127EA /* DefaultTabBarController.swift in Sources */,
@@ -891,6 +913,7 @@
 				7339CD7229E5B56A002A6D78 /* AuthService.swift in Sources */,
 				73B7373829E2505B0097806F /* SeasoningViewController.swift in Sources */,
 				73B7372C29E250010097806F /* FruitViewController.swift in Sources */,
+				7339CD8329E67F22002A6D78 /* AuthRequestModel.swift in Sources */,
 				73B7374529E293520097806F /* FoodCell.swift in Sources */,
 				73B7374929E2DCE60097806F /* FridgeResponseModel.swift in Sources */,
 				7339CD6F29E5B39D002A6D78 /* AuthMainViewController.swift in Sources */,
@@ -905,6 +928,7 @@
 				73B7371D29E1427A0097806F /* FoodAddImageCell.swift in Sources */,
 				73DC2F3D29DAA6A400F47ECD /* APIManger.swift in Sources */,
 				73F26FC129DAA735009E364B /* GeneralResponseModel.swift in Sources */,
+				7339CD8129E67406002A6D78 /* AuthUserInfoViewController.swift in Sources */,
 				738CAC9029E32858009EF9D2 /* FoodService.swift in Sources */,
 				73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */,
 				7339CD7529E5B6B0002A6D78 /* AuthViewModel.swift in Sources */,
