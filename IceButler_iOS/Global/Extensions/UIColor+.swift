@@ -71,6 +71,19 @@ extension UIColor{
         alpha: 0.4
     )
     
+    static let availableBlue = UIColor(
+        red: 111/255,
+        green: 161/255,
+        blue: 227/255,
+        alpha: 1
+    )
+    
+    static let unavailableRed = UIColor(
+        red: 255/255,
+        green: 219/255,
+        blue: 219/255,
+        alpha: 0.6
+    )
     
     static let notSelectedTabBarWhite = UIColor(
         red: 255/255,

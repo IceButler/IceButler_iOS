@@ -13,13 +13,14 @@ class AuthViewModel: ObservableObject {
     private let authService = AuthService()
     
     @Published var userEmail: String?
-    @Published var isCheckNickName: Bool?
+    @Published var userNickName: String?
+    @Published var isExistence: Bool?
     
     private var cancelLabels: Set<AnyCancellable> = []
     
     func userEmail(completion: @escaping (String) -> Void) {
         $userEmail.filter { userEmail in
-            userEmail != nil || userEmail != ""
+            userEmail != nil
         }.sink { userEmail in
             completion(userEmail!)
         }.store(in: &cancelLabels)
@@ -27,14 +28,27 @@ class AuthViewModel: ObservableObject {
     
     func isUserEmail(completion: @escaping () -> Void) {
         $userEmail.filter { userEmail in
-            userEmail != nil || userEmail != ""
+            userEmail != nil
         }.sink { userEmail in
             completion()
         }.store(in: &cancelLabels)
     }
     
+    func userNickName(completion: @escaping (String) -> Void) {
+        $userNickName.filter { nickName in
+            nickName != nil
+        }.sink { nickName in
+            completion(nickName!)
+        }.store(in: &cancelLabels)
+    }
     
-    
+    func isExistence(completion: @escaping (Bool) -> Void) {
+        $isExistence.filter { isExistence in
+            isExistence != nil
+        }.sink { isExistence in
+            completion(isExistence!)
+        }.store(in: &cancelLabels)
+    }
     
     func loginWithKakao() {
         authService.loginWithKakao { userEmail in
@@ -43,9 +57,15 @@ class AuthViewModel: ObservableObject {
     }
     
     func checkNickName(nickName: String) {
-        let parameter = AuthNickNameRequsetModel(nickname: nickName)
-        authService.requestCheckNickName(parameter: parameter) { result in
-            self.isCheckNickName = result
+        let parameter = AuthNickNameRequsetModel(nickName: nickName)
+        authService.requestCheckNickName(parameter: parameter) { response in
+            if response != nil {
+                self.userNickName = response?.nickName
+                self.isExistence = response?.existence
+            }else {
+                self.userNickName = nickName
+                self.isExistence = false
+            }
         }
     }
 }

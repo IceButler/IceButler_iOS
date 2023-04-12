@@ -396,7 +396,6 @@ extension FoodAddViewController: UITableViewDelegate, UITableViewDataSource {
         case 0 :
             return FoodCategory.allCases.count
         case 1:
-            // user api 받으면 바꿀 예정
             return FoodViewModel.shared.foodOwnerListCount()
         default:
             return 0
@@ -413,7 +412,6 @@ extension FoodAddViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         case 1:
-            // user api 받으면 바꿀 예정
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FoodOwnerCell", for: indexPath) as? FoodOwnerCell else {return UITableViewCell()}
             
             FoodViewModel.shared.foodOwnerListName(index: indexPath.row, store: &cell.cancellabels) { ownerName in

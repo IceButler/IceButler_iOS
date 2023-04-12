@@ -8,5 +8,5 @@
 import Foundation
 
 struct AuthNickNameRequsetModel: Codable {
-    let nickname: String
+    let nickName: String
 }

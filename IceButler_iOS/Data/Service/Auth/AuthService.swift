@@ -44,13 +44,9 @@ class AuthService {
         }
     }
     
-    func requestCheckNickName(parameter: AuthNickNameRequsetModel, completion: @escaping (Bool) -> Void) {
+    func requestCheckNickName(parameter: AuthNickNameRequsetModel, completion: @escaping (AuthNickNameResponseModel?) -> Void) {
         APIManger.shared.postData(urlEndpointString: "/users/nickname", responseDataType: AuthNickNameResponseModel.self, requestDataType: AuthNickNameRequsetModel.self, parameter: parameter) { response in
-            if response.data!.result {
-                completion(true)
-            }else {
-                completion(false)
-            }
+            completion(response.data)
         }
     }
 }

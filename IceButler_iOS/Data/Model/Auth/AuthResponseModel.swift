@@ -8,5 +8,6 @@
 import Foundation
 
 struct AuthNickNameResponseModel: Codable {
-    let result: Bool
+    let nickName: String
+    let existence: Bool
 }
