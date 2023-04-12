@@ -70,9 +70,11 @@ class FoodCollectionViewCell: UICollectionViewCell {
             }
             
         } else {
-            self.foodImageButton.backgroundColor = .signatureDustBlue
-            self.selectedImageView.isHidden = false
-            CartViewModel.shared.addRemoveIdx(removeIdx: self.tag, removeName: self.foodTitleLabel.text!)
+            if CartViewModel.shared.removeFoodIdxes?.count ?? 0 > 0 {
+                self.foodImageButton.backgroundColor = .signatureDustBlue
+                self.selectedImageView.isHidden = false
+                CartViewModel.shared.addRemoveIdx(removeIdx: self.tag, removeName: self.foodTitleLabel.text!)
+            }
         }
         self.isSelectedFood = !self.isSelectedFood
     }
