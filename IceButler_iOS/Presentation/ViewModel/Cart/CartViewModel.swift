@@ -104,7 +104,8 @@ class CartViewModel: ObservableObject {
         let cartIdx = 1 // 임시 cartId
         cartService.getCartFoodList(cartId: cartIdx, completion: { [weak self] response in
             self?.cartFoods = response ?? []
-            CartManager.shared.reloadFoodCV()
+//            CartManager.shared.reloadFoodCV()
+            CartManager.shared.cartViewController?.cartMainTableView.reloadData()
         })
     }
     
