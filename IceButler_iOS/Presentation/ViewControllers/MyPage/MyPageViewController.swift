@@ -125,6 +125,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 // TODO: 약관안내 화면으로 전환
                 print("약관안내 화면으로 전환")
+                guard let policyWebViewController = storyboard!.instantiateViewController(withIdentifier: "PolicyWebViewController") as? PolicyWebViewController else { return }
+                self.navigationController?.pushViewController(policyWebViewController, animated: true)
             case 1:
                 // TODO: 개인정보처리방침 화면으로 전환
                 print("개인정보처리방침 화면으로 전환")
