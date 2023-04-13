@@ -292,37 +292,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0S-YS-Ug1">
-                                <rect key="frame" x="35" y="465" width="323" height="43"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="영어,한글,숫자 (20자 이내)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7RT-WK-Hyr">
-                                        <rect key="frame" x="15" y="0.0" width="256" height="43"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfZ-De-FsC">
-                                        <rect key="frame" x="271" y="0.0" width="42" height="43"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="search"/>
-                                        <connections>
-                                            <action selector="didTapSearchButton:" destination="ZOw-6C-Px4" eventType="touchUpInside" id="qGs-37-ZPx"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                <constraints>
-                                    <constraint firstItem="7RT-WK-Hyr" firstAttribute="top" secondItem="N0S-YS-Ug1" secondAttribute="top" id="FIw-VX-Zs9"/>
-                                    <constraint firstItem="7RT-WK-Hyr" firstAttribute="leading" secondItem="N0S-YS-Ug1" secondAttribute="leading" constant="15" id="IbS-FL-fWL"/>
-                                    <constraint firstAttribute="height" constant="43" id="S7H-Rl-HSd"/>
-                                    <constraint firstAttribute="bottom" secondItem="7RT-WK-Hyr" secondAttribute="bottom" id="Ssj-ZG-U2J"/>
-                                    <constraint firstAttribute="trailing" secondItem="cfZ-De-FsC" secondAttribute="trailing" constant="10" id="gU0-dz-1Hd"/>
-                                    <constraint firstItem="cfZ-De-FsC" firstAttribute="top" secondItem="N0S-YS-Ug1" secondAttribute="top" id="seo-O8-qhE"/>
-                                    <constraint firstAttribute="bottom" secondItem="cfZ-De-FsC" secondAttribute="bottom" id="wM2-6B-ZGl"/>
-                                    <constraint firstItem="cfZ-De-FsC" firstAttribute="leading" secondItem="7RT-WK-Hyr" secondAttribute="trailing" id="xh5-Y5-tgn"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbw-0B-IXD">
                                 <rect key="frame" x="35" y="465" width="323" height="200"/>
                                 <subviews>
@@ -366,6 +335,37 @@
                                     <constraint firstItem="6r9-Zn-TSK" firstAttribute="top" secondItem="tbw-0B-IXD" secondAttribute="top" constant="45" id="Wcg-Ip-uEg"/>
                                     <constraint firstAttribute="height" constant="200" id="nca-Yk-pLY"/>
                                     <constraint firstItem="6r9-Zn-TSK" firstAttribute="centerX" secondItem="tbw-0B-IXD" secondAttribute="centerX" id="thy-CN-nur"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0S-YS-Ug1">
+                                <rect key="frame" x="35" y="465" width="323" height="43"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="영어,한글,숫자 (20자 이내)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7RT-WK-Hyr">
+                                        <rect key="frame" x="15" y="0.0" width="256" height="43"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfZ-De-FsC">
+                                        <rect key="frame" x="271" y="0.0" width="42" height="43"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="search"/>
+                                        <connections>
+                                            <action selector="didTapSearchButton:" destination="ZOw-6C-Px4" eventType="touchUpInside" id="qGs-37-ZPx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstItem="7RT-WK-Hyr" firstAttribute="top" secondItem="N0S-YS-Ug1" secondAttribute="top" id="FIw-VX-Zs9"/>
+                                    <constraint firstItem="7RT-WK-Hyr" firstAttribute="leading" secondItem="N0S-YS-Ug1" secondAttribute="leading" constant="15" id="IbS-FL-fWL"/>
+                                    <constraint firstAttribute="height" constant="43" id="S7H-Rl-HSd"/>
+                                    <constraint firstAttribute="bottom" secondItem="7RT-WK-Hyr" secondAttribute="bottom" id="Ssj-ZG-U2J"/>
+                                    <constraint firstAttribute="trailing" secondItem="cfZ-De-FsC" secondAttribute="trailing" constant="10" id="gU0-dz-1Hd"/>
+                                    <constraint firstItem="cfZ-De-FsC" firstAttribute="top" secondItem="N0S-YS-Ug1" secondAttribute="top" id="seo-O8-qhE"/>
+                                    <constraint firstAttribute="bottom" secondItem="cfZ-De-FsC" secondAttribute="bottom" id="wM2-6B-ZGl"/>
+                                    <constraint firstItem="cfZ-De-FsC" firstAttribute="leading" secondItem="7RT-WK-Hyr" secondAttribute="trailing" id="xh5-Y5-tgn"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hY-5k-2P7">

@@ -98,6 +98,7 @@ class AddFoodViewController: UIViewController {
         self.searchResultTableView.delegate = self
         self.searchResultTableView.dataSource = self
         
+        self.searchTextField.delegate = self
         self.searchTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
@@ -106,7 +107,8 @@ class AddFoodViewController: UIViewController {
     
     // MARK: @objc methods
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        print(textField.text)
+        if textField.text?.count == 0 { searchContainerView.backgroundColor = .systemGray6 }
+        else { searchContainerView.backgroundColor = .focusSkyBlue }
     }
 }
 
@@ -135,6 +137,9 @@ extension AddFoodViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension AddFoodViewController {
-    
+extension AddFoodViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        searchResultContainerView.isHidden = true
+        return true
+    }
 }
