@@ -19,17 +19,18 @@ class AddFoodViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var completeButton: UIButton!
     
+    @IBOutlet weak var searchResultContainerView: UIView!
+    @IBOutlet weak var searchResultTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+    
         self.navigationController?.navigationBar.backgroundColor = .signatureLightBlue
         self.tabBarController?.tabBar.isHidden = true
         
         setupNavigationBar()
         setupLayouts()
-        setupCollectionView()
+        setup()
     }
     
     // MARK: helper methods
@@ -39,6 +40,13 @@ class AddFoodViewController: UIViewController {
     
     @IBAction func didTapBackItem(_ sender: UIBarButtonItem) {
         self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @IBAction func didTapSearchButton(_ sender: UIButton) {
+        searchResultContainerView.isHidden = false
+        self.view.endEditing(true)
+        
+        // TODO: 검색어가 포함된 검색 결과를 GET -> searchResultTableView에 보이기
     }
     
     // MARK: helper methods
@@ -78,11 +86,27 @@ class AddFoodViewController: UIViewController {
 //        self.completeButton.backgroundColor = UIColor.signatureBlue
         self.completeButton.layer.cornerRadius = 23
         
+        searchResultContainerView.layer.cornerRadius = 23
+        searchResultContainerView.isHidden = true
     }
     
-    private func setupCollectionView() {
+    private func setup() {
         self.categoryCollectionView.delegate = self
         self.categoryCollectionView.dataSource = self
+        
+        self.searchResultTableView.separatorStyle = .none
+        self.searchResultTableView.delegate = self
+        self.searchResultTableView.dataSource = self
+        
+        self.searchTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+    
+    // TODO: Notification을 통해 추가될 식품의 정보가 1개 이상인 경우에만 '완료'버튼 활성화
+    
+    
+    // MARK: @objc methods
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        print(textField.text)
     }
 }
 
@@ -92,9 +116,25 @@ extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        return UICollectionViewCell()
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddFoodCollectionViewCell", for: indexPath) as? AddFoodCollectionViewCell else { return UICollectionViewCell() }
         cell.setupLayout(title: category[indexPath.row])
         return cell
     }
+}
+
+extension AddFoodViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 15   // TODO: 입력된 검색어를 포함한 검색 결과의 개수 반환
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddFoodSearchResultTableViewCell", for: indexPath) as? AddFoodSearchResultTableViewCell else { return UITableViewCell() }
+        cell.backgroundColor = .none
+        cell.resultLabel.text = "검색어 결과 테스트"
+        return cell
+    }
+}
+
+extension AddFoodViewController {
+    
 }

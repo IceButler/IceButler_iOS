@@ -51,6 +51,7 @@ class CartViewController: UIViewController {
     
     
     @IBAction func didTapDeleteFoodButton(_ sender: UIButton) {
+        print("didTapDeleteFoodButton called")
         let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
         guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
         alertViewController.configure(title: "식품 삭제",
@@ -62,6 +63,7 @@ class CartViewController: UIViewController {
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
+        print("didTapCompleteButton called")
         let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
         guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
         alertViewController.configure(title: "장보기 완료",
