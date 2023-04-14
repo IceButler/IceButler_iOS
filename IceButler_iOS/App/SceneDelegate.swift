@@ -14,12 +14,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        APIManger.shared.setupObserver()
         AuthViewModel.shared.getUserToken()
         
         AuthViewModel.shared.isJoin { isJoin in
             guard let windowScene = (scene as? UIWindowScene) else { return }
             self.window = UIWindow(windowScene: windowScene)
             if isJoin {
+                
                 self.window?.rootViewController = DefaultTabBarController()
             }else {
                 let authMainVC = UIStoryboard(name: "AuthMain", bundle: nil).instantiateViewController(identifier: "AuthMainViewController") as! AuthMainViewController

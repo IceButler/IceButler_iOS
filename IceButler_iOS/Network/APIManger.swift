@@ -13,6 +13,18 @@ private let BASE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.
 class APIManger {
     static let shared = APIManger()
     
+    private var headers: HTTPHeaders = [:]
+    
+    func setupObserver() {
+        AuthViewModel.shared.accessToken { token in
+            self.headers = ["Authorization" : token]
+            print(self.headers)
+        }
+    }
+    
+}
+
+extension APIManger {
     func getData<T: Codable, U: Decodable>(urlEndpointString: String,
                                            responseDataType: U.Type,
                                            requestDataType: T.Type,
@@ -80,18 +92,19 @@ class APIManger {
             .resume()
     }
     
-    func getImageUrl(url: String, parameter: Parameters?, completionHandler: @escaping (String?)->Void) {
+    func getImageUrl(url: String, parameter: Parameters?, completionHandler: @escaping (ImageResponseModel?)->Void) {
         guard let url = URL(string: url) else { return }
         AF
             .request(url, method: .get, parameters: parameter, headers: nil)
-            .responseString { response in
+            .responseDecodable(of: ImageResponseModel.self) { response in
+                print(response)
                 switch response.result {
                 case .success(let success):
                     completionHandler(success)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-            }
+            }.resume()
     }
     
     

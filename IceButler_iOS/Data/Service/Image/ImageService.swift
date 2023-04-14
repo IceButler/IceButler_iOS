@@ -12,7 +12,7 @@ import Alamofire
 class ImageService {
     static let shared = ImageService()
     
-    func getImageUrl(parameter: Parameters, completion: @escaping (String?) -> Void) {
+    func getImageUrl(parameter: Parameters, completion: @escaping (ImageResponseModel?) -> Void) {
         APIManger.shared.getImageUrl(url: "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/prod/presigned-url", parameter: parameter) { response in
             completion(response)
         }
@@ -20,8 +20,7 @@ class ImageService {
     
     func uploadImage(image: UIImage, url: String, compeltion: @escaping () -> Void) {
         guard let imageToData = image.jpegData(compressionQuality: 1) else { return }
-        var putUrl = url.replacingOccurrences(of: "\"", with: "")
-        APIManger.shared.putData(url: putUrl, data: imageToData, completion: compeltion)
+        APIManger.shared.putData(url: url, data: imageToData, completion: compeltion)
     }
     
     

@@ -18,6 +18,7 @@ class AuthViewModel: ObservableObject {
     @Published var userNickName: String?
     @Published var isExistence: Bool?
     @Published var isJoin: Bool = false
+    @Published var accessToken: String?
     
     private var cancelLabels: Set<AnyCancellable> = []
     
@@ -57,12 +58,25 @@ class AuthViewModel: ObservableObject {
             completion(isExistence!)
         }.store(in: &cancelLabels)
     }
-        
+    
     func isJoin(completion: @escaping (Bool) -> Void) {
         $isJoin.sink { isJoin in
             completion(isJoin)
         }.store(in: &cancelLabels)
     }
+    
+    func accessToken(completion: @escaping (String) -> Void) {
+        $accessToken.filter { token in
+            token != nil
+        }.sink { token in
+            completion(token!)
+        }.store(in: &cancelLabels)
+    }
+    
+    
+}
+
+extension AuthViewModel {
     
     func loginWithKakao() {
         authService.loginWithKakao { userEmail in
@@ -86,9 +100,10 @@ class AuthViewModel: ObservableObject {
     
     func getUploadImageUrl(imageDir: ImageDir, image: UIImage) {
         let parameter: Parameters = ["ext": "jpeg", "dir": imageDir.rawValue]
-        ImageService.shared.getImageUrl(parameter: parameter) {[weak self] response in
+        ImageService.shared.getImageUrl(parameter: parameter) {[self] response in
             if let response = response {
-                self?.uploadProfileImage(image: image, url: response)
+                profileImgKey = response.imageKey
+                uploadProfileImage(image: image, url: response.presignedUrl)
             }
         }
     }
@@ -123,7 +138,7 @@ class AuthViewModel: ObservableObject {
             if let userTokenData = UserDefaults.standard.object(forKey: "UserToken") as? Data {
                 let decoder = JSONDecoder()
                 if let userToken = try? decoder.decode(AuthJoinUserResponseModel.self, from: userTokenData) {
-                    print(userToken)
+                    self.accessToken = userToken.accessToken
                     self.isJoin = true
                 }
             }
