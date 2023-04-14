@@ -10,7 +10,6 @@ import Photos
 import BSImagePicker
 
 class AuthUserInfoViewController: UIViewController {
-
     @IBOutlet weak var userImageBorderView: UIView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userImageAddButton: UIButton!
@@ -26,19 +25,23 @@ class AuthUserInfoViewController: UIViewController {
     
     private let imagePickerController = ImagePickerController()
     
+    private let nickNameMaxLength = 8
+    
     private var isExistence = true
     private var profileImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        setup()
         setupLayout()
         setupNavigationBar()
         setupObserver()
     }
     
     func setup() {
-        
+        userNickNameTextField.delegate = self
     }
     
     func setupLayout() {
@@ -185,4 +188,20 @@ class AuthUserInfoViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
+}
+
+extension AuthUserInfoViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        guard textField.text!.count < nickNameMaxLength else { return false }
+        if string.hasCharacters() == false {
+            return false
+        }
+        return true
+    }
 }
