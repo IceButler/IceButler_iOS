@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import UIKit
+import Alamofire
 
 class AuthViewModel: ObservableObject {
     static let shared = AuthViewModel()
@@ -15,8 +17,14 @@ class AuthViewModel: ObservableObject {
     @Published var userEmail: String?
     @Published var userNickName: String?
     @Published var isExistence: Bool?
+    @Published var isJoin: Bool = false
     
     private var cancelLabels: Set<AnyCancellable> = []
+    
+    private var authProvider: AuthProvider?
+    
+    private var profileImgKey: String?
+    
     
     func userEmail(completion: @escaping (String) -> Void) {
         $userEmail.filter { userEmail in
@@ -49,10 +57,17 @@ class AuthViewModel: ObservableObject {
             completion(isExistence!)
         }.store(in: &cancelLabels)
     }
+        
+    func isJoin(completion: @escaping (Bool) -> Void) {
+        $isJoin.sink { isJoin in
+            completion(isJoin)
+        }.store(in: &cancelLabels)
+    }
     
     func loginWithKakao() {
         authService.loginWithKakao { userEmail in
             self.userEmail = userEmail
+            self.authProvider = .kakao
         }
     }
     
@@ -65,6 +80,52 @@ class AuthViewModel: ObservableObject {
             }else {
                 self.userNickName = nickName
                 self.isExistence = false
+            }
+        }
+    }
+    
+    func getUploadImageUrl(imageDir: ImageDir, image: UIImage) {
+        let parameter: Parameters = ["ext": "jpeg", "dir": imageDir.rawValue]
+        ImageService.shared.getImageUrl(parameter: parameter) {[weak self] response in
+            if let response = response {
+                self?.uploadProfileImage(image: image, url: response)
+            }
+        }
+    }
+    
+    func uploadProfileImage(image: UIImage, url: String) {
+        ImageService.shared.uploadImage(image: image, url: url) {
+            self.joinUser()
+        }
+    }
+    
+    func joinUser() {
+        let parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickName: userNickName!, profileImgUrl: profileImgKey)
+        self.authService.joinUser(parameter: parameter) { response in
+            if let response = response {
+                self.setUserToken(token: response)
+            }
+        }
+    }
+    
+    func setUserToken(token: AuthJoinUserResponseModel) {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(token) {
+            UserDefaults.standard.setValue(encoded, forKey: "UserToken")
+            self.isJoin = true
+        }
+    }
+    
+    func getUserToken() {
+        if UserDefaults.standard.value(forKey: "UserToken") == nil {
+            self.isJoin = false
+        }else {
+            if let userTokenData = UserDefaults.standard.object(forKey: "UserToken") as? Data {
+                let decoder = JSONDecoder()
+                if let userToken = try? decoder.decode(AuthJoinUserResponseModel.self, from: userTokenData) {
+                    print(userToken)
+                    self.isJoin = true
+                }
             }
         }
     }

@@ -49,4 +49,11 @@ class AuthService {
             completion(response.data)
         }
     }
+    
+    func joinUser(parameter: AuthJoinUserRequestModel, completion: @escaping (AuthJoinUserResponseModel?) -> Void) {
+        APIManger.shared.postData(urlEndpointString: "/users/login", responseDataType: AuthJoinUserResponseModel.self, requestDataType: AuthJoinUserRequestModel.self, parameter: parameter) { response in
+            print(response)
+            completion(response.data)
+        }
+    }
 }

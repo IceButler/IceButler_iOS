@@ -10,3 +10,8 @@ import Foundation
 struct AuthNickNameRequsetModel: Codable {
     let nickName: String
 }
+
+struct AuthJoinUserRequestModel: Codable {
+    let email, provider, nickName: String
+    let profileImgUrl: String?
+}

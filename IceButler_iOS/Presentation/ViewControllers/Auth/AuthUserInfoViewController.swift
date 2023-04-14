@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Photos
+import BSImagePicker
 
 class AuthUserInfoViewController: UIViewController {
 
@@ -22,7 +24,10 @@ class AuthUserInfoViewController: UIViewController {
     
     @IBOutlet weak var joinButton: UIButton!
     
+    private let imagePickerController = ImagePickerController()
+    
     private var isExistence = true
+    private var profileImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,10 +104,56 @@ class AuthUserInfoViewController: UIViewController {
                 self.userNickNameAlertLabel.text = "사용할 수 있는 닉네임입니다."
                 self.joinButton.backgroundColor = .availableBlue
             }
+            self.isExistence = isExistence
+        }
+        
+        AuthViewModel.shared.isJoin { isJoin in
+            if isJoin {
+               print("회원가입 성공")
+            }else {
+                print("회원가입 실패")
+            }
         }
     }
     
     @IBAction func addUserImage(_ sender: Any) {
+        selectImage()
+    }
+    
+    
+    private func selectImage() {
+        imagePickerController.settings.selection.max = 1
+        imagePickerController.settings.fetch.assets.supportedMediaTypes = [.image]
+        
+        self.presentImagePicker(imagePickerController) { (asset) in
+            
+        } deselect: { (asset) in
+            
+        } cancel: { (assets) in
+            
+        } finish: { (assets) in
+            let imageManager = PHImageManager.default()
+            let option = PHImageRequestOptions()
+            option.isSynchronous = true
+            
+            assets.forEach { asset in
+                var thumbnail = UIImage()
+                
+                imageManager.requestImage(for: asset,
+                                          targetSize: CGSize(width: 79, height: 79),
+                                          contentMode: .aspectFit,
+                                          options: option) { (result, info) in
+                    thumbnail = result!
+                }
+                
+                let data = thumbnail.jpegData(compressionQuality: 0.7)
+                guard let newImage = UIImage(data: data!) else {return}
+                
+                self.profileImage = newImage
+            }
+            
+            self.userImageView.image = self.profileImage
+        }
     }
     
     
@@ -119,7 +170,11 @@ class AuthUserInfoViewController: UIViewController {
         if isExistence {
             showAlert(title: "닉네임 입력", message: "닉네임 중복확인 후 회원가입을 시도해주세요.")
         }else {
-            
+            if profileImage != nil {
+                AuthViewModel.shared.getUploadImageUrl(imageDir: .Profile, image: profileImage!)
+            }else {
+                AuthViewModel.shared.joinUser()
+            }
         }
     }
     

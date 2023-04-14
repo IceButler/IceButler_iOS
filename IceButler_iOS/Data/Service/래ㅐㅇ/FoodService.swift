@@ -10,7 +10,6 @@ import Foundation
 class FoodService {
     func getAllFood(fridgeIdx: Int, foodIdx: Int, completion: @escaping (FoodDetailResponseModel?) -> Void) {
         APIManger.shared.getData(urlEndpointString: "/fridges/\(fridgeIdx)/foods/\(foodIdx)", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodDetailResponseModel.self, parameter: nil) { response in
-            print(response.data)
             completion(response.data)
         }
     }

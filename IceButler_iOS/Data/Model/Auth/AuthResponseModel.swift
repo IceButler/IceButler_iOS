@@ -11,3 +11,8 @@ struct AuthNickNameResponseModel: Codable {
     let nickName: String
     let existence: Bool
 }
+
+
+struct AuthJoinUserResponseModel: Codable {
+    let accessToken, refreshToken: String
+}
