@@ -31,6 +31,7 @@ class PolicyWebViewController: UIViewController {
     private func setupNavigationBar() {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
+        self.navigationController?.navigationBar.standardAppearance.backgroundColor = .navigationColor
         
         let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         spacer.width = 16

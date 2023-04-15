@@ -45,7 +45,7 @@ class MyPageViewController: UIViewController {
             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
             
             let statusbarView = UIView()
-            statusbarView.backgroundColor = UIColor.signatureLightBlue
+            statusbarView.backgroundColor = UIColor.navigationColor
             view.addSubview(statusbarView)
           
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,10 +60,10 @@ class MyPageViewController: UIViewController {
           
         } else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-            statusBar?.backgroundColor = UIColor.signatureLightBlue
+            statusBar?.backgroundColor = UIColor.navigationColor
         }
         
-        self.navigationController?.navigationBar.backgroundColor = .signatureLightBlue
+        self.navigationController?.navigationBar.backgroundColor = .navigationColor
         self.tabBarController?.tabBar.isHidden = false
     }
     

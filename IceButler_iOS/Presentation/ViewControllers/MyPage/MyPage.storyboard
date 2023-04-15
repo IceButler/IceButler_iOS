@@ -206,6 +206,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sOc-2t-KXH">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="standardAppearance"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
