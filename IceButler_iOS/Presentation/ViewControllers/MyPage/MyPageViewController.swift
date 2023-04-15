@@ -60,7 +60,7 @@ class MyPageViewController: UIViewController {
           
         } else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-            statusBar?.backgroundColor = UIColor.red
+            statusBar?.backgroundColor = UIColor.signatureLightBlue
         }
         
         self.navigationController?.navigationBar.backgroundColor = .signatureLightBlue
@@ -83,6 +83,19 @@ class MyPageViewController: UIViewController {
     @IBAction func didTapEditProfileButton(_ sender: UIButton) {
         // TODO: 프로필 편집 화면으로 이동
         print("프로필 편집 화면으로 이동")
+    }
+    
+    private func showPolicyWebVC(policyType: PolicyType) {
+        guard let policyWebViewController = storyboard!.instantiateViewController(withIdentifier: "PolicyWebViewController") as? PolicyWebViewController else { return }
+        
+        switch policyType {
+        case .tosGuide: policyWebViewController.setPolicyType(policyType: policyType.rawValue)
+            policyWebViewController.setUrl(url: PolicyUrl.tosGuide.rawValue)
+        case .privacyPolicy: policyWebViewController.setPolicyType(policyType: policyType.rawValue)
+            policyWebViewController.setUrl(url: PolicyUrl.privacyPolicy.rawValue)
+        }
+        
+        self.navigationController?.pushViewController(policyWebViewController, animated: true)
     }
 }
 
@@ -123,13 +136,9 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 3:
             switch indexPath.row {
             case 0:
-                // TODO: 약관안내 화면으로 전환
-                print("약관안내 화면으로 전환")
-                guard let policyWebViewController = storyboard!.instantiateViewController(withIdentifier: "PolicyWebViewController") as? PolicyWebViewController else { return }
-                self.navigationController?.pushViewController(policyWebViewController, animated: true)
+                showPolicyWebVC(policyType: .tosGuide)
             case 1:
-                // TODO: 개인정보처리방침 화면으로 전환
-                print("개인정보처리방침 화면으로 전환")
+                showPolicyWebVC(policyType: .privacyPolicy)
             default: return
             }
         default: return
