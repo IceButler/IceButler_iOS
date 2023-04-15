@@ -35,6 +35,7 @@ class CompleteBuyingViewController: UIViewController {
         guard let foodAddViewController = storyboard.instantiateViewController(withIdentifier: "FoodAddViewController") as? FoodAddViewController else { return }
         
         // TODO: 식품 추가 화면에 추가할 식품의 이름,인덱스 정보 배열 넘기기
+        foodAddViewController.setAddedFoodNames(names: CartViewModel.shared.removeFoodNames)
         self.navigationController?.pushViewController(foodAddViewController, animated: true)
     }
     

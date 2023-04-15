@@ -114,7 +114,10 @@ class AlertViewController: UIViewController {
         self.dismiss(animated: true)
         CartManager.shared.showCartCVTabBar()
         CartViewModel.shared.fetchData()
-        CartManager.shared.reloadFoodCV()
+//        CartManager.shared.reloadFoodCV() //
+
+        CartManager.shared.cartViewController?.congifure()
+        CartManager.shared.cartViewController?.cartMainTableView.reloadData()
     }
     
     @objc func completeBuying() {
