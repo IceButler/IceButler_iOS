@@ -43,4 +43,17 @@ class AuthService {
             }
         }
     }
+    
+    func requestCheckNickName(parameter: AuthNickNameRequsetModel, completion: @escaping (AuthNickNameResponseModel?) -> Void) {
+        APIManger.shared.postData(urlEndpointString: "/users/nickname", responseDataType: AuthNickNameResponseModel.self, requestDataType: AuthNickNameRequsetModel.self, parameter: parameter) { response in
+            completion(response.data)
+        }
+    }
+    
+    func joinUser(parameter: AuthJoinUserRequestModel, completion: @escaping (AuthJoinUserResponseModel?) -> Void) {
+        APIManger.shared.postData(urlEndpointString: "/users/login", responseDataType: AuthJoinUserResponseModel.self, requestDataType: AuthJoinUserRequestModel.self, parameter: parameter) { response in
+            print(response)
+            completion(response.data)
+        }
+    }
 }

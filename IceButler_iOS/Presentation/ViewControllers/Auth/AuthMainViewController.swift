@@ -28,7 +28,11 @@ class AuthMainViewController: UIViewController {
     }
     
     func setupObserver() {
-        
+        AuthViewModel.shared.isUserEmail {
+            let authUserInfoVC = UIStoryboard(name: "AuthUserInfo", bundle: nil).instantiateViewController(identifier: "AuthUserInfoViewController") as! AuthUserInfoViewController
+            
+            self.navigationController?.pushViewController(authUserInfoVC, animated: true)
+        }
     }
     
     

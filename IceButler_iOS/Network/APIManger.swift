@@ -13,6 +13,18 @@ private let BASE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.
 class APIManger {
     static let shared = APIManger()
     
+    private var headers: HTTPHeaders = [:]
+    
+    func setupObserver() {
+        AuthViewModel.shared.accessToken { token in
+            self.headers = ["Authorization" : token]
+            print(self.headers)
+        }
+    }
+    
+}
+
+extension APIManger {
     func getData<T: Codable, U: Decodable>(urlEndpointString: String,
                                            responseDataType: U.Type,
                                            requestDataType: T.Type,
@@ -45,6 +57,7 @@ class APIManger {
         AF
             .request(url, method: .get, parameters: parameter, headers: nil)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+                print(response)
                 switch response.result {
                 case .success(let success):
                     completionHandler(success)
@@ -79,16 +92,34 @@ class APIManger {
             .resume()
     }
     
-    func putData<T: Codable, U: Decodable>(urlEndpointString: String,
-                                            responseDataType: U.Type,
-                                            requestDataType: T.Type,
-                                            parameter: T?,
-                                            completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+    func getImageUrl(url: String, parameter: Parameters?, completionHandler: @escaping (ImageResponseModel?)->Void) {
+        guard let url = URL(string: url) else { return }
+        AF
+            .request(url, method: .get, parameters: parameter, headers: nil)
+            .responseDecodable(of: ImageResponseModel.self) { response in
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }.resume()
+    }
+    
+    
+    
+    
+    func getData<T: Codable, U: Decodable>(url: String,
+                                           responseDataType: U.Type,
+                                           requestDataType: T.Type,
+                                           parameter: T?,
+                                           completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
         
-        guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
+        guard let url = URL(string: url) else { return }
         
         AF
-            .request(url, method: .put, parameters: parameter, encoder: .json, headers: nil)
+            .request(url, method: .get, parameters: parameter, headers: nil)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
                 print(response)
                 switch response.result {
@@ -100,5 +131,42 @@ class APIManger {
             }
             .resume()
     }
+    
+    func putData<T: Codable, U: Decodable>(urlEndpointString: String,
+                                            responseDataType: U.Type,
+                                            requestDataType: T.Type,
+                                            parameter: T?,
+                                            completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+        
+        guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
+        
+        AF
+            .request(url, method: .put, parameters: parameter, encoder: .json, headers: nil)
+            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
+    
+    
+    func putData(url: String, data: Data, completion: @escaping () -> Void) {
+        let url = URL(string: url)
+
+        AF.upload(data, to: url!, method: .put).responseData(emptyResponseCodes: [200]) { response in
+            print(response)
+            switch response.result {
+            case .success(let _):
+                completion()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }.resume()
+    }
+    
 }
 
