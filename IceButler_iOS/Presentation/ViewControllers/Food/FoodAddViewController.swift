@@ -16,6 +16,8 @@ protocol FoodAddDelegate: AnyObject {
 
 class FoodAddViewController: UIViewController {
     
+    private var addedFoodNames: [String] = []
+    
     private var delegate: FoodAddDelegate?
     
     @IBOutlet weak var foodNameTextView: UITextView!
@@ -66,6 +68,7 @@ class FoodAddViewController: UIViewController {
         setupLayout()
         setupNavgationBar()
         setupObserver()
+        setupAddedFoodName()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -220,6 +223,12 @@ class FoodAddViewController: UIViewController {
         }
     }
     
+    private func setupAddedFoodName() {
+        if self.addedFoodNames.count > 1 {
+            self.foodNameTextView.text = self.addedFoodNames[0] // 임시
+        }
+    }
+    
     @objc private func backToScene() {
         navigationController?.popViewController(animated: true)
         delegate?.moveToFoodAddSelect()
@@ -227,6 +236,10 @@ class FoodAddViewController: UIViewController {
     
     func setDelegate(delegate: FoodAddDelegate) {
         self.delegate = delegate
+    }
+    
+    func setAddedFoodNames(names: [String]) {
+        self.addedFoodNames = names
     }
     
     @objc func selectDate() {

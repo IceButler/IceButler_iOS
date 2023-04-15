@@ -31,6 +31,7 @@ class FoodCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         cancellabels.removeAll()
+//        self.isSelectedFood = false
     }
     
     private func setupGestureHandler() {
