@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol FoodCategoryCellDelegate {
+    func didTapCategoryButton(category: String)
+}
+
 class FoodCategoryCollectionViewCell: UICollectionViewCell {
 
+    var delegate: FoodCategoryCellDelegate?
     private var isTapped: Bool = false
     
     @IBOutlet weak var categoryButton: UIButton!
@@ -28,6 +33,7 @@ class FoodCategoryCollectionViewCell: UICollectionViewCell {
             self.categoryButton.backgroundColor = .white
             self.categoryButton.tintColor = .lightGray
         }
+        delegate?.didTapCategoryButton(category: self.categoryButton.title(for: .normal)!)
     }
     
     public func setupLayout(title: String) {
