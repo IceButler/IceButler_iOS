@@ -83,9 +83,7 @@ extension APIManger {
         AF
             .request(url, method: .post, parameters: parameter, encoder: .json, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-                
-                print("헤더값 --> \(self.headers)")
-                print("파라미터 --> \(parameter)")
+
                 print(response)
                 switch response.result {
                 case .success(let success):
@@ -184,9 +182,7 @@ extension APIManger {
         AF
             .request(url, method: .delete, parameters: parameter, encoder: .json, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-                
-                print("헤더값 --> \(self.headers)")
-                print("파라미터 --> \(parameter)")
+
                 print(response)
                 switch response.result {
                 case .success(let success):
