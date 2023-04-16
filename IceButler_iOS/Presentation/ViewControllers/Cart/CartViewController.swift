@@ -7,26 +7,86 @@
 
 import UIKit
 
-class CartViewController: UIViewController {
-    
-    // 임시 데이터
-    let categoryTitleArr = [
-        "육류", "과일", "채소", "음료", "수산물", "반찬", "간식", "식재료", "가공식품", "기타"
-    ]
 
+class CartViewController: UIViewController {
     @IBOutlet weak var cartMainTableView: UITableView!
     @IBOutlet weak var addFoodButton: UIButton!
+    @IBOutlet weak var alertView: UIView!
+    @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
+    
+    private var cartFoods: [CartResponseModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        congifure()
+        setup()
         setupNavigationBar()
         setupLayout()
         setupTableView()
     }
     
-    @IBAction func didTapAddFoodButton(_ sender: UIButton) {
-        // TODO: 식품 추가 커스텀 팝업 띄우기
+    override func viewWillAppear(_ animated: Bool) {
+        self.alertView.isHidden = true
+        self.addFoodButton.isHidden = false
+        self.tabBarController?.tabBar.isHidden = false
     }
+    
+    func congifure() {
+        CartViewModel.shared.fetchData()
+        CartViewModel.shared.getCartFoods { cartFoods in
+            self.cartFoods = cartFoods
+            self.cartMainTableView.reloadData()
+            self.viewHeightConstraint.constant = CGFloat(170 * self.cartFoods.count)
+        }
+    }
+    
+    func setup() { CartManager.shared.setCartVC(cartVC: self) }
+    
+    @IBAction func didTapAddFoodButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard.init(name: "Cart", bundle: nil)
+        guard let addFoodViewController = storyboard.instantiateViewController(withIdentifier: "AddFoodViewController") as? AddFoodViewController else { return }
+        self.navigationController?.pushViewController(addFoodViewController, animated: true)
+    }
+    
+    
+    @IBAction func didTapDeleteFoodButton(_ sender: UIButton) {
+        print("didTapDeleteFoodButton called")
+        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
+        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
+        alertViewController.configure(title: "식품 삭제",
+                                      content: "선택하신 식품을 정말 삭제하시겠습니까?",
+                                      leftButtonTitle: "취소", righttButtonTitle: "삭제")
+        alertViewController.todo = .delete
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        present(alertViewController, animated: true)
+    }
+    
+    @IBAction func didTapCompleteButton(_ sender: UIButton) {
+        print("didTapCompleteButton called")
+        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
+        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
+        alertViewController.configure(title: "장보기 완료",
+                                      content: "선택하신 식품 장보기를 완료하셨습니까?",
+                                      leftButtonTitle: "취소", righttButtonTitle: "확인")
+        alertViewController.todo = .completeBuying
+        self.navigationController?.pushViewController(alertViewController, animated: true)
+    }
+    
+    
+    func showTabBar() {
+        self.tabBarController?.tabBar.isHidden = false
+        self.addFoodButton.isHidden = false
+        self.alertView.isHidden = true
+    }
+    
+    func showAlertView() {
+        self.tabBarController?.tabBar.isHidden = true
+        self.addFoodButton.isHidden = true
+        self.alertView.backgroundColor = .signatureBlue
+        self.alertView.isHidden = false
+    }
+    
     
     private func setupNavigationBar() {
         /// setting status bar background color
@@ -54,10 +114,13 @@ class CartViewController: UIViewController {
         }
         
         self.navigationController?.navigationBar.backgroundColor = .signatureLightBlue
+        self.tabBarController?.tabBar.isHidden = false
         
     }
     
     private func setupLayout() {
+        self.cartMainTableView.backgroundColor = .clear
+        self.alertView.layer.cornerRadius = 15
         self.addFoodButton.backgroundColor = UIColor.signatureDeepBlue
         self.addFoodButton.backgroundColor = UIColor.signatureDeepBlue
         self.addFoodButton.layer.cornerRadius = self.addFoodButton.frame.width / 2
@@ -74,15 +137,13 @@ class CartViewController: UIViewController {
 }
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryTitleArr.count
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return self.cartFoods.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartMainTableViewCell", for: indexPath) as? CartMainTableViewCell else { return UITableViewCell() }
-        cell.setTitle(title: categoryTitleArr[indexPath.row])
+        cell.setTitle(title: self.cartFoods[indexPath.row].category)
+        cell.cartFoods = CartViewModel.shared.getCartFoodsWithCategory(index: indexPath.row)
+        cell.backgroundColor = cell.contentView.backgroundColor
         return cell
     }
-    
-    
 }

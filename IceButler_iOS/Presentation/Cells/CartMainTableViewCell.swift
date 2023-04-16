@@ -12,16 +12,30 @@ class CartMainTableViewCell: UITableViewCell {
     @IBOutlet weak var categoryTitleView: UIView!
     @IBOutlet weak var categoryTitleLabel: UILabel!
     @IBOutlet weak var foodCollectionView: UICollectionView!
+    @IBOutlet weak var nothingLabel: UILabel!
+    
+    var cartFoods: [CartFood] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        setup()
         setupCollectionView()
         setupLayout()
     }
-
+    
+    private func setup() {
+        CartManager.shared.setCartMainTV(cartTV: self)
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }      
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0))
+    }
     
     private func setupCollectionView() {
         foodCollectionView.dataSource = self
@@ -31,32 +45,37 @@ class CartMainTableViewCell: UITableViewCell {
     
     private func setupLayout() {
         selectionStyle = .none
-        categoryTitleView.layer.cornerRadius = 16
-        categoryTitleView.layer.borderWidth = 1.0
+        categoryTitleView.layer.cornerRadius = 13
+        categoryTitleView.layer.borderWidth = 1.3
         categoryTitleView.layer.borderColor = UIColor.signatureBlue.cgColor
         categoryTitleLabel.textColor = .signatureBlue
         
-        self.layer.cornerRadius = 22
-        self.layer.shadowColor = UIColor.systemGray.cgColor
-//        cell.layer.shadowColor = UIColor(red: 152/255, green: 113/255, blue: 113/255, alpha: 1).cgColor
-        self.contentView.layer.shadowRadius = 4
-        self.layer.shadowOffset = CGSize(width: 4, height: 4)
-        self.layer.shadowOpacity = 0.7
+        contentView.layer.cornerRadius = 16
     }
+        
+    public func setTitle(title: String) { self.categoryTitleLabel.text = title }
     
-    public func setTitle(title: String) {
-        self.categoryTitleLabel.text = title
+    func reloadCV() { foodCollectionView.reloadData() }
+    
+    func checkFoodsCount() {
+        if cartFoods.count == 0 { nothingLabel.isHidden = false }
+        else { nothingLabel.isHidden = true }
     }
 }
 
 extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        checkFoodsCount()
+        return cartFoods.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = foodCollectionView.dequeueReusableCell(withReuseIdentifier: "FoodCollectionViewCell", for: indexPath) as? FoodCollectionViewCell else { return UICollectionViewCell() }
-        cell.foodImageView.layer.cornerRadius = cell.foodImageView.frame.width / 2
+        
+        cell.foodImageButton.layer.cornerRadius = cell.foodImageButton.frame.width / 2
+        cell.isSelectedFood = false
+        cell.foodTitleLabel.text = cartFoods[indexPath.row].foodName
+        cell.tag = cartFoods[indexPath.row].foodIdx ?? -1
         return cell
     }
     
@@ -66,3 +85,4 @@ extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectio
     
     
 }
+
