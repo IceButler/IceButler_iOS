@@ -1,18 +1,22 @@
 //
-//  AddFoodCollectionViewCell.swift
+//  FoodCategoryCollectionViewCell.swift
 //  IceButler_iOS
 //
-//  Created by 김초원 on 2023/04/07.
+//  Created by 김초원 on 2023/04/16.
 //
 
 import UIKit
 
-class AddFoodCollectionViewCell: UICollectionViewCell {
-    
+class FoodCategoryCollectionViewCell: UICollectionViewCell {
+
     private var isTapped: Bool = false
     
     @IBOutlet weak var categoryButton: UIButton!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
     @IBAction func didTapCategoryButton(_ sender: UIButton) {
         self.isTapped = !self.isTapped
         if self.isTapped {

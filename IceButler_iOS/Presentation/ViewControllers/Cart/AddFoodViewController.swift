@@ -14,6 +14,10 @@ class AddFoodViewController: UIViewController {
         "육류", "과일", "채소", "음료", "수산물", "반찬", "간식", "조미료", "가공식품", "기타"
     ]
     
+    private let tempSearchResults = ["오이", "오이무침", "오이소박이"]
+    
+    private var selectedFoodNames: [String] = []
+    
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var searchContainerView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -21,6 +25,8 @@ class AddFoodViewController: UIViewController {
     
     @IBOutlet weak var searchResultContainerView: UIView!
     @IBOutlet weak var searchResultTableView: UITableView!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,15 +94,27 @@ class AddFoodViewController: UIViewController {
         
         searchResultContainerView.layer.cornerRadius = 23
         searchResultContainerView.isHidden = true
+        collectionView.isHidden = true
     }
     
     private func setup() {
         self.categoryCollectionView.delegate = self
         self.categoryCollectionView.dataSource = self
+//        let categoryCell = UINib(nibName: "FoodCategoryCell", bundle: nil)
+//        categoryTableView.register(categoryCell, forCellReuseIdentifier: "FoodCategoryCell")
+        let categoryCell = UINib(nibName: "FoodCategoryCollectionViewCell", bundle: nil)
+        self.categoryCollectionView.register(categoryCell, forCellWithReuseIdentifier: "FoodCategoryCollectionViewCell")
+        self.categoryCollectionView.tag = 0
         
         self.searchResultTableView.separatorStyle = .none
         self.searchResultTableView.delegate = self
         self.searchResultTableView.dataSource = self
+        
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        let foodCell = UINib(nibName: "SelectedFoodNameCollectionViewCell", bundle: nil)
+        self.collectionView.register(foodCell, forCellWithReuseIdentifier: "SelectedFoodNameCollectionViewCell")
+        self.collectionView.tag = 1
         
         self.searchTextField.delegate = self
         self.searchTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -114,13 +132,30 @@ class AddFoodViewController: UIViewController {
 
 extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return category.count
+//        if collectionView == categoryCollectionView {
+        if collectionView.tag == 0 {
+            return self.category.count
+        } else {
+            return self.selectedFoodNames.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddFoodCollectionViewCell", for: indexPath) as? AddFoodCollectionViewCell else { return UICollectionViewCell() }
-        cell.setupLayout(title: category[indexPath.row])
-        return cell
+        
+//        if collectionView == categoryCollectionView {
+        if collectionView.tag == 0 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCategoryCollectionViewCell", for: indexPath) as? FoodCategoryCollectionViewCell else { return UICollectionViewCell() }
+            cell.setupLayout(title: category[indexPath.row])
+            return cell
+        } else if collectionView.tag == 1 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectedFoodNameCollectionViewCell", for: indexPath) as? SelectedFoodNameCollectionViewCell else { return UICollectionViewCell() }
+            cell.setupLayout(title: category[indexPath.row])
+//            cell.selectedFoodButton.setTitle(self.selectedFoodNames[indexPath.row], for: .normal)
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
     }
 }
 
@@ -134,6 +169,24 @@ extension AddFoodViewController: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = .none
         cell.resultLabel.text = "검색어 결과 테스트"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.searchResultContainerView.isHidden = true
+        self.collectionView.isHidden = false
+        
+        // TODO: 선택된 결과값의 카테고리/이름을 포함한 CV cell 추가 시키기
+        // selectedFoodNames에 데이터 추가 -> cv reload
+        if self.selectedFoodNames.count < 5 {
+            selectedFoodNames.append(self.tempSearchResults[indexPath.row])
+            self.collectionView.reloadData()
+            
+        } else {
+            let alert = UIAlertController(title: nil, message: "한 번에 최대 5가지의 식품만 추가가 가능합니다!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            present(alert, animated: true)
+        }
     }
 }
 

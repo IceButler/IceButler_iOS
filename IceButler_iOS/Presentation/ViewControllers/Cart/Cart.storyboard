@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -206,11 +205,11 @@
                                 <color key="textColor" red="0.26666666666666666" green="0.49803921568627452" blue="0.79607843137254897" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GZz-Cq-dCw">
-                                <rect key="frame" x="40" y="312" width="313" height="128"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GZz-Cq-dCw">
+                                <rect key="frame" x="20" y="312" width="353" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="kEV-rG-1Bx"/>
+                                    <constraint firstAttribute="height" constant="100" id="kEV-rG-1Bx"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="5" id="wvs-hf-dcn">
                                     <size key="itemSize" width="128" height="128"/>
@@ -218,40 +217,7 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="AddFoodCollectionViewCell" reuseIdentifier="AddFoodCollectionViewCell" id="H4G-1I-uhq" customClass="AddFoodCollectionViewCell" customModule="IceButler_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="51" height="28.333333333333332"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VBi-C3-asD">
-                                            <rect key="frame" x="0.0" y="0.0" width="51" height="28.333333333333332"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdE-rR-jCx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="51" height="28.333333333333332"/>
-                                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="카테1">
-                                                        <fontDescription key="titleFontDescription" type="boldSystem" pointSize="12"/>
-                                                    </buttonConfiguration>
-                                                    <connections>
-                                                        <action selector="didTapCategoryButton:" destination="H4G-1I-uhq" eventType="touchUpInside" id="r8m-4T-4Nn"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="PdE-rR-jCx" secondAttribute="bottom" id="DOC-rj-IFV"/>
-                                                <constraint firstAttribute="trailing" secondItem="PdE-rR-jCx" secondAttribute="trailing" id="WW3-ek-sM1"/>
-                                                <constraint firstItem="PdE-rR-jCx" firstAttribute="leading" secondItem="VBi-C3-asD" secondAttribute="leading" id="nWm-V3-qdt"/>
-                                                <constraint firstItem="PdE-rR-jCx" firstAttribute="top" secondItem="VBi-C3-asD" secondAttribute="top" id="tVZ-eq-nYU"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <outlet property="categoryButton" destination="PdE-rR-jCx" id="KXd-bL-zpA"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                             </collectionView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="W4H-5m-2rc">
                                 <rect key="frame" x="176.66666666666666" y="184" width="40" height="38.666666666666671"/>
@@ -261,9 +227,9 @@
                                     <constraint firstAttribute="width" constant="40" id="jhF-Zy-ofh"/>
                                 </constraints>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3nC-cd-ZNc">
-                                <rect key="frame" x="40" y="534" width="313" height="128"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3nC-cd-ZNc">
+                                <rect key="frame" x="40" y="506" width="313" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="GSo-yl-kWt"/>
                                 </constraints>
@@ -273,33 +239,16 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="PvG-xh-fwl">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xcQ-bp-4PD">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cqo-2x-zcI">
-                                                    <rect key="frame" x="-8" y="36" width="91" height="35"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="채소-당근"/>
-                                                </button>
-                                            </subviews>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbw-0B-IXD">
-                                <rect key="frame" x="35" y="465" width="323" height="200"/>
+                                <rect key="frame" x="35" y="437" width="323" height="200"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6r9-Zn-TSK">
                                         <rect key="frame" x="0.0" y="45" width="323" height="145"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="AddFoodSearchResultTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddFoodSearchResultTableViewCell" id="WAy-Y5-EfZ" customClass="AddFoodSearchResultTableViewCell" customModule="IceButler_iOS" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="AddFoodSearchResultTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddFoodSearchResultTableViewCell" id="WAy-Y5-EfZ" customClass="AddFoodSearchResultTableViewCell" customModule="IceButler_iOS" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="50" width="323" height="43.666667938232422"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WAy-Y5-EfZ" id="WnM-gH-ZFw">
@@ -338,7 +287,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0S-YS-Ug1">
-                                <rect key="frame" x="35" y="465" width="323" height="43"/>
+                                <rect key="frame" x="35" y="437" width="323" height="43"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="영어,한글,숫자 (20자 이내)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7RT-WK-Hyr">
                                         <rect key="frame" x="15" y="0.0" width="256" height="43"/>
@@ -397,13 +346,13 @@
                             <constraint firstItem="W4H-5m-2rc" firstAttribute="centerX" secondItem="0Vy-Ub-3Ev" secondAttribute="centerX" id="RMx-HV-Y88"/>
                             <constraint firstItem="tbw-0B-IXD" firstAttribute="top" secondItem="N0S-YS-Ug1" secondAttribute="top" id="XIJ-rk-A3v"/>
                             <constraint firstItem="W4H-5m-2rc" firstAttribute="top" secondItem="wNc-k6-GcY" secondAttribute="top" constant="80" id="Xq2-ep-eGt"/>
-                            <constraint firstItem="wNc-k6-GcY" firstAttribute="trailing" secondItem="GZz-Cq-dCw" secondAttribute="trailing" constant="40" id="YRZ-ti-Wc5"/>
+                            <constraint firstItem="wNc-k6-GcY" firstAttribute="trailing" secondItem="GZz-Cq-dCw" secondAttribute="trailing" constant="20" id="YRZ-ti-Wc5"/>
                             <constraint firstItem="z03-7I-8QA" firstAttribute="top" secondItem="W4H-5m-2rc" secondAttribute="bottom" constant="20" id="b5j-q8-tf1"/>
                             <constraint firstItem="tbw-0B-IXD" firstAttribute="trailing" secondItem="N0S-YS-Ug1" secondAttribute="trailing" id="dXo-M1-NlJ"/>
                             <constraint firstItem="wNc-k6-GcY" firstAttribute="bottom" secondItem="0hY-5k-2P7" secondAttribute="bottom" constant="35" id="hur-Zf-YcI"/>
                             <constraint firstItem="GZz-Cq-dCw" firstAttribute="top" secondItem="z03-7I-8QA" secondAttribute="bottom" constant="45" id="nIQ-Pi-Kd3"/>
                             <constraint firstItem="z03-7I-8QA" firstAttribute="centerX" secondItem="W4H-5m-2rc" secondAttribute="centerX" id="wO0-ca-sbd"/>
-                            <constraint firstItem="GZz-Cq-dCw" firstAttribute="leading" secondItem="wNc-k6-GcY" secondAttribute="leading" constant="40" id="y24-aG-tCm"/>
+                            <constraint firstItem="GZz-Cq-dCw" firstAttribute="leading" secondItem="wNc-k6-GcY" secondAttribute="leading" constant="20" id="y24-aG-tCm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="식품 추가" largeTitleDisplayMode="always" id="Nxc-6S-R2l">
@@ -416,6 +365,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="categoryCollectionView" destination="GZz-Cq-dCw" id="jSD-qj-fkP"/>
+                        <outlet property="collectionView" destination="3nC-cd-ZNc" id="1Qb-D1-iBa"/>
                         <outlet property="completeButton" destination="0hY-5k-2P7" id="M4R-WF-zjF"/>
                         <outlet property="searchContainerView" destination="N0S-YS-Ug1" id="4vn-kS-v6J"/>
                         <outlet property="searchResultContainerView" destination="tbw-0B-IXD" id="XPO-KU-bgx"/>

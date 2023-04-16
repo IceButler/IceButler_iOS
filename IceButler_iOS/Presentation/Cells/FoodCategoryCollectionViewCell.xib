@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FoodCategoryCollectionViewCell" id="gTV-IL-0wX" customClass="FoodCategoryCollectionViewCell" customModule="IceButler_iOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1DC-i3-l9I">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0et-nf-nae">
+                                <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="카테"/>
+                                <connections>
+                                    <action selector="didTapCategoryButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="w1A-BS-P9e"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="0et-nf-nae" secondAttribute="bottom" id="4SA-Rx-MUU"/>
+                            <constraint firstItem="0et-nf-nae" firstAttribute="leading" secondItem="1DC-i3-l9I" secondAttribute="leading" id="ZbT-3g-db9"/>
+                            <constraint firstItem="0et-nf-nae" firstAttribute="top" secondItem="1DC-i3-l9I" secondAttribute="top" id="a4E-Ig-NYB"/>
+                            <constraint firstAttribute="trailing" secondItem="0et-nf-nae" secondAttribute="trailing" id="cMs-sd-7cg"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="1DC-i3-l9I" secondAttribute="bottom" id="DDZ-SF-QHc"/>
+                <constraint firstItem="1DC-i3-l9I" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Hv9-Zt-GpX"/>
+                <constraint firstAttribute="trailing" secondItem="1DC-i3-l9I" secondAttribute="trailing" id="iL7-9e-ERs"/>
+                <constraint firstItem="1DC-i3-l9I" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="sEy-Ib-bCh"/>
+            </constraints>
+            <connections>
+                <outlet property="categoryButton" destination="0et-nf-nae" id="CIr-9X-HGZ"/>
+            </connections>
+            <point key="canvasLocation" x="137" y="20"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

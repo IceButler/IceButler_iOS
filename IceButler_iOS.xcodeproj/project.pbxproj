@@ -81,11 +81,10 @@
 		73F62A5829E00F94003D779F /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A5729E00F94003D779F /* UIButton+.swift */; };
 		7593A9D6AB4309D589AD972D /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236010665AA2D8D3B10A8DC6 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
 		A2459F1B29DFE26700D12089 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */; };
-		A2459F1D29DFF7A800D12089 /* AddFoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2459F1C29DFF7A800D12089 /* AddFoodCollectionViewCell.swift */; };
-		A258498729E7BE0A00E75568 /* AddFoodSearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498629E7BE0A00E75568 /* AddFoodSearchResultTableViewCell.swift */; };
 		A258498129E6A6BC00E75568 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A258498029E6A6BC00E75568 /* MyPage.storyboard */; };
 		A258498329E6A6CB00E75568 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498229E6A6CB00E75568 /* MyPageViewController.swift */; };
 		A258498529E6B02400E75568 /* MypageMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498429E6B02400E75568 /* MypageMenuTableViewCell.swift */; };
+		A258498729E7BE0A00E75568 /* AddFoodSearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498629E7BE0A00E75568 /* AddFoodSearchResultTableViewCell.swift */; };
 		A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */; };
 		A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */; };
 		A27302E629D853090060944D /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A27302E529D853090060944D /* Alert.storyboard */; };
@@ -100,6 +99,10 @@
 		A2C257A029DA71680040A987 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2579F29DA71680040A987 /* CartManager.swift */; };
 		A2CA99DC29DE7BA80020DEEC /* CompleteBuyingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CA99DB29DE7BA80020DEEC /* CompleteBuyingViewController.swift */; };
 		A2CA99FE29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CA99FD29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift */; };
+		A2F9190829EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9190629EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift */; };
+		A2F9190929EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F9190729EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib */; };
+		A2F9190C29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9190A29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift */; };
+		A2F9190D29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F9190B29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib */; };
 		A3161DBC2E056703BF1932B1 /* Pods_IceButler_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -204,11 +207,10 @@
 		802F4E91FBD50A88599AD4EE /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
-		A2459F1C29DFF7A800D12089 /* AddFoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodCollectionViewCell.swift; sourceTree = "<group>"; };
-		A258498629E7BE0A00E75568 /* AddFoodSearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodSearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		A258498029E6A6BC00E75568 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		A258498229E6A6CB00E75568 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		A258498429E6B02400E75568 /* MypageMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageMenuTableViewCell.swift; sourceTree = "<group>"; };
+		A258498629E7BE0A00E75568 /* AddFoodSearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodSearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
 		A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCollectionViewCell.xib; sourceTree = "<group>"; };
 		A27302E529D853090060944D /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
@@ -223,6 +225,10 @@
 		A2C2579F29DA71680040A987 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		A2CA99DB29DE7BA80020DEEC /* CompleteBuyingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteBuyingViewController.swift; sourceTree = "<group>"; };
 		A2CA99FD29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteBuyingTableViewCell.swift; sourceTree = "<group>"; };
+		A2F9190629EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFoodNameCollectionViewCell.swift; sourceTree = "<group>"; };
+		A2F9190729EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedFoodNameCollectionViewCell.xib; sourceTree = "<group>"; };
+		A2F9190A29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		A2F9190B29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		D28456CA7BE41F836612B66E /* Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E470A0018DCDEB6D049D1645 /* Pods-IceButler_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -688,7 +694,6 @@
 				A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */,
 				A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */,
 				A2CA99FD29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift */,
-				A2459F1C29DFF7A800D12089 /* AddFoodCollectionViewCell.swift */,
 				73F62A4B29DD81AC003D779F /* FoodAddSelectCell.swift */,
 				73F62A4C29DD81AC003D779F /* FoodAddSelectCell.xib */,
 				73F62A5129DFDADF003D779F /* FoodCategoryCell.swift */,
@@ -701,6 +706,10 @@
 				73B7374429E293520097806F /* FoodCell.xib */,
 				A258498629E7BE0A00E75568 /* AddFoodSearchResultTableViewCell.swift */,
 				A258498429E6B02400E75568 /* MypageMenuTableViewCell.swift */,
+				A2F9190629EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift */,
+				A2F9190729EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib */,
+				A2F9190A29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift */,
+				A2F9190B29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -831,6 +840,7 @@
 				7339CD7F29E671B0002A6D78 /* AuthUserInfo.storyboard in Resources */,
 				73F62A4E29DD81AC003D779F /* FoodAddSelectCell.xib in Resources */,
 				73F62A3C29DCFD52003D779F /* Fridge.storyboard in Resources */,
+				A2F9190D29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib in Resources */,
 				A28A763F29D54DEF00D127EA /* Cart.storyboard in Resources */,
 				73F0D24629D2E0000038BD0C /* LaunchScreen.storyboard in Resources */,
 				73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */,
@@ -839,6 +849,7 @@
 				738CAC8529E310CF009EF9D2 /* FoodDetail.storyboard in Resources */,
 				73F62A4029DD01CA003D779F /* BarCodeAdd.storyboard in Resources */,
 				73F62A4629DD6015003D779F /* FoodAdd.storyboard in Resources */,
+				A2F9190929EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib in Resources */,
 				73F62A4829DD7F30003D779F /* FoodAddSelect.storyboard in Resources */,
 				A28A765729D749C700D127EA /* CartMainTableViewCell.xib in Resources */,
 				A258498129E6A6BC00E75568 /* MyPage.storyboard in Resources */,
@@ -977,10 +988,10 @@
 				73B7373A29E250680097806F /* ProcessedFoodViewController.swift in Sources */,
 				A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */,
 				A28A764429D54F1C00D127EA /* DefaultTabBarController.swift in Sources */,
-				A2459F1D29DFF7A800D12089 /* AddFoodCollectionViewCell.swift in Sources */,
 				A28A764729D5527A00D127EA /* UIDevice+.swift in Sources */,
 				73B7373429E250430097806F /* SideViewController.swift in Sources */,
 				738CAC8A29E32773009EF9D2 /* FoodViewModel.swift in Sources */,
+				A2F9190829EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift in Sources */,
 				73F26FC629DAA94B009E364B /* CartService.swift in Sources */,
 				73B7372E29E250120097806F /* VegetableViewController.swift in Sources */,
 				73F26FCC29DAACC3009E364B /* CartViewModel.swift in Sources */,
@@ -1030,6 +1041,7 @@
 				73CF93B029E945BF0007CB7A /* UserResponseModel.swift in Sources */,
 				7339CD8C29E78880002A6D78 /* ImageService.swift in Sources */,
 				73B7372029E160750097806F /* UICollectionViewFlowLayout+.swift in Sources */,
+				A2F9190C29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift in Sources */,
 				A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */,
 				738CAC8729E31349009EF9D2 /* FoodDetailViewController.swift in Sources */,
 				73B7373229E250330097806F /* MarineProductsViewController.swift in Sources */,
