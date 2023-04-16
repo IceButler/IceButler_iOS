@@ -28,5 +28,14 @@ class CartService {
         }
     }
     
-    
+    func postFoodsAdd(multifridgeIdx: Int, foods: [AddFood]) {
+        let param = AddFoodRequestModel(foodRequests: foods)
+        APIManger.shared.postData(urlEndpointString: "/multiCarts/\(multifridgeIdx)/food",
+                                  responseDataType: AddFoodRequestModel.self,
+                                  requestDataType: AddFoodRequestModel.self,
+                                  parameter: param,
+                                  completionHandler: { response in
+            print("식품 추가 API 호출 결과 --> \(response)")
+        })
+    }
 }

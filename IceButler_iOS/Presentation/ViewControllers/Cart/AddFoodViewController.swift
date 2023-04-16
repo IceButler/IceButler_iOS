@@ -41,16 +41,7 @@ class AddFoodViewController: UIViewController {
     
     // MARK: helper methods
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        // TODO: 장바구니 식품 추가 API 호출
-        let multifridgeIdx = 1  // 임시 Idx
-        let param = AddFoodRequestModel(foodRequests: self.selectedFoods)
-        APIManger.shared.postData(urlEndpointString: "/multiCarts/\(multifridgeIdx)/food",
-                                  responseDataType: AddFoodRequestModel.self,
-                                  requestDataType: AddFoodRequestModel.self,
-                                  parameter: param,
-                                  completionHandler: { response in
-            print("식품 추가 API 호출 결과 --> \(response)")
-        })
+        CartService().postFoodsAdd(multifridgeIdx: 1, foods: self.selectedFoods)
     }
     
     @IBAction func didTapBackItem(_ sender: UIBarButtonItem) {
