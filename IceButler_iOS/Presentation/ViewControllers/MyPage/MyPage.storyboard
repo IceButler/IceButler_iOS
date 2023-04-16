@@ -9,6 +9,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="JiZ-jQ-VTU">
+            <objects>
+                <navigationController id="v0Z-rO-hbc" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MHe-Yf-MBS">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="CvC-NB-VQ3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d8B-b9-ULJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-619" y="-2"/>
+        </scene>
         <!--마이페이지-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
@@ -183,24 +199,74 @@
             <point key="canvasLocation" x="138.1679389312977" y="-2.1126760563380285"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="JiZ-jQ-VTU">
+        <scene sceneID="haS-6l-dFH">
             <objects>
-                <navigationController id="v0Z-rO-hbc" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MHe-Yf-MBS">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="88D-QH-LZE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sOc-2t-KXH">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="standardAppearance"/>
                     </navigationBar>
+                    <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="CvC-NB-VQ3"/>
+                        <segue destination="V7j-eC-h70" kind="relationship" relationship="rootViewController" id="caC-CH-Hu8"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d8B-b9-ULJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="65g-EG-KDb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-619" y="-2"/>
+            <point key="canvasLocation" x="-619" y="681"/>
+        </scene>
+        <!--Policy Web View Controller-->
+        <scene sceneID="3Lg-uS-hLp">
+            <objects>
+                <viewController storyboardIdentifier="PolicyWebViewController" id="V7j-eC-h70" customClass="PolicyWebViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Goa-uA-0HC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="afE-aB-7eR">
+                                <rect key="frame" x="16" y="117" width="361" height="685"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7rF-zo-qAI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="afE-aB-7eR" firstAttribute="leading" secondItem="7rF-zo-qAI" secondAttribute="leading" constant="16" id="Faa-lB-etM"/>
+                            <constraint firstAttribute="bottom" secondItem="afE-aB-7eR" secondAttribute="bottom" constant="50" id="m3a-Px-0pc"/>
+                            <constraint firstItem="afE-aB-7eR" firstAttribute="centerX" secondItem="Goa-uA-0HC" secondAttribute="centerX" id="pgU-vg-AUz"/>
+                            <constraint firstItem="7rF-zo-qAI" firstAttribute="trailing" secondItem="afE-aB-7eR" secondAttribute="trailing" constant="16" id="uYY-wa-Bbz"/>
+                            <constraint firstItem="afE-aB-7eR" firstAttribute="top" secondItem="7rF-zo-qAI" secondAttribute="top" constant="14" id="uii-4E-wUL"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Hka-3u-sPd">
+                        <barButtonItem key="leftBarButtonItem" title="Back Item" image="back" id="AZN-Rl-E5h">
+                            <inset key="imageInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="didTapBackItem:" destination="V7j-eC-h70" id="8EY-kD-G4g"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="webView" destination="afE-aB-7eR" id="r7Q-z1-d8W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bDE-Fa-FDw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="681"/>
         </scene>
     </scenes>
     <resources>
         <image name="1-1" width="15" height="21"/>
+        <image name="back" width="13" height="23"/>
         <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="person" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
