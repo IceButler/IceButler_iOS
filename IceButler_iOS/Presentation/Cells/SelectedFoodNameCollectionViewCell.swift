@@ -21,7 +21,6 @@ class SelectedFoodNameCollectionViewCell: UICollectionViewCell {
     }
 
     @IBAction func didTapSelectedButton(_ sender: UIButton) {
-        // TODO: 셀 삭제
         delegate?.didTapDeleteButton(index: self.tag)
     }
     

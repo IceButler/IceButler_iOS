@@ -42,4 +42,17 @@ class FoodCategoryCollectionViewCell: UICollectionViewCell {
         self.categoryButton.layer.borderColor = UIColor.lightGray.cgColor
         self.categoryButton.layer.cornerRadius = 17
     }
+    
+    public func setSelectedMode(selected: Bool) {
+        self.isTapped = selected
+        if self.isTapped {
+            self.categoryButton.layer.borderColor = UIColor.signatureBlue.cgColor
+            self.categoryButton.backgroundColor = .signatureLightBlue
+            self.categoryButton.tintColor = .signatureBlue
+        } else {
+            self.categoryButton.layer.borderColor = UIColor.lightGray.cgColor
+            self.categoryButton.backgroundColor = .white
+            self.categoryButton.tintColor = .lightGray
+        }
+    }
 }

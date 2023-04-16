@@ -33,13 +33,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="jik-K7-b5P">
+                            <scrollView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="jik-K7-b5P">
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUh-AB-WlM">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1700"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4rK-Xs-Q3R">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4rK-Xs-Q3R">
                                                 <rect key="frame" x="16" y="22" width="361" height="1678"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
@@ -55,62 +55,11 @@
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffF-Gn-RU2">
-                                                <rect key="frame" x="0.0" y="606" width="393" height="129"/>
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5F-r1-jze">
-                                                        <rect key="frame" x="0.0" y="15" width="393" height="79"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezw-au-X7c">
-                                                                <rect key="frame" x="0.0" y="0.0" width="196" height="79"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="plain" image="white_trash_icon" imagePlacement="top" title="삭제" buttonSize="large">
-                                                                    <fontDescription key="titleFontDescription" type="system" pointSize="13"/>
-                                                                </buttonConfiguration>
-                                                                <connections>
-                                                                    <action selector="didTapDeleteFoodButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="TaD-e4-OTc"/>
-                                                                </connections>
-                                                            </button>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Itx-Di-wg5">
-                                                                <rect key="frame" x="196" y="0.0" width="0.66666666666665719" height="79"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="0.5" id="aOr-pR-DaU"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjw-YI-mjF">
-                                                                <rect key="frame" x="196.66666666666663" y="0.0" width="196.33333333333337" height="79"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="plain" image="white_cart_icon" imagePlacement="top" title="장보기 완료" buttonSize="large">
-                                                                    <fontDescription key="titleFontDescription" type="system" pointSize="13"/>
-                                                                </buttonConfiguration>
-                                                                <connections>
-                                                                    <action selector="didTapCompleteButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RtE-kh-j6Y"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="d5F-r1-jze" secondAttribute="trailing" id="2yo-E2-cBB"/>
-                                                    <constraint firstAttribute="bottom" secondItem="d5F-r1-jze" secondAttribute="bottom" constant="35" id="OeZ-zA-grZ"/>
-                                                    <constraint firstItem="d5F-r1-jze" firstAttribute="leading" secondItem="ffF-Gn-RU2" secondAttribute="leading" id="WdE-Kj-SKI"/>
-                                                    <constraint firstAttribute="height" constant="129" id="l2h-Dr-yeb"/>
-                                                    <constraint firstItem="d5F-r1-jze" firstAttribute="top" secondItem="ffF-Gn-RU2" secondAttribute="top" constant="15" id="rAG-ND-kSt"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="ffF-Gn-RU2" secondAttribute="trailing" id="AOO-eB-TCH"/>
                                             <constraint firstItem="4rK-Xs-Q3R" firstAttribute="leading" secondItem="OUh-AB-WlM" secondAttribute="leading" constant="16" id="Cxx-aT-OrP"/>
                                             <constraint firstItem="4rK-Xs-Q3R" firstAttribute="top" secondItem="OUh-AB-WlM" secondAttribute="top" constant="22" id="QgV-ay-FA4"/>
-                                            <constraint firstItem="ffF-Gn-RU2" firstAttribute="leading" secondItem="OUh-AB-WlM" secondAttribute="leading" id="Z6B-zs-YVh"/>
                                             <constraint firstAttribute="height" constant="1700" id="m25-41-3Se"/>
                                             <constraint firstAttribute="bottom" secondItem="4rK-Xs-Q3R" secondAttribute="bottom" id="wps-qK-OI1"/>
                                             <constraint firstAttribute="trailing" secondItem="4rK-Xs-Q3R" secondAttribute="trailing" constant="16" id="zOd-Qv-uEA"/>
@@ -142,16 +91,55 @@
                                     <action selector="didTapAddFoodButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zqn-R0-dO8"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ng-35-uro">
+                                <rect key="frame" x="0.0" y="688" width="393" height="130"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lYh-ok-Bwf">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="130"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y2w-lu-s5Z">
+                                                <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="130"/>
+                                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="삭제"/>
+                                                <connections>
+                                                    <action selector="didTapDeleteFoodButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cN6-z0-twB"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1wn-ro-8nx">
+                                                <rect key="frame" x="196.66666666666663" y="0.0" width="196.33333333333337" height="130"/>
+                                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="장보기완료"/>
+                                                <connections>
+                                                    <action selector="didTapCompleteButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="YDG-kX-hfh"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="lYh-ok-Bwf" secondAttribute="bottom" id="3Wp-vs-vmL"/>
+                                    <constraint firstAttribute="trailing" secondItem="lYh-ok-Bwf" secondAttribute="trailing" id="DBq-sk-FCK"/>
+                                    <constraint firstItem="lYh-ok-Bwf" firstAttribute="leading" secondItem="1ng-35-uro" secondAttribute="leading" id="DKH-b6-1hh"/>
+                                    <constraint firstItem="lYh-ok-Bwf" firstAttribute="top" secondItem="1ng-35-uro" secondAttribute="top" id="l0h-DC-Qwn"/>
+                                    <constraint firstAttribute="height" constant="130" id="mxS-LS-qAj"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="jik-K7-b5P" secondAttribute="bottom" id="3D1-WB-Pv8"/>
+                            <constraint firstItem="1ng-35-uro" firstAttribute="leading" secondItem="jik-K7-b5P" secondAttribute="leading" id="4w1-9q-cIS"/>
+                            <constraint firstItem="1ng-35-uro" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="6oa-IK-Ste"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="tiL-ij-FjJ" secondAttribute="trailing" constant="20" id="DZA-vn-2dV"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ffF-Gn-RU2" secondAttribute="bottom" constant="-20" id="EEy-UM-OXn"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jik-K7-b5P" secondAttribute="trailing" id="OTU-zj-bbo"/>
                             <constraint firstItem="jik-K7-b5P" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="QN3-eC-yPf"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="tiL-ij-FjJ" secondAttribute="bottom" constant="70" id="n2o-6r-nl5"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1ng-35-uro" secondAttribute="trailing" id="tp8-Jw-B7O"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="1ng-35-uro" secondAttribute="bottom" id="vVh-oL-O7v"/>
                             <constraint firstItem="jik-K7-b5P" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="w8P-Mc-fZO"/>
                         </constraints>
                     </view>
@@ -165,8 +153,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addFoodButton" destination="tiL-ij-FjJ" id="ci0-hE-ddF"/>
-                        <outlet property="alertView" destination="ffF-Gn-RU2" id="n9s-Gi-kQh"/>
+                        <outlet property="alertView" destination="1ng-35-uro" id="1Jt-Yz-HTy"/>
                         <outlet property="cartMainTableView" destination="4rK-Xs-Q3R" id="rrR-D0-tbR"/>
+                        <outlet property="completeBuyingButton" destination="1wn-ro-8nx" id="NUI-ZQ-rnB"/>
+                        <outlet property="deleteButton" destination="Y2w-lu-s5Z" id="Noc-6Q-Sc4"/>
                         <outlet property="viewHeightConstraint" destination="m25-41-3Se" id="hEj-Rx-dPA"/>
                     </connections>
                 </viewController>
@@ -385,8 +375,6 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="plus.circle" catalog="system" width="128" height="123"/>
         <image name="search" width="18" height="18"/>
-        <image name="white_cart_icon" width="30" height="30"/>
-        <image name="white_trash_icon" width="21" height="27"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -395,6 +383,12 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

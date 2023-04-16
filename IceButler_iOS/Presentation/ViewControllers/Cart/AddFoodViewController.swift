@@ -13,6 +13,7 @@ class AddFoodViewController: UIViewController {
     private let category = [
         "육류", "과일", "채소", "음료", "수산물", "반찬", "간식", "조미료", "가공식품", "기타"
     ]
+//    private var categorySelected = [ false,false,false,false,false,false,false,false,false,false ]
     
     private var searchResults: [AddFoodResponseModel] = []
     private var selectedFoodNames: [String] = []
@@ -42,7 +43,8 @@ class AddFoodViewController: UIViewController {
     
     // MARK: helper methods
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        CartService().postFoodsAdd(multifridgeIdx: 1, foods: self.selectedFoods)
+        CartService().postFoodsAdd(cartId: 1, foods: self.selectedFoods)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func didTapBackItem(_ sender: UIBarButtonItem) {
@@ -172,6 +174,16 @@ class AddFoodViewController: UIViewController {
         }
     }
     
+    private func checkCategory(categoryName: String) {
+        // TODO: 해당 카테고리 셀을 isTapped = true 상태로 변경
+//        category.forEach { cate in
+//            if categoryName == cate {
+//                categorySelected[category.firstIndex(of: categoryName)!] = true
+//                categoryCollectionView.reloadData()
+//            }
+//        }
+    }
+    
     // MARK: @objc methods
     @objc private func textFieldDidChange(_ textField: UITextField) {
         if textField.text?.count == 0 { searchContainerView.backgroundColor = .systemGray6 }
@@ -192,12 +204,15 @@ extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDel
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCategoryCollectionViewCell", for: indexPath) as? FoodCategoryCollectionViewCell else { return UICollectionViewCell() }
             cell.setupLayout(title: category[indexPath.row])
             cell.delegate = self
+//            if categorySelected[indexPath.row] { cell.setSelectedMode(selected: true) }
+//            else { cell.setSelectedMode(selected: false) }
             return cell
         } else if collectionView.tag == 1 {
             // 검색결과 탭을 통해 하위에 생성되는 "카테고리-상세식품명" 형태의 셀
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectedFoodNameCollectionViewCell", for: indexPath) as? SelectedFoodNameCollectionViewCell else { return UICollectionViewCell() }
             cell.delegate = self
             if searchResults.count > 0 {
+//                checkCategory(categoryName: searchResults[indexPath.row].foodCategory!)
                 cell.setupLayout(title: "\(searchResults[indexPath.row].foodCategory!)-\(searchResults[indexPath.row].foodName!)")
             }
             cell.tag = indexPath.row
@@ -253,6 +268,12 @@ extension AddFoodViewController: FoodCategoryCellDelegate {
 extension AddFoodViewController: SelectedFoodCellDelegate {
     func didTapDeleteButton(index: Int) {
         selectedFoodNames.remove(at: index)
+//        category.forEach { cate in
+//            if cate == selectedFoods[index].foodCategory {
+//                categorySelected[index] = false
+//                categoryCollectionView.reloadData()
+//            }
+//        }
         collectionView.reloadData()
     }
 }

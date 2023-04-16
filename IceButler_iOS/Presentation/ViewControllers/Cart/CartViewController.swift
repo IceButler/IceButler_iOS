@@ -11,8 +11,13 @@ import UIKit
 class CartViewController: UIViewController {
     @IBOutlet weak var cartMainTableView: UITableView!
     @IBOutlet weak var addFoodButton: UIButton!
+//    @IBOutlet weak var alertView: UIView!
+    
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var completeBuyingButton: UIButton!
     
     private var cartFoods: [CartResponseModel] = []
     
@@ -39,6 +44,7 @@ class CartViewController: UIViewController {
             self.cartMainTableView.reloadData()
             self.viewHeightConstraint.constant = CGFloat(170 * self.cartFoods.count)
         }
+//        deleteButton.addTarget(self, action: #selector(didTapDeleteFoodButton), for: .allTouchEvents)
     }
     
     func setup() { CartManager.shared.setCartVC(cartVC: self) }
@@ -49,6 +55,9 @@ class CartViewController: UIViewController {
         self.navigationController?.pushViewController(addFoodViewController, animated: true)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print(#function)
+    }
     
     @IBAction func didTapDeleteFoodButton(_ sender: UIButton) {
         print("didTapDeleteFoodButton called")
