@@ -14,7 +14,7 @@ class AddFoodViewController: UIViewController {
         "육류", "과일", "채소", "음료", "수산물", "반찬", "간식", "조미료", "가공식품", "기타"
     ]
     
-    private let searchResults = ["오이", "오이무침", "오이소박이"]
+    private var searchResults: [String] = []
     
     private var selectedFoodNames: [String] = []
     
@@ -49,13 +49,12 @@ class AddFoodViewController: UIViewController {
     }
     
     @IBAction func didTapSearchButton(_ sender: UIButton) {
-        searchResultContainerView.isHidden = false
         self.view.endEditing(true)
         
         // TODO: 검색어가 포함된 검색 결과를 GET -> searchResultTableView에 보이기
         if let _ = searchTextField.text {
+            searchResults.removeAll()
             getSearchResults(inputKeyword: searchTextField.text!)
-
         }
     }
     
@@ -122,7 +121,30 @@ class AddFoodViewController: UIViewController {
     }
     
     private func getSearchResults(inputKeyword: String) {
-        // 입력된 검색어로 결과값 fetch해오기
+        let queryParam = ["word":inputKeyword]
+        APIManger.shared.getData(urlEndpointString: "/foods",
+                                 responseDataType: [AddFoodResponseModel].self,
+                                 parameter: queryParam,
+                                 completionHandler: { [weak self] response in
+            print("식품 추가 검색 결과 Response --> \(response)")
+            var temp: [String] = []
+            if response.data?.count ?? 0 > 0 {
+                response.data?.forEach({ data in
+                    self?.searchResults.append(data.foodName!)
+                    self?.searchResultTableView.reloadData()
+                })
+                if self?.searchResults.count ?? 0 > 0 {
+                    self?.searchResultContainerView.isHidden = false
+                } else {
+                    self?.searchResultContainerView.isHidden = true
+                }
+                
+            } else {
+                let alert = UIAlertController(title: nil, message: "검색 결과가 없습니다!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                self?.present(alert, animated: true)
+            }
+        })
     }
     
     private func checkSelectedFoodNamesCount() {
@@ -169,9 +191,7 @@ extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDel
 }
 
 extension AddFoodViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count   // TODO: 입력된 검색어를 포함한 검색 결과의 개수 반환
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return searchResults.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddFoodSearchResultTableViewCell", for: indexPath) as? AddFoodSearchResultTableViewCell else { return UITableViewCell() }

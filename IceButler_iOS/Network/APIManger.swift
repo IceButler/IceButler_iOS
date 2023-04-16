@@ -50,14 +50,14 @@ extension APIManger {
     
     
     func getData<U: Decodable>(urlEndpointString: String,
-                                           responseDataType: U.Type,
-                                           parameter: Parameters?,
-                                           completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+                               responseDataType: U.Type,
+                               parameter: Parameters?,
+                               completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
         
         guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
         
         AF
-            .request(url, method: .get, parameters: parameter, headers: self.headers)
+            .request(url, method: .get, parameters: parameter, encoding: URLEncoding.queryString, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
                 print(response)
                 switch response.result {
