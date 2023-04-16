@@ -14,9 +14,9 @@ class AddFoodViewController: UIViewController {
         "육류", "과일", "채소", "음료", "수산물", "반찬", "간식", "조미료", "가공식품", "기타"
     ]
     
-    private var searchResults: [String] = []
-    
+    private var searchResults: [AddFoodResponseModel] = []
     private var selectedFoodNames: [String] = []
+    private var selectedFoods: [AddFood] = []
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var searchContainerView: UIView!
@@ -42,6 +42,15 @@ class AddFoodViewController: UIViewController {
     // MARK: helper methods
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
         // TODO: 장바구니 식품 추가 API 호출
+        let multifridgeIdx = 1  // 임시 Idx
+        let param = AddFoodRequestModel(foodRequests: self.selectedFoods)
+        APIManger.shared.postData(urlEndpointString: "/multiCarts/\(multifridgeIdx)/food",
+                                  responseDataType: AddFoodRequestModel.self,
+                                  requestDataType: AddFoodRequestModel.self,
+                                  parameter: param,
+                                  completionHandler: { response in
+            print("식품 추가 API 호출 결과 --> \(response)")
+        })
     }
     
     @IBAction func didTapBackItem(_ sender: UIBarButtonItem) {
@@ -126,11 +135,10 @@ class AddFoodViewController: UIViewController {
                                  responseDataType: [AddFoodResponseModel].self,
                                  parameter: queryParam,
                                  completionHandler: { [weak self] response in
-            print("식품 추가 검색 결과 Response --> \(response)")
-            var temp: [String] = []
+
             if response.data?.count ?? 0 > 0 {
                 response.data?.forEach({ data in
-                    self?.searchResults.append(data.foodName!)
+                    self?.searchResults.append(data)
                     self?.searchResultTableView.reloadData()
                 })
                 if self?.searchResults.count ?? 0 > 0 {
@@ -159,6 +167,12 @@ class AddFoodViewController: UIViewController {
         }
     }
     
+    private func addFoods(index: Int) {
+        let name = self.searchResults[index].foodName
+        let category = self.searchResults[index].foodCategory
+        selectedFoods.append(AddFood(foodName: name, foodCategory: category))
+    }
+    
     // MARK: @objc methods
     @objc private func textFieldDidChange(_ textField: UITextField) {
         if textField.text?.count == 0 { searchContainerView.backgroundColor = .systemGray6 }
@@ -183,10 +197,20 @@ extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDel
             // 검색결과 탭을 통해 하위에 생성되는 "카테고리-상세식품명" 형태의 셀
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectedFoodNameCollectionViewCell", for: indexPath) as? SelectedFoodNameCollectionViewCell else { return UICollectionViewCell() }
             cell.setupLayout(title: selectedFoodNames[indexPath.row])
+            cell.tag = indexPath.row
             return cell
         } else {
             return UICollectionViewCell()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.tag == 0 {
+            // 카테고리 셀 탭 이벤트 정의 --> 카테고리 정보 저장
+        } else if collectionView.tag == 1 {
+            // "카테고리-상세식품명" 셀 탭 이벤트 정의 --> 셀 삭제
+            
+        } else { return }
     }
 }
 
@@ -196,7 +220,7 @@ extension AddFoodViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddFoodSearchResultTableViewCell", for: indexPath) as? AddFoodSearchResultTableViewCell else { return UITableViewCell() }
         cell.backgroundColor = .none
-        cell.resultLabel.text = searchResults[indexPath.row]
+        cell.resultLabel.text = searchResults[indexPath.row].foodName
         return cell
     }
     
@@ -208,9 +232,11 @@ extension AddFoodViewController: UITableViewDelegate, UITableViewDataSource {
         // TODO: 선택된 결과값의 카테고리/이름을 포함한 CV cell 추가 시키기
         // selectedFoodNames에 데이터 추가 -> cv reload
         if self.selectedFoodNames.count < 5 {
-            selectedFoodNames.append(self.searchResults[indexPath.row])
+            selectedFoodNames.append(self.searchResults[indexPath.row].foodName!)
             self.collectionView.reloadData()
             self.checkSelectedFoodNamesCount()
+            self.addFoods(index: indexPath.row)
+            
         } else {
             let alert = UIAlertController(title: nil, message: "한 번에 최대 5가지의 식품만 추가가 가능합니다!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .default))
