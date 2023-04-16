@@ -17,7 +17,7 @@ class APIManger {
     
     func setupObserver() {
         AuthViewModel.shared.accessToken { token in
-            self.headers = ["Authorization" : token]
+            self.headers = [.authorization(bearerToken: token)]
             print(self.headers)
         }
     }
