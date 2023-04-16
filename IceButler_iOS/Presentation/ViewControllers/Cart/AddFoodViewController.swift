@@ -50,8 +50,6 @@ class AddFoodViewController: UIViewController {
     
     @IBAction func didTapSearchButton(_ sender: UIButton) {
         self.view.endEditing(true)
-        
-        // TODO: 검색어가 포함된 검색 결과를 GET -> searchResultTableView에 보이기
         if let _ = searchTextField.text {
             searchResults.removeAll()
             getSearchResults(inputKeyword: searchTextField.text!)
@@ -187,6 +185,7 @@ extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDel
         } else if collectionView.tag == 1 {
             // 검색결과 탭을 통해 하위에 생성되는 "카테고리-상세식품명" 형태의 셀
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectedFoodNameCollectionViewCell", for: indexPath) as? SelectedFoodNameCollectionViewCell else { return UICollectionViewCell() }
+            cell.delegate = self
             cell.setupLayout(title: selectedFoodNames[indexPath.row])
             cell.tag = indexPath.row
             return cell
@@ -240,5 +239,12 @@ extension AddFoodViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         searchResultContainerView.isHidden = true
         return true
+    }
+}
+
+extension AddFoodViewController: SelectedFoodCellDelegate {
+    func didTapDeleteButton(index: Int) {
+        selectedFoodNames.remove(at: index)
+        collectionView.reloadData()
     }
 }

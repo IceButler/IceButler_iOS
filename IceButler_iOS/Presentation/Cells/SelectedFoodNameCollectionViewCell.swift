@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol SelectedFoodCellDelegate {
+    func didTapDeleteButton(index: Int)
+}
+
 class SelectedFoodNameCollectionViewCell: UICollectionViewCell {
 
+    var delegate: SelectedFoodCellDelegate?
     @IBOutlet weak var selectedFoodButton: UIButton!
     
     override func awakeFromNib() {
@@ -17,6 +22,7 @@ class SelectedFoodNameCollectionViewCell: UICollectionViewCell {
 
     @IBAction func didTapSelectedButton(_ sender: UIButton) {
         // TODO: 셀 삭제
+        delegate?.didTapDeleteButton(index: self.tag)
     }
     
     public func setupLayout(title: String) {
