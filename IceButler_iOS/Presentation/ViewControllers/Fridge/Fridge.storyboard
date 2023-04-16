@@ -36,20 +36,57 @@
                                     <action selector="foodAdd:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pUX-Lb-AIP"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noFridge" translatesAutoresizingMaskIntoConstraints="NO" id="leM-Z5-H2v">
+                                <rect key="frame" x="174" y="274" width="45" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="6Zb-5i-S49"/>
+                                    <constraint firstAttribute="width" constant="45" id="9dP-EQ-i6D"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고를 추가해보세요!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiX-Gg-iGw">
+                                <rect key="frame" x="99.666666666666686" y="359" width="194" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="194" id="9cP-Z0-dog"/>
+                                    <constraint firstAttribute="height" constant="22" id="DI1-vK-zte"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" red="0.59607843137254901" green="0.68235294117647061" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfT-xr-l2h">
+                                <rect key="frame" x="127.66666666666669" y="441" width="138" height="43"/>
+                                <color key="backgroundColor" red="0.26666666666666666" green="0.49803921568627452" blue="0.79607843137254897" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="LDA-ME-X95"/>
+                                    <constraint firstAttribute="width" constant="138" id="kSt-0S-Ruy"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="fridgeAdd" title="냉장고 추가"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4HG-QS-PTu" secondAttribute="trailing" id="Can-1z-p8a"/>
+                            <constraint firstItem="leM-Z5-H2v" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Had-eF-9la"/>
                             <constraint firstItem="4HG-QS-PTu" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Lbo-X5-sml"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="1RL-eN-Gn3" secondAttribute="bottom" constant="34" id="Lby-9j-nAA"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1RL-eN-Gn3" secondAttribute="trailing" constant="21" id="Lkr-c2-BgR"/>
+                            <constraint firstItem="IiX-Gg-iGw" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Pgq-iU-qsp"/>
                             <constraint firstItem="4HG-QS-PTu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="SO7-dr-IbU"/>
+                            <constraint firstItem="WfT-xr-l2h" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="bup-Nd-x98"/>
+                            <constraint firstItem="WfT-xr-l2h" firstAttribute="top" secondItem="IiX-Gg-iGw" secondAttribute="bottom" constant="60" id="cP8-Hp-2sp"/>
+                            <constraint firstItem="leM-Z5-H2v" firstAttribute="top" secondItem="4HG-QS-PTu" secondAttribute="bottom" constant="176" id="dd6-OG-ARK"/>
+                            <constraint firstItem="IiX-Gg-iGw" firstAttribute="top" secondItem="leM-Z5-H2v" secondAttribute="bottom" constant="21" id="eP7-8U-iAX"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="barView" destination="4HG-QS-PTu" id="VPX-V8-4MH"/>
                         <outlet property="foodAddButton" destination="1RL-eN-Gn3" id="heZ-1L-nSq"/>
+                        <outlet property="fridgeAddButton" destination="WfT-xr-l2h" id="OFy-LL-vfc"/>
+                        <outlet property="noFridgeImageView" destination="leM-Z5-H2v" id="ThM-3P-3oD"/>
+                        <outlet property="noFridgeLabel" destination="IiX-Gg-iGw" id="KxD-ex-JvO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -514,6 +551,8 @@
     </scenes>
     <resources>
         <image name="addButtonIcon" width="20.333333969116211" height="20.333333969116211"/>
+        <image name="fridgeAdd" width="18" height="18"/>
+        <image name="noFridge" width="45" height="64"/>
         <image name="rightArrow" width="9.3333330154418945" height="16"/>
         <image name="wasteIcon" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">

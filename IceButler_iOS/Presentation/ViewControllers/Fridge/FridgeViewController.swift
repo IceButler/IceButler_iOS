@@ -15,6 +15,12 @@ class FridgeViewController: TabmanViewController {
     @IBOutlet weak var barView: UIView!
     @IBOutlet weak var foodAddButton: UIButton!
     
+    
+    @IBOutlet weak var noFridgeImageView: UIImageView!
+    @IBOutlet weak var noFridgeLabel: UILabel!
+    @IBOutlet weak var fridgeAddButton: UIButton!
+    
+    
     private var viewControllerList: Array<UIViewController> = []
     
     override func viewDidLoad() {

@@ -118,7 +118,9 @@ extension AuthViewModel {
         let parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickName: userNickName!, profileImgUrl: profileImgKey)
         self.authService.joinUser(parameter: parameter) { response in
             if let response = response {
-                self.setUserToken(token: response)
+                let accessToken = response.accessToken.replacingOccurrences(of: "Bearer ", with: "")
+                let refreshToken = response.accessToken.replacingOccurrences(of: "Bearer ", with: "")
+                self.setUserToken(token: AuthJoinUserResponseModel(accessToken: accessToken, refreshToken: refreshToken))
             }
         }
     }
