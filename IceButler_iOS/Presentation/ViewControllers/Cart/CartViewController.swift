@@ -11,7 +11,6 @@ import UIKit
 class CartViewController: UIViewController {
     @IBOutlet weak var cartMainTableView: UITableView!
     @IBOutlet weak var addFoodButton: UIButton!
-//    @IBOutlet weak var alertView: UIView!
     
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
@@ -32,19 +31,21 @@ class CartViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+//        congifure()
         self.alertView.isHidden = true
         self.addFoodButton.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
     }
     
     func congifure() {
+//        self.cartFoods.removeAll()
         CartViewModel.shared.fetchData()
+        
         CartViewModel.shared.getCartFoods { cartFoods in
             self.cartFoods = cartFoods
             self.cartMainTableView.reloadData()
             self.viewHeightConstraint.constant = CGFloat(170 * self.cartFoods.count)
         }
-//        deleteButton.addTarget(self, action: #selector(didTapDeleteFoodButton), for: .allTouchEvents)
     }
     
     func setup() { CartManager.shared.setCartVC(cartVC: self) }
@@ -53,10 +54,6 @@ class CartViewController: UIViewController {
         let storyboard = UIStoryboard.init(name: "Cart", bundle: nil)
         guard let addFoodViewController = storyboard.instantiateViewController(withIdentifier: "AddFoodViewController") as? AddFoodViewController else { return }
         self.navigationController?.pushViewController(addFoodViewController, animated: true)
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print(#function)
     }
     
     @IBAction func didTapDeleteFoodButton(_ sender: UIButton) {
@@ -143,6 +140,13 @@ class CartViewController: UIViewController {
         cartMainTableView.dataSource = self
         cartMainTableView.register(UINib(nibName: "CartMainTableViewCell", bundle: nil), forCellReuseIdentifier: "CartMainTableViewCell")
     }
+    
+    public func reloadFoodData() {
+//        CartViewModel.shared.fetchData()
+        self.cartFoods.removeAll()
+        self.cartFoods = CartViewModel.shared.cartFoods
+        self.cartMainTableView.reloadData()
+    }
 }
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
@@ -151,7 +155,8 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartMainTableViewCell", for: indexPath) as? CartMainTableViewCell else { return UITableViewCell() }
         cell.setTitle(title: self.cartFoods[indexPath.row].category)
-        cell.cartFoods = CartViewModel.shared.getCartFoodsWithCategory(index: indexPath.row)
+        cell.cartFoods = self.cartFoods[indexPath.row].cartFoods
+//        cell.cartFoods = CartViewModel.shared.getCartFoodsWithCategory(index: indexPath.row)
         cell.backgroundColor = cell.contentView.backgroundColor
         return cell
     }

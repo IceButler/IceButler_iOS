@@ -20,12 +20,19 @@ class CartService {
     
     func deleteCartFood(cartId: Int, removeFoodIdxes: [Int], completion: @escaping ([CartResponseModel]?) -> Void) {
         let param = CartRemoveRequestModel(foodIdxes: removeFoodIdxes)
-        APIManger.shared.putData(urlEndpointString: "/carts/\(cartId)/foods",
-                                 responseDataType: [CartResponseModel]?.self,
-                                 requestDataType: CartRemoveRequestModel.self,
-                                 parameter: param) { response in
+//        APIManger.shared.putData(urlEndpointString: "/carts/\(cartId)/foods",
+//                                 responseDataType: [CartResponseModel]?.self,
+//                                 requestDataType: CartRemoveRequestModel.self,
+//                                 parameter: param) { response in
+//            completion(response.data as? [CartResponseModel])
+//        }
+        APIManger.shared.deleteData(urlEndpointString: "/carts/\(cartId)/foods",
+                                    responseDataType: [CartResponseModel].self,
+                                    requestDataType: CartRemoveRequestModel.self,
+                                    parameter: param,
+                                    completionHandler: { response in
             completion(response.data as? [CartResponseModel])
-        }
+        })
     }
     
     func postFoodsAdd(cartId: Int, foods: [AddFood]) {

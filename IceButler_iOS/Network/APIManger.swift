@@ -81,8 +81,11 @@ extension APIManger {
         guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
         
         AF
-            .request(url, method: .post, parameters: parameter, encoder: .json, headers: nil)
+            .request(url, method: .post, parameters: parameter, encoder: .json, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+                
+                print("헤더값 --> \(self.headers)")
+                print("파라미터 --> \(parameter)")
                 print(response)
                 switch response.result {
                 case .success(let success):
@@ -168,6 +171,31 @@ extension APIManger {
                 print(error.localizedDescription)
             }
         }.resume()
+    }
+    
+    func deleteData<T: Codable, U: Decodable>(urlEndpointString: String,
+                                            responseDataType: U.Type,
+                                            requestDataType: T.Type,
+                                            parameter: T?,
+                                            completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+        
+        guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
+        
+        AF
+            .request(url, method: .delete, parameters: parameter, encoder: .json, headers: self.headers)
+            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+                
+                print("헤더값 --> \(self.headers)")
+                print("파라미터 --> \(parameter)")
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
     }
     
 }

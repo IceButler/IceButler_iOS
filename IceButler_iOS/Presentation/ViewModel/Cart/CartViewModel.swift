@@ -15,6 +15,7 @@ class CartViewModel: ObservableObject {
     
     @Published var cart: [CartFood]? = []
     @Published var cartFoods: [CartResponseModel] = []
+//    var cartFoods: [CartResponseModel] = []
     @Published var removeFoodIdxes: [Int]? = []
     @Published var removeFoodNames: [String] = []
     @Published var isLongGesture = false
@@ -104,8 +105,9 @@ class CartViewModel: ObservableObject {
         let cartIdx = 1 // 임시 cartId
         cartService.getCartFoodList(cartId: cartIdx, completion: { [weak self] response in
             self?.cartFoods = response ?? []
-//            CartManager.shared.reloadFoodCV()
-            CartManager.shared.cartViewController?.cartMainTableView.reloadData()
+            CartManager.shared.reloadFoodCV()
+//            CartManager.shared.cartViewController?.reloadFoodData()
+//            CartManager.shared.cartViewController?.cartMainTableView.reloadData()
         })
     }
     
