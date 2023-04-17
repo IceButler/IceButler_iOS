@@ -12,6 +12,6 @@ struct AuthNickNameRequsetModel: Codable {
 }
 
 struct AuthJoinUserRequestModel: Codable {
-    let email, provider, nickName: String
+    let email, provider, nickname: String
     let profileImgUrl: String?
 }

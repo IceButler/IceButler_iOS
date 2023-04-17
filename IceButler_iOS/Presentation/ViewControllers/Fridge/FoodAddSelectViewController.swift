@@ -58,6 +58,16 @@ class FoodAddSelectViewController: UIViewController {
     
 }
 
+extension FoodAddSelectViewController: BarCodeAddProtocol {
+    func moveToFoodAdd() {
+        self.dismiss(animated: false) {
+            let foodAddVC = UIStoryboard(name: "FoodAdd", bundle: nil).instantiateViewController(identifier: "FoodAddViewController") as! FoodAddViewController
+            
+            self.delegate?.moveToFoodAddViewController(foodAddVC: foodAddVC)
+        }
+    }
+}
+
 extension FoodAddSelectViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
@@ -90,6 +100,8 @@ extension FoodAddSelectViewController: UITableViewDelegate, UITableViewDataSourc
             barCodeAddVC.modalTransitionStyle = .coverVertical
             barCodeAddVC.modalPresentationStyle = .fullScreen
             
+            barCodeAddVC.setDelegate(delegate: self)
+            
             present(barCodeAddVC, animated: true)
             break
         case 1:
@@ -107,6 +119,7 @@ extension FoodAddSelectViewController: UITableViewDelegate, UITableViewDataSourc
             break
         }
     }
-    
-    
 }
+
+
+

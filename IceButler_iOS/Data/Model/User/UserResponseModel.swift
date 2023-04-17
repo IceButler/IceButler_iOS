@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct UserInfoResponseModel {
+struct UserInfoResponseModel: Codable {
     let userIdx: Int
-    let nickName: String
+    let nickName, email: String?
     let profileImage: String?
 }

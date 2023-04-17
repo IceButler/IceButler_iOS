@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		66CF0EC13B3373BB87EC99CC /* Pods_IceButler_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71520AB6EE790D9359A21DBB /* Pods_IceButler_iOSTests.framework */; };
+		73178AC629EC40A6001C3AA4 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73178AC529EC40A6001C3AA4 /* UserService.swift */; };
 		7339CD6D29E5B390002A6D78 /* AuthMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7339CD6C29E5B390002A6D78 /* AuthMain.storyboard */; };
 		7339CD6F29E5B39D002A6D78 /* AuthMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD6E29E5B39D002A6D78 /* AuthMainViewController.swift */; };
 		7339CD7229E5B56A002A6D78 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD7129E5B56A002A6D78 /* AuthService.swift */; };
@@ -83,6 +84,7 @@
 		95488DC229E7C2AC009AE17A /* PolicyWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95488DC129E7C2AC009AE17A /* PolicyWebViewController.swift */; };
 		95488DC429EADF94009AE17A /* PolicyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95488DC329EADF94009AE17A /* PolicyType.swift */; };
 		A2459F1B29DFE26700D12089 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */; };
+		A2459F1D29DFF7A800D12089 /* AddFoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2459F1C29DFF7A800D12089 /* AddFoodCollectionViewCell.swift */; };
 		A258498129E6A6BC00E75568 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A258498029E6A6BC00E75568 /* MyPage.storyboard */; };
 		A258498329E6A6CB00E75568 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498229E6A6CB00E75568 /* MyPageViewController.swift */; };
 		A258498529E6B02400E75568 /* MypageMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498429E6B02400E75568 /* MypageMenuTableViewCell.swift */; };
@@ -131,6 +133,7 @@
 		6C2264B9924DFAFE47B1F678 /* Pods-IceButler_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		71520AB6EE790D9359A21DBB /* Pods_IceButler_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71A4557F1B0043751FF6453B /* Pods-IceButler_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOSTests.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOSTests/Pods-IceButler_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		73178AC529EC40A6001C3AA4 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		7339CD6C29E5B390002A6D78 /* AuthMain.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthMain.storyboard; sourceTree = "<group>"; };
 		7339CD6E29E5B39D002A6D78 /* AuthMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMainViewController.swift; sourceTree = "<group>"; };
 		7339CD7129E5B56A002A6D78 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -211,6 +214,7 @@
 		95488DC329EADF94009AE17A /* PolicyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyType.swift; sourceTree = "<group>"; };
 		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
+		A2459F1C29DFF7A800D12089 /* AddFoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodCollectionViewCell.swift; sourceTree = "<group>"; };
 		A258498029E6A6BC00E75568 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		A258498229E6A6CB00E75568 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		A258498429E6B02400E75568 /* MypageMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageMenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -286,6 +290,14 @@
 				71520AB6EE790D9359A21DBB /* Pods_IceButler_iOSTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		73178AC429EC409C001C3AA4 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				73178AC529EC40A6001C3AA4 /* UserService.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		7339CD6B29E5B381002A6D78 /* Auth */ = {
@@ -389,13 +401,9 @@
 			isa = PBXGroup;
 			children = (
 				73B7372729E24F510097806F /* FoodCategory.swift */,
-
-			
-
-	      95488DC329EADF94009AE17A /* PolicyType.swift */,
+				95488DC329EADF94009AE17A /* PolicyType.swift */,
 				7339CD8D29E788BE002A6D78 /* ImageDir.swift */,
 				7339CD9129E79CDD002A6D78 /* AuthProvider.swift */,
-
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -436,13 +444,6 @@
 			isa = PBXGroup;
 			children = (
 				73CF93B229E94BB60007CB7A /* UserViewModel.swift */,
-			);
-			path = User;
-			sourceTree = "<group>";
-		};
-		73CF93B429E94BE50007CB7A /* User */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -580,7 +581,7 @@
 		73F26FBE29DAA71B009E364B /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				73CF93B429E94BE50007CB7A /* User */,
+				73178AC429EC409C001C3AA4 /* User */,
 				7339CD8A29E78875002A6D78 /* Image */,
 				7339CD7029E5B55F002A6D78 /* Auth */,
 				738CAC8B29E32804009EF9D2 /* Food */,
@@ -1014,6 +1015,7 @@
 				73B7372329E1B2040097806F /* FoodOwnerCell.swift in Sources */,
 				73F62A5329DFDADF003D779F /* FoodCategoryCell.swift in Sources */,
 				73F62A5829E00F94003D779F /* UIButton+.swift in Sources */,
+				73178AC629EC40A6001C3AA4 /* UserService.swift in Sources */,
 				73F62A3829DAB1A5003D779F /* CartRequestModel.swift in Sources */,
 				A2CA99FE29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift in Sources */,
 				73CF93B329E94BB60007CB7A /* UserViewModel.swift in Sources */,

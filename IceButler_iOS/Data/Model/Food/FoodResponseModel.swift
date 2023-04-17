@@ -28,3 +28,9 @@ struct FoodOwner: Codable {
     let userIdx: Int
     let nickName, profileImage: String?
 }
+
+
+struct BarcodeFoodResponse: Codable {
+    let foodIdx: Int?
+    let foodName, foodDetailName, foodCategory: String?
+}

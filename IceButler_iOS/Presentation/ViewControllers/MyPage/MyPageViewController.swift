@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MyPageViewController: UIViewController {
     
@@ -35,7 +36,19 @@ class MyPageViewController: UIViewController {
     }
     
     private func configure() {
-        // TODO: 유저의 프로필 사진, 닉네임, 이메일 설정
+        UserViewModel.shared.getUserInfo()
+        
+        
+        
+        UserViewModel.shared.userInfo { user in
+            if let imageUrlString = user.profileImage {
+                if let imageUrl = URL(string: imageUrlString) {
+                    self.profileImgView.kf.setImage(with: imageUrl)
+                }
+            }
+            self.nicknameLabel.text = user.nickName
+            self.emailLabel.text = user.email
+        }
     }
     
     private func setupNavigationBar() {

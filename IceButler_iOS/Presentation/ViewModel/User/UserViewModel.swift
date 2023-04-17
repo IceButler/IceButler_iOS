@@ -6,7 +6,28 @@
 //
 
 import Foundation
+import Combine
 
-class UserViewModel {
+class UserViewModel: ObservableObject {
     static let shared = UserViewModel()
+    private let userService = UserService()
+    
+    @Published var userInfo: UserInfoResponseModel?
+    
+    private var cancelLabels: Set<AnyCancellable> = []
+    
+    func userInfo(completion: @escaping (UserInfoResponseModel) -> Void) {
+        $userInfo.filter { userInfo in
+            userInfo != nil
+        }.sink { userInfo in
+            completion(userInfo!)
+        }.store(in: &cancelLabels)
+    }
+    
+    
+    func getUserInfo() {
+        userService.getUserInfo { userInfo in
+            self.userInfo = userInfo
+        }
+    }
 }
