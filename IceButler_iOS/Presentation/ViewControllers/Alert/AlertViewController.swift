@@ -113,11 +113,6 @@ class AlertViewController: UIViewController {
         CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
         self.dismiss(animated: true)
         CartManager.shared.showCartCVTabBar()
-        CartViewModel.shared.fetchData()
-//        CartManager.shared.reloadFoodCV() //
-
-        CartManager.shared.cartViewController?.congifure()
-        CartManager.shared.cartViewController?.cartMainTableView.reloadData()
     }
     
     @objc func completeBuying() {

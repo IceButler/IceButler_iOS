@@ -1,18 +1,27 @@
 //
-//  AddFoodCollectionViewCell.swift
+//  FoodCategoryCollectionViewCell.swift
 //  IceButler_iOS
 //
-//  Created by 김초원 on 2023/04/07.
+//  Created by 김초원 on 2023/04/16.
 //
 
 import UIKit
 
-class AddFoodCollectionViewCell: UICollectionViewCell {
-    
+protocol FoodCategoryCellDelegate {
+    func didTapCategoryButton(category: String)
+}
+
+class FoodCategoryCollectionViewCell: UICollectionViewCell {
+
+    var delegate: FoodCategoryCellDelegate?
     private var isTapped: Bool = false
     
     @IBOutlet weak var categoryButton: UIButton!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
     @IBAction func didTapCategoryButton(_ sender: UIButton) {
         self.isTapped = !self.isTapped
         if self.isTapped {
@@ -24,6 +33,7 @@ class AddFoodCollectionViewCell: UICollectionViewCell {
             self.categoryButton.backgroundColor = .white
             self.categoryButton.tintColor = .lightGray
         }
+        delegate?.didTapCategoryButton(category: self.categoryButton.title(for: .normal)!)
     }
     
     public func setupLayout(title: String) {
@@ -31,5 +41,18 @@ class AddFoodCollectionViewCell: UICollectionViewCell {
         self.categoryButton.layer.borderWidth = 1.6
         self.categoryButton.layer.borderColor = UIColor.lightGray.cgColor
         self.categoryButton.layer.cornerRadius = 17
+    }
+    
+    public func setSelectedMode(selected: Bool) {
+        self.isTapped = selected
+        if self.isTapped {
+            self.categoryButton.layer.borderColor = UIColor.signatureBlue.cgColor
+            self.categoryButton.backgroundColor = .signatureLightBlue
+            self.categoryButton.tintColor = .signatureBlue
+        } else {
+            self.categoryButton.layer.borderColor = UIColor.lightGray.cgColor
+            self.categoryButton.backgroundColor = .white
+            self.categoryButton.tintColor = .lightGray
+        }
     }
 }

@@ -10,3 +10,10 @@ import Foundation
 struct CartRemoveRequestModel: Codable {
     let foodIdxes: [Int]
 }
+
+struct AddFoodRequestModel: Codable {
+    let foodRequests: [AddFood]?
+}
+struct AddFood: Codable {
+    let foodName, foodCategory: String?
+}
