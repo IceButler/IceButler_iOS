@@ -117,8 +117,7 @@ extension AuthViewModel {
     func joinUser() {
         guard let profileImageKey = self.profileImgKey else  {return}
         
-        let parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickName!, profileImgKey: profileImageKey)
-        
+        let parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickName!, profileImgUrl: profileImageKey)
         
         self.authService.joinUser(parameter: parameter) { response in
             if let response = response {
