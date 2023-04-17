@@ -221,6 +221,12 @@ class FoodAddViewController: UIViewController {
         FoodViewModel.shared.foodOwnerList {
             self.foodOwnerTableView.reloadData()
         }
+        
+        FoodViewModel.shared.barcodeFood { barcodeFood in
+            self.foodDetailTextView.text = barcodeFood.foodDetailName
+            self.foodDetailTextView.textColor = .black
+            self.foodDetailTextView.backgroundColor = .focusSkyBlue
+        }
     }
     
     private func setupAddedFoodName() {
@@ -377,21 +383,33 @@ class FoodAddViewController: UIViewController {
         let dateFromat = DateFormatter()
         dateFromat.dateFormat = "yyyy-MM-dd"
         let dateString = dateFromat.string(from: date!)
-
         
-        FoodViewModel.shared.postFood(fridgeIdx: 1, foodName: foodNameTextView.text, foodDetail: foodDetailTextView.text, foodCategory: selectedFoodCategory!.rawValue, foodShelfLife: dateString, foodOwnerIdx: foodOwnerIdx!, memo: memo, imgUrl: nil) { result in
-            if result {
-                let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
-                    self.navigationController?.popViewController(animated: true)
-                }))
-                self.present(alert, animated: true)
-            }else {
-                self.showAlert(title: "실패", message: "음식 등록에 실패하셨습니다. 다시 시도해주세요.")
+        if foodImage != nil {
+            FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food, image: foodImage!, fridgeIdx: 1, foodName: foodNameTextView.text, foodDetail: foodDetailTextView.text, foodCategory: selectedFoodCategory!.rawValue, foodShelfLife: dateString, foodOwnerIdx: foodOwnerIdx!, memo: memo) { result in
+                if result {
+                    let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    self.present(alert, animated: true)
+                }else {
+                    self.showAlert(title: "실패", message: "음식 등록에 실패하셨습니다. 다시 시도해주세요.")
+                }
+                
+            }
+        }else {
+            FoodViewModel.shared.postFood(fridgeIdx: 1, foodName: foodNameTextView.text, foodDetail: foodDetailTextView.text, foodCategory: selectedFoodCategory!.rawValue, foodShelfLife: dateString, foodOwnerIdx: foodOwnerIdx!, memo: memo, imgUrl: nil) { result in
+                if result {
+                    let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    self.present(alert, animated: true)
+                }else {
+                    self.showAlert(title: "실패", message: "음식 등록에 실패하셨습니다. 다시 시도해주세요.")
+                }
             }
         }
-        
-        
     }
     
     private func showAlert(title: String, message: String) {

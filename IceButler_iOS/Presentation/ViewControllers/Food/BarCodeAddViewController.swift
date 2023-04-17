@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol BarCodeAddProtocol {
+    func moveToFoodAdd()
+}
+
 class BarCodeAddViewController: UIViewController {
     
     @IBOutlet weak var barCodeView: BarCodeView!
     @IBOutlet weak var centerGuideLineView: UIView!
     @IBOutlet weak var cancelButton: UIButton!
+    
+    private var delegate: BarCodeAddProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +55,10 @@ class BarCodeAddViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    func setDelegate(delegate: BarCodeAddProtocol) {
+        self.delegate = delegate
+    }
+    
     
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -68,6 +78,14 @@ class BarCodeAddViewController: UIViewController {
         barCodeView.stop()
         self.dismiss(animated: true)
     }
+    
+    func moveToFoodAddVC(barcode: String) {
+        barCodeView.stop()
+        FoodViewModel.shared.getBarcodeFood(barcode: barcode)
+        self.dismiss(animated: true) {
+            self.delegate?.moveToFoodAdd()
+        }
+    }
 }
 
 extension BarCodeAddViewController: BarCodeViewDelgate {
@@ -78,7 +96,7 @@ extension BarCodeAddViewController: BarCodeViewDelgate {
                 showAlert(title: "에러", message: "바코드를 인식하지 못했습니다.")
                 break
             }
-            showAlert(title: "성공", message: code)
+            self.moveToFoodAddVC(barcode: code)
         case .fail:
             showAlert(title: "에러", message: "바코드를 인식하지 못했습니다.")
             break

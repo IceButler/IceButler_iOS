@@ -11,4 +11,5 @@ enum ImageDir: String {
     case RecipeThumbnail = "recipe-thumbnail"
     case RecipeImage = "recipe-image"
     case Profile = "profile"
+    case Food = "food"
 }

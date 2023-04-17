@@ -121,6 +121,7 @@ extension AuthViewModel {
         
         self.authService.joinUser(parameter: parameter) { response in
             if let response = response {
+                self.accessToken = response.accessToken
                 self.setUserToken(token: response)
             }
         }

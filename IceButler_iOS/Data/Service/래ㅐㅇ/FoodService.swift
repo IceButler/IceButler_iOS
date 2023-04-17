@@ -20,6 +20,14 @@ class FoodService {
         }
     }
     
+    func getBarcodeFood(barcode: String, completion: @escaping (BarcodeFoodResponse) -> Void) {
+        APIManger.shared.getData(urlEndpointString: "/foods/barcode?code_num=\(barcode)", responseDataType: BarcodeFoodResponse.self, parameter: nil) { response in
+            if let data = response.data {
+                completion(data)
+            }
+        }
+    }
+    
     func postFood(fridgeIdx: Int, parameter: FoodAddRequestModel, completion: @escaping (Bool) -> Void) {
         APIManger.shared.postData(urlEndpointString: "/fridges/\(fridgeIdx)/food", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodAddRequestModel.self, parameter: parameter) { response in
             if response.status == "OK" {
