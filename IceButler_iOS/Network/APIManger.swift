@@ -17,7 +17,7 @@ class APIManger {
     
     func setupObserver() {
         AuthViewModel.shared.accessToken { token in
-            self.headers = [.authorization(bearerToken: token)]
+            self.headers = ["Authorization": token]
             print(self.headers)
         }
     }
@@ -122,7 +122,7 @@ extension APIManger {
         guard let url = URL(string: url) else { return }
         
         AF
-            .request(url, method: .get, parameters: parameter, headers: nil)
+            .request(url, method: .get, parameters: parameter, headers: headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
                 print(response)
                 switch response.result {

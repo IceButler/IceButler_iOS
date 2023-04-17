@@ -40,6 +40,10 @@ class FridgeViewController: TabmanViewController {
     
     private func setup() {
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: 1)
+        
+        noFridgeImageView.isHidden = true
+        noFridgeLabel.isHidden = true
+        fridgeAddButton.isHidden = true
     }
     
     private func setupTabman() {
