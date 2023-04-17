@@ -13,6 +13,12 @@ class AddFoodViewController: UIViewController {
     private let category = [
         "육류", "과일", "채소", "음료", "수산물", "반찬", "간식", "조미료", "가공식품", "기타"
     ]
+//    private var categorySelected = [ false,false,false,false,false,false,false,false,false,false ]
+    
+    private var searchResults: [AddFoodResponseModel] = []
+    private var selectedFoodNames: [String] = []
+    private var selectedFoods: [AddFood] = []
+    private var selectedCategory: String?
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var searchContainerView: UIView!
@@ -21,6 +27,8 @@ class AddFoodViewController: UIViewController {
     
     @IBOutlet weak var searchResultContainerView: UIView!
     @IBOutlet weak var searchResultTableView: UITableView!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +43,8 @@ class AddFoodViewController: UIViewController {
     
     // MARK: helper methods
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        // TODO: 장바구니 식품 추가 API 호출
+        CartService().postFoodsAdd(cartId: 1, foods: self.selectedFoods)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func didTapBackItem(_ sender: UIBarButtonItem) {
@@ -43,10 +52,11 @@ class AddFoodViewController: UIViewController {
     }
     
     @IBAction func didTapSearchButton(_ sender: UIButton) {
-        searchResultContainerView.isHidden = false
         self.view.endEditing(true)
-        
-        // TODO: 검색어가 포함된 검색 결과를 GET -> searchResultTableView에 보이기
+        if let _ = searchTextField.text {
+            searchResults.removeAll()
+            getSearchResults(inputKeyword: searchTextField.text!)
+        }
     }
     
     // MARK: helper methods
@@ -83,27 +93,96 @@ class AddFoodViewController: UIViewController {
         self.searchTextField.borderStyle = .none
         self.completeButton.backgroundColor = .systemGray5
         self.completeButton.tintColor = .white
-//        self.completeButton.backgroundColor = UIColor.signatureBlue
         self.completeButton.layer.cornerRadius = 23
         
         searchResultContainerView.layer.cornerRadius = 23
         searchResultContainerView.isHidden = true
+        collectionView.isHidden = true
     }
     
     private func setup() {
         self.categoryCollectionView.delegate = self
         self.categoryCollectionView.dataSource = self
+        let categoryCell = UINib(nibName: "FoodCategoryCollectionViewCell", bundle: nil)
+        self.categoryCollectionView.register(categoryCell, forCellWithReuseIdentifier: "FoodCategoryCollectionViewCell")
+        self.categoryCollectionView.tag = 0
         
         self.searchResultTableView.separatorStyle = .none
         self.searchResultTableView.delegate = self
         self.searchResultTableView.dataSource = self
         
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        let foodCell = UINib(nibName: "SelectedFoodNameCollectionViewCell", bundle: nil)
+        self.collectionView.register(foodCell, forCellWithReuseIdentifier: "SelectedFoodNameCollectionViewCell")
+        self.collectionView.tag = 1
+        
         self.searchTextField.delegate = self
         self.searchTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
-    // TODO: Notification을 통해 추가될 식품의 정보가 1개 이상인 경우에만 '완료'버튼 활성화
+    private func getSearchResults(inputKeyword: String) {
+        let queryParam = ["word":inputKeyword]
+        APIManger.shared.getData(urlEndpointString: "/foods",
+                                 responseDataType: [AddFoodResponseModel].self,
+                                 parameter: queryParam,
+                                 completionHandler: { [weak self] response in
+
+            if response.data?.count ?? 0 > 0 {
+                response.data?.forEach({ data in
+                    self?.searchResults.append(data)
+                    self?.searchResultTableView.reloadData()
+                })
+                if self?.searchResults.count ?? 0 > 0 {
+                    self?.searchResultContainerView.isHidden = false
+                } else {
+                    self?.searchResultContainerView.isHidden = true
+                }
+                
+            } else {
+                self?.selfAddFood(foodName: (self?.searchTextField.text)!)
+                let alert = UIAlertController(title: nil, message: "검색 결과가 없습니다!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                self?.present(alert, animated: true)
+            }
+        })
+    }
     
+    private func checkSelectedFoodNamesCount() {
+        if selectedFoodNames.count > 0 {
+            completeButton.backgroundColor = UIColor.signatureBlue
+            completeButton.isEnabled = true
+        } else {
+            completeButton.backgroundColor = UIColor.white
+            completeButton.backgroundColor = .systemGray5
+            completeButton.tintColor = .white
+            completeButton.isEnabled = false
+        }
+    }
+    
+    private func addFoods(index: Int) {
+        let name = self.searchResults[index].foodName
+        let category = self.searchResults[index].foodCategory
+        selectedFoods.append(AddFood(foodName: name, foodCategory: category))
+    }
+    
+    private func selfAddFood(foodName: String) {
+        if let category = selectedCategory {
+            selectedFoods.append(AddFood(foodName: foodName, foodCategory: category))
+            collectionView.reloadData()
+            print(selectedFoods)
+        }
+    }
+    
+    private func checkCategory(categoryName: String) {
+        // TODO: 해당 카테고리 셀을 isTapped = true 상태로 변경
+//        category.forEach { cate in
+//            if categoryName == cate {
+//                categorySelected[category.firstIndex(of: categoryName)!] = true
+//                categoryCollectionView.reloadData()
+//            }
+//        }
+    }
     
     // MARK: @objc methods
     @objc private func textFieldDidChange(_ textField: UITextField) {
@@ -114,26 +193,64 @@ class AddFoodViewController: UIViewController {
 
 extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return category.count
+        if collectionView.tag == 0 { return self.category.count }
+        else { return self.selectedFoodNames.count }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddFoodCollectionViewCell", for: indexPath) as? AddFoodCollectionViewCell else { return UICollectionViewCell() }
-        cell.setupLayout(title: category[indexPath.row])
-        return cell
+        
+        if collectionView.tag == 0 {
+            // 카테고리 셀
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCategoryCollectionViewCell", for: indexPath) as? FoodCategoryCollectionViewCell else { return UICollectionViewCell() }
+            cell.setupLayout(title: category[indexPath.row])
+            cell.delegate = self
+//            if categorySelected[indexPath.row] { cell.setSelectedMode(selected: true) }
+//            else { cell.setSelectedMode(selected: false) }
+            return cell
+        } else if collectionView.tag == 1 {
+            // 검색결과 탭을 통해 하위에 생성되는 "카테고리-상세식품명" 형태의 셀
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectedFoodNameCollectionViewCell", for: indexPath) as? SelectedFoodNameCollectionViewCell else { return UICollectionViewCell() }
+            cell.delegate = self
+            if searchResults.count > 0 {
+//                checkCategory(categoryName: searchResults[indexPath.row].foodCategory!)
+                cell.setupLayout(title: "\(searchResults[indexPath.row].foodCategory!)-\(searchResults[indexPath.row].foodName!)")
+            }
+            cell.tag = indexPath.row
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
     }
 }
 
 extension AddFoodViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15   // TODO: 입력된 검색어를 포함한 검색 결과의 개수 반환
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return searchResults.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddFoodSearchResultTableViewCell", for: indexPath) as? AddFoodSearchResultTableViewCell else { return UITableViewCell() }
         cell.backgroundColor = .none
-        cell.resultLabel.text = "검색어 결과 테스트"
+        cell.resultLabel.text = searchResults[indexPath.row].foodName
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.searchResultContainerView.isHidden = true
+        self.collectionView.isHidden = false
+        
+        // TODO: 선택된 결과값의 카테고리/이름을 포함한 CV cell 추가 시키기
+        // selectedFoodNames에 데이터 추가 -> cv reload
+        if self.selectedFoodNames.count < 5 {
+            selectedFoodNames.append(self.searchResults[indexPath.row].foodName!)
+            self.collectionView.reloadData()
+            self.checkSelectedFoodNamesCount()
+            self.addFoods(index: indexPath.row)
+            
+        } else {
+            let alert = UIAlertController(title: nil, message: "한 번에 최대 5가지의 식품만 추가가 가능합니다!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            present(alert, animated: true)
+        }
     }
 }
 
@@ -141,5 +258,22 @@ extension AddFoodViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         searchResultContainerView.isHidden = true
         return true
+    }
+}
+
+extension AddFoodViewController: FoodCategoryCellDelegate {
+    func didTapCategoryButton(category: String) { selectedCategory = category }
+}
+
+extension AddFoodViewController: SelectedFoodCellDelegate {
+    func didTapDeleteButton(index: Int) {
+        selectedFoodNames.remove(at: index)
+//        category.forEach { cate in
+//            if cate == selectedFoods[index].foodCategory {
+//                categorySelected[index] = false
+//                categoryCollectionView.reloadData()
+//            }
+//        }
+        collectionView.reloadData()
     }
 }

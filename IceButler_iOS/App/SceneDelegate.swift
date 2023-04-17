@@ -14,6 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+
+//        UserDefaults.standard.removeObject(forKey: "UserToken")
+        
         APIManger.shared.setupObserver()
         AuthViewModel.shared.getUserToken()
         
