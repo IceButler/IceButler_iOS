@@ -15,7 +15,6 @@ class CartViewModel: ObservableObject {
     
     @Published var cart: [CartFood]? = []
     @Published var cartFoods: [CartResponseModel] = []
-//    var cartFoods: [CartResponseModel] = []
     @Published var removeFoodIdxes: [Int]? = []
     @Published var removeFoodNames: [String] = []
     @Published var isLongGesture = false
