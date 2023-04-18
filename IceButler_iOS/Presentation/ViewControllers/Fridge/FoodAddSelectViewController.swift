@@ -111,6 +111,7 @@ extension FoodAddSelectViewController: UITableViewDelegate, UITableViewDataSourc
             let foodAddVC = UIStoryboard(name: "FoodAdd", bundle: nil).instantiateViewController(identifier: "FoodAddViewController") as! FoodAddViewController
             
             self.dismiss(animated: true) {
+                FoodViewModel.shared.barcodeFoodInfo = nil
                 self.delegate?.showFoodAddButton()
                 self.delegate?.moveToFoodAddViewController(foodAddVC: foodAddVC)
             }

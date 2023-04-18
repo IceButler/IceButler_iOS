@@ -176,6 +176,7 @@ class FoodAddViewController: UIViewController {
         }
     }
     
+    
     private func setupNavgationBar() {
         if #available(iOS 13.0, *) {
             let app = UIApplication.shared
@@ -223,9 +224,15 @@ class FoodAddViewController: UIViewController {
         }
         
         FoodViewModel.shared.barcodeFood { barcodeFood in
-            self.foodDetailTextView.text = barcodeFood.foodDetailName
-            self.foodDetailTextView.textColor = .black
-            self.foodDetailTextView.backgroundColor = .focusSkyBlue
+            if barcodeFood == nil {
+                self.foodDetailTextView.text = ""
+                self.setupLayout()
+                self.setupPlaceholder()
+            }else {
+                self.foodDetailTextView.text = barcodeFood?.foodDetailName
+                self.foodDetailTextView.textColor = .black
+                self.foodDetailTextView.backgroundColor = .focusSkyBlue
+            }
         }
     }
     

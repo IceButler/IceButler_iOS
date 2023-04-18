@@ -30,11 +30,9 @@ class FoodViewModel: ObservableObject {
         }.store(in: &cancelLabels)
     }
     
-    func barcodeFood(completion: @escaping (BarcodeFoodResponse) -> Void) {
-        $barcodeFoodInfo.filter { barcodeFood in
-            barcodeFood != nil
-        }.sink { barcodeFood in
-            completion(barcodeFood!)
+    func barcodeFood(completion: @escaping (BarcodeFoodResponse?) -> Void) {
+        $barcodeFoodInfo.sink { barcodeFood in
+            completion(barcodeFood ?? nil)
         }.store(in: &cancelLabels)
     }
     
