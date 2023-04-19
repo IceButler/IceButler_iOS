@@ -36,14 +36,26 @@ class FridgeViewController: TabmanViewController {
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
+        self.noFridgeImageView.isHidden = true
+        self.noFridgeLabel.isHidden = true
+        self.fridgeAddButton.isHidden = true
     }
     
     private func setup() {
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: 1)
         
-        noFridgeImageView.isHidden = true
-        noFridgeLabel.isHidden = true
-        fridgeAddButton.isHidden = true
+       
+    }
+    
+    private func setupObserver() {
+//        FridgeViewModel.shared.allFoodList(foodListIdx: 0) { foodList in
+//            self.noFridgeImageView.isHidden = true
+//            self.noFridgeLabel.isHidden = true
+//            self.fridgeAddButton.isHidden = true
+//
+//            self.setupTabman()
+//        }
+//        foodAddButton.isHidden = true
     }
     
     private func setupTabman() {

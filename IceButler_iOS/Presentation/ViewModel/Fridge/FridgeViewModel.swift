@@ -30,7 +30,9 @@ class FridgeViewModel: ObservableObject {
     func allFoodList(foodListIdx: Int, completion: @escaping ([FridgeFood])-> Void) {
         switch foodListIdx {
         case 0:
-            $allFoodList.sink { allFoodList in
+            $allFoodList.filter({ allFoodList in
+                allFoodList.count != 0
+            }).sink { allFoodList in
                 completion(allFoodList)
             }.store(in: &cancelLabels)
             break
