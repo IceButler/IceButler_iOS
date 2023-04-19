@@ -30,6 +30,9 @@ class AlertViewController: UIViewController {
     private var leftButtonAction: Selector?
     private var rightButtonAction: Selector?
     
+    private var rightCompletion: (() -> Void)?
+    private var leftCompletion: (() -> Void)?
+    
 
     @IBOutlet weak var containerView: UIView!
     
@@ -75,11 +78,13 @@ class AlertViewController: UIViewController {
         self.rightButton.layer.cornerRadius = 16
     }
     
-    public func configure(title: String, content: String, leftButtonTitle: String, righttButtonTitle: String) {
+    public func configure(title: String, content: String, leftButtonTitle: String, righttButtonTitle: String, rightCompletion: @escaping () -> Void, leftCompletion: @escaping () -> Void) {
         self.titleText = title
         self.contentText = content
         self.leftButtonTitle = leftButtonTitle
         self.righttButtonTitle = righttButtonTitle
+        self.rightCompletion = rightCompletion
+        self.leftCompletion = leftCompletion
     }
     
     private func setupContents() {
@@ -89,38 +94,19 @@ class AlertViewController: UIViewController {
         self.rightButton.setTitle(self.righttButtonTitle, for: .normal)
     }
     
-    public func setLeftButtonAction(action: Selector) { self.leftButtonAction = action }
-    public func setRightButtonAction(action: Selector) { self.rightButtonAction = action }
-    
-    
     func setButtonAction() {
-        leftButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
-        switch todo {
-        case .delete:
-            rightButton.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
-        case .completeBuying:
-            rightButton.addTarget(self, action: #selector(completeBuying), for: .touchUpInside)
-        default: return
-        }
+        leftButton.addTarget(self, action: #selector(leftAction), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(rightAction), for: .touchUpInside)
     }
     
     // MARK: @objc methods
-    @objc func cancelAction() {
+    @objc func leftAction() {
         self.dismiss(animated: true)
-        CartManager.shared.showCartCVTabBar()
+        leftCompletion!()
     }
-    @objc func deleteAction() {
-        CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
+    @objc func rightAction() {
         self.dismiss(animated: true)
-        CartManager.shared.showCartCVTabBar()
+        rightCompletion!()
     }
-    
-    @objc func completeBuying() {
-        CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
-        
-        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
-        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "SelectAlertViewController") as? CompleteBuyingViewController else { return }
-        alertViewController.completeFoods = CartViewModel.shared.removeFoodNames
-        self.navigationController?.pushViewController(alertViewController, animated: true)
-    }
+
 }

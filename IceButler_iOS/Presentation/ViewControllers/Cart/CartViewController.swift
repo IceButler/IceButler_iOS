@@ -62,8 +62,14 @@ class CartViewController: UIViewController {
         guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
         alertViewController.configure(title: "식품 삭제",
                                       content: "선택하신 식품을 정말 삭제하시겠습니까?",
-                                      leftButtonTitle: "취소", righttButtonTitle: "삭제")
-        alertViewController.todo = .delete
+                                      leftButtonTitle: "취소",
+                                      righttButtonTitle: "삭제",
+                                      rightCompletion: {
+            CartViewModel.shared.deleteFood(cartId: 1)
+            },
+                                      leftCompletion: {
+            })
+
         alertViewController.modalPresentationStyle = .overCurrentContext
         present(alertViewController, animated: true)
     }
@@ -74,8 +80,19 @@ class CartViewController: UIViewController {
         guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
         alertViewController.configure(title: "장보기 완료",
                                       content: "선택하신 식품 장보기를 완료하셨습니까?",
-                                      leftButtonTitle: "취소", righttButtonTitle: "확인")
-        alertViewController.todo = .completeBuying
+                                      leftButtonTitle: "취소",
+                                      righttButtonTitle: "확인",
+                                      rightCompletion: {
+            CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
+            
+            let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
+            guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "SelectAlertViewController") as? CompleteBuyingViewController else { return }
+            alertViewController.completeFoods = CartViewModel.shared.removeFoodNames
+            self.navigationController?.pushViewController(alertViewController, animated: true)
+            },
+                                      leftCompletion: {
+            
+            })
         self.navigationController?.pushViewController(alertViewController, animated: true)
     }
     
