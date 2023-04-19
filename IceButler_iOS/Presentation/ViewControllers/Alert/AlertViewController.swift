@@ -7,20 +7,8 @@
 
 import UIKit
 
-protocol AlertDelegate {
-    func deleteFoodsAction()
-}
-
-enum Todo {
-    case cancel
-    case delete
-    case completeBuying
-}
 
 class AlertViewController: UIViewController {
-    
-    var delegate: AlertDelegate?
-    var todo: Todo?
     
     private var titleText: String = ""
     private var contentText: String = ""
