@@ -19,3 +19,8 @@ struct AuthJoinUserRequestModel: Codable {
 struct AuthLoginRequest: Codable {
     let email, provider: String
 }
+
+struct ModfiyUserRequest: Codable {
+    let nickname: String
+    let profileImgKey: String?
+}

@@ -64,6 +64,15 @@ class AuthService {
         }
     }
     
+    func modfiyUser(parameter: ModfiyUserRequest, completion: @escaping () -> Void) {
+        APIManger.shared.patchData(urlEndpointString: "/users/profile", responseDataType: AuthJoinUserResponseModel.self, requestDataType: ModfiyUserRequest.self, parameter: parameter) { response in
+            print(response)
+            if response.status == "OK" {
+                completion()
+            }
+        }
+    }
+    
     func requestLogout(completion: @escaping () -> Void) {
         APIManger.shared.postData(urlEndpointString: "/users/logout", responseDataType: AuthNicknameResponseModel.self, requestDataType: AuthLoginRequest.self, parameter: nil) { _ in
             completion()

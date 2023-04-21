@@ -35,6 +35,10 @@ class MyPageViewController: UIViewController {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AuthViewModel.shared.isModify = false
+    }
+    
     private func configure() {
         UserViewModel.shared.getUserInfo()
         
@@ -95,7 +99,11 @@ class MyPageViewController: UIViewController {
     
     @IBAction func didTapEditProfileButton(_ sender: UIButton) {
         // TODO: 프로필 편집 화면으로 이동
-        print("프로필 편집 화면으로 이동")
+        let authUserInfoVC = UIStoryboard(name: "AuthUserInfo", bundle: nil).instantiateViewController(identifier: "AuthUserInfoViewController") as! AuthUserInfoViewController
+        
+        authUserInfoVC.setEditMode(mode: .Modify)
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.pushViewController(authUserInfoVC, animated: true)
     }
     
     private func showPolicyWebVC(policyType: PolicyType) {
@@ -146,7 +154,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                     AuthViewModel.shared.logout()
                 } leftCompletion: {
                 }
-                alertVC.modalPresentationStyle = .fullScreen
+                alertVC.modalPresentationStyle = .overFullScreen
                 
                 self.present(alertVC, animated: true)
 

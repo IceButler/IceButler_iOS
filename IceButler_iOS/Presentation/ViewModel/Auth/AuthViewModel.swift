@@ -19,6 +19,7 @@ class AuthViewModel: ObservableObject {
     @Published var isExistence: Bool?
     @Published var isJoin: Bool = false
     @Published var accessToken: String?
+    @Published var isModify: Bool = false
     
     private var cancelLabels: Set<AnyCancellable> = []
     
@@ -62,6 +63,12 @@ class AuthViewModel: ObservableObject {
     func isJoin(completion: @escaping (Bool) -> Void) {
         $isJoin.sink { isJoin in
             completion(isJoin)
+        }.store(in: &cancelLabels)
+    }
+    
+    func isModify(completion: @escaping (Bool) -> Void) {
+        $isModify.sink { isModify in
+            completion(isModify)
         }.store(in: &cancelLabels)
     }
     
@@ -112,26 +119,34 @@ extension AuthViewModel {
         }
     }
     
-    func getUploadImageUrl(imageDir: ImageDir, image: UIImage) {
+    func getUploadImageUrl(imageDir: ImageDir, image: UIImage, mode: ProfileEditMode) {
         let parameter: Parameters = ["ext": "jpeg", "dir": imageDir.rawValue]
         ImageService.shared.getImageUrl(parameter: parameter) {[self] response in
             if let response = response {
                 profileImgKey = response.imageKey
-                uploadProfileImage(image: image, url: response.presignedUrl)
+                uploadProfileImage(image: image, url: response.presignedUrl, mode: mode)
             }
         }
     }
     
-    func uploadProfileImage(image: UIImage, url: String) {
+    func uploadProfileImage(image: UIImage, url: String, mode: ProfileEditMode) {
         ImageService.shared.uploadImage(image: image, url: url) {
-            self.joinUser()
+            if mode == .Join {
+                self.joinUser()
+            }else {
+                self.modifyUser()
+            }
         }
     }
     
     func joinUser() {
-        guard let profileImageKey = self.profileImgKey else  {return}
-        
-        let parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickname!, profileImgKey: profileImageKey)
+        let parameter: AuthJoinUserRequestModel
+
+        if let profileImageKey = self.profileImgKey {
+            parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickname!, profileImgKey: profileImageKey)
+        }else {
+            parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickname!, profileImgKey: nil)
+        }
         
         self.authService.joinUser(parameter: parameter) { response in
             if let response = response {
@@ -140,6 +155,22 @@ extension AuthViewModel {
             }
         }
     }
+    
+    func modifyUser() {
+        let parameter: ModfiyUserRequest
+
+        if let profileImageKey = self.profileImgKey {
+            parameter = ModfiyUserRequest(nickname: userNickname!, profileImgKey: profileImageKey)
+        }else {
+            parameter = ModfiyUserRequest(nickname: userNickname!, profileImgKey: nil)
+        }
+        
+        self.authService.modfiyUser(parameter: parameter) {
+            UserViewModel.shared.getUserInfo()
+            self.isModify = true
+        }
+    }
+    
     
     func setUserToken(token: AuthJoinUserResponseModel) {
         let encoder = JSONEncoder()
