@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct AuthNickNameResponseModel: Codable {
-    let nickName: String
+struct AuthNicknameResponseModel: Codable {
+    let nickname: String
     let existence: Bool
 }
 

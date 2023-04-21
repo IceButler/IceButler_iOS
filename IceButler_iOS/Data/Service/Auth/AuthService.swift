@@ -44,8 +44,16 @@ class AuthService {
         }
     }
     
-    func requestCheckNickName(parameter: AuthNickNameRequsetModel, completion: @escaping (AuthNickNameResponseModel?) -> Void) {
-        APIManger.shared.postData(urlEndpointString: "/users/nickname", responseDataType: AuthNickNameResponseModel.self, requestDataType: AuthNickNameRequsetModel.self, parameter: parameter) { response in
+    
+    func requestLogin(parameter: AuthLoginRequest, completion: @escaping (AuthJoinUserResponseModel?) -> Void) {
+        APIManger.shared.postData(urlEndpointString: "/users/join", responseDataType: AuthJoinUserResponseModel.self, requestDataType: AuthLoginRequest.self, parameter: parameter) { response in
+            completion(response.data)
+        }
+    }
+    
+    
+    func requestCheckNickname(parameter: AuthNicknameRequsetModel, completion: @escaping (AuthNicknameResponseModel?) -> Void) {
+        APIManger.shared.postData(urlEndpointString: "/users/nickname", responseDataType: AuthNicknameResponseModel.self, requestDataType: AuthNicknameRequsetModel.self, parameter: parameter) { response in
             completion(response.data)
         }
     }
@@ -53,6 +61,12 @@ class AuthService {
     func joinUser(parameter: AuthJoinUserRequestModel, completion: @escaping (AuthJoinUserResponseModel?) -> Void) {
         APIManger.shared.postData(urlEndpointString: "/users/login", responseDataType: AuthJoinUserResponseModel.self, requestDataType: AuthJoinUserRequestModel.self, parameter: parameter) { response in
             completion(response.data)
+        }
+    }
+    
+    func requestLogout(completion: @escaping () -> Void) {
+        APIManger.shared.postData(urlEndpointString: "/users/logout", responseDataType: AuthNicknameResponseModel.self, requestDataType: AuthLoginRequest.self, parameter: nil) { _ in
+            completion()
         }
     }
 }

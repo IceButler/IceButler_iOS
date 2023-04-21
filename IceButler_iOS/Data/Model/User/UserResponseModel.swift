@@ -9,6 +9,6 @@ import Foundation
 
 struct UserInfoResponseModel: Codable {
     let userIdx: Int
-    let nickName, email: String?
+    let nickname, email: String?
     let profileImage: String?
 }
