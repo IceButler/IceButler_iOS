@@ -17,15 +17,15 @@ class AuthUserInfoViewController: UIViewController {
     @IBOutlet weak var userEmailLabel: UILabel!
     
     
-    @IBOutlet weak var userNickNameTextField: UITextField!
-    @IBOutlet weak var userNickNameCheckButton: UIButton!
-    @IBOutlet weak var userNickNameAlertLabel: UILabel!
+    @IBOutlet weak var userNicknameTextField: UITextField!
+    @IBOutlet weak var userNicknameCheckButton: UIButton!
+    @IBOutlet weak var userNicknameAlertLabel: UILabel!
     
     @IBOutlet weak var joinButton: UIButton!
     
     private let imagePickerController = ImagePickerController()
     
-    private let nickNameMaxLength = 8
+    private let nicknameMaxLength = 8
     
     private var isExistence = true
     private var profileImage: UIImage?
@@ -41,15 +41,15 @@ class AuthUserInfoViewController: UIViewController {
     }
     
     func setup() {
-        userNickNameTextField.delegate = self
+        userNicknameTextField.delegate = self
     }
     
     func setupLayout() {
         userImageBorderView.layer.cornerRadius = userImageBorderView.frame.width / 2
         userImageAddButton.layer.cornerRadius = userImageAddButton.frame.width / 2
         
-        userNickNameTextField.layer.cornerRadius = 10
-        userNickNameCheckButton.layer.cornerRadius = 10
+        userNicknameTextField.layer.cornerRadius = 10
+        userNicknameCheckButton.layer.cornerRadius = 10
         joinButton.layer.cornerRadius = 30
     }
     
@@ -98,13 +98,13 @@ class AuthUserInfoViewController: UIViewController {
         
         AuthViewModel.shared.isExistence { isExistence in
             if isExistence {
-                self.userNickNameTextField.backgroundColor = .unavailableRed
-                self.userNickNameAlertLabel.textColor = .red
-                self.userNickNameAlertLabel.text = "이미 존재하는 닉네임입니다."
+                self.userNicknameTextField.backgroundColor = .unavailableRed
+                self.userNicknameAlertLabel.textColor = .red
+                self.userNicknameAlertLabel.text = "이미 존재하는 닉네임입니다."
             }else {
-                self.userNickNameTextField.backgroundColor = .focusSkyBlue
-                self.userNickNameAlertLabel.textColor = .signatureDustBlue
-                self.userNickNameAlertLabel.text = "사용할 수 있는 닉네임입니다."
+                self.userNicknameTextField.backgroundColor = .focusSkyBlue
+                self.userNicknameAlertLabel.textColor = .signatureDustBlue
+                self.userNicknameAlertLabel.text = "사용할 수 있는 닉네임입니다."
                 self.joinButton.backgroundColor = .availableBlue
             }
             self.isExistence = isExistence
@@ -161,8 +161,8 @@ class AuthUserInfoViewController: UIViewController {
     
     
     @IBAction func checkNickName(_ sender: Any) {
-        if userNickNameTextField.text != nil {
-            AuthViewModel.shared.checkNickName(nickName: userNickNameTextField.text!)
+        if userNicknameTextField.text != nil {
+            AuthViewModel.shared.checkNickname(nickname: userNicknameTextField.text!)
         }else {
             showAlert(title: "닉네임 입력", message: "닉네임을 입력 후 중복확인을 눌러주세요.")
         }
@@ -198,7 +198,7 @@ extension AuthUserInfoViewController: UITextFieldDelegate {
                 return true
             }
         }
-        guard textField.text!.count < nickNameMaxLength else { return false }
+        guard textField.text!.count < nicknameMaxLength else { return false }
         if string.hasCharacters() == false {
             return false
         }

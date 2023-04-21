@@ -48,7 +48,7 @@ class FoodViewModel: ObservableObject {
     
     func foodOwnerListName(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
         $foodOwnerList.sink { foodOwnerList in
-            completion((foodOwnerList[index].nickName) ?? "")
+            completion((foodOwnerList[index].nickname) ?? "")
         }.store(in: &store)
     }
     

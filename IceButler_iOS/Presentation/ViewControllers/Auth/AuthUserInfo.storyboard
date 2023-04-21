@@ -144,9 +144,9 @@
                         <outlet property="userImageAddButton" destination="Iuj-wg-bBc" id="j4F-DR-75P"/>
                         <outlet property="userImageBorderView" destination="hah-83-64d" id="OVf-Ih-mgs"/>
                         <outlet property="userImageView" destination="cxz-7l-h7p" id="TQl-FA-MOD"/>
-                        <outlet property="userNickNameAlertLabel" destination="NsG-p4-bBe" id="zjf-kW-nz6"/>
-                        <outlet property="userNickNameCheckButton" destination="r0d-lt-gU9" id="k6e-29-fV1"/>
-                        <outlet property="userNickNameTextField" destination="ArC-ae-2Kl" id="rLv-Z5-gLE"/>
+                        <outlet property="userNicknameAlertLabel" destination="NsG-p4-bBe" id="5eq-hc-GKq"/>
+                        <outlet property="userNicknameCheckButton" destination="r0d-lt-gU9" id="Pej-Ap-URE"/>
+                        <outlet property="userNicknameTextField" destination="ArC-ae-2Kl" id="js4-2R-zI0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

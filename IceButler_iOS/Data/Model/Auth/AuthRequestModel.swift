@@ -7,11 +7,15 @@
 
 import Foundation
 
-struct AuthNickNameRequsetModel: Codable {
-    let nickName: String
+struct AuthNicknameRequsetModel: Codable {
+    let nickname: String
 }
 
 struct AuthJoinUserRequestModel: Codable {
     let email, provider, nickname: String
     let profileImgUrl: String?
+}
+
+struct AuthLoginRequest: Codable {
+    let email, provider: String
 }

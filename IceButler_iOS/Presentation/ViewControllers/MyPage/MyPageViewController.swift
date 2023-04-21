@@ -46,7 +46,7 @@ class MyPageViewController: UIViewController {
                     self.profileImgView.kf.setImage(with: imageUrl)
                 }
             }
-            self.nicknameLabel.text = user.nickName
+            self.nicknameLabel.text = user.nickname
             self.emailLabel.text = user.email
         }
     }

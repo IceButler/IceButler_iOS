@@ -15,7 +15,7 @@ class AuthViewModel: ObservableObject {
     private let authService = AuthService()
     
     @Published var userEmail: String?
-    @Published var userNickName: String?
+    @Published var userNickname: String?
     @Published var isExistence: Bool?
     @Published var isJoin: Bool = false
     @Published var accessToken: String?
@@ -43,11 +43,11 @@ class AuthViewModel: ObservableObject {
         }.store(in: &cancelLabels)
     }
     
-    func userNickName(completion: @escaping (String) -> Void) {
-        $userNickName.filter { nickName in
-            nickName != nil
-        }.sink { nickName in
-            completion(nickName!)
+    func userNickname(completion: @escaping (String) -> Void) {
+        $userNickname.filter { nickname in
+            nickname != nil
+        }.sink { nickname in
+            completion(nickname!)
         }.store(in: &cancelLabels)
     }
     
@@ -80,19 +80,33 @@ extension AuthViewModel {
     
     func loginWithKakao() {
         authService.loginWithKakao { userEmail in
-            self.userEmail = userEmail
             self.authProvider = .kakao
+            self.login(userEmail: userEmail)
         }
     }
     
-    func checkNickName(nickName: String) {
-        let parameter = AuthNickNameRequsetModel(nickName: nickName)
-        authService.requestCheckNickName(parameter: parameter) { response in
+    func login(userEmail: String) {
+        let parameter = AuthLoginRequest(email: userEmail, provider: self.authProvider!.rawValue)
+        
+        authService.requestLogin(parameter: parameter) { response in
+            if let response = response {
+                self.accessToken = response.accessToken
+                self.setUserToken(token: response)
+            }else {
+                self.userEmail = userEmail
+            }
+        }
+    }
+    
+    
+    func checkNickname(nickname: String) {
+        let parameter = AuthNicknameRequsetModel(nickname: nickname)
+        authService.requestCheckNickname(parameter: parameter) { response in
             if response != nil {
-                self.userNickName = response?.nickName
+                self.userNickname = response?.nickname
                 self.isExistence = response?.existence
             }else {
-                self.userNickName = nickName
+                self.userNickname = nickname
                 self.isExistence = false
             }
         }
@@ -117,7 +131,7 @@ extension AuthViewModel {
     func joinUser() {
         guard let profileImageKey = self.profileImgKey else  {return}
         
-        let parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickName!, profileImgUrl: profileImageKey)
+        let parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickname!, profileImgUrl: profileImageKey)
         
         self.authService.joinUser(parameter: parameter) { response in
             if let response = response {
