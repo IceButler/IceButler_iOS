@@ -52,6 +52,8 @@ class AlertViewController: UIViewController {
     }
     
     private func setupLayouts() {
+        self.modalPresentationStyle = .overFullScreen
+        
         self.navigationController?.isNavigationBarHidden = true
         self.containerView.layer.cornerRadius = 15
         self.titleLabel.textColor = .signatureBlue

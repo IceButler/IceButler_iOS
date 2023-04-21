@@ -131,7 +131,7 @@ extension AuthViewModel {
     func joinUser() {
         guard let profileImageKey = self.profileImgKey else  {return}
         
-        let parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickname!, profileImgUrl: profileImageKey)
+        let parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickname!, profileImgKey: profileImageKey)
         
         self.authService.joinUser(parameter: parameter) { response in
             if let response = response {
@@ -161,6 +161,13 @@ extension AuthViewModel {
                     self.isJoin = true
                 }
             }
+        }
+    }
+
+    func logout() {
+        authService.requestLogout {
+            self.isJoin = false
+            UserDefaults.standard.removeObject(forKey: "UserToken")
         }
     }
 }

@@ -141,7 +141,15 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 2:
             switch indexPath.row {
             case 0:
-                print("로그아웃 팝업 띄우기")
+                let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(identifier: "AlertViewController") as! AlertViewController
+                alertVC.configure(title: "로그아웃", content: "로그아웃 하시겠습니까?", leftButtonTitle: "취소", righttButtonTitle: "확인") {
+                    AuthViewModel.shared.logout()
+                } leftCompletion: {
+                }
+                alertVC.modalPresentationStyle = .fullScreen
+                
+                self.present(alertVC, animated: true)
+
             case 1:
                 print("회원탈퇴 팝업 띄우기")
             default: return

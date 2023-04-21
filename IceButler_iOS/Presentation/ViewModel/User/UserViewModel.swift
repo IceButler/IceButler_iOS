@@ -30,4 +30,6 @@ class UserViewModel: ObservableObject {
             self.userInfo = userInfo
         }
     }
+    
+    
 }

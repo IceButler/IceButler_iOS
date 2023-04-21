@@ -63,4 +63,10 @@ class AuthService {
             completion(response.data)
         }
     }
+    
+    func requestLogout(completion: @escaping () -> Void) {
+        APIManger.shared.postData(urlEndpointString: "/users/logout", responseDataType: AuthNicknameResponseModel.self, requestDataType: AuthLoginRequest.self, parameter: nil) { _ in
+            completion()
+        }
+    }
 }

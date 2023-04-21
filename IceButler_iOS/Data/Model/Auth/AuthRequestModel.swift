@@ -13,7 +13,7 @@ struct AuthNicknameRequsetModel: Codable {
 
 struct AuthJoinUserRequestModel: Codable {
     let email, provider, nickname: String
-    let profileImgUrl: String?
+    let profileImgKey: String?
 }
 
 struct AuthLoginRequest: Codable {
