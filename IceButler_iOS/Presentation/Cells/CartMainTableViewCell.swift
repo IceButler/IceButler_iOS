@@ -25,7 +25,7 @@ class CartMainTableViewCell: UITableViewCell {
     }
     
     private func setup() {
-        CartManager.shared.setCartMainTV(cartTV: self)
+        CartViewModel.shared.setCartMainTV(cartTV: self)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

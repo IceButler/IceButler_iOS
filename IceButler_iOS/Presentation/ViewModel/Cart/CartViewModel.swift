@@ -24,6 +24,25 @@ class CartViewModel: ObservableObject {
     private var longGestureCancellabels: Set<AnyCancellable> = []
     
     
+    /// CartManager의 변수 및 메소드
+    var cartIndex: String?
+    
+    var cartViewController: CartViewController? = nil
+    var alertViewController: AlertViewController? = nil
+    var cartMainTV: CartMainTableViewCell? = nil
+    
+    var cartFoodData: [String : [String]] = [:]
+    
+    func setCartVC(cartVC: CartViewController) { cartViewController = cartVC }
+    func setAlertVC(alertVC: AlertViewController) { alertViewController = alertVC }
+    func setCartMainTV(cartTV: CartMainTableViewCell) { cartMainTV = cartTV }
+    
+    func showCartCVTabBar() { cartViewController?.showTabBar() }
+    func showCartVCAlertView() { cartViewController?.showAlertView() }
+    
+    func reloadFoodCV() { cartMainTV?.reloadCV() }
+    ///
+    
     func cart(completion: @escaping ([CartFood]?) -> Void) {
         $cart.sink { cart in
             if cart != nil {
@@ -104,7 +123,7 @@ class CartViewModel: ObservableObject {
         let cartIdx = 1 // 임시 cartId
         cartService.getCartFoodList(cartId: cartIdx, completion: { [weak self] response in
             self?.cartFoods = response ?? []
-            CartManager.shared.reloadFoodCV()
+            self?.reloadFoodCV()
 //            CartManager.shared.cartViewController?.reloadFoodData()
 //            CartManager.shared.cartViewController?.cartMainTableView.reloadData()
         })

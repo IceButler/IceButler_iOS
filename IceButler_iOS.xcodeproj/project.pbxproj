@@ -99,7 +99,6 @@
 		A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A764829D6B36E00D127EA /* UIColor+.swift */; };
 		A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A765429D749C700D127EA /* CartMainTableViewCell.swift */; };
 		A28A765729D749C700D127EA /* CartMainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A28A765529D749C700D127EA /* CartMainTableViewCell.xib */; };
-		A2C257A029DA71680040A987 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2579F29DA71680040A987 /* CartManager.swift */; };
 		A2CA99DC29DE7BA80020DEEC /* CompleteBuyingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CA99DB29DE7BA80020DEEC /* CompleteBuyingViewController.swift */; };
 		A2CA99FE29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CA99FD29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift */; };
 		A2F9190829EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9190629EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift */; };
@@ -229,7 +228,6 @@
 		A28A764829D6B36E00D127EA /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		A28A765429D749C700D127EA /* CartMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartMainTableViewCell.swift; sourceTree = "<group>"; };
 		A28A765529D749C700D127EA /* CartMainTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartMainTableViewCell.xib; sourceTree = "<group>"; };
-		A2C2579F29DA71680040A987 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		A2CA99DB29DE7BA80020DEEC /* CompleteBuyingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteBuyingViewController.swift; sourceTree = "<group>"; };
 		A2CA99FD29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteBuyingTableViewCell.swift; sourceTree = "<group>"; };
 		A2F9190629EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFoodNameCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -679,7 +677,6 @@
 			children = (
 				A28A763E29D54DEF00D127EA /* Cart.storyboard */,
 				A28A764129D54EFA00D127EA /* CartViewController.swift */,
-				A2C2579F29DA71680040A987 /* CartManager.swift */,
 				A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */,
 			);
 			path = Cart;
@@ -1011,7 +1008,6 @@
 				73B7374C29E2EB570097806F /* FridgeService.swift in Sources */,
 				73B7374F29E2EC5A0097806F /* FridgeViewModel.swift in Sources */,
 				73CF93B629E94D580007CB7A /* String+.swift in Sources */,
-				A2C257A029DA71680040A987 /* CartManager.swift in Sources */,
 				73B7372329E1B2040097806F /* FoodOwnerCell.swift in Sources */,
 				73F62A5329DFDADF003D779F /* FoodCategoryCell.swift in Sources */,
 				73F62A5829E00F94003D779F /* UIButton+.swift in Sources */,

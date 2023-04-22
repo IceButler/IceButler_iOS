@@ -48,7 +48,7 @@ class CartViewController: UIViewController {
         }
     }
     
-    func setup() { CartManager.shared.setCartVC(cartVC: self) }
+    func setup() { CartViewModel.shared.setCartVC(cartVC: self) }
     
     @IBAction func didTapAddFoodButton(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "Cart", bundle: nil)
