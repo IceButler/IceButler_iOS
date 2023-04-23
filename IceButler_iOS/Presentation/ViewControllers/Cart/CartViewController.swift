@@ -23,7 +23,7 @@ class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        congifure()
+        configure()
         setup()
         setupNavigationBar()
         setupLayout()
@@ -31,24 +31,46 @@ class CartViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        congifure()
+        configure()
         self.alertView.isHidden = true
         self.addFoodButton.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    func congifure() {
+    func configure() {
 //        self.cartFoods.removeAll()
-        CartViewModel.shared.fetchData()
         
-        CartViewModel.shared.getCartFoods { cartFoods in
-            self.cartFoods = cartFoods
-            self.cartMainTableView.reloadData()
-            self.viewHeightConstraint.constant = CGFloat(170 * self.cartFoods.count)
+        
+        APIManger.shared.getData(urlEndpointString: "/carts/78/foods",
+                                 responseDataType: [CartResponseModel].self,
+                                 requestDataType: [CartResponseModel].self,
+                                 parameter: nil) { [weak self] response in
+            self?.cartFoods.removeAll()
+            self?.cartFoods = response.data!
+    
+            print("이거 뭔데; \(self?.cartFoods)")
+            self?.cartMainTableView.reloadData()
+            
+            self?.viewHeightConstraint.constant = CGFloat(170 * (self?.cartFoods.count ?? 0))
         }
+        
+        
+//        CartViewModel.shared.fetchData()
+        
+//        CartViewModel.shared.getCartFoods { cartFoods in
+//            self.cartFoods = cartFoods
+//            self.cartMainTableView.reloadData()
+//            self.viewHeightConstraint.constant = CGFloat(170 * self.cartFoods.count)
+//        }
     }
     
     func setup() { CartViewModel.shared.setCartVC(cartVC: self) }
+    
+    func resetTableView(data: [CartResponseModel]) {
+        cartFoods.removeAll()
+        cartFoods = data
+        self.cartMainTableView.reloadData()
+    }
     
     @IBAction func didTapAddFoodButton(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "Cart", bundle: nil)
@@ -65,7 +87,7 @@ class CartViewController: UIViewController {
                                       leftButtonTitle: "취소",
                                       righttButtonTitle: "삭제",
                                       rightCompletion: {
-            CartViewModel.shared.deleteFood(cartId: 1)
+            CartViewModel.shared.deleteFood(cartId: 78)
             },
                                       leftCompletion: {
             })
@@ -83,7 +105,7 @@ class CartViewController: UIViewController {
                                       leftButtonTitle: "취소",
                                       righttButtonTitle: "확인",
                                       rightCompletion: {
-            CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
+            CartViewModel.shared.deleteFood(cartId: 78)  // 임시 ID
             
             let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
             guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "SelectAlertViewController") as? CompleteBuyingViewController else { return }
@@ -156,6 +178,8 @@ class CartViewController: UIViewController {
         cartMainTableView.delegate = self
         cartMainTableView.dataSource = self
         cartMainTableView.register(UINib(nibName: "CartMainTableViewCell", bundle: nil), forCellReuseIdentifier: "CartMainTableViewCell")
+//        cartMainTableView.register(CartMainTableViewCell.self, forCellReuseIdentifier: "CartMainTableViewCell")
+
     }
     
     public func reloadFoodData() {
@@ -173,7 +197,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartMainTableViewCell", for: indexPath) as? CartMainTableViewCell else { return UITableViewCell() }
         cell.setTitle(title: self.cartFoods[indexPath.row].category)
         cell.cartFoods = self.cartFoods[indexPath.row].cartFoods
-//        cell.cartFoods = CartViewModel.shared.getCartFoodsWithCategory(index: indexPath.row)
+        cell.reloadCV()
         cell.backgroundColor = cell.contentView.backgroundColor
         return cell
     }

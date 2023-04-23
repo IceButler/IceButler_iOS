@@ -72,10 +72,14 @@ extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = foodCollectionView.dequeueReusableCell(withReuseIdentifier: "FoodCollectionViewCell", for: indexPath) as? FoodCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.foodImageButton.layer.cornerRadius = cell.foodImageButton.frame.width / 2
+//        cell.foodImageButton.layer.cornerRadius = cell.foodImageButton.frame.width / 2
         cell.isSelectedFood = false
-        cell.foodTitleLabel.text = cartFoods[indexPath.row].foodName
+//        cell.foodTitleLabel.text = cartFoods[indexPath.row].foodName
+        cell.configure(name: cartFoods[indexPath.row].foodName!)
+        
         cell.tag = cartFoods[indexPath.row].foodIdx ?? -1
+        
+        print("\(indexPath.row) >> cv cell.cartFood --> \(self.cartFoods)")
         return cell
     }
     
