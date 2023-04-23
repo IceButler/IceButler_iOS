@@ -139,7 +139,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             switch indexPath.row {
             case 0:
-                print("마이 냉장고 화면으로 전환")
+                let myRefriVC = UIStoryboard(name: "MyRefrigerator", bundle: nil).instantiateViewController(identifier: "MyRefrigeratorViewController") as! MyRefrigeratorViewController
+                self.navigationController?.pushViewController(myRefriVC, animated: true)
             case 1:
                 print("마이 레시피 화면으로 전환")
             default: return
