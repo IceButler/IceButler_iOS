@@ -55,6 +55,12 @@
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장 볼 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhy-s4-QRN">
+                                                <rect key="frame" x="91.333333333333329" y="490.66666666666663" width="210.33333333333337" height="24"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <color key="textColor" red="0.59607843137254901" green="0.68235294117647061" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
@@ -142,8 +148,10 @@
                             <constraint firstItem="1ng-35-uro" firstAttribute="leading" secondItem="jik-K7-b5P" secondAttribute="leading" id="4w1-9q-cIS"/>
                             <constraint firstItem="1ng-35-uro" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="6oa-IK-Ste"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="tiL-ij-FjJ" secondAttribute="trailing" constant="20" id="DZA-vn-2dV"/>
+                            <constraint firstItem="lhy-s4-QRN" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="E6h-b5-4SX"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jik-K7-b5P" secondAttribute="trailing" id="OTU-zj-bbo"/>
                             <constraint firstItem="jik-K7-b5P" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="QN3-eC-yPf"/>
+                            <constraint firstItem="lhy-s4-QRN" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="gWd-Nq-0GU"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="tiL-ij-FjJ" secondAttribute="bottom" constant="70" id="n2o-6r-nl5"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1ng-35-uro" secondAttribute="trailing" id="tp8-Jw-B7O"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="1ng-35-uro" secondAttribute="bottom" id="vVh-oL-O7v"/>
@@ -164,6 +172,7 @@
                         <outlet property="cartMainTableView" destination="4rK-Xs-Q3R" id="rrR-D0-tbR"/>
                         <outlet property="completeBuyingButton" destination="1wn-ro-8nx" id="NUI-ZQ-rnB"/>
                         <outlet property="deleteButton" destination="Y2w-lu-s5Z" id="Noc-6Q-Sc4"/>
+                        <outlet property="nothingFoodLabel" destination="lhy-s4-QRN" id="em5-v4-ZKO"/>
                         <outlet property="viewHeightConstraint" destination="m25-41-3Se" id="hEj-Rx-dPA"/>
                     </connections>
                 </viewController>

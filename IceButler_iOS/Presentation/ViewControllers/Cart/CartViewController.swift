@@ -10,6 +10,7 @@ import UIKit
 
 class CartViewController: UIViewController {
     @IBOutlet weak var cartMainTableView: UITableView!
+    @IBOutlet weak var nothingFoodLabel: UILabel!
     @IBOutlet weak var addFoodButton: UIButton!
     
     @IBOutlet weak var alertView: UIView!
@@ -39,18 +40,6 @@ class CartViewController: UIViewController {
     
     func configure() {
 //        self.cartFoods.removeAll()
-        
-        APIManger.shared.getData(urlEndpointString: "/carts/78/foods",
-                                 responseDataType: [CartResponseModel].self,
-                                 requestDataType: [CartResponseModel].self,
-                                 parameter: nil) { [weak self] response in
-            self?.cartFoods.removeAll()
-            self?.cartFoods = response.data!
-            self?.cartMainTableView.reloadData()
-            self?.viewHeightConstraint.constant = CGFloat(170 * (self?.cartFoods.count ?? 0))
-        }
-        
-        
 //        CartViewModel.shared.fetchData()
         
 //        CartViewModel.shared.getCartFoods { cartFoods in
@@ -58,6 +47,32 @@ class CartViewController: UIViewController {
 //            self.cartMainTableView.reloadData()
 //            self.viewHeightConstraint.constant = CGFloat(170 * self.cartFoods.count)
 //        }
+        
+        APIManger.shared.getData(urlEndpointString: "/carts/78/foods",
+                                 responseDataType: [CartResponseModel].self,
+                                 requestDataType: [CartResponseModel].self,
+                                 parameter: nil) { [weak self] response in
+            
+            switch response.statusCode {
+            case 200:
+                self?.cartFoods.removeAll()
+                self?.cartFoods = response.data!
+                self?.cartMainTableView.reloadData()
+                self?.viewHeightConstraint.constant = CGFloat(170 * (self?.cartFoods.count ?? 0))
+                if self?.cartFoods.count == 0 {
+                    self?.cartMainTableView.isHidden = true
+                    self?.nothingFoodLabel.isHidden = false
+                } else {
+                    self?.cartMainTableView.isHidden = false
+                    self?.nothingFoodLabel.isHidden = true
+                }
+            case 404:
+                print("냉장고 없을 때 화면 구현 예정")
+                
+            default: return
+            }
+            
+        }
     }
     
     func setup() { CartViewModel.shared.setCartVC(cartVC: self) }
