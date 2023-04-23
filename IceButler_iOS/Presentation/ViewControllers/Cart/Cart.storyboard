@@ -56,11 +56,49 @@
                                                 </prototypes>
                                             </tableView>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장 볼 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhy-s4-QRN">
-                                                <rect key="frame" x="91.333333333333329" y="490.66666666666663" width="210.33333333333337" height="24"/>
+                                                <rect key="frame" x="91.333333333333329" y="345.66666666666669" width="210.33333333333337" height="24"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <color key="textColor" red="0.59607843137254901" green="0.68235294117647061" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5By-y0-7hb">
+                                                <rect key="frame" x="76.666666666666686" y="257.66666666666669" width="240" height="200"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고를 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vK-D3-OYj">
+                                                        <rect key="frame" x="28" y="88" width="184" height="24"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <color key="textColor" red="0.59607843140000005" green="0.68235294120000001" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nef-as-9SS">
+                                                        <rect key="frame" x="59.666666666666664" y="125.99999999999999" width="120.66666666666669" height="34.333333333333329"/>
+                                                        <color key="backgroundColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843137254897" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system" title="냉장고 추가">
+                                                            <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
+                                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </buttonConfiguration>
+                                                    </button>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noFridge" translatesAutoresizingMaskIntoConstraints="NO" id="y2j-Fc-2eH">
+                                                        <rect key="frame" x="97.333333333333329" y="16" width="44.999999999999986" height="64"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="45" id="M8V-vZ-GWh"/>
+                                                            <constraint firstAttribute="height" constant="64" id="ZWq-5G-l8W"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="Nef-as-9SS" firstAttribute="top" secondItem="8vK-D3-OYj" secondAttribute="bottom" constant="14" id="12c-77-WKA"/>
+                                                    <constraint firstItem="y2j-Fc-2eH" firstAttribute="centerX" secondItem="5By-y0-7hb" secondAttribute="centerX" id="K8Z-L5-oSu"/>
+                                                    <constraint firstItem="8vK-D3-OYj" firstAttribute="top" secondItem="y2j-Fc-2eH" secondAttribute="bottom" constant="8" id="Ndz-Lv-EuD"/>
+                                                    <constraint firstItem="8vK-D3-OYj" firstAttribute="centerX" secondItem="5By-y0-7hb" secondAttribute="centerX" id="QF6-BE-AjC"/>
+                                                    <constraint firstItem="8vK-D3-OYj" firstAttribute="centerY" secondItem="5By-y0-7hb" secondAttribute="centerY" id="Ubd-Fu-T71"/>
+                                                    <constraint firstAttribute="height" constant="200" id="fm1-CI-ge4"/>
+                                                    <constraint firstItem="Nef-as-9SS" firstAttribute="centerX" secondItem="5By-y0-7hb" secondAttribute="centerX" id="gsP-5O-bVB"/>
+                                                    <constraint firstAttribute="width" constant="240" id="nSZ-Jy-dIh"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
@@ -149,8 +187,10 @@
                             <constraint firstItem="1ng-35-uro" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="6oa-IK-Ste"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="tiL-ij-FjJ" secondAttribute="trailing" constant="20" id="DZA-vn-2dV"/>
                             <constraint firstItem="lhy-s4-QRN" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="E6h-b5-4SX"/>
+                            <constraint firstItem="5By-y0-7hb" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="GcO-lJ-GcH"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jik-K7-b5P" secondAttribute="trailing" id="OTU-zj-bbo"/>
                             <constraint firstItem="jik-K7-b5P" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="QN3-eC-yPf"/>
+                            <constraint firstItem="5By-y0-7hb" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="VP0-5b-BTf"/>
                             <constraint firstItem="lhy-s4-QRN" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="gWd-Nq-0GU"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="tiL-ij-FjJ" secondAttribute="bottom" constant="70" id="n2o-6r-nl5"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1ng-35-uro" secondAttribute="trailing" id="tp8-Jw-B7O"/>
@@ -168,10 +208,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addFoodButton" destination="tiL-ij-FjJ" id="ci0-hE-ddF"/>
+                        <outlet property="addRefrigeratorButton" destination="Nef-as-9SS" id="lXu-v1-0bJ"/>
                         <outlet property="alertView" destination="1ng-35-uro" id="1Jt-Yz-HTy"/>
                         <outlet property="cartMainTableView" destination="4rK-Xs-Q3R" id="rrR-D0-tbR"/>
                         <outlet property="completeBuyingButton" destination="1wn-ro-8nx" id="NUI-ZQ-rnB"/>
                         <outlet property="deleteButton" destination="Y2w-lu-s5Z" id="Noc-6Q-Sc4"/>
+                        <outlet property="noRefrigeratorView" destination="5By-y0-7hb" id="Mfu-xV-s0k"/>
                         <outlet property="nothingFoodLabel" destination="lhy-s4-QRN" id="em5-v4-ZKO"/>
                         <outlet property="viewHeightConstraint" destination="m25-41-3Se" id="hEj-Rx-dPA"/>
                     </connections>
@@ -389,6 +431,7 @@
         <image name="cartBarTitle" width="61" height="17"/>
         <image name="deleteIcon" width="16.333333969116211" height="20.333333969116211"/>
         <image name="map" width="21" height="22"/>
+        <image name="noFridge" width="45" height="64"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="plus.circle" catalog="system" width="128" height="123"/>
         <image name="search" width="18" height="18"/>

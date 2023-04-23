@@ -10,8 +10,11 @@ import UIKit
 
 class CartViewController: UIViewController {
     @IBOutlet weak var cartMainTableView: UITableView!
+    @IBOutlet weak var noRefrigeratorView: UIView!
     @IBOutlet weak var nothingFoodLabel: UILabel!
     @IBOutlet weak var addFoodButton: UIButton!
+    
+    @IBOutlet weak var addRefrigeratorButton: UIButton!
     
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
@@ -55,6 +58,7 @@ class CartViewController: UIViewController {
             
             switch response.statusCode {
             case 200:
+                self?.noRefrigeratorView.isHidden = true
                 self?.cartFoods.removeAll()
                 self?.cartFoods = response.data!
                 self?.cartMainTableView.reloadData()
@@ -67,7 +71,7 @@ class CartViewController: UIViewController {
                     self?.nothingFoodLabel.isHidden = true
                 }
             case 404:
-                print("냉장고 없을 때 화면 구현 예정")
+                self?.noRefrigeratorView.isHidden = false
                 
             default: return
             }
@@ -180,6 +184,7 @@ class CartViewController: UIViewController {
         self.addFoodButton.backgroundColor = UIColor.signatureDeepBlue
         self.addFoodButton.backgroundColor = UIColor.signatureDeepBlue
         self.addFoodButton.layer.cornerRadius = self.addFoodButton.frame.width / 2
+        self.addRefrigeratorButton.layer.cornerRadius = 15
     }
     
     
@@ -189,7 +194,6 @@ class CartViewController: UIViewController {
         cartMainTableView.delegate = self
         cartMainTableView.dataSource = self
         cartMainTableView.register(UINib(nibName: "CartMainTableViewCell", bundle: nil), forCellReuseIdentifier: "CartMainTableViewCell")
-//        cartMainTableView.register(CartMainTableViewCell.self, forCellReuseIdentifier: "CartMainTableViewCell")
 
     }
     
