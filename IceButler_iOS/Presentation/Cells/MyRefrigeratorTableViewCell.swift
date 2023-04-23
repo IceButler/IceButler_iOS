@@ -48,6 +48,16 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
         if moreView.isHidden { moreView.isHidden = false }
         else { moreView.isHidden = true }
     }
+    
+    @IBAction func didTapEditButton(_ sender: UIButton) {
+        // TODO: 냉장고 수정 화면으로 전환
+    }
+    
+    
+    @IBAction func didTapDeleteButton(_ sender: UIButton) {
+        // TODO: 냉장고 삭제 AlertVC 전환
+    }
+    
 }
 
 extension MyRefrigeratorTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {

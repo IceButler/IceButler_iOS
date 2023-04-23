@@ -107,6 +107,7 @@
 		A2EA101B29F5407D000D600B /* MyRefrigeratorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EA101929F5407D000D600B /* MyRefrigeratorTableViewCell.xib */; };
 		A2EA101E29F5448F000D600B /* RefriMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA101C29F5448F000D600B /* RefriMemberCollectionViewCell.swift */; };
 		A2EA101F29F5448F000D600B /* RefriMemberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EA101D29F5448F000D600B /* RefriMemberCollectionViewCell.xib */; };
+		A2EA102229F556AC000D600B /* MyRefrigeratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA102129F556AC000D600B /* MyRefrigeratorViewModel.swift */; };
 		A2F9190829EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9190629EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift */; };
 		A2F9190929EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F9190729EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib */; };
 		A2F9190C29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9190A29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift */; };
@@ -242,6 +243,7 @@
 		A2EA101929F5407D000D600B /* MyRefrigeratorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyRefrigeratorTableViewCell.xib; sourceTree = "<group>"; };
 		A2EA101C29F5448F000D600B /* RefriMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefriMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2EA101D29F5448F000D600B /* RefriMemberCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RefriMemberCollectionViewCell.xib; sourceTree = "<group>"; };
+		A2EA102129F556AC000D600B /* MyRefrigeratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRefrigeratorViewModel.swift; sourceTree = "<group>"; };
 		A2F9190629EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFoodNameCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2F9190729EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedFoodNameCollectionViewCell.xib; sourceTree = "<group>"; };
 		A2F9190A29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -621,6 +623,7 @@
 		73F26FC929DAACB2009E364B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A2EA102029F5568F000D600B /* MyFridge */,
 				73CF93B129E94BAC0007CB7A /* User */,
 				7339CD7329E5B6A6002A6D78 /* Auth */,
 				738CAC8829E32767009EF9D2 /* Food */,
@@ -757,6 +760,14 @@
 			children = (
 				A2EA101429F53EDE000D600B /* MyRefrigerator.storyboard */,
 				A2EA101629F53EEE000D600B /* MyRefrigeratorViewController.swift */,
+			);
+			path = MyFridge;
+			sourceTree = "<group>";
+		};
+		A2EA102029F5568F000D600B /* MyFridge */ = {
+			isa = PBXGroup;
+			children = (
+				A2EA102129F556AC000D600B /* MyRefrigeratorViewModel.swift */,
 			);
 			path = MyFridge;
 			sourceTree = "<group>";
@@ -1027,6 +1038,7 @@
 				A28A764429D54F1C00D127EA /* DefaultTabBarController.swift in Sources */,
 				A28A764729D5527A00D127EA /* UIDevice+.swift in Sources */,
 				73B7373429E250430097806F /* SideViewController.swift in Sources */,
+				A2EA102229F556AC000D600B /* MyRefrigeratorViewModel.swift in Sources */,
 				738CAC8A29E32773009EF9D2 /* FoodViewModel.swift in Sources */,
 				A2F9190829EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift in Sources */,
 				73F26FC629DAA94B009E364B /* CartService.swift in Sources */,
