@@ -101,11 +101,8 @@ class CartViewController: UIViewController {
                                       content: "선택하신 식품을 정말 삭제하시겠습니까?",
                                       leftButtonTitle: "취소",
                                       righttButtonTitle: "삭제",
-                                      rightCompletion: {
-            CartViewModel.shared.deleteFood(cartId: 78)
-            },
-                                      leftCompletion: {
-            })
+                                      rightCompletion: { CartViewModel.shared.deleteFood(cartId: 78) },
+                                      leftCompletion: { })
 
         alertViewController.modalPresentationStyle = .overCurrentContext
         present(alertViewController, animated: true)

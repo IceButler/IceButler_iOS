@@ -45,6 +45,9 @@ class FoodCollectionViewCell: UICollectionViewCell {
     private func setupLayout() {
         self.foodImageButton.backgroundColor = UIColor.signatureSkyBlue
         self.foodImageButton.layer.cornerRadius = self.foodImageButton.frame.width / 2
+        
+        self.foodImageButton.backgroundColor = .signatureSkyBlue
+        self.selectedImageView.isHidden = true
     }
     
     public func configure(name: String) {
