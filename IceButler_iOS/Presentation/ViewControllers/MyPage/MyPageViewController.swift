@@ -36,6 +36,7 @@ class MyPageViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
         AuthViewModel.shared.isModify = false
     }
     
@@ -102,7 +103,7 @@ class MyPageViewController: UIViewController {
         let authUserInfoVC = UIStoryboard(name: "AuthUserInfo", bundle: nil).instantiateViewController(identifier: "AuthUserInfoViewController") as! AuthUserInfoViewController
         
         authUserInfoVC.setEditMode(mode: .Modify)
-        self.tabBarController?.tabBar.isHidden = true
+        
         self.navigationController?.pushViewController(authUserInfoVC, animated: true)
     }
     

@@ -97,6 +97,8 @@ class AuthUserInfoViewController: UIViewController {
             let titleItem = UIBarButtonItem(customView: titleLabel)
             
             self.navigationItem.leftBarButtonItems = [backItem, titleItem]
+            
+            self.tabBarController?.tabBar.isHidden = true
         }else {
             self.navigationItem.leftBarButtonItem = backItem
         }
@@ -130,6 +132,7 @@ class AuthUserInfoViewController: UIViewController {
                 if isModify == true {
                     self.tabBarController?.tabBar.isHidden = false
                     self.navigationController?.popViewController(animated: true)
+                    self.tabBarController?.tabBar.isHidden = false
                 }
             }
         }else {
