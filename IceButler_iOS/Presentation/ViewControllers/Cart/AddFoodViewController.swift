@@ -29,6 +29,7 @@ class AddFoodViewController: UIViewController {
     @IBOutlet weak var searchResultTableView: UITableView!
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var resultTableViewHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,6 +134,7 @@ class AddFoodViewController: UIViewController {
                     self?.searchResults.append(data)
                     self?.searchResultTableView.reloadData()
                 })
+                self?.resultTableViewHeight.constant = CGFloat(48 + 43 * (self?.searchResults.count)!)
                 if self?.searchResults.count ?? 0 > 0 {
                     self?.searchResultContainerView.isHidden = false
                 } else {
