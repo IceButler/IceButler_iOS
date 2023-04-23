@@ -16,23 +16,22 @@ protocol FoodCellDelegate {
 class FoodCollectionViewCell: UICollectionViewCell {
 
     var isSelectedFood: Bool = false
-    var cancellabels: Set<AnyCancellable> = []
+//    var cancellabels: Set<AnyCancellable> = []
     
     @IBOutlet weak var foodImageButton: UIButton!
     @IBOutlet weak var selectedImageView: UIImageView!
     @IBOutlet weak var foodTitleLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupGestureHandler()
-        setupLayout()
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        
+//    }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        cancellabels.removeAll()
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        cancellabels.removeAll()
 //        self.isSelectedFood = false
-    }
+//    }
     
     private func setupGestureHandler() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction(_:)))
@@ -46,6 +45,16 @@ class FoodCollectionViewCell: UICollectionViewCell {
     private func setupLayout() {
         self.foodImageButton.backgroundColor = UIColor.signatureSkyBlue
         self.foodImageButton.layer.cornerRadius = self.foodImageButton.frame.width / 2
+        
+        self.foodImageButton.backgroundColor = .signatureSkyBlue
+        self.selectedImageView.isHidden = true
+    }
+    
+    public func configure(name: String) {
+        self.isSelectedFood = false
+        self.foodTitleLabel.text = name
+        setupGestureHandler()
+        setupLayout()
     }
     
     @objc func longPressAction(_ guesture: UILongPressGestureRecognizer) {
