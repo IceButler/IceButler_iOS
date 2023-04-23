@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -77,34 +76,34 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hVm-yk-qR2">
-                                <rect key="frame" x="17" y="128" width="295" height="20"/>
+                                <rect key="frame" x="17" y="128" width="291" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="귀가할 때 과자 어쩌고...더보기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjp-d6-kxH">
-                                        <rect key="frame" x="0.0" y="0.0" width="275" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="271" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhl-12-ihV">
-                                        <rect key="frame" x="275" y="0.0" width="20" height="20"/>
+                                        <rect key="frame" x="271" y="0.0" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="Don-nk-7eM"/>
                                             <constraint firstAttribute="height" constant="20" id="fny-5V-jSB"/>
                                         </constraints>
                                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="chevron.forward" catalog="system"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="chevron_right"/>
                                     </button>
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="hVm-yk-qR2" firstAttribute="leading" secondItem="aKg-E5-qrv" secondAttribute="leading" constant="8" id="2Go-Gy-9To"/>
                             <constraint firstAttribute="trailing" secondItem="hM7-0d-8mf" secondAttribute="trailing" constant="8" id="CuY-zu-uGX"/>
                             <constraint firstAttribute="bottom" secondItem="hVm-yk-qR2" secondAttribute="bottom" constant="10" id="DQU-8l-8cN"/>
                             <constraint firstItem="aKg-E5-qrv" firstAttribute="leading" secondItem="wry-pU-nZG" secondAttribute="leading" constant="-5" id="Gja-XZ-agQ"/>
-                            <constraint firstItem="hVm-yk-qR2" firstAttribute="trailing" secondItem="aKg-E5-qrv" secondAttribute="trailing" constant="-6" id="KB7-IH-ZyW"/>
+                            <constraint firstItem="hVm-yk-qR2" firstAttribute="trailing" secondItem="aKg-E5-qrv" secondAttribute="trailing" constant="-10" id="KB7-IH-ZyW"/>
                             <constraint firstItem="wry-pU-nZG" firstAttribute="top" secondItem="eLT-EG-alH" secondAttribute="top" constant="8" id="Kkn-mb-zeQ"/>
                             <constraint firstItem="wry-pU-nZG" firstAttribute="leading" secondItem="eLT-EG-alH" secondAttribute="leading" constant="14" id="Zg8-tc-W9s"/>
                             <constraint firstItem="hM7-0d-8mf" firstAttribute="centerY" secondItem="wry-pU-nZG" secondAttribute="centerY" id="egS-I6-0b6"/>
@@ -125,7 +124,7 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eD9-Vw-VMO">
                                 <rect key="frame" x="3" y="41.666666666666671" width="89" height="1"/>
-                                <color key="backgroundColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.24313725490196078" green="0.46274509803921571" blue="0.74901960784313726" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="lI1-xH-io5"/>
                                 </constraints>
@@ -139,7 +138,7 @@
                                 </buttonConfiguration>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="84" id="3xC-Ju-kDY"/>
                             <constraint firstAttribute="trailing" secondItem="eD9-Vw-VMO" secondAttribute="trailing" constant="3" id="AAA-s0-FVZ"/>
@@ -174,13 +173,10 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="chevron.forward" catalog="system" width="97" height="128"/>
+        <image name="chevron_right" width="7" height="12.333333015441895"/>
         <image name="ellipsis_vertical" width="27" height="27"/>
         <image name="pencil" width="20.666666030883789" height="20.666666030883789"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="trash" width="15.333333015441895" height="20"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

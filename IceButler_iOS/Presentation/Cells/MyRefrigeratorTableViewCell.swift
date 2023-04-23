@@ -33,25 +33,20 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        moreView.layer.cornerRadius = 12
-        
-        [moreView, contentView].forEach { view in
+        [containerView, moreView].forEach { view in
             view.backgroundColor = .white
-            view.layer.shadowColor = UIColor.lightGray.cgColor
+            view.layer.shadowColor = UIColor.gray.cgColor
             view.layer.shadowOpacity = 0.15
             view.layer.shadowRadius = 10
             view.layer.shadowOffset = CGSize(width: 0, height: 5)
             view.layer.shadowPath = nil
         }
+        moreView.layer.cornerRadius = 12
     }
     
     @IBAction func didTapMoreButton(_ sender: UIButton) {
-        if moreView.isHidden {
-            moreView.isHidden = false
-        } else {
-            moreView.isHidden = true
-        }
-        
+        if moreView.isHidden { moreView.isHidden = false }
+        else { moreView.isHidden = true }
     }
 }
 
