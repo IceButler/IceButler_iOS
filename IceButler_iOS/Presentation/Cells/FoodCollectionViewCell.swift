@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import Kingfisher
 
 protocol FoodCellDelegate {
      func setEditMode(edit: Bool)
@@ -53,6 +54,20 @@ class FoodCollectionViewCell: UICollectionViewCell {
     public func configure(name: String) {
         self.isSelectedFood = false
         self.foodTitleLabel.text = name
+        setupGestureHandler()
+        setupLayout()
+    }
+    
+    public func setData(data: CartFood) {
+        if let _ = data.foodIconName,
+           let _ = data.foodName {
+            
+            let url = URL(string: data.foodIconName!)
+            self.foodImageButton.kf.setImage(with: url, for: .normal)
+            
+            self.isSelectedFood = false
+            self.foodTitleLabel.text = data.foodName
+        }
         setupGestureHandler()
         setupLayout()
     }
