@@ -57,7 +57,7 @@ class MyRefrigeratorViewController: UIViewController {
 
 extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2    // 임시 개수
+        return 12    // 임시 개수
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

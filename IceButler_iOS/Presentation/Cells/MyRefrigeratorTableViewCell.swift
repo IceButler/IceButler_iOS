@@ -32,9 +32,12 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        containerView.layer.borderWidth = 0.3
-        containerView.layer.borderColor = UIColor.lightGray.cgColor
-        containerView.layer.cornerRadius = 10
+        containerView.backgroundColor = .white
+        containerView.layer.shadowColor = UIColor.lightGray.cgColor
+        containerView.layer.shadowOpacity = 0.15
+        containerView.layer.shadowRadius = 10
+        containerView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        containerView.layer.shadowPath = nil
     }
 }
 
@@ -46,9 +49,7 @@ extension MyRefrigeratorTableViewCell: UICollectionViewDelegateFlowLayout, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RefriMemberCollectionViewCell", for: indexPath) as? RefriMemberCollectionViewCell else { return UICollectionViewCell() }
         cell.setupLayout()
-        if indexPath.row == 0 {
-            cell.crownImg.isHidden = false
-        }
+        if indexPath.row == 0 { cell.setupMainMemberProfile() }
         return cell
     }
     

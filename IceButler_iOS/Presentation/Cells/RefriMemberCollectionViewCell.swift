@@ -21,9 +21,12 @@ class RefriMemberCollectionViewCell: UICollectionViewCell {
         imgView.layer.cornerRadius = imgView.frame.width / 2
     }
     
-    public func setupMainMemberProfile(isMain: Bool) {
-        if isMain { crownImg.isHidden = false }
-        else { crownImg.isHidden = true }
+    public func setupMainMemberProfile() {
+        crownImg.isHidden = false
+        imgView.layer.cornerRadius = imgView.frame.width / 2 - 2
+        imgView.layer.borderColor = UIColor.signatureLightBlue.cgColor
+        imgView.layer.borderWidth = 3.0
+        imgView.backgroundColor = .white    // 삭제 예정
     }
 
 }
