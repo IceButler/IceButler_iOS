@@ -40,17 +40,13 @@ class CartViewController: UIViewController {
     func configure() {
 //        self.cartFoods.removeAll()
         
-        
         APIManger.shared.getData(urlEndpointString: "/carts/78/foods",
                                  responseDataType: [CartResponseModel].self,
                                  requestDataType: [CartResponseModel].self,
                                  parameter: nil) { [weak self] response in
             self?.cartFoods.removeAll()
             self?.cartFoods = response.data!
-    
-            print("이거 뭔데; \(self?.cartFoods)")
             self?.cartMainTableView.reloadData()
-            
             self?.viewHeightConstraint.constant = CGFloat(170 * (self?.cartFoods.count ?? 0))
         }
         

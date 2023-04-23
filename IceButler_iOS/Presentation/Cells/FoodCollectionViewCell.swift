@@ -48,6 +48,7 @@ class FoodCollectionViewCell: UICollectionViewCell {
     }
     
     public func configure(name: String) {
+        self.isSelectedFood = false
         self.foodTitleLabel.text = name
         setupGestureHandler()
         setupLayout()

@@ -133,6 +133,7 @@ class CartViewModel: ObservableObject {
                                     completionHandler: { [weak self] response in
 //            completion(response.data as? [CartResponseModel])
             self?.cartViewController?.configure()
+            self?.showCartCVTabBar()
         })
         
     }
