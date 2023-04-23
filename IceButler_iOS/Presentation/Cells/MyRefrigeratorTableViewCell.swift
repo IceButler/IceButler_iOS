@@ -14,6 +14,7 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     @IBOutlet weak var memberNumLabel: UILabel!
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var moreView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,12 +33,25 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        containerView.backgroundColor = .white
-        containerView.layer.shadowColor = UIColor.lightGray.cgColor
-        containerView.layer.shadowOpacity = 0.15
-        containerView.layer.shadowRadius = 10
-        containerView.layer.shadowOffset = CGSize(width: 0, height: 5)
-        containerView.layer.shadowPath = nil
+        moreView.layer.cornerRadius = 12
+        
+        [moreView, contentView].forEach { view in
+            view.backgroundColor = .white
+            view.layer.shadowColor = UIColor.lightGray.cgColor
+            view.layer.shadowOpacity = 0.15
+            view.layer.shadowRadius = 10
+            view.layer.shadowOffset = CGSize(width: 0, height: 5)
+            view.layer.shadowPath = nil
+        }
+    }
+    
+    @IBAction func didTapMoreButton(_ sender: UIButton) {
+        if moreView.isHidden {
+            moreView.isHidden = false
+        } else {
+            moreView.isHidden = true
+        }
+        
     }
 }
 
