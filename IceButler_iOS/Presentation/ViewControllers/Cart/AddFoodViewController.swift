@@ -270,12 +270,10 @@ extension AddFoodViewController: FoodCategoryCellDelegate {
 extension AddFoodViewController: SelectedFoodCellDelegate {
     func didTapDeleteButton(index: Int) {
         selectedFoodNames.remove(at: index)
-//        category.forEach { cate in
-//            if cate == selectedFoods[index].foodCategory {
-//                categorySelected[index] = false
-//                categoryCollectionView.reloadData()
-//            }
-//        }
+        if selectedFoodNames.count == 0 {
+            self.completeButton.backgroundColor = .systemGray5
+            self.completeButton.isEnabled = false
+        }
         collectionView.reloadData()
     }
 }

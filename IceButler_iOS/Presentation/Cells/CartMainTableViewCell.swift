@@ -76,10 +76,7 @@ extension CartMainTableViewCell: UICollectionViewDelegateFlowLayout, UICollectio
 //        cell.foodTitleLabel.text = cartFoods[indexPath.row].foodName
 //        cell.isSelectedFood = false
         cell.configure(name: cartFoods[indexPath.row].foodName!)
-        
         cell.tag = cartFoods[indexPath.row].foodIdx ?? -1
-        
-        print("\(indexPath.row) >> cv cell.cartFood --> \(self.cartFoods)")
         return cell
     }
     
