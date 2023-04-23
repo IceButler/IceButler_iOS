@@ -141,9 +141,11 @@ class AddFoodViewController: UIViewController {
                 }
                 
             } else {
-                self?.selfAddFood(foodName: (self?.searchTextField.text)!)
                 let alert = UIAlertController(title: nil, message: "검색 결과가 없습니다!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                let confirm = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+                    self?.selfAddFood(foodName: (self?.searchTextField.text)!)
+                }
+                alert.addAction(confirm)
                 self?.present(alert, animated: true)
             }
         })
@@ -172,17 +174,11 @@ class AddFoodViewController: UIViewController {
             selectedFoods.append(AddFood(foodName: foodName, foodCategory: category))
             collectionView.reloadData()
             print(selectedFoods)
+        } else {
+            let alert = UIAlertController(title: nil, message: "카테고리를 먼저 선택해주세요!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            present(alert, animated: true)
         }
-    }
-    
-    private func checkCategory(categoryName: String) {
-        // TODO: 해당 카테고리 셀을 isTapped = true 상태로 변경
-//        category.forEach { cate in
-//            if categoryName == cate {
-//                categorySelected[category.firstIndex(of: categoryName)!] = true
-//                categoryCollectionView.reloadData()
-//            }
-//        }
     }
     
     // MARK: @objc methods
@@ -195,7 +191,7 @@ class AddFoodViewController: UIViewController {
 extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 0 { return self.category.count }
-        else { return self.selectedFoodNames.count }
+        else { return self.selectedFoods.count }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -212,7 +208,7 @@ extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDel
             // 검색결과 탭을 통해 하위에 생성되는 "카테고리-상세식품명" 형태의 셀
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectedFoodNameCollectionViewCell", for: indexPath) as? SelectedFoodNameCollectionViewCell else { return UICollectionViewCell() }
             cell.delegate = self
-            if searchResults.count > 0 {
+            if selectedFoods.count > 0 {
                 cell.setupLayout(title: "\(selectedFoods[indexPath.row].foodCategory!)-\(selectedFoods[indexPath.row].foodName!)")
             }
             cell.tag = indexPath.row
@@ -220,6 +216,15 @@ extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDel
         } else {
             return UICollectionViewCell()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView.tag == 0 {
+            return CGSize(width: category[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]).width + 20, height: 45)
+        } else if collectionView.tag == 1 {
+            return CGSize(width: category[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]).width + 20, height: 45)
+        }
+        return CGSize(width: 0, height: 0)
     }
 }
 
