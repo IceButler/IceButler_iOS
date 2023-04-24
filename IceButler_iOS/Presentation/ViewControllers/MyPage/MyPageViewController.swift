@@ -46,7 +46,7 @@ class MyPageViewController: UIViewController {
         
         
         UserViewModel.shared.userInfo { user in
-            if let imageUrlString = user.profileImage {
+            if let imageUrlString = user.profileImgUrl {
                 if let imageUrl = URL(string: imageUrlString) {
                     self.profileImgView.kf.setImage(with: imageUrl)
                 }
