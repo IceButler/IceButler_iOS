@@ -13,10 +13,10 @@ struct CartResponseModel: Codable {
 }
 struct CartFood: Codable {
     let foodIdx: Int?
-    let foodName, foodIconName: String?
+    let foodName, foodImgUrl: String?
 }
 
 struct AddFoodResponseModel: Codable {
     let foodIdx: Int?
-    let foodName, foodIconName, foodCategory: String?
+    let foodName, foodImgUrl, foodCategory: String?
 }

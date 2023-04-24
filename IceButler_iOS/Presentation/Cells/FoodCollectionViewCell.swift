@@ -59,10 +59,10 @@ class FoodCollectionViewCell: UICollectionViewCell {
     }
     
     public func setData(data: CartFood) {
-        if let _ = data.foodIconName,
+        if let _ = data.foodImgUrl,
            let _ = data.foodName {
             
-            let url = URL(string: data.foodIconName!)
+            let url = URL(string: data.foodImgUrl!)
             self.foodImageButton.kf.setImage(with: url, for: .normal)
             
             self.isSelectedFood = false
