@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import Kingfisher
 
 class FoodCell: UICollectionViewCell {
     @IBOutlet weak var foodImageView: UIImageView!
@@ -40,5 +41,10 @@ class FoodCell: UICollectionViewCell {
         foodDdayLabel.text = foodDday
     }
     
+    func setFoodImage(foodImage: String) {
+        if let url = URL(string: foodImage) {
+            foodImageView.kf.setImage(with: url)
+        }
+    }
 
 }

@@ -139,12 +139,6 @@ class AuthUserInfoViewController: UIViewController {
             AuthViewModel.shared.userEmail { userEmail in
                 self.userEmailLabel.text = userEmail
             }
-            
-            AuthViewModel.shared.isJoin { isJoin in
-                if isJoin == false {
-                    self.showAlert(title: "회원가입 실패", message: "회원가입에 실패하였습니다. 다시 시도해주세요.")
-                }
-            }
         }
         
         AuthViewModel.shared.isExistence { isExistence in

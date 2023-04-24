@@ -99,10 +99,9 @@ extension AuthViewModel {
             if let response = response {
                 self.accessToken = response.accessToken
                 self.setUserToken(token: response)
-            }else {
-                self.userEmail = userEmail
             }
         }
+        self.userEmail = userEmail
     }
     
     

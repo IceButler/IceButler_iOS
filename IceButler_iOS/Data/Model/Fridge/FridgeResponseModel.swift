@@ -14,6 +14,6 @@ struct FridgeResponseModel: Codable {
 struct FridgeFood: Codable {
     let fridgeFoodIdx: Int
     let foodName: String
-    let foodIconName: String?
+    let foodIconName: String
     let shelfLife: String
 }

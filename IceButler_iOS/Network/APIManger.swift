@@ -13,7 +13,7 @@ private let BASE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.
 class APIManger {
     static let shared = APIManger()
     
-    private var headers: HTTPHeaders = [:]
+    private var headers: HTTPHeaders?
     
     func setupObserver() {
         AuthViewModel.shared.accessToken { token in
@@ -36,7 +36,6 @@ extension APIManger {
         AF
             .request(url, method: .get, parameters: parameter, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-                print("헤더값 --> \(self.headers)")
                 print(response)
                 switch response.result {
                 case .success(let success):
