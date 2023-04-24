@@ -10,7 +10,8 @@ import Foundation
 struct FoodDetailResponseModel: Codable {
     let fridgeFoodIdx, foodIdx: Int
     let foodName, foodDetailName, foodCategory, shelfLife: String?
-    let day, owner: String?
+    let day: Int
+    let owner: String?
     let memo, imgURL: String?
 
     enum CodingKeys: String, CodingKey {

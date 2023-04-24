@@ -525,7 +525,7 @@ extension FoodAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodAddImageCell", for: indexPath) as? FoodAddImageCell else {return UICollectionViewCell()}
         
         if foodImage != nil {
-            cell.configure(image: foodImage!)
+            cell.setImage(image: foodImage!)
             cell.hiddenFoodImageAddIcon()
         }
         

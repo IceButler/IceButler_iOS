@@ -30,6 +30,15 @@ class FoodViewModel: ObservableObject {
         }.store(in: &cancelLabels)
     }
     
+    func foodImage(completion: @escaping (String) -> Void) {
+        $food.filter({ food in
+            food?.imgURL != nil
+        }).sink { food in
+            completion((food?.imgURL)!)
+        }.store(in: &cancelLabels)
+    }
+    
+    
     func barcodeFood(completion: @escaping (BarcodeFoodResponse?) -> Void) {
         $barcodeFoodInfo.sink { barcodeFood in
             completion(barcodeFood ?? nil)

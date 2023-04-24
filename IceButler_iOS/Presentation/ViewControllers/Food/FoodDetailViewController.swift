@@ -39,6 +39,7 @@ class FoodDetailViewController: UIViewController {
     
     private func setupLayout() {
         [foodNameLabel, foodDetailLabel, foodCategoryLabel, foodShelfLifeLabel, foodDdayLabel, foodOwnerLabel, foodMemoLabel].forEach { label in
+            label?.clipsToBounds = true
             label?.backgroundColor = .focusTableViewSkyBlue
             label?.layer.cornerRadius = 10
         }
@@ -120,9 +121,23 @@ class FoodDetailViewController: UIViewController {
             self.foodDetailLabel.text = food.foodDetailName
             self.foodCategoryLabel.text = food.foodCategory
             self.foodShelfLifeLabel.text = food.shelfLife
-            self.foodDdayLabel.text = food.day
             self.foodOwnerLabel.text = food.owner
             self.foodMemoLabel.text = food.memo
+            
+            if food.day > 0 {
+                self.foodDdayLabel.text = "D+" + food.day.description
+            }else {
+                self.foodDdayLabel.text = "D" + food.day.description
+            }
+            
+            if food.day > -4 {
+                self.foodDdayLabel.backgroundColor = UIColor(red: 255/225, green: 219/225, blue: 219/225, alpha: 0.6)
+                self.foodDdayLabel.textColor = UIColor(red: 187/225, green: 62/225, blue: 62/225, alpha: 1)
+            }else {
+                self.foodDdayLabel.backgroundColor = .focusTableViewSkyBlue
+                self.foodDdayLabel.textColor = .black
+            }
+            
         }
     }
     
@@ -139,6 +154,10 @@ extension FoodDetailViewController: UICollectionViewDelegate, UICollectionViewDa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodAddImageCell", for: indexPath) as! FoodAddImageCell
         
         cell.hiddenFoodImageAddIcon()
+        
+        FoodViewModel.shared.foodImage { imgUrl in
+            cell.configure(imageUrl: imgUrl)
+        }
         
         return cell
     }
