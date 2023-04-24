@@ -70,7 +70,7 @@ class CartViewController: UIViewController {
                     self?.cartMainTableView.isHidden = false
                     self?.nothingFoodLabel.isHidden = true
                 }
-            case 404:
+            case 403:
                 self?.noRefrigeratorView.isHidden = false
                 
             default: return
