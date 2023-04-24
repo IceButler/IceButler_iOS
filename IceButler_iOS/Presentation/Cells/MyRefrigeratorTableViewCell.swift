@@ -9,12 +9,16 @@ import UIKit
 
 class MyRefrigeratorTableViewCell: UITableViewCell {
 
+//    private var refrigeratorData:
+    
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var refrigeratorNameLabel: UILabel!
     @IBOutlet weak var memberNumLabel: UILabel!
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var moreView: UIView!
+    
+    @IBOutlet weak var commentLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,6 +46,22 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
             view.layer.shadowPath = nil
         }
         moreView.layer.cornerRadius = 12
+    }
+    
+    public func configureFridge(data: Fridge?) {
+        if let data = data {
+            refrigeratorNameLabel.text = data.fridgeName
+            memberNumLabel.text = "\(data.userCnt!)"
+            commentLabel.text = data.comment
+        }
+    }
+    
+    public func configureMultiFridge(data: MultiFridgeRes?) {
+        if let data = data {
+            refrigeratorNameLabel.text = data.multiFridgeName
+            memberNumLabel.text = "\(data.userCnt!)"
+            commentLabel.text = data.comment
+        }
     }
     
     @IBAction func didTapMoreButton(_ sender: UIButton) {
