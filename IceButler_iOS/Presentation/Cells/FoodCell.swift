@@ -37,8 +37,13 @@ class FoodCell: UICollectionViewCell {
         foodNameLabel.text = foodName
     }
     
-    func setDday(foodDday: String) {
-        foodDdayLabel.text = foodDday
+    func setDday(foodDday: Int) {
+        if foodDday > 0 {
+            foodDdayLabel.text = "D+" + foodDday.description
+        }else {
+            foodDdayLabel.text = "D" + foodDday.description
+        }
+        
     }
     
     func setFoodImage(foodImage: String) {
