@@ -18,12 +18,6 @@ class RefriMemberCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-//    override func prepareForReuse() {
-//        crownImg.image = nil
-//        imgView.image = nil
-//        nickname.text = nil
-//    }
-    
     public func setupLayout() {
         imgView.layer.cornerRadius = imgView.frame.width / 2 - 2
     }
@@ -38,8 +32,8 @@ class RefriMemberCollectionViewCell: UICollectionViewCell {
 
     public func configure(data: FridgeUser) {
         nickname.text = data.nickname
-        if let profileImg = data.profileImage {
-            let url = URL(string: profileImg)
+        if let imgUrlStr = data.profileImgUrl {
+            let url = URL(string: imgUrlStr)
             imgView.kf.setImage(with: url)
         }
         if data.role == "OWNER" { setupMainMemberProfile()  }

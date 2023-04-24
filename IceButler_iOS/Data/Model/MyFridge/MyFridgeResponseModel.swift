@@ -27,5 +27,5 @@ struct MultiFridgeRes: Codable {
 }
 
 struct FridgeUser: Codable {
-    let nickname, role, profileImage: String?
+    let nickname, role, profileImgUrl: String?
 }

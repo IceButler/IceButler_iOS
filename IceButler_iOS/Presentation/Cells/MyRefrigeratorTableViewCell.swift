@@ -9,7 +9,6 @@ import UIKit
 
 class MyRefrigeratorTableViewCell: UITableViewCell {
 
-//    private var refrigeratorData:
     private var memberInfos: [FridgeUser] = []
     
     @IBOutlet weak var containerView: UIView!
@@ -85,7 +84,6 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
 
 extension MyRefrigeratorTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 4    // 임시 멤버수
         return memberInfos.count
     }
     
