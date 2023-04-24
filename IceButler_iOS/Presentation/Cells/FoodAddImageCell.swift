@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FoodAddImageCell: UICollectionViewCell {
     @IBOutlet weak var foodImageView: UIImageView!
@@ -15,7 +16,13 @@ class FoodAddImageCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func configure(image: UIImage) {
+    func configure(imageUrl: String) {
+        if let url = URL(string: imageUrl) {
+            foodImageView.kf.setImage(with: url)
+        }
+    }
+    
+    func setImage(image: UIImage) {
         foodImageView.image = image
     }
     
