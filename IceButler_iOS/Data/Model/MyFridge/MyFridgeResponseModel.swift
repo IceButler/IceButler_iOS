@@ -15,17 +15,17 @@ struct MyFridgeResponseModel: Codable {
 struct Fridge: Codable {
     let fridgeIdx: Int?
     let fridgeName, comment: String?
-    let users: [User]?
+    let users: [FridgeUser]?
     let userCnt: Int?
 }
 
 struct MultiFridgeRes: Codable {
     let multiFridgeIdx: Int?
     let multiFridgeName, comment: String?
-    let users: [User]?
+    let users: [FridgeUser]?
     let userCnt: Int?
 }
 
-struct User: Codable {
+struct FridgeUser: Codable {
     let nickname, role, profileImage: String?
 }

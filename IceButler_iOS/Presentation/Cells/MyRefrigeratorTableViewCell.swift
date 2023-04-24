@@ -10,6 +10,7 @@ import UIKit
 class MyRefrigeratorTableViewCell: UITableViewCell {
 
 //    private var refrigeratorData:
+    private var memberInfos: [FridgeUser] = []
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var refrigeratorNameLabel: UILabel!
@@ -53,6 +54,7 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
             refrigeratorNameLabel.text = data.fridgeName
             memberNumLabel.text = "\(data.userCnt!)"
             commentLabel.text = data.comment
+            memberInfos = data.users!
         }
     }
     
@@ -61,6 +63,7 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
             refrigeratorNameLabel.text = data.multiFridgeName
             memberNumLabel.text = "\(data.userCnt!)"
             commentLabel.text = data.comment
+            memberInfos = data.users!
         }
     }
     
@@ -82,13 +85,14 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
 
 extension MyRefrigeratorTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4    // 임시 멤버수
+//        return 4    // 임시 멤버수
+        return memberInfos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RefriMemberCollectionViewCell", for: indexPath) as? RefriMemberCollectionViewCell else { return UICollectionViewCell() }
         cell.setupLayout()
-        if indexPath.row == 0 { cell.setupMainMemberProfile() }
+        cell.configure(data: memberInfos[indexPath.row])
         return cell
     }
     
