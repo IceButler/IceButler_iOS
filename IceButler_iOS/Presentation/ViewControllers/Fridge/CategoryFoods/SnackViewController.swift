@@ -54,6 +54,10 @@ extension SnackViewController: UICollectionViewDelegate, UICollectionViewDataSou
             cell.setFoodName(foodName: foodName)
         }
         
+        FridgeViewModel.shared.allFoodListFoodImage(foodListIdx: 7, index: indexPath.row, store: &cell.cancellabels) { foodImage in
+            cell.setFoodImage(foodImage: foodImage)
+        }
+        
         return cell
     }
     

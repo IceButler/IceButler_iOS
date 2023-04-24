@@ -9,8 +9,9 @@ import UIKit
 import Photos
 import BSImagePicker
 
+
+
 class AuthUserInfoViewController: UIViewController {
-    @IBOutlet weak var userImageBorderView: UIView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userImageAddButton: UIButton!
     
@@ -30,6 +31,8 @@ class AuthUserInfoViewController: UIViewController {
     private var isExistence = true
     private var profileImage: UIImage?
     
+    private var mode: ProfileEditMode = .Join
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,7 +48,7 @@ class AuthUserInfoViewController: UIViewController {
     }
     
     func setupLayout() {
-        userImageBorderView.layer.cornerRadius = userImageBorderView.frame.width / 2
+        userImageView.layer.cornerRadius = userImageView.frame.width / 2
         userImageAddButton.layer.cornerRadius = userImageAddButton.frame.width / 2
         
         userNicknameTextField.layer.cornerRadius = 10
@@ -83,7 +86,24 @@ class AuthUserInfoViewController: UIViewController {
         let backItem = UIBarButtonItem(image: UIImage(named: "backIcon"), style: .done, target: self, action: #selector(backToScene))
         backItem.tintColor = .white
         
-        self.navigationItem.leftBarButtonItem = backItem
+        if mode == .Modify {
+            let titleLabel = UILabel()
+            titleLabel.text = "프로필 편집"
+            titleLabel.textAlignment = .left
+            titleLabel.font = UIFont.systemFont(ofSize: 18)
+            titleLabel.textColor = .white
+            titleLabel.sizeToFit()
+            
+            let titleItem = UIBarButtonItem(customView: titleLabel)
+            
+            self.navigationItem.leftBarButtonItems = [backItem, titleItem]
+            
+            self.tabBarController?.tabBar.isHidden = true
+        }else {
+            self.navigationItem.leftBarButtonItem = backItem
+        }
+        
+       
     }
     
     
@@ -91,9 +111,34 @@ class AuthUserInfoViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    func setEditMode(mode: ProfileEditMode) {
+        self.mode = mode
+    }
+    
+    
     func setupObserver() {
-        AuthViewModel.shared.userEmail { userEmail in
-            self.userEmailLabel.text = userEmail
+        if mode == .Modify {
+            UserViewModel.shared.userInfo { user in
+                if let imageUrlString = user.profileImage {
+                    if let imageUrl = URL(string: imageUrlString) {
+                        self.userImageView.kf.setImage(with: imageUrl)
+                    }
+                }
+                self.userNicknameTextField.text = user.nickname
+                self.userEmailLabel.text = user.email
+            }
+            
+            AuthViewModel.shared.isModify { isModify in
+                if isModify == true {
+                    self.tabBarController?.tabBar.isHidden = false
+                    self.navigationController?.popViewController(animated: true)
+                    self.tabBarController?.tabBar.isHidden = false
+                }
+            }
+        }else {
+            AuthViewModel.shared.userEmail { userEmail in
+                self.userEmailLabel.text = userEmail
+            }
         }
         
         AuthViewModel.shared.isExistence { isExistence in
@@ -103,19 +148,11 @@ class AuthUserInfoViewController: UIViewController {
                 self.userNicknameAlertLabel.text = "이미 존재하는 닉네임입니다."
             }else {
                 self.userNicknameTextField.backgroundColor = .focusSkyBlue
-                self.userNicknameAlertLabel.textColor = .signatureDustBlue
+                self.userNicknameAlertLabel.textColor = .textDeepBlue
                 self.userNicknameAlertLabel.text = "사용할 수 있는 닉네임입니다."
                 self.joinButton.backgroundColor = .availableBlue
             }
             self.isExistence = isExistence
-        }
-        
-        AuthViewModel.shared.isJoin { isJoin in
-            if isJoin {
-               print("회원가입 성공")
-            }else {
-                print("회원가입 실패")
-            }
         }
     }
     
@@ -171,12 +208,16 @@ class AuthUserInfoViewController: UIViewController {
     
     @IBAction func join(_ sender: Any) {
         if isExistence {
-            showAlert(title: "닉네임 입력", message: "닉네임 중복확인 후 회원가입을 시도해주세요.")
+            showAlert(title: "닉네임 입력", message: "닉네임 중복확인 후 프로필 편집을 시도해주세요.")
         }else {
             if profileImage != nil {
-                AuthViewModel.shared.getUploadImageUrl(imageDir: .Profile, image: profileImage!)
+                AuthViewModel.shared.getUploadImageUrl(imageDir: .Profile, image: profileImage!, mode: mode)
             }else {
-                AuthViewModel.shared.joinUser()
+                if mode == .Join {
+                    AuthViewModel.shared.joinUser()
+                }else {
+                    AuthViewModel.shared.modifyUser()
+                }
             }
         }
     }

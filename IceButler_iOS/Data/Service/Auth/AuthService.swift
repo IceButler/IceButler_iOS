@@ -46,7 +46,7 @@ class AuthService {
     
     
     func requestLogin(parameter: AuthLoginRequest, completion: @escaping (AuthJoinUserResponseModel?) -> Void) {
-        APIManger.shared.postData(urlEndpointString: "/users/join", responseDataType: AuthJoinUserResponseModel.self, requestDataType: AuthLoginRequest.self, parameter: parameter) { response in
+        APIManger.shared.postData(urlEndpointString: "/users/login", responseDataType: AuthJoinUserResponseModel.self, requestDataType: AuthLoginRequest.self, parameter: parameter) { response in
             completion(response.data)
         }
     }
@@ -59,8 +59,17 @@ class AuthService {
     }
     
     func joinUser(parameter: AuthJoinUserRequestModel, completion: @escaping (AuthJoinUserResponseModel?) -> Void) {
-        APIManger.shared.postData(urlEndpointString: "/users/login", responseDataType: AuthJoinUserResponseModel.self, requestDataType: AuthJoinUserRequestModel.self, parameter: parameter) { response in
+        APIManger.shared.postData(urlEndpointString: "/users/join", responseDataType: AuthJoinUserResponseModel.self, requestDataType: AuthJoinUserRequestModel.self, parameter: parameter) { response in
             completion(response.data)
+        }
+    }
+    
+    func modfiyUser(parameter: ModfiyUserRequest, completion: @escaping () -> Void) {
+        APIManger.shared.patchData(urlEndpointString: "/users/profile", responseDataType: AuthJoinUserResponseModel.self, requestDataType: ModfiyUserRequest.self, parameter: parameter) { response in
+            print(response)
+            if response.status == "OK" {
+                completion()
+            }
         }
     }
     

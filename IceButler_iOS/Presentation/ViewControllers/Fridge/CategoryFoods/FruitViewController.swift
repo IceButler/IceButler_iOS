@@ -58,6 +58,10 @@ extension FruitViewController: UICollectionViewDelegate, UICollectionViewDataSou
             cell.setFoodName(foodName: foodName)
         }
         
+        FridgeViewModel.shared.allFoodListFoodImage(foodListIdx:2, index: indexPath.row, store: &cell.cancellabels) { foodImage in
+            cell.setFoodImage(foodImage: foodImage)
+        }
+        
         return cell
     }
     

@@ -13,7 +13,7 @@ private let BASE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.
 class APIManger {
     static let shared = APIManger()
     
-    private var headers: HTTPHeaders = [:]
+    private var headers: HTTPHeaders?
     
     func setupObserver() {
         AuthViewModel.shared.accessToken { token in
@@ -36,7 +36,6 @@ extension APIManger {
         AF
             .request(url, method: .get, parameters: parameter, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-                print("헤더값 --> \(self.headers)")
                 print(response)
                 switch response.result {
                 case .success(let success):
@@ -183,6 +182,28 @@ extension APIManger {
             .request(url, method: .delete, parameters: parameter, encoder: .json, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
 
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
+    
+    func patchData<T: Codable, U: Decodable>(urlEndpointString: String,
+                                            responseDataType: U.Type,
+                                            requestDataType: T.Type,
+                                            parameter: T?,
+                                            completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+        
+        guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
+        
+        AF
+            .request(url, method: .patch, parameters: parameter, encoder: .json, headers: self.headers)
+            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
                 print(response)
                 switch response.result {
                 case .success(let success):

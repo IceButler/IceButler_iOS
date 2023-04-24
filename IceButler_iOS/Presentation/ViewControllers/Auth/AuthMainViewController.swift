@@ -31,6 +31,8 @@ class AuthMainViewController: UIViewController {
         AuthViewModel.shared.isUserEmail {
             let authUserInfoVC = UIStoryboard(name: "AuthUserInfo", bundle: nil).instantiateViewController(identifier: "AuthUserInfoViewController") as! AuthUserInfoViewController
             
+            authUserInfoVC.setEditMode(mode: .Join)
+            
             self.navigationController?.pushViewController(authUserInfoVC, animated: true)
         }
     }
