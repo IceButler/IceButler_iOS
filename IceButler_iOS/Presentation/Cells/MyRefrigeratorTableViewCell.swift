@@ -9,12 +9,16 @@ import UIKit
 
 class MyRefrigeratorTableViewCell: UITableViewCell {
 
+    private var memberInfos: [FridgeUser] = []
+    
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var refrigeratorNameLabel: UILabel!
     @IBOutlet weak var memberNumLabel: UILabel!
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var moreView: UIView!
+    
+    @IBOutlet weak var commentLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,6 +48,24 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
         moreView.layer.cornerRadius = 12
     }
     
+    public func configureFridge(data: Fridge?) {
+        if let data = data {
+            refrigeratorNameLabel.text = data.fridgeName
+            memberNumLabel.text = "\(data.userCnt!)"
+            commentLabel.text = data.comment
+            memberInfos = data.users!
+        }
+    }
+    
+    public func configureMultiFridge(data: MultiFridgeRes?) {
+        if let data = data {
+            refrigeratorNameLabel.text = data.multiFridgeName
+            memberNumLabel.text = "\(data.userCnt!)"
+            commentLabel.text = data.comment
+            memberInfos = data.users!
+        }
+    }
+    
     @IBAction func didTapMoreButton(_ sender: UIButton) {
         if moreView.isHidden { moreView.isHidden = false }
         else { moreView.isHidden = true }
@@ -62,13 +84,13 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
 
 extension MyRefrigeratorTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4    // 임시 멤버수
+        return memberInfos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RefriMemberCollectionViewCell", for: indexPath) as? RefriMemberCollectionViewCell else { return UICollectionViewCell() }
         cell.setupLayout()
-        if indexPath.row == 0 { cell.setupMainMemberProfile() }
+        cell.configure(data: memberInfos[indexPath.row])
         return cell
     }
     

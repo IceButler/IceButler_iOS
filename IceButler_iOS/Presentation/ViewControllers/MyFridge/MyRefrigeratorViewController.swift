@@ -10,9 +10,11 @@ import UIKit
 class MyRefrigeratorViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    private var data: MyFridgeResponseModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
         setupNavigationBar()
         setupTableView()
     }
@@ -53,16 +55,37 @@ class MyRefrigeratorViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: "MyRefrigeratorTableViewCell", bundle: nil), forCellReuseIdentifier: "MyRefrigeratorTableViewCell")
     }
+    
+    private func fetchData() {
+        
+        APIManger.shared.getData(urlEndpointString: "/fridges",
+                                 responseDataType: MyFridgeResponseModel.self,
+                                 parameter: nil) { [weak self] response in
+            if let data = response.data { self?.data = data }
+            self?.tableView.reloadData()
+        }
+    }
 }
 
 extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12    // 임시 개수
+        if let fridgeList = data?.fridgeList,
+           let multiFridgeResList = data?.multiFridgeResList {
+            return fridgeList.count + multiFridgeResList.count
+        }
+        else { return 0 }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyRefrigeratorTableViewCell", for: indexPath) as? MyRefrigeratorTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
+        if indexPath.row < data?.fridgeList?.count ?? 0 {
+            cell.configureFridge(data: data?.fridgeList![indexPath.row])
+        } else {
+            let frigeratorCount = data?.fridgeList?.count ?? 0
+            cell.configureMultiFridge(data: data?.multiFridgeResList![indexPath.row - frigeratorCount])
+        }
         return cell
     }
     

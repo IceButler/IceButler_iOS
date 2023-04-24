@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class RefriMemberCollectionViewCell: UICollectionViewCell {
 
@@ -18,7 +19,7 @@ class RefriMemberCollectionViewCell: UICollectionViewCell {
     }
     
     public func setupLayout() {
-        imgView.layer.cornerRadius = imgView.frame.width / 2
+        imgView.layer.cornerRadius = imgView.frame.width / 2 - 2
     }
     
     public func setupMainMemberProfile() {
@@ -29,4 +30,13 @@ class RefriMemberCollectionViewCell: UICollectionViewCell {
         imgView.backgroundColor = .white    // 삭제 예정
     }
 
+    public func configure(data: FridgeUser) {
+        nickname.text = data.nickname
+        if let imgUrlStr = data.profileImgUrl {
+            let url = URL(string: imgUrlStr)
+            imgView.kf.setImage(with: url)
+        }
+        if data.role == "OWNER" { setupMainMemberProfile()  }
+        else { crownImg.isHidden = true }
+    }
 }

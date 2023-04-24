@@ -170,6 +170,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="collectionView" destination="aKg-E5-qrv" id="eMu-iG-paF"/>
+                <outlet property="commentLabel" destination="gjp-d6-kxH" id="rCA-ZT-XCr"/>
                 <outlet property="containerView" destination="eLT-EG-alH" id="hpB-wa-Ml3"/>
                 <outlet property="memberNumLabel" destination="BeD-6g-uTi" id="uc3-Si-zaf"/>
                 <outlet property="moreView" destination="iiT-dd-uHf" id="4zs-91-Eqq"/>
