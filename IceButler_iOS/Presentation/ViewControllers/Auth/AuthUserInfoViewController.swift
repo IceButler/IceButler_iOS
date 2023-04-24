@@ -119,7 +119,7 @@ class AuthUserInfoViewController: UIViewController {
     func setupObserver() {
         if mode == .Modify {
             UserViewModel.shared.userInfo { user in
-                if let imageUrlString = user.profileImage {
+                if let imageUrlString = user.profileImgUrl {
                     if let imageUrl = URL(string: imageUrlString) {
                         self.userImageView.kf.setImage(with: imageUrl)
                     }

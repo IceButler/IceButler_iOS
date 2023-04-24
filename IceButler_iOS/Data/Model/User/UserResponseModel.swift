@@ -10,5 +10,5 @@ import Foundation
 struct UserInfoResponseModel: Codable {
     let userIdx: Int
     let nickname, email: String?
-    let profileImage: String?
+    let profileImgUrl: String?
 }
