@@ -51,7 +51,7 @@ class CartViewController: UIViewController {
 //            self.viewHeightConstraint.constant = CGFloat(170 * self.cartFoods.count)
 //        }
         
-        APIManger.shared.getData(urlEndpointString: "/carts/78/foods",
+        APIManger.shared.getData(urlEndpointString: "/carts/1/foods",
                                  responseDataType: [CartResponseModel].self,
                                  requestDataType: [CartResponseModel].self,
                                  parameter: nil) { [weak self] response in
