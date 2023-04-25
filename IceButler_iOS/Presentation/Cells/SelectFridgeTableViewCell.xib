@@ -25,7 +25,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k9n-Dw-gVC">
-                        <rect key="frame" x="55" y="26.666666666666671" width="65" height="17"/>
+                        <rect key="frame" x="60" y="26.666666666666671" width="65" height="17"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                         <color key="textColor" red="0.24313725489999999" green="0.46274509800000002" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                     <constraint firstItem="arn-94-e0q" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="8ts-bU-eJC"/>
                     <constraint firstItem="KfK-z6-Zeg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VC6-hV-eQR"/>
                     <constraint firstItem="k9n-Dw-gVC" firstAttribute="centerY" secondItem="arn-94-e0q" secondAttribute="centerY" id="cts-R7-zhr"/>
-                    <constraint firstItem="k9n-Dw-gVC" firstAttribute="leading" secondItem="arn-94-e0q" secondAttribute="trailing" constant="10" id="pFr-YX-yBb"/>
+                    <constraint firstItem="k9n-Dw-gVC" firstAttribute="leading" secondItem="arn-94-e0q" secondAttribute="trailing" constant="15" id="pFr-YX-yBb"/>
                     <constraint firstItem="arn-94-e0q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="slN-8m-nAl"/>
                     <constraint firstAttribute="trailing" secondItem="KfK-z6-Zeg" secondAttribute="trailing" constant="25" id="vwC-Ab-Zqo"/>
                 </constraints>

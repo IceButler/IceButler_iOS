@@ -25,13 +25,13 @@ class SelectFridgeTableViewCell: UITableViewCell {
         if !isAddCell { self.selectImg.isHidden = !selected }
     }
     
-    public func setFridgeModeCell(data: String?) {
+    public func setFridgeModeCell(data: CommonFridgeModel?, isShareFridge: Bool) {
         if let data = data { setMyFridgeModeCell(data: data, isShareFridge: true) }
         else { setAddFridgeModeCell() }
     }
     
-    public func setMyFridgeModeCell(data: String, isShareFridge: Bool) {
-        fridgeNameLabel.text = data
+    public func setMyFridgeModeCell(data: CommonFridgeModel, isShareFridge: Bool) {
+        fridgeNameLabel.text = data.name
         isAddCell = false
         
         if isShareFridge {
