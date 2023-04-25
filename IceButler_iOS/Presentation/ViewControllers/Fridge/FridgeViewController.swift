@@ -171,7 +171,17 @@ class FridgeViewController: TabmanViewController {
     }
     
     @objc private func selectFridge() {
-        
+        let selectVC = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as! SelectFrideViewController
+        selectVC.view.backgroundColor = .signatureSkyBlue
+        selectVC.modalPresentationStyle = .pageSheet
+
+        if let sheet = selectVC.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.delegate = self
+            sheet.prefersGrabberVisible = true
+        }
+
+        present(selectVC, animated: true, completion: nil)
     }
     
     @objc private func moveToSearchVC() {
@@ -240,5 +250,12 @@ extension FridgeViewController: FoodAddSelectDelgate {
 extension FridgeViewController: FoodAddDelegate {
     func moveToFoodAddSelect() {
         moveToFoodAddSelectVC(animate: false)
+    }
+}
+
+
+extension FridgeViewController: UISheetPresentationControllerDelegate {
+    func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
+        print(sheetPresentationController.selectedDetentIdentifier == .large ? "large" : "medium")
     }
 }
