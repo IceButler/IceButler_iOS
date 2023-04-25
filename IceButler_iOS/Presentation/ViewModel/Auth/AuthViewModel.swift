@@ -73,10 +73,8 @@ class AuthViewModel: ObservableObject {
     }
     
     func accessToken(completion: @escaping (String) -> Void) {
-        $accessToken.filter { token in
-            token != nil
-        }.sink { token in
-            completion(token!)
+        $accessToken.sink { token in
+            completion(token ?? "")
         }.store(in: &cancelLabels)
     }
     
@@ -151,6 +149,7 @@ extension AuthViewModel {
             if let response = response {
                 self.accessToken = response.accessToken
                 self.setUserToken(token: response)
+                self.isJoin = true
             }
         }
     }
@@ -175,20 +174,15 @@ extension AuthViewModel {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(token) {
             UserDefaults.standard.setValue(encoded, forKey: "UserToken")
-            self.isJoin = true
         }
     }
     
     func getUserToken() {
-        if UserDefaults.standard.value(forKey: "UserToken") == nil {
-            self.isJoin = false
-        }else {
+        if UserDefaults.standard.value(forKey: "UserToken") != nil {
             if let userTokenData = UserDefaults.standard.object(forKey: "UserToken") as? Data {
                 let decoder = JSONDecoder()
                 if let userToken = try? decoder.decode(AuthJoinUserResponseModel.self, from: userTokenData) {
-                    print(userToken.accessToken)
                     self.accessToken = userToken.accessToken
-                    self.isJoin = true
                 }
             }
         }

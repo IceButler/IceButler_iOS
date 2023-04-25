@@ -8,6 +8,7 @@
 import UIKit
 import Tabman
 import Pageboy
+import Toast_Swift
 
 
 class FridgeViewController: TabmanViewController {
@@ -31,6 +32,7 @@ class FridgeViewController: TabmanViewController {
         setupNavigationBar()
         setupTabman()
         setupLayout()
+        setupObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,19 +45,14 @@ class FridgeViewController: TabmanViewController {
     
     private func setup() {
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: 1)
-        
-       
     }
     
     private func setupObserver() {
-//        FridgeViewModel.shared.allFoodList(foodListIdx: 0) { foodList in
-//            self.noFridgeImageView.isHidden = true
-//            self.noFridgeLabel.isHidden = true
-//            self.fridgeAddButton.isHidden = true
-//
-//            self.setupTabman()
-//        }
-//        foodAddButton.isHidden = true
+        AuthViewModel.shared.isJoin { isJoin in
+            if isJoin {
+                self.view.makeToast("회원가입이 완료되었습니다!", duration: 1.0, position: .center)
+            }
+        }
     }
     
     private func setupTabman() {
