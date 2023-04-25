@@ -44,7 +44,6 @@ class MyPageViewController: UIViewController {
         UserViewModel.shared.getUserInfo()
         
         
-        
         UserViewModel.shared.userInfo { user in
             if let imageUrlString = user.profileImgUrl {
                 if let imageUrl = URL(string: imageUrlString) {

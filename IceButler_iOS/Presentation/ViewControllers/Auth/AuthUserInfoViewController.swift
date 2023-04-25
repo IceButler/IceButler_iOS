@@ -132,7 +132,6 @@ class AuthUserInfoViewController: UIViewController {
                 if isModify == true {
                     self.tabBarController?.tabBar.isHidden = false
                     self.navigationController?.popViewController(animated: true)
-                    self.tabBarController?.tabBar.isHidden = false
                 }
             }
         }else {
