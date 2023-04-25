@@ -35,9 +35,11 @@ class FoodAddViewController: UIViewController {
     @IBOutlet weak var foodDatePickerViewHeight: NSLayoutConstraint!
     
     
-    @IBOutlet weak var foodOwnerTextView: UITextView!
+    
+    @IBOutlet weak var ownerOpenButton: UIButton!
     @IBOutlet weak var foodOwnerTableView: UITableView!
     @IBOutlet weak var foodOwnerView: UIView!
+    @IBOutlet weak var foodOwnerIconImageView: UIImageView!
     @IBOutlet weak var foodOwnerViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var foodMemoTextView: UITextView!
@@ -78,7 +80,7 @@ class FoodAddViewController: UIViewController {
     private func setup() {
         FoodViewModel.shared.getFoodOwnerList(fridgeIdx: 1)
         
-        let textViewList = [foodNameTextView, foodDetailTextView, foodOwnerTextView, foodMemoTextView]
+        let textViewList = [foodNameTextView, foodDetailTextView, foodMemoTextView]
         for i in 0..<textViewList.count {
             textViewList[i]?.delegate = self
             textViewList[i]?.tag = i
@@ -119,7 +121,7 @@ class FoodAddViewController: UIViewController {
             button?.layer.cornerRadius = 10
         }
         
-        [foodNameTextView, foodDetailTextView, foodOwnerTextView, foodMemoTextView].forEach { textView in
+        [foodNameTextView, foodDetailTextView,  foodMemoTextView].forEach { textView in
             textView?.layer.cornerRadius = 10
             textView?.textAlignment = .left
             textView?.textContainerInset = UIEdgeInsets(top: 13, left: 10, bottom: 0, right: 0)
@@ -165,10 +167,6 @@ class FoodAddViewController: UIViewController {
         datePickerOpenButton.tintColor = .placeholderColor
         datePickerOpenButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         
-        if foodOwnerTextView.text == "" {
-            foodOwnerTextView.text = "닉네임으로 검색해주세요."
-            foodOwnerTextView.textColor = .placeholderColor
-        }
         
         if foodMemoTextView.text == "" {
             foodMemoTextView.text = "메모내용 or 없음"
@@ -278,6 +276,7 @@ class FoodAddViewController: UIViewController {
         }
     }
     
+    
     @IBAction func openCategory(_ sender: Any) {
         UIView.animate(withDuration: 0.5) {
             if self.isOpenCategoryView {
@@ -293,14 +292,20 @@ class FoodAddViewController: UIViewController {
         }
     }
     
-    private func openOwnerTableView() {
+    
+    @IBAction func openOwnerTableView(_ sender: Any) {
         UIView.animate(withDuration: 0.5) {
-            self.foodOwnerView.backgroundColor = .focusTableViewSkyBlue
-            self.foodOwnerViewHeight.priority = UILayoutPriority(200)
-            self.isOpenOwnerTableView = true
-            self.foodOwnerTableView.reloadData()
+            if self.isOpenOwnerTableView {
+                self.foodOwnerViewHeight.priority = UILayoutPriority(1000)
+                self.foodOwnerIconImageView.image = UIImage(named: "categoryOpenIcon")
+            }else {
+                self.foodOwnerView.backgroundColor = .focusTableViewSkyBlue
+                self.foodOwnerViewHeight.priority = UILayoutPriority(200)
+                self.foodOwnerIconImageView.image = UIImage(named: "categoryCloseIcon")
+                self.foodOwnerTableView.reloadData()
+            }
+            self.isOpenOwnerTableView.toggle()
         }
-        
     }
     
     private func selectFoodCategory(index: Int) {
@@ -472,7 +477,9 @@ extension FoodAddViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             guard let cell = tableView.cellForRow(at: indexPath)! as? FoodOwnerCell else {return}
             FoodViewModel.shared.foodOwnerListName(index: indexPath.row, store: &cell.cancellabels) { ownerName in
-                self.foodOwnerTextView.text = ownerName
+                self.ownerOpenButton.tintColor = .black
+                self.ownerOpenButton.backgroundColor = .focusSkyBlue
+                self.ownerOpenButton.setTitle(ownerName, for: .normal)
             }
             FoodViewModel.shared.foodOwnerListIdx(index: indexPath.row, store: &cell.cancellabels) { foodOwnerIdx in
                 self.foodOwnerIdx = foodOwnerIdx
@@ -499,12 +506,6 @@ extension FoodAddViewController: UITextViewDelegate {
             }
             break
         case 2:
-            if textView.text == "닉네임으로 검색해주세요." {
-                focusTextView(textView: textView)
-            }
-            openOwnerTableView()
-            break
-        case 3:
             if textView.text == "메모내용 or 없음" {
                 focusTextView(textView: textView)
             }

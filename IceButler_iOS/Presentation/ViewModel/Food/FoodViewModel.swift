@@ -57,7 +57,7 @@ class FoodViewModel: ObservableObject {
     
     func foodOwnerListName(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
         $foodOwnerList.sink { foodOwnerList in
-            completion((foodOwnerList[index].nickname) ?? "")
+            completion((foodOwnerList[index].nickName) ?? "")
         }.store(in: &store)
     }
     
@@ -83,7 +83,7 @@ class FoodViewModel: ObservableObject {
     func getFoodOwnerList(fridgeIdx: Int) {
         foodService.getFoodOwnerList(fridgeIdx: fridgeIdx) { foodOwnerList in
             self.foodOwnerList.removeAll()
-            foodOwnerList?.userList.forEach({ foodOwner in
+            foodOwnerList?.fridgeUsers.forEach({ foodOwner in
                 self.foodOwnerList.append(foodOwner)
             })
         }

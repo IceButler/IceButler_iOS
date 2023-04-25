@@ -22,12 +22,12 @@ struct FoodDetailResponseModel: Codable {
 
 
 struct FoodOwnerResponseModel: Codable {
-    let userList: [FoodOwner]
+    let fridgeUsers: [FoodOwner]
 }
 
 struct FoodOwner: Codable {
     let userIdx: Int
-    let nickname, profileImage: String?
+    let nickName, profileImage: String?
 }
 
 
