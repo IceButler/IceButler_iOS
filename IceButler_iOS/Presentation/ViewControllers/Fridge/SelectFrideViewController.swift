@@ -15,7 +15,12 @@ class SelectFrideViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
         setupTableView()
+    }
+    
+    private func fetchData() {
+        // TODO: 마이냉장고 조회 API 연결 및 데이터 구성
     }
     
     private func setupTableView() {
@@ -34,10 +39,12 @@ extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectFridgeTableViewCell", for: indexPath) as? SelectFridgeTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
-        if indexPath.row == myFridgeData.count { cell.setAddFridgeModeCell() }
-        else { cell.setMyFridgeModeCell(data: myFridgeData[indexPath.row], isShareFridge: false) }
-        
+        if indexPath.row == myFridgeData.count { cell.setFridgeModeCell(data: nil) }
+        else { cell.setFridgeModeCell(data: myFridgeData[indexPath.row]) }
         return cell
     }
-    
+        
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
+    }
 }
