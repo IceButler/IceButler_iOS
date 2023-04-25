@@ -13,6 +13,7 @@ class SelectFrideViewController: UIViewController {
     private var fridgeCount: Int = 0
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,7 @@ class SelectFrideViewController: UIViewController {
     
     private func configureData(data: MyFridgeResponseModel?) {
         if let data = data {
+            tableViewHeight.constant = CGFloat(55 * (data.fridgeList!.count ?? 0 + data.multiFridgeResList!.count ?? 0) + 5)
             fridgeCount = data.fridgeList?.count ?? 0
 
             data.fridgeList?.forEach({ fridge in
@@ -68,24 +70,28 @@ class SelectFrideViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "확인", style: .default))
         present(alert, animated: true)
     }
+    
+    @IBAction func didTapAddFridgeButton(_ sender: UIButton) {
+        // TODO: 냉장고 추가 화면으로 이동
+        print("TODO: 냉장고 추가 화면으로 이동")
+    }
+    
 }
 
 extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 55 }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return myFridgeData.count + 1 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return myFridgeData.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectFridgeTableViewCell", for: indexPath) as? SelectFridgeTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
-        if indexPath.row == myFridgeData.count { cell.setFridgeModeCell(data: nil, isShareFridge: false) }
-        else {
-            if indexPath.row < fridgeCount {
-                cell.setFridgeModeCell(data: myFridgeData[indexPath.row], isShareFridge: false)
-            } else {
-                cell.setFridgeModeCell(data: myFridgeData[indexPath.row], isShareFridge: true)
-            }
+        if indexPath.row < fridgeCount {
+            cell.setFridgeModeCell(data: myFridgeData[indexPath.row], isShareFridge: false)
+        } else {
+            cell.setFridgeModeCell(data: myFridgeData[indexPath.row], isShareFridge: true)
         }
+        
         return cell
     }
         
