@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class FoodService {
     func getAllFood(fridgeIdx: Int, foodIdx: Int, completion: @escaping (FoodDetailResponseModel?) -> Void) {
@@ -34,6 +35,24 @@ class FoodService {
                 completion(true)
             }else {
                 completion(false)
+            }
+        }
+    }
+    
+    func getGptFoodName(foodDetailName: String, completion: @escaping (GptFoodNameResponse) -> Void) {
+        let parameter: Parameters =  ["keyword" : foodDetailName]
+        APIManger.shared.getGpt(url: "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/dev/chatgpt-oneword", responseDataType: GptFoodNameResponse.self, parameter: parameter) { response in
+            if let response = response {
+                completion(response)
+            }
+        }
+    }
+    
+    func getGptFoodCategory(foodDetailName: String, completion: @escaping (GptCategoryResponse) -> Void) {
+        let parameter: Parameters =  ["keyword" : foodDetailName]
+        APIManger.shared.getGpt(url: "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/dev/chatgpt-category", responseDataType: GptCategoryResponse.self, parameter: parameter) { response in
+            if let response = response {
+                completion(response)
             }
         }
     }

@@ -18,6 +18,8 @@ class FoodViewModel: ObservableObject {
     @Published var food: FoodDetailResponseModel?
     @Published var foodOwnerList: [FoodOwner] = []
     @Published var barcodeFoodInfo: BarcodeFoodResponse?
+    @Published var gptFoodNames: [String] = []
+    @Published var gptFoodCategories: [String] = []
     
     var cancelLabels: Set<AnyCancellable> = []
     private var profileImgKey: String?
@@ -56,23 +58,92 @@ class FoodViewModel: ObservableObject {
     }
     
     func foodOwnerListName(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
-        $foodOwnerList.sink { foodOwnerList in
-            completion((foodOwnerList[index].nickname) ?? "")
+        $foodOwnerList.filter { foodOwnerList in
+            index < foodOwnerList.count
+        }.sink { foodOwnerList in
+            completion((foodOwnerList[index].nickName) ?? "")
         }.store(in: &store)
     }
     
-    func foodOwnerListIdx(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (Int) -> Void) {
-        $foodOwnerList.sink { foodOwnerList in
-            completion(foodOwnerList[index].userIdx)
-        }.store(in: &store)
+    func foodOwnerListName(index: Int) -> String {
+        guard let nickname = foodOwnerList[index].nickName else {return ""}
+        return nickname
+    }
+    
+    func foodOwnerListIdx(index:Int) -> Int {
+        return foodOwnerList[index].userIdx
     }
     
     func foodOwnerListImage(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
-        $foodOwnerList.sink { foodOwnerList in
+        $foodOwnerList.filter { foodOwnerList in
+            index < foodOwnerList.count
+        }.sink { foodOwnerList in
             completion((foodOwnerList[index].profileImage)!)
         }.store(in: &store)
     }
     
+    func gptFoodNames(index: Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
+        $gptFoodNames.filter({ gptFoodNames in
+            index < gptFoodNames.count && gptFoodNames.count != 0
+        }).sink { gptFoodNames in
+            completion(gptFoodNames[index])
+        }.store(in: &store)
+    }
+    
+    func getGptFoodName(index: Int) -> String {
+        return gptFoodNames[index]
+    }
+    
+    func isChangeGptFoodNames(completion: @escaping () -> Void) {
+        $gptFoodNames.filter({ gptFoodNames in
+            gptFoodNames.count > 0
+        }).sink { gptFoodNames in
+            completion()
+        }.store(in: &cancelLabels)
+    }
+    
+    func gptFoodNamesCount() -> Int {
+        return gptFoodNames.count
+    }
+    
+    func gptFoodCategory(index: Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
+        $gptFoodCategories.filter({ gptFoodCategories in
+            index < gptFoodCategories.count && gptFoodCategories.count != 0
+        }).sink { gptFoodCategories in
+            completion(gptFoodCategories[index])
+        }.store(in: &store)
+    }
+    
+    func gptFoodCategoriesCount() -> Int {
+        return gptFoodCategories.count
+    }
+    
+    func getGptFoodCategory(index: Int) -> String {
+        return gptFoodCategories[index]
+    }
+    
+    func isChangeFoodCategories(completion: @escaping () -> Void) {
+        $gptFoodCategories.filter({ gptFoodCategories in
+            gptFoodCategories.count > 0
+        }).sink { gptFoodCategories in
+            completion()
+        }.store(in: &cancelLabels)
+    }
+    
+    func deleteAll() {
+        self.food = nil
+        self.foodOwnerList = []
+        self.barcodeFoodInfo = nil
+        self.gptFoodNames = []
+        self.gptFoodCategories = []
+    }
+}
+
+
+
+
+
+extension FoodViewModel {
     func getFoodDetail(fridgeIdx: Int, foodIdx: Int) {
         foodService.getAllFood(fridgeIdx: fridgeIdx, foodIdx: foodIdx) { foodDetail in
             self.food = foodDetail
@@ -83,7 +154,7 @@ class FoodViewModel: ObservableObject {
     func getFoodOwnerList(fridgeIdx: Int) {
         foodService.getFoodOwnerList(fridgeIdx: fridgeIdx) { foodOwnerList in
             self.foodOwnerList.removeAll()
-            foodOwnerList?.userList.forEach({ foodOwner in
+            foodOwnerList?.fridgeUsers.forEach({ foodOwner in
                 self.foodOwnerList.append(foodOwner)
             })
         }
@@ -92,6 +163,9 @@ class FoodViewModel: ObservableObject {
     func getBarcodeFood(barcode: String) {
         foodService.getBarcodeFood(barcode: barcode) { barcodeFood in
             self.barcodeFoodInfo = barcodeFood
+            if let foodDetailName = barcodeFood.foodDetailName {
+                self.getGptFood(foodDetailName: foodDetailName)
+            }
         }
     }
     
@@ -122,6 +196,18 @@ class FoodViewModel: ObservableObject {
                 completion(true)
             }else {
                 completion(false)
+            }
+        }
+    }
+    
+    func getGptFood(foodDetailName: String) {
+        DispatchQueue.global().async {
+            self.foodService.getGptFoodName(foodDetailName: foodDetailName) { response in
+                self.gptFoodNames = response.words
+            }
+            
+            self.foodService.getGptFoodCategory(foodDetailName: foodDetailName) { response in
+                self.gptFoodCategories = response.categories
             }
         }
     }
