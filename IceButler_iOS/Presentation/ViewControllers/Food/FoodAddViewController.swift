@@ -267,6 +267,7 @@ class FoodAddViewController: UIViewController {
     }
     
     @objc private func backToScene() {
+        FoodViewModel.shared.deleteAll()
         navigationController?.popViewController(animated: true)
         delegate?.moveToFoodAddSelect()
     }
@@ -427,6 +428,7 @@ class FoodAddViewController: UIViewController {
                 if result {
                     let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                        FoodViewModel.shared.deleteAll()
                         self.navigationController?.popViewController(animated: true)
                     }))
                     self.present(alert, animated: true)
@@ -440,6 +442,7 @@ class FoodAddViewController: UIViewController {
                 if result {
                     let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                        FoodViewModel.shared.deleteAll()
                         self.navigationController?.popViewController(animated: true)
                     }))
                     self.present(alert, animated: true)
@@ -557,13 +560,7 @@ extension FoodAddViewController: UITextViewDelegate {
         }
     }
     
-//    func textViewDidChange(_ textView: UITextView) {
-//        if textView.tag == 1 {
-//            FoodViewModel.shared.getGptFood(foodDetailName: textView.text)
-//        }
-//    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView) {
         if textView.tag == 1 {
             FoodViewModel.shared.getGptFood(foodDetailName: textView.text)
         }

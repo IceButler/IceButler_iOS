@@ -122,6 +122,14 @@ class FoodViewModel: ObservableObject {
             completion()
         }.store(in: &cancelLabels)
     }
+    
+    func deleteAll() {
+        self.food = nil
+        self.foodOwnerList = []
+        self.barcodeFoodInfo = nil
+        self.gptFoodNames = []
+        self.gptFoodCategories = []
+    }
 }
 
 
