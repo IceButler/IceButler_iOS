@@ -252,11 +252,21 @@ class FoodAddViewController: UIViewController {
         
         DispatchQueue.main.async {
             FoodViewModel.shared.isChangeFoodCategories {
-                self.categoryGptCollectionView.reloadData()
+                UIView.transition(with: self.categoryGptCollectionView,
+                                  duration: 0.35,
+                                  options: .transitionCrossDissolve,
+                                  animations: { () -> Void in
+                    self.categoryGptCollectionView.reloadData()},
+                                  completion: nil)
             }
             
             FoodViewModel.shared.isChangeGptFoodNames {
-                self.foodNameGptCollectionView.reloadData()
+                UIView.transition(with: self.foodNameGptCollectionView,
+                                  duration: 0.35,
+                                  options: .transitionCrossDissolve,
+                                  animations: { () -> Void in
+                    self.foodNameGptCollectionView.reloadData()},
+                                  completion: nil)
             }
         }
     }
