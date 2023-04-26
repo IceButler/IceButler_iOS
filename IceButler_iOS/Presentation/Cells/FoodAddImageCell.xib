@@ -17,12 +17,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageAddIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Dxt-y5-Zt0">
-                        <rect key="frame" x="29.666666666666664" y="29.666666666666664" width="19.666666666666664" height="19.666666666666664"/>
-                    </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ptv-Ca-6by">
                         <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageAddIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Dxt-y5-Zt0">
+                        <rect key="frame" x="29.666666666666664" y="29.666666666666664" width="19.666666666666664" height="19.666666666666664"/>
                     </imageView>
                 </subviews>
             </view>

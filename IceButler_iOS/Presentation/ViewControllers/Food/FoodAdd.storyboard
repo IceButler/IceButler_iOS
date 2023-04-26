@@ -188,7 +188,7 @@
                                                 <color key="textColor" red="0.16078431372549018" green="0.3529411764705882" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8h1-sF-TnC">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8h1-sF-TnC">
                                                 <rect key="frame" x="99.666666666666657" y="193" width="293.33333333333337" height="34"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -218,7 +218,7 @@
                                                 <color key="textColor" red="0.16078431369999999" green="0.35294117650000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fjh-VV-9ah">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fjh-VV-9ah">
                                                 <rect key="frame" x="99.666666666666657" y="485" width="293.33333333333337" height="34"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -431,6 +431,7 @@
                     </view>
                     <size key="freeformSize" width="393" height="1200"/>
                     <connections>
+                        <outlet property="categoryGptCollectionView" destination="fjh-VV-9ah" id="Fg5-x7-8NX"/>
                         <outlet property="categoryIconImageView" destination="2CE-LN-4FK" id="ZF6-VY-g78"/>
                         <outlet property="categoryOpenButton" destination="yph-Eb-kY8" id="M0y-4o-WAq"/>
                         <outlet property="categoryTableView" destination="Ga1-Tf-nZz" id="fwD-wn-zfZ"/>
@@ -443,6 +444,7 @@
                         <outlet property="foodDetailTextView" destination="jpu-4n-SM1" id="1Vb-fs-vKv"/>
                         <outlet property="foodImageCollectionView" destination="hK6-W9-jKo" id="rCd-Ul-fRv"/>
                         <outlet property="foodMemoTextView" destination="xhF-yj-jgn" id="CFP-Pl-md1"/>
+                        <outlet property="foodNameGptCollectionView" destination="8h1-sF-TnC" id="hde-3y-ZVL"/>
                         <outlet property="foodNameTextView" destination="yDt-4h-DNK" id="Zfr-WJ-Oui"/>
                         <outlet property="foodOwnerIconImageView" destination="AxJ-le-OXG" id="VEQ-K5-gqi"/>
                         <outlet property="foodOwnerTableView" destination="AV7-is-9ti" id="X2j-Xt-2oh"/>

@@ -94,24 +94,6 @@ extension APIManger {
             .resume()
     }
     
-    func getImageUrl(url: String, parameter: Parameters?, completionHandler: @escaping (ImageResponseModel?)->Void) {
-        guard let url = URL(string: url) else { return }
-        AF
-            .request(url, method: .get, parameters: parameter, headers: nil)
-            .responseDecodable(of: ImageResponseModel.self) { response in
-                print(response)
-                switch response.result {
-                case .success(let success):
-                    completionHandler(success)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }.resume()
-    }
-    
-    
-    
-    
     func getData<T: Codable, U: Decodable>(url: String,
                                            responseDataType: U.Type,
                                            requestDataType: T.Type,
@@ -133,6 +115,39 @@ extension APIManger {
             }
             .resume()
     }
+    
+    
+    func getImageUrl(url: String, parameter: Parameters?, completionHandler: @escaping (ImageResponseModel?)->Void) {
+        guard let url = URL(string: url) else { return }
+        AF
+            .request(url, method: .get, parameters: parameter, headers: nil)
+            .responseDecodable(of: ImageResponseModel.self) { response in
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }.resume()
+    }
+    
+    func getGpt<T: Codable>(url: String, responseDataType: T.Type,  parameter: Parameters?, completionHandler: @escaping (T?)->Void) {
+        guard let url = URL(string: url) else {return}
+        
+        AF
+            .request(url, method: .get, parameters: parameter, headers: nil)
+            .responseDecodable(of: T.self) { response in
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }.resume()
+    }
+    
     
     func putData<T: Codable, U: Decodable>(urlEndpointString: String,
                                             responseDataType: U.Type,

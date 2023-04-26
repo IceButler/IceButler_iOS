@@ -23,12 +23,15 @@ class FoodAddViewController: UIViewController {
     @IBOutlet weak var foodNameTextView: UITextView!
     @IBOutlet weak var foodDetailTextView: UITextView!
     
+    @IBOutlet weak var foodNameGptCollectionView: UICollectionView!
+    
     @IBOutlet weak var categoryOpenButton: UIButton!
     @IBOutlet weak var categoryIconImageView: UIImageView!
     @IBOutlet weak var categoryTableView: UITableView!
     @IBOutlet weak var categoryView: UIView!
     @IBOutlet weak var categoryViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var categoryGptCollectionView: UICollectionView!
     
     @IBOutlet weak var datePickerOpenButton: UIButton!
     @IBOutlet weak var foodDatePicker: UIDatePicker!
@@ -101,8 +104,18 @@ class FoodAddViewController: UIViewController {
         foodOwnerTableView.register(foodOwnerCell, forCellReuseIdentifier: "FoodOwnerCell")
         
         
-        foodImageCollectionView.delegate = self
-        foodImageCollectionView.dataSource = self
+        
+        let collectionViewList = [foodNameGptCollectionView, categoryGptCollectionView, foodImageCollectionView]
+        for k in 0..<collectionViewList.count {
+            collectionViewList[k]?.delegate = self
+            collectionViewList[k]?.dataSource = self
+            collectionViewList[k]?.tag = k
+            
+        }
+        
+        let gptCell = UINib(nibName: "ChatGptCell", bundle: nil)
+        foodNameGptCollectionView.register(gptCell, forCellWithReuseIdentifier: "ChatGptCell")
+        categoryGptCollectionView.register(gptCell, forCellWithReuseIdentifier: "ChatGptCell")
         
         let foodAddImageCell = UINib(nibName: "FoodAddImageCell", bundle: nil)
         foodImageCollectionView.register(foodAddImageCell, forCellWithReuseIdentifier: "FoodAddImageCell")
@@ -132,11 +145,14 @@ class FoodAddViewController: UIViewController {
             tableView?.layer.cornerRadius = 10
         }
         
+        
+        
         [categoryView, foodOwnerView].forEach { view in
             view?.layer.cornerRadius = 10
         }
-        
-        foodImageCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
+        [foodNameGptCollectionView, categoryGptCollectionView, foodImageCollectionView].forEach { collectionView in
+            collectionView?.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
+        }
         
         
         if let flowLayout = foodImageCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -230,6 +246,16 @@ class FoodAddViewController: UIViewController {
                 self.foodDetailTextView.text = barcodeFood?.foodDetailName
                 self.foodDetailTextView.textColor = .black
                 self.foodDetailTextView.backgroundColor = .focusSkyBlue
+            }
+        }
+        
+        DispatchQueue.main.async {
+            FoodViewModel.shared.isChangeFoodCategories {
+                self.categoryGptCollectionView.reloadData()
+            }
+            
+            FoodViewModel.shared.isChangeGptFoodNames {
+                self.foodNameGptCollectionView.reloadData()
             }
         }
     }
@@ -430,6 +456,22 @@ class FoodAddViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
+    private func setFoodNameTextView(gptFoodName: String) {
+        UIView.animate(withDuration: 0.5) {
+            self.foodNameTextView.textColor = .black
+            self.foodNameTextView.backgroundColor = .focusSkyBlue
+            self.foodNameTextView.text = gptFoodName
+        }
+    }
+    
+    private func setFoodCategory(gptFoodCategory: String) {
+        for i in 0..<FoodCategory.allCases.count {
+            if FoodCategory.allCases[i].rawValue == gptFoodCategory {
+                selectFoodCategory(index: i)
+            }
+        }
+    }
+    
     
 }
 
@@ -514,30 +556,105 @@ extension FoodAddViewController: UITextViewDelegate {
             break
         }
     }
+    
+//    func textViewDidChange(_ textView: UITextView) {
+//        if textView.tag == 1 {
+//            FoodViewModel.shared.getGptFood(foodDetailName: textView.text)
+//        }
+//    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.tag == 1 {
+            FoodViewModel.shared.getGptFood(foodDetailName: textView.text)
+        }
+    }
+    
 }
 
 
 extension FoodAddViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        switch collectionView.tag {
+        case 0:
+            return FoodViewModel.shared.gptFoodNamesCount()
+        case 1:
+            return FoodViewModel.shared.gptFoodCategoriesCount()
+        case 2:
+            return 1
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodAddImageCell", for: indexPath) as? FoodAddImageCell else {return UICollectionViewCell()}
-        
-        if foodImage != nil {
-            cell.setImage(image: foodImage!)
-            cell.hiddenFoodImageAddIcon()
+        switch collectionView.tag {
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatGptCell", for: indexPath) as? ChatGptCell else {return UICollectionViewCell()}
+            
+            FoodViewModel.shared.gptFoodNames(index: indexPath.row, store: &cell.cancelLabels) { foodName in
+                cell.configure(gptText: foodName)
+            }
+            
+            return cell
+        case 1:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatGptCell", for: indexPath) as? ChatGptCell else {return UICollectionViewCell()}
+            
+            FoodViewModel.shared.gptFoodCategory(index: indexPath.row, store: &cell.cancelLabels) { foodCategory in
+                cell.configure(gptText: foodCategory)
+            }
+            
+            return cell
+        case 2:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodAddImageCell", for: indexPath) as? FoodAddImageCell else {return UICollectionViewCell()}
+            
+            if foodImage != nil {
+                cell.setImage(image: foodImage!)
+                cell.hiddenFoodImageAddIcon()
+            }
+            
+            return cell
+        default:
+            return UICollectionViewCell()
         }
         
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if foodImage == nil {
-            selectImage()
+        if collectionView.tag == 0 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatGptCell", for: indexPath) as? ChatGptCell else {return}
+            FoodViewModel.shared.gptFoodNames(index: indexPath.row, store: &cell.cancelLabels) { foodName in
+                self.setFoodNameTextView(gptFoodName: foodName)
+            }
+        }else if collectionView.tag == 1 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatGptCell", for: indexPath) as? ChatGptCell else {return}
+            FoodViewModel.shared.gptFoodCategory(index: indexPath.row, store: &cell.cancelLabels) { foodCategory in
+                self.setFoodCategory(gptFoodCategory: foodCategory)
+            }
+        }else if collectionView.tag == 2 {
+            if foodImage == nil {
+                selectImage()
+            }
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView.tag == 0 {
+            let sizeLabel = UILabel()
+            sizeLabel.font = .systemFont(ofSize: 14)
+            sizeLabel.text = FoodViewModel.shared.getGptFoodName(index: indexPath.row)
+            sizeLabel.sizeToFit()
+            return CGSize(width: sizeLabel.frame.width + 30, height: 34)
+        }else if collectionView.tag == 1{
+            let sizeLabel = UILabel()
+            sizeLabel.font = .systemFont(ofSize: 14)
+            sizeLabel.text = FoodViewModel.shared.getGptFoodCategory(index: indexPath.row)
+            sizeLabel.sizeToFit()
+            return CGSize(width: sizeLabel.frame.width + 30, height: 34)
+        }else {
+            return CGSize(width: 79, height: 79)
+        }
+    }
+    
     
 }
 

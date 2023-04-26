@@ -35,3 +35,12 @@ struct BarcodeFoodResponse: Codable {
     let foodIdx: Int?
     let foodName, foodDetailName, foodCategory: String?
 }
+
+
+struct GptCategoryResponse: Codable {
+    let categories: [String]
+}
+
+struct GptFoodNameResponse: Codable {
+    let words: [String]
+}

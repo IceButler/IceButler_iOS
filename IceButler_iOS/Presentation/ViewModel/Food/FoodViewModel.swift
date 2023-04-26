@@ -18,6 +18,8 @@ class FoodViewModel: ObservableObject {
     @Published var food: FoodDetailResponseModel?
     @Published var foodOwnerList: [FoodOwner] = []
     @Published var barcodeFoodInfo: BarcodeFoodResponse?
+    @Published var gptFoodNames: [String] = []
+    @Published var gptFoodCategories: [String] = []
     
     var cancelLabels: Set<AnyCancellable> = []
     private var profileImgKey: String?
@@ -73,6 +75,60 @@ class FoodViewModel: ObservableObject {
         }.store(in: &store)
     }
     
+    func gptFoodNames(index: Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
+        $gptFoodNames.filter({ gptFoodNames in
+            index < gptFoodNames.count && gptFoodNames.count != 0
+        }).sink { gptFoodNames in
+            completion(gptFoodNames[index])
+        }.store(in: &store)
+    }
+    
+    func getGptFoodName(index: Int) -> String {
+        return gptFoodNames[index]
+    }
+    
+    func isChangeGptFoodNames(completion: @escaping () -> Void) {
+        $gptFoodNames.filter({ gptFoodNames in
+            gptFoodNames.count > 0
+        }).sink { gptFoodNames in
+            completion()
+        }.store(in: &cancelLabels)
+    }
+    
+    func gptFoodNamesCount() -> Int {
+        return gptFoodNames.count
+    }
+    
+    func gptFoodCategory(index: Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
+        $gptFoodCategories.filter({ gptFoodCategories in
+            index < gptFoodCategories.count && gptFoodCategories.count != 0
+        }).sink { gptFoodCategories in
+            completion(gptFoodCategories[index])
+        }.store(in: &store)
+    }
+    
+    func gptFoodCategoriesCount() -> Int {
+        return gptFoodCategories.count
+    }
+    
+    func getGptFoodCategory(index: Int) -> String {
+        return gptFoodCategories[index]
+    }
+    
+    func isChangeFoodCategories(completion: @escaping () -> Void) {
+        $gptFoodCategories.filter({ gptFoodCategories in
+            gptFoodCategories.count > 0
+        }).sink { gptFoodCategories in
+            completion()
+        }.store(in: &cancelLabels)
+    }
+}
+
+
+
+
+
+extension FoodViewModel {
     func getFoodDetail(fridgeIdx: Int, foodIdx: Int) {
         foodService.getAllFood(fridgeIdx: fridgeIdx, foodIdx: foodIdx) { foodDetail in
             self.food = foodDetail
@@ -122,6 +178,18 @@ class FoodViewModel: ObservableObject {
                 completion(true)
             }else {
                 completion(false)
+            }
+        }
+    }
+    
+    func getGptFood(foodDetailName: String) {
+        DispatchQueue.global().async {
+            self.foodService.getGptFoodName(foodDetailName: foodDetailName) { response in
+                self.gptFoodNames = response.words
+            }
+            
+            self.foodService.getGptFoodCategory(foodDetailName: foodDetailName) { response in
+                self.gptFoodCategories = response.categories
             }
         }
     }
