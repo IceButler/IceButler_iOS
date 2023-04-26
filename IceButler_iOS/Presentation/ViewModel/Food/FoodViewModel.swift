@@ -58,19 +58,26 @@ class FoodViewModel: ObservableObject {
     }
     
     func foodOwnerListName(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
-        $foodOwnerList.sink { foodOwnerList in
+        $foodOwnerList.filter { foodOwnerList in
+            index < foodOwnerList.count
+        }.sink { foodOwnerList in
             completion((foodOwnerList[index].nickName) ?? "")
         }.store(in: &store)
     }
     
-    func foodOwnerListIdx(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (Int) -> Void) {
-        $foodOwnerList.sink { foodOwnerList in
-            completion(foodOwnerList[index].userIdx)
-        }.store(in: &store)
+    func foodOwnerListName(index: Int) -> String {
+        guard let nickname = foodOwnerList[index].nickName else {return ""}
+        return nickname
+    }
+    
+    func foodOwnerListIdx(index:Int) -> Int {
+        return foodOwnerList[index].userIdx
     }
     
     func foodOwnerListImage(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
-        $foodOwnerList.sink { foodOwnerList in
+        $foodOwnerList.filter { foodOwnerList in
+            index < foodOwnerList.count
+        }.sink { foodOwnerList in
             completion((foodOwnerList[index].profileImage)!)
         }.store(in: &store)
     }
@@ -156,6 +163,9 @@ extension FoodViewModel {
     func getBarcodeFood(barcode: String) {
         foodService.getBarcodeFood(barcode: barcode) { barcodeFood in
             self.barcodeFoodInfo = barcodeFood
+            if let foodDetailName = barcodeFood.foodDetailName {
+                self.getGptFood(foodDetailName: foodDetailName)
+            }
         }
     }
     

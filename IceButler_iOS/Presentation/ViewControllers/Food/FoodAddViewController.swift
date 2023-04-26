@@ -16,9 +16,7 @@ protocol FoodAddDelegate: AnyObject {
 
 class FoodAddViewController: UIViewController {
     
-    private var addedFoodNames: [String] = []
     
-    private var delegate: FoodAddDelegate?
     
     @IBOutlet weak var foodNameTextView: UITextView!
     @IBOutlet weak var foodDetailTextView: UITextView!
@@ -53,6 +51,8 @@ class FoodAddViewController: UIViewController {
     
     private let imagePickerController = ImagePickerController()
     
+    private var delegate: FoodAddDelegate?
+    
     private var isOpenDatePicker = false
     private var isOpenCategoryView = false
     private var isOpenOwnerTableView = false
@@ -60,10 +60,10 @@ class FoodAddViewController: UIViewController {
     private var selectedFoodCategory: FoodCategory?
     
     private var foodOwnerIdx: Int?
-    
     private var foodImage: UIImage?
-    
     private var date: Date?
+    private var addedFoodNames: [String] = []
+    private var selectedOwner: [Bool] = []
     
     
     override func viewDidLoad() {
@@ -129,7 +129,7 @@ class FoodAddViewController: UIViewController {
         categoryViewHeight.priority = UILayoutPriority(1000)
         foodOwnerViewHeight.priority = UILayoutPriority(1000)
         
-        [categoryOpenButton, datePickerOpenButton].forEach { button in
+        [categoryOpenButton, datePickerOpenButton, ownerOpenButton].forEach { button in
             button?.alignTextLeft()
             button?.layer.cornerRadius = 10
         }
@@ -144,8 +144,6 @@ class FoodAddViewController: UIViewController {
             tableView?.separatorStyle = .none
             tableView?.layer.cornerRadius = 10
         }
-        
-        
         
         [categoryView, foodOwnerView].forEach { view in
             view?.layer.cornerRadius = 10
@@ -199,7 +197,7 @@ class FoodAddViewController: UIViewController {
             let statusbarView = UIView()
             statusbarView.backgroundColor = UIColor.navigationColor
             view.addSubview(statusbarView)
-          
+            
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
             statusbarView.heightAnchor
                 .constraint(equalToConstant: statusBarHeight).isActive = true
@@ -209,7 +207,7 @@ class FoodAddViewController: UIViewController {
                 .constraint(equalTo: view.topAnchor).isActive = true
             statusbarView.centerXAnchor
                 .constraint(equalTo: view.centerXAnchor).isActive = true
-          
+            
         } else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
             statusBar?.backgroundColor = UIColor.navigationColor
@@ -234,6 +232,9 @@ class FoodAddViewController: UIViewController {
     
     private func setupObserver() {
         FoodViewModel.shared.foodOwnerList {
+            for _ in 0..<FoodViewModel.shared.foodOwnerListCount() {
+                self.selectedOwner.append(false)
+            }
             self.foodOwnerTableView.reloadData()
         }
         
@@ -283,9 +284,13 @@ class FoodAddViewController: UIViewController {
     @objc func selectDate() {
         let dateFromat = DateFormatter()
         dateFromat.dateFormat = "yyyy-MM-dd"
-
-        datePickerOpenButton.setTitle(dateFromat.string(from: foodDatePicker.date), for: .normal)
-        datePickerOpenButton.backgroundColor = .focusSkyBlue
+        
+        UIView.animate(withDuration: 0.5) {
+            self.datePickerOpenButton.backgroundColor = .focusSkyBlue
+            self.datePickerOpenButton.tintColor = .black
+            self.datePickerOpenButton.setTitle(dateFromat.string(from: self.foodDatePicker.date), for: .normal)
+        }
+        
         
         date = foodDatePicker.date
     }
@@ -296,7 +301,6 @@ class FoodAddViewController: UIViewController {
             if self.isOpenDatePicker {
                 self.foodDatePickerViewHeight.priority = UILayoutPriority(1000)
             }else {
-                self.datePickerOpenButton.backgroundColor = .focusSkyBlue
                 self.foodDatePickerViewHeight.priority = UILayoutPriority(200)
             }
             self.isOpenDatePicker.toggle()
@@ -310,7 +314,6 @@ class FoodAddViewController: UIViewController {
                 self.categoryViewHeight.priority = UILayoutPriority(1000)
                 self.categoryIconImageView.image = UIImage(named: "categoryOpenIcon")
             }else {
-                self.categoryOpenButton.backgroundColor = .focusSkyBlue
                 self.categoryView.backgroundColor = .focusTableViewSkyBlue
                 self.categoryViewHeight.priority = UILayoutPriority(200)
                 self.categoryIconImageView.image = UIImage(named: "categoryCloseIcon")
@@ -337,8 +340,11 @@ class FoodAddViewController: UIViewController {
     
     private func selectFoodCategory(index: Int) {
         selectedFoodCategory = FoodCategory.allCases[index]
-        
-        categoryOpenButton.setTitle(selectedFoodCategory?.rawValue, for: .normal)
+        UIView.animate(withDuration: 0.5) {
+            self.categoryOpenButton.backgroundColor = .focusSkyBlue
+            self.categoryOpenButton.tintColor = .black
+            self.categoryOpenButton.setTitle(self.selectedFoodCategory?.rawValue, for: .normal)
+        }
     }
     
     private func focusTextView(textView: UITextView) {
@@ -475,6 +481,29 @@ class FoodAddViewController: UIViewController {
         }
     }
     
+    private func selectOwner(index: Int) {
+        for i in 0..<selectedOwner.count {
+            if i == index {
+                selectedOwner[i] = true
+            }else {
+                selectedOwner[i] = false
+            }
+        }
+        
+        UIView.animate(withDuration: 0.5) {
+            self.ownerOpenButton.tintColor = .black
+            self.ownerOpenButton.backgroundColor = .focusSkyBlue
+            self.ownerOpenButton.setTitle(FoodViewModel.shared.foodOwnerListName(index: index), for: .normal)
+        }
+        
+        UIView.transition(with: self.foodOwnerTableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+            self.foodOwnerTableView.reloadData()},
+                          completion: nil)
+    }
+    
     
 }
 
@@ -503,7 +532,7 @@ extension FoodAddViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FoodOwnerCell", for: indexPath) as? FoodOwnerCell else {return UITableViewCell()}
             
             FoodViewModel.shared.foodOwnerListName(index: indexPath.row, store: &cell.cancellabels) { ownerName in
-                cell.configure(name: ownerName)
+                cell.configure(name: ownerName, isSelect: self.selectedOwner[indexPath.row])
             }
             
             cell.selectionStyle = .none
@@ -520,17 +549,8 @@ extension FoodAddViewController: UITableViewDelegate, UITableViewDataSource {
         case 0 :
             selectFoodCategory(index: indexPath.row)
         case 1:
-            guard let cell = tableView.cellForRow(at: indexPath)! as? FoodOwnerCell else {return}
-            FoodViewModel.shared.foodOwnerListName(index: indexPath.row, store: &cell.cancellabels) { ownerName in
-                self.ownerOpenButton.tintColor = .black
-                self.ownerOpenButton.backgroundColor = .focusSkyBlue
-                self.ownerOpenButton.setTitle(ownerName, for: .normal)
-            }
-            FoodViewModel.shared.foodOwnerListIdx(index: indexPath.row, store: &cell.cancellabels) { foodOwnerIdx in
-                self.foodOwnerIdx = foodOwnerIdx
-            }
-            
-            cell.selectedOwnerCell()
+            selectOwner(index: indexPath.row)
+            self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: indexPath.row)
         default:
             return
         }
@@ -560,7 +580,7 @@ extension FoodAddViewController: UITextViewDelegate {
         }
     }
     
-    func textViewDidChange(_ textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         if textView.tag == 1 {
             FoodViewModel.shared.getGptFood(foodDetailName: textView.text)
         }
