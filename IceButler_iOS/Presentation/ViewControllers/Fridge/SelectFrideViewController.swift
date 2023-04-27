@@ -94,5 +94,12 @@ extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource 
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let index = myFridgeData[indexPath.row].idx!
+//        APIManger.shared.setupFridgeIndex(index: index)
+        APIManger.shared.fridgeIdx = index
+        self.dismiss(animated: true)
+    }
         
 }
