@@ -27,6 +27,8 @@ class FridgeViewModel: ObservableObject {
     
     var cancelLabels: Set<AnyCancellable> = []
     
+    var defaultFridgeName: String = ""
+    
     func allFoodList(foodListIdx: Int, completion: @escaping ([FridgeFood])-> Void) {
         switch foodListIdx {
         case 0:
@@ -563,5 +565,20 @@ class FridgeViewModel: ObservableObject {
             })
         }
         
-    } 
+    }
+    
+    func setDefaultFridge() {
+        APIManger.shared.getData(urlEndpointString: "/fridges",
+                                 responseDataType: MyFridgeResponseModel.self,
+                                 requestDataType: MyFridgeResponseModel.self,
+                                 parameter: nil) { [weak self] response in
+            
+            switch response.statusCode {
+            case 200:
+                APIManger.shared.setFridgeIdx(index: (response.data?.fridgeList![0].fridgeIdx)!)  // 최초 로딩에 보여질 냉장고 기본값 설정
+                self?.defaultFridgeName = (response.data?.fridgeList![0].fridgeName)!
+            default: return
+            }
+        }
+    }
 }

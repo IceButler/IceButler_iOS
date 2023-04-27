@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol SelectFridgeDelegate {
+    func updateMainFridgeTitle(title: String)
+}
+
 class SelectFrideViewController: UIViewController {
     
+    var delegate: SelectFridgeDelegate?
     private var myFridgeData: [CommonFridgeModel] = []
     private var fridgeCount: Int = 0
     
@@ -45,7 +50,7 @@ class SelectFrideViewController: UIViewController {
     
     private func configureData(data: MyFridgeResponseModel?) {
         if let data = data {
-            tableViewHeight.constant = CGFloat(55 * (data.fridgeList!.count ?? 0 + data.multiFridgeResList!.count ?? 0) + 5)
+            tableViewHeight.constant = CGFloat(55 * (data.fridgeList!.count + data.multiFridgeResList!.count) + 5)
             fridgeCount = data.fridgeList?.count ?? 0
 
             data.fridgeList?.forEach({ fridge in
@@ -96,9 +101,14 @@ extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.updateMainFridgeTitle(title: myFridgeData[indexPath.row].name ?? "냉장고 이름")
+        
+        if indexPath.row < fridgeCount { APIManger.shared.setIsMultiFridge(data: false) }
+        else { APIManger.shared.setIsMultiFridge(data: true) }
+        
         let index = myFridgeData[indexPath.row].idx!
-//        APIManger.shared.setupFridgeIndex(index: index)
-        APIManger.shared.fridgeIdx = index
+        APIManger.shared.setFridgeIdx(index: index)
+        
         self.dismiss(animated: true)
     }
         
