@@ -22,16 +22,25 @@ struct FoodDetailResponseModel: Codable {
 
 
 struct FoodOwnerResponseModel: Codable {
-    let userList: [FoodOwner]
+    let fridgeUsers: [FoodOwner]
 }
 
 struct FoodOwner: Codable {
     let userIdx: Int
-    let nickname, profileImage: String?
+    let nickName, profileImage: String?
 }
 
 
 struct BarcodeFoodResponse: Codable {
     let foodIdx: Int?
     let foodName, foodDetailName, foodCategory: String?
+}
+
+
+struct GptCategoryResponse: Codable {
+    let categories: [String]
+}
+
+struct GptFoodNameResponse: Codable {
+    let words: [String]
 }

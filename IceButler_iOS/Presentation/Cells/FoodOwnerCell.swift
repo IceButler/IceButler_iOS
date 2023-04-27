@@ -39,8 +39,15 @@ class FoodOwnerCell: UITableViewCell {
         contentView.backgroundColor = UIColor(red: 240 / 255, green: 240 / 255, blue: 240 / 255, alpha: 1)
     }
     
-    func configure(name: String) {
+    func configure(name: String, isSelect: Bool) {
         ownerNameLabel.text = name
+        
+        if isSelect {
+            ownerNameLabel.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight(rawValue: 700))
+        }else {
+            ownerNameLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        }
+        
     }
     
     func isFocus(focus: Bool) {
@@ -51,7 +58,7 @@ class FoodOwnerCell: UITableViewCell {
     }
     
     func selectedOwnerCell() {
-        ownerNameLabel.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight(rawValue: 700))
+        
     }
     
 }

@@ -22,6 +22,8 @@
 		7339CD8E29E788BE002A6D78 /* ImageDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD8D29E788BE002A6D78 /* ImageDir.swift */; };
 		7339CD9029E7997F002A6D78 /* ImageRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD8F29E7997F002A6D78 /* ImageRequestModel.swift */; };
 		7339CD9229E79CDD002A6D78 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD9129E79CDD002A6D78 /* AuthProvider.swift */; };
+		7388C3AD29F82D81000C3606 /* ChatGptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7388C3AB29F82D81000C3606 /* ChatGptCell.swift */; };
+		7388C3AE29F82D81000C3606 /* ChatGptCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7388C3AC29F82D81000C3606 /* ChatGptCell.xib */; };
 		738CAC8529E310CF009EF9D2 /* FoodDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 738CAC8429E310CF009EF9D2 /* FoodDetail.storyboard */; };
 		738CAC8729E31349009EF9D2 /* FoodDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CAC8629E31349009EF9D2 /* FoodDetailViewController.swift */; };
 		738CAC8A29E32773009EF9D2 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CAC8929E32773009EF9D2 /* FoodViewModel.swift */; };
@@ -157,6 +159,8 @@
 		7339CD8D29E788BE002A6D78 /* ImageDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDir.swift; sourceTree = "<group>"; };
 		7339CD8F29E7997F002A6D78 /* ImageRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequestModel.swift; sourceTree = "<group>"; };
 		7339CD9129E79CDD002A6D78 /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
+		7388C3AB29F82D81000C3606 /* ChatGptCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptCell.swift; sourceTree = "<group>"; };
+		7388C3AC29F82D81000C3606 /* ChatGptCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatGptCell.xib; sourceTree = "<group>"; };
 		738CAC8429E310CF009EF9D2 /* FoodDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FoodDetail.storyboard; sourceTree = "<group>"; };
 		738CAC8629E31349009EF9D2 /* FoodDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailViewController.swift; sourceTree = "<group>"; };
 		738CAC8929E32773009EF9D2 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
@@ -752,6 +756,8 @@
 				A2EA101D29F5448F000D600B /* RefriMemberCollectionViewCell.xib */,
 				A2EA102829F84E6A000D600B /* SelectFridgeTableViewCell.swift */,
 				A2EA102929F84E6A000D600B /* SelectFridgeTableViewCell.xib */,
+				7388C3AB29F82D81000C3606 /* ChatGptCell.swift */,
+				7388C3AC29F82D81000C3606 /* ChatGptCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -915,6 +921,7 @@
 				73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */,
 				7339CD6D29E5B390002A6D78 /* AuthMain.storyboard in Resources */,
 				A27302E629D853090060944D /* Alert.storyboard in Resources */,
+				7388C3AE29F82D81000C3606 /* ChatGptCell.xib in Resources */,
 				A2EA101529F53EDE000D600B /* MyRefrigerator.storyboard in Resources */,
 				A2EA101F29F5448F000D600B /* RefriMemberCollectionViewCell.xib in Resources */,
 				738CAC8529E310CF009EF9D2 /* FoodDetail.storyboard in Resources */,
@@ -1132,6 +1139,7 @@
 				73B7373E29E2507A0097806F /* AllFoodViewController.swift in Sources */,
 				73B7373C29E250700097806F /* ETCViewController.swift in Sources */,
 				73F62A5029DE9F5E003D779F /* FoodAddViewController.swift in Sources */,
+				7388C3AD29F82D81000C3606 /* ChatGptCell.swift in Sources */,
 				A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */,
 				A2459F1B29DFE26700D12089 /* AddFoodViewController.swift in Sources */,
 				73F62A3E29DCFD7B003D779F /* FridgeViewController.swift in Sources */,

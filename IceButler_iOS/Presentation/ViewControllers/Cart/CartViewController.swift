@@ -100,7 +100,7 @@ class CartViewController: UIViewController {
                                       content: "선택하신 식품을 정말 삭제하시겠습니까?",
                                       leftButtonTitle: "취소",
                                       righttButtonTitle: "삭제",
-                                      rightCompletion: { CartViewModel.shared.deleteFood(cartId: 78) },
+                                      rightCompletion: { CartViewModel.shared.deleteFood(cartId: 1) },
                                       leftCompletion: { })
 
         alertViewController.modalPresentationStyle = .overCurrentContext
@@ -115,7 +115,7 @@ class CartViewController: UIViewController {
                                       leftButtonTitle: "취소",
                                       righttButtonTitle: "확인",
                                       rightCompletion: {
-            CartViewModel.shared.deleteFood(cartId: 78)  // 임시 ID
+            CartViewModel.shared.deleteFood(cartId: 1)  // 임시 ID
             
             let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
             guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "SelectAlertViewController") as? CompleteBuyingViewController else { return }
