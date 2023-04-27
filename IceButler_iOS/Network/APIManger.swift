@@ -15,6 +15,12 @@ class APIManger {
     
     private var headers: HTTPHeaders?
     
+    private var isMultiFridge: Bool = false
+    var fridgeIdx: Int {
+        get { return fridgeIdx }
+        set(idx) { fridgeIdx = idx }
+    }
+    
     func setupObserver() {
         AuthViewModel.shared.accessToken { token in
             self.headers = ["Authorization": token]

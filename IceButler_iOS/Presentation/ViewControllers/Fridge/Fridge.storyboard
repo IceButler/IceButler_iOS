@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -92,6 +92,71 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-726" y="-521"/>
+        </scene>
+        <!--Select Fride View Controller-->
+        <scene sceneID="QQ6-hd-WOg">
+            <objects>
+                <viewController storyboardIdentifier="SelectFrideViewController" id="KAJ-RT-joO" customClass="SelectFrideViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Opy-Bf-HV8">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="N80-sy-oJY">
+                                <rect key="frame" x="0.0" y="109" width="393" height="300"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="DHf-Pt-ERx"/>
+                                </constraints>
+                                <color key="separatorColor" red="0.66666666666666663" green="0.80000000000000004" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="QqL-yq-OWJ">
+                                <rect key="frame" x="25" y="409" width="343" height="50"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addFridgeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="iIf-8o-o0I">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="NeP-6n-GaG"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSG-3j-dcC">
+                                        <rect key="frame" x="23" y="0.0" width="320" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.39215686274509803" green="0.61176470588235299" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="냉장고 추가">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="14"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="didTapAddFridgeButton:" destination="KAJ-RT-joO" eventType="touchUpInside" id="oVG-g1-6qs"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="GZF-7n-XOv"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4rs-uh-fWO"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4rs-uh-fWO" firstAttribute="trailing" secondItem="N80-sy-oJY" secondAttribute="trailing" id="ANj-lm-wnf"/>
+                            <constraint firstItem="QqL-yq-OWJ" firstAttribute="leading" secondItem="4rs-uh-fWO" secondAttribute="leading" constant="25" id="STI-zi-lrh"/>
+                            <constraint firstItem="QqL-yq-OWJ" firstAttribute="top" secondItem="N80-sy-oJY" secondAttribute="bottom" id="c7i-Ln-mVF"/>
+                            <constraint firstItem="4rs-uh-fWO" firstAttribute="trailing" secondItem="QqL-yq-OWJ" secondAttribute="trailing" constant="25" id="cYf-3d-fpG"/>
+                            <constraint firstItem="N80-sy-oJY" firstAttribute="top" secondItem="4rs-uh-fWO" secondAttribute="top" constant="50" id="kgF-Ne-rnU"/>
+                            <constraint firstItem="N80-sy-oJY" firstAttribute="leading" secondItem="4rs-uh-fWO" secondAttribute="leading" id="uaf-6t-uJk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="N80-sy-oJY" id="eZ8-ms-Xb6"/>
+                        <outlet property="tableViewHeight" destination="DHf-Pt-ERx" id="Buo-5b-2Ky"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lV3-hK-89b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="70.992366412213741" y="-521.12676056338034"/>
         </scene>
         <!--All Food View Controller-->
         <scene sceneID="Zz7-EC-xbF">
@@ -551,6 +616,7 @@
     </scenes>
     <resources>
         <image name="addButtonIcon" width="20.333333969116211" height="20.333333969116211"/>
+        <image name="addFridgeIcon" width="23.666666030883789" height="23.666666030883789"/>
         <image name="fridgeAdd" width="18" height="18"/>
         <image name="noFridge" width="45" height="64"/>
         <image name="rightArrow" width="9.3333330154418945" height="16"/>
