@@ -86,6 +86,10 @@
 		7593A9D6AB4309D589AD972D /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236010665AA2D8D3B10A8DC6 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
 		95488DC229E7C2AC009AE17A /* PolicyWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95488DC129E7C2AC009AE17A /* PolicyWebViewController.swift */; };
 		95488DC429EADF94009AE17A /* PolicyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95488DC329EADF94009AE17A /* PolicyType.swift */; };
+		95A398A729FA5D37009CDDDC /* Recipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A398A629FA5D37009CDDDC /* Recipe.storyboard */; };
+		95A398A929FAAB99009CDDDC /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398A829FAAB99009CDDDC /* RecipeViewController.swift */; };
+		95A398AC29FBCA5F009CDDDC /* RecipeInFridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398AB29FBCA5F009CDDDC /* RecipeInFridgeViewController.swift */; };
+		95A398AE29FBCA77009CDDDC /* PopularRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398AD29FBCA77009CDDDC /* PopularRecipeViewController.swift */; };
 		A2459F1B29DFE26700D12089 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */; };
 		A258498129E6A6BC00E75568 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A258498029E6A6BC00E75568 /* MyPage.storyboard */; };
 		A258498329E6A6CB00E75568 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498229E6A6CB00E75568 /* MyPageViewController.swift */; };
@@ -225,6 +229,10 @@
 		802F4E91FBD50A88599AD4EE /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		95488DC129E7C2AC009AE17A /* PolicyWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PolicyWebViewController.swift; path = IceButler_iOS/Presentation/ViewControllers/MyPage/PolicyWebViewController.swift; sourceTree = SOURCE_ROOT; };
 		95488DC329EADF94009AE17A /* PolicyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyType.swift; sourceTree = "<group>"; };
+		95A398A629FA5D37009CDDDC /* Recipe.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recipe.storyboard; sourceTree = "<group>"; };
+		95A398A829FAAB99009CDDDC /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		95A398AB29FBCA5F009CDDDC /* RecipeInFridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInFridgeViewController.swift; sourceTree = "<group>"; };
+		95A398AD29FBCA77009CDDDC /* PopularRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularRecipeViewController.swift; sourceTree = "<group>"; };
 		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
 		A258498029E6A6BC00E75568 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
@@ -677,6 +685,25 @@
 			path = Fridge;
 			sourceTree = "<group>";
 		};
+		95A398A529FA5C7A009CDDDC /* Recipe */ = {
+			isa = PBXGroup;
+			children = (
+				95A398AA29FBC9A8009CDDDC /* Category */,
+				95A398A629FA5D37009CDDDC /* Recipe.storyboard */,
+				95A398A829FAAB99009CDDDC /* RecipeViewController.swift */,
+			);
+			path = Recipe;
+			sourceTree = "<group>";
+		};
+		95A398AA29FBC9A8009CDDDC /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				95A398AB29FBCA5F009CDDDC /* RecipeInFridgeViewController.swift */,
+				95A398AD29FBCA77009CDDDC /* PopularRecipeViewController.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		A258497F29E6A6A900E75568 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -756,6 +783,7 @@
 		A28A764B29D6F01200D127EA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				95A398A529FA5C7A009CDDDC /* Recipe */,
 				A2EA101329F53EB9000D600B /* MyFridge */,
 				A258497F29E6A6A900E75568 /* MyPage */,
 				7339CD6B29E5B381002A6D78 /* Auth */,
@@ -910,6 +938,7 @@
 				73F0D24629D2E0000038BD0C /* LaunchScreen.storyboard in Resources */,
 				73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */,
 				7339CD6D29E5B390002A6D78 /* AuthMain.storyboard in Resources */,
+				95A398A729FA5D37009CDDDC /* Recipe.storyboard in Resources */,
 				A27302E629D853090060944D /* Alert.storyboard in Resources */,
 				7388C3AE29F82D81000C3606 /* ChatGptCell.xib in Resources */,
 				A2EA101529F53EDE000D600B /* MyRefrigerator.storyboard in Resources */,
@@ -1055,6 +1084,7 @@
 			files = (
 				7339CD8629E68818002A6D78 /* AuthResponseModel.swift in Sources */,
 				73B7373A29E250680097806F /* ProcessedFoodViewController.swift in Sources */,
+				95A398AC29FBCA5F009CDDDC /* RecipeInFridgeViewController.swift in Sources */,
 				A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */,
 				A28A764429D54F1C00D127EA /* DefaultTabBarController.swift in Sources */,
 				A28A764729D5527A00D127EA /* UIDevice+.swift in Sources */,
@@ -1062,6 +1092,7 @@
 				A2EA102229F556AC000D600B /* MyRefrigeratorViewModel.swift in Sources */,
 				738CAC8A29E32773009EF9D2 /* FoodViewModel.swift in Sources */,
 				A2F9190829EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift in Sources */,
+				95A398AE29FBCA77009CDDDC /* PopularRecipeViewController.swift in Sources */,
 				73F26FC629DAA94B009E364B /* CartService.swift in Sources */,
 				73B7372E29E250120097806F /* VegetableViewController.swift in Sources */,
 				73F26FCC29DAACC3009E364B /* CartViewModel.swift in Sources */,
@@ -1097,6 +1128,7 @@
 				73F26FC429DAA8EB009E364B /* CartResponseModel.swift in Sources */,
 				7339CD8929E7846A002A6D78 /* ImageResponseModel.swift in Sources */,
 				73F62A4A29DD7F45003D779F /* FoodAddSelectViewController.swift in Sources */,
+				95A398A929FAAB99009CDDDC /* RecipeViewController.swift in Sources */,
 				95488DC429EADF94009AE17A /* PolicyType.swift in Sources */,
 				73C18A4529E3F0440037FE3A /* FoodRequestModel.swift in Sources */,
 				95488DC229E7C2AC009AE17A /* PolicyWebViewController.swift in Sources */,

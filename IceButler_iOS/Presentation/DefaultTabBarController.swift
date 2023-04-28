@@ -56,8 +56,8 @@ class DefaultTabBarController: UITabBarController {
         let fridge = UINavigationController(rootViewController: fridgeViewController)
         fridge.tabBarItem = fridgeTab
         
-        storyboard = UIStoryboard.init(name: "AuthMain", bundle: nil)
-        guard let recipeViewController = storyboard.instantiateViewController(withIdentifier: "AuthMainViewController") as? AuthMainViewController else { return }
+        storyboard = UIStoryboard.init(name: "Recipe", bundle: nil)
+        guard let recipeViewController = storyboard.instantiateViewController(withIdentifier: "RecipeViewController") as? RecipeViewController else { return }
         let recipe = UINavigationController(rootViewController: recipeViewController)
         recipe.tabBarItem = recipeTab
         
