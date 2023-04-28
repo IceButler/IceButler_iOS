@@ -24,19 +24,18 @@ class SelectFridgeTableViewCell: UITableViewCell {
     }
     
     public func setFridgeModeCell(data: CommonFridgeModel?, isShareFridge: Bool) {
-        if let data = data { setMyFridgeModeCell(data: data, isShareFridge: true) }
+        if let data = data { setMyFridgeModeCell(data: data, isShareFridge: isShareFridge) }
     }
     
     public func setMyFridgeModeCell(data: CommonFridgeModel, isShareFridge: Bool) {
         fridgeNameLabel.text = data.name
         
         if isShareFridge {
-            fridgeNameLabel.textColor = UIColor(red: 41/255, green: 103/255, blue: 185/255, alpha: 1)
-            fridgeImg.image = UIImage(named: "noFridge")
-            
-        } else {
             fridgeNameLabel.textColor = .black
             fridgeImg.image = UIImage(named: "shareFridgeIcon")
+        } else {
+            fridgeNameLabel.textColor = UIColor(red: 41/255, green: 103/255, blue: 185/255, alpha: 1)
+            fridgeImg.image = UIImage(named: "noFridge")
         }
     }
 }
