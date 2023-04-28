@@ -9,8 +9,12 @@ import Foundation
 
 
 class CartService {
-    func getCartFoodList(cartId: Int, completion: @escaping ([CartResponseModel]?) -> Void) {
-        APIManger.shared.getData(urlEndpointString: "/carts/\(cartId)/foods",
+    
+    private var urlStr = ""
+    func getCartFoodList(completion: @escaping ([CartResponseModel]?) -> Void) {
+        
+        setUrlStr()
+        APIManger.shared.getData(urlEndpointString: urlStr,
                                  responseDataType: [CartResponseModel].self,
                                  requestDataType: [CartResponseModel].self,
                                  parameter: nil) { response in
@@ -18,9 +22,11 @@ class CartService {
         }
     }
     
-    func deleteCartFood(cartId: Int, removeFoodIdxes: [Int], completion: @escaping ([CartResponseModel]?) -> Void) {
+    func deleteCartFood(removeFoodIdxes: [Int], completion: @escaping ([CartResponseModel]?) -> Void) {
+        
+        setUrlStr()
         let param = CartRemoveRequestModel(foodIdxes: removeFoodIdxes)
-        APIManger.shared.deleteData(urlEndpointString: "/carts/\(cartId)/foods",
+        APIManger.shared.deleteData(urlEndpointString: urlStr,
                                     responseDataType: [CartResponseModel].self,
                                     requestDataType: CartRemoveRequestModel.self,
                                     parameter: param,
@@ -29,9 +35,10 @@ class CartService {
         })
     }
     
-    func postFoodsAdd(cartId: Int, foods: [AddFood]) {
+    func postFoodsAdd(foods: [AddFood]) {
+        setUrlStr()
         let param = AddFoodRequestModel(foodRequests: foods)
-        APIManger.shared.postData(urlEndpointString: "/carts/\(cartId)/foods",
+        APIManger.shared.postData(urlEndpointString: urlStr,
                                   responseDataType: AddFoodRequestModel.self,
                                   requestDataType: AddFoodRequestModel.self,
                                   parameter: param,
@@ -39,5 +46,11 @@ class CartService {
             print("식품 추가 API 호출 결과 --> \(response)")
             CartViewModel.shared.cartViewController?.configure()
         })
+    }
+    
+    private func setUrlStr() {
+        let fridgeId = APIManger.shared.getFridgeIdx()
+        if APIManger.shared.getIsMultiFridge() { urlStr = "/multiCarts/\(fridgeId)/foods" }
+        else { urlStr = "/carts/\(fridgeId)/foods" }
     }
 }
