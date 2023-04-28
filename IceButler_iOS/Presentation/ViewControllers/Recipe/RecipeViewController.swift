@@ -12,12 +12,14 @@ import Pageboy
 class RecipeViewController: TabmanViewController {
 
     private var searchBar: UISearchBar! = nil
+    private var viewControllerList: Array<UIViewController> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationBar()
         initSearchBar()
+        setupTabman()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -92,5 +94,56 @@ class RecipeViewController: TabmanViewController {
         searchBtn.setImage(UIImage(named: "searchIcon"), for: .normal)
         searchBar.searchTextField.rightView = searchBtn
         searchBar.searchTextField.rightViewMode = .always
+    }
+    
+    private func setupTabman() {
+        let recipeInFridgeVC = storyboard?.instantiateViewController(identifier: "RecipeInFridgeViewController") as! RecipeInFridgeViewController
+        let popularRecipeVC = storyboard?.instantiateViewController(identifier: "PopularRecipeViewController") as! PopularRecipeViewController
+        
+        [recipeInFridgeVC, popularRecipeVC].forEach { vc in
+            viewControllerList.append(vc)
+        }
+        
+        self.dataSource = self
+        setupTabBar()
+    }
+    
+    private func setupTabBar() {
+        let bar = TMBar.ButtonBar()
+        
+        bar.buttons.customize { (button) in
+            button.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+            button.tintColor = .notSelectedTabBarWhite
+            button.selectedTintColor = .selectedTabBarWhite
+        }
+        
+        bar.backgroundView.style = .clear
+        bar.backgroundColor = .navigationColor
+        bar.indicator.weight = .light
+        bar.indicator.tintColor = .white
+        bar.indicator.overscrollBehavior = .bounce
+        bar.layout.contentMode = .fit
+        bar.layout.interButtonSpacing = 24
+        bar.layout.transitionStyle = .snap
+        bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
+        
+        addBar(bar, dataSource: self, at: .top)
+    }
+}
+
+extension RecipeViewController: PageboyViewControllerDataSource, TMBarDataSource {
+    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
+        return TMBarItem(title: RecipeCategory.allCases[index].rawValue)
+    }
+    func numberOfViewControllers(in pageboyViewController: Pageboy.PageboyViewController) -> Int {
+        return viewControllerList.count
+    }
+    
+    func viewController(for pageboyViewController: Pageboy.PageboyViewController, at index: Pageboy.PageboyViewController.PageIndex) -> UIViewController? {
+        return viewControllerList[index]
+    }
+    
+    func defaultPage(for pageboyViewController: Pageboy.PageboyViewController) -> Pageboy.PageboyViewController.Page? {
+        return .at(index: 0)
     }
 }
