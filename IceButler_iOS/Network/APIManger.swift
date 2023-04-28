@@ -15,11 +15,8 @@ class APIManger {
     
     private var headers: HTTPHeaders?
     
+    private var fridgeIdx: Int = 1
     private var isMultiFridge: Bool = false
-    var fridgeIdx: Int {
-        get { return fridgeIdx }
-        set(idx) { fridgeIdx = idx }
-    }
     
     func setupObserver() {
         AuthViewModel.shared.accessToken { token in
@@ -27,7 +24,15 @@ class APIManger {
             print(self.headers)
         }
     }
+}
+
+// MARK: 냉장고 Index 및 공용/가정용 구분값의 get/set
+extension APIManger {
+    func setFridgeIdx(index: Int) { fridgeIdx = index }
+    func getFridgeIdx() -> Int { return fridgeIdx }
     
+    func setIsMultiFridge(data: Bool) { isMultiFridge = data }
+    func getIsMultiFridge() -> Bool { return isMultiFridge }
 }
 
 extension APIManger {

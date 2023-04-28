@@ -41,17 +41,9 @@ class CartViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    func configure() {
-//        self.cartFoods.removeAll()
-//        CartViewModel.shared.fetchData()
-        
-//        CartViewModel.shared.getCartFoods { cartFoods in
-//            self.cartFoods = cartFoods
-//            self.cartMainTableView.reloadData()
-//            self.viewHeightConstraint.constant = CGFloat(170 * self.cartFoods.count)
-//        }
-        
-        APIManger.shared.getData(urlEndpointString: "/carts/1/foods",
+    /// 장바구니 조회 요청 메소드
+    func fetchCartData(urlStr: String) {
+        APIManger.shared.getData(urlEndpointString: urlStr,
                                  responseDataType: [CartResponseModel].self,
                                  requestDataType: [CartResponseModel].self,
                                  parameter: nil) { [weak self] response in
@@ -78,6 +70,16 @@ class CartViewController: UIViewController {
             
         }
     }
+    func configure() {
+        if APIManger.shared.getIsMultiFridge() {
+            let idx = APIManger.shared.getFridgeIdx()
+            fetchCartData(urlStr: "/multiCarts/\(idx)/foods")
+            
+        } else {
+            let idx = APIManger.shared.getFridgeIdx()
+            fetchCartData(urlStr: "/carts/\(idx)/foods")
+        }
+    }
     
     func setup() { CartViewModel.shared.setCartVC(cartVC: self) }
     
@@ -85,6 +87,12 @@ class CartViewController: UIViewController {
         cartFoods.removeAll()
         cartFoods = data
         self.cartMainTableView.reloadData()
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: nil, message: "장바구니 식품 조회에 실패하였습니다.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
     }
     
     @IBAction func didTapAddFoodButton(_ sender: UIButton) {

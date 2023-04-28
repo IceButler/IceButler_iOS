@@ -36,8 +36,6 @@ class FridgeViewController: TabmanViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setup()
-        
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
         self.noFridgeImageView.isHidden = true
@@ -47,8 +45,8 @@ class FridgeViewController: TabmanViewController {
     
     private func setup() {
 //        FridgeViewModel.shared.getAllFoodList(fridgeIdx: 1)
-        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.fridgeIdx)
-
+        FridgeViewModel.shared.setDefaultFridge()
+        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
     }
     
     private func setupObserver() {
@@ -149,19 +147,7 @@ class FridgeViewController: TabmanViewController {
         
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
         
-        let backItem = UIBarButtonItem(image: UIImage(named: "fridgeSelectIcon"), style: .done, target: self, action: #selector(selectFridge))
-        backItem.tintColor = .white
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "우리 집 냉장고"
-        titleLabel.textAlignment = .left
-        titleLabel.font = UIFont.systemFont(ofSize: 17)
-        titleLabel.textColor = .white
-        titleLabel.sizeToFit()
-        
-        let titleItem = UIBarButtonItem(customView: titleLabel)
-        
-        self.navigationItem.leftBarButtonItems = [titleItem, backItem]
+        setupleftBarItems(title: FridgeViewModel.shared.defaultFridgeName)
         
         let searchItem = UIBarButtonItem(image: UIImage(named: "searchIcon"), style: .done, target: self, action: #selector(moveToSearchVC))
         searchItem.tintColor = .white
@@ -171,8 +157,25 @@ class FridgeViewController: TabmanViewController {
         self.navigationItem.rightBarButtonItems = [alarmItem, searchItem]
     }
     
+    private func setupleftBarItems(title: String) {
+        let backItem = UIBarButtonItem(image: UIImage(named: "fridgeSelectIcon"), style: .done, target: self, action: #selector(selectFridge))
+        backItem.tintColor = .white
+        
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.textAlignment = .left
+        titleLabel.font = UIFont.systemFont(ofSize: 17)
+        titleLabel.textColor = .white
+        titleLabel.sizeToFit()
+        
+        let titleItem = UIBarButtonItem(customView: titleLabel)
+        
+        self.navigationItem.leftBarButtonItems = [titleItem, backItem]
+    }
+    
     @objc private func selectFridge() {
         let selectVC = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as! SelectFrideViewController
+        selectVC.delegate = self
         selectVC.view.backgroundColor = .signatureSkyBlue
         selectVC.modalPresentationStyle = .pageSheet
 
@@ -258,5 +261,12 @@ extension FridgeViewController: FoodAddDelegate {
 extension FridgeViewController: UISheetPresentationControllerDelegate {
     func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
         print(sheetPresentationController.selectedDetentIdentifier == .large ? "large" : "medium")
+    }
+}
+
+extension FridgeViewController: SelectFridgeDelegate {
+    func updateMainFridgeTitle(title: String) {
+        setupleftBarItems(title: title)
+        // TODO: 냉장고 메인 화면 Reload 필요
     }
 }

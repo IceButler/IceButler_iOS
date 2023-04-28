@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -87,7 +87,7 @@
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="Nef-as-9SS" firstAttribute="top" secondItem="8vK-D3-OYj" secondAttribute="bottom" constant="14" id="12c-77-WKA"/>
                                                     <constraint firstItem="y2j-Fc-2eH" firstAttribute="centerX" secondItem="5By-y0-7hb" secondAttribute="centerX" id="K8Z-L5-oSu"/>
@@ -122,7 +122,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="3dM-hU-VfC"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiL-ij-FjJ">
-                                <rect key="frame" x="325" y="700" width="48" height="48"/>
+                                <rect key="frame" x="325" y="730" width="48" height="48"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="EVX-1p-L4k"/>
@@ -192,7 +192,7 @@
                             <constraint firstItem="jik-K7-b5P" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="QN3-eC-yPf"/>
                             <constraint firstItem="5By-y0-7hb" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="VP0-5b-BTf"/>
                             <constraint firstItem="lhy-s4-QRN" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="gWd-Nq-0GU"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="tiL-ij-FjJ" secondAttribute="bottom" constant="70" id="n2o-6r-nl5"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="tiL-ij-FjJ" secondAttribute="bottom" constant="40" id="n2o-6r-nl5"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1ng-35-uro" secondAttribute="trailing" id="tp8-Jw-B7O"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="1ng-35-uro" secondAttribute="bottom" id="vVh-oL-O7v"/>
                             <constraint firstItem="jik-K7-b5P" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="w8P-Mc-fZO"/>
