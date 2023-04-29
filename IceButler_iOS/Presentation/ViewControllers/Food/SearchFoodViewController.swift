@@ -118,6 +118,7 @@ class SearchFoodViewController: UIViewController {
     
     
     @objc private func backToScene() {
+        FoodViewModel.shared.deleteAll()
         self.navigationController?.popViewController(animated: true)
         self.fridgeDelegate?.moveToFoodAddSelect()
     }
@@ -149,10 +150,11 @@ extension SearchFoodViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         FoodViewModel.shared.selectSearchFood(index: indexPath.row)
+
+        let foodAddVC = UIStoryboard(name: "FoodAdd", bundle: nil).instantiateViewController(withIdentifier: "FoodAddViewController") as! FoodAddViewController
         
-        delegate?.moveToFoodAdd()
+        self.navigationController?.pushViewController(foodAddVC, animated: true)
     }
-    
     
 }
 

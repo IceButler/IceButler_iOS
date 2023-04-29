@@ -185,6 +185,8 @@ class FoodViewModel: ObservableObject {
         self.barcodeFoodInfo = nil
         self.gptFoodNames = []
         self.gptFoodCategories = []
+        self.selectedSearchFood = nil
+        self.searchFoodList = []
     }
 }
 
