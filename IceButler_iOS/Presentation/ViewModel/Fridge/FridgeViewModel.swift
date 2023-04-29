@@ -575,8 +575,16 @@ class FridgeViewModel: ObservableObject {
             
             switch response.statusCode {
             case 200:
-                APIManger.shared.setFridgeIdx(index: (response.data?.fridgeList![0].fridgeIdx)!)  // 최초 로딩에 보여질 냉장고 기본값 설정
-                self?.defaultFridgeName = (response.data?.fridgeList![0].fridgeName)!
+                /// 최초 로딩에 보여질 냉장고 기본값 설정
+                if response.data?.fridgeList?.count ?? 0 > 0 {
+                    APIManger.shared.setFridgeIdx(index: (response.data?.fridgeList![0].fridgeIdx)!)
+                    self?.defaultFridgeName = (response.data?.fridgeList![0].fridgeName)!
+                    
+                } else if response.data?.multiFridgeResList?.count ?? 0 > 0 {
+                    APIManger.shared.setFridgeIdx(index: (response.data?.multiFridgeResList![0].multiFridgeIdx)!)  
+                    self?.defaultFridgeName = (response.data?.multiFridgeResList![0].multiFridgeName)!
+                }
+                
             default: return
             }
         }
