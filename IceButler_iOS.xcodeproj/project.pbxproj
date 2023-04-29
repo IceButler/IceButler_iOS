@@ -29,6 +29,8 @@
 		738CAC8A29E32773009EF9D2 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CAC8929E32773009EF9D2 /* FoodViewModel.swift */; };
 		738CAC8E29E32817009EF9D2 /* FoodResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CAC8D29E32817009EF9D2 /* FoodResponseModel.swift */; };
 		738CAC9029E32858009EF9D2 /* FoodService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CAC8F29E32858009EF9D2 /* FoodService.swift */; };
+		738F4B4729FB88B10043AC07 /* SearchFoodVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F4B4629FB88B00043AC07 /* SearchFoodVIewController.swift */; };
+		738F4B4929FB88BD0043AC07 /* SearchFood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 738F4B4829FB88BD0043AC07 /* SearchFood.storyboard */; };
 		73B7371D29E1427A0097806F /* FoodAddImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7371B29E1427A0097806F /* FoodAddImageCell.swift */; };
 		73B7371E29E1427A0097806F /* FoodAddImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B7371C29E1427A0097806F /* FoodAddImageCell.xib */; };
 		73B7372029E160750097806F /* UICollectionViewFlowLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7371F29E160750097806F /* UICollectionViewFlowLayout+.swift */; };
@@ -163,6 +165,8 @@
 		738CAC8929E32773009EF9D2 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
 		738CAC8D29E32817009EF9D2 /* FoodResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodResponseModel.swift; sourceTree = "<group>"; };
 		738CAC8F29E32858009EF9D2 /* FoodService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodService.swift; sourceTree = "<group>"; };
+		738F4B4629FB88B00043AC07 /* SearchFoodVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFoodVIewController.swift; sourceTree = "<group>"; };
+		738F4B4829FB88BD0043AC07 /* SearchFood.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchFood.storyboard; sourceTree = "<group>"; };
 		73B7371B29E1427A0097806F /* FoodAddImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAddImageCell.swift; sourceTree = "<group>"; };
 		73B7371C29E1427A0097806F /* FoodAddImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodAddImageCell.xib; sourceTree = "<group>"; };
 		73B7371F29E160750097806F /* UICollectionViewFlowLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+.swift"; sourceTree = "<group>"; };
@@ -661,6 +665,8 @@
 				73F62A4F29DE9F5E003D779F /* FoodAddViewController.swift */,
 				738CAC8429E310CF009EF9D2 /* FoodDetail.storyboard */,
 				738CAC8629E31349009EF9D2 /* FoodDetailViewController.swift */,
+				738F4B4629FB88B00043AC07 /* SearchFoodVIewController.swift */,
+				738F4B4829FB88BD0043AC07 /* SearchFood.storyboard */,
 			);
 			path = Food;
 			sourceTree = "<group>";
@@ -919,6 +925,7 @@
 				73F62A4629DD6015003D779F /* FoodAdd.storyboard in Resources */,
 				A2EA101B29F5407D000D600B /* MyRefrigeratorTableViewCell.xib in Resources */,
 				A2F9190929EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib in Resources */,
+				738F4B4929FB88BD0043AC07 /* SearchFood.storyboard in Resources */,
 				73F62A4829DD7F30003D779F /* FoodAddSelect.storyboard in Resources */,
 				A28A765729D749C700D127EA /* CartMainTableViewCell.xib in Resources */,
 				A258498129E6A6BC00E75568 /* MyPage.storyboard in Resources */,
@@ -1107,6 +1114,7 @@
 				73DC2F3D29DAA6A400F47ECD /* APIManger.swift in Sources */,
 				73F26FC129DAA735009E364B /* GeneralResponseModel.swift in Sources */,
 				7339CD8129E67406002A6D78 /* AuthUserInfoViewController.swift in Sources */,
+				738F4B4729FB88B10043AC07 /* SearchFoodVIewController.swift in Sources */,
 				738CAC9029E32858009EF9D2 /* FoodService.swift in Sources */,
 				73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */,
 				7339CD7529E5B6B0002A6D78 /* AuthViewModel.swift in Sources */,

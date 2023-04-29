@@ -20,6 +20,8 @@ class FoodViewModel: ObservableObject {
     @Published var barcodeFoodInfo: BarcodeFoodResponse?
     @Published var gptFoodNames: [String] = []
     @Published var gptFoodCategories: [String] = []
+    @Published var searchFoodList: [SearchFoodResponse] = []
+    @Published var selectedSearchFood: SearchFoodResponse?
     
     var cancelLabels: Set<AnyCancellable> = []
     private var profileImgKey: String?
@@ -129,6 +131,53 @@ class FoodViewModel: ObservableObject {
             completion()
         }.store(in: &cancelLabels)
     }
+
+    func isSearchFoodList(completion: @escaping (Bool) -> Void) {
+        $searchFoodList.sink { searchFoodList in
+            if searchFoodList.count == 0 {
+                completion(false)
+            }else{
+                completion(true)
+            }
+        }.store(in: &cancelLabels)
+    }
+    
+    func searchFoodIdx(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (Int) -> Void) {
+        $searchFoodList.filter { searchFoodList in
+            index < searchFoodList.count && searchFoodList.count != 0
+        }.sink { searchFoodList in
+            completion(searchFoodList[index].foodIdx)
+        }.store(in: &cancelLabels)
+    }
+    
+    func searchFoodName(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
+        $searchFoodList.filter { searchFoodList in
+            index < searchFoodList.count && searchFoodList.count != 0
+        }.sink { searchFoodList in
+            completion(searchFoodList[index].foodName)
+        }.store(in: &cancelLabels)
+    }
+    
+    func searchFoodImg(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
+        $searchFoodList.filter { searchFoodList in
+            index < searchFoodList.count && searchFoodList.count != 0
+        }.sink { searchFoodList in
+            completion(searchFoodList[index].foodImgUrl)
+        }.store(in: &cancelLabels)
+    }
+    
+    func searchFoodListCount() -> Int {
+        return searchFoodList.count
+    }
+    
+    func selectedSearchFood(completion: @escaping (SearchFoodResponse) -> Void) {
+        $selectedSearchFood.filter { selectedSearchFood in
+            selectedSearchFood != nil
+        }.sink { selectedSearchFood in
+            completion(selectedSearchFood!)
+        }.store(in: &cancelLabels)
+    }
+    
     
     func deleteAll() {
         self.food = nil
@@ -210,5 +259,17 @@ extension FoodViewModel {
                 self.gptFoodCategories = response.categories
             }
         }
+    }
+    
+    func getSearchFood(word: String) {
+        foodService.getSearchFood(word: word) { result in
+            if let result = result {
+                self.searchFoodList = result
+            }
+        }
+    }
+    
+    func selectSearchFood(index: Int) {
+        selectedSearchFood = searchFoodList[index]
     }
 }
