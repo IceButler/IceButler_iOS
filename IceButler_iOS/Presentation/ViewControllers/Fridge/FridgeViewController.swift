@@ -268,5 +268,6 @@ extension FridgeViewController: SelectFridgeDelegate {
     func updateMainFridgeTitle(title: String) {
         setupleftBarItems(title: title)
         // TODO: 냉장고 메인 화면 Reload 필요
+//        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
     }
 }
