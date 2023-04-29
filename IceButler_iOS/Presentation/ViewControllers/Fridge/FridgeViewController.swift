@@ -249,6 +249,11 @@ extension FridgeViewController: FoodAddSelectDelgate {
         foodAddVC.setDelegate(delegate: self)
         navigationController?.pushViewController(foodAddVC, animated: true)
     }
+    
+    func moveToSearchFoodVC(searchFoodVC: SearchFoodViewController) {
+        searchFoodVC.setFridgeDelegate(fridgeDelegate: self)
+        navigationController?.pushViewController(searchFoodVC, animated: true)
+    }
 }
 
 extension FridgeViewController: FoodAddDelegate {
