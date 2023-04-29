@@ -107,44 +107,51 @@ extension UIColor{
     )
     
     static let pinkCell = UIColor(
-        red: 249,
-        green: 198,
-        blue: 216,
+        red: 249/255,
+        green: 198/255,
+        blue: 216/255,
         alpha: 1
     )
     
     static let orangeCell = UIColor(
-        red: 252,
-        green: 199,
-        blue: 170,
+        red: 252/255,
+        green: 199/255,
+        blue: 170/255,
         alpha: 1
     )
     
     static let greenCell = UIColor(
-        red: 196,
-        green: 232,
-        blue: 169,
+        red: 196/255,
+        green: 232/255,
+        blue: 169/255,
         alpha: 1
     )
     
     static let yellowCell = UIColor(
-        red: 255,
-        green: 233,
-        blue: 156,
+        red: 255/255,
+        green: 233/255,
+        blue: 156/255,
         alpha: 1
     )
     
     static let purpleCell = UIColor(
-        red: 206,
-        green: 208,
-        blue: 242,
+        red: 206/255,
+        green: 208/255,
+        blue: 242/255,
         alpha: 1
     )
     
     static let crimsonCell = UIColor(
-        red: 255,
-        green: 184,
-        blue: 174,
+        red: 255/255,
+        green: 184/255,
+        blue: 174/255,
+        alpha: 1
+    )
+    
+    static let recipeBackgroudColor = UIColor(
+        red: 245/255,
+        green: 245/255,
+        blue: 245/255,
         alpha: 1
     )
 }
