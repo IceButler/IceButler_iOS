@@ -127,7 +127,12 @@ class CartViewController: UIViewController {
             
             let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
             guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "SelectAlertViewController") as? CompleteBuyingViewController else { return }
-            alertViewController.completeFoods = CartViewModel.shared.removeFoodNames
+            CartViewModel.shared.removeFoodIdxes?.forEach({ idx in
+                let i = CartViewModel.shared.removeFoodIdxes?.firstIndex(of: idx) ?? 0
+                let name = CartViewModel.shared.removeFoodNames[i]
+                alertViewController.completeFoods.append(BuyedFood(idx: idx, name: name))
+            })
+//            alertViewController.completeFoods = CartViewModel.shared.removeFoodNames
             self.navigationController?.pushViewController(alertViewController, animated: true)
             },
                                       leftCompletion: {
