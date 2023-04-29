@@ -252,6 +252,13 @@ class FoodAddViewController: UIViewController {
             }
         }
         
+        FoodViewModel.shared.selectedSearchFood { searchFood in
+            self.setFoodCategory(gptFoodCategory: searchFood.foodCategory)
+            self.foodNameTextView.text = searchFood.foodName
+            self.foodNameTextView.textColor = .black
+            self.foodNameTextView.backgroundColor = .focusSkyBlue
+        }
+        
         DispatchQueue.main.async {
             FoodViewModel.shared.isChangeFoodCategories {
                 UIView.transition(with: self.categoryGptCollectionView,

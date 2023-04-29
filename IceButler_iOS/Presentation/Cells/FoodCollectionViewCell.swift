@@ -23,10 +23,9 @@ class FoodCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var selectedImageView: UIImageView!
     @IBOutlet weak var foodTitleLabel: UILabel!
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        
-//    }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
     
 //    override func prepareForReuse() {
 //        super.prepareForReuse()
