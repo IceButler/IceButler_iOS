@@ -16,6 +16,12 @@ class RecipeViewModel: ObservableObject {
     @Published var fridgeRecipeList: [Recipe] = []
     @Published var popularRecipeList: [Recipe] = []
     
+    private var recipeInFridgeVC: RecipeInFridgeViewController? = nil
+    
+    func setRecipeInFridgeVC(recipeInFridgeVC: RecipeInFridgeViewController) {
+        self.recipeInFridgeVC = recipeInFridgeVC
+    }
+    
     // 가정용, 공용은 같이 하고
     // 냉장고 속 레시피랑 인기레시피 함수 나눠서 하자
     func getFridgeRecipeList(fridgeType: FridgeType, fridgeIdx: Int) {
@@ -23,6 +29,7 @@ class RecipeViewModel: ObservableObject {
             self.fridgeRecipeList.removeAll()
             response?.recipeMainResList.forEach { recipe in
                 self.fridgeRecipeList.append(recipe)
+                self.recipeInFridgeVC?.recipeCollectionView.reloadData()
             }
         }
     }

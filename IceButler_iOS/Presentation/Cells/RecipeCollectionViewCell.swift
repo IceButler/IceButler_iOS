@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class RecipeCollectionViewCell: UICollectionViewCell {
 
@@ -84,11 +85,24 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     }
     
     func setPercent(percent: Int) {
-        percentLabel.text = String(percent)
+        percentLabel.text = String(percent) + "%"
+        
+        // 50%~79%:빨간색, 80%~99%:노란색, 100%:초록색
+        if 50 <= percent, percent < 80 {
+            percentLabel.backgroundColor = .pinkCell
+        } else if 80 <= percent, percent < 100 {
+            percentLabel.backgroundColor = .yellowCell
+        } else {
+            percentLabel.backgroundColor = .greenCell
+        }
     }
     
     func setLikeStatus(status: Bool) {
-        
+        if status {
+            bookmarkBtn.imageView?.image = UIImage(named: "smallStar")
+        } else {
+            bookmarkBtn.imageView?.image = UIImage(named: "emptyStar")
+        }
     }
 }
 

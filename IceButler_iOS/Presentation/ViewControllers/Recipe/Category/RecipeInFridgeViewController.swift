@@ -13,13 +13,12 @@ class RecipeInFridgeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setup()
         setupLayout()
-        setupObserver()
     }
     
     private func setup() {
+        RecipeViewModel.shared.setRecipeInFridgeVC(recipeInFridgeVC: self)
         recipeCollectionView.delegate = self
         recipeCollectionView.dataSource = self
 
@@ -31,10 +30,6 @@ class RecipeInFridgeViewController: UIViewController {
         recipeCollectionView.layer.backgroundColor = UIColor.recipeBackgroudColor.cgColor
         
         recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
-    }
-    
-    private func setupObserver() {
-        self.recipeCollectionView.reloadData()
     }
 }
 
