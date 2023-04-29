@@ -52,3 +52,21 @@ class FoodCollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
         return attributes
     }
 }
+
+class RecipeCollectionViewFlowLayout: UICollectionViewFlowLayout {
+    let columnCount = 2
+    let lineSpacing = 18
+    let itemSpacing = 16
+    
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        self.minimumLineSpacing = 16
+        self.minimumInteritemSpacing = 14
+        self.sectionInset = UIEdgeInsets(top: 13, left: 16, bottom: 18, right: 16)
+ 
+        let width: CGFloat = UIScreen.main.bounds.width - CGFloat((itemSpacing * (columnCount - 1))) - CGFloat((itemSpacing * 2))
+        let itemWidth: CGFloat = width / CGFloat(columnCount)
+        self.itemSize = CGSize(width: itemWidth, height: itemWidth * (204/171))
+        
+        return super.layoutAttributesForElements(in: rect)
+    }
+}

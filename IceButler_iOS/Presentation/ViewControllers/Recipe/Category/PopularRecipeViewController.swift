@@ -9,21 +9,50 @@ import UIKit
 
 class PopularRecipeViewController: UIViewController {
 
+    @IBOutlet weak var recipeCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setup()
+        setupLayout()
+    }
 
-        // Do any additional setup after loading the view.
+    private func setup() {
+        recipeCollectionView.delegate = self
+        recipeCollectionView.dataSource = self
+
+        let recipeCollectionViewCell = UINib(nibName: "RecipeCollectionViewCell", bundle: nil)
+        recipeCollectionView.register(recipeCollectionViewCell, forCellWithReuseIdentifier: "RecipeCollectionViewCell")
+
+        recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupLayout() {
+        recipeCollectionView.layer.backgroundColor = UIColor.recipeBackgroudColor.cgColor
     }
-    */
+    
+    private func setupObserver() {
+    }
+}
 
+extension PopularRecipeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = recipeCollectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
+        
+        cell.recipeImageView.image = UIImage(named: "dbt")
+        cell.recipeImageView.contentMode = .scaleAspectFill
+        cell.recipeNameLabel.text = "닭볶음탕"
+        cell.foodTypeLabel.text = "한식"
+        cell.percentLabel.text = "90%"
+
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
 }
