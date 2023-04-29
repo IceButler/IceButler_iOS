@@ -29,3 +29,11 @@ struct MultiFridgeRes: Codable {
 struct FridgeUser: Codable {
     let nickname, role, profileImgUrl: String?
 }
+
+// MARK: 공용/가정용 냉장고의 공통 모델
+struct CommonFridgeModel {
+    let idx: Int?
+    let name, comment: String?
+    let users: [FridgeUser]?
+    let userCnt: Int?
+}

@@ -91,13 +91,7 @@ class CartViewModel: ObservableObject {
     func getCartFoodsWithCategory(index: Int) -> [CartFood] { return cartFoods[index].cartFoods }
     
     func setIsLongGesture(longGesture: Bool) { isLongGesture = longGesture }
-    
-//    func getIsLongGesture(completion: @escaping (Bool) -> Void) {
-//        $isLongGesture.sink { isLongGesture in
-//            completion(isLongGesture)
-//        }.store(in: &longGestureCancellabels)
-//    }
-    
+
     func addRemoveIdx(removeIdx: Int, removeName: String) {
         if removeIdx != -1 {
             removeFoodIdxes?.append(removeIdx)
@@ -110,47 +104,26 @@ class CartViewModel: ObservableObject {
             removeIndex == removeIdx
         }) { removeFoodIdxes?.remove(at: removeIndex) }
     }
-    
-//    func getRemoveIdx(completion: @escaping ([Int]) -> Void) {
-//        $removeFoodIdxes.sink { removeIdx in
-//            completion(removeIdx ?? [])
-//        }.store(in: &removeCancelLabels)
-//    }
 
     func deleteFood(cartId: Int) {
-//        cartCancelLabels.removeAll()
-//        cartService.deleteCartFood(cartId: cartId, removeFoodIdxes: removeFoodIdxes ?? []) { _ in
-//            self.fetchData()
-//            self.cartViewController?.configure()
-//        }
-        
         let param = CartRemoveRequestModel(foodIdxes: removeFoodIdxes ?? [])
-        let cartId = 78
-        APIManger.shared.deleteData(urlEndpointString: "/carts/\(cartId)/foods",
-                                    responseDataType: [CartResponseModel].self,
-                                    requestDataType: CartRemoveRequestModel.self,
-                                    parameter: param,
-                                    completionHandler: { [weak self] response in
-//            completion(response.data as? [CartResponseModel])
+        let fridgeIdx = APIManger.shared.getFridgeIdx()
+
+        cartService.deleteCartFood(removeFoodIdxes: removeFoodIdxes ?? [],
+                                          completion:{ [weak self] data in
             self?.cartViewController?.configure()
             self?.showCartCVTabBar()
         })
-        
+    }
+    
+    func addFoods(foods: [AddFood]) {
+        cartService.postFoodsAdd(foods: foods)
     }
 
     func fetchData() {
-        let cartIdx = 78 // 임시 cartId
-        cartService.getCartFoodList(cartId: cartIdx, completion: { [weak self] response in
+        let fridgeId = APIManger.shared.getFridgeIdx()
+        cartService.getCartFoodList(completion: { [weak self] response in
             self?.cartFoods = response ?? []
-//            self?.reloadFoodCV()
-//            CartManager.shared.cartViewController?.reloadFoodData()
-//            CartViewModel.shared.cartViewController?.cartMainTableView.reloadData()
         })
     }
-    
-//    func getCartFoods(completion: @escaping ([CartResponseModel]) -> Void) {
-//        $cartFoods.sink { cartFoods in
-//            completion(cartFoods)
-//        }.store(in: &cartCancelLabels)
-//    }
 }
