@@ -47,8 +47,6 @@ extension PopularRecipeViewController: UICollectionViewDelegate, UICollectionVie
         cell.recipeImageView.image = UIImage(named: "dbt")
         cell.recipeImageView.contentMode = .scaleAspectFill
         cell.recipeNameLabel.text = "닭볶음탕"
-        cell.foodTypeLabel.text = "한식"
-        cell.percentLabel.text = "90%"
 
         return cell
     }

@@ -35,7 +35,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         foodTypeLabel = {
             let foodTypeLabel = BasePaddingLabel()
             foodTypeLabel.backgroundColor = .navigationColor
-            foodTypeLabel.text = "한식"
             foodTypeLabel.textColor = .white
             foodTypeLabel.font = .systemFont(ofSize: 10, weight: .regular)
             foodTypeLabel.layer.masksToBounds = true
@@ -44,7 +43,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         percentLabel = {
             let percentLabel = BasePaddingLabel()
             percentLabel.backgroundColor = .greenCell
-            percentLabel.text = "50%"
             percentLabel.textColor = .white
             percentLabel.font = .systemFont(ofSize: 10, weight: .regular)
             percentLabel.layer.masksToBounds = true
@@ -69,6 +67,28 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     private func setLabelCornerRadius() {
         foodTypeLabel.layer.cornerRadius = foodTypeLabel.frame.height / 2
         percentLabel.layer.cornerRadius = percentLabel.frame.height / 2
+    }
+    
+    func setImage(imageUrl: String) {
+        if let url = URL(string: imageUrl) {
+            recipeImageView.kf.setImage(with: url)
+        }
+    }
+    
+    func setName(name: String) {
+        recipeNameLabel.text = name
+    }
+    
+    func setCategory(category: String) {
+        foodTypeLabel.text = category
+    }
+    
+    func setPercent(percent: Int) {
+        percentLabel.text = String(percent)
+    }
+    
+    func setLikeStatus(status: Bool) {
+        
     }
 }
 
