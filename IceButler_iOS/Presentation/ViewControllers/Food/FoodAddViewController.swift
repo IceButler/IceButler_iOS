@@ -65,6 +65,7 @@ class FoodAddViewController: UIViewController {
 
     private var addedFoodNames: [String] = []
     private var buyedFoods: [BuyedFood] = []
+    private var currentFoodIndex: Int = -1  /// '이전', '다음' 버튼을 위한 인덱스
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -276,6 +277,7 @@ class FoodAddViewController: UIViewController {
     private func setupAddedFoodName() {
         if self.buyedFoods.count > 0 {
             self.foodNameTextView.text = self.buyedFoods[0].name
+            currentFoodIndex = 0
         }
     }
     
@@ -334,40 +336,20 @@ class FoodAddViewController: UIViewController {
     
     /// '이전' 버튼 탭 이벤트 정의
     @objc func didTapBeforeButton() {
-        var currentFood: BuyedFood?
-        self.buyedFoods.forEach { food in
-            if food.name == self.foodNameTextView.text {
-                currentFood = food
-            }
+        if currentFoodIndex > 0 {
+            currentFoodIndex -= 1
+            self.foodNameTextView.text = self.buyedFoods[currentFoodIndex].name
         }
-        
-        if let currentFood = currentFood {
-            let idx = buyedFoods.firstIndex(of: currentFood)
-            if let idx = idx, idx > 1 {
-                self.foodNameTextView.text = self.buyedFoods[idx-1].name
-            }
-            else {  showAlert(title: "", message: "가장 앞 순서의 데이터입니다!") }
-        }
-        
-        
+        else {  showAlert(title: "", message: "가장 앞 순서의 데이터입니다!") }
     }
     
     /// '다음' 버튼 탭 이벤트 정의
     @objc func didTapAfterButton() {
-        var currentFood: BuyedFood?
-        self.buyedFoods.forEach { food in
-            if food.name == self.foodNameTextView.text {
-                currentFood = food
-            }
+        if currentFoodIndex < buyedFoods.count-1 {
+            currentFoodIndex += 1
+            self.foodNameTextView.text = self.buyedFoods[currentFoodIndex].name
         }
-        
-        if let currentFood = currentFood {
-            let idx = buyedFoods.firstIndex(of: currentFood)
-            if let idx = idx, idx < self.buyedFoods.count-1 {
-                self.foodNameTextView.text = self.buyedFoods[idx+1].name
-            }
-            else {  showAlert(title: "", message: "가장 뒷 순서의 데이터입니다!") }
-        }
+        else {  showAlert(title: "", message: "가장 뒷 순서의 데이터입니다!") }
     }
     
     @objc func selectDate() {
