@@ -14,9 +14,7 @@ protocol FoodAddDelegate: AnyObject {
     func moveToFoodAddSelect()
 }
 
-class FoodAddViewController: UIViewController {
-    
-    
+class FoodAddViewController: UIViewController {    
     
     @IBOutlet weak var foodNameTextView: UITextView!
     @IBOutlet weak var foodDetailTextView: UITextView!
@@ -62,9 +60,12 @@ class FoodAddViewController: UIViewController {
     private var foodOwnerIdx: Int?
     private var foodImage: UIImage?
     private var date: Date?
-    private var addedFoodNames: [String] = []
+
     private var selectedOwner: [Bool] = []
-    
+
+    private var addedFoodNames: [String] = []
+    private var buyedFoods: [BuyedFood] = []
+    private var currentFoodIndex: Int = -1  /// '이전', '다음' 버튼을 위한 인덱스
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +73,7 @@ class FoodAddViewController: UIViewController {
         setup()
         setupLayout()
         setupNavgationBar()
+        setupBeforeAfterNavItems()
         setupObserver()
         setupAddedFoodName()
     }
@@ -271,9 +273,11 @@ class FoodAddViewController: UIViewController {
         }
     }
     
+    /// 장보기 완료 후 식품 추가를 통해 화면 전환되었을 때 기본값으로 0번째 데이터를 화면에 구성
     private func setupAddedFoodName() {
-        if self.addedFoodNames.count > 1 {
-            self.foodNameTextView.text = self.addedFoodNames[0] // 임시
+        if self.buyedFoods.count > 0 {
+            self.foodNameTextView.text = self.buyedFoods[0].name
+            currentFoodIndex = 0
         }
     }
     
@@ -289,6 +293,63 @@ class FoodAddViewController: UIViewController {
     
     func setAddedFoodNames(names: [String]) {
         self.addedFoodNames = names
+    }
+    
+    func setBuyedFoods(foods: [BuyedFood]) {
+        self.buyedFoods = foods
+    }
+    
+    /// 장보기 완료 후 여러 개의 식품 추가가 필요한 경우 '이전','다음' 버튼을 추가
+    func setupBeforeAfterNavItems() {
+        let beforeButton: UIButton = {
+           let button = UIButton()
+            button.setTitle("이전", for: .normal)
+            button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+            button.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
+            button.backgroundColor = .white
+            button.setTitleColor(.navigationColor, for: .normal)
+            button.layer.cornerRadius = 10
+            button.addTarget(self, action: #selector(didTapBeforeButton), for: .touchUpInside)
+            return button
+        }()
+        
+        let afterButton: UIButton = {
+           let button = UIButton()
+            button.setTitle("다음", for: .normal)
+            button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+            button.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
+            button.backgroundColor = .white
+            button.setTitleColor(.navigationColor, for: .normal)
+            button.layer.cornerRadius = 10
+            button.addTarget(self, action: #selector(didTapAfterButton), for: .touchUpInside)
+            return button
+        }()
+        
+        if self.buyedFoods.count > 0 {
+            self.navigationItem.rightBarButtonItems = [
+                UIBarButtonItem(customView: afterButton),
+                UIBarButtonItem(customView: beforeButton)
+            ]
+        }
+        
+    }
+    
+    /// '이전' 버튼 탭 이벤트 정의
+    @objc func didTapBeforeButton() {
+        if currentFoodIndex > 0 {
+            currentFoodIndex -= 1
+            self.foodNameTextView.text = self.buyedFoods[currentFoodIndex].name
+        }
+        else {  showAlert(title: "", message: "가장 앞 순서의 데이터입니다!") }
+    }
+    
+    /// '다음' 버튼 탭 이벤트 정의
+    @objc func didTapAfterButton() {
+        if currentFoodIndex < buyedFoods.count-1 {
+            currentFoodIndex += 1
+            self.foodNameTextView.text = self.buyedFoods[currentFoodIndex].name
+        }
+        else {  showAlert(title: "", message: "가장 뒷 순서의 데이터입니다!") }
     }
     
     @objc func selectDate() {
@@ -440,7 +501,9 @@ class FoodAddViewController: UIViewController {
         let dateString = dateFromat.string(from: date!)
         
         if foodImage != nil {
-            FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food, image: foodImage!, fridgeIdx: 1, foodName: foodNameTextView.text, foodDetail: foodDetailTextView.text, foodCategory: selectedFoodCategory!.rawValue, foodShelfLife: dateString, foodOwnerIdx: foodOwnerIdx!, memo: memo) { result in
+            let fridgeIdx = APIManger.shared.getFridgeIdx()
+//            FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food, image: foodImage!, fridgeIdx: 1, foodName: foodNameTextView.text, foodDetail: foodDetailTextView.text, foodCategory: selectedFoodCategory!.rawValue, foodShelfLife: dateString, foodOwnerIdx: foodOwnerIdx!, memo: memo) { result in
+            FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food, image: foodImage!, fridgeIdx: fridgeIdx, foodName: foodNameTextView.text, foodDetail: foodDetailTextView.text, foodCategory: selectedFoodCategory!.rawValue, foodShelfLife: dateString, foodOwnerIdx: foodOwnerIdx!, memo: memo) { result in
                 if result {
                     let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
