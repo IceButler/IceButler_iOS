@@ -16,6 +16,7 @@ class RecipeInFridgeViewController: UIViewController {
         
         setup()
         setupLayout()
+        setupObserver()
     }
     
     private func setup() {
@@ -24,15 +25,16 @@ class RecipeInFridgeViewController: UIViewController {
 
         let recipeCollectionViewCell = UINib(nibName: "RecipeCollectionViewCell", bundle: nil)
         recipeCollectionView.register(recipeCollectionViewCell, forCellWithReuseIdentifier: "RecipeCollectionViewCell")
-
-        recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
     }
     
     private func setupLayout() {
         recipeCollectionView.layer.backgroundColor = UIColor.recipeBackgroudColor.cgColor
+        
+        recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
     }
     
     private func setupObserver() {
+        self.recipeCollectionView.reloadData()
     }
 }
 

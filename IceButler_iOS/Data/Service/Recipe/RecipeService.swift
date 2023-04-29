@@ -14,11 +14,11 @@ class RecipeService {
         let parameter: Parameters = ["category" : "냉장고"]
         switch fridgeType {
         case .homeUse:
-            APIManger.shared.getData(urlEndpointString: "/recipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
+            APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response.data)
             }
         case .multiUse:
-            APIManger.shared.getData(urlEndpointString: "/recipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
+            APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response.data)
             }
         }

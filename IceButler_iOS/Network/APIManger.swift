@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 
 private let BASE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/dev/dev-ice-bulter-main"
+private let RECIPE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/dev/dev-ice-bulter-recipe"
 
 class APIManger {
     static let shared = APIManger()
@@ -80,7 +81,26 @@ extension APIManger {
             .resume()
     }
     
-    
+    func getRecipeData<U: Decodable>(urlEndpointString: String,
+                                     responseDataType: U.Type,
+                                     parameter: Parameters?,
+                                     completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+              
+              guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
+              
+              AF
+                  .request(url, method: .get, parameters: parameter, encoding: URLEncoding.queryString, headers: self.headers)
+                  .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+                      print(response)
+                      switch response.result {
+                      case .success(let success):
+                          completionHandler(success)
+                      case .failure(let error):
+                          print(error.localizedDescription)
+                      }
+                  }
+                  .resume()
+          }
     
     func postData<T: Codable, U: Decodable>(urlEndpointString: String,
                                             responseDataType: U.Type,

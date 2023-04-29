@@ -16,6 +16,7 @@ class RecipeViewController: TabmanViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         fetchData()
         setupNavigationBar()
         initSearchBar()
