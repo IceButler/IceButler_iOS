@@ -85,6 +85,12 @@ class SelectFrideViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    private func checkSavedIdx(idx: Int) -> Bool {
+        print("checkSavedIdx called --> idx : \(idx) | setIdx : \(APIManger.shared.getFridgeIdx())")
+        if idx == APIManger.shared.getFridgeIdx() { return true }
+        else { return false }
+    }
+    
     @IBAction func didTapAddFridgeButton(_ sender: UIButton) {
         // TODO: 냉장고 추가 화면으로 이동
         print("TODO: 냉장고 추가 화면으로 이동")
@@ -105,6 +111,9 @@ extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource 
         } else {
             cell.setFridgeModeCell(data: myFridgeData[indexPath.row], isShareFridge: true)
         }
+        
+        let isSaved = checkSavedIdx(idx: myFridgeData[indexPath.row].idx ?? -1)
+        cell.setIsSavedFridge(isSaved: isSaved)
         
         return cell
     }
