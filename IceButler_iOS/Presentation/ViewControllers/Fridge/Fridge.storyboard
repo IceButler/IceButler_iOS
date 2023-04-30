@@ -101,55 +101,79 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="N80-sy-oJY">
-                                <rect key="frame" x="0.0" y="109" width="393" height="300"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="DHf-Pt-ERx"/>
-                                </constraints>
-                                <color key="separatorColor" red="0.66666666666666663" green="0.80000000000000004" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                            </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="QqL-yq-OWJ">
-                                <rect key="frame" x="25" y="409" width="343" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIg-PN-YeN">
+                                <rect key="frame" x="0.0" y="552" width="393" height="300"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addFridgeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="iIf-8o-o0I">
-                                        <rect key="frame" x="0.0" y="0.0" width="20" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y0b-3y-kDW">
+                                        <rect key="frame" x="169" y="8" width="55" height="4"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="NeP-6n-GaG"/>
+                                            <constraint firstAttribute="width" constant="55" id="UXq-Oy-rZz"/>
+                                            <constraint firstAttribute="height" constant="4" id="u2r-IQ-EX8"/>
                                         </constraints>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSG-3j-dcC">
-                                        <rect key="frame" x="23" y="0.0" width="320" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" red="0.39215686274509803" green="0.61176470588235299" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="냉장고 추가">
-                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="14"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="didTapAddFridgeButton:" destination="KAJ-RT-joO" eventType="touchUpInside" id="oVG-g1-6qs"/>
-                                        </connections>
-                                    </button>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="N80-sy-oJY">
+                                        <rect key="frame" x="0.0" y="20" width="393" height="200"/>
+                                        <color key="backgroundColor" red="0.96078431372549022" green="0.98039215686274506" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="DHf-Pt-ERx"/>
+                                        </constraints>
+                                        <color key="separatorColor" red="0.66666666666666663" green="0.80000000000000004" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                    </tableView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="QqL-yq-OWJ">
+                                        <rect key="frame" x="25" y="220" width="358" height="45"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addFridgeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="iIf-8o-o0I">
+                                                <rect key="frame" x="0.0" y="0.0" width="20" height="45"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="20" id="NeP-6n-GaG"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSG-3j-dcC">
+                                                <rect key="frame" x="23" y="0.0" width="335" height="45"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" red="0.39215686274509803" green="0.61176470588235299" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="냉장고 추가">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="14"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="didTapAddFridgeButton:" destination="KAJ-RT-joO" eventType="touchUpInside" id="oVG-g1-6qs"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="GZF-7n-XOv"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="GZF-7n-XOv"/>
+                                    <constraint firstItem="y0b-3y-kDW" firstAttribute="centerX" secondItem="uIg-PN-YeN" secondAttribute="centerX" id="157-hC-Q1Q"/>
+                                    <constraint firstItem="y0b-3y-kDW" firstAttribute="top" secondItem="uIg-PN-YeN" secondAttribute="top" constant="8" id="Ed3-u1-MrA"/>
+                                    <constraint firstAttribute="height" constant="300" id="Exj-Iu-Cr7"/>
+                                    <constraint firstItem="QqL-yq-OWJ" firstAttribute="leading" secondItem="uIg-PN-YeN" secondAttribute="leading" constant="25" id="FMO-8W-yMp"/>
+                                    <constraint firstAttribute="trailing" secondItem="N80-sy-oJY" secondAttribute="trailing" id="IGl-hj-o6W"/>
+                                    <constraint firstItem="N80-sy-oJY" firstAttribute="top" secondItem="uIg-PN-YeN" secondAttribute="top" constant="20" id="OA8-1B-avT"/>
+                                    <constraint firstAttribute="trailing" secondItem="QqL-yq-OWJ" secondAttribute="trailing" constant="10" id="Zxa-1r-Kpe"/>
+                                    <constraint firstItem="QqL-yq-OWJ" firstAttribute="top" secondItem="N80-sy-oJY" secondAttribute="bottom" id="bWG-jj-rKo"/>
+                                    <constraint firstItem="N80-sy-oJY" firstAttribute="leading" secondItem="uIg-PN-YeN" secondAttribute="leading" id="kfV-xB-Nln"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4rs-uh-fWO"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="4rs-uh-fWO" firstAttribute="trailing" secondItem="N80-sy-oJY" secondAttribute="trailing" id="ANj-lm-wnf"/>
-                            <constraint firstItem="QqL-yq-OWJ" firstAttribute="leading" secondItem="4rs-uh-fWO" secondAttribute="leading" constant="25" id="STI-zi-lrh"/>
-                            <constraint firstItem="QqL-yq-OWJ" firstAttribute="top" secondItem="N80-sy-oJY" secondAttribute="bottom" id="c7i-Ln-mVF"/>
-                            <constraint firstItem="4rs-uh-fWO" firstAttribute="trailing" secondItem="QqL-yq-OWJ" secondAttribute="trailing" constant="25" id="cYf-3d-fpG"/>
-                            <constraint firstItem="N80-sy-oJY" firstAttribute="top" secondItem="4rs-uh-fWO" secondAttribute="top" constant="50" id="kgF-Ne-rnU"/>
-                            <constraint firstItem="N80-sy-oJY" firstAttribute="leading" secondItem="4rs-uh-fWO" secondAttribute="leading" id="uaf-6t-uJk"/>
+                            <constraint firstAttribute="bottom" secondItem="uIg-PN-YeN" secondAttribute="bottom" id="hxU-bd-26A"/>
+                            <constraint firstItem="4rs-uh-fWO" firstAttribute="trailing" secondItem="uIg-PN-YeN" secondAttribute="trailing" id="s3H-Ne-638"/>
+                            <constraint firstItem="uIg-PN-YeN" firstAttribute="leading" secondItem="4rs-uh-fWO" secondAttribute="leading" id="uNM-y1-gUj"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="uIg-PN-YeN" id="jCA-6u-I9j"/>
+                        <outlet property="containerViewHeight" destination="Exj-Iu-Cr7" id="6GM-op-3BJ"/>
                         <outlet property="tableView" destination="N80-sy-oJY" id="eZ8-ms-Xb6"/>
                         <outlet property="tableViewHeight" destination="DHf-Pt-ERx" id="Buo-5b-2Ky"/>
                     </connections>

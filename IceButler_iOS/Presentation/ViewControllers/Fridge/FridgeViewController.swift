@@ -176,14 +176,16 @@ class FridgeViewController: TabmanViewController {
     @objc private func selectFridge() {
         let selectVC = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as! SelectFrideViewController
         selectVC.delegate = self
-        selectVC.view.backgroundColor = .signatureSkyBlue
-        selectVC.modalPresentationStyle = .pageSheet
-
-        if let sheet = selectVC.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-            sheet.delegate = self
-            sheet.prefersGrabberVisible = true
-        }
+//        selectVC.setupLayout()
+//        selectVC.view.backgroundColor = .signatureSkyBlue
+        
+//        selectVC.modalPresentationStyle = .pageSheet
+//
+//        if let sheet = selectVC.sheetPresentationController {
+//            sheet.detents = [.medium(), .large()]
+//            sheet.delegate = self
+//            sheet.prefersGrabberVisible = true
+//        }
 
         present(selectVC, animated: true, completion: nil)
     }
