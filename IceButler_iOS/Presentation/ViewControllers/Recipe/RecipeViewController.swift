@@ -21,22 +21,9 @@ class RecipeViewController: TabmanViewController {
         setupTabman()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchData()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setSearchBarRightView()
-    }
-    
-    private func fetchData() {
-        if APIManger.shared.getIsMultiFridge() {
-            RecipeViewModel.shared.getFridgeRecipeList(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx())
-        } else {
-            RecipeViewModel.shared.getFridgeRecipeList(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx())
-        }
     }
     
     private func setupNavigationBar() {

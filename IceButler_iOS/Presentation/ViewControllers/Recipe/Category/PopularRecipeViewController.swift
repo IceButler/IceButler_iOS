@@ -20,7 +20,6 @@ class PopularRecipeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchData()
-//        reloadCV()
     }
     
     private func fetchData() {

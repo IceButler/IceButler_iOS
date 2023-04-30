@@ -19,7 +19,15 @@ class RecipeInFridgeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadCV()
+        fetchData()
+    }
+    
+    private func fetchData() {
+        if APIManger.shared.getIsMultiFridge() {
+            RecipeViewModel.shared.getFridgeRecipeList(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx())
+        } else {
+            RecipeViewModel.shared.getFridgeRecipeList(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx())
+        }
     }
     
     private func setup() {
