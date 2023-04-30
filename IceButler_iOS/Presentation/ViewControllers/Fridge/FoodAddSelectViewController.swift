@@ -10,6 +10,7 @@ import UIKit
 protocol FoodAddSelectDelgate: AnyObject {
     func showFoodAddButton()
     func moveToFoodAddViewController(foodAddVC: FoodAddViewController)
+    func moveToSearchFoodVC(searchFoodVC: SearchFoodViewController)
 }
 
 class FoodAddSelectViewController: UIViewController {
@@ -105,7 +106,11 @@ extension FoodAddSelectViewController: UITableViewDelegate, UITableViewDataSourc
             present(barCodeAddVC, animated: true)
             break
         case 1:
+            let searchFoodVC = UIStoryboard(name: "SearchFood", bundle: nil).instantiateViewController(identifier: "SearchFoodViewController") as! SearchFoodViewController
             
+            self.dismiss(animated: true) {
+                self.delegate?.moveToSearchFoodVC(searchFoodVC: searchFoodVC)
+            }
             break
         case 2:
             let foodAddVC = UIStoryboard(name: "FoodAdd", bundle: nil).instantiateViewController(identifier: "FoodAddViewController") as! FoodAddViewController

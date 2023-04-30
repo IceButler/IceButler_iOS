@@ -56,4 +56,12 @@ class FoodService {
             }
         }
     }
+    
+    func getSearchFood(word: String, completion: @escaping ([SearchFoodResponse]?) -> Void) {
+        let parameter: Parameters = ["word" : word]
+        APIManger.shared.getListData(urlEndpointString: "/foods", responseDataType: SearchFoodResponse.self, parameter: parameter) { response in
+            completion(response.data)
+        }
+        
+    }
 }

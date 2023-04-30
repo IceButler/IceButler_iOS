@@ -18,3 +18,16 @@ struct GeneralResponseModel<T: Codable>: Codable {
         case status, description, statusCode
     }
 }
+
+
+struct GeneralResponseListModel<T: Codable>: Codable {
+    let data: [T]?
+    let transactionTime, status, description: String?
+    let statusCode: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case data
+        case transactionTime = "transaction_time"
+        case status, description, statusCode
+    }
+}

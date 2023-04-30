@@ -17,22 +17,22 @@ protocol FoodCellDelegate {
 class FoodCollectionViewCell: UICollectionViewCell {
 
     var isSelectedFood: Bool = false
-//    var cancellabels: Set<AnyCancellable> = []
+    var cancellabels: Set<AnyCancellable> = []
     
     @IBOutlet weak var foodImageButton: UIButton!
     @IBOutlet weak var selectedImageView: UIImageView!
     @IBOutlet weak var foodTitleLabel: UILabel!
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        
-//    }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
     
 //    override func prepareForReuse() {
 //        super.prepareForReuse()
 //        cancellabels.removeAll()
 //        self.isSelectedFood = false
 //    }
+    
     
     private func setupGestureHandler() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction(_:)))
@@ -49,6 +49,15 @@ class FoodCollectionViewCell: UICollectionViewCell {
         
         self.foodImageButton.backgroundColor = .signatureSkyBlue
         self.selectedImageView.isHidden = true
+    }
+    
+    func setFoodName(foodName: String) {
+        self.foodTitleLabel.text = foodName
+    }
+    
+    func setFoodImg(foodImg: String) {
+        let url = URL(string: foodImg)
+        self.foodImageButton.kf.setImage(with: url, for: .normal)
     }
     
     public func configure(name: String) {
