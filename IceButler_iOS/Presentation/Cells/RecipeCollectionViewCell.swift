@@ -22,12 +22,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         setupLayout()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        backView.layoutIfNeeded()
-        setLabelCornerRadius()
-    }
-    
     private func setupLayout() {
         backView.layer.masksToBounds = true
         backView.layer.cornerRadius = 20
@@ -63,6 +57,9 @@ class RecipeCollectionViewCell: UICollectionViewCell {
             percentLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -13),
             percentLabel.heightAnchor.constraint(equalToConstant: 19),
         ])
+        
+        backView.layoutIfNeeded()
+        setLabelCornerRadius()
     }
     
     private func setLabelCornerRadius() {
@@ -73,6 +70,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     func setImage(imageUrl: String) {
         if let url = URL(string: imageUrl) {
             recipeImageView.kf.setImage(with: url)
+            recipeImageView.contentMode = .scaleAspectFill
         }
     }
     

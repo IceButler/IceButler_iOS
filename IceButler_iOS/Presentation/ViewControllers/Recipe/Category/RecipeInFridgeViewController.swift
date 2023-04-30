@@ -17,6 +17,11 @@ class RecipeInFridgeViewController: UIViewController {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadCV()
+    }
+    
     private func setup() {
         RecipeViewModel.shared.setRecipeInFridgeVC(recipeInFridgeVC: self)
         recipeCollectionView.delegate = self
@@ -28,8 +33,11 @@ class RecipeInFridgeViewController: UIViewController {
     
     private func setupLayout() {
         recipeCollectionView.layer.backgroundColor = UIColor.recipeBackgroudColor.cgColor
-        
         recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
+    }
+    
+    func reloadCV() {
+        recipeCollectionView.reloadData()
     }
 }
 
@@ -48,7 +56,7 @@ extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionVi
             cell.setPercent(percent: recipe.percentageOfFood)
             cell.setLikeStatus(status: recipe.recipeLikeStatus)
         }
-
+        
         return cell
     }
     

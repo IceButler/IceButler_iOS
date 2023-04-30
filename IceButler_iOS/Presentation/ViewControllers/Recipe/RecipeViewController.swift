@@ -16,11 +16,14 @@ class RecipeViewController: TabmanViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fetchData()
         setupNavigationBar()
         initSearchBar()
         setupTabman()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
