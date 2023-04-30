@@ -86,7 +86,6 @@ class SelectFrideViewController: UIViewController {
     }
     
     private func checkSavedIdx(idx: Int) -> Bool {
-        print("checkSavedIdx called --> idx : \(idx) | setIdx : \(APIManger.shared.getFridgeIdx())")
         if idx == APIManger.shared.getFridgeIdx() { return true }
         else { return false }
     }

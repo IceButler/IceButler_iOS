@@ -22,7 +22,6 @@ class SelectFridgeTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-//        self.selectImg.isHidden = !selected
     }
     
     public func setFridgeModeCell(data: CommonFridgeModel?, isShareFridge: Bool) {
