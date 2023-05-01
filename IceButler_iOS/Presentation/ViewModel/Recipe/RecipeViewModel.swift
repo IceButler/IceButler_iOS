@@ -60,7 +60,15 @@ class RecipeViewModel: ObservableObject {
         }
     }
     
-    func getRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
+    func getFridgeRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
         completion(fridgeRecipeList[index])
+    }
+    
+    func getPopularRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
+        completion(popularRecipeList[index])
+    }
+    
+    func getBookmarkRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
+        completion(bookmarkRecipeList[index])
     }
 }

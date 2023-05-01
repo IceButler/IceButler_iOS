@@ -22,6 +22,11 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         setupLayout()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
+    
     private func setupLayout() {
         backView.layer.masksToBounds = true
         backView.layer.cornerRadius = 20
