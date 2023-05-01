@@ -9,6 +9,8 @@ import UIKit
 
 class SelectFridgeTableViewCell: UITableViewCell {
     
+    private var isSavedFridge: Bool = false
+    
     @IBOutlet weak var fridgeImg: UIImageView!
     @IBOutlet weak var fridgeNameLabel: UILabel!
     @IBOutlet weak var selectImg: UIImageView!
@@ -20,7 +22,6 @@ class SelectFridgeTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        self.selectImg.isHidden = !selected 
     }
     
     public func setFridgeModeCell(data: CommonFridgeModel?, isShareFridge: Bool) {
@@ -38,4 +39,6 @@ class SelectFridgeTableViewCell: UITableViewCell {
             fridgeImg.image = UIImage(named: "noFridge")
         }
     }
+    
+    public func setIsSavedFridge(isSaved: Bool) { selectImg.isHidden = !isSaved }
 }
