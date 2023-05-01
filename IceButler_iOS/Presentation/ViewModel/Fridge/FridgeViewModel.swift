@@ -596,4 +596,13 @@ class FridgeViewModel: ObservableObject {
             }
         }
     }
+    
+    /// 이전에 선택된 냉장고가 있다면 해당 냉장고로 기본 설정
+    func setSavedFridgeIdx() {
+        if let idx = UserDefaults.standard.value(forKey: "selectedFridgeIdx"),
+           let name = UserDefaults.standard.value(forKey: "selectedFridgeName") {
+            APIManger.shared.setFridgeIdx(index: idx as! Int)
+            self.defaultFridgeName = name as! String
+        }
+    }
 }
