@@ -23,6 +23,7 @@ class AllFoodViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
 //        FridgeViewModel.shared.getAllFoodList(fridgeIdx: 1)
+        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
     }
     
     private func setup() {

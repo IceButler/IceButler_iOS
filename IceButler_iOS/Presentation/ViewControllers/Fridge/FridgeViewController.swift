@@ -46,7 +46,7 @@ class FridgeViewController: TabmanViewController {
     private func setup() {
 //        FridgeViewModel.shared.getAllFoodList(fridgeIdx: 1)
         FridgeViewModel.shared.setDefaultFridge()
-        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+        
     }
     
     private func setupObserver() {
@@ -148,6 +148,7 @@ class FridgeViewController: TabmanViewController {
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
         
         setupleftBarItems(title: FridgeViewModel.shared.defaultFridgeName)
+        print("FridgeViewModel.shared.defaultFridgeName --> \(FridgeViewModel.shared.defaultFridgeName)")
         
         let searchItem = UIBarButtonItem(image: UIImage(named: "searchIcon"), style: .done, target: self, action: #selector(moveToSearchVC))
         searchItem.tintColor = .white
@@ -176,15 +177,6 @@ class FridgeViewController: TabmanViewController {
     @objc private func selectFridge() {
         let selectVC = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as! SelectFrideViewController
         selectVC.delegate = self
-        selectVC.view.backgroundColor = .signatureSkyBlue
-        selectVC.modalPresentationStyle = .pageSheet
-
-        if let sheet = selectVC.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-            sheet.delegate = self
-            sheet.prefersGrabberVisible = true
-        }
-
         present(selectVC, animated: true, completion: nil)
     }
     
@@ -270,9 +262,8 @@ extension FridgeViewController: UISheetPresentationControllerDelegate {
 }
 
 extension FridgeViewController: SelectFridgeDelegate {
-    func updateMainFridgeTitle(title: String) {
+    func updateMainFridge(title: String) {
         setupleftBarItems(title: title)
-        // TODO: 냉장고 메인 화면 Reload 필요
-//        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
     }
 }

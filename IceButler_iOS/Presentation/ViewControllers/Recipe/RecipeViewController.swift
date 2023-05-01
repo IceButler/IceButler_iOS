@@ -16,7 +16,6 @@ class RecipeViewController: TabmanViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupNavigationBar()
         initSearchBar()
         setupTabman()
@@ -24,7 +23,6 @@ class RecipeViewController: TabmanViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         setSearchBarRightView()
     }
     

@@ -13,41 +13,58 @@ class RecipeInFridgeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setup()
         setupLayout()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
+    }
+    
+    private func fetchData() {
+        if APIManger.shared.getIsMultiFridge() {
+            RecipeViewModel.shared.getFridgeRecipeList(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx())
+        } else {
+            RecipeViewModel.shared.getFridgeRecipeList(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx())
+        }
+    }
+    
     private func setup() {
+        RecipeViewModel.shared.setRecipeInFridgeVC(recipeInFridgeVC: self)
         recipeCollectionView.delegate = self
         recipeCollectionView.dataSource = self
 
         let recipeCollectionViewCell = UINib(nibName: "RecipeCollectionViewCell", bundle: nil)
         recipeCollectionView.register(recipeCollectionViewCell, forCellWithReuseIdentifier: "RecipeCollectionViewCell")
-
-        recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
     }
     
     private func setupLayout() {
         recipeCollectionView.layer.backgroundColor = UIColor.recipeBackgroudColor.cgColor
+        recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
     }
     
-    private func setupObserver() {
+    func reloadCV() {
+        recipeCollectionView.reloadData()
     }
 }
 
 extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return RecipeViewModel.shared.fridgeRecipeList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = recipeCollectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
         
-        cell.recipeImageView.image = UIImage(named: "dbt")
-        cell.recipeImageView.contentMode = .scaleAspectFill
-        cell.recipeNameLabel.text = "닭볶음탕"
-
+        RecipeViewModel.shared.getRecipeCellInfo(index: indexPath.row) { recipe in
+            cell.setImage(imageUrl: recipe.recipeImgUrl)
+            cell.setName(name: recipe.recipeName)
+            cell.setCategory(category: recipe.recipeCategory)
+            cell.setPercent(percent: recipe.percentageOfFood)
+            cell.setLikeStatus(status: recipe.recipeLikeStatus)
+        }
+        
         return cell
     }
     
