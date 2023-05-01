@@ -27,7 +27,7 @@ class FridgeViewModel: ObservableObject {
     
     var cancelLabels: Set<AnyCancellable> = []
     
-    var defaultFridgeName: String = ""
+    var defaultFridgeName: String = "냉장고 미선택"
     
     func allFoodList(foodListIdx: Int, completion: @escaping ([FridgeFood])-> Void) {
         switch foodListIdx {
@@ -97,7 +97,8 @@ class FridgeViewModel: ObservableObject {
         switch foodListIdx {
         case 0:
             $allFoodList.filter { allFoodList in
-                allFoodList.count > 0
+//                allFoodList.count > 0
+                allFoodList.count > -1
             }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
