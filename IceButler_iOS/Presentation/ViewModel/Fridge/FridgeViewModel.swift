@@ -576,14 +576,20 @@ class FridgeViewModel: ObservableObject {
             switch response.statusCode {
             case 200:
                 /// 최초 로딩에 보여질 냉장고 기본값 설정
+//                print("setDefaultFridge called")
+//                print(response.data)
                 if response.data?.fridgeList?.count ?? 0 > 0 {
                     APIManger.shared.setFridgeIdx(index: (response.data?.fridgeList![0].fridgeIdx)!)
+                    APIManger.shared.setIsMultiFridge(data: false)
                     self?.defaultFridgeName = (response.data?.fridgeList![0].fridgeName)!
                     
                 } else if response.data?.multiFridgeResList?.count ?? 0 > 0 {
-                    APIManger.shared.setFridgeIdx(index: (response.data?.multiFridgeResList![0].multiFridgeIdx)!)  
+                    APIManger.shared.setFridgeIdx(index: (response.data?.multiFridgeResList![0].multiFridgeIdx)!)
+                    APIManger.shared.setIsMultiFridge(data: true)
                     self?.defaultFridgeName = (response.data?.multiFridgeResList![0].multiFridgeName)!
                 }
+                print("default fridge idx --> \(APIManger.shared.getFridgeIdx())")
+                FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
                 
             default: return
             }

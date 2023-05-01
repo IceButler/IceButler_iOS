@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SelectFridgeDelegate {
-    func updateMainFridgeTitle(title: String)
+    func updateMainFridge(title: String)
 }
 
 class SelectFrideViewController: UIViewController {
@@ -118,13 +118,12 @@ extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.updateMainFridgeTitle(title: myFridgeData[indexPath.row].name ?? "냉장고 이름")
-        
         if indexPath.row < fridgeCount { APIManger.shared.setIsMultiFridge(data: false) }
         else { APIManger.shared.setIsMultiFridge(data: true) }
         
         let index = myFridgeData[indexPath.row].idx!
         APIManger.shared.setFridgeIdx(index: index)
+        delegate?.updateMainFridge(title: myFridgeData[indexPath.row].name ?? "냉장고 이름")
         
         self.dismiss(animated: true)
     }
