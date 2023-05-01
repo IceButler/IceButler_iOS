@@ -29,8 +29,8 @@ class FoodService {
         }
     }
     
-    func postFood(fridgeIdx: Int, parameter: FoodAddRequestModel, completion: @escaping (Bool) -> Void) {
-        APIManger.shared.postData(urlEndpointString: "/fridges/\(fridgeIdx)/food", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodAddRequestModel.self, parameter: parameter) { response in
+    func postFood(fridgeIdx: Int, parameter: FoodAddListModel, completion: @escaping (Bool) -> Void) {
+        APIManger.shared.postData(urlEndpointString: "/fridges/\(fridgeIdx)/food", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodAddListModel.self, parameter: parameter) { response in
             if response.status == "OK" {
                 completion(true)
             }else {
