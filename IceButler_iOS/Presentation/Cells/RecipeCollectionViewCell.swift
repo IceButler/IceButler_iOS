@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class RecipeCollectionViewCell: UICollectionViewCell {
 
@@ -21,12 +22,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         setupLayout()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        backView.layoutIfNeeded()
-        setLabelCornerRadius()
-    }
-    
     private func setupLayout() {
         backView.layer.masksToBounds = true
         backView.layer.cornerRadius = 20
@@ -35,7 +30,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         foodTypeLabel = {
             let foodTypeLabel = BasePaddingLabel()
             foodTypeLabel.backgroundColor = .navigationColor
-            foodTypeLabel.text = "한식"
             foodTypeLabel.textColor = .white
             foodTypeLabel.font = .systemFont(ofSize: 10, weight: .regular)
             foodTypeLabel.layer.masksToBounds = true
@@ -44,7 +38,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         percentLabel = {
             let percentLabel = BasePaddingLabel()
             percentLabel.backgroundColor = .greenCell
-            percentLabel.text = "50%"
             percentLabel.textColor = .white
             percentLabel.font = .systemFont(ofSize: 10, weight: .regular)
             percentLabel.layer.masksToBounds = true
@@ -64,11 +57,50 @@ class RecipeCollectionViewCell: UICollectionViewCell {
             percentLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -13),
             percentLabel.heightAnchor.constraint(equalToConstant: 19),
         ])
+        
+        backView.layoutIfNeeded()
+        setLabelCornerRadius()
     }
     
     private func setLabelCornerRadius() {
         foodTypeLabel.layer.cornerRadius = foodTypeLabel.frame.height / 2
         percentLabel.layer.cornerRadius = percentLabel.frame.height / 2
+    }
+    
+    func setImage(imageUrl: String) {
+        if let url = URL(string: imageUrl) {
+            recipeImageView.kf.setImage(with: url)
+            recipeImageView.contentMode = .scaleAspectFill
+        }
+    }
+    
+    func setName(name: String) {
+        recipeNameLabel.text = name
+    }
+    
+    func setCategory(category: String) {
+        foodTypeLabel.text = category
+    }
+    
+    func setPercent(percent: Int) {
+        percentLabel.text = String(percent) + "%"
+        
+        // 50%~79%:빨간색, 80%~99%:노란색, 100%:초록색
+        if 50 <= percent, percent < 80 {
+            percentLabel.backgroundColor = .pinkCell
+        } else if 80 <= percent, percent < 100 {
+            percentLabel.backgroundColor = .yellowCell
+        } else {
+            percentLabel.backgroundColor = .greenCell
+        }
+    }
+    
+    func setLikeStatus(status: Bool) {
+        if status {
+            bookmarkBtn.imageView?.image = UIImage(named: "smallStar")
+        } else {
+            bookmarkBtn.imageView?.image = UIImage(named: "emptyStar")
+        }
     }
 }
 
