@@ -21,22 +21,36 @@ class RecipeViewController: TabmanViewController {
         setupTabman()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setSearchBarRightView()
     }
     
+    @objc func didTapButton(sender: UIButton!) {
+        guard let bookmarkRecipeViewController = storyboard!.instantiateViewController(withIdentifier: "BookmarkRecipeViewController") as? BookmarkRecipeViewController else { return }
+        self.navigationController?.pushViewController(bookmarkRecipeViewController, animated: true)
+    }
+    
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
+        
         // left item
         let mainText = UILabel()
         mainText.text = "레시피"
         mainText.textColor = .white
         mainText.font = .systemFont(ofSize: 17, weight: .bold)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: mainText)
+        
         // right item
         let bookmarkBtn = UIButton()
         bookmarkBtn.setImage(UIImage(named: "star"), for: .normal)
+        bookmarkBtn.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: bookmarkBtn)
         
         if #available(iOS 13.0, *) {
