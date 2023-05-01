@@ -14,15 +14,20 @@ class RecipeViewModel: ObservableObject {
     
     @Published var fridgeRecipeList: [Recipe] = []
     @Published var popularRecipeList: [Recipe] = []
+    @Published var bookmarkRecipeList: [Recipe] = []
     
     private var recipeInFridgeVC: RecipeInFridgeViewController? = nil
     private var popularRecipeVC: PopularRecipeViewController? = nil
+    private var bookmarkRecipeVC: BookmarkRecipeViewController? = nil
     
     func setRecipeInFridgeVC(recipeInFridgeVC: RecipeInFridgeViewController) {
         self.recipeInFridgeVC = recipeInFridgeVC
     }
     func setPopularRecipeVC(popularRecipeVC: PopularRecipeViewController) {
         self.popularRecipeVC = popularRecipeVC
+    }
+    func setBookmarkRecipeVC(bookmarkRecipeVC: BookmarkRecipeViewController) {
+        self.bookmarkRecipeVC = bookmarkRecipeVC
     }
     
     func getFridgeRecipeList(fridgeType: FridgeType, fridgeIdx: Int) {
@@ -45,7 +50,25 @@ class RecipeViewModel: ObservableObject {
         }
     }
     
-    func getRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
+    func getBookmarkRecipeList(fridgeType: FridgeType, fridgeIdx: Int) {
+        recipeService.getBookmarkRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx) { response in
+            self.bookmarkRecipeList.removeAll()
+            response?.recipeMainResList.forEach { recipe in
+                self.bookmarkRecipeList.append(recipe)
+                self.bookmarkRecipeVC?.reloadCV()
+            }
+        }
+    }
+    
+    func getFridgeRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
         completion(fridgeRecipeList[index])
+    }
+    
+    func getPopularRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
+        completion(popularRecipeList[index])
+    }
+    
+    func getBookmarkRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
+        completion(bookmarkRecipeList[index])
     }
 }

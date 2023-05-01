@@ -33,8 +33,6 @@ class PolicyWebViewController: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
         self.navigationController?.navigationBar.standardAppearance.backgroundColor = .navigationColor
         
-        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        spacer.width = 16
         let title = UILabel()
         title.text = policyType
         title.font = .systemFont(ofSize: 18, weight: .bold)
@@ -42,7 +40,6 @@ class PolicyWebViewController: UIViewController {
         title.textAlignment = .left
         title.sizeToFit()
         
-        self.navigationItem.leftBarButtonItems?.append(spacer)
         self.navigationItem.leftBarButtonItems?.append(UIBarButtonItem(customView: title))
         
         if #available(iOS 13.0, *) {
