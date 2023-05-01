@@ -37,4 +37,17 @@ class RecipeService {
             }
         }
     }
+    
+    func getBookmarkRecipes(fridgeType: FridgeType, fridgeIdx: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
+        switch fridgeType {
+        case .homeUse:
+            APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)/bookmark", responseDataType: RecipeResponseModel.self, parameter: nil) { response in
+                completion(response.data)
+            }
+        case .multiUse:
+            APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/\(fridgeIdx)/bookmark", responseDataType: RecipeResponseModel.self, parameter: nil) { response in
+                completion(response.data)
+            }
+        }
+    }
 }

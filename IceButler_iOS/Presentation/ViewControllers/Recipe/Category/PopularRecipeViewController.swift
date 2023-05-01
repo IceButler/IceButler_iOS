@@ -51,13 +51,13 @@ class PopularRecipeViewController: UIViewController {
 
 extension PopularRecipeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return RecipeViewModel.shared.fridgeRecipeList.count
+        return RecipeViewModel.shared.popularRecipeList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
         
-        RecipeViewModel.shared.getRecipeCellInfo(index: indexPath.row) { recipe in
+        RecipeViewModel.shared.getPopularRecipeCellInfo(index: indexPath.row) { recipe in
             cell.setImage(imageUrl: recipe.recipeImgUrl)
             cell.setName(name: recipe.recipeName)
             cell.setCategory(category: recipe.recipeCategory)

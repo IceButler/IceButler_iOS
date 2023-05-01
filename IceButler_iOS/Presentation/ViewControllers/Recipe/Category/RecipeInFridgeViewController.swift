@@ -57,7 +57,7 @@ extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
         
-        RecipeViewModel.shared.getRecipeCellInfo(index: indexPath.row) { recipe in
+        RecipeViewModel.shared.getFridgeRecipeCellInfo(index: indexPath.row) { recipe in
             cell.setImage(imageUrl: recipe.recipeImgUrl)
             cell.setName(name: recipe.recipeName)
             cell.setCategory(category: recipe.recipeCategory)
