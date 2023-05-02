@@ -177,7 +177,8 @@ class FridgeViewController: TabmanViewController {
     @objc private func selectFridge() {
         let selectVC = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as! SelectFrideViewController
         selectVC.delegate = self
-        present(selectVC, animated: true, completion: nil)
+//        present(selectVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(selectVC, animated: true)
     }
     
     @objc private func moveToSearchVC() {
