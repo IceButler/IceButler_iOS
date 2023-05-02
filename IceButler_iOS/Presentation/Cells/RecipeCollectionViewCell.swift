@@ -25,6 +25,27 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        // cell index
+        guard let superView = self.superview as? UICollectionView else { return }
+        let indexPath = superView.indexPath(for: self)
+        // 가장 최근 업데이트된 레시피 리스트
+        let recipeListType = RecipeViewModel.shared.getRecentlyUpdatedList()
+        switch recipeListType {
+        case .recipeInFridge:
+            RecipeViewModel.shared.getFridgeRecipeCellInfo(index: indexPath!.row) { response in
+                if response != nil {
+                    self.setLikeStatus(status: response!.recipeLikeStatus)
+                }
+            }
+        case .popularRecipe:
+            RecipeViewModel.shared.getPopularRecipeCellInfo(index: indexPath!.row) { response in
+                if response != nil {
+                    self.setLikeStatus(status: response!.recipeLikeStatus)
+                }
+            }
+        case .bookmarkRecipe:
+            return
+        }
     }
     
     private func setupLayout() {
