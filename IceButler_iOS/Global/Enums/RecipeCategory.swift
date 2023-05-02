@@ -11,3 +11,9 @@ enum RecipeCategory: String, CaseIterable {
     case recipeInFridge = "냉장고 속 레시피"
     case popularRecipe = "인기 레시피"
 }
+
+enum RecipeListType: String, CaseIterable {
+    case recipeInFridge
+    case popularRecipe
+    case bookmarkRecipe
+}
