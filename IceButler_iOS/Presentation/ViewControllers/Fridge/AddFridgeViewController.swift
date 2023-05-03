@@ -23,6 +23,10 @@ class AddFridgeViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var completeButton: UIButton!
     
+    @IBOutlet weak var searchResultContainerView: UIView!
+    @IBOutlet weak var memberSearchTableView: UITableView!
+    
+    
     // MARK: @IBAction
     @IBAction func didTapFridgeButton(_ sender: UIButton) {
         fridgeInfoLabel.isHidden = false
@@ -42,6 +46,11 @@ class AddFridgeViewController: UIViewController {
     
     @IBAction func didTapMemberSearchButton(_ sender: UIButton) {
         // TODO: searchTextField에 입력된 닉네임으로 멤버 검색 요청
+        if searchTextField.text?.count ?? 0 > 0 {
+            print("입력된 검색어(닉네임) --> \(searchTextField.text!)")
+            searchResultContainerView.isHidden = false
+        }
+        else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
@@ -51,12 +60,20 @@ class AddFridgeViewController: UIViewController {
     // MARK: Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setup()
         setupNavigationBar()
         setupLayouts()
         setupTextInputTargets()
     }
     
     // MARK: Helper Methods
+    private func setup() {
+        memberSearchTableView.delegate = self
+        memberSearchTableView.dataSource = self
+        memberSearchTableView.separatorStyle = .none
+    }
+    
     private func setupNavigationBar() {
         /// setting status bar background color
         if #available(iOS 13.0, *) {
@@ -114,6 +131,8 @@ class AddFridgeViewController: UIViewController {
             multiFridgeButton,
             nameFieldContainer,
             fridgeDetailTextView,
+            searchResultContainerView,
+            memberSearchTableView,
             completeButton
             
         ].forEach { btn in btn?.layer.cornerRadius = 12 }
@@ -124,6 +143,12 @@ class AddFridgeViewController: UIViewController {
         fridgeNameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         searchTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         fridgeDetailTextView.delegate = self
+    }
+    
+    private func showAlert(title: String?, message: String, confirmTitle: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: confirmTitle, style: .default))
+        present(alert, animated: true)
     }
     
     
@@ -172,5 +197,17 @@ extension AddFridgeViewController: UITextViewDelegate {
             textView.text = "   200자 이내로 작성해주세요."
             textView.textColor = .lightGray
         }
+    }
+}
+
+extension AddFridgeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3    // TODO: 멤버 검색 결과 수로 변경
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemberSearchTableViewCell", for: indexPath) as? MemberSearchTableViewCell else { return UITableViewCell() }
+        cell.backgroundColor = .none
+        return cell
     }
 }
