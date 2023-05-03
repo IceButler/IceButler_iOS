@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import AuthenticationServices
 
-class AuthViewModel: ObservableObject {
+class AuthViewModel: NSObject, ObservableObject {
     static let shared = AuthViewModel()
     private let authService = AuthService()
     
@@ -96,6 +96,9 @@ extension AuthViewModel {
             completion(request)
         }
     }
+    
+    
+    
     
     func login(userEmail: String) {
         let parameter = AuthLoginRequest(email: userEmail, provider: self.authProvider!.rawValue)
@@ -203,5 +206,21 @@ extension AuthViewModel {
             self.accessToken = nil
             UserDefaults.standard.removeObject(forKey: "UserToken")
         }
+    }
+}
+
+
+extension AuthViewModel: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {return}
+        
+        if let email = credential.email {
+            self.authProvider = .apple
+            self.login(userEmail: email)
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("애플 로그인 에러")
     }
 }

@@ -15,29 +15,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        self.window = UIWindow(windowScene: windowScene)
-        let authMainVC = UIStoryboard(name: "AuthMain", bundle: nil).instantiateViewController(identifier: "AuthMainViewController") as! AuthMainViewController
-        self.window?.rootViewController = UINavigationController(rootViewController: authMainVC)
-        self.window?.backgroundColor = .systemBackground
-        self.window?.makeKeyAndVisible()
-        
-//        APIManger.shared.setupObserver()
-//        AuthViewModel.shared.getUserToken()
-//
-//        AuthViewModel.shared.accessToken { accessToken in
-//            guard let windowScene = (scene as? UIWindowScene) else { return }
-//            self.window = UIWindow(windowScene: windowScene)
-//            if accessToken != "" {
-//                self.window?.rootViewController = DefaultTabBarController()
-//            }else {
-//                let authMainVC = UIStoryboard(name: "AuthMain", bundle: nil).instantiateViewController(identifier: "AuthMainViewController") as! AuthMainViewController
-//                self.window?.rootViewController = UINavigationController(rootViewController: authMainVC)
-//            }
-//            self.window?.backgroundColor = .systemBackground
-//            self.window?.makeKeyAndVisible()
-//        }
+        APIManger.shared.setupObserver()
+        AuthViewModel.shared.getUserToken()
+
+        AuthViewModel.shared.accessToken { accessToken in
+            guard let windowScene = (scene as? UIWindowScene) else { return }
+            self.window = UIWindow(windowScene: windowScene)
+            if accessToken != "" {
+                self.window?.rootViewController = DefaultTabBarController()
+            }else {
+                let authMainVC = UIStoryboard(name: "AuthMain", bundle: nil).instantiateViewController(identifier: "AuthMainViewController") as! AuthMainViewController
+                self.window?.rootViewController = UINavigationController(rootViewController: authMainVC)
+            }
+            self.window?.backgroundColor = .systemBackground
+            self.window?.makeKeyAndVisible()
+        }
         
        
        

@@ -67,16 +67,16 @@ class AuthMainViewController: UIViewController {
     @objc func loginWithApple() {
         AuthViewModel.shared.loginWithApple { request in
             let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-                authorizationController.delegate = self
-                authorizationController.presentationContextProvider = self
-                authorizationController.performRequests()
+            authorizationController.delegate = AuthViewModel.shared as! any ASAuthorizationControllerDelegate
+            authorizationController.presentationContextProvider = self
+            authorizationController.performRequests()
         }
     }
 
     
 }
 
-extension AuthMainViewController:ASAuthorizationControllerDelegate,  ASAuthorizationControllerPresentationContextProviding {
+extension AuthMainViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
     }
