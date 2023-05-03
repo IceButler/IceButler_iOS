@@ -175,10 +175,17 @@ class FridgeViewController: TabmanViewController {
     }
     
     @objc private func selectFridge() {
-        let selectVC = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as! SelectFrideViewController
-        selectVC.delegate = self
+//        let selectVC = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as! SelectFrideViewController
+//        selectVC.delegate = self
 //        present(selectVC, animated: true, completion: nil)
-        self.navigationController?.pushViewController(selectVC, animated: true)
+        
+        guard let vc = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as? SelectFrideViewController else { return }
+        let selectVC = UINavigationController(rootViewController: vc)
+//        selectVC.modalPresentationStyle = .fullScreen
+        selectVC.isNavigationBarHidden = true
+        present(selectVC, animated: true)
+        
+//        self.navigationController?.pushViewController(selectVC, animated: true)
     }
     
     @objc private func moveToSearchVC() {
