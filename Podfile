@@ -14,6 +14,7 @@ target 'IceButler_iOS' do
   pod "BSImagePicker", "~> 3.1"
   pod 'KakaoSDKUser'
   pod 'KakaoSDKAuth'
+  pod 'SnapKit'
 
   target 'IceButler_iOSTests' do
     inherit! :search_paths

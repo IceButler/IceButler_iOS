@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import UIKit
 import Alamofire
+import AuthenticationServices
 
 class AuthViewModel: ObservableObject {
     static let shared = AuthViewModel()
@@ -87,6 +88,12 @@ extension AuthViewModel {
         authService.loginWithKakao { userEmail in
             self.authProvider = .kakao
             self.login(userEmail: userEmail)
+        }
+    }
+    
+    func loginWithApple(completion: @escaping (ASAuthorizationAppleIDRequest) -> Void) {
+        authService.loginWithApple { request in
+            completion(request)
         }
     }
     
