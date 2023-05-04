@@ -100,6 +100,7 @@
 		95A398BF29FD8C13009CDDDC /* RecipeResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398BE29FD8C13009CDDDC /* RecipeResponseModel.swift */; };
 		95A398C129FEFC43009CDDDC /* BookmarkRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398C029FEFC43009CDDDC /* BookmarkRecipeViewController.swift */; };
 		95A398C32A001303009CDDDC /* SearchFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398C22A001303009CDDDC /* SearchFoodViewController.swift */; };
+		95BC85A02A0379AE00181183 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC859F2A0379AE00181183 /* AddRecipeViewController.swift */; };
 		A2459F1B29DFE26700D12089 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */; };
 		A258498129E6A6BC00E75568 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A258498029E6A6BC00E75568 /* MyPage.storyboard */; };
 		A258498329E6A6CB00E75568 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498229E6A6CB00E75568 /* MyPageViewController.swift */; };
@@ -256,6 +257,7 @@
 		95A398BE29FD8C13009CDDDC /* RecipeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResponseModel.swift; sourceTree = "<group>"; };
 		95A398C029FEFC43009CDDDC /* BookmarkRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRecipeViewController.swift; sourceTree = "<group>"; };
 		95A398C22A001303009CDDDC /* SearchFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFoodViewController.swift; sourceTree = "<group>"; };
+		95BC859F2A0379AE00181183 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
 		A258498029E6A6BC00E75568 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
@@ -726,6 +728,7 @@
 				95A398A629FA5D37009CDDDC /* Recipe.storyboard */,
 				95A398A829FAAB99009CDDDC /* RecipeViewController.swift */,
 				95A398C029FEFC43009CDDDC /* BookmarkRecipeViewController.swift */,
+				95BC859F2A0379AE00181183 /* AddRecipeViewController.swift */,
 			);
 			path = Recipe;
 			sourceTree = "<group>";
@@ -1190,6 +1193,7 @@
 				A2EA101A29F5407D000D600B /* MyRefrigeratorTableViewCell.swift in Sources */,
 				73B7374929E2DCE60097806F /* FridgeResponseModel.swift in Sources */,
 				7339CD6F29E5B39D002A6D78 /* AuthMainViewController.swift in Sources */,
+				95BC85A02A0379AE00181183 /* AddRecipeViewController.swift in Sources */,
 				73B7372829E24F510097806F /* FoodCategory.swift in Sources */,
 				73F62A4229DD01DE003D779F /* BarCodeAddViewController.swift in Sources */,
 				A27302E829D853160060944D /* AlertViewController.swift in Sources */,
