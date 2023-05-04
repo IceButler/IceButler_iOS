@@ -10,6 +10,9 @@ import UIKit
 class AddFridgeViewController: UIViewController {
 
     // MARK: @IBOutlet, Variables
+    private var isPersonalfridge: Bool = false
+    private var isMultifridge: Bool = false
+    
     @IBOutlet weak var fridgeButton: UIButton!
     @IBOutlet weak var multiFridgeButton: UIButton!
     
@@ -18,6 +21,8 @@ class AddFridgeViewController: UIViewController {
     
     @IBOutlet weak var nameFieldContainer: UIView!
     @IBOutlet weak var fridgeNameTextField: UITextField!
+    
+    @IBOutlet weak var detailContainerView: UIView!
     @IBOutlet weak var fridgeDetailTextView: UITextView!
     @IBOutlet weak var searchContainerView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -29,6 +34,9 @@ class AddFridgeViewController: UIViewController {
     
     // MARK: @IBAction
     @IBAction func didTapFridgeButton(_ sender: UIButton) {
+        isPersonalfridge = true
+        isMultifridge = false
+        
         fridgeInfoLabel.isHidden = false
         multiFridgeInfoLabel.isHidden = true
         
@@ -37,6 +45,9 @@ class AddFridgeViewController: UIViewController {
     }
     
     @IBAction func didTapMultiFridgeButton(_ sender: UIButton) {
+        isPersonalfridge = false
+        isMultifridge = true
+        
         fridgeInfoLabel.isHidden = true
         multiFridgeInfoLabel.isHidden = false
         
@@ -54,7 +65,8 @@ class AddFridgeViewController: UIViewController {
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        // TODO: 입력값이 모두 존재하는지 확인 (미입력이 존재한다면 Alert 띄우기), 냉장고 추가 요청
+        // TODO: 냉장고 추가 요청
+        print("TODO: 냉장고 추가 요청")
     }
     
     // MARK: Life Cycle Methods
@@ -130,7 +142,8 @@ class AddFridgeViewController: UIViewController {
             fridgeButton,
             multiFridgeButton,
             nameFieldContainer,
-            fridgeDetailTextView,
+//            fridgeDetailTextView,
+            detailContainerView,
             searchResultContainerView,
             memberSearchTableView,
             completeButton
@@ -151,6 +164,14 @@ class AddFridgeViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    private func isEmptyInputs() -> Bool {
+        if checkFridgeType()
+            && checkFridgeName()
+            && checkFridgeDetail()
+            && checkFridgeMember() { return true }
+        else { return false }
+    }
+    
     
     // MARK: @objc methods
     @objc private func didTapBackItem() {
@@ -158,6 +179,14 @@ class AddFridgeViewController: UIViewController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
+        if isEmptyInputs() {
+            completeButton.backgroundColor = .availableBlue
+            completeButton.isEnabled = true
+        } else {
+            completeButton.backgroundColor = .systemGray4
+            completeButton.isEnabled = false
+        }
+        
         if textField.text?.count ?? 0 > 0 {
             
             if textField == fridgeNameTextField {
@@ -178,6 +207,35 @@ class AddFridgeViewController: UIViewController {
     }
 }
 
+// MARK: check methods
+extension AddFridgeViewController {
+
+    /// 가정용,공용 선택 여부 확인
+    private func checkFridgeType() -> Bool {
+        if isPersonalfridge || isMultifridge { return true }
+        else { return false }
+    }
+    
+    /// 냉장고 이름 입력 여부
+    private func checkFridgeName() -> Bool {
+        if fridgeNameTextField.text?.count ?? 0 > 0 { return true }
+        else { return false }
+    }
+    
+    /// 냉장고 세부사항 입력 여부
+    private func checkFridgeDetail() -> Bool {
+        if (fridgeDetailTextView.text.count > 0)
+            && (fridgeDetailTextView.text != "   200자 이내로 작성해주세요.") { return true }
+        else { return false }
+    }
+    
+    /// 냉장고 멤버 추가 여부
+    private func checkFridgeMember() -> Bool {
+        return true // 임시
+    }
+}
+
+// MARK: extensions for delegate, ...
 extension AddFridgeViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
@@ -185,16 +243,24 @@ extension AddFridgeViewController: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        if textView.text.count > 0 {
-            textView.backgroundColor = .focusTableViewSkyBlue
+        if isEmptyInputs() {
+            completeButton.backgroundColor = .availableBlue
+            completeButton.isEnabled = true
         } else {
-            textView.backgroundColor = .systemGray6
+            completeButton.backgroundColor = .systemGray4
+            completeButton.isEnabled = false
+        }
+        
+        if textView.text.count > 0 {
+            detailContainerView.backgroundColor = .focusTableViewSkyBlue
+        } else {
+            detailContainerView.backgroundColor = .systemGray6
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.count == 0 {
-            textView.text = "   200자 이내로 작성해주세요."
+            textView.text = "200자 이내로 작성해주세요."
             textView.textColor = .lightGray
         }
     }
