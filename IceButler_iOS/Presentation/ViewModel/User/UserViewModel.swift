@@ -31,5 +31,12 @@ class UserViewModel: ObservableObject {
         }
     }
     
+    func deleteUser() {
+        userService.deleteUser { result in
+            if result == true {
+                AuthViewModel.shared.removeAllData()
+            }
+        }
+    }
     
 }
