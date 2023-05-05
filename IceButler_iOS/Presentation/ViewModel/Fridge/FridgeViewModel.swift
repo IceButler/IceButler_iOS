@@ -576,8 +576,6 @@ class FridgeViewModel: ObservableObject {
             switch response.statusCode {
             case 200:
                 /// 최초 로딩에 보여질 냉장고 기본값 설정
-//                print("setDefaultFridge called")
-//                print(response.data)
                 if response.data?.fridgeList?.count ?? 0 > 0 {
                     APIManger.shared.setFridgeIdx(index: (response.data?.fridgeList![0].fridgeIdx)!)
                     APIManger.shared.setIsMultiFridge(data: false)
@@ -594,5 +592,13 @@ class FridgeViewModel: ObservableObject {
             default: return
             }
         }
+    }
+    
+    func searchMember(nickname: String) -> [MemberResponseModel] {
+        var result: [MemberResponseModel] = []
+        fridgeService.getMemberSearchResults(nickname: nickname, completion: { data in
+            if let data = data { result = data }
+        })
+        return result
     }
 }

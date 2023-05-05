@@ -12,6 +12,7 @@ class AddFridgeViewController: UIViewController {
     // MARK: @IBOutlet, Variables
     private var isPersonalfridge: Bool = false
     private var isMultifridge: Bool = false
+    private var searchMember: [MemberResponseModel] = []
     
     @IBOutlet weak var fridgeButton: UIButton!
     @IBOutlet weak var multiFridgeButton: UIButton!
@@ -59,6 +60,7 @@ class AddFridgeViewController: UIViewController {
         // TODO: searchTextField에 입력된 닉네임으로 멤버 검색 요청
         if searchTextField.text?.count ?? 0 > 0 {
             print("입력된 검색어(닉네임) --> \(searchTextField.text!)")
+            FridgeViewModel.shared.searchMember(nickname: searchTextField.text!)
             searchResultContainerView.isHidden = false
         }
         else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
@@ -142,7 +144,6 @@ class AddFridgeViewController: UIViewController {
             fridgeButton,
             multiFridgeButton,
             nameFieldContainer,
-//            fridgeDetailTextView,
             detailContainerView,
             searchResultContainerView,
             memberSearchTableView,
@@ -268,12 +269,13 @@ extension AddFridgeViewController: UITextViewDelegate {
 
 extension AddFridgeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3    // TODO: 멤버 검색 결과 수로 변경
+        return searchMember.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemberSearchTableViewCell", for: indexPath) as? MemberSearchTableViewCell else { return UITableViewCell() }
         cell.backgroundColor = .none
+        cell.configure(data: searchMember[indexPath.row])
         return cell
     }
 }

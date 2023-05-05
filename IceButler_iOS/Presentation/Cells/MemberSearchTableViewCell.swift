@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MemberSearchTableViewCell: UITableViewCell {
 
@@ -23,5 +24,10 @@ class MemberSearchTableViewCell: UITableViewCell {
 
     private func setupLayout() {
         profileImgView.layer.cornerRadius = profileImgView.frame.width/2 - 1
+    }
+    
+    public func configure(data: MemberResponseModel) {
+        // TODO: profileImg setImage
+        nicknameLabel.text = data.nickname
     }
 }
