@@ -12,3 +12,9 @@ struct UserInfoResponseModel: Codable {
     let nickname, email: String?
     let profileImgUrl: String?
 }
+
+struct MemberResponseModel: Codable {
+    let nickname: String
+    let userIdx: Int
+    let profileImgUrl: String?
+}

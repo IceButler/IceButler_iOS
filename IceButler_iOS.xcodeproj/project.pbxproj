@@ -100,6 +100,9 @@
 		95A398BF29FD8C13009CDDDC /* RecipeResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398BE29FD8C13009CDDDC /* RecipeResponseModel.swift */; };
 		95A398C129FEFC43009CDDDC /* BookmarkRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398C029FEFC43009CDDDC /* BookmarkRecipeViewController.swift */; };
 		95A398C32A001303009CDDDC /* SearchFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398C22A001303009CDDDC /* SearchFoodViewController.swift */; };
+		A220B1632A026E430048592B /* MemberSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */; };
+		A220B1662A05411D0048592B /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */; };
+		A220B1672A05411D0048592B /* MemberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */; };
 		A2459F1B29DFE26700D12089 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */; };
 		A258498129E6A6BC00E75568 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A258498029E6A6BC00E75568 /* MyPage.storyboard */; };
 		A258498329E6A6CB00E75568 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498229E6A6CB00E75568 /* MyPageViewController.swift */; };
@@ -116,6 +119,7 @@
 		A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A764829D6B36E00D127EA /* UIColor+.swift */; };
 		A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A765429D749C700D127EA /* CartMainTableViewCell.swift */; };
 		A28A765729D749C700D127EA /* CartMainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A28A765529D749C700D127EA /* CartMainTableViewCell.xib */; };
+		A2A164C32A00DA6A008132D2 /* AddFridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A164C22A00DA6A008132D2 /* AddFridgeViewController.swift */; };
 		A2CA99DC29DE7BA80020DEEC /* CompleteBuyingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CA99DB29DE7BA80020DEEC /* CompleteBuyingViewController.swift */; };
 		A2CA99FE29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CA99FD29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift */; };
 		A2EA101529F53EDE000D600B /* MyRefrigerator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2EA101429F53EDE000D600B /* MyRefrigerator.storyboard */; };
@@ -259,6 +263,10 @@
 		95A398BE29FD8C13009CDDDC /* RecipeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResponseModel.swift; sourceTree = "<group>"; };
 		95A398C029FEFC43009CDDDC /* BookmarkRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRecipeViewController.swift; sourceTree = "<group>"; };
 		95A398C22A001303009CDDDC /* SearchFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFoodViewController.swift; sourceTree = "<group>"; };
+		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSearchTableViewCell.swift; sourceTree = "<group>"; };
+		A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCollectionViewCell.xib; sourceTree = "<group>"; };
 		A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
 		A258498029E6A6BC00E75568 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		A258498229E6A6CB00E75568 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
@@ -275,6 +283,7 @@
 		A28A764829D6B36E00D127EA /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		A28A765429D749C700D127EA /* CartMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartMainTableViewCell.swift; sourceTree = "<group>"; };
 		A28A765529D749C700D127EA /* CartMainTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartMainTableViewCell.xib; sourceTree = "<group>"; };
+		A2A164C22A00DA6A008132D2 /* AddFridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFridgeViewController.swift; sourceTree = "<group>"; };
 		A2CA99DB29DE7BA80020DEEC /* CompleteBuyingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteBuyingViewController.swift; sourceTree = "<group>"; };
 		A2CA99FD29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteBuyingTableViewCell.swift; sourceTree = "<group>"; };
 		A2EA101429F53EDE000D600B /* MyRefrigerator.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRefrigerator.storyboard; sourceTree = "<group>"; };
@@ -718,6 +727,7 @@
 				73F62A3D29DCFD7B003D779F /* FridgeViewController.swift */,
 				73F62A4729DD7F30003D779F /* FoodAddSelect.storyboard */,
 				73F62A4929DD7F45003D779F /* FoodAddSelectViewController.swift */,
+				A2A164C22A00DA6A008132D2 /* AddFridgeViewController.swift */,
 			);
 			path = Fridge;
 			sourceTree = "<group>";
@@ -842,6 +852,9 @@
 				7388C3AC29F82D81000C3606 /* ChatGptCell.xib */,
 				95A398B129FC3A4F009CDDDC /* RecipeCollectionViewCell.swift */,
 				95A398B229FC3A4F009CDDDC /* RecipeCollectionViewCell.xib */,
+				A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */,
+				A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */,
+				A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1006,6 +1019,7 @@
 				73F0D24629D2E0000038BD0C /* LaunchScreen.storyboard in Resources */,
 				73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */,
 				7339CD6D29E5B390002A6D78 /* AuthMain.storyboard in Resources */,
+				A220B1672A05411D0048592B /* MemberCollectionViewCell.xib in Resources */,
 				95A398A729FA5D37009CDDDC /* Recipe.storyboard in Resources */,
 				A27302E629D853090060944D /* Alert.storyboard in Resources */,
 				7388C3AE29F82D81000C3606 /* ChatGptCell.xib in Resources */,
@@ -1183,6 +1197,7 @@
 				A2CA99FE29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift in Sources */,
 				73CF93B329E94BB60007CB7A /* UserViewModel.swift in Sources */,
 				73B7373029E2501A0097806F /* DrinkViewController.swift in Sources */,
+				A220B1662A05411D0048592B /* MemberCollectionViewCell.swift in Sources */,
 				73F62A4429DD11C4003D779F /* BarCodeView.swift in Sources */,
 				7339CD7229E5B56A002A6D78 /* AuthService.swift in Sources */,
 				73B7373829E2505B0097806F /* SeasoningViewController.swift in Sources */,
@@ -1226,6 +1241,7 @@
 				7339CD8E29E788BE002A6D78 /* ImageDir.swift in Sources */,
 				A2EA102A29F84E6A000D600B /* SelectFridgeTableViewCell.swift in Sources */,
 				73CF93B029E945BF0007CB7A /* UserResponseModel.swift in Sources */,
+				A2A164C32A00DA6A008132D2 /* AddFridgeViewController.swift in Sources */,
 				7339CD8C29E78880002A6D78 /* ImageService.swift in Sources */,
 				73B7372029E160750097806F /* UICollectionViewFlowLayout+.swift in Sources */,
 				A2F9190C29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift in Sources */,
@@ -1236,6 +1252,7 @@
 				7339CD9229E79CDD002A6D78 /* AuthProvider.swift in Sources */,
 				73C8714F29F2ED44002DDB60 /* ProfileEditMode.swift in Sources */,
 				73B7373E29E2507A0097806F /* AllFoodViewController.swift in Sources */,
+				A220B1632A026E430048592B /* MemberSearchTableViewCell.swift in Sources */,
 				73B7373C29E250700097806F /* ETCViewController.swift in Sources */,
 				73F62A5029DE9F5E003D779F /* FoodAddViewController.swift in Sources */,
 				7388C3AD29F82D81000C3606 /* ChatGptCell.swift in Sources */,

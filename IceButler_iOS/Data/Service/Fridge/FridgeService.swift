@@ -45,4 +45,27 @@ class FridgeService {
             completion(response.data)
         }
     }
+    
+    func getMemberSearchResults(nickname: String, completion: @escaping ([MemberResponseModel]?) -> Void) {
+        let param: Parameters = ["nickname" : nickname]
+        APIManger.shared.getData(urlEndpointString: "/users/search",
+                                 responseDataType: [MemberResponseModel].self,
+                                 parameter: param,
+                                 completionHandler: { response in
+            print(response)
+            completion(response.data)
+        })
+    }
+    
+    func addFridge(name: String, comment: String, members: [Int], completion: @escaping ((Int?) -> Void)) {
+        let req = FridgeRequestModel(fridgeName: name, fridgeComment: comment, members: members)
+        APIManger.shared.postData(urlEndpointString: "/fridges/register",
+                                  responseDataType: Int.self,
+                                  requestDataType: FridgeRequestModel.self,
+                                  parameter: req,
+                                  completionHandler: { response in
+            print(response)
+            completion(response.data)
+        })
+    }
 }
