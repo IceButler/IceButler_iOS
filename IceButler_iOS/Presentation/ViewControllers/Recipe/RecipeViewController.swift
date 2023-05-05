@@ -160,7 +160,7 @@ class RecipeViewController: TabmanViewController {
 
 extension RecipeViewController: PageboyViewControllerDataSource, TMBarDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
-        return TMBarItem(title: RecipeCategory.allCases[index].rawValue)
+        return TMBarItem(title: RecipeListType.allCases[index].rawValue)
     }
     func numberOfViewControllers(in pageboyViewController: Pageboy.PageboyViewController) -> Int {
         return viewControllerList.count
