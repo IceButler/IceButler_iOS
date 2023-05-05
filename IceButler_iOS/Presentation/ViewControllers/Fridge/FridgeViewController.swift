@@ -44,8 +44,10 @@ class FridgeViewController: TabmanViewController {
     }
     
     private func setup() {
-//        FridgeViewModel.shared.getAllFoodList(fridgeIdx: 1)
-        FridgeViewModel.shared.setDefaultFridge()
+//        FridgeViewModel.shared.getAllFoodList(fridgeIdx: 78)
+//        FridgeViewModel.shared.setDefaultFridge()
+        FridgeViewModel.shared.setSavedFridgeIdx()
+        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
         
     }
     
@@ -148,7 +150,7 @@ class FridgeViewController: TabmanViewController {
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
         
         setupleftBarItems(title: FridgeViewModel.shared.defaultFridgeName)
-        print("FridgeViewModel.shared.defaultFridgeName --> \(FridgeViewModel.shared.defaultFridgeName)")
+//        print("FridgeViewModel.shared.defaultFridgeName --> \(FridgeViewModel.shared.defaultFridgeName)")
         
         let searchItem = UIBarButtonItem(image: UIImage(named: "searchIcon"), style: .done, target: self, action: #selector(moveToSearchVC))
         searchItem.tintColor = .white
