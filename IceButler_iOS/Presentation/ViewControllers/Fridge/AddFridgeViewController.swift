@@ -13,6 +13,7 @@ class AddFridgeViewController: UIViewController {
     private var isPersonalfridge: Bool = false
     private var isMultifridge: Bool = false
     private var searchMember: [MemberResponseModel] = []
+    private var selectedMemberIdx: [Int] = []
     
     @IBOutlet weak var fridgeButton: UIButton!
     @IBOutlet weak var multiFridgeButton: UIButton!
@@ -59,7 +60,6 @@ class AddFridgeViewController: UIViewController {
     @IBAction func didTapMemberSearchButton(_ sender: UIButton) {
         // TODO: searchTextField에 입력된 닉네임으로 멤버 검색 요청
         if searchTextField.text?.count ?? 0 > 0 {
-            print("입력된 검색어(닉네임) --> \(searchTextField.text!)")
             FridgeViewModel.shared.searchMember(nickname: searchTextField.text!)
             searchResultContainerView.isHidden = false
         }
@@ -69,6 +69,12 @@ class AddFridgeViewController: UIViewController {
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
         // TODO: 냉장고 추가 요청
         print("TODO: 냉장고 추가 요청")
+        let addResult = FridgeViewModel.shared.requestAddFridge(name: fridgeNameTextField.text!,
+                                                comment: fridgeDetailTextView.text!,
+                                                members: selectedMemberIdx)
+        
+        if addResult { showAlert(title: nil, message: "냉장고를 성공적으로 추가하였습니다!", confirmTitle: "확인") }
+        else { showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인") }
     }
     
     // MARK: Life Cycle Methods
@@ -232,7 +238,7 @@ extension AddFridgeViewController {
     
     /// 냉장고 멤버 추가 여부
     private func checkFridgeMember() -> Bool {
-        return true // 임시
+        return (selectedMemberIdx.count > 0) ? true : false
     }
 }
 
@@ -277,5 +283,10 @@ extension AddFridgeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = .none
         cell.configure(data: searchMember[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedMemberIdx.append(searchMember[indexPath.row].userIdx)
+        self.searchContainerView.isHidden = true
     }
 }
