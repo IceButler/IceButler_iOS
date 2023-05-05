@@ -7,6 +7,7 @@
 
 import Foundation
 import KakaoSDKUser
+import AuthenticationServices
 
 class AuthService {
     func loginWithKakao(comletion: @escaping (String) -> Void) {
@@ -43,6 +44,15 @@ class AuthService {
             }
         }
     }
+    
+    func loginWithApple(completion: @escaping (ASAuthorizationAppleIDRequest) -> Void) {
+        let appleIdProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIdProvider.createRequest()
+        request.requestedScopes = [.email]
+        
+        completion(request)
+    }
+    
     
     
     func requestLogin(parameter: AuthLoginRequest, completion: @escaping (AuthJoinUserResponseModel?) -> Void) {

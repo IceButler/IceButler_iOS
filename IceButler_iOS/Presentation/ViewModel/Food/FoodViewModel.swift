@@ -239,7 +239,10 @@ extension FoodViewModel {
     
     
     func postFood(fridgeIdx: Int, foodName: String, foodDetail: String, foodCategory: String, foodShelfLife: String, foodOwnerIdx: Int, memo: String?, imgUrl: String?, completion: @escaping (Bool) -> Void) {
-        let parameter = FoodAddRequestModel(foodName: foodName, foodDetailName: foodDetail, foodCategory: foodCategory, shelfLife: foodShelfLife, memo: memo, imageUrl: imgUrl, ownerIdx: foodOwnerIdx)
+        var foodAddModel: [FoodAddRequestModel] = []
+        foodAddModel.append(FoodAddRequestModel(foodName: foodName, foodDetailName: foodDetail, foodCategory: foodCategory, shelfLife: foodShelfLife, memo: memo, imageUrl: imgUrl, ownerIdx: foodOwnerIdx))
+        
+        let parameter = FoodAddListModel(fridgeFoods: foodAddModel)
         
         foodService.postFood(fridgeIdx: fridgeIdx, parameter: parameter) { result in
             if result {

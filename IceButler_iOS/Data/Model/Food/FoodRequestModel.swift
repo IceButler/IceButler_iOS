@@ -7,6 +7,9 @@
 
 import Foundation
 
+struct FoodAddListModel: Codable {
+    let fridgeFoods: [FoodAddRequestModel]
+}
 
 struct FoodAddRequestModel: Codable {
     let foodName, foodDetailName, foodCategory, shelfLife: String
