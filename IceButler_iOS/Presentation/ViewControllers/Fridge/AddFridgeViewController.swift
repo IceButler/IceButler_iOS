@@ -185,13 +185,7 @@ class AddFridgeViewController: UIViewController {
     
     // MARK: @objc methods
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if isEmptyInputs() {
-            completeButton.backgroundColor = .availableBlue
-            completeButton.isEnabled = true
-        } else {
-            completeButton.backgroundColor = .systemGray4
-            completeButton.isEnabled = false
-        }
+        setCompleteButtonMode()
         
         if textField.text?.count ?? 0 > 0 {
             
@@ -239,6 +233,17 @@ extension AddFridgeViewController {
     private func checkFridgeMember() -> Bool {
         return (selectedMember.count > 0) ? true : false
     }
+    
+    /// 완료 버튼 활성/비활성 설정
+    private func setCompleteButtonMode() {
+        if isEmptyInputs() {
+            completeButton.backgroundColor = .availableBlue
+            completeButton.isEnabled = true
+        } else {
+            completeButton.backgroundColor = .systemGray4
+            completeButton.isEnabled = false
+        }
+    }
 }
 
 // MARK: extensions for delegate, ...
@@ -249,13 +254,7 @@ extension AddFridgeViewController: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        if isEmptyInputs() {
-            completeButton.backgroundColor = .availableBlue
-            completeButton.isEnabled = true
-        } else {
-            completeButton.backgroundColor = .systemGray4
-            completeButton.isEnabled = false
-        }
+        setCompleteButtonMode()
         
         if textView.text.count > 0 {
             detailContainerView.backgroundColor = .focusTableViewSkyBlue
@@ -306,6 +305,7 @@ extension AddFridgeViewController: UICollectionViewDelegateFlowLayout, UICollect
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedMember.remove(at: indexPath.row)
+        setCompleteButtonMode()
         collectionView.reloadData()
     }
     
