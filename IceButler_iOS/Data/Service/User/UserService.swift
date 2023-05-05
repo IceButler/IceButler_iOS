@@ -15,4 +15,14 @@ class UserService {
             }
         }
     }
+    
+    func deleteUser(completion: @escaping (Bool) -> Void) {
+        APIManger.shared.deleteData(urlEndpointString: "/users/delete", responseDataType: UserInfoResponseModel.self, requestDataType: UserInfoResponseModel.self, parameter: nil) { response in
+            if response.statusCode == 200 {
+                completion(true)
+            }else {
+                completion(false)
+            }
+        }
+    }
 }

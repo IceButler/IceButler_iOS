@@ -126,6 +126,8 @@ extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource 
         
         let index = myFridgeData[indexPath.row].idx!
         APIManger.shared.setFridgeIdx(index: index)
+        UserDefaults.standard.setValue(index, forKey: "selectedFridgeIdx")
+        UserDefaults.standard.setValue(myFridgeData[indexPath.row].name, forKey: "selectedFridgeName")
         delegate?.updateMainFridge(title: myFridgeData[indexPath.row].name ?? "냉장고 이름")
         
         self.dismiss(animated: true)

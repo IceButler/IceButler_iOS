@@ -200,12 +200,16 @@ extension AuthViewModel {
 
     func logout() {
         authService.requestLogout {
-            self.isJoin = false
-            self.isModify = false
-            self.userEmail = nil
-            self.accessToken = nil
-            UserDefaults.standard.removeObject(forKey: "UserToken")
+            self.removeAllData()
         }
+    }
+    
+    func removeAllData() {
+        self.isJoin = false
+        self.isModify = false
+        self.userEmail = nil
+        self.accessToken = nil
+        UserDefaults.standard.removeObject(forKey: "UserToken")
     }
 }
 

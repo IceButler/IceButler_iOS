@@ -160,7 +160,14 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                 self.present(alertVC, animated: true)
 
             case 1:
-                print("회원탈퇴 팝업 띄우기")
+                let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(identifier: "AlertViewController") as! AlertViewController
+                alertVC.configure(title: "회원 탈퇴", content: "회웥 탈퇴시,\n현재 저장된 모든 냉장고의 정보를 잃게 됩니다.\n탈퇴하시겠습니까?", leftButtonTitle: "취소", righttButtonTitle: "확인") {
+                    UserViewModel.shared.deleteUser()
+                } leftCompletion: {
+                }
+                alertVC.modalPresentationStyle = .overFullScreen
+                
+                self.present(alertVC, animated: true)
             default: return
             }
         case 3:

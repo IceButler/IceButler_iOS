@@ -16,7 +16,7 @@ class APIManger {
     
     private var headers: HTTPHeaders?
     
-    private var fridgeIdx: Int = 1
+    private var fridgeIdx: Int = -1
     private var isMultiFridge: Bool = false
     
     func setupObserver() {
