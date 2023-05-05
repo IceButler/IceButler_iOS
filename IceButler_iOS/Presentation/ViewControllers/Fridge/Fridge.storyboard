@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -326,7 +327,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2iQ-7W-Ibo">
-                                                <rect key="frame" x="12" y="690" width="369" height="49"/>
+                                                <rect key="frame" x="12" y="731" width="369" height="49"/>
                                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="49" id="yQ6-vu-b7U"/>
@@ -351,17 +352,17 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K7k-yf-u4I">
-                                                <rect key="frame" x="16" y="529" width="361" height="200"/>
+                                                <rect key="frame" x="16" y="529" width="349" height="200"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VUA-QP-WLL">
-                                                        <rect key="frame" x="0.0" y="50" width="361" height="150"/>
+                                                        <rect key="frame" x="0.0" y="50" width="349" height="150"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MemberSearchTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemberSearchTableViewCell" id="lVO-eh-9xz" customClass="MemberSearchTableViewCell" customModule="IceButler_iOS" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="50" width="361" height="43.666667938232422"/>
+                                                                <rect key="frame" x="0.0" y="50" width="349" height="43.666667938232422"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lVO-eh-9xz" id="FFw-ll-vwh">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="361" height="43.666667938232422"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="349" height="43.666667938232422"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V5h-Ij-jTO">
@@ -423,11 +424,35 @@
                                                     </navigationItem>
                                                 </items>
                                             </navigationBar>
+                                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tbR-JG-cJ3">
+                                                <rect key="frame" x="28" y="580" width="337" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="cZ7-Tf-cva"/>
+                                                </constraints>
+                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="auS-Sc-L8g">
+                                                    <size key="itemSize" width="128" height="128"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="e7U-HF-2Sy">
+                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hUs-9u-2w6">
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </collectionViewCellContentView>
+                                                    </collectionViewCell>
+                                                </cells>
+                                            </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="9O7-Br-xHd" firstAttribute="leading" secondItem="eDv-jP-eZp" secondAttribute="leading" id="0Wv-N5-Lbh"/>
                                             <constraint firstItem="eDv-jP-eZp" firstAttribute="leading" secondItem="AUc-Bz-hIb" secondAttribute="leading" id="88t-4H-tZz"/>
+                                            <constraint firstItem="tbR-JG-cJ3" firstAttribute="top" secondItem="9O7-Br-xHd" secondAttribute="bottom" constant="8" id="8v6-TQ-cO1"/>
                                             <constraint firstItem="qyW-bo-4OV" firstAttribute="leading" secondItem="lw4-oY-sMr" secondAttribute="leading" constant="16" id="8v6-yF-EYg"/>
                                             <constraint firstItem="uo8-zI-NYn" firstAttribute="top" secondItem="6p1-dh-86O" secondAttribute="bottom" constant="50" id="Ahe-eS-wTs"/>
                                             <constraint firstItem="6p1-dh-86O" firstAttribute="top" secondItem="qyW-bo-4OV" secondAttribute="bottom" constant="12" id="BNf-Jq-xWq"/>
@@ -448,8 +473,9 @@
                                             <constraint firstItem="357-4x-4Qv" firstAttribute="top" secondItem="uo8-zI-NYn" secondAttribute="bottom" constant="12" id="b8P-PB-EMH"/>
                                             <constraint firstItem="AUc-Bz-hIb" firstAttribute="leading" secondItem="uo8-zI-NYn" secondAttribute="leading" id="e07-xe-N9j"/>
                                             <constraint firstAttribute="trailing" secondItem="357-4x-4Qv" secondAttribute="trailing" constant="16" id="fF9-er-XLc"/>
-                                            <constraint firstItem="K7k-yf-u4I" firstAttribute="trailing" secondItem="9O7-Br-xHd" secondAttribute="trailing" id="gNc-5P-dBs"/>
+                                            <constraint firstItem="K7k-yf-u4I" firstAttribute="trailing" secondItem="9O7-Br-xHd" secondAttribute="trailing" constant="-12" id="gNc-5P-dBs"/>
                                             <constraint firstAttribute="trailing" secondItem="2iQ-7W-Ibo" secondAttribute="trailing" constant="12" id="hHJ-Nk-IGM"/>
+                                            <constraint firstItem="tbR-JG-cJ3" firstAttribute="trailing" secondItem="K7k-yf-u4I" secondAttribute="trailing" id="hg8-uq-dnT"/>
                                             <constraint firstItem="e0d-OU-MwS" firstAttribute="top" secondItem="lw4-oY-sMr" secondAttribute="top" id="jKX-Hg-Blj"/>
                                             <constraint firstItem="K7k-yf-u4I" firstAttribute="top" secondItem="9O7-Br-xHd" secondAttribute="bottom" constant="-43" id="jdc-Y5-mO0"/>
                                             <constraint firstItem="vSw-ak-Vqe" firstAttribute="leading" secondItem="wfR-sr-Hc7" secondAttribute="leading" id="knD-gv-gQ4"/>
@@ -458,6 +484,7 @@
                                             <constraint firstItem="2iQ-7W-Ibo" firstAttribute="leading" secondItem="lw4-oY-sMr" secondAttribute="leading" constant="12" id="uTd-Sg-M6G"/>
                                             <constraint firstItem="qyW-bo-4OV" firstAttribute="top" secondItem="e0d-OU-MwS" secondAttribute="bottom" constant="20" id="v70-Ja-WVa"/>
                                             <constraint firstAttribute="trailing" secondItem="9O7-Br-xHd" secondAttribute="trailing" constant="16" id="vbr-ZV-khY"/>
+                                            <constraint firstItem="tbR-JG-cJ3" firstAttribute="leading" secondItem="K7k-yf-u4I" secondAttribute="leading" constant="12" id="wg7-xD-kci"/>
                                             <constraint firstItem="2jv-rX-uxw" firstAttribute="trailing" secondItem="9GS-qc-vgt" secondAttribute="trailing" id="xvR-2S-IdU"/>
                                         </constraints>
                                     </view>
@@ -485,12 +512,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="lIB-NH-Oyh"/>
                     <connections>
+                        <outlet property="collectionViewHeight" destination="cZ7-Tf-cva" id="tKo-Yg-Bol"/>
                         <outlet property="completeButton" destination="2iQ-7W-Ibo" id="OY9-EY-2ua"/>
                         <outlet property="detailContainerView" destination="iDv-MH-5A8" id="PmI-aT-TXO"/>
                         <outlet property="fridgeButton" destination="wfR-sr-Hc7" id="wfV-Ng-zqI"/>
                         <outlet property="fridgeDetailTextView" destination="oqO-YO-wi5" id="e7t-ue-iz3"/>
                         <outlet property="fridgeInfoLabel" destination="vSw-ak-Vqe" id="lyG-WA-7b1"/>
                         <outlet property="fridgeNameTextField" destination="2vE-ai-pCe" id="d4r-De-zTq"/>
+                        <outlet property="memberCollectionView" destination="tbR-JG-cJ3" id="ZVM-Wr-OjZ"/>
                         <outlet property="memberSearchTableView" destination="VUA-QP-WLL" id="GOG-Co-BI5"/>
                         <outlet property="multiFridgeButton" destination="9GS-qc-vgt" id="C5o-TK-jEr"/>
                         <outlet property="multiFridgeInfoLabel" destination="2jv-rX-uxw" id="aQN-LY-pkR"/>

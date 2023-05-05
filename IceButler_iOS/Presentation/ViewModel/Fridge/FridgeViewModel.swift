@@ -605,11 +605,9 @@ class FridgeViewModel: ObservableObject {
         })
     }
     
-    func requestAddFridge(name: String, comment: String, members: [Int]) -> Bool {
-        var result: Bool = false
+    func requestAddFridge(name: String, comment: String, members: [Int], completion: @escaping ((Bool)->Void)) {
         fridgeService.addFridge(name: name, comment: comment, members: members, completion: { response in
-            result = (response != nil) ? true : false
+            completion((response != nil) ? true : false)
         })
-        return result
     }
 }

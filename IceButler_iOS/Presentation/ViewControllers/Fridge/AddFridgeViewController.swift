@@ -13,7 +13,7 @@ class AddFridgeViewController: UIViewController {
     private var isPersonalfridge: Bool = false
     private var isMultifridge: Bool = false
     private var searchMember: [MemberResponseModel] = []
-    private var selectedMemberIdx: [Int] = []
+    private var selectedMember: [MemberResponseModel] = []
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var fridgeButton: UIButton!
@@ -35,10 +35,12 @@ class AddFridgeViewController: UIViewController {
     @IBOutlet weak var memberSearchTableView: UITableView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var memberCollectionView: UICollectionView!
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
+    
+    
     // MARK: @IBAction
-    @IBAction func didTapBackItem(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
-    }
+    @IBAction func didTapBackItem(_ sender: UIBarButtonItem) { dismiss(animated: true) }
     
     @IBAction func didTapFridgeButton(_ sender: UIButton) {
         isPersonalfridge = true
@@ -65,7 +67,9 @@ class AddFridgeViewController: UIViewController {
     @IBAction func didTapMemberSearchButton(_ sender: UIButton) {
         if searchTextField.text?.count ?? 0 > 0 {
             FridgeViewModel.shared.searchMember(nickname: searchTextField.text!, completion: {
+                self.searchMember = FridgeViewModel.shared.searchMemberResults
                 self.tableViewHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
+                self.memberCollectionView.isHidden = true
                 self.searchResultContainerView.isHidden = false
                 self.memberSearchTableView.reloadData()
             })
@@ -74,12 +78,16 @@ class AddFridgeViewController: UIViewController {
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        let addResult = FridgeViewModel.shared.requestAddFridge(name: fridgeNameTextField.text!,
-                                                comment: fridgeDetailTextView.text!,
-                                                members: selectedMemberIdx)
+        var memberIdx:[Int] = []
+        selectedMember.forEach { member in memberIdx.append(member.userIdx) }
         
-        if addResult { showAlert(title: nil, message: "냉장고를 성공적으로 추가하였습니다!", confirmTitle: "확인") }
-        else { showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인") }
+        FridgeViewModel.shared.requestAddFridge(name: fridgeNameTextField.text!,
+                                                comment: fridgeDetailTextView.text!,
+                                                                members: memberIdx,
+                                                                completion: { [weak self] result in
+            if result { self?.showAlert(title: nil, message: "냉장고를 성공적으로 추가하였습니다!", confirmTitle: "확인") }
+            else { self?.showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인") }
+        })
     }
     
     // MARK: Life Cycle Methods
@@ -97,6 +105,11 @@ class AddFridgeViewController: UIViewController {
         memberSearchTableView.delegate = self
         memberSearchTableView.dataSource = self
         memberSearchTableView.separatorStyle = .none
+        
+        memberCollectionView.delegate = self
+        memberCollectionView.dataSource = self
+        let memberCell = UINib(nibName: "MemberCollectionViewCell", bundle: nil)
+        memberCollectionView.register(memberCell, forCellWithReuseIdentifier: "MemberCollectionViewCell")
     }
     
     private func setupNavigationBar() {
@@ -224,7 +237,7 @@ extension AddFridgeViewController {
     
     /// 냉장고 멤버 추가 여부
     private func checkFridgeMember() -> Bool {
-        return (selectedMemberIdx.count > 0) ? true : false
+        return (selectedMember.count > 0) ? true : false
     }
 }
 
@@ -273,7 +286,30 @@ extension AddFridgeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedMemberIdx.append(FridgeViewModel.shared.searchMemberResults[indexPath.row].userIdx)
+        selectedMember.append(searchMember[indexPath.row])
         self.searchResultContainerView.isHidden = true
+        self.memberCollectionView.isHidden = false
+        self.memberCollectionView.reloadData()
+    }
+}
+
+extension AddFridgeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return selectedMember.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemberCollectionViewCell", for: indexPath) as? MemberCollectionViewCell else { return UICollectionViewCell() }
+        cell.nicknameLabel.text = selectedMember[indexPath.row].nickname
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedMember.remove(at: indexPath.row)
+        collectionView.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 25.5 + selectedMember[indexPath.row].nickname.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]).width + 20, height: 34)
     }
 }
