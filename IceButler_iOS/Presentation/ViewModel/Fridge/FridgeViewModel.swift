@@ -25,6 +25,8 @@ class FridgeViewModel: ObservableObject {
     @Published var processedFoodList: [FridgeFood] = []
     @Published var etcFoodList: [FridgeFood] = []
     
+    var searchMemberResults: [MemberResponseModel] = []
+    
     var cancelLabels: Set<AnyCancellable> = []
     
     var defaultFridgeName: String = ""
@@ -594,12 +596,13 @@ class FridgeViewModel: ObservableObject {
         }
     }
     
-    func searchMember(nickname: String) -> [MemberResponseModel] {
-        var result: [MemberResponseModel] = []
-        fridgeService.getMemberSearchResults(nickname: nickname, completion: { data in
-            if let data = data { result = data }
+    func searchMember(nickname: String, completion: @escaping () -> Void) {
+        fridgeService.getMemberSearchResults(nickname: nickname, completion: { [weak self] data in
+            if let data = data {
+                self?.searchMemberResults = data
+                completion()
+            }
         })
-        return result
     }
     
     func requestAddFridge(name: String, comment: String, members: [Int]) -> Bool {

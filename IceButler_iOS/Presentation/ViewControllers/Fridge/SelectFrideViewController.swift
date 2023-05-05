@@ -93,9 +93,15 @@ class SelectFrideViewController: UIViewController {
     @IBAction func didTapAddFridgeButton(_ sender: UIButton) {
         // TODO: 냉장고 추가 화면으로 이동
         print("TODO: 냉장고 추가 화면으로 이동")
-        let addFridgeVC = storyboard?.instantiateViewController(identifier: "AddFridgeViewController") as! AddFridgeViewController
-//        present(selectVC, animated: true, completion: nil)
-        self.navigationController?.pushViewController(addFridgeVC, animated: true)
+//        let addFridgeVC = storyboard?.instantiateViewController(identifier: "AddFridgeViewController") as! AddFridgeViewController
+////        present(selectVC, animated: true, completion: nil)
+//        self.navigationController?.pushViewController(addFridgeVC, animated: true)
+        
+        guard let vc = storyboard?.instantiateViewController(identifier: "AddFridgeViewController") as? AddFridgeViewController else { return }
+        let addVC = UINavigationController(rootViewController: vc)
+        addVC.modalPresentationStyle = .fullScreen
+        addVC.isNavigationBarHidden = true
+        present(addVC, animated: true)
     }
     
 }

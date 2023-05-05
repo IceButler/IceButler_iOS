@@ -15,6 +15,7 @@ class AddFridgeViewController: UIViewController {
     private var searchMember: [MemberResponseModel] = []
     private var selectedMemberIdx: [Int] = []
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var fridgeButton: UIButton!
     @IBOutlet weak var multiFridgeButton: UIButton!
     
@@ -32,9 +33,13 @@ class AddFridgeViewController: UIViewController {
     
     @IBOutlet weak var searchResultContainerView: UIView!
     @IBOutlet weak var memberSearchTableView: UITableView!
-    
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     // MARK: @IBAction
+    @IBAction func didTapBackItem(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
     @IBAction func didTapFridgeButton(_ sender: UIButton) {
         isPersonalfridge = true
         isMultifridge = false
@@ -58,17 +63,17 @@ class AddFridgeViewController: UIViewController {
     }
     
     @IBAction func didTapMemberSearchButton(_ sender: UIButton) {
-        // TODO: searchTextField에 입력된 닉네임으로 멤버 검색 요청
         if searchTextField.text?.count ?? 0 > 0 {
-            FridgeViewModel.shared.searchMember(nickname: searchTextField.text!)
-            searchResultContainerView.isHidden = false
+            FridgeViewModel.shared.searchMember(nickname: searchTextField.text!, completion: {
+                self.tableViewHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
+                self.searchResultContainerView.isHidden = false
+                self.memberSearchTableView.reloadData()
+            })
         }
         else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        // TODO: 냉장고 추가 요청
-        print("TODO: 냉장고 추가 요청")
         let addResult = FridgeViewModel.shared.requestAddFridge(name: fridgeNameTextField.text!,
                                                 comment: fridgeDetailTextView.text!,
                                                 members: selectedMemberIdx)
@@ -98,7 +103,7 @@ class AddFridgeViewController: UIViewController {
         /// setting status bar background color
         if #available(iOS 13.0, *) {
             let app = UIApplication.shared
-            let statusBarHeight: CGFloat = app.statusBarFrame.size.height
+            let statusBarHeight: CGFloat = app.statusBarFrame.size.height + 5
             
             let statusbarView = UIView()
             statusbarView.backgroundColor = UIColor.navigationColor
@@ -121,25 +126,10 @@ class AddFridgeViewController: UIViewController {
         
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
-        
-        // left item
-        let mainText = UILabel()
-        mainText.text = "냉장고 추가"
-        mainText.textColor = .white
-        mainText.font = .systemFont(ofSize: 18, weight: .bold)
-        
-        let backItem = UIButton()
-        backItem.setImage(UIImage(named: "backIcon"), for: .normal)
-        backItem.frame = CGRect(x: 0, y: 0, width: 30, height: backItem.frame.height)
-        backItem.addTarget(self, action: #selector(didTapBackItem), for: .touchUpInside)
-        
-        self.navigationItem.leftBarButtonItems = [
-            UIBarButtonItem(customView: backItem),
-            UIBarButtonItem(customView: mainText)
-        ]
     }
     
     private func setupLayouts() {
+        navigationBar.barTintColor = .navigationColor
         [
             fridgeNameTextField,
             searchTextField
@@ -181,10 +171,6 @@ class AddFridgeViewController: UIViewController {
     
     
     // MARK: @objc methods
-    @objc private func didTapBackItem() {
-        self.navigationController?.popToRootViewController(animated: true)
-    }
-    
     @objc func textFieldDidChange(_ textField: UITextField) {
         if isEmptyInputs() {
             completeButton.backgroundColor = .availableBlue
@@ -232,7 +218,7 @@ extension AddFridgeViewController {
     /// 냉장고 세부사항 입력 여부
     private func checkFridgeDetail() -> Bool {
         if (fridgeDetailTextView.text.count > 0)
-            && (fridgeDetailTextView.text != "   200자 이내로 작성해주세요.") { return true }
+            && (fridgeDetailTextView.text != "200자 이내로 작성해주세요.") { return true }
         else { return false }
     }
     
@@ -275,18 +261,19 @@ extension AddFridgeViewController: UITextViewDelegate {
 
 extension AddFridgeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchMember.count
+        return FridgeViewModel.shared.searchMemberResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemberSearchTableViewCell", for: indexPath) as? MemberSearchTableViewCell else { return UITableViewCell() }
         cell.backgroundColor = .none
-        cell.configure(data: searchMember[indexPath.row])
+        cell.selectionStyle = .none
+        cell.configure(data: FridgeViewModel.shared.searchMemberResults[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedMemberIdx.append(searchMember[indexPath.row].userIdx)
-        self.searchContainerView.isHidden = true
+        selectedMemberIdx.append(FridgeViewModel.shared.searchMemberResults[indexPath.row].userIdx)
+        self.searchResultContainerView.isHidden = true
     }
 }

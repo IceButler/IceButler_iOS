@@ -27,7 +27,9 @@ class MemberSearchTableViewCell: UITableViewCell {
     }
     
     public func configure(data: MemberResponseModel) {
-        // TODO: profileImg setImage
+        if let urlStr = data.profileImgUrl {
+            profileImgView.kf.setImage(with: URL(string: urlStr))
+        }
         nicknameLabel.text = data.nickname
     }
 }
