@@ -28,11 +28,11 @@ class SelectedFoodNameCollectionViewCell: UICollectionViewCell {
         delegate?.didTapDeleteButton(index: self.tag)
     }
     
+    public func didTapSelectedFoodCell() {
+        delegate?.didTapDeleteButton(index: self.tag)
+    }
+    
     public func setupLayout(title: String) {
-//        self.selectedFoodButton.setTitle(title, for: .normal)
-//        self.selectedFoodButton.layer.borderWidth = 1.6
-//        self.selectedFoodButton.layer.borderColor = UIColor.signatureBlue.cgColor
-//        self.selectedFoodButton.layer.cornerRadius = 17
         self.nameLabel.text = title
         self.containerView.layer.borderWidth = 1.6
         self.containerView.layer.borderColor = UIColor.signatureBlue.cgColor

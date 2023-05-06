@@ -29,6 +29,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="iyA-xx-iPb" firstAttribute="centerX" secondItem="1DC-i3-l9I" secondAttribute="centerX" id="XJW-w7-nfK"/>
                             <constraint firstItem="iyA-xx-iPb" firstAttribute="centerY" secondItem="1DC-i3-l9I" secondAttribute="centerY" id="dFh-IT-6SF"/>

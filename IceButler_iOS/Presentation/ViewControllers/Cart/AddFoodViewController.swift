@@ -228,6 +228,16 @@ extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDel
         return CGSize(width: 0, height: 0)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.tag == 0 {
+            let cell = self.categoryCollectionView.cellForItem(at: indexPath) as? FoodCategoryCollectionViewCell
+            cell?.didTapCategoryCell()
+            
+        } else if collectionView.tag == 1 {
+            let cell = self.collectionView.cellForItem(at: indexPath) as? SelectedFoodNameCollectionViewCell
+            cell?.didTapSelectedFoodCell()
+        }
+    }
 }
 
 extension AddFoodViewController: UITableViewDelegate, UITableViewDataSource {
@@ -277,7 +287,9 @@ extension AddFoodViewController: FoodCategoryCellDelegate {
 extension AddFoodViewController: SelectedFoodCellDelegate {
     func didTapDeleteButton(index: Int) {
         selectedFoodNames.remove(at: index)
-        
+        selectedFoods.remove(at: index)
+        collectionView.reloadData()
+
         selectedCategory = ""
         categoryCollectionView.reloadData()
         
@@ -285,6 +297,5 @@ extension AddFoodViewController: SelectedFoodCellDelegate {
             self.completeButton.backgroundColor = .systemGray5
             self.completeButton.isEnabled = false
         }
-        collectionView.reloadData()
     }
 }
