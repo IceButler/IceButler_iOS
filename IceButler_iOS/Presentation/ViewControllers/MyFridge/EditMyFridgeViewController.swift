@@ -9,7 +9,11 @@ import UIKit
 
 class EditMyFridgeViewController: UIViewController {
 
+    private var searchMember: [MemberResponseModel] = []
+    private var selectedMember: [MemberResponseModel] = []
+    private var mandatedMember: MemberResponseModel?
     
+
     @IBOutlet weak var typeContainerView: UIView!
     @IBOutlet weak var fridgeTypeLabel: UILabel!
     
@@ -22,7 +26,9 @@ class EditMyFridgeViewController: UIViewController {
     @IBOutlet weak var memberSearchContainerView: UIView!
     @IBOutlet weak var memberSearchTextField: UITextField!
     @IBOutlet weak var memberSearchResultContainerView: UIView!
+    @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var memberResultTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var selectedMemberCollectionView: UICollectionView!
     
     @IBOutlet weak var intervalOfTableViews: NSLayoutConstraint!
     
@@ -30,11 +36,23 @@ class EditMyFridgeViewController: UIViewController {
     @IBOutlet weak var mandateTextField: UITextField!
     @IBOutlet weak var mandateResultContainerView: UIView!
     @IBOutlet weak var mandateResultTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var mandateTableView: UITableView!
     
     @IBOutlet weak var completeButton: UIButton!
     
     @IBAction func didTapMemberSearchButton(_ sender: UIButton) {
         // TODO: 닉네임으로 멤버 검색
+        if memberSearchTextField.text?.count ?? 0 > 0 {
+            FridgeViewModel.shared.searchMember(nickname: memberSearchTextField.text!, completion: {
+                self.searchMember = FridgeViewModel.shared.searchMemberResults
+                self.memberResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
+                self.selectedMemberCollectionView.isHidden = true
+                self.memberSearchContainerView.isHidden = false
+                self.searchTableView.reloadData()
+                self.setupConstraints()
+            })
+        }
+        else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
     }
     
     @IBAction func didTapMandateSearchButton(_ sender: UIButton) {
@@ -119,13 +137,70 @@ class EditMyFridgeViewController: UIViewController {
     
     private func setupConstraints() {
         // TODO: 각 검색 결과값을 적용한 제한으로 수정
-        memberResultTableHeight.constant = 43 + 30 * 0
-        mandateResultTableHeight.constant = 43 + 30 * 0
-        intervalOfTableViews.constant = 40 + 0
+        memberResultTableHeight.constant = CGFloat(50 + 44 * searchMember.count)
+        mandateResultTableHeight.constant = CGFloat(50 + 44 * searchMember.count)
+        intervalOfTableViews.constant = 40 + CGFloat(50 + 44 * searchMember.count)
+    }
+    
+    private func setupSubViews() {
+        searchTableView.delegate = self
+        searchTableView.dataSource = self
+        searchTableView.separatorStyle = .none
+        
+        mandateTableView.delegate = self
+        mandateTableView.dataSource = self
+        mandateTableView.separatorStyle = .none
+        
+        selectedMemberCollectionView.delegate = self
+        selectedMemberCollectionView.dataSource = self
+        let memberCell = UINib(nibName: "MemberCollectionViewCell", bundle: nil)
+        selectedMemberCollectionView.register(memberCell, forCellWithReuseIdentifier: "MemberCollectionViewCell")
+    }
+    
+    private func showAlert(title: String?, message: String, confirmTitle: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: confirmTitle, style: .default))
+        present(alert, animated: true)
     }
     
     // MARK: @objc methods
     @objc private func didTapBackItem() {
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension EditMyFridgeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchMember.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemberSearchTableViewCell", for: indexPath) as? MemberSearchTableViewCell else { return UITableViewCell() }
+        cell.backgroundColor = .none
+        cell.selectionStyle = .none
+        cell.configure(data: FridgeViewModel.shared.searchMemberResults[indexPath.row])
+        return cell
+    }
+}
+
+extension EditMyFridgeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return selectedMember.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemberCollectionViewCell", for: indexPath) as? MemberCollectionViewCell else { return UICollectionViewCell() }
+        cell.nicknameLabel.text = selectedMember[indexPath.row].nickname
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedMember.remove(at: indexPath.row)
+//        setCompleteButtonMode()
+        collectionView.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 25.5 + selectedMember[indexPath.row].nickname.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]).width + 20, height: 34)
     }
 }
