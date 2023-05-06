@@ -16,7 +16,11 @@ class FoodService {
     }
     
     func getFoodOwnerList(fridgeIdx: Int, completion: @escaping (FoodOwnerResponseModel?) -> Void) {
-        APIManger.shared.getData(urlEndpointString: "/fridges/\(fridgeIdx)/members", responseDataType: FoodOwnerResponseModel.self, parameter: nil) { response in
+        var urlStr = ""
+        if APIManger.shared.getIsMultiFridge() { urlStr = "/multiFridges/\(fridgeIdx)/members" }
+        else { urlStr = "/fridges/\(fridgeIdx)/members" }
+        
+        APIManger.shared.getData(urlEndpointString: urlStr, responseDataType: FoodOwnerResponseModel.self, parameter: nil) { response in
             completion(response.data)
         }
     }

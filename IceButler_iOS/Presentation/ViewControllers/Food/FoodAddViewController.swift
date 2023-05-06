@@ -66,6 +66,7 @@ class FoodAddViewController: UIViewController {
     private var addedFoodNames: [String] = []
     private var buyedFoods: [BuyedFood] = []
     private var currentFoodIndex: Int = -1  /// '이전', '다음' 버튼을 위한 인덱스
+    private var savedFoods: [FoodAddRequestModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +84,7 @@ class FoodAddViewController: UIViewController {
     }
     
     private func setup() {
-        FoodViewModel.shared.getFoodOwnerList(fridgeIdx: 1)
+        FoodViewModel.shared.getFoodOwnerList(fridgeIdx: APIManger.shared.getFridgeIdx())
         
         let textViewList = [foodNameTextView, foodDetailTextView, foodMemoTextView]
         for i in 0..<textViewList.count {
@@ -341,20 +342,44 @@ class FoodAddViewController: UIViewController {
         
     }
     
+    private func setupFoodData(index: Int) {
+        let foodData = savedFoods[index]
+
+        self.foodDetailTextView.text = foodData.foodDetailName
+        self.foodNameTextView.text = foodData.foodName
+        self.selectedFoodCategory = FoodCategory(rawValue: foodData.foodCategory)
+        // TODO: 유통기한 및 소유자 값 복원
+//        self.datePickerOpenButton.setTitle(foodData.shelfLife, for: .normal)
+    }
+    
+    private func resetFoodData() {
+        self.foodDetailTextView.text = ""
+        self.selectedFoodCategory = .none
+        self.datePickerOpenButton.setTitle("", for: .normal)
+        // TODO: 유통기한 및 소유자 값 복원
+    }
+    
     /// '이전' 버튼 탭 이벤트 정의
     @objc func didTapBeforeButton() {
+        saveFoodInfo()
         if currentFoodIndex > 0 {
             currentFoodIndex -= 1
-            self.foodNameTextView.text = self.buyedFoods[currentFoodIndex].name
+            setupFoodData(index: currentFoodIndex)
         }
         else {  showAlert(title: "", message: "가장 앞 순서의 데이터입니다!") }
     }
     
     /// '다음' 버튼 탭 이벤트 정의
     @objc func didTapAfterButton() {
+        saveFoodInfo()
         if currentFoodIndex < buyedFoods.count-1 {
             currentFoodIndex += 1
-            self.foodNameTextView.text = self.buyedFoods[currentFoodIndex].name
+            if savedFoods.count == (currentFoodIndex + 1) {
+                setupFoodData(index: currentFoodIndex)
+            } else {
+                resetFoodData()
+                self.foodNameTextView.text = self.buyedFoods[currentFoodIndex].name
+            }
         }
         else {  showAlert(title: "", message: "가장 뒷 순서의 데이터입니다!") }
     }
@@ -466,6 +491,57 @@ class FoodAddViewController: UIViewController {
         }
     }
     
+    private func saveFoodInfo() {
+        if date == nil {
+            showAlert(title: "유통기한 오류", message: "유통 기한을 입력해주세요.")
+            return
+        }else if date! < Date() {
+            showAlert(title: "유통기한 오류", message: "유통기한이 지난 제품은 등록 할 수 없습니다.")
+            return
+        }
+        
+        if foodNameTextView.text == "" || foodNameTextView.text == "식품명을 입력해주세요." {
+            showAlert(title: "오류", message: "식품명을 입력해주세요.")
+            return
+        }
+        
+        if foodDetailTextView.text == "" || foodDetailTextView.text == "식품 상세명을 입력해주세요." {
+            showAlert(title: "오류", message: "식품 상세명을 입력해주세요.")
+            return
+        }
+        
+        if selectedFoodCategory == nil {
+            showAlert(title: "오류", message: "카테고리를 선택해주세요.")
+            return
+        }
+        
+        if foodOwnerIdx == nil {
+            showAlert(title: "오류", message: "음식 소유자를 선택해주세요.")
+            return
+        }
+        
+        let memo: String?
+        
+        if foodMemoTextView.text == "" || foodMemoTextView.text == "메모내용 or 없음" {
+            memo = nil
+        }else {
+            memo = foodMemoTextView.text
+        }
+        
+        let dateFromat = DateFormatter()
+        dateFromat.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFromat.string(from: date!)
+        
+        savedFoods.append(FoodAddRequestModel(foodName: foodNameTextView.text,
+                                                           foodDetailName: foodDetailTextView.text,
+                                                           foodCategory: selectedFoodCategory!.rawValue,
+                                                           shelfLife: dateString,
+                                                           memo: memo,
+                                                           imageUrl: nil,
+                                                           ownerIdx: foodOwnerIdx!))
+        
+    }
+    
     @IBAction func foodAdd(_ sender: Any) {
         if date == nil {
             showAlert(title: "유통기한 오류", message: "유통 기한을 입력해주세요.")
@@ -510,7 +586,15 @@ class FoodAddViewController: UIViewController {
         if foodImage != nil {
             let fridgeIdx = APIManger.shared.getFridgeIdx()
 //            FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food, image: foodImage!, fridgeIdx: 1, foodName: foodNameTextView.text, foodDetail: foodDetailTextView.text, foodCategory: selectedFoodCategory!.rawValue, foodShelfLife: dateString, foodOwnerIdx: foodOwnerIdx!, memo: memo) { result in
-            FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food, image: foodImage!, fridgeIdx: fridgeIdx, foodName: foodNameTextView.text, foodDetail: foodDetailTextView.text, foodCategory: selectedFoodCategory!.rawValue, foodShelfLife: dateString, foodOwnerIdx: foodOwnerIdx!, memo: memo) { result in
+            FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food,
+                                                   image: foodImage!,
+                                                   fridgeIdx: fridgeIdx,
+                                                   foodName: foodNameTextView.text,
+                                                   foodDetail: foodDetailTextView.text,
+                                                   foodCategory: selectedFoodCategory!.rawValue,
+                                                   foodShelfLife: dateString,
+                                                   foodOwnerIdx: foodOwnerIdx!,
+                                                   memo: memo) { result in
                 if result {
                     let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
@@ -524,7 +608,15 @@ class FoodAddViewController: UIViewController {
                 
             }
         }else {
-            FoodViewModel.shared.postFood(fridgeIdx: 1, foodName: foodNameTextView.text, foodDetail: foodDetailTextView.text, foodCategory: selectedFoodCategory!.rawValue, foodShelfLife: dateString, foodOwnerIdx: foodOwnerIdx!, memo: memo, imgUrl: nil) { result in
+            let fridgeIdx = APIManger.shared.getFridgeIdx()
+            FoodViewModel.shared.postFood(fridgeIdx: fridgeIdx,
+                                          foodName: foodNameTextView.text,
+                                          foodDetail: foodDetailTextView.text,
+                                          foodCategory: selectedFoodCategory!.rawValue,
+                                          foodShelfLife: dateString,
+                                          foodOwnerIdx: foodOwnerIdx!,
+                                          memo: memo,
+                                          imgUrl: nil) { result in
                 if result {
                     let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
@@ -612,7 +704,8 @@ extension FoodAddViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FoodOwnerCell", for: indexPath) as? FoodOwnerCell else {return UITableViewCell()}
             
             FoodViewModel.shared.foodOwnerListName(index: indexPath.row, store: &cell.cancellabels) { ownerName in
-                cell.configure(name: ownerName, isSelect: self.selectedOwner[indexPath.row])
+//                cell.configure(name: ownerName, isSelect: self.selectedOwner[indexPath.row])
+                cell.configure(name: ownerName, isSelect: false)
             }
             
             cell.selectionStyle = .none
