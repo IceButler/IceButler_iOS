@@ -40,7 +40,6 @@ class RecipeInFridgeViewController: UIViewController {
     }
     
     private func setupLayout() {
-        recipeCollectionView.layer.backgroundColor = UIColor.recipeBackgroudColor.cgColor
         recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
     }
     

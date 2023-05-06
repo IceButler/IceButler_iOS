@@ -103,6 +103,7 @@
 		95BC85A02A0379AE00181183 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC859F2A0379AE00181183 /* AddRecipeViewController.swift */; };
 		95BC85A32A053DE500181183 /* RecipeCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC85A12A053DE500181183 /* RecipeCategoryTableViewCell.swift */; };
 		95BC85A42A053DE500181183 /* RecipeCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BC85A22A053DE500181183 /* RecipeCategoryTableViewCell.xib */; };
+		95BC85A62A06959300181183 /* AddRecipeSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC85A52A06959300181183 /* AddRecipeSecondViewController.swift */; };
 		A2459F1B29DFE26700D12089 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */; };
 		A258498129E6A6BC00E75568 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A258498029E6A6BC00E75568 /* MyPage.storyboard */; };
 		A258498329E6A6CB00E75568 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498229E6A6CB00E75568 /* MyPageViewController.swift */; };
@@ -262,6 +263,7 @@
 		95BC859F2A0379AE00181183 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		95BC85A12A053DE500181183 /* RecipeCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		95BC85A22A053DE500181183 /* RecipeCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeCategoryTableViewCell.xib; sourceTree = "<group>"; };
+		95BC85A52A06959300181183 /* AddRecipeSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeSecondViewController.swift; sourceTree = "<group>"; };
 		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
 		A258498029E6A6BC00E75568 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
@@ -733,6 +735,7 @@
 				95A398A829FAAB99009CDDDC /* RecipeViewController.swift */,
 				95A398C029FEFC43009CDDDC /* BookmarkRecipeViewController.swift */,
 				95BC859F2A0379AE00181183 /* AddRecipeViewController.swift */,
+				95BC85A52A06959300181183 /* AddRecipeSecondViewController.swift */,
 			);
 			path = Recipe;
 			sourceTree = "<group>";
@@ -1168,6 +1171,7 @@
 				73B7373429E250430097806F /* SideViewController.swift in Sources */,
 				A2EA102229F556AC000D600B /* MyRefrigeratorViewModel.swift in Sources */,
 				738CAC8A29E32773009EF9D2 /* FoodViewModel.swift in Sources */,
+				95BC85A62A06959300181183 /* AddRecipeSecondViewController.swift in Sources */,
 				A2F9190829EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift in Sources */,
 				95A398AE29FBCA77009CDDDC /* PopularRecipeViewController.swift in Sources */,
 				73F26FC629DAA94B009E364B /* CartService.swift in Sources */,
