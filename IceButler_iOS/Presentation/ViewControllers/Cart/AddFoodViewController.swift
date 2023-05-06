@@ -220,12 +220,14 @@ extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.tag == 0 {
-            return CGSize(width: category[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]).width + 20, height: 45)
+            return CGSize(width: category[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]).width + 20, height: 34)
         } else if collectionView.tag == 1 {
-            return CGSize(width: category[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]).width + 20, height: 45)
+            let title = "\(selectedFoods[indexPath.row].foodCategory!)-\(selectedFoods[indexPath.row].foodName!)"
+            return CGSize(width: 25.5 + title.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]).width + 20, height: 34)
         }
         return CGSize(width: 0, height: 0)
     }
+    
 }
 
 extension AddFoodViewController: UITableViewDelegate, UITableViewDataSource {

@@ -18,6 +18,9 @@ class FoodCategoryCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var categoryButton: UIButton!
     
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var categoryLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -37,22 +40,22 @@ class FoodCategoryCollectionViewCell: UICollectionViewCell {
     }
     
     public func setupLayout(title: String) {
-        self.categoryButton.setTitle(title, for: .normal)
-        self.categoryButton.layer.borderWidth = 1.6
-        self.categoryButton.layer.borderColor = UIColor.lightGray.cgColor
-        self.categoryButton.layer.cornerRadius = 17
+        self.categoryLabel.text = title
+        self.containerView.layer.borderWidth = 1.6
+        self.containerView.layer.borderColor = UIColor.lightGray.cgColor
+        self.containerView.layer.cornerRadius = 17
     }
     
     public func setSelectedMode(selected: Bool) {
         self.isTapped = selected
         if self.isTapped {
-            self.categoryButton.layer.borderColor = UIColor.signatureBlue.cgColor
-            self.categoryButton.backgroundColor = .signatureLightBlue
-            self.categoryButton.tintColor = .signatureBlue
+            self.containerView.layer.borderColor = UIColor.signatureBlue.cgColor
+            self.containerView.backgroundColor = .signatureLightBlue
+            self.categoryLabel.textColor = .signatureBlue
         } else {
-            self.categoryButton.layer.borderColor = UIColor.lightGray.cgColor
-            self.categoryButton.backgroundColor = .white
-            self.categoryButton.tintColor = .lightGray
+            self.containerView.layer.borderColor = UIColor.lightGray.cgColor
+            self.containerView.backgroundColor = .white
+            self.categoryLabel.textColor = .lightGray
         }
     }
 }
