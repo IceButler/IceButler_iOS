@@ -46,7 +46,7 @@ class FridgeViewController: TabmanViewController {
     private func setup() {
 //        FridgeViewModel.shared.getAllFoodList(fridgeIdx: 78)
 //        FridgeViewModel.shared.setDefaultFridge()
-        FridgeViewModel.shared.setSavedFridgeIdx()
+//        FridgeViewModel.shared.setSavedFridgeIdx()
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
         
     }
@@ -258,9 +258,14 @@ extension FridgeViewController: FoodAddSelectDelgate {
     }
 }
 
-extension FridgeViewController: FoodAddDelegate {
+extension FridgeViewController: FoodAddDelegate, SelectFridgeDelegate {
     func moveToFoodAddSelect() {
         moveToFoodAddSelectVC(animate: false)
+    }
+    
+    func updateMainFridge(title: String) {
+        setupleftBarItems(title: title)
+        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
     }
 }
 
@@ -271,9 +276,3 @@ extension FridgeViewController: UISheetPresentationControllerDelegate {
     }
 }
 
-extension FridgeViewController: SelectFridgeDelegate {
-    func updateMainFridge(title: String) {
-        setupleftBarItems(title: title)
-        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
-    }
-}
