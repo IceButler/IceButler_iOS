@@ -21,11 +21,11 @@ class GraphMainViewController: TabmanViewController {
     
     
     private func setupTabman() {
-        let allFoodVC = UIStoryboard(name: "Fridge", bundle: nil).instantiateViewController(identifier: "AllFoodViewController") as! AllFoodViewController
-        let meatVC = UIStoryboard(name: "Fridge", bundle: nil).instantiateViewController(identifier: "MeatViewController") as! MeatViewController
+        let wasteGraphVC = UIStoryboard(name: "WasteGraph", bundle: nil).instantiateViewController(identifier: "WasteGraphViewController") as! WasteGraphViewController
+        let consumeGraphVC = UIStoryboard(name: "ConsumeGraph", bundle: nil).instantiateViewController(identifier: "ConsumeGraphViewController") as! ConsumeGraphViewController
        
         
-        [allFoodVC, meatVC].forEach { vc in
+        [wasteGraphVC, consumeGraphVC].forEach { vc in
             viewControllerList.append(vc)
         }
         
@@ -43,7 +43,7 @@ class GraphMainViewController: TabmanViewController {
             let tmpLabel = UILabel()
             tmpLabel.text = button.text
             tmpLabel.font = UIFont.systemFont(ofSize: 15)
-            button.frame.size = tmpLabel.frame.size
+            button.frame.size = CGSize(width: 163, height: 36)
             
             button.contentVerticalAlignment = .center
             button.font = UIFont.systemFont(ofSize: 15)

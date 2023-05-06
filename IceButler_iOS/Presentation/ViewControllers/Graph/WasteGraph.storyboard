@@ -1,25 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17150" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17122"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Waste Graph View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WasteGraphViewController" id="Y6W-OH-hqX" customClass="WasteGraphViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IU9-eF-bDV" customClass="PieChartView" customModule="IceButler_iOS" customModuleProvider="target">
+                                <rect key="frame" x="16" y="85" width="361" height="208"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="208" id="0Pe-sv-nfC"/>
+                                </constraints>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="flJ-yJ-Mr6">
+                                <rect key="frame" x="0.0" y="333" width="393" height="485"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Sp8-hc-OyA">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="flJ-yJ-Mr6" secondAttribute="bottom" id="6rn-fy-8dZ"/>
+                            <constraint firstItem="IU9-eF-bDV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="26" id="8Si-NA-4DC"/>
+                            <constraint firstItem="flJ-yJ-Mr6" firstAttribute="top" secondItem="IU9-eF-bDV" secondAttribute="bottom" constant="40" id="HWh-wt-gka"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="IU9-eF-bDV" secondAttribute="trailing" constant="16" id="ObQ-Rh-6Ms"/>
+                            <constraint firstItem="flJ-yJ-Mr6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="amq-7x-Xp2"/>
+                            <constraint firstItem="IU9-eF-bDV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="dzE-o8-N5x"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="flJ-yJ-Mr6" secondAttribute="trailing" id="haT-Cq-7zM"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="pieChartView" destination="IU9-eF-bDV" id="ca4-3r-k2y"/>
+                        <outlet property="wasteCollectionView" destination="flJ-yJ-Mr6" id="8zk-f2-HeG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-476" y="-142"/>
         </scene>
     </scenes>
     <resources>

@@ -1,18 +1,14 @@
 //
-//  WasteGraphViewController.swift
+//  ConsumeGraphViewController.swift
 //  IceButler_iOS
 //
 //  Created by 유상 on 2023/05/06.
 //
 
 import UIKit
-import Charts
 
-class WasteGraphViewController: UIViewController {
-    
-    @IBOutlet weak var pieChartView: PieChartView!
-    @IBOutlet weak var wasteCollectionView: UICollectionView!
-    
+class ConsumeGraphViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
