@@ -68,18 +68,20 @@ class MyRefrigeratorViewController: UIViewController {
 }
 
 extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 188 }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let fridgeList = data?.fridgeList,
            let multiFridgeResList = data?.multiFridgeResList {
             return fridgeList.count + multiFridgeResList.count
         }
         else { return 0 }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyRefrigeratorTableViewCell", for: indexPath) as? MyRefrigeratorTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
+        cell.delegate = self
         if indexPath.row < data?.fridgeList?.count ?? 0 {
             cell.configureFridge(data: data?.fridgeList![indexPath.row])
         } else {
@@ -88,9 +90,15 @@ extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSour
         }
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 188
+}
+
+extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
+    func didTapEditButton() {
+        guard let editViewController = storyboard?.instantiateViewController(withIdentifier: "EditMyFridgeViewController") as? EditMyFridgeViewController else { return }
+        self.navigationController?.pushViewController(editViewController, animated: true)
     }
     
+    func didTapDeleteButton() {
+        // TODO: 마이냉장고 삭제 팝업 표시
+    }
 }
