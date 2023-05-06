@@ -30,15 +30,16 @@ class SelectFridgeTableViewCell: UITableViewCell {
     
     public func setMyFridgeModeCell(data: CommonFridgeModel, isShareFridge: Bool) {
         fridgeNameLabel.text = data.name
-        
-        if isShareFridge {
-            fridgeNameLabel.textColor = .black
-            fridgeImg.image = UIImage(named: "shareFridgeIcon")
-        } else {
+    }
+    public func setIsSavedFridge(isSaved: Bool) {
+        if isSaved {
             fridgeNameLabel.textColor = UIColor(red: 41/255, green: 103/255, blue: 185/255, alpha: 1)
             fridgeImg.image = UIImage(named: "noFridge")
+        } else {
+            fridgeNameLabel.textColor = .black
+            fridgeImg.image = UIImage(named: "shareFridgeIcon")
         }
+        selectImg.isHidden = !isSaved
+        
     }
-    
-    public func setIsSavedFridge(isSaved: Bool) { selectImg.isHidden = !isSaved }
 }
