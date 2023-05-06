@@ -32,6 +32,7 @@
 		735584C12A0626CD0077E69E /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C02A0626CD0077E69E /* PieChartView.swift */; };
 		735584C42A062DE70077E69E /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C32A062DE70077E69E /* GraphViewModel.swift */; };
 		735584C72A062DFB0077E69E /* GraphService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C62A062DFB0077E69E /* GraphService.swift */; };
+		735584CA2A06B1A10077E69E /* GraphResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C92A06B1A10077E69E /* GraphResponseModel.swift */; };
 		7388C3AD29F82D81000C3606 /* ChatGptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7388C3AB29F82D81000C3606 /* ChatGptCell.swift */; };
 		7388C3AE29F82D81000C3606 /* ChatGptCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7388C3AC29F82D81000C3606 /* ChatGptCell.xib */; };
 		738CAC8529E310CF009EF9D2 /* FoodDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 738CAC8429E310CF009EF9D2 /* FoodDetail.storyboard */; };
@@ -197,6 +198,7 @@
 		735584C02A0626CD0077E69E /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		735584C32A062DE70077E69E /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		735584C62A062DFB0077E69E /* GraphService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphService.swift; sourceTree = "<group>"; };
+		735584C92A06B1A10077E69E /* GraphResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphResponseModel.swift; sourceTree = "<group>"; };
 		7388C3AB29F82D81000C3606 /* ChatGptCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptCell.swift; sourceTree = "<group>"; };
 		7388C3AC29F82D81000C3606 /* ChatGptCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatGptCell.xib; sourceTree = "<group>"; };
 		738CAC8429E310CF009EF9D2 /* FoodDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FoodDetail.storyboard; sourceTree = "<group>"; };
@@ -465,6 +467,14 @@
 			path = Graph;
 			sourceTree = "<group>";
 		};
+		735584C82A06B1930077E69E /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				735584C92A06B1A10077E69E /* GraphResponseModel.swift */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
 		738CAC8829E32767009EF9D2 /* Food */ = {
 			isa = PBXGroup;
 			children = (
@@ -683,6 +693,7 @@
 		73F26FBD29DAA716009E364B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				735584C82A06B1930077E69E /* Graph */,
 				95A398BD29FD8C01009CDDDC /* Recipe */,
 				A2EA102329F5A60C000D600B /* MyFridge */,
 				73CF93AE29E943A50007CB7A /* User */,
@@ -1256,6 +1267,7 @@
 				73F62A4429DD11C4003D779F /* BarCodeView.swift in Sources */,
 				7339CD7229E5B56A002A6D78 /* AuthService.swift in Sources */,
 				735584C72A062DFB0077E69E /* GraphService.swift in Sources */,
+				735584CA2A06B1A10077E69E /* GraphResponseModel.swift in Sources */,
 				73B7373829E2505B0097806F /* SeasoningViewController.swift in Sources */,
 				A258498329E6A6CB00E75568 /* MyPageViewController.swift in Sources */,
 				73B7372C29E250010097806F /* FruitViewController.swift in Sources */,

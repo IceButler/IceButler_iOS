@@ -46,7 +46,7 @@ class FridgeViewController: TabmanViewController {
     private func setup() {
 //        FridgeViewModel.shared.getAllFoodList(fridgeIdx: 78)
 //        FridgeViewModel.shared.setDefaultFridge()
-//        FridgeViewModel.shared.setSavedFridgeIdx()
+        FridgeViewModel.shared.setSavedFridgeIdx()
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
         
     }

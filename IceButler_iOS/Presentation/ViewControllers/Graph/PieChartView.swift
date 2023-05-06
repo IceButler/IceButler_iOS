@@ -8,19 +8,22 @@
 import UIKit
 
 class PieChartView: UIView {
+    
+    private var values: [FoodGraphList] = []
+    
+    func setValues(values: [FoodGraphList]) {
+        self.values = values
+    }
+    
 
     override func draw(_ rect: CGRect) {
            let center = CGPoint(x: rect.midX, y: rect.midY)
-           
-           let colors = [UIColor.orange, UIColor.black, UIColor.systemGreen, UIColor.systemPink, UIColor.cyan, UIColor.systemTeal]
-           let values: [CGFloat] = [10, 20, 70]
-           let total = values.reduce(0, +)
            
            var startAngle: CGFloat = (-(.pi) / 2)
            var endAngle: CGFloat = 0.0
            
            values.forEach { (value) in
-               endAngle = (value / total) * (.pi * 2)
+               endAngle = CGFloat(value.percentage) * (.pi * 2)
                
                let path = UIBezierPath()
                path.move(to: center)
@@ -30,7 +33,13 @@ class PieChartView: UIView {
                            endAngle: startAngle + endAngle,
                            clockwise: true)
                
-               colors.randomElement()?.set()
+               
+               FoodCategory.AllCases().forEach { category in
+                   if value.foodCategory == category.rawValue {
+                       category.color.set()
+                   }
+               }
+               
                path.fill()
                startAngle += endAngle
                path.close()
