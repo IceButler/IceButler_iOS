@@ -64,6 +64,8 @@
 		73B7374F29E2EC5A0097806F /* FridgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7374E29E2EC5A0097806F /* FridgeViewModel.swift */; };
 		73C18A4529E3F0440037FE3A /* FoodRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C18A4429E3F0440037FE3A /* FoodRequestModel.swift */; };
 		73C8714F29F2ED44002DDB60 /* ProfileEditMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8714E29F2ED44002DDB60 /* ProfileEditMode.swift */; };
+		73CC35162A07E60C00096492 /* FoodRemoveRankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC35142A07E60B00096492 /* FoodRemoveRankCell.swift */; };
+		73CC35172A07E60C00096492 /* FoodRemoveRankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73CC35152A07E60C00096492 /* FoodRemoveRankCell.xib */; };
 		73CF93B029E945BF0007CB7A /* UserResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF93AF29E945BF0007CB7A /* UserResponseModel.swift */; };
 		73CF93B329E94BB60007CB7A /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF93B229E94BB60007CB7A /* UserViewModel.swift */; };
 		73CF93B629E94D580007CB7A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF93B529E94D580007CB7A /* String+.swift */; };
@@ -230,6 +232,8 @@
 		73C18A4429E3F0440037FE3A /* FoodRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRequestModel.swift; sourceTree = "<group>"; };
 		73C8714D29F28FD7002DDB60 /* IceButler_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceButler_iOS.entitlements; sourceTree = "<group>"; };
 		73C8714E29F2ED44002DDB60 /* ProfileEditMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditMode.swift; sourceTree = "<group>"; };
+		73CC35142A07E60B00096492 /* FoodRemoveRankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRemoveRankCell.swift; sourceTree = "<group>"; };
+		73CC35152A07E60C00096492 /* FoodRemoveRankCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodRemoveRankCell.xib; sourceTree = "<group>"; };
 		73CF93AF29E945BF0007CB7A /* UserResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponseModel.swift; sourceTree = "<group>"; };
 		73CF93B229E94BB60007CB7A /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		73CF93B529E94D580007CB7A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -912,6 +916,8 @@
 				A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */,
 				A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */,
 				A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */,
+				73CC35142A07E60B00096492 /* FoodRemoveRankCell.swift */,
+				73CC35152A07E60C00096492 /* FoodRemoveRankCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1084,6 +1090,7 @@
 				A27302E629D853090060944D /* Alert.storyboard in Resources */,
 				7388C3AE29F82D81000C3606 /* ChatGptCell.xib in Resources */,
 				A2EA101529F53EDE000D600B /* MyRefrigerator.storyboard in Resources */,
+				73CC35172A07E60C00096492 /* FoodRemoveRankCell.xib in Resources */,
 				A2EA101F29F5448F000D600B /* RefriMemberCollectionViewCell.xib in Resources */,
 				95A398B429FC3A4F009CDDDC /* RecipeCollectionViewCell.xib in Resources */,
 				738CAC8529E310CF009EF9D2 /* FoodDetail.storyboard in Resources */,
@@ -1246,6 +1253,7 @@
 				A258498729E7BE0A00E75568 /* AddFoodSearchResultTableViewCell.swift in Sources */,
 				A2CA99DC29DE7BA80020DEEC /* CompleteBuyingViewController.swift in Sources */,
 				73B7374C29E2EB570097806F /* FridgeService.swift in Sources */,
+				73CC35162A07E60C00096492 /* FoodRemoveRankCell.swift in Sources */,
 				A2EA101E29F5448F000D600B /* RefriMemberCollectionViewCell.swift in Sources */,
 				73B7374F29E2EC5A0097806F /* FridgeViewModel.swift in Sources */,
 				73CF93B629E94D580007CB7A /* String+.swift in Sources */,

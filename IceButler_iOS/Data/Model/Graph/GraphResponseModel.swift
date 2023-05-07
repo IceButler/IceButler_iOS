@@ -13,5 +13,6 @@ struct GraphResponseModel: Codable {
 
 struct FoodGraphList: Codable {
     let foodCategory: String
-    let percentage, count: Int
+    let percentage: Double
+    let count: Int
 }

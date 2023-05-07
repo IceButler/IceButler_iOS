@@ -47,6 +47,5 @@ extension FoodCategory {
             return UIColor(red: 0.799, green: 0.908, blue: 0.869, alpha: 1)
         }
     }
-    
-    
 }
+

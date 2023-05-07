@@ -20,4 +20,16 @@ class GraphService {
             }
         }
     }
+    
+    func getConsume(fridgeIdx: Int, year: Int, month: Int, completion: @escaping ([FoodGraphList]) -> Void) {
+        let parameters: Parameters = ["deleteCategory": "섭취",
+                                     "year": year,
+                                     "month": month]
+        
+        APIManger.shared.getData(urlEndpointString: "/fridges/\(fridgeIdx)/statistics", responseDataType: GraphResponseModel.self, parameter: parameters) { response in
+            if let data = response.data {
+                completion(data.foodStatisticsList)
+            }
+        }
+    }
 }

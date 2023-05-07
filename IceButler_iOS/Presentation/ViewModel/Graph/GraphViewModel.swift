@@ -26,11 +26,21 @@ class GraphViewModel: ObservableObject {
         }.store(in: &cancelLabels)
     }
     
-    func isChangeWasteList(completion: @escaping () -> Void) {
+    func waste(index: Int, store: inout Set<AnyCancellable>, completion: @escaping (FoodGraphList) -> Void) {
         $wasteList.filter { wasteList in
             wasteList.count > 0
         }.sink { wasteList in
-            completion()
+            completion(wasteList[index])
+        }.store(in: &cancelLabels)
+    }
+    
+    func isChangeWasteList(completion: @escaping (Bool) -> Void) {
+        $wasteList.sink { wasteList in
+            if wasteList.count > 0 {
+                completion(true)
+            }else {
+                completion(false)
+            }
         }.store(in: &cancelLabels)
     }
     
@@ -42,11 +52,21 @@ class GraphViewModel: ObservableObject {
         }.store(in: &cancelLabels)
     }
     
-    func isChangeConsumeList(completion: @escaping () -> Void) {
+    func isChangeConsumeList(completion: @escaping (Bool) -> Void) {
+        $consumeList.sink { consumeList in
+            if consumeList.count > 0 {
+                completion(true)
+            }else {
+                completion(false)
+            }
+        }.store(in: &cancelLabels)
+    }
+    
+    func consume(index: Int, store: inout Set<AnyCancellable>, completion: @escaping (FoodGraphList) -> Void) {
         $consumeList.filter { consumeList in
             consumeList.count > 0
         }.sink { consumeList in
-            completion()
+            completion(consumeList[index])
         }.store(in: &cancelLabels)
     }
     
@@ -55,11 +75,19 @@ class GraphViewModel: ObservableObject {
 extension GraphViewModel {
     func fetchWasteList(fridgeIdx: Int, year: Int, month: Int) {
         graphService.getWaste(fridgeIdx: fridgeIdx, year: year, month: month) { wasteList in
+            wasteList.sorted {
+                $0.percentage < $1.percentage
+            }
             self.wasteList = wasteList
         }
     }
     
     func fetchConsumeList(fridgeIdx: Int, year: Int, month: Int) {
-        
+        graphService.getWaste(fridgeIdx: fridgeIdx, year: year, month: month) { wasteList in
+            wasteList.sorted {
+                $0.percentage < $1.percentage
+            }
+            self.wasteList = wasteList
+        }
     }
 }

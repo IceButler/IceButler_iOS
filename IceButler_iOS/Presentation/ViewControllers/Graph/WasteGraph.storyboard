@@ -18,16 +18,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IU9-eF-bDV" customClass="PieChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="85" width="361" height="208"/>
+                                <rect key="frame" x="16" y="162" width="361" height="208"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="208" id="0Pe-sv-nfC"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="flJ-yJ-Mr6">
-                                <rect key="frame" x="0.0" y="333" width="393" height="485"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="flJ-yJ-Mr6">
+                                <rect key="frame" x="0.0" y="410" width="393" height="408"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Sp8-hc-OyA">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Sp8-hc-OyA">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -40,7 +40,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="flJ-yJ-Mr6" secondAttribute="bottom" id="6rn-fy-8dZ"/>
-                            <constraint firstItem="IU9-eF-bDV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="26" id="8Si-NA-4DC"/>
+                            <constraint firstItem="IU9-eF-bDV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="103" id="8Si-NA-4DC"/>
                             <constraint firstItem="flJ-yJ-Mr6" firstAttribute="top" secondItem="IU9-eF-bDV" secondAttribute="bottom" constant="40" id="HWh-wt-gka"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="IU9-eF-bDV" secondAttribute="trailing" constant="16" id="ObQ-Rh-6Ms"/>
                             <constraint firstItem="flJ-yJ-Mr6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="amq-7x-Xp2"/>

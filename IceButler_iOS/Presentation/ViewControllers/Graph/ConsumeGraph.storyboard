@@ -17,15 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAa-vG-9V8">
-                                <rect key="frame" x="16" y="85" width="361" height="208"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAa-vG-9V8" customClass="PieChartView" customModule="Charts">
+                                <rect key="frame" x="16" y="162" width="361" height="208"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="208" id="ipt-RQ-r6m"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kyI-pU-t4P">
-                                <rect key="frame" x="0.0" y="333" width="393" height="485"/>
+                                <rect key="frame" x="0.0" y="410" width="393" height="408"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Im4-FX-Hdf">
                                     <size key="itemSize" width="128" height="128"/>
@@ -45,9 +45,13 @@
                             <constraint firstItem="ACq-BK-kCi" firstAttribute="trailing" secondItem="LAa-vG-9V8" secondAttribute="trailing" constant="16" id="b2b-6f-jvy"/>
                             <constraint firstItem="kyI-pU-t4P" firstAttribute="top" secondItem="LAa-vG-9V8" secondAttribute="bottom" constant="40" id="fO5-TS-dKi"/>
                             <constraint firstItem="ACq-BK-kCi" firstAttribute="trailing" secondItem="kyI-pU-t4P" secondAttribute="trailing" id="mEA-PD-lzz"/>
-                            <constraint firstItem="LAa-vG-9V8" firstAttribute="top" secondItem="ACq-BK-kCi" secondAttribute="top" constant="26" id="wO1-YI-wMu"/>
+                            <constraint firstItem="LAa-vG-9V8" firstAttribute="top" secondItem="ACq-BK-kCi" secondAttribute="top" constant="103" id="wO1-YI-wMu"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="consumeCollectionView" destination="kyI-pU-t4P" id="KPZ-wI-K7j"/>
+                        <outlet property="pieChartView" destination="LAa-vG-9V8" id="JjG-Wv-fUc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fsA-3x-Ima" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
