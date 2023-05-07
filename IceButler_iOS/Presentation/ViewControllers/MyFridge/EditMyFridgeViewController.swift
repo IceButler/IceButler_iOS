@@ -87,13 +87,15 @@ class EditMyFridgeViewController: UIViewController {
            selectedMember.count > 0,
            let newOwner = mandatedMember {
             
-            var memberIdxs:[Int] = []
-            selectedMember.forEach { member in memberIdxs.append(member.userIdx) }
+            var memberIdxs:[UserIndexModel] = []
+            selectedMember.forEach { member in memberIdxs.append(UserIndexModel(userIdx: member.userIdx)) }
             
             let param = EditedFridgeRequestModel(fridgeName: name,
                                                  fridgeComment: comment,
                                                  members: memberIdxs,
                                                  newOwnerIdx: newOwner.userIdx)
+            
+//            print("param --> \(param)")
             
             var urlStr = ""
             if isMulti { urlStr = "/multiFridges/\(fridgeIdx)" }

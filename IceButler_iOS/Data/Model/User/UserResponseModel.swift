@@ -18,3 +18,7 @@ struct UserInfoResponseModel: Codable {
 //    let userIdx: Int
 //    let profileImgUrl: String?
 //}
+
+struct UserIndexModel: Codable {
+    let userIdx: Int
+}

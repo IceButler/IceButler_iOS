@@ -14,6 +14,6 @@ struct FridgeRequestModel: Codable {
 
 struct EditedFridgeRequestModel: Codable {
     let fridgeName, fridgeComment: String
-    let members: [Int]
+    let members: [UserIndexModel]
     let newOwnerIdx: Int?
 }
