@@ -309,11 +309,21 @@ extension EditMyFridgeViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? MemberSearchTableViewCell else { return UITableViewCell() }
-        cell.backgroundColor = .none
-        cell.selectionStyle = .none
-        cell.configure(data: self.searchMember[indexPath.row])
-        return cell
+        if tableView.tag == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? MemberSearchTableViewCell else { return UITableViewCell() }
+            cell.backgroundColor = .none
+            cell.selectionStyle = .none
+            cell.configure(data: self.searchMember[indexPath.row])
+            return cell
+        } else if tableView.tag == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MandateTableViewCell", for: indexPath) as? MemberSearchTableViewCell else { return UITableViewCell() }
+            cell.backgroundColor = .none
+            cell.selectionStyle = .none
+            cell.configure(data: self.searchMember[indexPath.row])
+            return cell
+        }
+        
+       return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
