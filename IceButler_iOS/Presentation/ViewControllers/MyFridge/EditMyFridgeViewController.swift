@@ -56,14 +56,12 @@ class EditMyFridgeViewController: UIViewController {
                 self.selectedMemberCollectionView.isHidden = true
                 self.memberSearchResultContainerView.isHidden = false
                 self.searchTableView.reloadData()
-//                self.setupConstraints()
             })
         }
         else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
     }
     
     @IBAction func didTapMandateSearchButton(_ sender: UIButton) {
-        // TODO: 닉네임으로 멤버 검색
         if mandateTextField.text?.count ?? 0 > 0 {
             searchMember.removeAll()
             FridgeViewModel.shared.searchMemberResults.removeAll()
@@ -81,6 +79,7 @@ class EditMyFridgeViewController: UIViewController {
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
         // TODO: 입력값 체크 및 냉장고 수정 요청
+        self.navigationController?.popViewController(animated: true)
     }
     
     
@@ -152,7 +151,7 @@ class EditMyFridgeViewController: UIViewController {
             mandateResultContainerView
             
         ].forEach { btn in btn?.layer.cornerRadius = 12 }
-        completeButton.layer.cornerRadius = 20
+        completeButton.layer.cornerRadius = 25
         
         setupConstraints()
     }
@@ -241,7 +240,6 @@ extension EditMyFridgeViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRowAt된 tableView tag -> \(tableView.tag)")
         if tableView.tag == 0 {
             selectedMember.append(FridgeUser(nickname: searchMember[indexPath.row].nickname,
                                              role: "MEMBER",

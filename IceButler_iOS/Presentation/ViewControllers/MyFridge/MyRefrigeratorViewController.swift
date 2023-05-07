@@ -19,6 +19,11 @@ class MyRefrigeratorViewController: UIViewController {
         setupTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        fetchData()
+        tableView.reloadData()
+    }
+    
     private func setupNavigationBar() {
         /// setting status bar background color
         if #available(iOS 13.0, *) {
@@ -89,6 +94,8 @@ extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSour
             let frigeratorCount = data?.fridgeList?.count ?? 0
             cell.configureMultiFridge(data: data?.multiFridgeResList![indexPath.row - frigeratorCount])
         }
+        cell.moreView.isHidden = true
+        cell.collectionView.reloadData()
         return cell
     }
 }
