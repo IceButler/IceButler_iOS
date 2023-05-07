@@ -55,10 +55,7 @@ class AllFoodViewController: UIViewController {
 
     
     @IBAction func didTapView(_ sender: UITapGestureRecognizer) {
-//        let foodDetailVC = UIStoryboard(name: "FoodDetail", bundle: nil).instantiateViewController(identifier: "FoodDetailViewController") as! FoodDetailViewController
-//        
-//        self.navigationController?.pushViewController(foodDetailVC, animated: true)
-        
+        GraphViewModel.shared.fetchWasteList(fridgeIdx: 1, year: 2023, month: 4)
         
         let graphVC = UIStoryboard(name: "GraphMain", bundle: nil).instantiateViewController(withIdentifier: "GraphMainViewController") as! GraphMainViewController
 

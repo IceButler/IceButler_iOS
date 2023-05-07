@@ -24,11 +24,38 @@ class WasteGraphViewController: UIViewController {
         GraphViewModel.shared.fetchWasteList(fridgeIdx: 1, year: 2023, month: 4)
     }
     
-    
     private func setupObserver() {
         GraphViewModel.shared.wasteList { wasteList in
-            self.pieChartView.setValues(values: wasteList)
+            self.setupPieChart(wasteList: wasteList)
         }
     }
+    
+    private func setupPieChart(wasteList: [FoodGraphList]) {
+        var pieDataEntryList: [ChartDataEntry] = []
+        var pieDataColorList: [UIColor] = []
+        
+        
+        
+        for i in 0..<wasteList.count {
+            let pieDataEntry = ChartDataEntry(x: Double(i), y: Double(wasteList[i].percentage))
+            pieDataEntryList.append(pieDataEntry)
+            
+            FoodCategory.AllCases().forEach { category in
+                if wasteList[i].foodCategory == category.rawValue {
+                    pieDataColorList.append(category.color)
+                }
+            }
+        }
+        
+        let pieChartDataSet = PieChartDataSet(entries: pieDataEntryList)
+        pieChartDataSet.colors = pieDataColorList
+        pieChartDataSet.highlightEnabled = false
+        
+        let pieChartData = PieChartData(dataSet: pieChartDataSet)
+        pieChartView.data = pieChartData
+    }
+    
+    
+
 
 }

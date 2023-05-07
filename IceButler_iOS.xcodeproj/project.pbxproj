@@ -29,7 +29,6 @@
 		735584BB2A06244E0077E69E /* WasteGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584BA2A06244E0077E69E /* WasteGraphViewController.swift */; };
 		735584BD2A0624740077E69E /* ConsumeGraph.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735584BC2A0624740077E69E /* ConsumeGraph.storyboard */; };
 		735584BF2A06248B0077E69E /* ConsumeGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584BE2A06248B0077E69E /* ConsumeGraphViewController.swift */; };
-		735584C12A0626CD0077E69E /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C02A0626CD0077E69E /* PieChartView.swift */; };
 		735584C42A062DE70077E69E /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C32A062DE70077E69E /* GraphViewModel.swift */; };
 		735584C72A062DFB0077E69E /* GraphService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C62A062DFB0077E69E /* GraphService.swift */; };
 		735584CA2A06B1A10077E69E /* GraphResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C92A06B1A10077E69E /* GraphResponseModel.swift */; };
@@ -195,7 +194,6 @@
 		735584BA2A06244E0077E69E /* WasteGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasteGraphViewController.swift; sourceTree = "<group>"; };
 		735584BC2A0624740077E69E /* ConsumeGraph.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConsumeGraph.storyboard; sourceTree = "<group>"; };
 		735584BE2A06248B0077E69E /* ConsumeGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeGraphViewController.swift; sourceTree = "<group>"; };
-		735584C02A0626CD0077E69E /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		735584C32A062DE70077E69E /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		735584C62A062DFB0077E69E /* GraphService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphService.swift; sourceTree = "<group>"; };
 		735584C92A06B1A10077E69E /* GraphResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphResponseModel.swift; sourceTree = "<group>"; };
@@ -446,7 +444,6 @@
 				735584BA2A06244E0077E69E /* WasteGraphViewController.swift */,
 				735584BC2A0624740077E69E /* ConsumeGraph.storyboard */,
 				735584BE2A06248B0077E69E /* ConsumeGraphViewController.swift */,
-				735584C02A0626CD0077E69E /* PieChartView.swift */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -1314,7 +1311,6 @@
 				A2A164C32A00DA6A008132D2 /* AddFridgeViewController.swift in Sources */,
 				7339CD8C29E78880002A6D78 /* ImageService.swift in Sources */,
 				73B7372029E160750097806F /* UICollectionViewFlowLayout+.swift in Sources */,
-				735584C12A0626CD0077E69E /* PieChartView.swift in Sources */,
 				A2F9190C29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift in Sources */,
 				A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */,
 				738CAC8729E31349009EF9D2 /* FoodDetailViewController.swift in Sources */,
