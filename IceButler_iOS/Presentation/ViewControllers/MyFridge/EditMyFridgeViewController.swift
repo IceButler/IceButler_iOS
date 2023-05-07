@@ -9,8 +9,14 @@ import UIKit
 
 class EditMyFridgeViewController: UIViewController {
 
+    private var isMulti: Bool = false
+    private var fridgeName: String = ""
+    private var comment: String = ""
+    private var members: [MemberResponseModel] = []
+    private var ownerName: String = ""
+    
     private var searchMember: [MemberResponseModel] = []
-    private var selectedMember: [MemberResponseModel] = []
+    private var selectedMember: [FridgeUser] = []
     private var mandatedMember: MemberResponseModel?
     
 
@@ -68,7 +74,6 @@ class EditMyFridgeViewController: UIViewController {
                 self.mandateTableView.isHidden = false
                 self.mandateResultContainerView.isHidden = false
                 self.mandateTableView.reloadData()
-//                self.setupConstraints()
             })
         }
         else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
@@ -84,6 +89,7 @@ class EditMyFridgeViewController: UIViewController {
         setupNavigationBar()
         setupLayouts()
         setupSubViews()
+        configure()
     }
     
     private func setupNavigationBar() {
@@ -175,14 +181,44 @@ class EditMyFridgeViewController: UIViewController {
         selectedMemberCollectionView.register(memberCell, forCellWithReuseIdentifier: "MemberCollectionViewCell")
     }
     
+    /// 수정할 냉장고 정보로 UI 구성
     private func configure() {
-        // TODO: 수정할 냉장고 정보로 UI 구성
+        if isMulti { fridgeTypeLabel.text = "공유용" }
+        else { fridgeTypeLabel.text = "가정용" }
+        if fridgeName != "" {
+            fridgeNameTextField.text = fridgeName
+            fridgeNameContainerView.backgroundColor = .focusSkyBlue
+        }
+        if comment != "" {
+            fridgeCommentTextView.text = comment
+            fridgeCommentTextView.textColor = .black
+            fridgeCommentContainerView.backgroundColor = .focusSkyBlue
+        }
+        mandateTextField.text = ownerName
+        mandateSearchContainerView.backgroundColor = .focusSkyBlue
+          
+        if selectedMember.count > 0 {
+            selectedMemberCollectionView.isHidden = false
+            selectedMemberCollectionView.reloadData()
+        }
     }
     
     private func showAlert(title: String?, message: String, confirmTitle: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: confirmTitle, style: .default))
         present(alert, animated: true)
+    }
+    
+    public func setFridgeData(isMulti: Bool,
+                              fridgeName: String,
+                              comment: String,
+                              members: [FridgeUser],
+                              ownerName: String) {
+        self.isMulti = isMulti
+        self.fridgeName = fridgeName
+        self.comment = comment
+        self.ownerName = ownerName
+        self.selectedMember = members
     }
     
     // MARK: @objc methods
@@ -207,7 +243,9 @@ extension EditMyFridgeViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("didSelectRowAt된 tableView tag -> \(tableView.tag)")
         if tableView.tag == 0 {
-            selectedMember.append(searchMember[indexPath.row])
+            selectedMember.append(FridgeUser(nickname: searchMember[indexPath.row].nickname,
+                                             role: "MEMBER",
+                                             profileImgUrl: searchMember[indexPath.row].profileImgUrl))
             self.memberSearchResultContainerView.isHidden = true
             self.selectedMemberCollectionView.isHidden = false
             self.selectedMemberCollectionView.reloadData()
@@ -240,6 +278,6 @@ extension EditMyFridgeViewController: UICollectionViewDelegateFlowLayout, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 25.5 + selectedMember[indexPath.row].nickname.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]).width + 20, height: 34)
+        return CGSize(width: 25.5 + selectedMember[indexPath.row].nickname!.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]).width + 20, height: 34)
     }
 }

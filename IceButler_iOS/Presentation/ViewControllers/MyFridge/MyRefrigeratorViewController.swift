@@ -81,6 +81,7 @@ extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyRefrigeratorTableViewCell", for: indexPath) as? MyRefrigeratorTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
+        cell.tag = indexPath.row
         cell.delegate = self
         if indexPath.row < data?.fridgeList?.count ?? 0 {
             cell.configureFridge(data: data?.fridgeList![indexPath.row])
@@ -93,8 +94,26 @@ extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
-    func didTapEditButton() {
+    func didTapEditButton(index: Int) {
         guard let editViewController = storyboard?.instantiateViewController(withIdentifier: "EditMyFridgeViewController") as? EditMyFridgeViewController else { return }
+        
+        if index < (data?.fridgeList?.count ?? 0) {
+            let data = data?.fridgeList![index]
+            editViewController.setFridgeData(isMulti: false,
+                                             fridgeName: data?.fridgeName ?? "",
+                                             comment: data?.comment ?? "",
+                                             members: (data?.users)!,
+                                             ownerName: (data?.users![0].nickname)!)
+            
+        } else {
+            let idx = index - (data?.fridgeList?.count ?? 0)
+            let data = data?.multiFridgeResList![idx]
+            editViewController.setFridgeData(isMulti: true,
+                                             fridgeName: data?.multiFridgeName ?? "",
+                                             comment: data?.comment ?? "",
+                                             members: (data?.users)!,
+                                             ownerName: (data?.users![0].nickname)!)
+        }
         self.navigationController?.pushViewController(editViewController, animated: true)
     }
     
