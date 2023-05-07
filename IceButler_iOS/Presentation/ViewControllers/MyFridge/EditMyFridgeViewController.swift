@@ -28,6 +28,7 @@ class EditMyFridgeViewController: UIViewController {
     @IBOutlet weak var memberSearchResultContainerView: UIView!
     @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var memberResultTableHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var selectedMemberCollectionView: UICollectionView!
     
     @IBOutlet weak var intervalOfTableViews: NSLayoutConstraint!
@@ -47,9 +48,9 @@ class EditMyFridgeViewController: UIViewController {
                 self.searchMember = FridgeViewModel.shared.searchMemberResults
                 self.memberResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
                 self.selectedMemberCollectionView.isHidden = true
-                self.memberSearchContainerView.isHidden = false
+                self.memberSearchResultContainerView.isHidden = false
                 self.searchTableView.reloadData()
-                self.setupConstraints()
+//                self.setupConstraints()
             })
         }
         else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
@@ -57,6 +58,20 @@ class EditMyFridgeViewController: UIViewController {
     
     @IBAction func didTapMandateSearchButton(_ sender: UIButton) {
         // TODO: 닉네임으로 멤버 검색
+        if mandateTextField.text?.count ?? 0 > 0 {
+            searchMember.removeAll()
+            FridgeViewModel.shared.searchMemberResults.removeAll()
+            
+            FridgeViewModel.shared.searchMember(nickname: mandateTextField.text!, completion: {
+                self.searchMember = FridgeViewModel.shared.searchMemberResults
+                self.mandateResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
+                self.mandateTableView.isHidden = false
+                self.mandateResultContainerView.isHidden = false
+                self.mandateTableView.reloadData()
+//                self.setupConstraints()
+            })
+        }
+        else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
@@ -68,6 +83,7 @@ class EditMyFridgeViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupLayouts()
+        setupSubViews()
     }
     
     private func setupNavigationBar() {
@@ -146,15 +162,21 @@ class EditMyFridgeViewController: UIViewController {
         searchTableView.delegate = self
         searchTableView.dataSource = self
         searchTableView.separatorStyle = .none
+        searchTableView.tag = 0
         
         mandateTableView.delegate = self
         mandateTableView.dataSource = self
         mandateTableView.separatorStyle = .none
+        mandateTableView.tag = 1
         
         selectedMemberCollectionView.delegate = self
         selectedMemberCollectionView.dataSource = self
         let memberCell = UINib(nibName: "MemberCollectionViewCell", bundle: nil)
         selectedMemberCollectionView.register(memberCell, forCellWithReuseIdentifier: "MemberCollectionViewCell")
+    }
+    
+    private func configure() {
+        // TODO: 수정할 냉장고 정보로 UI 구성
     }
     
     private func showAlert(title: String?, message: String, confirmTitle: String) {
@@ -175,11 +197,28 @@ extension EditMyFridgeViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemberSearchTableViewCell", for: indexPath) as? MemberSearchTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? MemberSearchTableViewCell else { return UITableViewCell() }
         cell.backgroundColor = .none
         cell.selectionStyle = .none
-        cell.configure(data: FridgeViewModel.shared.searchMemberResults[indexPath.row])
+        cell.configure(data: self.searchMember[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("didSelectRowAt된 tableView tag -> \(tableView.tag)")
+        if tableView.tag == 0 {
+            selectedMember.append(searchMember[indexPath.row])
+            self.memberSearchResultContainerView.isHidden = true
+            self.selectedMemberCollectionView.isHidden = false
+            self.selectedMemberCollectionView.reloadData()
+            
+        } else if tableView.tag == 1 {
+            mandatedMember = searchMember[indexPath.row]
+            self.mandateResultContainerView.isHidden = true
+            self.mandateTextField.text = mandatedMember?.nickname
+            self.mandateTextField.endEditing(true)
+        }
+        
     }
 }
 
