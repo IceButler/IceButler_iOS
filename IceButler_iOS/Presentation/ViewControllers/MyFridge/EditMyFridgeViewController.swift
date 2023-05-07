@@ -50,6 +50,9 @@ class EditMyFridgeViewController: UIViewController {
     @IBAction func didTapMemberSearchButton(_ sender: UIButton) {
         // TODO: 닉네임으로 멤버 검색
         if memberSearchTextField.text?.count ?? 0 > 0 {
+            searchMember.removeAll()
+            FridgeViewModel.shared.searchMemberResults.removeAll()
+
             FridgeViewModel.shared.searchMember(nickname: memberSearchTextField.text!, completion: {
                 self.searchMember = FridgeViewModel.shared.searchMemberResults
                 self.memberResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
@@ -83,6 +86,7 @@ class EditMyFridgeViewController: UIViewController {
     }
     
     
+    // MARK: Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -91,6 +95,7 @@ class EditMyFridgeViewController: UIViewController {
         configure()
     }
     
+    // MARK: Helper Methods
     private func setupNavigationBar() {
         /// setting status bar background color
         if #available(iOS 13.0, *) {
@@ -157,13 +162,14 @@ class EditMyFridgeViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        // TODO: 각 검색 결과값을 적용한 제한으로 수정
+        /// 각 검색 결과값을 적용한 제한으로 수정
         memberResultTableHeight.constant = CGFloat(50 + 44 * searchMember.count)
         mandateResultTableHeight.constant = CGFloat(50 + 44 * searchMember.count)
         intervalOfTableViews.constant = 40 + CGFloat(50 + 44 * searchMember.count)
     }
     
     private func setupSubViews() {
+        /// TableView
         searchTableView.delegate = self
         searchTableView.dataSource = self
         searchTableView.separatorStyle = .none
@@ -174,10 +180,17 @@ class EditMyFridgeViewController: UIViewController {
         mandateTableView.separatorStyle = .none
         mandateTableView.tag = 1
         
+        /// CollectionView
         selectedMemberCollectionView.delegate = self
         selectedMemberCollectionView.dataSource = self
         let memberCell = UINib(nibName: "MemberCollectionViewCell", bundle: nil)
         selectedMemberCollectionView.register(memberCell, forCellWithReuseIdentifier: "MemberCollectionViewCell")
+        
+        /// TextField, TextView
+        fridgeCommentTextView.delegate = self
+        fridgeNameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        memberSearchTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        mandateTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     /// 수정할 냉장고 정보로 UI 구성
@@ -223,6 +236,35 @@ class EditMyFridgeViewController: UIViewController {
     // MARK: @objc methods
     @objc private func didTapBackItem() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+//        setCompleteButtonMode()
+        
+        if textField.text?.count ?? 0 > 0 {
+            
+            switch textField {
+            case fridgeNameTextField:
+                fridgeNameContainerView.backgroundColor = .focusTableViewSkyBlue
+            case memberSearchTextField:
+                memberSearchContainerView.backgroundColor = .focusTableViewSkyBlue
+            case mandateTextField:
+                mandateSearchContainerView.backgroundColor = .focusTableViewSkyBlue
+            default: return
+            }
+            
+        } else {
+
+            switch textField {
+            case fridgeNameTextField:
+                fridgeNameContainerView.backgroundColor = .systemGray6
+            case memberSearchTextField:
+                memberSearchContainerView.backgroundColor = .systemGray6
+            case mandateTextField:
+                mandateSearchContainerView.backgroundColor = .systemGray6
+            default: return
+            }
+        }
     }
 }
 
@@ -271,11 +313,35 @@ extension EditMyFridgeViewController: UICollectionViewDelegateFlowLayout, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedMember.remove(at: indexPath.row)
-//        setCompleteButtonMode()
         collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 25.5 + selectedMember[indexPath.row].nickname!.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]).width + 20, height: 34)
+    }
+}
+
+// MARK: extensions for delegate, ...
+extension EditMyFridgeViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = ""
+        textView.textColor = .black
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+//        setCompleteButtonMode()
+        
+        if textView.text.count > 0 {
+            fridgeCommentContainerView.backgroundColor = .focusTableViewSkyBlue
+        } else {
+            fridgeCommentContainerView.backgroundColor = .systemGray6
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.count == 0 {
+            textView.text = "200자 이내로 작성해주세요."
+            textView.textColor = .lightGray
+        }
     }
 }
