@@ -13,8 +13,8 @@ struct UserInfoResponseModel: Codable {
     let profileImgUrl: String?
 }
 
-struct MemberResponseModel: Codable {
-    let nickname: String
-    let userIdx: Int
-    let profileImgUrl: String?
-}
+//struct MemberResponseModel: Codable {
+//    let nickname: String
+//    let userIdx: Int
+//    let profileImgUrl: String?
+//}

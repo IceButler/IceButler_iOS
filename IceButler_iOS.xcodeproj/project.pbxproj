@@ -123,6 +123,7 @@
 		A2A164C32A00DA6A008132D2 /* AddFridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A164C22A00DA6A008132D2 /* AddFridgeViewController.swift */; };
 		A2CA99DC29DE7BA80020DEEC /* CompleteBuyingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CA99DB29DE7BA80020DEEC /* CompleteBuyingViewController.swift */; };
 		A2CA99FE29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CA99FD29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift */; };
+		A2DC65792A07AE8700D8C6F9 /* FridgeRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DC65782A07AE8700D8C6F9 /* FridgeRequestModel.swift */; };
 		A2EA101529F53EDE000D600B /* MyRefrigerator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2EA101429F53EDE000D600B /* MyRefrigerator.storyboard */; };
 		A2EA101729F53EEE000D600B /* MyRefrigeratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA101629F53EEE000D600B /* MyRefrigeratorViewController.swift */; };
 		A2EA101A29F5407D000D600B /* MyRefrigeratorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA101829F5407D000D600B /* MyRefrigeratorTableViewCell.swift */; };
@@ -287,6 +288,7 @@
 		A2A164C22A00DA6A008132D2 /* AddFridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFridgeViewController.swift; sourceTree = "<group>"; };
 		A2CA99DB29DE7BA80020DEEC /* CompleteBuyingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteBuyingViewController.swift; sourceTree = "<group>"; };
 		A2CA99FD29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteBuyingTableViewCell.swift; sourceTree = "<group>"; };
+		A2DC65782A07AE8700D8C6F9 /* FridgeRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeRequestModel.swift; sourceTree = "<group>"; };
 		A2EA101429F53EDE000D600B /* MyRefrigerator.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRefrigerator.storyboard; sourceTree = "<group>"; };
 		A2EA101629F53EEE000D600B /* MyRefrigeratorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRefrigeratorViewController.swift; sourceTree = "<group>"; };
 		A2EA101829F5407D000D600B /* MyRefrigeratorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRefrigeratorTableViewCell.swift; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 			isa = PBXGroup;
 			children = (
 				73B7374829E2DCE60097806F /* FridgeResponseModel.swift */,
+				A2DC65782A07AE8700D8C6F9 /* FridgeRequestModel.swift */,
 			);
 			path = Fridge;
 			sourceTree = "<group>";
@@ -1215,6 +1218,7 @@
 				73F62A4229DD01DE003D779F /* BarCodeAddViewController.swift in Sources */,
 				A27302E829D853160060944D /* AlertViewController.swift in Sources */,
 				A29674252A06BDAB00A7A1E0 /* EditMyFridgeViewController.swift in Sources */,
+				A2DC65792A07AE8700D8C6F9 /* FridgeRequestModel.swift in Sources */,
 				A28A764229D54EFA00D127EA /* CartViewController.swift in Sources */,
 				A2EA101729F53EEE000D600B /* MyRefrigeratorViewController.swift in Sources */,
 				73F26FC429DAA8EB009E364B /* CartResponseModel.swift in Sources */,

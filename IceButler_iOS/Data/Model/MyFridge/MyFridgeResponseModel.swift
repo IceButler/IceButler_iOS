@@ -28,6 +28,7 @@ struct MultiFridgeRes: Codable {
 
 struct FridgeUser: Codable {
     let nickname, role, profileImgUrl: String?
+    let userIdx: Int
 }
 
 // MARK: 공용/가정용 냉장고의 공통 모델

@@ -104,22 +104,26 @@ extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
     func didTapEditButton(index: Int) {
         guard let editViewController = storyboard?.instantiateViewController(withIdentifier: "EditMyFridgeViewController") as? EditMyFridgeViewController else { return }
         
+        
         if index < (data?.fridgeList?.count ?? 0) {
             let data = data?.fridgeList![index]
+            editViewController.setFridgeIdx(index: data?.fridgeIdx ?? -1)
             editViewController.setFridgeData(isMulti: false,
                                              fridgeName: data?.fridgeName ?? "",
                                              comment: data?.comment ?? "",
                                              members: (data?.users)!,
-                                             ownerName: (data?.users![0].nickname)!)
+                                             owner: (data?.users![0])!)
             
         } else {
             let idx = index - (data?.fridgeList?.count ?? 0)
             let data = data?.multiFridgeResList![idx]
+            editViewController.setFridgeIdx(index: data?.multiFridgeIdx ?? -1)
             editViewController.setFridgeData(isMulti: true,
                                              fridgeName: data?.multiFridgeName ?? "",
                                              comment: data?.comment ?? "",
                                              members: (data?.users)!,
-                                             ownerName: (data?.users![0].nickname)!)
+                                             owner: (data?.users![0])!)
+            
         }
         self.navigationController?.pushViewController(editViewController, animated: true)
     }

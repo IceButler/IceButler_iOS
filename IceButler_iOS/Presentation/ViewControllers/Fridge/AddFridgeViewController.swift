@@ -12,8 +12,8 @@ class AddFridgeViewController: UIViewController {
     // MARK: @IBOutlet, Variables
     private var isPersonalfridge: Bool = false
     private var isMultifridge: Bool = false
-    private var searchMember: [MemberResponseModel] = []
-    private var selectedMember: [MemberResponseModel] = []
+    private var searchMember: [FridgeUser] = []
+    private var selectedMember: [FridgeUser] = []
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var fridgeButton: UIButton!
@@ -83,8 +83,8 @@ class AddFridgeViewController: UIViewController {
         
         FridgeViewModel.shared.requestAddFridge(name: fridgeNameTextField.text!,
                                                 comment: fridgeDetailTextView.text!,
-                                                                members: memberIdx,
-                                                                completion: { [weak self] result in
+                                                members: memberIdx,
+                                                completion: { [weak self] result in
             if result { self?.showAlert(title: nil, message: "냉장고를 성공적으로 추가하였습니다!", confirmTitle: "확인") }
             else { self?.showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인") }
         })
@@ -310,6 +310,6 @@ extension AddFridgeViewController: UICollectionViewDelegateFlowLayout, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 25.5 + selectedMember[indexPath.row].nickname.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]).width + 20, height: 34)
+        return CGSize(width: 25.5 + selectedMember[indexPath.row].nickname!.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]).width + 20, height: 34)
     }
 }

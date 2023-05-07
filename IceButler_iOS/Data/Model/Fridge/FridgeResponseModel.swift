@@ -18,7 +18,3 @@ struct FridgeFood: Codable {
     let shelfLife: Int
 }
 
-struct FridgeRequestModel: Codable {
-    let fridgeName, fridgeComment: String
-    let members: [Int]
-}

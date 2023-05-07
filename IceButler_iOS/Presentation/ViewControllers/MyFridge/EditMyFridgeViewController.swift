@@ -12,12 +12,13 @@ class EditMyFridgeViewController: UIViewController {
     private var isMulti: Bool = false
     private var fridgeName: String = ""
     private var comment: String = ""
-    private var members: [MemberResponseModel] = []
+    private var members: [FridgeUser] = []
     private var ownerName: String = ""
     
-    private var searchMember: [MemberResponseModel] = []
+    private var fridgeIdx: Int = -1
+    private var searchMember: [FridgeUser] = []
     private var selectedMember: [FridgeUser] = []
-    private var mandatedMember: MemberResponseModel?
+    private var mandatedMember: FridgeUser?
     
 
     @IBOutlet weak var typeContainerView: UIView!
@@ -81,8 +82,40 @@ class EditMyFridgeViewController: UIViewController {
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        // TODO: 입력값 체크 및 냉장고 수정 요청
-        self.navigationController?.popViewController(animated: true)
+        if let name = fridgeNameTextField.text,
+           let comment = fridgeCommentTextView.text,
+           selectedMember.count > 0,
+           let newOwner = mandatedMember {
+            
+            var memberIdxs:[Int] = []
+            selectedMember.forEach { member in memberIdxs.append(member.userIdx) }
+            
+            let param = EditedFridgeRequestModel(fridgeName: name,
+                                                 fridgeComment: comment,
+                                                 members: memberIdxs,
+                                                 newOwnerIdx: newOwner.userIdx)
+            
+            var urlStr = ""
+            if isMulti { urlStr = "/multiFridges/\(fridgeIdx)" }
+            else { urlStr = "/fridges/\(fridgeIdx)" }
+            
+            APIManger.shared.patchData(urlEndpointString: urlStr,
+                                       responseDataType: EditedFridgeRequestModel.self,
+                                       requestDataType: EditedFridgeRequestModel.self,
+                                       parameter: param,
+                                       completionHandler: { [weak self] response in
+                switch response.statusCode {
+                case 200: self?.navigationController?.popViewController(animated: true)
+                default: self?.showAlert(title: "마이냉장고 수정 실패", message: response.description ?? "", confirmTitle: "확인")
+                }
+            })
+            
+        } else {
+            showAlert(title: nil, message: "모든 정보를 입력해주세요!", confirmTitle: "확인")
+        }
+           
+            
+        
     }
     
     
@@ -221,16 +254,19 @@ class EditMyFridgeViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    public func setFridgeIdx(index: Int) { fridgeIdx = index }
+    
     public func setFridgeData(isMulti: Bool,
                               fridgeName: String,
                               comment: String,
                               members: [FridgeUser],
-                              ownerName: String) {
+                              owner: FridgeUser) {
         self.isMulti = isMulti
         self.fridgeName = fridgeName
         self.comment = comment
-        self.ownerName = ownerName
+        self.ownerName = owner.nickname!
         self.selectedMember = members
+        self.mandatedMember = owner
     }
     
     // MARK: @objc methods
@@ -239,8 +275,7 @@ class EditMyFridgeViewController: UIViewController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-//        setCompleteButtonMode()
-        
+
         if textField.text?.count ?? 0 > 0 {
             
             switch textField {
@@ -285,7 +320,9 @@ extension EditMyFridgeViewController: UITableViewDelegate, UITableViewDataSource
         if tableView.tag == 0 {
             selectedMember.append(FridgeUser(nickname: searchMember[indexPath.row].nickname,
                                              role: "MEMBER",
-                                             profileImgUrl: searchMember[indexPath.row].profileImgUrl))
+                                             profileImgUrl: searchMember[indexPath.row].profileImgUrl,
+                                             userIdx: searchMember[indexPath.row].userIdx))
+            
             self.memberSearchResultContainerView.isHidden = true
             self.selectedMemberCollectionView.isHidden = false
             self.selectedMemberCollectionView.reloadData()
@@ -329,8 +366,6 @@ extension EditMyFridgeViewController: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-//        setCompleteButtonMode()
-        
         if textView.text.count > 0 {
             fridgeCommentContainerView.backgroundColor = .focusTableViewSkyBlue
         } else {
