@@ -198,7 +198,6 @@ class AddRecipeViewController: UIViewController {
     @IBAction func didTapAddIngredientButton(_ sender: Any) {
         if !ingredientNameTextField.text!.isEmpty && !ingredientAmountTextField.text!.isEmpty {
             addedIngredientList.append([ingredientNameTextField.text!, ingredientAmountTextField.text!])
-            print(addedIngredientList)
             ingredientStackViewTopConstraintToIngredientTableView.priority = UILayoutPriority(1000)
             
             ingredientTableView.reloadData()
@@ -307,15 +306,12 @@ extension AddRecipeViewController: UITableViewDelegate, UITableViewDataSource {
 
 class IntrinsicTableView: UITableView {
     override var intrinsicContentSize: CGSize {
-        let number = numberOfRows(inSection: 0)
-        var height: CGFloat = 0
-
-        for i in 0..<number {
-            guard let cell = cellForRow(at: IndexPath(row: i, section: 0)) else {
-                continue
-            }
-            height += cell.bounds.height
-        }
-        return CGSize(width: contentSize.width, height: height)
+        let height = self.contentSize.height + self.contentInset.top + self.contentInset.bottom
+        return CGSize(width: self.contentSize.width, height: height)
+    }
+    
+    override func layoutSubviews() {
+        self.invalidateIntrinsicContentSize()
+        super.layoutSubviews()
     }
 }
