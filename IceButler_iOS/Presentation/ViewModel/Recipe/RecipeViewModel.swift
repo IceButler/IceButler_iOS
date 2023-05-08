@@ -86,4 +86,10 @@ class RecipeViewModel: ObservableObject {
     func getBookmarkRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
         completion(bookmarkRecipeList[index])
     }
+    
+    func updateBookmarkStatus(recipeIdx: Int, completion: @escaping (Bool) -> Void) {
+        recipeService.postBookmarkStatus(recipeIdx: recipeIdx) { response in
+            completion(response!.status)
+        }
+    }
 }

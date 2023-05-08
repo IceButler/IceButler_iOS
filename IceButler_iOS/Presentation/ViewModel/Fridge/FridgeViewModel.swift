@@ -99,7 +99,7 @@ class FridgeViewModel: ObservableObject {
         switch foodListIdx {
         case 0:
             $allFoodList.filter { allFoodList in
-//                allFoodList.count > 0
+                //                allFoodList.count > 0
                 allFoodList.count > -1
             }.sink { allFoodList in
                 completion()
@@ -610,6 +610,7 @@ class FridgeViewModel: ObservableObject {
         fridgeService.addFridge(name: name, comment: comment, members: members, completion: { response in
             completion((response != nil) ? true : false)
         })
+    }
         
     /// 이전에 선택된 냉장고가 있다면 해당 냉장고로 기본 설정
     func setSavedFridgeIdx() {
