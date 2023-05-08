@@ -32,9 +32,6 @@ class AllFoodViewController: UIViewController {
         
         let foodCell = UINib(nibName: "FoodCell", bundle: nil)
         foodCollectionView.register(foodCell, forCellWithReuseIdentifier: "FoodCell")
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(moveToWasteVC))
-        wasteInfoView.addGestureRecognizer(tapGesture)
     }
     
     private func setupLayout() {
@@ -55,10 +52,17 @@ class AllFoodViewController: UIViewController {
             self.foodCollectionView.reloadData()
         }
     }
-    
-    @objc private func moveToWasteVC() {
 
+    
+    @IBAction func didTapView(_ sender: UITapGestureRecognizer) {
+        GraphViewModel.shared.fetchWasteList(fridgeIdx: 1, year: 2023, month: 5)
+        
+        
+        let graphVC = UIStoryboard(name: "GraphMain", bundle: nil).instantiateViewController(withIdentifier: "GraphMainViewController") as! GraphMainViewController
+
+        self.navigationController?.pushViewController(graphVC, animated: true)
     }
+    
 }
 
 extension AllFoodViewController: UICollectionViewDelegate, UICollectionViewDataSource {

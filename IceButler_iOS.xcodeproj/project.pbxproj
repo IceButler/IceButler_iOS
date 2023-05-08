@@ -23,6 +23,15 @@
 		7339CD8E29E788BE002A6D78 /* ImageDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD8D29E788BE002A6D78 /* ImageDir.swift */; };
 		7339CD9029E7997F002A6D78 /* ImageRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD8F29E7997F002A6D78 /* ImageRequestModel.swift */; };
 		7339CD9229E79CDD002A6D78 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD9129E79CDD002A6D78 /* AuthProvider.swift */; };
+		735584B52A0569BC0077E69E /* GraphMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735584B42A0569BC0077E69E /* GraphMain.storyboard */; };
+		735584B72A0569CA0077E69E /* GraphMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584B62A0569CA0077E69E /* GraphMainViewController.swift */; };
+		735584B92A0624410077E69E /* WasteGraph.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735584B82A0624410077E69E /* WasteGraph.storyboard */; };
+		735584BB2A06244E0077E69E /* WasteGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584BA2A06244E0077E69E /* WasteGraphViewController.swift */; };
+		735584BD2A0624740077E69E /* ConsumeGraph.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735584BC2A0624740077E69E /* ConsumeGraph.storyboard */; };
+		735584BF2A06248B0077E69E /* ConsumeGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584BE2A06248B0077E69E /* ConsumeGraphViewController.swift */; };
+		735584C42A062DE70077E69E /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C32A062DE70077E69E /* GraphViewModel.swift */; };
+		735584C72A062DFB0077E69E /* GraphService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C62A062DFB0077E69E /* GraphService.swift */; };
+		735584CA2A06B1A10077E69E /* GraphResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C92A06B1A10077E69E /* GraphResponseModel.swift */; };
 		7388C3AD29F82D81000C3606 /* ChatGptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7388C3AB29F82D81000C3606 /* ChatGptCell.swift */; };
 		7388C3AE29F82D81000C3606 /* ChatGptCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7388C3AC29F82D81000C3606 /* ChatGptCell.xib */; };
 		738CAC8529E310CF009EF9D2 /* FoodDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 738CAC8429E310CF009EF9D2 /* FoodDetail.storyboard */; };
@@ -55,6 +64,8 @@
 		73B7374F29E2EC5A0097806F /* FridgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7374E29E2EC5A0097806F /* FridgeViewModel.swift */; };
 		73C18A4529E3F0440037FE3A /* FoodRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C18A4429E3F0440037FE3A /* FoodRequestModel.swift */; };
 		73C8714F29F2ED44002DDB60 /* ProfileEditMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8714E29F2ED44002DDB60 /* ProfileEditMode.swift */; };
+		73CC35162A07E60C00096492 /* FoodRemoveRankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC35142A07E60B00096492 /* FoodRemoveRankCell.swift */; };
+		73CC35172A07E60C00096492 /* FoodRemoveRankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73CC35152A07E60C00096492 /* FoodRemoveRankCell.xib */; };
 		73CF93B029E945BF0007CB7A /* UserResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF93AF29E945BF0007CB7A /* UserResponseModel.swift */; };
 		73CF93B329E94BB60007CB7A /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF93B229E94BB60007CB7A /* UserViewModel.swift */; };
 		73CF93B629E94D580007CB7A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF93B529E94D580007CB7A /* String+.swift */; };
@@ -179,6 +190,15 @@
 		7339CD8D29E788BE002A6D78 /* ImageDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDir.swift; sourceTree = "<group>"; };
 		7339CD8F29E7997F002A6D78 /* ImageRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequestModel.swift; sourceTree = "<group>"; };
 		7339CD9129E79CDD002A6D78 /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
+		735584B42A0569BC0077E69E /* GraphMain.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GraphMain.storyboard; sourceTree = "<group>"; };
+		735584B62A0569CA0077E69E /* GraphMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphMainViewController.swift; sourceTree = "<group>"; };
+		735584B82A0624410077E69E /* WasteGraph.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WasteGraph.storyboard; sourceTree = "<group>"; };
+		735584BA2A06244E0077E69E /* WasteGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasteGraphViewController.swift; sourceTree = "<group>"; };
+		735584BC2A0624740077E69E /* ConsumeGraph.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConsumeGraph.storyboard; sourceTree = "<group>"; };
+		735584BE2A06248B0077E69E /* ConsumeGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeGraphViewController.swift; sourceTree = "<group>"; };
+		735584C32A062DE70077E69E /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
+		735584C62A062DFB0077E69E /* GraphService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphService.swift; sourceTree = "<group>"; };
+		735584C92A06B1A10077E69E /* GraphResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphResponseModel.swift; sourceTree = "<group>"; };
 		7388C3AB29F82D81000C3606 /* ChatGptCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptCell.swift; sourceTree = "<group>"; };
 		7388C3AC29F82D81000C3606 /* ChatGptCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatGptCell.xib; sourceTree = "<group>"; };
 		738CAC8429E310CF009EF9D2 /* FoodDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FoodDetail.storyboard; sourceTree = "<group>"; };
@@ -212,6 +232,8 @@
 		73C18A4429E3F0440037FE3A /* FoodRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRequestModel.swift; sourceTree = "<group>"; };
 		73C8714D29F28FD7002DDB60 /* IceButler_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceButler_iOS.entitlements; sourceTree = "<group>"; };
 		73C8714E29F2ED44002DDB60 /* ProfileEditMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditMode.swift; sourceTree = "<group>"; };
+		73CC35142A07E60B00096492 /* FoodRemoveRankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRemoveRankCell.swift; sourceTree = "<group>"; };
+		73CC35152A07E60C00096492 /* FoodRemoveRankCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodRemoveRankCell.xib; sourceTree = "<group>"; };
 		73CF93AF29E945BF0007CB7A /* UserResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponseModel.swift; sourceTree = "<group>"; };
 		73CF93B229E94BB60007CB7A /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		73CF93B529E94D580007CB7A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -263,7 +285,6 @@
 		95A398BE29FD8C13009CDDDC /* RecipeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResponseModel.swift; sourceTree = "<group>"; };
 		95A398C029FEFC43009CDDDC /* BookmarkRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRecipeViewController.swift; sourceTree = "<group>"; };
 		95A398C22A001303009CDDDC /* SearchFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFoodViewController.swift; sourceTree = "<group>"; };
-		97799942B569A0176DFFDED0 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSearchTableViewCell.swift; sourceTree = "<group>"; };
 		A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -416,6 +437,43 @@
 				7339CD8B29E78880002A6D78 /* ImageService.swift */,
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		735584B32A0569AB0077E69E /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				735584B42A0569BC0077E69E /* GraphMain.storyboard */,
+				735584B62A0569CA0077E69E /* GraphMainViewController.swift */,
+				735584B82A0624410077E69E /* WasteGraph.storyboard */,
+				735584BA2A06244E0077E69E /* WasteGraphViewController.swift */,
+				735584BC2A0624740077E69E /* ConsumeGraph.storyboard */,
+				735584BE2A06248B0077E69E /* ConsumeGraphViewController.swift */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		735584C22A062DDB0077E69E /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				735584C32A062DE70077E69E /* GraphViewModel.swift */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		735584C52A062DF20077E69E /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				735584C62A062DFB0077E69E /* GraphService.swift */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		735584C82A06B1930077E69E /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				735584C92A06B1A10077E69E /* GraphResponseModel.swift */,
+			);
+			path = Graph;
 			sourceTree = "<group>";
 		};
 		738CAC8829E32767009EF9D2 /* Food */ = {
@@ -636,6 +694,7 @@
 		73F26FBD29DAA716009E364B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				735584C82A06B1930077E69E /* Graph */,
 				95A398BD29FD8C01009CDDDC /* Recipe */,
 				A2EA102329F5A60C000D600B /* MyFridge */,
 				73CF93AE29E943A50007CB7A /* User */,
@@ -652,6 +711,7 @@
 		73F26FBE29DAA71B009E364B /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				735584C52A062DF20077E69E /* Graph */,
 				95A398BA29FD82CB009CDDDC /* Recipe */,
 				73178AC429EC409C001C3AA4 /* User */,
 				7339CD8A29E78875002A6D78 /* Image */,
@@ -683,6 +743,7 @@
 		73F26FC929DAACB2009E364B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				735584C22A062DDB0077E69E /* Graph */,
 				7339CD7329E5B6A6002A6D78 /* Auth */,
 				73F26FCA29DAACBC009E364B /* Cart */,
 				738CAC8829E32767009EF9D2 /* Food */,
@@ -855,6 +916,8 @@
 				A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */,
 				A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */,
 				A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */,
+				73CC35142A07E60B00096492 /* FoodRemoveRankCell.swift */,
+				73CC35152A07E60C00096492 /* FoodRemoveRankCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -862,6 +925,7 @@
 		A28A764B29D6F01200D127EA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				735584B32A0569AB0077E69E /* Graph */,
 				A27302E429D852F20060944D /* Alert */,
 				7339CD6B29E5B381002A6D78 /* Auth */,
 				A28A763D29D54D6F00D127EA /* Cart */,
@@ -1011,9 +1075,11 @@
 			files = (
 				A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */,
 				A2EA102B29F84E6A000D600B /* SelectFridgeTableViewCell.xib in Resources */,
+				735584B92A0624410077E69E /* WasteGraph.storyboard in Resources */,
 				7339CD7F29E671B0002A6D78 /* AuthUserInfo.storyboard in Resources */,
 				73F62A4E29DD81AC003D779F /* FoodAddSelectCell.xib in Resources */,
 				73F62A3C29DCFD52003D779F /* Fridge.storyboard in Resources */,
+				735584B52A0569BC0077E69E /* GraphMain.storyboard in Resources */,
 				A2F9190D29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib in Resources */,
 				A28A763F29D54DEF00D127EA /* Cart.storyboard in Resources */,
 				73F0D24629D2E0000038BD0C /* LaunchScreen.storyboard in Resources */,
@@ -1024,12 +1090,14 @@
 				A27302E629D853090060944D /* Alert.storyboard in Resources */,
 				7388C3AE29F82D81000C3606 /* ChatGptCell.xib in Resources */,
 				A2EA101529F53EDE000D600B /* MyRefrigerator.storyboard in Resources */,
+				73CC35172A07E60C00096492 /* FoodRemoveRankCell.xib in Resources */,
 				A2EA101F29F5448F000D600B /* RefriMemberCollectionViewCell.xib in Resources */,
 				95A398B429FC3A4F009CDDDC /* RecipeCollectionViewCell.xib in Resources */,
 				738CAC8529E310CF009EF9D2 /* FoodDetail.storyboard in Resources */,
 				73F62A4029DD01CA003D779F /* BarCodeAdd.storyboard in Resources */,
 				73F62A4629DD6015003D779F /* FoodAdd.storyboard in Resources */,
 				A2EA101B29F5407D000D600B /* MyRefrigeratorTableViewCell.xib in Resources */,
+				735584BD2A0624740077E69E /* ConsumeGraph.storyboard in Resources */,
 				A2F9190929EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib in Resources */,
 				738F4B4929FB88BD0043AC07 /* SearchFood.storyboard in Resources */,
 				73F62A4829DD7F30003D779F /* FoodAddSelect.storyboard in Resources */,
@@ -1180,16 +1248,19 @@
 				95A398AE29FBCA77009CDDDC /* PopularRecipeViewController.swift in Sources */,
 				73F26FC629DAA94B009E364B /* CartService.swift in Sources */,
 				73B7372E29E250120097806F /* VegetableViewController.swift in Sources */,
+				735584B72A0569CA0077E69E /* GraphMainViewController.swift in Sources */,
 				73F26FCC29DAACC3009E364B /* CartViewModel.swift in Sources */,
 				A258498729E7BE0A00E75568 /* AddFoodSearchResultTableViewCell.swift in Sources */,
 				A2CA99DC29DE7BA80020DEEC /* CompleteBuyingViewController.swift in Sources */,
 				73B7374C29E2EB570097806F /* FridgeService.swift in Sources */,
+				73CC35162A07E60C00096492 /* FoodRemoveRankCell.swift in Sources */,
 				A2EA101E29F5448F000D600B /* RefriMemberCollectionViewCell.swift in Sources */,
 				73B7374F29E2EC5A0097806F /* FridgeViewModel.swift in Sources */,
 				73CF93B629E94D580007CB7A /* String+.swift in Sources */,
 				73B7372329E1B2040097806F /* FoodOwnerCell.swift in Sources */,
 				73F62A5329DFDADF003D779F /* FoodCategoryCell.swift in Sources */,
 				95A398B929FD7B38009CDDDC /* FridgeType.swift in Sources */,
+				735584BB2A06244E0077E69E /* WasteGraphViewController.swift in Sources */,
 				73F62A5829E00F94003D779F /* UIButton+.swift in Sources */,
 				73178AC629EC40A6001C3AA4 /* UserService.swift in Sources */,
 				95A398C32A001303009CDDDC /* SearchFoodViewController.swift in Sources */,
@@ -1200,6 +1271,8 @@
 				A220B1662A05411D0048592B /* MemberCollectionViewCell.swift in Sources */,
 				73F62A4429DD11C4003D779F /* BarCodeView.swift in Sources */,
 				7339CD7229E5B56A002A6D78 /* AuthService.swift in Sources */,
+				735584C72A062DFB0077E69E /* GraphService.swift in Sources */,
+				735584CA2A06B1A10077E69E /* GraphResponseModel.swift in Sources */,
 				73B7373829E2505B0097806F /* SeasoningViewController.swift in Sources */,
 				A258498329E6A6CB00E75568 /* MyPageViewController.swift in Sources */,
 				73B7372C29E250010097806F /* FruitViewController.swift in Sources */,
@@ -1218,6 +1291,7 @@
 				7339CD8929E7846A002A6D78 /* ImageResponseModel.swift in Sources */,
 				73F62A4A29DD7F45003D779F /* FoodAddSelectViewController.swift in Sources */,
 				95A398A929FAAB99009CDDDC /* RecipeViewController.swift in Sources */,
+				735584BF2A06248B0077E69E /* ConsumeGraphViewController.swift in Sources */,
 				95488DC429EADF94009AE17A /* PolicyType.swift in Sources */,
 				73C18A4529E3F0440037FE3A /* FoodRequestModel.swift in Sources */,
 				95488DC229E7C2AC009AE17A /* PolicyWebViewController.swift in Sources */,
@@ -1228,6 +1302,7 @@
 				73DC2F3D29DAA6A400F47ECD /* APIManger.swift in Sources */,
 				73F26FC129DAA735009E364B /* GeneralResponseModel.swift in Sources */,
 				7339CD8129E67406002A6D78 /* AuthUserInfoViewController.swift in Sources */,
+				735584C42A062DE70077E69E /* GraphViewModel.swift in Sources */,
 				738CAC9029E32858009EF9D2 /* FoodService.swift in Sources */,
 				95A398BC29FD82DD009CDDDC /* RecipeService.swift in Sources */,
 				73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */,

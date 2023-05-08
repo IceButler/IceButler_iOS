@@ -327,7 +327,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2iQ-7W-Ibo">
-                                                <rect key="frame" x="12" y="731" width="369" height="49"/>
+                                                <rect key="frame" x="12" y="690" width="369" height="49"/>
                                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="49" id="yQ6-vu-b7U"/>
@@ -538,7 +538,7 @@
         <!--All Food View Controller-->
         <scene sceneID="Zz7-EC-xbF">
             <objects>
-                <viewController storyboardIdentifier="AllFoodViewController" id="ISD-SD-nmE" customClass="AllFoodViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="AllFoodViewController" storyboardIdentifier="AllFoodViewController" id="ISD-SD-nmE" customClass="AllFoodViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ro6-Cn-wDP">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -574,6 +574,7 @@
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43529411759999997" green="0.63137254899999995" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="cqf-VM-9uG" firstAttribute="top" secondItem="eDq-AZ-PyD" secondAttribute="top" constant="31" id="7h6-Sv-fDy"/>
                                     <constraint firstItem="1ma-cv-0kn" firstAttribute="top" secondItem="eDq-AZ-PyD" secondAttribute="top" constant="32.079999999999998" id="BfJ-CT-KOP"/>
@@ -586,6 +587,9 @@
                                     <constraint firstAttribute="trailing" secondItem="1ma-cv-0kn" secondAttribute="trailing" constant="27.329999999999998" id="skO-2c-VRp"/>
                                     <constraint firstItem="7Bn-do-EOB" firstAttribute="leading" secondItem="ZMv-sx-Fy7" secondAttribute="trailing" constant="15" id="yG5-oS-l68"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="fu6-ny-uwn" appends="YES" id="fWF-Rh-dHf"/>
+                                </connections>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Lbj-Vf-FVS">
                                 <rect key="frame" x="0.0" y="207" width="393" height="611"/>
@@ -617,6 +621,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ew5-07-4oa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="fu6-ny-uwn">
+                    <connections>
+                        <action selector="didTapView:" destination="ISD-SD-nmE" id="tAr-EL-J4f"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-752" y="166"/>
         </scene>
