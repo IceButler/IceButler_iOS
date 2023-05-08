@@ -147,4 +147,19 @@ extension UIColor{
         blue: 174/255,
         alpha: 1
     )
+    
+    static let recipeBackgroudColor = UIColor(
+        red: 245/255,
+        green: 245/255,
+        blue: 245/255,
+        alpha: 1
+    )
+    
+    static let notInputColor = UIColor(
+        red: 246/255,
+        green: 246/255,
+        blue: 246/255,
+        alpha: 1
+    )
+
 }

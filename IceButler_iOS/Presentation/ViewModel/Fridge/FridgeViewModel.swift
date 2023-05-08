@@ -620,4 +620,5 @@ class FridgeViewModel: ObservableObject {
             self.defaultFridgeName = name as! String
         }
     }
+
 }

@@ -14,7 +14,11 @@ protocol SelectedFoodCellDelegate {
 class SelectedFoodNameCollectionViewCell: UICollectionViewCell {
 
     var delegate: SelectedFoodCellDelegate?
+    
     @IBOutlet weak var selectedFoodButton: UIButton!
+    
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,10 +28,14 @@ class SelectedFoodNameCollectionViewCell: UICollectionViewCell {
         delegate?.didTapDeleteButton(index: self.tag)
     }
     
+    public func didTapSelectedFoodCell() {
+        delegate?.didTapDeleteButton(index: self.tag)
+    }
+    
     public func setupLayout(title: String) {
-        self.selectedFoodButton.setTitle(title, for: .normal)
-        self.selectedFoodButton.layer.borderWidth = 1.6
-        self.selectedFoodButton.layer.borderColor = UIColor.signatureBlue.cgColor
-        self.selectedFoodButton.layer.cornerRadius = 17
+        self.nameLabel.text = title
+        self.containerView.layer.borderWidth = 1.6
+        self.containerView.layer.borderColor = UIColor.signatureBlue.cgColor
+        self.containerView.layer.cornerRadius = 17
     }
 }
