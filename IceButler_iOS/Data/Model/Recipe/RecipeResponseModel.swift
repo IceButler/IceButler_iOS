@@ -19,3 +19,7 @@ struct Recipe: Codable {
     let percentageOfFood: Int
     let recipeLikeStatus: Bool
 }
+
+struct RecipeBookmarkResponseModel: Codable {
+    let status: Bool
+}
