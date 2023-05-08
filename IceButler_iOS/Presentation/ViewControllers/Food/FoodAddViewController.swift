@@ -363,18 +363,52 @@ class FoodAddViewController: UIViewController {
 
         self.foodDetailTextView.text = foodData.foodDetailName
         self.foodNameTextView.text = foodData.foodName
-        self.selectedFoodCategory = FoodCategory(rawValue: foodData.foodCategory)
-        self.datePickerOpenButton.setTitle(foodData.shelfLife, for: .normal)
         self.foodOwnerIdx = foodData.ownerIdx
-        // TODO: 카테고리 및 소유자 값 복원
-
-    }
-    
-    private func resetFoodData() {
-        self.foodDetailTextView.text = ""
-        self.selectedFoodCategory = .none
-        self.datePickerOpenButton.setTitle("", for: .normal)
-        // TODO: 유통기한 및 소유자 값 복원
+        
+        /// reset UI
+        setupPlaceholder()
+        if foodData.foodDetailName == "" {
+            foodDetailTextView.backgroundColor = .notInputColor
+        } else { foodDetailTextView.textColor = .black }
+        
+        if foodData.foodCategory == "" {
+            categoryOpenButton.setTitle("카테고리를 선택해주세요.", for: .normal)
+            categoryOpenButton.tintColor = .placeholderColor
+            categoryOpenButton.backgroundColor = .notInputColor
+        } else {
+            categoryOpenButton.setTitle(foodData.foodCategory, for: .normal)
+            categoryOpenButton.backgroundColor = .focusSkyBlue
+            categoryOpenButton.tintColor = .black
+        }
+        
+        if foodData.shelfLife == "" {
+            datePickerOpenButton.backgroundColor = .notInputColor
+            datePickerOpenButton.setTitle("소비기한을 입력해주세요.", for: .normal)
+        } else {
+            datePickerOpenButton.backgroundColor = .focusSkyBlue
+            datePickerOpenButton.setTitle(foodData.shelfLife, for: .normal)
+            datePickerOpenButton.tintColor = .black
+        }
+        
+        if foodData.ownerIdx == -1 {
+            ownerOpenButton.setTitle("", for: .normal)
+            ownerOpenButton.backgroundColor = .notInputColor
+        }
+        else {
+            ownerOpenButton.setTitle(ownerName, for: .normal)
+            ownerOpenButton.backgroundColor = .focusSkyBlue
+        }
+        
+        if foodData.memo == nil {
+            foodMemoTextView.text = "메모내용 or 없음"
+            foodMemoTextView.backgroundColor = .notInputColor
+            foodMemoTextView.textColor = .placeholderColor
+        } else {
+            foodMemoTextView.text = foodData.memo
+            foodMemoTextView.backgroundColor = .focusSkyBlue
+            foodMemoTextView.textColor = .black
+        }
+        
     }
     
     /// '이전' 버튼 탭 이벤트 정의
@@ -522,8 +556,11 @@ class FoodAddViewController: UIViewController {
         if foodDetailTextView.text != "" && foodDetailTextView.text != "식품 상세명을 입력해주세요." {
             savedFoods[currentFoodIndex].foodDetailName = foodDetailTextView.text
         }
-        if selectedFoodCategory != nil {
+        if selectedFoodCategory != nil && categoryOpenButton.title(for: .normal) != "카테고리를 선택해주세요." {
             savedFoods[currentFoodIndex].foodCategory = selectedFoodCategory!.rawValue
+        }
+        if datePickerOpenButton.title(for: .normal) != "소비기한을 입력해주세요." {
+            savedFoods[currentFoodIndex].shelfLife = datePickerOpenButton.title(for: .normal)!
         }
         if foodOwnerIdx != -1 {
             savedFoods[currentFoodIndex].ownerIdx = foodOwnerIdx ?? -1
@@ -532,6 +569,16 @@ class FoodAddViewController: UIViewController {
             savedFoods[currentFoodIndex].memo = foodMemoTextView.text
         }
         // TODO: 이미지 url 임시저장
+        if foodImage != nil {
+//            savedFoods[currentFoodIndex].imageUrl
+//            let parameter: Parameters = ["ext": "jpeg", "dir": imageDir.rawValue]
+//            ImageService.shared.getImageUrl(parameter: parameter) {[self] response in
+//                if let response = response {
+//                    profileImgKey = response.imageKey
+//                    uploadProfileImage(image: image, url: response.presignedUrl, fridgeIdx: fridgeIdx, foodName: foodName, foodDetail: foodDetail, foodCategory: foodCategory, foodShelfLife: foodShelfLife, foodOwnerIdx: foodOwnerIdx, memo: memo, completion: completion)
+//                }
+//            }
+        }
         
         print("임시저장된 식품 정보 --> index: \(currentFoodIndex) \n\(savedFoods[currentFoodIndex])")
     }
