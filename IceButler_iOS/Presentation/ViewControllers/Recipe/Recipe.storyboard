@@ -187,7 +187,6 @@
         <!--Add Recipe View Controller-->
         <scene sceneID="6QH-N1-2U3">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Bx-v9-Uk2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="AddRecipeViewController" id="UgH-2e-Wa1" customClass="AddRecipeViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HRS-ei-gnm">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
@@ -482,7 +481,7 @@
                                             <constraint firstItem="tTe-w7-0wA" firstAttribute="top" secondItem="q2Q-cf-UBo" secondAttribute="bottom" constant="9" id="QjJ-Ox-eo1"/>
                                             <constraint firstItem="3sn-zT-0K6" firstAttribute="top" secondItem="Kk0-e3-iCV" secondAttribute="bottom" constant="9" id="Tvu-l1-buc"/>
                                             <constraint firstItem="wWI-dc-xIw" firstAttribute="leading" secondItem="nPs-xS-ybu" secondAttribute="leading" id="U8t-g8-Rcf"/>
-                                            <constraint firstItem="wWI-dc-xIw" firstAttribute="top" secondItem="l0j-0N-Lr6" secondAttribute="bottom" priority="250" constant="9" id="V8M-3W-vts"/>
+                                            <constraint firstItem="wWI-dc-xIw" firstAttribute="top" secondItem="l0j-0N-Lr6" secondAttribute="bottom" priority="250" id="V8M-3W-vts"/>
                                             <constraint firstItem="hmT-Yx-nKP" firstAttribute="centerY" secondItem="Kk0-e3-iCV" secondAttribute="centerY" id="aWg-Iz-jy2"/>
                                             <constraint firstAttribute="height" constant="800" id="b4o-TI-eq8"/>
                                             <constraint firstItem="Kk0-e3-iCV" firstAttribute="top" secondItem="tTe-w7-0wA" secondAttribute="bottom" constant="20" id="dhO-JR-obo"/>
@@ -499,7 +498,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOi-TJ-cIs">
-                                        <rect key="frame" x="16" y="664" width="361" height="49"/>
+                                        <rect key="frame" x="16" y="697" width="361" height="49"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="49" id="alk-90-dZz"/>
                                         </constraints>
@@ -578,6 +577,7 @@
                         <outlet property="timeRequiredView" destination="Reu-gp-qJN" id="tO9-Jp-EJl"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Bx-v9-Uk2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1865" y="1465"/>
         </scene>

@@ -17,6 +17,14 @@ class RecipeIngredientTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupLayout()
+    }
+    
+    private func setupLayout() {
+        nameView.layer.cornerRadius = 10
+        nameView.layer.masksToBounds = true
+        amountView.layer.cornerRadius = 10
+        amountView.layer.masksToBounds = true
     }
     
     func configure(name: String, amount: String) {

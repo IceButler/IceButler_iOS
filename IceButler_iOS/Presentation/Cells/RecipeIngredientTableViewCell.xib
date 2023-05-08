@@ -11,10 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeIngredientCell" id="KGk-i7-Jjw" customClass="RecipeIngredientTableViewCell" customModule="IceButler_iOS" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="345" height="43"/>
+            <rect key="frame" x="0.0" y="0.0" width="345" height="52"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="345" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="345" height="52"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="Hgu-h3-dQH">
@@ -38,7 +38,6 @@
                                     <constraint firstItem="a5z-5M-qj0" firstAttribute="leading" secondItem="iRi-2O-Jsg" secondAttribute="leading" constant="20" id="AHy-eL-Ngm"/>
                                     <constraint firstItem="a5z-5M-qj0" firstAttribute="top" secondItem="iRi-2O-Jsg" secondAttribute="top" constant="10" id="Lfi-Qs-8yM"/>
                                     <constraint firstAttribute="bottom" secondItem="a5z-5M-qj0" secondAttribute="bottom" constant="10" id="QbT-PO-UcF"/>
-                                    <constraint firstItem="a5z-5M-qj0" firstAttribute="centerY" secondItem="iRi-2O-Jsg" secondAttribute="centerY" id="tHE-8s-2xl"/>
                                     <constraint firstAttribute="trailing" secondItem="a5z-5M-qj0" secondAttribute="trailing" constant="20" id="wBa-rg-5yW"/>
                                 </constraints>
                             </view>
@@ -57,7 +56,6 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.86274509799999999" green="0.92156862750000001" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="tbB-dE-6uh" firstAttribute="centerY" secondItem="amV-PN-3kG" secondAttribute="centerY" id="3n2-sr-e6o"/>
                                     <constraint firstAttribute="bottom" secondItem="tbB-dE-6uh" secondAttribute="bottom" constant="10" id="Phs-iN-c90"/>
                                     <constraint firstAttribute="trailing" secondItem="tbB-dE-6uh" secondAttribute="trailing" constant="20" id="RWI-I3-AqD"/>
                                     <constraint firstItem="tbB-dE-6uh" firstAttribute="top" secondItem="amV-PN-3kG" secondAttribute="top" constant="10" id="VC8-CB-Dpa"/>
@@ -65,6 +63,12 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="iRi-2O-Jsg" firstAttribute="top" secondItem="Hgu-h3-dQH" secondAttribute="top" id="5vq-Xh-PY6"/>
+                            <constraint firstItem="iRi-2O-Jsg" firstAttribute="centerY" secondItem="amV-PN-3kG" secondAttribute="centerY" id="6pK-Rq-42z"/>
+                            <constraint firstAttribute="bottom" secondItem="iRi-2O-Jsg" secondAttribute="bottom" id="rGZ-1T-sjK"/>
+                            <constraint firstItem="iRi-2O-Jsg" firstAttribute="leading" secondItem="Hgu-h3-dQH" secondAttribute="leading" id="tDh-Ii-WKu"/>
+                        </constraints>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2B-ha-51f">
                         <rect key="frame" x="315" y="-7" width="30" height="57"/>
@@ -77,11 +81,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="O2B-ha-51f" secondAttribute="trailing" id="JGA-3t-eR3"/>
-                    <constraint firstAttribute="bottom" secondItem="Hgu-h3-dQH" secondAttribute="bottom" id="bEq-cP-f2r"/>
+                    <constraint firstAttribute="bottom" secondItem="Hgu-h3-dQH" secondAttribute="bottom" constant="9" id="bEq-cP-f2r"/>
+                    <constraint firstItem="O2B-ha-51f" firstAttribute="centerY" secondItem="amV-PN-3kG" secondAttribute="centerY" id="bJ3-HA-Ng7"/>
                     <constraint firstItem="Hgu-h3-dQH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="eWt-qI-lbc"/>
                     <constraint firstItem="Hgu-h3-dQH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="kRh-hq-lOA"/>
                     <constraint firstItem="O2B-ha-51f" firstAttribute="leading" secondItem="Hgu-h3-dQH" secondAttribute="trailing" constant="14" id="nE8-Kj-h2L"/>
-                    <constraint firstItem="O2B-ha-51f" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="udE-QG-1S3"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
