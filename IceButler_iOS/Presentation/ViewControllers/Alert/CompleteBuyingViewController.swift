@@ -34,6 +34,10 @@ class CompleteBuyingViewController: UIViewController {
     
     @IBAction func didTapCancelButton(_ sender: UIButton) {
         self.navigationController?.popToRootViewController(animated: true)
+        completeFoods.removeAll()
+        selectedFoods.removeAll()
+        CartViewModel.shared.removeFoodIdxes?.removeAll()
+        CartViewModel.shared.removeFoodNames.removeAll()
     }
     @IBAction func didTapRightButton(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "FoodAdd", bundle: nil)
@@ -45,6 +49,8 @@ class CompleteBuyingViewController: UIViewController {
         
         completeFoods.removeAll()
         selectedFoods.removeAll()
+        CartViewModel.shared.removeFoodIdxes?.removeAll()
+        CartViewModel.shared.removeFoodNames.removeAll()
         
         self.navigationController?.pushViewController(foodAddViewController, animated: true)
     }
