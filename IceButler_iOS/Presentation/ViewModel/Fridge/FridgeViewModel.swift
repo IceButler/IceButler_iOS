@@ -25,7 +25,7 @@ class FridgeViewModel: ObservableObject {
     @Published var processedFoodList: [FridgeFood] = []
     @Published var etcFoodList: [FridgeFood] = []
     
-    var searchMemberResults: [MemberResponseModel] = []
+    var searchMemberResults: [FridgeUser] = []
     
     var cancelLabels: Set<AnyCancellable> = []
     
@@ -99,7 +99,7 @@ class FridgeViewModel: ObservableObject {
         switch foodListIdx {
         case 0:
             $allFoodList.filter { allFoodList in
-//                allFoodList.count > 0
+                //                allFoodList.count > 0
                 allFoodList.count > -1
             }.sink { allFoodList in
                 completion()
@@ -612,7 +612,7 @@ class FridgeViewModel: ObservableObject {
         })
     }
         
-    /// 이전에 선택된 냉장고가 있다면 해당 냉장고로 기본 설정
+        /// 이전에 선택된 냉장고가 있다면 해당 냉장고로 기본 설정
     func setSavedFridgeIdx() {
         if let idx = UserDefaults.standard.value(forKey: "selectedFridgeIdx"),
            let name = UserDefaults.standard.value(forKey: "selectedFridgeName") {

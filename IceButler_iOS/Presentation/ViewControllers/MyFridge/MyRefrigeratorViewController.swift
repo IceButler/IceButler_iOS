@@ -19,6 +19,11 @@ class MyRefrigeratorViewController: UIViewController {
         setupTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        fetchData()
+        tableView.reloadData()
+    }
+    
     private func setupNavigationBar() {
         /// setting status bar background color
         if #available(iOS 13.0, *) {
@@ -68,29 +73,62 @@ class MyRefrigeratorViewController: UIViewController {
 }
 
 extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 188 }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let fridgeList = data?.fridgeList,
            let multiFridgeResList = data?.multiFridgeResList {
             return fridgeList.count + multiFridgeResList.count
         }
         else { return 0 }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyRefrigeratorTableViewCell", for: indexPath) as? MyRefrigeratorTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
+        cell.tag = indexPath.row
+        cell.delegate = self
         if indexPath.row < data?.fridgeList?.count ?? 0 {
             cell.configureFridge(data: data?.fridgeList![indexPath.row])
         } else {
             let frigeratorCount = data?.fridgeList?.count ?? 0
             cell.configureMultiFridge(data: data?.multiFridgeResList![indexPath.row - frigeratorCount])
         }
+        cell.moreView.isHidden = true
+        cell.collectionView.reloadData()
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 188
+}
+
+extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
+    func didTapEditButton(index: Int) {
+        guard let editViewController = storyboard?.instantiateViewController(withIdentifier: "EditMyFridgeViewController") as? EditMyFridgeViewController else { return }
+        
+        
+        if index < (data?.fridgeList?.count ?? 0) {
+            let data = data?.fridgeList![index]
+            editViewController.setFridgeIdx(index: data?.fridgeIdx ?? -1)
+            editViewController.setFridgeData(isMulti: false,
+                                             fridgeName: data?.fridgeName ?? "",
+                                             comment: data?.comment ?? "",
+                                             members: (data?.users)!,
+                                             owner: (data?.users![0])!)
+            
+        } else {
+            let idx = index - (data?.fridgeList?.count ?? 0)
+            let data = data?.multiFridgeResList![idx]
+            editViewController.setFridgeIdx(index: data?.multiFridgeIdx ?? -1)
+            editViewController.setFridgeData(isMulti: true,
+                                             fridgeName: data?.multiFridgeName ?? "",
+                                             comment: data?.comment ?? "",
+                                             members: (data?.users)!,
+                                             owner: (data?.users![0])!)
+            
+        }
+        self.navigationController?.pushViewController(editViewController, animated: true)
     }
     
+    func didTapDeleteButton() {
+        // TODO: 마이냉장고 삭제 팝업 표시
+    }
 }

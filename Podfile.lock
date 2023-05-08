@@ -1,6 +1,10 @@
 PODS:
   - Alamofire (5.6.4)
   - BSImagePicker (3.3.1)
+  - Charts (4.1.0):
+    - Charts/Core (= 4.1.0)
+  - Charts/Core (4.1.0):
+    - SwiftAlgorithms (~> 1.0)
   - IQKeyboardManager (6.5.11)
   - KakaoSDKAuth (2.15.0):
     - KakaoSDKCommon (= 2.15.0)
@@ -16,6 +20,7 @@ PODS:
   - Kingfisher (7.6.2)
   - Pageboy (4.0.2)
   - SnapKit (5.6.0)
+  - SwiftAlgorithms (1.0.0)
   - Tabman (3.0.1):
     - Pageboy (~> 4.0.2)
   - Toast-Swift (5.0.1)
@@ -23,6 +28,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - BSImagePicker (~> 3.1)
+  - Charts
   - IQKeyboardManager
   - KakaoSDKAuth
   - KakaoSDKUser
@@ -35,6 +41,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - BSImagePicker
+    - Charts
     - IQKeyboardManager
     - KakaoSDKAuth
     - KakaoSDKCommon
@@ -42,12 +49,14 @@ SPEC REPOS:
     - Kingfisher
     - Pageboy
     - SnapKit
+    - SwiftAlgorithms
     - Tabman
     - Toast-Swift
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
+  Charts: 354f86803d11d9c35de280587fef50d1af063978
   IQKeyboardManager: ef43ce1ba1e5aaf4adf222c0a46f39761f246879
   KakaoSDKAuth: 0fe5cf1756e8a9f66f8fc77826061aafa93034f3
   KakaoSDKCommon: 89d863b7f34398e6fb93a0acb28a204908551a39
@@ -55,9 +64,10 @@ SPEC CHECKSUMS:
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   Pageboy: 34ff11e8d1041b81769d5bcde9b19a0cb7218bd9
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   Tabman: a5880789298f81d3f2cdd6510b54ae637cfd8e09
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 7e9590abfb5804abbd1a3ed8b1ec9e835a93ea47
+PODFILE CHECKSUM: 01e03f08e66316a932da35fa4ed2767f736d8636
 
 COCOAPODS: 1.11.3
