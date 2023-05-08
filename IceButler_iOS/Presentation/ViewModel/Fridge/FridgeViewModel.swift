@@ -25,7 +25,7 @@ class FridgeViewModel: ObservableObject {
     @Published var processedFoodList: [FridgeFood] = []
     @Published var etcFoodList: [FridgeFood] = []
     
-    var searchMemberResults: [MemberResponseModel] = []
+    var searchMemberResults: [FridgeUser] = []
     
     var cancelLabels: Set<AnyCancellable> = []
     

@@ -26,7 +26,7 @@ class MemberSearchTableViewCell: UITableViewCell {
         profileImgView.layer.cornerRadius = profileImgView.frame.width/2 - 1
     }
     
-    public func configure(data: MemberResponseModel) {
+    public func configure(data: FridgeUser) {
         if let urlStr = data.profileImgUrl {
             profileImgView.kf.setImage(with: URL(string: urlStr))
         }
