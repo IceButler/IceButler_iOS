@@ -103,9 +103,6 @@ class GraphMainViewController: TabmanViewController {
         bar.backgroundView.style = .clear
         
         bar.buttons.customize { (button) in
-            let tmpLabel = UILabel()
-            tmpLabel.text = button.text
-            tmpLabel.font = UIFont.systemFont(ofSize: 15)
             button.frame.size = CGSize(width: 163, height: 36)
             
             button.contentVerticalAlignment = .center
@@ -116,12 +113,12 @@ class GraphMainViewController: TabmanViewController {
         
         bar.backgroundColor = .white
         
-        bar.indicator.weight = .light
+        bar.indicator.weight = .custom(value: 3)
         bar.indicator.tintColor = .signatureBlue
         bar.indicator.overscrollBehavior = .bounce
         
-        bar.layout.contentMode = .intrinsic
-        bar.layout.interButtonSpacing = 165
+        bar.layout.contentMode = .fit
+        bar.layout.interButtonSpacing = 10
         bar.layout.transitionStyle = .snap
         bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 20.0)
         
