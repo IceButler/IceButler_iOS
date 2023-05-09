@@ -11,6 +11,7 @@ class AddRecipeViewController: UIViewController {
     private let MENU_NAME_MAX_LENGTH = 20
     private let GENERAL_MAX_LENGTH = 3
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var representativeImageLabel: UILabel!
     @IBOutlet weak var addRepresentativeImageButton: UIButton!
     @IBOutlet weak var menuNameLabel: UILabel!
@@ -191,16 +192,20 @@ class AddRecipeViewController: UIViewController {
                 self.categoryViewHeight.priority = UILayoutPriority(250)
                 self.categoryOpenImageView.image = UIImage(named: "recipeCategoryCloseIcon")
             }
-            self.isOpenCategoryView.toggle()
+//            self.scrollView.updateContentSize()
         }
+        isOpenCategoryView.toggle()
     }
     
     @IBAction func didTapAddIngredientButton(_ sender: Any) {
         if !ingredientNameTextField.text!.isEmpty && !ingredientAmountTextField.text!.isEmpty {
             addedIngredientList.append([ingredientNameTextField.text!, ingredientAmountTextField.text!])
             ingredientStackViewTopConstraintToIngredientTableView.priority = UILayoutPriority(1000)
+            print(addedIngredientList)
             
             ingredientTableView.reloadData()
+//            scrollView.updateContentSize()
+            scrollView.invalidateIntrinsicContentSize()
         }
     }
     
@@ -301,6 +306,27 @@ extension AddRecipeViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             return
         }
+    }
+}
+
+extension UIScrollView {
+    func updateContentSize() {
+        let unionCalculatedTotalRect = recursiveUnionInDepthFor(view: self)
+        
+        // 계산된 크기로 컨텐츠 사이즈 설정
+        self.contentSize = CGSize(width: self.frame.width, height: unionCalculatedTotalRect.height+50)
+    }
+    
+    private func recursiveUnionInDepthFor(view: UIView) -> CGRect {
+        var totalRect: CGRect = .zero
+        
+        // 모든 자식 View의 컨트롤의 크기를 재귀적으로 호출하며 최종 영역의 크기를 설정
+        for subView in view.subviews {
+            totalRect = totalRect.union(recursiveUnionInDepthFor(view: subView))
+        }
+        
+        // 최종 계산 영역의 크기를 반환
+        return totalRect.union(view.frame)
     }
 }
 
