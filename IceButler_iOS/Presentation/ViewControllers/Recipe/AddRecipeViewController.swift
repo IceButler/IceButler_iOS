@@ -51,12 +51,17 @@ class AddRecipeViewController: UIViewController {
     }
     
     private func setup() {
+        menuNameTextField.delegate = self
+        amountTextField.delegate = self
+        timeRequiredTextField.delegate = self
+        ingredientNameTextField.delegate = self
+        ingredientAmountTextField.delegate = self
+        
         let tableViewList = [categoryTableView, ingredientTableView]
         for i in 0..<tableViewList.count {
             tableViewList[i]?.delegate = self
             tableViewList[i]?.dataSource = self
             tableViewList[i]?.tag = i
-
         }
         ingredientTableView.rowHeight = UITableView.automaticDimension
         
@@ -65,9 +70,14 @@ class AddRecipeViewController: UIViewController {
         let ingredientCell = UINib(nibName: "RecipeIngredientTableViewCell", bundle: nil)
         ingredientTableView.register(ingredientCell, forCellReuseIdentifier: "RecipeIngredientCell")
         
+        // 글자수 제한
         NotificationCenter.default.addObserver(self, selector: #selector(menuNameTextDidChange), name: UITextField.textDidChangeNotification, object: menuNameTextField)
         NotificationCenter.default.addObserver(self, selector: #selector(amountTextDidChange), name: UITextField.textDidChangeNotification, object: amountTextField)
         NotificationCenter.default.addObserver(self, selector: #selector(timeRequiredTextDidChange), name: UITextField.textDidChangeNotification, object: timeRequiredTextField)
+        // 입력 감지 후 배경색 변경
+        menuNameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        amountTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        timeRequiredTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     private func setupNavigationBar() {
@@ -115,16 +125,11 @@ class AddRecipeViewController: UIViewController {
         setupCornerRadius()
         setupColor()
         
-        // 3. textField/카테고리 미입력/입력 시 색깔 지정 -> 회색, 파란색
         // 인분, 분: 미입력-> placeholder색, 입력-> 검은색
         // 모든 사항 입력시 다음 버튼 활성화(뭐하나 입력될 때마다 확인해봐야 하나?)
-        categoryTableView.separatorStyle = .none
-        categoryTableView.backgroundColor = .notEnteredStateColor.withAlphaComponent(0.4)
-        ingredientTableView.separatorStyle = .none
-        
-        // 조리과정 : tableview
-        // 스크롤뷰 수정(동적으로)
         // 대표사진 선택
+        categoryTableView.separatorStyle = .none
+        ingredientTableView.separatorStyle = .none
     }
     
     private func setupPlaceholder() {
@@ -173,6 +178,7 @@ class AddRecipeViewController: UIViewController {
         representativeImageLabel.textColor = .textDeepBlue
         menuNameLabel.textColor = .textDeepBlue
         categoryLabel.textColor = .textDeepBlue
+        categoryTableView.backgroundColor = .notEnteredStateColor.withAlphaComponent(0.4)
         amountLabel.textColor = .textDeepBlue
         timeRequiredLabel.textColor = .textDeepBlue
         ingredientLabel.textColor = .textDeepBlue
@@ -250,6 +256,36 @@ class AddRecipeViewController: UIViewController {
             }
         }
     }
+    
+    /* textField 입력 감지 함수 */
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if textField.text?.count ?? 0 > 0 {
+            switch textField {
+                case menuNameTextField:
+                    menuNameView.backgroundColor = .focusSkyBlue
+                case amountTextField:
+                    servingLabel.textColor = .black
+                    amountView.backgroundColor = .focusSkyBlue
+                case timeRequiredTextField:
+                    minuteLabel.textColor = .black
+                    timeRequiredView.backgroundColor = .focusSkyBlue
+                default: return
+            }
+            
+        } else {
+            switch textField {
+                case menuNameTextField:
+                    menuNameView.backgroundColor = .notEnteredStateColor
+                case amountTextField:
+                    servingLabel.textColor = .placeholderColor
+                    amountView.backgroundColor = .notEnteredStateColor
+                case timeRequiredTextField:
+                    minuteLabel.textColor = .placeholderColor
+                    timeRequiredView.backgroundColor = .notEnteredStateColor
+                default: return
+            }
+        }
+    }
 }
 
 extension AddRecipeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -302,6 +338,13 @@ extension AddRecipeViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             return
         }
+    }
+}
+
+extension AddRecipeViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

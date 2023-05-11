@@ -29,6 +29,9 @@ class AddRecipeSecondViewController: UIViewController {
     }
     
     private func setup() {
+        // TODO: textView 200자 글자수 제한
+        hideKeyboardWhenTapScreen()
+        cookingProcessTextView.delegate = self
         cookingProcessTableView.delegate = self
         cookingProcessTableView.dataSource = self
         cookingProcessTableView.rowHeight = UITableView.automaticDimension
@@ -86,7 +89,8 @@ class AddRecipeSecondViewController: UIViewController {
         addCookingProcessImageButton.layer.cornerRadius = 10
         addCookingProcessImageButton.layer.masksToBounds = true
         // textView
-        // TODO: placeholder 구현
+        cookingProcessTextView.text = "200자 이내"
+        cookingProcessTextView.textColor = .placeholderColor
         cookingProcessTextView.textContainerInset = UIEdgeInsets(top: 12, left: 13, bottom: 12, right: 13);
         cookingProcessTextView.layer.cornerRadius = 10
         cookingProcessTextView.layer.masksToBounds = true
@@ -105,7 +109,6 @@ class AddRecipeSecondViewController: UIViewController {
     }
     
     @IBAction func didTapAddCookingProcessButton(_ sender: Any) {
-        // TODO: 테이블뷰에서 사용할 데이터 리스트에 추가 및 reloadData()
         // 이미지는 추가하지 않아도 됨, cell에서 텍스트 편집은 안 돼도(유저인터랙션 어쩌구 false), 사진은 추가할 수 있도록 해야함
         if !cookingProcessTextView.text!.isEmpty {
             if ((addCookingProcessImageButton.imageView?.image?.isEqual(UIImage(named: "imageAddIcon"))) != nil) {
@@ -133,5 +136,33 @@ extension AddRecipeSecondViewController: UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = .none
         
         return cell
+    }
+}
+
+extension AddRecipeSecondViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.placeholderColor {
+            textView.textColor = UIColor.black
+            textView.text = nil
+        }
+    }
+        
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "200자 이내"
+            textView.textColor = .placeholderColor
+        }
+    }
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTapScreen() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGestureRecognizer.cancelsTouchesInView = true
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
