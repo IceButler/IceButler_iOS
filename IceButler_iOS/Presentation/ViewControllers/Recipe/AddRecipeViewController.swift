@@ -209,7 +209,6 @@ class AddRecipeViewController: UIViewController {
     @IBAction func didTapNextButton(_ sender: Any) {
         // 비활성화 상태인지 확인, disabled라면 필수항목 입력해달라고 띄우기
         // 모든 데이터 넘겨야함
-        // 두번째 추가 화면에서 다시 back 버튼 눌렀을 때 두번째 화면 데이터 다시 첫번째로 넘겨서 보존하기
         guard let addRecipeSecondViewController = storyboard!.instantiateViewController(withIdentifier: "AddRecipeSecondViewController") as? AddRecipeSecondViewController else { return }
         self.navigationController?.pushViewController(addRecipeSecondViewController, animated: true)
     }
