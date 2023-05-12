@@ -124,6 +124,7 @@ class AddRecipeViewController: UIViewController {
         setupPlaceholder()
         setupCornerRadius()
         setupColor()
+        addRepresentativeImageButton.setImage(UIImage(named: "imageAddIcon"), for: .normal)
         categoryTableView.separatorStyle = .none
         ingredientTableView.separatorStyle = .none
     }
@@ -205,14 +206,39 @@ class AddRecipeViewController: UIViewController {
             
             ingredientTableView.reloadData()
             scrollView.invalidateIntrinsicContentSize()
+            changeNextButtonColor()
         }
     }
     
     @IBAction func didTapNextButton(_ sender: Any) {
-        // 비활성화 상태인지 확인, disabled라면 필수항목 입력해달라고 띄우기
         // 모든 데이터 넘겨야함
-        guard let addRecipeSecondViewController = storyboard!.instantiateViewController(withIdentifier: "AddRecipeSecondViewController") as? AddRecipeSecondViewController else { return }
-        self.navigationController?.pushViewController(addRecipeSecondViewController, animated: true)
+        if nextButton.backgroundColor == .availableBlue {
+            guard let addRecipeSecondViewController = storyboard!.instantiateViewController(withIdentifier: "AddRecipeSecondViewController") as? AddRecipeSecondViewController else { return }
+            self.navigationController?.pushViewController(addRecipeSecondViewController, animated: true)
+        }
+        // TODO: alert 띄우기
+    }
+    
+    private func isAllEntered() -> Bool {
+        if
+//            !addRepresentativeImageButton.imageView!.image!.isEqual(UIImage(named: "imageAddIcon")),
+           !(menuNameTextField.text?.isEmpty ?? true),
+           categoryOpenButton.backgroundColor == .focusSkyBlue,
+           !(amountTextField.text?.isEmpty ?? true),
+           !(timeRequiredTextField.text?.isEmpty ?? true),
+           ingredientTableView.numberOfRows(inSection: 0) > 1
+        {
+            return true
+        }
+        return false
+    }
+    
+    private func changeNextButtonColor() {
+        if isAllEntered() {
+            nextButton.backgroundColor = .availableBlue
+        } else {
+            nextButton.backgroundColor = .disabledButtonGray
+        }
     }
     
     /* textField 글자수 제한 함수 */
@@ -281,6 +307,7 @@ class AddRecipeViewController: UIViewController {
                 default: return
             }
         }
+        changeNextButtonColor()
     }
 }
 
@@ -326,6 +353,7 @@ extension AddRecipeViewController: UITableViewDelegate, UITableViewDataSource, D
                 self.categoryOpenButton.backgroundColor = .focusSkyBlue
                 self.categoryTableView.backgroundColor = .focusTableViewSkyBlue
                 self.categoryOpenImageView.image = UIImage(named: "recipeCategoryOpenIcon")
+                self.changeNextButtonColor()
             }
             let selectedRecipeCategory = RecipeCategory.allCases[indexPath.row]
             let attributedTitle = NSAttributedString(string: selectedRecipeCategory.rawValue, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.black])
@@ -343,6 +371,7 @@ extension AddRecipeViewController: UITableViewDelegate, UITableViewDataSource, D
         ingredientTableView.deleteRows(at: [indexPath], with: .none)
         ingredientTableView.endUpdates()
         ingredientTableView.reloadData()
+        changeNextButtonColor()
     }
 }
 

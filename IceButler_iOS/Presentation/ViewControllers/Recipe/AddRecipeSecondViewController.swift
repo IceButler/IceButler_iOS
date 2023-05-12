@@ -29,7 +29,6 @@ class AddRecipeSecondViewController: UIViewController {
     }
     
     private func setup() {
-        // TODO: textView 200자 글자수 제한
         hideKeyboardWhenTapScreen()
         cookingProcessTextView.delegate = self
         cookingProcessTableView.delegate = self
@@ -86,6 +85,7 @@ class AddRecipeSecondViewController: UIViewController {
         // tableView
         cookingProcessTableView.separatorStyle = .none
         // addImageButton
+        addCookingProcessImageButton.setImage(UIImage(named: "imageAddIcon"), for: .normal)
         addCookingProcessImageButton.layer.cornerRadius = 10
         addCookingProcessImageButton.layer.masksToBounds = true
         // textView
@@ -111,7 +111,7 @@ class AddRecipeSecondViewController: UIViewController {
     @IBAction func didTapAddCookingProcessButton(_ sender: Any) {
         // 이미지는 추가하지 않아도 됨, cell에서 텍스트 편집은 안 돼도(유저인터랙션 어쩌구 false), 사진은 추가할 수 있도록 해야함
         if !cookingProcessTextView.text!.isEmpty {
-            if ((addCookingProcessImageButton.imageView?.image?.isEqual(UIImage(named: "imageAddIcon"))) != nil) {
+            if addCookingProcessImageButton.imageView!.image!.isEqual(UIImage(named: "imageAddIcon")) {
                 addedCookingProcessList.append([nil, cookingProcessTextView.text!])
             } else {
                 // TODO: 추가된 이미지 리스트에 넣기
