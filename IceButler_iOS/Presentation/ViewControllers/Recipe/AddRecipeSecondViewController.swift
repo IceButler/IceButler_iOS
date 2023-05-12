@@ -124,7 +124,7 @@ class AddRecipeSecondViewController: UIViewController {
     }
 }
 
-extension AddRecipeSecondViewController: UITableViewDelegate, UITableViewDataSource {
+extension AddRecipeSecondViewController: UITableViewDelegate, UITableViewDataSource, DeleteButtonTappedDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return addedCookingProcessList.count
     }
@@ -132,10 +132,19 @@ extension AddRecipeSecondViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCookingProcessCell", for: indexPath) as? RecipeCookingProcessCell else {return UITableViewCell()}
         
-        cell.configure(image: addedCookingProcessList[indexPath.row][0], description: addedCookingProcessList[indexPath.row][1]!)
+        cell.configure(indexPath: indexPath, image: addedCookingProcessList[indexPath.row][0], description: addedCookingProcessList[indexPath.row][1]!)
         cell.selectionStyle = .none
+        cell.delegate = self
         
         return cell
+    }
+    
+    func tappedCellDeleteButton(indexPath: IndexPath) {
+        cookingProcessTableView.beginUpdates()
+        addedCookingProcessList.remove(at: indexPath.row)
+        cookingProcessTableView.deleteRows(at: [indexPath], with: .none)
+        cookingProcessTableView.endUpdates()
+        cookingProcessTableView.reloadData()
     }
 }
 

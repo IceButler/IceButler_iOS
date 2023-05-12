@@ -7,8 +7,9 @@
 
 import UIKit
 
-class RecipeCookingProcessCell: UITableViewCell {
+class RecipeCookingProcessCell: CustomTableViewCell {
 
+    private var indexPath: IndexPath!
     @IBOutlet weak var addImageButton: UIButton!
     @IBOutlet weak var cookingProcessTextView: UITextView!
     @IBOutlet weak var deleteButton: UIButton!
@@ -26,7 +27,12 @@ class RecipeCookingProcessCell: UITableViewCell {
         cookingProcessTextView.textContainerInset = UIEdgeInsets(top: 12, left: 13, bottom: 12, right: 13);
     }
     
-    func configure(image: String?, description: String) {
+    @IBAction func tappedDeleteButton(_ sender: Any) {
+        delegate?.tappedCellDeleteButton(indexPath: indexPath)
+    }
+    
+    func configure(indexPath: IndexPath, image: String?, description: String) {
+        self.indexPath = indexPath
         cookingProcessTextView.text = description
     }
 }

@@ -7,8 +7,9 @@
 
 import UIKit
 
-class RecipeIngredientTableViewCell: UITableViewCell {
+class RecipeIngredientTableViewCell: CustomTableViewCell {
 
+    private var indexPath: IndexPath!
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountView: UIView!
@@ -27,7 +28,12 @@ class RecipeIngredientTableViewCell: UITableViewCell {
         amountView.layer.masksToBounds = true
     }
     
-    func configure(name: String, amount: String) {
+    @IBAction func tappedDeleteButton(_ sender: Any) {
+        delegate?.tappedCellDeleteButton(indexPath: indexPath)
+    }
+    
+    func configure(indexPath: IndexPath, name: String, amount: String) {
+        self.indexPath = indexPath
         nameLabel.text = name
         amountLabel.text = amount
     }

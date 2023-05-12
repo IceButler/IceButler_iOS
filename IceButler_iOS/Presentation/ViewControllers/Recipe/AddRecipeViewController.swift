@@ -284,7 +284,7 @@ class AddRecipeViewController: UIViewController {
     }
 }
 
-extension AddRecipeViewController: UITableViewDelegate, UITableViewDataSource {
+extension AddRecipeViewController: UITableViewDelegate, UITableViewDataSource, DeleteButtonTappedDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView.tag {
         case 0 :
@@ -309,8 +309,9 @@ extension AddRecipeViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeIngredientCell", for: indexPath) as? RecipeIngredientTableViewCell else {return UITableViewCell()}
             
-            cell.configure(name: addedIngredientList[indexPath.row][0], amount: addedIngredientList[indexPath.row][1])
+            cell.configure(indexPath: indexPath, name: addedIngredientList[indexPath.row][0], amount: addedIngredientList[indexPath.row][1])
             cell.selectionStyle = .none
+            cell.delegate = self
             
             return cell
         default:
@@ -335,6 +336,14 @@ extension AddRecipeViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
     }
+    
+    func tappedCellDeleteButton(indexPath: IndexPath) {
+        ingredientTableView.beginUpdates()
+        addedIngredientList.remove(at: indexPath.row)
+        ingredientTableView.deleteRows(at: [indexPath], with: .none)
+        ingredientTableView.endUpdates()
+        ingredientTableView.reloadData()
+    }
 }
 
 extension AddRecipeViewController: UITextFieldDelegate {
@@ -354,4 +363,12 @@ class IntrinsicTableView: UITableView {
         self.invalidateIntrinsicContentSize()
         super.layoutSubviews()
     }
+}
+
+protocol DeleteButtonTappedDelegate: AnyObject {
+    func tappedCellDeleteButton(indexPath: IndexPath)
+}
+
+class CustomTableViewCell: UITableViewCell {
+    weak var delegate: DeleteButtonTappedDelegate?
 }

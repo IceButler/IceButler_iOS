@@ -49,6 +49,9 @@
                         </constraints>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" image="deleteCircle"/>
+                        <connections>
+                            <action selector="tappedDeleteButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ath-Zk-Nqk"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
