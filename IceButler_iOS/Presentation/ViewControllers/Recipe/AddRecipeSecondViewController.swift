@@ -153,6 +153,12 @@ extension AddRecipeSecondViewController: UITextViewDelegate {
             textView.textColor = .placeholderColor
         }
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard let str = textView.text else { return true }
+        let newLength = str.count + text.count - range.length
+        return newLength <= 200
+    }
 }
 
 extension UIViewController {

@@ -124,10 +124,6 @@ class AddRecipeViewController: UIViewController {
         setupPlaceholder()
         setupCornerRadius()
         setupColor()
-        
-        // 인분, 분: 미입력-> placeholder색, 입력-> 검은색
-        // 모든 사항 입력시 다음 버튼 활성화(뭐하나 입력될 때마다 확인해봐야 하나?)
-        // 대표사진 선택
         categoryTableView.separatorStyle = .none
         ingredientTableView.separatorStyle = .none
     }
