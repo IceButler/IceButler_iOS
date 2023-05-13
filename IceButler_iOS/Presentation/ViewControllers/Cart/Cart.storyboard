@@ -252,6 +252,9 @@
                                         <rect key="frame" x="303.66666666666669" y="11" width="33.333333333333314" height="33.333333333333336"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="chevron_right_blue"/>
+                                        <connections>
+                                            <action selector="didTapViewStoreDetail:" destination="k7t-tL-utM" eventType="touchUpInside" id="FsG-Xb-Lsz"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M66-43-e8K">
                                         <rect key="frame" x="24" y="45.333333333333378" width="305" height="100.66666666666669"/>
@@ -339,6 +342,9 @@
                         <outlet property="currentLocationButton" destination="YK6-NE-xf7" id="uWQ-H2-5fA"/>
                         <outlet property="infoInnerView" destination="M66-43-e8K" id="cZd-lE-Uor"/>
                         <outlet property="infoView" destination="PFC-qs-OLM" id="apT-8Z-Ipe"/>
+                        <outlet property="storeAddressLabel" destination="R3Y-RJ-vwo" id="tSD-oz-GXj"/>
+                        <outlet property="storeNameLabel" destination="W0I-UL-plq" id="Wpz-xU-gJx"/>
+                        <outlet property="storePhoneNumLabel" destination="Ik5-Zc-gqL" id="npd-NK-Vdv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M5v-Fs-VuU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

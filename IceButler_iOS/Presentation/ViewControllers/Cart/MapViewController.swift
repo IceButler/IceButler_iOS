@@ -15,10 +15,22 @@ class MapViewController: UIViewController {
     @IBOutlet var infoView: UIView!
     @IBOutlet var infoInnerView: UIView!
     
+    @IBOutlet var storeNameLabel: UILabel!
+    @IBOutlet var storeAddressLabel: UILabel!
+    @IBOutlet var storePhoneNumLabel: UILabel!
+    
+    
+    
     @IBAction func didTapCurrentLocationButton(_ sender: UIButton) {
         // TODO: 현재 위치로 지도 이동
         print("TODO: 현재 위치로 지도 이동")
     }
+    
+    @IBAction func didTapViewStoreDetail(_ sender: UIButton) {
+        // TODO: 카카오맵을 통해 가게 상세 정보 화면으로 이동
+        print("TODO: 카카오맵을 통해 가게 상세 정보 화면으로 이동")
+    }
+    
     
     
     // MARK: Life Cycle Methods
