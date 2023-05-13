@@ -199,9 +199,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="psB-QL-6uc">
-                        <barButtonItem key="leftBarButtonItem" image="cartBarTitle" id="0yu-Jq-qUU">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="map" id="2Ge-a1-suB">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
@@ -429,7 +426,6 @@
     </scenes>
     <resources>
         <image name="back" width="13" height="23"/>
-        <image name="cartBarTitle" width="61" height="17"/>
         <image name="deleteIcon" width="16.333333969116211" height="20.333333969116211"/>
         <image name="map" width="21" height="22"/>
         <image name="noFridge" width="45" height="64"/>
