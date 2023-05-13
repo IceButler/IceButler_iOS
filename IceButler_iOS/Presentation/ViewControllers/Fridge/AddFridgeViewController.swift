@@ -9,7 +9,7 @@ import UIKit
 
 class AddFridgeViewController: UIViewController {
 
-    // MARK: @IBOutlet, Variables
+    // MARK: @IBOutlet, Variables    
     private var isPersonalfridge: Bool = false
     private var isMultifridge: Bool = false
     private var searchMember: [FridgeUser] = []
@@ -86,8 +86,13 @@ class AddFridgeViewController: UIViewController {
                                                 comment: fridgeDetailTextView.text!,
                                                 members: memberIdx,
                                                 completion: { [weak self] result in
-            if result { self?.showAlert(title: nil, message: "냉장고를 성공적으로 추가하였습니다!", confirmTitle: "확인") }
-            else { self?.showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인") }
+            if result {
+//                self?.showAlert(title: nil, message: "냉장고를 성공적으로 추가하였습니다!", confirmTitle: "확인")
+                self?.dismiss(animated: true)
+            }
+            else {
+                self?.showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인")
+            }
         })
     }
     
