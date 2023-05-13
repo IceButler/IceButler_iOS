@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 class AddRecipeViewController: UIViewController {
     private let MENU_NAME_MAX_LENGTH = 20
@@ -48,6 +49,7 @@ class AddRecipeViewController: UIViewController {
         setup()
         setupNavigationBar()
         setupLayout()
+        
     }
     
     private func setup() {
@@ -186,6 +188,10 @@ class AddRecipeViewController: UIViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
+    @IBAction func didTapAddRepresentativeImageButton(_ sender: Any) {
+        authorizePhotoAccess()
+    }
+    
     @IBAction func didTapCategoryOpenButton(_ sender: Any) {
         UIView.animate(withDuration: 0.3) {
             if self.isOpenCategoryView {
@@ -219,9 +225,53 @@ class AddRecipeViewController: UIViewController {
         // TODO: alert 띄우기
     }
     
+    private func authorizePhotoAccess() {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .denied:
+            showSettingAlert()
+        case .authorized:
+            openPhotoLibrary()
+        case .notDetermined, .restricted:
+            PHPhotoLibrary.requestAuthorization { state in
+                if state == .authorized { self.openPhotoLibrary() }
+            }
+        default:
+            break
+        }
+    }
+    
+    private func openPhotoLibrary() {
+        DispatchQueue.main.async {
+            let imagePicker = UIImagePickerController()
+            if (UIImagePickerController.isSourceTypeAvailable(.photoLibrary)) {
+                imagePicker.sourceType = .photoLibrary
+                imagePicker.modalPresentationStyle = .currentContext
+                imagePicker.delegate = self
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func showSettingAlert() {
+        if let appName = Bundle.main.infoDictionary!["CFBundleName"] as? String {
+            let alertVC = UIAlertController(
+                title: "사진 접근 권한이 없습니다.",
+                message: "사진 접근 허용은 '설정 > \(appName) > 사진'에서 하실 수 있습니다.",
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction (
+                title: "확인",
+                style: .default
+            )
+            alertVC.addAction(okAction)
+            DispatchQueue.main.async {
+                self.present(alertVC, animated: true, completion: nil)
+            }
+        }
+    }
+    
     private func isAllEntered() -> Bool {
-        if
-//            !addRepresentativeImageButton.imageView!.image!.isEqual(UIImage(named: "imageAddIcon")),
+        if !addRepresentativeImageButton.imageView!.image!.isEqual(UIImage(named: "imageAddIcon")),
            !(menuNameTextField.text?.isEmpty ?? true),
            categoryOpenButton.backgroundColor == .focusSkyBlue,
            !(amountTextField.text?.isEmpty ?? true),
@@ -308,6 +358,20 @@ class AddRecipeViewController: UIViewController {
             }
         }
         changeNextButtonColor()
+    }
+}
+
+extension AddRecipeViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            addRepresentativeImageButton.imageView?.contentMode = .scaleAspectFill
+            addRepresentativeImageButton.setImage(image, for: .normal)
+            changeNextButtonColor()
+        }
+        dismiss(animated: true, completion: nil)
     }
 }
 

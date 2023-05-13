@@ -1442,11 +1442,11 @@
 				CODE_SIGN_ENTITLEMENTS = IceButler_iOS/IceButler_iOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 643M65W7HH;
+				DEVELOPMENT_TEAM = Q927Z26DP6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceButler_iOS/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"냉집사\"에서 바코드 인식을 위해 카메라 접근을 허용해주세요.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"냉집사\"에서 음식 사진 추가를 위해 사진 접근을 허용해주세요.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"냉집사\"에서 사진 첨부를 위해 사진 접근을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = BarCodeAdd;
@@ -1479,11 +1479,11 @@
 				CODE_SIGN_ENTITLEMENTS = IceButler_iOS/IceButler_iOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 643M65W7HH;
+				DEVELOPMENT_TEAM = Q927Z26DP6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceButler_iOS/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"냉집사\"에서 바코드 인식을 위해 카메라 접근을 허용해주세요.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"냉집사\"에서 음식 사진 추가를 위해 사진 접근을 허용해주세요.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"냉집사\"에서 사진 첨부를 위해 사진 접근을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = BarCodeAdd;
