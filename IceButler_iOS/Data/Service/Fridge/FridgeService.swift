@@ -57,9 +57,13 @@ class FridgeService {
         })
     }
     
-    func addFridge(name: String, comment: String, members: [Int], completion: @escaping ((Int?) -> Void)) {
+    func addFridge(isMulti: Bool, name: String, comment: String, members: [Int], completion: @escaping ((Int?) -> Void)) {
+        var fridgeType: String = ""
+        if isMulti { fridgeType = "multi" }
+        else { fridgeType = "fridge" }
+        
         let req = FridgeRequestModel(fridgeName: name, fridgeComment: comment, members: members)
-        APIManger.shared.postData(urlEndpointString: "/fridges/register",
+        APIManger.shared.postData(urlEndpointString: "/fridges/register?fridgeType=\(fridgeType)",
                                   responseDataType: Int.self,
                                   requestDataType: FridgeRequestModel.self,
                                   parameter: req,

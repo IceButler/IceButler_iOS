@@ -81,7 +81,8 @@ class AddFridgeViewController: UIViewController {
         var memberIdx:[Int] = []
         selectedMember.forEach { member in memberIdx.append(member.userIdx) }
         
-        FridgeViewModel.shared.requestAddFridge(name: fridgeNameTextField.text!,
+        FridgeViewModel.shared.requestAddFridge(isMulti: isMultifridge,
+                                                name: fridgeNameTextField.text!,
                                                 comment: fridgeDetailTextView.text!,
                                                 members: memberIdx,
                                                 completion: { [weak self] result in
