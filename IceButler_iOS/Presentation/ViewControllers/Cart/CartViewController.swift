@@ -233,9 +233,8 @@ class CartViewController: UIViewController {
     
     // MARK: @objc methods
     @objc private func didTapMapItem() {
-        print("didTapMapItem called")
-//        let vc = MapViewController()
-//        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = MapViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
