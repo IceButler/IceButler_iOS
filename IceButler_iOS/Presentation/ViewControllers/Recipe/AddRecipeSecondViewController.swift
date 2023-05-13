@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Photos
 
-class AddRecipeSecondViewController: UIViewController {
+class AddRecipeSecondViewController: UIViewController, ReceiveFirstDataDelegate {
     private let TEXTVIEW_MAX_LENGTH = 200
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -16,16 +17,26 @@ class AddRecipeSecondViewController: UIViewController {
     @IBOutlet weak var addCookingProcessImageButton: UIButton!
     @IBOutlet weak var cookingProcessTextView: UITextView!
     @IBOutlet weak var completionButton: UIButton!
-    
     @IBOutlet weak var cookingProcessStackViewTopConstarintToCookingProcessTableView: NSLayoutConstraint!
     
-    private var addedCookingProcessList: [[String?]] = []
+    private var addedCookingProcessList: [[Any?]] = []
+    private let stackViewImagePicker = UIImagePickerController()
+    private let cellImagePicker = UIImagePickerController()
+    
+    weak var secondDateDelegate: ReceiveSecondDataDelegate?
+    private var representativeImage: UIImage!
+    private var menuName: String!
+    private var category: String!
+    private var amount: Int!
+    private var timeRequired: Int!
+    private var ingredientList: [[String]]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupNavigationBar()
         setupLayout()
+        changeCompletionButtonColor()
     }
     
     private func setup() {
@@ -83,9 +94,13 @@ class AddRecipeSecondViewController: UIViewController {
         // label
         cookingProcessLabel.textColor = .textDeepBlue
         // tableView
+        if addedCookingProcessList.count > 0 {
+            cookingProcessStackViewTopConstarintToCookingProcessTableView.priority = UILayoutPriority(1000)
+        }
         cookingProcessTableView.separatorStyle = .none
         // addImageButton
         addCookingProcessImageButton.setImage(UIImage(named: "imageAddIcon"), for: .normal)
+        addCookingProcessImageButton.imageView?.contentMode = .scaleAspectFill
         addCookingProcessImageButton.layer.cornerRadius = 10
         addCookingProcessImageButton.layer.masksToBounds = true
         // textView
@@ -101,30 +116,155 @@ class AddRecipeSecondViewController: UIViewController {
     }
     
     @IBAction func didTapBackButton(_ sender: Any) {
+        secondDateDelegate?.receiveDataFromSecondAddVC(addedCookingProcessList: addedCookingProcessList)
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func didTapAddImageButton(_ sender: Any) {
-        // TODO: 조리 과정 사진 추가
+        authorizePhotoAccess()
     }
     
     @IBAction func didTapAddCookingProcessButton(_ sender: Any) {
-        // 이미지는 추가하지 않아도 됨, cell에서 텍스트 편집은 안 돼도(유저인터랙션 어쩌구 false), 사진은 추가할 수 있도록 해야함
         if !cookingProcessTextView.text!.isEmpty {
             if addCookingProcessImageButton.imageView!.image!.isEqual(UIImage(named: "imageAddIcon")) {
-                addedCookingProcessList.append([nil, cookingProcessTextView.text!])
+                addedCookingProcessList.append([UIImage(named: "imageAddIcon"), cookingProcessTextView.text!])
             } else {
-                // TODO: 추가된 이미지 리스트에 넣기
+                addedCookingProcessList.append([addCookingProcessImageButton.imageView?.image, cookingProcessTextView.text!])
             }
             cookingProcessStackViewTopConstarintToCookingProcessTableView.priority = UILayoutPriority(1000)
+            cookingProcessTableView.reloadData()
+            scrollView.invalidateIntrinsicContentSize()
+            changeCompletionButtonColor()
         }
-        
+    }
+    
+    @IBAction func didTapCompletionButton(_ sender: Any) {
+        // viewmodel 서버 연결준비~
+        if completionButton.backgroundColor == .availableBlue {
+            
+        }
+    }
+    
+    private func authorizePhotoAccess() {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .denied:
+            showSettingAlert()
+        case .authorized:
+            openPhotoLibrary()
+        case .notDetermined, .restricted:
+            PHPhotoLibrary.requestAuthorization { state in
+                if state == .authorized { self.openPhotoLibrary() }
+            }
+        default:
+            break
+        }
+    }
+    
+    private func authorizePhotoAccess(indexPath: IndexPath) {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .denied:
+            showSettingAlert()
+        case .authorized:
+            openPhotoLibrary(indexPath: indexPath)
+        case .notDetermined, .restricted:
+            PHPhotoLibrary.requestAuthorization { state in
+                if state == .authorized { self.openPhotoLibrary(indexPath: indexPath) }
+            }
+        default:
+            break
+        }
+    }
+    
+    private func openPhotoLibrary() {
+        DispatchQueue.main.async {
+            if (UIImagePickerController.isSourceTypeAvailable(.photoLibrary)) {
+                self.stackViewImagePicker.sourceType = .photoLibrary
+                self.stackViewImagePicker.modalPresentationStyle = .currentContext
+                self.stackViewImagePicker.delegate = self
+                self.present(self.stackViewImagePicker, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func openPhotoLibrary(indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            self.cellImagePicker.view.tag = indexPath.row
+            if (UIImagePickerController.isSourceTypeAvailable(.photoLibrary)) {
+                self.cellImagePicker.sourceType = .photoLibrary
+                self.cellImagePicker.modalPresentationStyle = .currentContext
+                self.cellImagePicker.delegate = self
+                self.present(self.cellImagePicker, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func showSettingAlert() {
+        if let appName = Bundle.main.infoDictionary!["CFBundleName"] as? String {
+            let alertVC = UIAlertController(
+                title: "사진 접근 권한이 없습니다.",
+                message: "사진 접근 허용은 '설정 > \(appName) > 사진'에서 하실 수 있습니다.",
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction (
+                title: "확인",
+                style: .default
+            )
+            alertVC.addAction(okAction)
+            DispatchQueue.main.async {
+                self.present(alertVC, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func isAllEntered() -> Bool {
+        if cookingProcessTableView.numberOfRows(inSection: 0) > 1 { return true }
+        return false
+    }
+    
+    private func changeCompletionButtonColor() {
+        if isAllEntered() { completionButton.backgroundColor = .availableBlue }
+        else { completionButton.backgroundColor = .disabledButtonGray }
+    }
+    
+    private func changeCellImage(image: UIImage, index: Int) {
+        addedCookingProcessList[index][0] = image
         cookingProcessTableView.reloadData()
-        scrollView.invalidateIntrinsicContentSize()
+    }
+    
+    func receiveDataFromFirstAddVC(addedCookingProcessList: [[Any?]], representativeImage: UIImage, menuName: String, category: String, amount: Int, timeRequired: Int, addedIngredientList: [[String]]) {
+        self.addedCookingProcessList = addedCookingProcessList
+        self.representativeImage = representativeImage
+        self.menuName = menuName
+        self.category = category
+        self.amount = amount
+        self.timeRequired = timeRequired
+        self.ingredientList = addedIngredientList
     }
 }
 
-extension AddRecipeSecondViewController: UITableViewDelegate, UITableViewDataSource, DeleteButtonTappedDelegate {
+extension AddRecipeSecondViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            switch picker {
+            case stackViewImagePicker:
+                addCookingProcessImageButton.imageView?.contentMode = .scaleAspectFill
+                addCookingProcessImageButton.setImage(image, for: .normal)
+                changeCompletionButtonColor()
+            case cellImagePicker:
+                changeCellImage(image: image, index: picker.view.tag)
+            default:
+                return
+            }
+            
+        }
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension AddRecipeSecondViewController: UITableViewDelegate, UITableViewDataSource, DeleteButtonTappedDelegate, AddImageButtonTappedDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return addedCookingProcessList.count
     }
@@ -132,11 +272,16 @@ extension AddRecipeSecondViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCookingProcessCell", for: indexPath) as? RecipeCookingProcessCell else {return UITableViewCell()}
         
-        cell.configure(indexPath: indexPath, image: addedCookingProcessList[indexPath.row][0], description: addedCookingProcessList[indexPath.row][1]!)
+        cell.configure(indexPath: indexPath, image: addedCookingProcessList[indexPath.row][0] as? UIImage, description: addedCookingProcessList[indexPath.row][1]! as! String)
         cell.selectionStyle = .none
-        cell.delegate = self
+        cell.deleteButtonTappedDelegate = self
+        cell.addImageButtonTappedDelegate = self
         
         return cell
+    }
+    
+    func tappedCellAddImageButton(indexPath: IndexPath) {
+        authorizePhotoAccess(indexPath: indexPath)
     }
     
     func tappedCellDeleteButton(indexPath: IndexPath) {
@@ -145,6 +290,7 @@ extension AddRecipeSecondViewController: UITableViewDelegate, UITableViewDataSou
         cookingProcessTableView.deleteRows(at: [indexPath], with: .none)
         cookingProcessTableView.endUpdates()
         cookingProcessTableView.reloadData()
+        changeCompletionButtonColor()
     }
 }
 
@@ -180,4 +326,12 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+}
+
+protocol AddImageButtonTappedDelegate: AnyObject {
+    func tappedCellAddImageButton(indexPath: IndexPath)
+}
+
+protocol ReceiveFirstDataDelegate: AnyObject {
+    func receiveDataFromFirstAddVC(addedCookingProcessList: [[Any?]], representativeImage: UIImage, menuName: String, category: String, amount: Int, timeRequired: Int, addedIngredientList: [[String]])
 }

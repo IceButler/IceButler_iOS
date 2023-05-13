@@ -29,7 +29,7 @@ class RecipeIngredientTableViewCell: CustomTableViewCell {
     }
     
     @IBAction func tappedDeleteButton(_ sender: Any) {
-        delegate?.tappedCellDeleteButton(indexPath: indexPath)
+        deleteButtonTappedDelegate?.tappedCellDeleteButton(indexPath: indexPath)
     }
     
     func configure(indexPath: IndexPath, name: String, amount: String) {

@@ -8,7 +8,7 @@
 import UIKit
 import Photos
 
-class AddRecipeViewController: UIViewController {
+class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
     private let MENU_NAME_MAX_LENGTH = 20
     private let GENERAL_MAX_LENGTH = 3
     
@@ -44,12 +44,14 @@ class AddRecipeViewController: UIViewController {
     private var isOpenCategoryView: Bool = false
     private var addedIngredientList: [[String]] = []
     
+    weak var firstDateDelegate: ReceiveFirstDataDelegate?
+    private var addedCookingProcessList: [[Any?]] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupNavigationBar()
         setupLayout()
-        
     }
     
     private func setup() {
@@ -209,7 +211,6 @@ class AddRecipeViewController: UIViewController {
         if !ingredientNameTextField.text!.isEmpty && !ingredientAmountTextField.text!.isEmpty {
             addedIngredientList.append([ingredientNameTextField.text!, ingredientAmountTextField.text!])
             ingredientStackViewTopConstraintToIngredientTableView.priority = UILayoutPriority(1000)
-            
             ingredientTableView.reloadData()
             scrollView.invalidateIntrinsicContentSize()
             changeNextButtonColor()
@@ -217,9 +218,11 @@ class AddRecipeViewController: UIViewController {
     }
     
     @IBAction func didTapNextButton(_ sender: Any) {
-        // 모든 데이터 넘겨야함
         if nextButton.backgroundColor == .availableBlue {
             guard let addRecipeSecondViewController = storyboard!.instantiateViewController(withIdentifier: "AddRecipeSecondViewController") as? AddRecipeSecondViewController else { return }
+            self.firstDateDelegate = addRecipeSecondViewController
+            addRecipeSecondViewController.secondDateDelegate = self
+            firstDateDelegate?.receiveDataFromFirstAddVC(addedCookingProcessList: addedCookingProcessList, representativeImage: addRepresentativeImageButton.imageView!.image!, menuName: menuNameTextField.text!, category: categoryOpenButton.titleLabel!.text!, amount: Int(amountTextField.text!) ?? 0, timeRequired: Int(timeRequiredTextField.text!) ?? 0, addedIngredientList: addedIngredientList)
             self.navigationController?.pushViewController(addRecipeSecondViewController, animated: true)
         }
         // TODO: alert 띄우기
@@ -284,11 +287,12 @@ class AddRecipeViewController: UIViewController {
     }
     
     private func changeNextButtonColor() {
-        if isAllEntered() {
-            nextButton.backgroundColor = .availableBlue
-        } else {
-            nextButton.backgroundColor = .disabledButtonGray
-        }
+        if isAllEntered() { nextButton.backgroundColor = .availableBlue }
+        else { nextButton.backgroundColor = .disabledButtonGray }
+    }
+    
+    func receiveDataFromSecondAddVC(addedCookingProcessList: [[Any?]]) {
+        self.addedCookingProcessList = addedCookingProcessList
     }
     
     /* textField 글자수 제한 함수 */
@@ -343,7 +347,6 @@ class AddRecipeViewController: UIViewController {
                     timeRequiredView.backgroundColor = .focusSkyBlue
                 default: return
             }
-            
         } else {
             switch textField {
                 case menuNameTextField:
@@ -402,7 +405,7 @@ extension AddRecipeViewController: UITableViewDelegate, UITableViewDataSource, D
             
             cell.configure(indexPath: indexPath, name: addedIngredientList[indexPath.row][0], amount: addedIngredientList[indexPath.row][1])
             cell.selectionStyle = .none
-            cell.delegate = self
+            cell.deleteButtonTappedDelegate = self
             
             return cell
         default:
@@ -463,5 +466,9 @@ protocol DeleteButtonTappedDelegate: AnyObject {
 }
 
 class CustomTableViewCell: UITableViewCell {
-    weak var delegate: DeleteButtonTappedDelegate?
+    weak var deleteButtonTappedDelegate: DeleteButtonTappedDelegate?
+}
+
+protocol ReceiveSecondDataDelegate: AnyObject {
+    func receiveDataFromSecondAddVC(addedCookingProcessList: [[Any?]])
 }
