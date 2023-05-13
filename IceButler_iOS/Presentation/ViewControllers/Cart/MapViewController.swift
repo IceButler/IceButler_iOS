@@ -7,22 +7,32 @@
 
 import UIKit
 
-class MapViewController: UIViewController, MTMapViewDelegate {
+class MapViewController: UIViewController {
 
-    var mapView: MTMapView!
+    private var mapView: MTMapView!
     
+    @IBOutlet var currentLocationButton: UIButton!
+    @IBOutlet var infoView: UIView!
+    @IBOutlet var infoInnerView: UIView!
+    
+    @IBAction func didTapCurrentLocationButton(_ sender: UIButton) {
+        // TODO: 현재 위치로 지도 이동
+        print("TODO: 현재 위치로 지도 이동")
+    }
+    
+    
+    // MARK: Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /// TODO: 카카오 API를 사용한 카테고리별 장소 검색으로 가까운 식료품점 데이터 fetch
+        ///      가져온 데이터를 기반으로 pin 구성
+        ///      지도 중심을 현재 위치로 이동
+        ///      핀 탭 이벤트를 통해 보여지는 info view의 더보기 버튼 탭 이벤트 정의 (카카오맵 상세 정보 화면으로 넘어가기)
+        
+        setupView()
         setupMapView()
         setupNavigationBar()
-    }
-    
-    private func setupMapView() {
-        mapView = MTMapView(frame: self.view.frame)
-        mapView.delegate = self
-        mapView.baseMapType = .standard
-        self.view.addSubview(mapView)
     }
     
     private func setupNavigationBar() {
@@ -65,10 +75,71 @@ class MapViewController: UIViewController, MTMapViewDelegate {
         self.navigationItem.leftBarButtonItem = backItem
         
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
-        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.isHidden = true
     }
     
-    @objc private func didTapBackItem() {
-        self.navigationController?.popViewController(animated: true)
+    private func setupView() {
+        infoView.backgroundColor = .white
+        infoView.layer.cornerRadius = 18
+        
+        infoView.layer.shadowColor = UIColor.black.cgColor
+        infoView.layer.masksToBounds = false
+        infoView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        infoView.layer.shadowRadius = 4
+        infoView.layer.shadowOpacity = 0.2
+        
+        infoInnerView.layer.cornerRadius = 18
+        
+        currentLocationButton.layer.zPosition = 99
+    }
+    
+    
+    private func setupMapView() {
+        mapView = MTMapView(frame: self.view.frame)
+        mapView.delegate = self
+        mapView.baseMapType = .standard
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapMapView))
+        mapView.addGestureRecognizer(tapGestureRecognizer)
+        
+        self.view.addSubview(mapView)
+        
+        setupPins()
+        
+    }
+    
+    private func setupPins() {
+        let point1 = MTMapPOIItem()
+        point1.tag = 1
+        point1.itemName = nil
+        point1.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: 37.5309828, longitude: 126.8381839)) // 테스트용 위치
+        point1.markerType = .customImage
+        point1.customImage = UIImage(named: "pin")
+        point1.customSelectedImage = UIImage(named: "pin.fill")
+        
+        mapView.addPOIItems([point1])
+        
+    }
+    func loadViewAnimation() {
+        UIView.transition(with: self.infoView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+            self.infoView.isHidden = !self.infoView.isHidden
+            self.infoView.layer.zPosition = self.infoView.isHidden ? -100 : 100
+        }, completion: nil);
+    }
+    
+    // MARK: @objc methods
+    @objc private func didTapBackItem() { self.navigationController?.popViewController(animated: true) }
+    @objc private func didTapMapView() { loadViewAnimation() }
+    
+}
+
+extension MapViewController: MTMapViewDelegate {
+    func mapView(_ mapView: MTMapView!, selectedPOIItem poiItem: MTMapPOIItem!) -> Bool {
+        // TODO: 마커 selectedImage로 변경
+        loadViewAnimation()
+        return true
     }
 }
