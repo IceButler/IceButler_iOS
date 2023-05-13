@@ -112,6 +112,7 @@
 		A220B1632A026E430048592B /* MemberSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */; };
 		A220B1662A05411D0048592B /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */; };
 		A220B1672A05411D0048592B /* MemberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */; };
+		A22B98CF2A0F7EE900797C81 /* InfoAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22B98CE2A0F7EE900797C81 /* InfoAlertViewController.swift */; };
 		A2459F1B29DFE26700D12089 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */; };
 		A258498129E6A6BC00E75568 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A258498029E6A6BC00E75568 /* MyPage.storyboard */; };
 		A258498329E6A6CB00E75568 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498229E6A6CB00E75568 /* MyPageViewController.swift */; };
@@ -149,7 +150,7 @@
 		A2F9190C29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9190A29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift */; };
 		A2F9190D29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F9190B29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib */; };
 		D0813D291EEFB13C09EC92B4 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2708CB9FBC694A16BAFA8531 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
-		D8A21758045158BC28C2523F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		D8A21758045158BC28C2523F /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		DD2902D23317EF23C6A905C6 /* Pods_IceButler_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8979B6CE0B0D46EE7B9D4100 /* Pods_IceButler_iOS.framework */; };
 		E9AD90AC33433D7DAB6F05F3 /* Pods_IceButler_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DC4367B2FAC09707A9A1FA /* Pods_IceButler_iOSTests.framework */; };
 /* End PBXBuildFile section */
@@ -288,6 +289,7 @@
 		A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSearchTableViewCell.swift; sourceTree = "<group>"; };
 		A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCollectionViewCell.xib; sourceTree = "<group>"; };
+		A22B98CE2A0F7EE900797C81 /* InfoAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAlertViewController.swift; sourceTree = "<group>"; };
 		A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
 		A258498029E6A6BC00E75568 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		A258498229E6A6CB00E75568 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
@@ -335,7 +337,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8A21758045158BC28C2523F /* BuildFile in Frameworks */,
+				D8A21758045158BC28C2523F /* (null) in Frameworks */,
 				DD2902D23317EF23C6A905C6 /* Pods_IceButler_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -848,6 +850,7 @@
 				A27302E529D853090060944D /* Alert.storyboard */,
 				A2CA99DB29DE7BA80020DEEC /* CompleteBuyingViewController.swift */,
 				A27302E729D853160060944D /* AlertViewController.swift */,
+				A22B98CE2A0F7EE900797C81 /* InfoAlertViewController.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -1332,6 +1335,7 @@
 				738CAC8729E31349009EF9D2 /* FoodDetailViewController.swift in Sources */,
 				73B7373229E250330097806F /* MarineProductsViewController.swift in Sources */,
 				73B7372A29E24FDB0097806F /* MeatViewController.swift in Sources */,
+				A22B98CF2A0F7EE900797C81 /* InfoAlertViewController.swift in Sources */,
 				7339CD9229E79CDD002A6D78 /* AuthProvider.swift in Sources */,
 				73C8714F29F2ED44002DDB60 /* ProfileEditMode.swift in Sources */,
 				73B7373E29E2507A0097806F /* AllFoodViewController.swift in Sources */,

@@ -129,6 +129,23 @@ extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
     }
     
     func didTapDeleteButton() {
-        // TODO: 마이냉장고 삭제 팝업 표시
+        guard let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
+        
+        alertVC.configure(title: "냉장고 삭제",
+                          content: "해당 냉장고를 삭제하시겠습니까?",
+                          leftButtonTitle: "취소",
+                          righttButtonTitle: "삭제",
+                          rightCompletion: {
+            
+            self.dismiss(animated: false)
+            guard let infoVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(withIdentifier: "InfoAlertViewController") as? InfoAlertViewController else { return }
+            infoVC.modalPresentationStyle = .fullScreen
+            self.present(infoVC, animated: true)
+        },
+                          leftCompletion: { self.dismiss(animated: true) })
+        
+        alertVC.modalPresentationStyle = .fullScreen
+        present(alertVC, animated: true)
+        
     }
 }
