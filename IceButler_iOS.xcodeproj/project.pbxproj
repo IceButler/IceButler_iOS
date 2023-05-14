@@ -168,6 +168,8 @@
 		A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A765429D749C700D127EA /* CartMainTableViewCell.swift */; };
 		A28A765729D749C700D127EA /* CartMainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A28A765529D749C700D127EA /* CartMainTableViewCell.xib */; };
 		A29674252A06BDAB00A7A1E0 /* EditMyFridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29674242A06BDAB00A7A1E0 /* EditMyFridgeViewController.swift */; };
+		A29C59472A11845900E8D227 /* KakaoMapWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29C59462A11845900E8D227 /* KakaoMapWebViewController.swift */; };
+		A29C59492A1193A300E8D227 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29C59482A1193A300E8D227 /* WebKit.framework */; };
 		A2A164C32A00DA6A008132D2 /* AddFridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A164C22A00DA6A008132D2 /* AddFridgeViewController.swift */; };
 		A2CA99DC29DE7BA80020DEEC /* CompleteBuyingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CA99DB29DE7BA80020DEEC /* CompleteBuyingViewController.swift */; };
 		A2CA99FE29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CA99FD29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift */; };
@@ -387,6 +389,8 @@
 		A28A765429D749C700D127EA /* CartMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartMainTableViewCell.swift; sourceTree = "<group>"; };
 		A28A765529D749C700D127EA /* CartMainTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartMainTableViewCell.xib; sourceTree = "<group>"; };
 		A29674242A06BDAB00A7A1E0 /* EditMyFridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyFridgeViewController.swift; sourceTree = "<group>"; };
+		A29C59462A11845900E8D227 /* KakaoMapWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapWebViewController.swift; sourceTree = "<group>"; };
+		A29C59482A1193A300E8D227 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		A2A164C22A00DA6A008132D2 /* AddFridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFridgeViewController.swift; sourceTree = "<group>"; };
 		A2CA99DB29DE7BA80020DEEC /* CompleteBuyingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteBuyingViewController.swift; sourceTree = "<group>"; };
 		A2CA99FD29DFC2660020DEEC /* CompleteBuyingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteBuyingTableViewCell.swift; sourceTree = "<group>"; };
@@ -416,6 +420,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A29C59492A1193A300E8D227 /* WebKit.framework in Frameworks */,
 				A22B98CD2A0F503F00797C81 /* libc++.tbd in Frameworks */,
 				A22B98CC2A0F503700797C81 /* libsqlite3.tbd in Frameworks */,
 				A22B98CB2A0F502600797C81 /* libxml2.tbd in Frameworks */,
@@ -1008,6 +1013,7 @@
 				A28A764129D54EFA00D127EA /* CartViewController.swift */,
 				A2459F1A29DFE26700D12089 /* AddFoodViewController.swift */,
 				A22B98BF2A0F4D3E00797C81 /* MapViewController.swift */,
+				A29C59462A11845900E8D227 /* KakaoMapWebViewController.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -1112,6 +1118,7 @@
 		F529865F5F9A8785316D5C50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A29C59482A1193A300E8D227 /* WebKit.framework */,
 				A22B98782A0F4C8100797C81 /* DaumMap.embeddedframework */,
 				A22B98C32A0F4DC600797C81 /* Metal.framework */,
 				A22B98772A0F4C6B00797C81 /* libxml2.tbd */,
@@ -1527,6 +1534,7 @@
 				7388C3AD29F82D81000C3606 /* ChatGptCell.swift in Sources */,
 				95A398B729FD41BA009CDDDC /* RecipeViewModel.swift in Sources */,
 				A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */,
+				A29C59472A11845900E8D227 /* KakaoMapWebViewController.swift in Sources */,
 				A2459F1B29DFE26700D12089 /* AddFoodViewController.swift in Sources */,
 				73F62A3E29DCFD7B003D779F /* FridgeViewController.swift in Sources */,
 				73F62A4D29DD81AC003D779F /* FoodAddSelectCell.swift in Sources */,
