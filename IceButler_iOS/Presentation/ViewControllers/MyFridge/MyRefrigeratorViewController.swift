@@ -128,7 +128,55 @@ extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
         self.navigationController?.pushViewController(editViewController, animated: true)
     }
     
-    func didTapDeleteButton() {
-        // TODO: 마이냉장고 삭제 팝업 표시
+    func didTapDeleteButton(index: Int) {
+        var removeFridgeIdx = -1
+        var isMulti = false
+        var ownerIdx = -1
+        
+        if index < (data?.fridgeList?.count ?? 0) {
+            let data = data?.fridgeList![index]
+            removeFridgeIdx = data?.fridgeIdx ?? -1
+            isMulti = false
+            ownerIdx = (data?.users![0].userIdx)!
+        } else {
+            let idx = index - (data?.fridgeList?.count ?? 0)
+            let data = data?.multiFridgeResList![idx]
+            removeFridgeIdx = data?.multiFridgeIdx ?? -1
+            isMulti = true
+            ownerIdx = (data?.users![0].userIdx)!
+        }
+        
+        guard let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
+        
+        alertVC.configure(title: "냉장고 삭제",
+                          content: "해당 냉장고를 삭제하시겠습니까?",
+                          leftButtonTitle: "취소",
+                          righttButtonTitle: "삭제",
+                          rightCompletion: {
+            
+            self.dismiss(animated: false)
+            guard let infoVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(withIdentifier: "InfoAlertViewController") as? InfoAlertViewController else { return }
+            infoVC.delegate = self
+            infoVC.setRemoveInfo(isMulti: isMulti,
+                                 ownerIdx: ownerIdx,
+                                 removeFridgeIdx: removeFridgeIdx)
+            infoVC.modalPresentationStyle = .fullScreen
+            self.present(infoVC, animated: true)
+        },
+                          leftCompletion: { self.dismiss(animated: true) })
+        
+        alertVC.modalPresentationStyle = .fullScreen
+        present(alertVC, animated: true)
+        
+    }
+}
+
+extension MyRefrigeratorViewController: FridgeRemoveDelegate {
+    func reloadMyFridgeVC() { self.tableView.reloadData() }
+    
+    func showMessageFailToRemoveFridge(message: String) {
+        let alert = UIAlertController(title: "냉장고 삭제 실패", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
     }
 }

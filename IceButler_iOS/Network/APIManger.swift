@@ -24,6 +24,14 @@ class APIManger {
             self.headers = ["Authorization": token]
         }
     }
+    
+    func getFridgeUrl() -> String {
+        if isMultiFridge {
+            return "/multiFridges"
+        }else {
+            return "/fridges"
+        }
+    }
 }
 
 // MARK: 냉장고 Index 및 공용/가정용 구분값의 get/set
@@ -280,6 +288,27 @@ extension APIManger {
             .resume()
     }
     
+    func deleteData<U: Decodable>(urlEndpointString: String,
+                                            responseDataType: U.Type,
+                                            completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+        
+        guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
+        print("삭제 요청 URL --> \(url)")
+        AF
+            .request(url, method: .delete, headers: self.headers)
+            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
+    
     func patchData<T: Codable, U: Decodable>(urlEndpointString: String,
                                             responseDataType: U.Type,
                                             requestDataType: T.Type,
@@ -287,9 +316,29 @@ extension APIManger {
                                             completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
         
         guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
-        
+        print("삭제 요청 URL --> \(url)")
         AF
             .request(url, method: .patch, parameters: parameter, encoder: .json, headers: self.headers)
+            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
+    
+    func patchData<U: Decodable>(urlEndpointString: String,
+                                 responseDataType: U.Type,
+                                 completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+        
+        guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
+        
+        AF
+            .request(url, method: .patch, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
                 print(response)
                 switch response.result {

@@ -9,7 +9,7 @@ import UIKit
 
 protocol MyRefrigeratorTableViewCellDelegate {
     func didTapEditButton(index: Int)
-    func didTapDeleteButton()
+    func didTapDeleteButton(index: Int)
 }
 
 class MyRefrigeratorTableViewCell: UITableViewCell {
@@ -83,7 +83,7 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     
     
     @IBAction func didTapDeleteButton(_ sender: UIButton) {
-        delegate?.didTapDeleteButton()
+        delegate?.didTapDeleteButton(index: self.tag)
     }
     
 }
