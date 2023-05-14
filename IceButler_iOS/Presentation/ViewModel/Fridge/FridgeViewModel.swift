@@ -606,8 +606,8 @@ class FridgeViewModel: ObservableObject {
         })
     }
     
-    func requestAddFridge(name: String, comment: String, members: [Int], completion: @escaping ((Bool)->Void)) {
-        fridgeService.addFridge(name: name, comment: comment, members: members, completion: { response in
+    func requestAddFridge(isMulti: Bool, name: String, comment: String, members: [Int], completion: @escaping ((Bool)->Void)) {
+        fridgeService.addFridge(isMulti: isMulti, name: name, comment: comment, members: members, completion: { response in
             completion((response != nil) ? true : false)
         })
     }
