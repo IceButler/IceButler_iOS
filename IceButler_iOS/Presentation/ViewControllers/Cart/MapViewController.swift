@@ -111,6 +111,7 @@ class MapViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = backItem
         
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
+        self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.tabBar.isHidden = true
     }
     
