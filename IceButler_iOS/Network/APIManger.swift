@@ -146,6 +146,19 @@ extension APIManger {
             .resume()
     }
     
+    func postRecipeData<T: Codable, U: Decodable>(urlEndpointString: String,
+                                            responseDataType: U.Type,
+                                            requestDataType: T.Type,
+                                            parameter: T?) async throws -> GeneralResponseModel<U> {
+        
+        guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return GeneralResponseModel(data: nil, transactionTime: nil, status: nil, description: nil, statusCode: nil) }
+        
+        return try await AF
+            .request(url, method: .post, parameters: parameter, encoder: .json, headers: self.headers)
+            .serializingDecodable(GeneralResponseModel<U>.self)
+            .value
+    }
+    
     func getData<T: Codable, U: Decodable>(url: String,
                                            responseDataType: U.Type,
                                            requestDataType: T.Type,
@@ -182,6 +195,14 @@ extension APIManger {
                     print(error.localizedDescription)
                 }
             }.resume()
+    }
+    
+    func getImageUrl(url: String, parameter: Parameters?) async throws -> ImageResponseModel? {
+        guard let url = URL(string: url) else { return nil }
+        return try await AF
+            .request(url, method: .get, parameters: parameter, headers: nil)
+            .serializingDecodable(ImageResponseModel.self)
+            .value
     }
     
     func getGpt<T: Codable>(url: String, responseDataType: T.Type,  parameter: Parameters?, completionHandler: @escaping (T?)->Void) {

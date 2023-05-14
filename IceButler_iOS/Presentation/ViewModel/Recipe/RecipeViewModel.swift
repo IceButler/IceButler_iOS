@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import UIKit
+import Alamofire
 
 class RecipeViewModel: ObservableObject {
     static let shared = RecipeViewModel()
@@ -85,5 +87,66 @@ class RecipeViewModel: ObservableObject {
     
     func getBookmarkRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
         completion(bookmarkRecipeList[index])
+    }
+    
+    func postRecipe(recipeImg: UIImage,
+                    recipeName: String,
+                    category: String,
+                    amount: Int,
+                    timeRequired: Int,
+                    ingredientList: [[String]],
+                    cookingProcessList: [[Any?]]) async throws -> Bool {
+        let thumbnailParameter: Parameters = ["ext": "jpeg", "dir": ImageDir.RecipeThumbnail.rawValue]
+        let recipeImageParameter: Parameters = ["ext": "jpeg", "dir": ImageDir.RecipeImage.rawValue]
+        var thumbnailImgKey: String?
+        var thumbnailUrl: String?
+        var recipeImgKeyList: [String?] = []
+        var recipeUrlList: [String?] = []
+        var foodList: [Ingredient] = []
+        var cookeryList: [CookingProcess] = []
+        
+        // get ImageKey
+        print("1")
+        let thumbnailResponse = try await ImageService.shared.getRecipeImageUrl(parameter: thumbnailParameter)
+        thumbnailImgKey = thumbnailResponse?.imageKey
+        thumbnailUrl = thumbnailResponse?.presignedUrl
+        print("2")
+        
+        for i in cookingProcessList.indices {
+            if cookingProcessList[i][0] == nil {
+                recipeImgKeyList.append(nil)
+                recipeUrlList.append(nil)
+            } else {
+                let response = try await ImageService.shared.getRecipeImageUrl(parameter: recipeImageParameter)
+                recipeImgKeyList.append(response?.imageKey)
+                recipeUrlList.append(response?.presignedUrl)
+            }
+        }
+        print("3")
+        
+        // upload Image
+        ImageService.shared.uploadRecipeImage(image: recipeImg, url: thumbnailUrl!) {}
+        for i in cookingProcessList.indices {
+            if cookingProcessList[i][0] != nil {
+                ImageService.shared.uploadRecipeImage(image: cookingProcessList[i][0] as! UIImage, url: recipeUrlList[i]!) {}
+            }
+        }
+        print("4")
+        
+        // 재료 list
+        for i in ingredientList.indices {
+            foodList.append(Ingredient(foodName: ingredientList[i][0], foodDetail: ingredientList[i][1]))
+        }
+        // 조리과정 list
+        for i in cookingProcessList.indices {
+            cookeryList.append(CookingProcess(cookeryImgKey: recipeImgKeyList[i], cookeryDescription: (cookingProcessList[i][1] as? String)!))
+        }
+        print("5")
+        
+        // post api 연결
+        let parameter = RecipeAddRequestModel(recipeName: recipeName, recipeImgKey: thumbnailImgKey!, recipeCategory: category, leadTime: timeRequired, quantity: amount, foodList: foodList, cookeryList: cookeryList)
+        let response = try await recipeService.postRecipe(parameter: parameter)
+        print("6")
+        return response
     }
 }

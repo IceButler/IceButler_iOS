@@ -39,7 +39,11 @@ class RecipeCookingProcessCell: CustomTableViewCell {
     
     func configure(indexPath: IndexPath, image: UIImage?, description: String) {
         self.indexPath = indexPath
-        addImageButton.setImage(image, for: .normal)
+        if image == nil {
+            addImageButton.setImage(UIImage(named: "imageAddIcon"), for: .normal)
+        } else {
+            addImageButton.setImage(image, for: .normal)
+        }
         cookingProcessTextView.text = description
     }
 }

@@ -23,6 +23,13 @@ class ImageService {
         APIManger.shared.putData(url: url, data: imageToData, completion: compeltion)
     }
     
-    
+    func getRecipeImageUrl(parameter: Parameters) async throws -> ImageResponseModel? {
+        let response = try? await APIManger.shared.getImageUrl(url: "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/prod/presigned-url", parameter: parameter)
+        return response
+    }
 
+    func uploadRecipeImage(image: UIImage, url: String, compeltion: @escaping () -> Void) {
+        guard let imageToData = image.jpegData(compressionQuality: 1) else { return }
+        APIManger.shared.putData(url: url, data: imageToData, completion: compeltion)
+    }
 }
