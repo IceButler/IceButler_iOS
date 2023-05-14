@@ -8,6 +8,7 @@
 import UIKit
 import BSImagePicker
 import Photos
+import Alamofire
 
 
 protocol FoodAddDelegate: AnyObject {
@@ -544,43 +545,47 @@ class FoodAddViewController: UIViewController {
     }
     
     private func preSaveFoodInfo() {
-
-        if date != nil {
-            let dateFromat = DateFormatter()
-            dateFromat.dateFormat = "yyyy-MM-dd"
-            savedFoods[currentFoodIndex].shelfLife = dateFromat.string(from: date!)
-        }
-        if foodNameTextView.text != "" && foodNameTextView.text != "식품명을 입력해주세요." {
-            savedFoods[currentFoodIndex].foodName = foodNameTextView.text
-        }
-        if foodDetailTextView.text != "" && foodDetailTextView.text != "식품 상세명을 입력해주세요." {
-            savedFoods[currentFoodIndex].foodDetailName = foodDetailTextView.text
-        }
-        if selectedFoodCategory != nil && categoryOpenButton.title(for: .normal) != "카테고리를 선택해주세요." {
-            savedFoods[currentFoodIndex].foodCategory = selectedFoodCategory!.rawValue
-        }
-        if datePickerOpenButton.title(for: .normal) != "소비기한을 입력해주세요." {
-            savedFoods[currentFoodIndex].shelfLife = datePickerOpenButton.title(for: .normal)!
-        }
-        if foodOwnerIdx != -1 {
-            savedFoods[currentFoodIndex].ownerIdx = foodOwnerIdx ?? -1
-        }
-        if foodMemoTextView.text != "" && foodMemoTextView.text != "메모내용 or 없음" {
-            savedFoods[currentFoodIndex].memo = foodMemoTextView.text
-        }
-        // TODO: 이미지 url 임시저장
-        if foodImage != nil {
-//            savedFoods[currentFoodIndex].imageUrl
-//            let parameter: Parameters = ["ext": "jpeg", "dir": imageDir.rawValue]
-//            ImageService.shared.getImageUrl(parameter: parameter) {[self] response in
-//                if let response = response {
-//                    profileImgKey = response.imageKey
-//                    uploadProfileImage(image: image, url: response.presignedUrl, fridgeIdx: fridgeIdx, foodName: foodName, foodDetail: foodDetail, foodCategory: foodCategory, foodShelfLife: foodShelfLife, foodOwnerIdx: foodOwnerIdx, memo: memo, completion: completion)
-//                }
-//            }
+        if savedFoods.count > 0 {
+            if date != nil {
+                let dateFormat = DateFormatter()
+                dateFormat.dateFormat = "yyyy-MM-dd"
+                savedFoods[currentFoodIndex].shelfLife = dateFormat.string(from: date!)
+            }
+            if foodNameTextView.text != "" && foodNameTextView.text != "식품명을 입력해주세요." {
+                savedFoods[currentFoodIndex].foodName = foodNameTextView.text
+            }
+            if foodDetailTextView.text != "" && foodDetailTextView.text != "식품 상세명을 입력해주세요." {
+                savedFoods[currentFoodIndex].foodDetailName = foodDetailTextView.text
+            }
+            if selectedFoodCategory != nil && categoryOpenButton.title(for: .normal) != "카테고리를 선택해주세요." {
+                savedFoods[currentFoodIndex].foodCategory = selectedFoodCategory!.rawValue
+            }
+            if datePickerOpenButton.title(for: .normal) != "소비기한을 입력해주세요." {
+                savedFoods[currentFoodIndex].shelfLife = datePickerOpenButton.title(for: .normal)!
+            }
+            if foodOwnerIdx != -1 {
+                savedFoods[currentFoodIndex].ownerIdx = foodOwnerIdx ?? -1
+            }
+            if foodMemoTextView.text != "" && foodMemoTextView.text != "메모내용 or 없음" {
+                savedFoods[currentFoodIndex].memo = foodMemoTextView.text
+            }
+            // TODO: 이미지 url 임시저장
+            if foodImage != nil {
+                let parameter: Parameters = ["ext": "jpeg", "dir": ImageDir.Food.rawValue]
+                ImageService.shared.getImageUrl(parameter: parameter, completion: { [weak self] response in
+                    if let response = response {
+                        self?.savedFoods[(self?.currentFoodIndex)!].imageUrl = response.imageKey
+                        print("임시저장된 Img KEY --> \(response.imageKey)")
+                        print("임시저장된 Img presignedUrl --> \(response.presignedUrl)")
+                        ImageService.shared.uploadImage(image: (self?.foodImage)!, url: response.presignedUrl, compeltion: {  })
+                    }
+                })
+            }
+            else { savedFoods[currentFoodIndex].imageUrl = nil }
+            
+            print("임시저장된 식품 정보 --> index: \(currentFoodIndex) \n\(savedFoods[currentFoodIndex])")
         }
         
-        print("임시저장된 식품 정보 --> index: \(currentFoodIndex) \n\(savedFoods[currentFoodIndex])")
     }
     
     @IBAction func foodAdd(_ sender: Any) {
@@ -590,6 +595,8 @@ class FoodAddViewController: UIViewController {
             if checkForSaveFoodInfo() {
                 let fridgeIdx = APIManger.shared.getFridgeIdx()
                 let param = FoodAddListModel(fridgeFoods: savedFoods)
+                
+                print("요청할 식품 정보들 --> \(param)")
                 
                 APIManger.shared.postData(urlEndpointString: "/fridges/\(fridgeIdx)/food",
                                           responseDataType: FoodAddRequestModel.self,
