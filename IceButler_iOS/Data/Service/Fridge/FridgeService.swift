@@ -20,10 +20,6 @@ class FridgeService {
     }
     
     func getAllFood(fridgeIdx: Int, completion: @escaping (FridgeResponseModel?) -> Void) {
-//        APIManger.shared.getData(urlEndpointString: "/fridges/\(fridgeIdx)/foods", responseDataType: FridgeResponseModel.self, requestDataType: FridgeResponseModel.self, parameter: nil) { response in
-//            completion(response.data)
-//        }
-
         setUrl()
         APIManger.shared.getData(urlEndpointString: urlStr,
                                  responseDataType: FridgeResponseModel.self,
@@ -35,9 +31,6 @@ class FridgeService {
     
     func getCategoryFood(fridgeIdx: Int, category: String,  completion: @escaping (FridgeResponseModel?) -> Void) {
         let parameter: Parameters = ["category" : category]
-//        APIManger.shared.getData(urlEndpointString: "/fridges/\(fridgeIdx)/foods", responseDataType: FridgeResponseModel.self, parameter: parameter) {  response in
-//            completion(response.data)
-//        }
         setUrl()
         APIManger.shared.getData(urlEndpointString: urlStr,
                                  responseDataType: FridgeResponseModel.self,

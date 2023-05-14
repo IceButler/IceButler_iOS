@@ -14,7 +14,8 @@ class GraphService {
                                      "year": year,
                                      "month": month]
         
-        APIManger.shared.getData(urlEndpointString: "/fridges/\(fridgeIdx)/statistics", responseDataType: GraphResponseModel.self, parameter: parameters) { response in
+        
+        APIManger.shared.getData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/statistics", responseDataType: GraphResponseModel.self, parameter: parameters) { response in
             if let data = response.data {
                 completion(data.foodStatisticsList)
             }
@@ -26,7 +27,7 @@ class GraphService {
                                      "year": year,
                                      "month": month]
         
-        APIManger.shared.getData(urlEndpointString: "/fridges/\(fridgeIdx)/statistics", responseDataType: GraphResponseModel.self, parameter: parameters) { response in
+        APIManger.shared.getData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/statistics", responseDataType: GraphResponseModel.self, parameter: parameters) { response in
             if let data = response.data {
                 completion(data.foodStatisticsList)
             }

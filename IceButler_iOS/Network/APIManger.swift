@@ -24,6 +24,14 @@ class APIManger {
             self.headers = ["Authorization": token]
         }
     }
+    
+    func getFridgeUrl() -> String {
+        if isMultiFridge {
+            return "/multiFridges"
+        }else {
+            return "/fridges"
+        }
+    }
 }
 
 // MARK: 냉장고 Index 및 공용/가정용 구분값의 get/set
