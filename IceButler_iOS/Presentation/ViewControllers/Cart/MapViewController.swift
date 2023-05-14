@@ -10,6 +10,7 @@ import UIKit
 class MapViewController: UIViewController {
 
     private var mapView: MTMapView!
+    private var storeData: [KakaoStoreData] = []
     
     @IBOutlet var currentLocationButton: UIButton!
     @IBOutlet var infoView: UIView!
@@ -112,8 +113,8 @@ class MapViewController: UIViewController {
         mapView.delegate = self
         mapView.baseMapType = .standard
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapMapView))
-        mapView.addGestureRecognizer(tapGestureRecognizer)
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapMapView))
+//        mapView.addGestureRecognizer(tapGestureRecognizer)
         
         self.view.addSubview(mapView)
         
@@ -126,9 +127,10 @@ class MapViewController: UIViewController {
         point1.tag = 1
         point1.itemName = nil
         point1.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: 37.5309828, longitude: 126.8381839)) // 테스트용 위치
-        point1.markerType = .customImage
-        point1.customImage = UIImage(named: "pin")
-        point1.customSelectedImage = UIImage(named: "pin.fill")
+        point1.markerType = .redPin
+//        point1.markerType = .customImage
+//        point1.customImage = UIImage(named: "pin")
+//        point1.customSelectedImage = UIImage(named: "pin.fill")
         
         mapView.addPOIItems([point1])
         
@@ -152,19 +154,46 @@ class MapViewController: UIViewController {
 extension MapViewController: MTMapViewDelegate {
     func mapView(_ mapView: MTMapView!, selectedPOIItem poiItem: MTMapPOIItem!) -> Bool {
         // TODO: 마커 selectedImage로 변경
+        storeNameLabel.text = storeData[poiItem.tag].place_name
+        storeAddressLabel.text = storeData[poiItem.tag].road_address_name
+        storePhoneNumLabel.text = storeData[poiItem.tag].phone
         loadViewAnimation()
-        return true
+        return false
     }
 }
 
 
 extension MapViewController {
     private func fetchKakaoData() {
-        print("fetchKakaoData called")
         KakaoMapService.shared.getNearStoreData(x: 126.8381839,
                                                 y: 37.5309828,
-                                                completion: { response in
-            print("카카오맵 데이터 조회 결과 --> \(response.documents)")
+                                                completion: { [weak self] response in
+            
+            if response.documents.count > 0 {
+                self?.storeData = response.documents
+                self?.setupStorePins(storeData: response.documents)
+            } else {
+                let alert = UIAlertController(title: nil, message: "조회할 식료품점 정보가 없습니다!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                self?.present(alert, animated: true)
+            }
+
         })
+    }
+    
+    private func setupStorePins(storeData: [KakaoStoreData]) {
+        var pins: [MTMapPOIItem] = []
+        
+        for i in 0..<storeData.count {
+            let pin = MTMapPOIItem()
+            pin.itemName = storeData[i].place_name
+            pin.tag = i
+            pin.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: Double(storeData[i].y!) ?? 0,
+                                                              longitude: Double(storeData[i].x!) ?? 0))
+            pin.markerType = .customImage
+            pin.customImage = UIImage(named: "pin")
+            pins.append(pin)
+        }
+        mapView.addPOIItems(pins)
     }
 }

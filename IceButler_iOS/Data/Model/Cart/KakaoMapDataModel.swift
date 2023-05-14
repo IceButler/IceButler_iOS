@@ -19,6 +19,7 @@ struct KakaoStoreData: Codable {
     let category_name: String?
     let id: String?
     let phone: String?
+    let place_name: String?
     let place_url: String?
     let road_address_name: String?
     let x: String?
