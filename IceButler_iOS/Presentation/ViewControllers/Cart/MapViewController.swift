@@ -42,6 +42,7 @@ class MapViewController: UIViewController {
         ///      지도 중심을 현재 위치로 이동
         ///      핀 탭 이벤트를 통해 보여지는 info view의 더보기 버튼 탭 이벤트 정의 (카카오맵 상세 정보 화면으로 넘어가기)
         
+        fetchKakaoData()
         setupView()
         setupMapView()
         setupNavigationBar()
@@ -153,5 +154,17 @@ extension MapViewController: MTMapViewDelegate {
         // TODO: 마커 selectedImage로 변경
         loadViewAnimation()
         return true
+    }
+}
+
+
+extension MapViewController {
+    private func fetchKakaoData() {
+        print("fetchKakaoData called")
+        KakaoMapService.shared.getNearStoreData(x: 126.8381839,
+                                                y: 37.5309828,
+                                                completion: { response in
+            print("카카오맵 데이터 조회 결과 --> \(response.documents)")
+        })
     }
 }

@@ -109,6 +109,8 @@
 		95A398BF29FD8C13009CDDDC /* RecipeResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398BE29FD8C13009CDDDC /* RecipeResponseModel.swift */; };
 		95A398C129FEFC43009CDDDC /* BookmarkRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398C029FEFC43009CDDDC /* BookmarkRecipeViewController.swift */; };
 		95A398C32A001303009CDDDC /* SearchFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398C22A001303009CDDDC /* SearchFoodViewController.swift */; };
+		A20B91822A11513F00C3FCA4 /* KakaoMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20B91812A11513F00C3FCA4 /* KakaoMapService.swift */; };
+		A20B91842A11549E00C3FCA4 /* KakaoMapDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20B91832A11549E00C3FCA4 /* KakaoMapDataModel.swift */; };
 		A220B1632A026E430048592B /* MemberSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */; };
 		A220B1662A05411D0048592B /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */; };
 		A220B1672A05411D0048592B /* MemberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */; };
@@ -318,6 +320,8 @@
 		95A398BE29FD8C13009CDDDC /* RecipeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResponseModel.swift; sourceTree = "<group>"; };
 		95A398C029FEFC43009CDDDC /* BookmarkRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRecipeViewController.swift; sourceTree = "<group>"; };
 		95A398C22A001303009CDDDC /* SearchFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFoodViewController.swift; sourceTree = "<group>"; };
+		A20B91812A11513F00C3FCA4 /* KakaoMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapService.swift; sourceTree = "<group>"; };
+		A20B91832A11549E00C3FCA4 /* KakaoMapDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapDataModel.swift; sourceTree = "<group>"; };
 		A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSearchTableViewCell.swift; sourceTree = "<group>"; };
 		A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -807,6 +811,7 @@
 			children = (
 				73F26FC329DAA8EB009E364B /* CartResponseModel.swift */,
 				73F62A3729DAB1A5003D779F /* CartRequestModel.swift */,
+				A20B91832A11549E00C3FCA4 /* KakaoMapDataModel.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -815,6 +820,7 @@
 			isa = PBXGroup;
 			children = (
 				73F26FC529DAA94B009E364B /* CartService.swift */,
+				A20B91812A11513F00C3FCA4 /* KakaoMapService.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -1419,6 +1425,7 @@
 			files = (
 				95A398BF29FD8C13009CDDDC /* RecipeResponseModel.swift in Sources */,
 				7339CD8629E68818002A6D78 /* AuthResponseModel.swift in Sources */,
+				A20B91822A11513F00C3FCA4 /* KakaoMapService.swift in Sources */,
 				73B7373A29E250680097806F /* ProcessedFoodViewController.swift in Sources */,
 				95A398AC29FBCA5F009CDDDC /* RecipeInFridgeViewController.swift in Sources */,
 				A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */,
@@ -1454,6 +1461,7 @@
 				73B7373029E2501A0097806F /* DrinkViewController.swift in Sources */,
 				A220B1662A05411D0048592B /* MemberCollectionViewCell.swift in Sources */,
 				73F62A4429DD11C4003D779F /* BarCodeView.swift in Sources */,
+				A20B91842A11549E00C3FCA4 /* KakaoMapDataModel.swift in Sources */,
 				7339CD7229E5B56A002A6D78 /* AuthService.swift in Sources */,
 				735584C72A062DFB0077E69E /* GraphService.swift in Sources */,
 				735584CA2A06B1A10077E69E /* GraphResponseModel.swift in Sources */,
