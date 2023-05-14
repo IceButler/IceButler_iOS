@@ -149,14 +149,22 @@ extension APIManger {
     func postRecipeData<T: Codable, U: Decodable>(urlEndpointString: String,
                                             responseDataType: U.Type,
                                             requestDataType: T.Type,
-                                            parameter: T?) async throws -> GeneralResponseModel<U> {
+                                            parameter: T?,
+                                            completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+        guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
         
-        guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return GeneralResponseModel(data: nil, transactionTime: nil, status: nil, description: nil, statusCode: nil) }
-        
-        return try await AF
+        AF
             .request(url, method: .post, parameters: parameter, encoder: .json, headers: self.headers)
-            .serializingDecodable(GeneralResponseModel<U>.self)
-            .value
+            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
     }
     
     func getData<T: Codable, U: Decodable>(url: String,

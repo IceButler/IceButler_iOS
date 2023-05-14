@@ -51,8 +51,14 @@ class RecipeService {
         }
     }
     
-    func postRecipe(parameter: RecipeAddRequestModel) async throws -> Bool {
-        let response = try await APIManger.shared.postRecipeData(urlEndpointString: "/recipes", responseDataType: RecipeResponseModel.self, requestDataType: RecipeAddRequestModel.self, parameter: parameter)
-        return response.status == "OK"
+    func postRecipe(parameter: RecipeAddRequestModel, completion: @escaping (Bool) -> Void) {
+        APIManger.shared.postRecipeData(urlEndpointString: "/recipes", responseDataType: RecipeResponseModel.self, requestDataType: RecipeAddRequestModel.self, parameter: parameter) { response in
+            print(response)
+            if response.status == "OK" {
+                completion(true)
+            }else {
+                completion(false)
+            }
+        }
     }
 }

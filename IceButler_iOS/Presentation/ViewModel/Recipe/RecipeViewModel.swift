@@ -95,7 +95,8 @@ class RecipeViewModel: ObservableObject {
                     amount: Int,
                     timeRequired: Int,
                     ingredientList: [[String]],
-                    cookingProcessList: [[Any?]]) async throws -> Bool {
+                    cookingProcessList: [[Any?]],
+                    completion: @escaping (Bool) -> Void) async throws {
         let thumbnailParameter: Parameters = ["ext": "jpeg", "dir": ImageDir.RecipeThumbnail.rawValue]
         let recipeImageParameter: Parameters = ["ext": "jpeg", "dir": ImageDir.RecipeImage.rawValue]
         var thumbnailImgKey: String?
@@ -106,11 +107,9 @@ class RecipeViewModel: ObservableObject {
         var cookeryList: [CookingProcess] = []
         
         // get ImageKey
-        print("1")
         let thumbnailResponse = try await ImageService.shared.getRecipeImageUrl(parameter: thumbnailParameter)
         thumbnailImgKey = thumbnailResponse?.imageKey
         thumbnailUrl = thumbnailResponse?.presignedUrl
-        print("2")
         
         for i in cookingProcessList.indices {
             if cookingProcessList[i][0] == nil {
@@ -122,16 +121,6 @@ class RecipeViewModel: ObservableObject {
                 recipeUrlList.append(response?.presignedUrl)
             }
         }
-        print("3")
-        
-        // upload Image
-        ImageService.shared.uploadRecipeImage(image: recipeImg, url: thumbnailUrl!) {}
-        for i in cookingProcessList.indices {
-            if cookingProcessList[i][0] != nil {
-                ImageService.shared.uploadRecipeImage(image: cookingProcessList[i][0] as! UIImage, url: recipeUrlList[i]!) {}
-            }
-        }
-        print("4")
         
         // 재료 list
         for i in ingredientList.indices {
@@ -139,14 +128,32 @@ class RecipeViewModel: ObservableObject {
         }
         // 조리과정 list
         for i in cookingProcessList.indices {
-            cookeryList.append(CookingProcess(cookeryImgKey: recipeImgKeyList[i], cookeryDescription: (cookingProcessList[i][1] as? String)!))
+            if cookingProcessList[i][0] != nil {
+                cookeryList.append(CookingProcess(cookeryImgKey: recipeImgKeyList[i], cookeryDescription: (cookingProcessList[i][1] as? String)!))
+            } else {
+                cookeryList.append(CookingProcess(cookeryImgKey: nil, cookeryDescription: (cookingProcessList[i][1] as? String)!))
+            }
         }
-        print("5")
         
         // post api 연결
-        let parameter = RecipeAddRequestModel(recipeName: recipeName, recipeImgKey: thumbnailImgKey!, recipeCategory: category, leadTime: timeRequired, quantity: amount, foodList: foodList, cookeryList: cookeryList)
-        let response = try await recipeService.postRecipe(parameter: parameter)
-        print("6")
-        return response
+        if cookeryList.count == cookingProcessList.count {
+            let parameter = RecipeAddRequestModel(recipeName: recipeName, recipeImgKey: thumbnailImgKey!, recipeCategory: category, leadTime: timeRequired, quantity: amount, foodList: foodList, cookeryList: cookeryList)
+            self.recipeService.postRecipe(parameter: parameter) { result in
+                if result {
+                    // upload Image
+                    ImageService.shared.uploadRecipeImage(image: recipeImg, url: thumbnailUrl!) {
+                        for i in cookingProcessList.indices {
+                            if cookingProcessList[i][0] != nil {
+                                ImageService.shared.uploadRecipeImage(image: cookingProcessList[i][0] as! UIImage, url: recipeUrlList[i]!) {
+                                    completion(true)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    completion(false)
+                }
+            }
+        }
     }
 }
