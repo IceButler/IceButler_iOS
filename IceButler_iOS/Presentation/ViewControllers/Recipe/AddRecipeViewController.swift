@@ -210,6 +210,9 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
     @IBAction func didTapAddIngredientButton(_ sender: Any) {
         if !ingredientNameTextField.text!.isEmpty && !ingredientAmountTextField.text!.isEmpty {
             addedIngredientList.append([ingredientNameTextField.text!, ingredientAmountTextField.text!])
+            ingredientNameTextField.text = nil
+            ingredientAmountTextField.text = nil
+            view.endEditing(true)
             ingredientStackViewTopConstraintToIngredientTableView.priority = UILayoutPriority(1000)
             ingredientTableView.reloadData()
             scrollView.invalidateIntrinsicContentSize()

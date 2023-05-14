@@ -125,16 +125,24 @@ class AddRecipeSecondViewController: UIViewController, ReceiveFirstDataDelegate 
     }
     
     @IBAction func didTapAddCookingProcessButton(_ sender: Any) {
-        if !cookingProcessTextView.text!.isEmpty {
-            if addCookingProcessImageButton.imageView!.image!.isEqual(UIImage(named: "imageAddIcon")) {
-                addedCookingProcessList.append([nil, cookingProcessTextView.text!])
-            } else {
-                addedCookingProcessList.append([addCookingProcessImageButton.imageView?.image, cookingProcessTextView.text!])
+        if !(cookingProcessTextView.textColor == .placeholderColor) {
+            if !cookingProcessTextView.text!.isEmpty {
+                if addCookingProcessImageButton.imageView!.image!.isEqual(UIImage(named: "imageAddIcon")) {
+                    addedCookingProcessList.append([nil, cookingProcessTextView.text!])
+                    cookingProcessTextView.text = "200자 이내"
+                    cookingProcessTextView.textColor = .placeholderColor
+                } else {
+                    addedCookingProcessList.append([addCookingProcessImageButton.imageView?.image, cookingProcessTextView.text!])
+                    cookingProcessTextView.text = "200자 이내"
+                    cookingProcessTextView.textColor = .placeholderColor
+                    addCookingProcessImageButton.setImage(UIImage(named: "imageAddIcon"), for: .normal)
+                }
+                view.endEditing(true)
+                cookingProcessStackViewTopConstarintToCookingProcessTableView.priority = UILayoutPriority(1000)
+                cookingProcessTableView.reloadData()
+                scrollView.invalidateIntrinsicContentSize()
+                changeCompletionButtonColor()
             }
-            cookingProcessStackViewTopConstarintToCookingProcessTableView.priority = UILayoutPriority(1000)
-            cookingProcessTableView.reloadData()
-            scrollView.invalidateIntrinsicContentSize()
-            changeCompletionButtonColor()
         }
     }
     
@@ -149,14 +157,14 @@ class AddRecipeSecondViewController: UIViewController, ReceiveFirstDataDelegate 
                                                         ingredientList: ingredientList,
                                                         cookingProcessList: addedCookingProcessList) { isSuccess in
                     if isSuccess {
-                        let alert = UIAlertController(title: "성공", message: "레시피 등록에 성공했습니다.", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "성공", message: "레시피 추가에 성공했습니다.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
                             // TODO: 마이레시피로 이동
                             self.navigationController?.popToRootViewController(animated: true)
                         }))
                         self.present(alert, animated: true)
                     } else {
-                        let alert = UIAlertController(title: "실패", message: "레시피 등록에 실패했습니다. 다시 시도해주세요.", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "실패", message: "레시피 추가에 실패했습니다. 다시 시도해주세요.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default))
                         self.present(alert, animated: true)
                     }
