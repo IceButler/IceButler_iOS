@@ -245,7 +245,7 @@ class AddRecipeSecondViewController: UIViewController, ReceiveFirstDataDelegate 
     }
     
     private func isAllEntered() -> Bool {
-        if cookingProcessTableView.numberOfRows(inSection: 0) > 1 { return true }
+        if cookingProcessTableView.numberOfRows(inSection: 0) > 2 { return true }
         return false
     }
     

@@ -35,14 +35,14 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sy0-B6-YK9">
                                 <rect key="frame" x="92" y="0.0" width="210" height="79"/>
                                 <color key="backgroundColor" red="0.86274509799999999" green="0.92156862750000001" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="79" id="mhf-lK-alq"/>
-                                </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" priority="999" constant="79" id="JiQ-8I-CDX"/>
+                        </constraints>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1Z-KQ-v0m">
                         <rect key="frame" x="316" y="11.333333333333332" width="30" height="56.666666666666671"/>
