@@ -614,11 +614,15 @@ class FridgeViewModel: ObservableObject {
         
         /// 이전에 선택된 냉장고가 있다면 해당 냉장고로 기본 설정
     func setSavedFridgeIdx() {
-        if let idx = UserDefaults.standard.value(forKey: "selectedFridgeIdx"),
-           let name = UserDefaults.standard.value(forKey: "selectedFridgeName") {
-            APIManger.shared.setFridgeIdx(index: idx as! Int)
-            self.defaultFridgeName = name as! String
-        }
+        guard let idx = UserDefaults.standard.value(forKey: "selectedFridgeIdx") as? Int else {return}
+        guard let name = UserDefaults.standard.value(forKey: "selectedFridgeName") as? String else {return}
+        guard let isMultiFridge = UserDefaults.standard.value(forKey: "isMulti") as? Bool else {return}
+        
+        APIManger.shared.setFridgeIdx(index: idx)
+        APIManger.shared.setIsMultiFridge(data: isMultiFridge)
+        self.defaultFridgeName = name
+        
+      
     }
 
 }

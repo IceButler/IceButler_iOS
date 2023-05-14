@@ -44,8 +44,6 @@ class FridgeViewController: TabmanViewController {
     }
     
     private func setup() {
-//        FridgeViewModel.shared.getAllFoodList(fridgeIdx: 78)
-//        FridgeViewModel.shared.setDefaultFridge()
         FridgeViewModel.shared.setSavedFridgeIdx()
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
         
@@ -177,17 +175,10 @@ class FridgeViewController: TabmanViewController {
     }
     
     @objc private func selectFridge() {
-//        let selectVC = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as! SelectFrideViewController
-//        selectVC.delegate = self
-//        present(selectVC, animated: true, completion: nil)
-        
         guard let vc = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as? SelectFrideViewController else { return }
         let selectVC = UINavigationController(rootViewController: vc)
-//        selectVC.modalPresentationStyle = .fullScreen
         selectVC.isNavigationBarHidden = true
         present(selectVC, animated: true)
-        
-//        self.navigationController?.pushViewController(selectVC, animated: true)
     }
     
     @objc private func moveToSearchVC() {
