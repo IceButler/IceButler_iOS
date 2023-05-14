@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MapViewController: UIViewController {
 
+    var locationManager : CLLocationManager!
+    
     private var mapView: MTMapView!
     private var storeData: [KakaoStoreData] = []
+    private var currentStoreWebUrl = ""     /// 가게 상세 정보 탭할 경우 웹뷰로 넘어가기 위한 url
     
     @IBOutlet var currentLocationButton: UIButton!
     @IBOutlet var infoView: UIView!
@@ -29,7 +33,7 @@ class MapViewController: UIViewController {
     
     @IBAction func didTapViewStoreDetail(_ sender: UIButton) {
         // TODO: 카카오맵을 통해 가게 상세 정보 화면으로 이동
-        print("TODO: 카카오맵을 통해 가게 상세 정보 화면으로 이동")
+        print("TODO: 카카오맵을 통해 가게 상세 정보 화면으로 이동 --> \n currentStoreWebUrl : \(currentStoreWebUrl)")
     }
     
     
@@ -38,11 +42,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// TODO: 카카오 API를 사용한 카테고리별 장소 검색으로 가까운 식료품점 데이터 fetch
-        ///      가져온 데이터를 기반으로 pin 구성
-        ///      지도 중심을 현재 위치로 이동
-        ///      핀 탭 이벤트를 통해 보여지는 info view의 더보기 버튼 탭 이벤트 정의 (카카오맵 상세 정보 화면으로 넘어가기)
-        
+        setupLocation()
         fetchKakaoData()
         setupView()
         setupMapView()
@@ -107,6 +107,12 @@ class MapViewController: UIViewController {
         currentLocationButton.layer.zPosition = 99
     }
     
+    private func setupLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
     
     private func setupMapView() {
         mapView = MTMapView(frame: self.view.frame)
@@ -117,24 +123,23 @@ class MapViewController: UIViewController {
 //        mapView.addGestureRecognizer(tapGestureRecognizer)
         
         self.view.addSubview(mapView)
-        
-        setupPins()
-        
+        setupCurrentLocationPin()
     }
     
-    private func setupPins() {
-        let point1 = MTMapPOIItem()
-        point1.tag = 1
-        point1.itemName = nil
-        point1.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: 37.5309828, longitude: 126.8381839)) // 테스트용 위치
-        point1.markerType = .redPin
-//        point1.markerType = .customImage
-//        point1.customImage = UIImage(named: "pin")
-//        point1.customSelectedImage = UIImage(named: "pin.fill")
+    private func setupCurrentLocationPin() {
+        let longitude = locationManager.location?.coordinate.longitude
+        let latitude = locationManager.location?.coordinate.latitude
         
-        mapView.addPOIItems([point1])
+        let currentPoint = MTMapPOIItem()
+        currentPoint.tag = 1
+        currentPoint.itemName = nil
+        currentPoint.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude!, longitude: longitude!))
+        currentPoint.markerType = .redPin
+        mapView.addPOIItems([currentPoint])
         
+        mapView.setMapCenter(.init(geoCoord: .init(latitude: latitude!, longitude: longitude!)), animated: true)
     }
+    
     func loadViewAnimation() {
         UIView.transition(with: self.infoView,
                           duration: 0.35,
@@ -151,18 +156,48 @@ class MapViewController: UIViewController {
     
 }
 
+// MARK: Delegate Extensions
 extension MapViewController: MTMapViewDelegate {
     func mapView(_ mapView: MTMapView!, selectedPOIItem poiItem: MTMapPOIItem!) -> Bool {
         // TODO: 마커 selectedImage로 변경
+        
+        currentStoreWebUrl = storeData[poiItem.tag].place_url ?? ""
+        
         storeNameLabel.text = storeData[poiItem.tag].place_name
         storeAddressLabel.text = storeData[poiItem.tag].road_address_name
-        storePhoneNumLabel.text = storeData[poiItem.tag].phone
+        storePhoneNumLabel.text = (storeData[poiItem.tag].phone!.count > 0) ? storeData[poiItem.tag].phone : "전화번호가 없습니다."
+        
         loadViewAnimation()
         return false
     }
 }
 
+extension MapViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("GPS 권한 설정됨")
+        case .notDetermined:
+            print("GPS 권한 설정되지 않음")
+        case .denied:
+            print("GPS 권한 거부됨")
+        default: return
+        }
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+//        print(manager.location)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location: CLLocation = locations[locations.count-1]
+        let longtitude: CLLocationDegrees = location.coordinate.longitude
+        let latitude: CLLocationDegrees = location.coordinate.latitude
+    }
+}
 
+
+// MARK: 카카오맵 API 사용 관련 메소드
 extension MapViewController {
     private func fetchKakaoData() {
         KakaoMapService.shared.getNearStoreData(x: 126.8381839,
