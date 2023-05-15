@@ -239,8 +239,8 @@ extension MapViewController: CLLocationManagerDelegate {
 // MARK: 카카오맵 API 사용 관련 메소드
 extension MapViewController {
     private func fetchKakaoData() {
-        KakaoMapService.shared.getNearStoreData(x: 126.8381839,
-                                                y: 37.5309828,
+        KakaoMapService.shared.getNearStoreData(x: currentLo,
+                                                y: currentLa,
                                                 completion: { [weak self] response in
             
             if response.documents.count > 0 {
