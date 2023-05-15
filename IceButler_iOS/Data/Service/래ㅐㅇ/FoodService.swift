@@ -39,8 +39,8 @@ class FoodService {
         }
     }
     
-    func patchFood(foodIdx: Int, parameter: FoodAddListModel, completion: @escaping (Bool) -> Void) {
-        APIManger.shared.patchData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/food/\(foodIdx)", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodAddListModel.self, parameter: parameter) { response in
+    func patchFood(foodIdx: Int, parameter: FoodAddRequestModel, completion: @escaping (Bool) -> Void) {
+        APIManger.shared.patchData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/foods/\(foodIdx)", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodAddRequestModel.self, parameter: parameter) { response in
             if response.status == "OK" {
                 completion(true)
             }else {

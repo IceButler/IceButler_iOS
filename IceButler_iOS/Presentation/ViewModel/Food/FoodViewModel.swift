@@ -277,12 +277,10 @@ extension FoodViewModel {
     }
     
     func patchFood(foodIdx: Int, fridgeIdx: Int, foodName: String, foodDetail: String, foodCategory: String, foodShelfLife: String, foodOwnerIdx: Int, memo: String?, imgUrl: String?, completion: @escaping (Bool) -> Void) {
-        var foodAddModel: [FoodAddRequestModel] = []
-        foodAddModel.append(FoodAddRequestModel(foodName: foodName, foodDetailName: foodDetail, foodCategory: foodCategory, shelfLife: foodShelfLife, memo: memo, imageUrl: imgUrl, ownerIdx: foodOwnerIdx))
+        let foodAddModel: FoodAddRequestModel = FoodAddRequestModel(foodName: foodName, foodDetailName: foodDetail, foodCategory: foodCategory, shelfLife: foodShelfLife, memo: memo, imageUrl: imgUrl, ownerIdx: foodOwnerIdx)
         
-        let parameter = FoodAddListModel(fridgeFoods: foodAddModel)
         
-        foodService.patchFood(foodIdx: foodIdx, parameter: parameter) { result in
+        foodService.patchFood(foodIdx: foodIdx, parameter: foodAddModel) { result in
             if result {
                 FoodViewModel.shared.getFoodDetail(fridgeIdx: 0, foodIdx: foodIdx)
                 FridgeViewModel.shared.getAllFoodList(fridgeIdx: fridgeIdx)

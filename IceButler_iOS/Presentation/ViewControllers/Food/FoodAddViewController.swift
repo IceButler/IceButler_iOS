@@ -249,6 +249,24 @@ class FoodAddViewController: UIViewController {
                 self.selectedOwner.append(false)
             }
             self.foodOwnerTableView.reloadData()
+            
+            
+            
+            if FoodViewModel.shared.isEditFood == true && FoodViewModel.shared.foodOwnerListCount() != 0 {
+                FoodViewModel.shared.getFood { food in
+                    for i in 0..<FoodViewModel.shared.foodOwnerListCount() {
+                        if FoodViewModel.shared.foodOwnerListName(index: i) == food.owner {
+                            self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: i)
+                        }
+                    }
+                    
+                    print(self.foodOwnerIdx)
+                    
+                    self.ownerOpenButton.tintColor = .black
+                    self.ownerOpenButton.backgroundColor = .focusSkyBlue
+                    self.ownerOpenButton.setTitle(food.owner ?? "", for: .normal)
+                }
+            }
         }
         
         FoodViewModel.shared.barcodeFood { barcodeFood in
@@ -275,7 +293,7 @@ class FoodAddViewController: UIViewController {
             self.isEdit = isEditFood
             if isEditFood {
                 FoodViewModel.shared.getFood { food in
-                    self.foodIdx = food.foodIdx
+                    self.foodIdx = food.fridgeFoodIdx
                     
                     
                     self.foodNameTextView.text = food.foodName
@@ -301,15 +319,18 @@ class FoodAddViewController: UIViewController {
                     
                     self.date = date
                     
-                    self.foodOwnerIdx = FoodViewModel.shared.findFoodOwnerIdx(name: food.owner!)
                     
-                    self.ownerOpenButton.tintColor = .black
-                    self.ownerOpenButton.backgroundColor = .focusSkyBlue
-                    self.ownerOpenButton.setTitle(FoodViewModel.shared.foodOwnerListName(index: self.foodOwnerIdx ?? 0), for: .normal)
                     
                     self.foodMemoTextView.text = food.memo
                     
                     self.foodImageUrl = food.imgURL
+                    
+                    
+                    for i in 0..<FoodViewModel.shared.foodOwnerListCount() {
+                        if FoodViewModel.shared.foodOwnerListName(index: i) == food.owner {
+                            self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: i)
+                        }
+                    }
                 }
             }
         }
@@ -356,9 +377,13 @@ class FoodAddViewController: UIViewController {
     }
     
     @objc private func backToScene() {
-        FoodViewModel.shared.deleteAll()
-        navigationController?.popViewController(animated: true)
-        delegate?.moveToFoodAddSelect()
+        if isEdit {
+            navigationController?.popViewController(animated: true)
+        }else {
+            FoodViewModel.shared.deleteAll()
+            navigationController?.popViewController(animated: true)
+            delegate?.moveToFoodAddSelect()
+        }
     }
     
     func setDelegate(delegate: FoodAddDelegate) {
@@ -696,8 +721,8 @@ class FoodAddViewController: UIViewController {
                     if result {
                         let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
-                            FoodViewModel.shared.deleteAll()
                             FoodViewModel.shared.getFoodDetail(fridgeIdx: 0, foodIdx: self.foodIdx)
+                            FoodViewModel.shared.isEditFood = false
                             self.navigationController?.popViewController(animated: true)
                         }))
                         self.present(alert, animated: true)
@@ -719,7 +744,7 @@ class FoodAddViewController: UIViewController {
                     if result {
                         let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
-                            FoodViewModel.shared.deleteAll()
+                            FoodViewModel.shared.isEditFood = false
                             FoodViewModel.shared.getFoodDetail(fridgeIdx: 0, foodIdx: self.foodIdx)
                             self.navigationController?.popViewController(animated: true)
                         }))
