@@ -39,6 +39,16 @@ class FoodService {
         }
     }
     
+    func patchFood(foodIdx: Int, parameter: FoodAddRequestModel, completion: @escaping (Bool) -> Void) {
+        APIManger.shared.patchData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/foods/\(foodIdx)", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodAddRequestModel.self, parameter: parameter) { response in
+            if response.status == "OK" {
+                completion(true)
+            }else {
+                completion(false)
+            }
+        }
+    }
+    
     func getGptFoodName(foodDetailName: String, completion: @escaping (GptFoodNameResponse) -> Void) {
         let parameter: Parameters =  ["keyword" : foodDetailName]
         APIManger.shared.getGpt(url: "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/dev/chatgpt-oneword", responseDataType: GptFoodNameResponse.self, parameter: parameter) { response in
