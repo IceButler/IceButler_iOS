@@ -163,7 +163,7 @@ class CartViewController: UIViewController {
             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
             
             let statusbarView = UIView()
-            statusbarView.backgroundColor = UIColor.signatureLightBlue
+            statusbarView.backgroundColor = UIColor.navigationColor
             view.addSubview(statusbarView)
           
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -181,7 +181,25 @@ class CartViewController: UIViewController {
             statusBar?.backgroundColor = UIColor.red
         }
         
-        self.navigationController?.navigationBar.backgroundColor = .signatureLightBlue
+        /// set up title
+        let titleLabel = UILabel()
+        titleLabel.text = "장바구니"
+        titleLabel.textAlignment = .left
+        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        titleLabel.textColor = .white
+        titleLabel.sizeToFit()
+        
+        let titleItem = UIBarButtonItem(customView: titleLabel)
+        
+        self.navigationItem.leftBarButtonItem = titleItem
+        
+        /// set up right item
+        let mapItem = UIBarButtonItem(image: UIImage(named: "mapIcon"), style: .done, target: self, action: #selector(didTapMapItem))
+        mapItem.tintColor = .white
+        
+        self.navigationItem.rightBarButtonItem = mapItem
+        
+        self.navigationController?.navigationBar.backgroundColor = .navigationColor
         self.tabBarController?.tabBar.isHidden = false
         
     }
@@ -210,6 +228,13 @@ class CartViewController: UIViewController {
         self.cartFoods.removeAll()
         self.cartFoods = CartViewModel.shared.cartFoods
         self.cartMainTableView.reloadData()
+    }
+    
+    
+    // MARK: @objc methods
+    @objc private func didTapMapItem() {
+        guard let vc = storyboard?.instantiateViewController(identifier: "MapViewController") as? MapViewController else { return }
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
