@@ -25,9 +25,11 @@ class FridgeViewModel: ObservableObject {
     @Published var processedFoodList: [FridgeFood] = []
     @Published var etcFoodList: [FridgeFood] = []
     
+    var searchMemberResults: [FridgeUser] = []
+    
     var cancelLabels: Set<AnyCancellable> = []
     
-    var defaultFridgeName: String = ""
+    var defaultFridgeName: String = "냉장고 미선택"
     
     func allFoodList(foodListIdx: Int, completion: @escaping ([FridgeFood])-> Void) {
         switch foodListIdx {
@@ -97,7 +99,8 @@ class FridgeViewModel: ObservableObject {
         switch foodListIdx {
         case 0:
             $allFoodList.filter { allFoodList in
-                allFoodList.count > 0
+                //                allFoodList.count > 0
+                allFoodList.count > -1
             }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
@@ -576,8 +579,6 @@ class FridgeViewModel: ObservableObject {
             switch response.statusCode {
             case 200:
                 /// 최초 로딩에 보여질 냉장고 기본값 설정
-//                print("setDefaultFridge called")
-//                print(response.data)
                 if response.data?.fridgeList?.count ?? 0 > 0 {
                     APIManger.shared.setFridgeIdx(index: (response.data?.fridgeList![0].fridgeIdx)!)
                     APIManger.shared.setIsMultiFridge(data: false)
@@ -595,4 +596,33 @@ class FridgeViewModel: ObservableObject {
             }
         }
     }
+    
+    func searchMember(nickname: String, completion: @escaping () -> Void) {
+        fridgeService.getMemberSearchResults(nickname: nickname, completion: { [weak self] data in
+            if let data = data {
+                self?.searchMemberResults = data
+                completion()
+            }
+        })
+    }
+    
+    func requestAddFridge(isMulti: Bool, name: String, comment: String, members: [Int], completion: @escaping ((Bool)->Void)) {
+        fridgeService.addFridge(isMulti: isMulti, name: name, comment: comment, members: members, completion: { response in
+            completion((response != nil) ? true : false)
+        })
+    }
+        
+        /// 이전에 선택된 냉장고가 있다면 해당 냉장고로 기본 설정
+    func setSavedFridgeIdx() {
+        guard let idx = UserDefaults.standard.value(forKey: "selectedFridgeIdx") as? Int else {return}
+        guard let name = UserDefaults.standard.value(forKey: "selectedFridgeName") as? String else {return}
+        guard let isMultiFridge = UserDefaults.standard.value(forKey: "isMulti") as? Bool else {return}
+        
+        APIManger.shared.setFridgeIdx(index: idx)
+        APIManger.shared.setIsMultiFridge(data: isMultiFridge)
+        self.defaultFridgeName = name
+        
+      
+    }
+
 }

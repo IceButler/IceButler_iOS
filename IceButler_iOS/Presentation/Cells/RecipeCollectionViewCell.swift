@@ -12,10 +12,11 @@ class RecipeCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var recipeImageView: UIImageView!
-    @IBOutlet weak var bookmarkBtn: UIButton!
+    @IBOutlet weak var bookmarkButton: UIButton!
     @IBOutlet weak var recipeNameLabel: UILabel!
     var foodTypeLabel: BasePaddingLabel!
     var percentLabel: BasePaddingLabel!
+    var idx: Int!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,6 +46,12 @@ class RecipeCollectionViewCell: UICollectionViewCell {
             }
         case .bookmarkRecipe:
             return
+        }
+    }
+    
+    @IBAction func didTapBookmarkButton(_ sender: Any) {
+        RecipeViewModel.shared.updateBookmarkStatus(recipeIdx: idx) { bookmarkStatus in
+            self.setLikeStatus(status: bookmarkStatus)
         }
     }
     
@@ -123,11 +130,13 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     func setLikeStatus(status: Bool) {
         if status {
-            bookmarkBtn.imageView?.image = UIImage(named: "smallStar")
+            bookmarkButton.imageView?.image = UIImage(named: "smallStar")
         } else {
-            bookmarkBtn.imageView?.image = UIImage(named: "emptyStar")
+            bookmarkButton.imageView?.image = UIImage(named: "emptyStar")
         }
     }
+    
+    func configure(idx: Int) { self.idx = idx }
 }
 
 extension CALayer {

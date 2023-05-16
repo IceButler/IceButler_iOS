@@ -103,6 +103,7 @@ extension BookmarkRecipeViewController: UICollectionViewDelegate, UICollectionVi
             cell.setCategory(category: recipe.recipeCategory)
             cell.setPercent(percent: recipe.percentageOfFood)
             cell.setLikeStatus(status: recipe.recipeLikeStatus)
+            cell.configure(idx: recipe.recipeIdx)
         }
         
         return cell

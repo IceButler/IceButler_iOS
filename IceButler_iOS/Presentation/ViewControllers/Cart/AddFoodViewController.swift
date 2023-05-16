@@ -220,11 +220,23 @@ extension AddFoodViewController: UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.tag == 0 {
-            return CGSize(width: category[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]).width + 20, height: 45)
+            return CGSize(width: category[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]).width + 20, height: 34)
         } else if collectionView.tag == 1 {
-            return CGSize(width: category[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]).width + 20, height: 45)
+            let title = "\(selectedFoods[indexPath.row].foodCategory!)-\(selectedFoods[indexPath.row].foodName!)"
+            return CGSize(width: 25.5 + title.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]).width + 20, height: 34)
         }
         return CGSize(width: 0, height: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.tag == 0 {
+            let cell = self.categoryCollectionView.cellForItem(at: indexPath) as? FoodCategoryCollectionViewCell
+            cell?.didTapCategoryCell()
+            
+        } else if collectionView.tag == 1 {
+            let cell = self.collectionView.cellForItem(at: indexPath) as? SelectedFoodNameCollectionViewCell
+            cell?.didTapSelectedFoodCell()
+        }
     }
 }
 
@@ -275,7 +287,9 @@ extension AddFoodViewController: FoodCategoryCellDelegate {
 extension AddFoodViewController: SelectedFoodCellDelegate {
     func didTapDeleteButton(index: Int) {
         selectedFoodNames.remove(at: index)
-        
+        selectedFoods.remove(at: index)
+        collectionView.reloadData()
+
         selectedCategory = ""
         categoryCollectionView.reloadData()
         
@@ -283,6 +297,5 @@ extension AddFoodViewController: SelectedFoodCellDelegate {
             self.completeButton.backgroundColor = .systemGray5
             self.completeButton.isEnabled = false
         }
-        collectionView.reloadData()
     }
 }

@@ -110,6 +110,11 @@ class FoodDetailViewController: UIViewController {
     }
     
     @objc private func moveToEdit() {
+        let foodEditVC = UIStoryboard(name: "FoodAdd", bundle: nil).instantiateViewController(withIdentifier: "FoodAddViewController") as! FoodAddViewController
+        
+        FoodViewModel.shared.isEditFood = true
+        
+        self.navigationController?.pushViewController(foodEditVC, animated: true)
     }
     
     @objc private func deleteFood() {

@@ -9,8 +9,9 @@ import Foundation
 import Combine
 import UIKit
 import Alamofire
+import AuthenticationServices
 
-class AuthViewModel: ObservableObject {
+class AuthViewModel: NSObject, ObservableObject {
     static let shared = AuthViewModel()
     private let authService = AuthService()
     
@@ -90,6 +91,15 @@ extension AuthViewModel {
         }
     }
     
+    func loginWithApple(completion: @escaping (ASAuthorizationAppleIDRequest) -> Void) {
+        authService.loginWithApple { request in
+            completion(request)
+        }
+    }
+    
+    
+    
+    
     func login(userEmail: String) {
         let parameter = AuthLoginRequest(email: userEmail, provider: self.authProvider!.rawValue)
         
@@ -97,9 +107,10 @@ extension AuthViewModel {
             if let response = response {
                 self.accessToken = response.accessToken
                 self.setUserToken(token: response)
+            }else {
+                self.userEmail = userEmail
             }
         }
-        self.userEmail = userEmail
     }
     
     
@@ -190,11 +201,68 @@ extension AuthViewModel {
 
     func logout() {
         authService.requestLogout {
-            self.isJoin = false
-            self.isModify = false
-            self.userEmail = nil
-            self.accessToken = nil
-            UserDefaults.standard.removeObject(forKey: "UserToken")
+            self.removeAllData()
         }
+    }
+    
+    func removeAllData() {
+        self.isJoin = false
+        self.isModify = false
+        self.userEmail = nil
+        self.accessToken = nil
+        UserDefaults.standard.removeObject(forKey: "UserToken")
+    }
+}
+
+
+extension AuthViewModel: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {return}
+        
+        if let email = credential.email {
+            self.authProvider = .apple
+            self.login(userEmail: email)
+        }else {
+            if let tokenString = String(data: credential.identityToken ?? Data(), encoding: .utf8) {
+                let email = decode(jwtToken: tokenString)["email"] as? String ?? ""
+                self.authProvider = .apple
+                self.login(userEmail: email)
+           }
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("애플 로그인 에러")
+    }
+    
+    
+    private func decode(jwtToken jwt: String) -> [String: Any] {
+        
+        func base64UrlDecode(_ value: String) -> Data? {
+            var base64 = value
+                .replacingOccurrences(of: "-", with: "+")
+                .replacingOccurrences(of: "_", with: "/")
+
+            let length = Double(base64.lengthOfBytes(using: String.Encoding.utf8))
+            let requiredLength = 4 * ceil(length / 4.0)
+            let paddingLength = requiredLength - length
+            if paddingLength > 0 {
+                let padding = "".padding(toLength: Int(paddingLength), withPad: "=", startingAt: 0)
+                base64 = base64 + padding
+            }
+            return Data(base64Encoded: base64, options: .ignoreUnknownCharacters)
+        }
+
+        func decodeJWTPart(_ value: String) -> [String: Any]? {
+            guard let bodyData = base64UrlDecode(value),
+                  let json = try? JSONSerialization.jsonObject(with: bodyData, options: []), let payload = json as? [String: Any] else {
+                return nil
+            }
+
+            return payload
+        }
+        
+        let segments = jwt.components(separatedBy: ".")
+        return decodeJWTPart(segments[1]) ?? [:]
     }
 }

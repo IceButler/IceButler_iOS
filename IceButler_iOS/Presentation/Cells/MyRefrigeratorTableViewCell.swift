@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol MyRefrigeratorTableViewCellDelegate {
+    func didTapEditButton(index: Int)
+    func didTapDeleteButton(index: Int)
+}
+
 class MyRefrigeratorTableViewCell: UITableViewCell {
 
+    var delegate: MyRefrigeratorTableViewCellDelegate?
     private var memberInfos: [FridgeUser] = []
     
     @IBOutlet weak var containerView: UIView!
@@ -72,12 +78,12 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     }
     
     @IBAction func didTapEditButton(_ sender: UIButton) {
-        // TODO: 냉장고 수정 화면으로 전환
+        delegate?.didTapEditButton(index: self.tag)
     }
     
     
     @IBAction func didTapDeleteButton(_ sender: UIButton) {
-        // TODO: 냉장고 삭제 AlertVC 전환
+        delegate?.didTapDeleteButton(index: self.tag)
     }
     
 }

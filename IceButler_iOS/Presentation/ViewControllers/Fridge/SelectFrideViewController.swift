@@ -91,8 +91,11 @@ class SelectFrideViewController: UIViewController {
     }
     
     @IBAction func didTapAddFridgeButton(_ sender: UIButton) {
-        // TODO: 냉장고 추가 화면으로 이동
-        print("TODO: 냉장고 추가 화면으로 이동")
+        guard let vc = storyboard?.instantiateViewController(identifier: "AddFridgeViewController") as? AddFridgeViewController else { return }
+        let addVC = UINavigationController(rootViewController: vc)
+        addVC.modalPresentationStyle = .fullScreen
+        addVC.isNavigationBarHidden = true
+        present(addVC, animated: true)
     }
     
 }
@@ -118,11 +121,20 @@ extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row < fridgeCount { APIManger.shared.setIsMultiFridge(data: false) }
-        else { APIManger.shared.setIsMultiFridge(data: true) }
+        if indexPath.row < fridgeCount {
+            APIManger.shared.setIsMultiFridge(data: false)
+            UserDefaults.standard.setValue(false, forKey: "isMulti")
+        }
+        else {
+            APIManger.shared.setIsMultiFridge(data: true)
+            UserDefaults.standard.setValue(true, forKey: "isMulti")
+        }
         
         let index = myFridgeData[indexPath.row].idx!
         APIManger.shared.setFridgeIdx(index: index)
+        UserDefaults.standard.setValue(index, forKey: "selectedFridgeIdx")
+        
+        UserDefaults.standard.setValue(myFridgeData[indexPath.row].name, forKey: "selectedFridgeName")
         delegate?.updateMainFridge(title: myFridgeData[indexPath.row].name ?? "냉장고 이름")
         
         self.dismiss(animated: true)

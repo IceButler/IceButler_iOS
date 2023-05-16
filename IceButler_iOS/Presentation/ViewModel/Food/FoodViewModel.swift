@@ -22,6 +22,7 @@ class FoodViewModel: ObservableObject {
     @Published var gptFoodCategories: [String] = []
     @Published var searchFoodList: [SearchFoodResponse] = []
     @Published var selectedSearchFood: SearchFoodResponse?
+    @Published var isEditFood: Bool = false
     
     var cancelLabels: Set<AnyCancellable> = []
     private var profileImgKey: String?
@@ -33,6 +34,11 @@ class FoodViewModel: ObservableObject {
             }
         }.store(in: &cancelLabels)
     }
+    
+    func getFood(completion: @escaping (FoodDetailResponseModel) -> Void) {
+        completion(food!)
+    }
+    
     
     func foodImage(completion: @escaping (String) -> Void) {
         $food.filter({ food in
@@ -178,6 +184,22 @@ class FoodViewModel: ObservableObject {
         }.store(in: &cancelLabels)
     }
     
+    func isEditFood(completion: @escaping (Bool) -> Void) {
+        $isEditFood.sink { isEditFood in
+            completion(isEditFood)
+        }.store(in: &cancelLabels)
+    }
+    
+    
+    func findFoodOwnerIdx(name: String) -> Int {
+        for i in 0..<foodOwnerList.count {
+            if foodOwnerList[i].nickName == name {
+                return foodOwnerList[i].userIdx
+            }
+        }
+        return 0
+    }
+    
     
     func deleteAll() {
         self.food = nil
@@ -187,6 +209,7 @@ class FoodViewModel: ObservableObject {
         self.gptFoodCategories = []
         self.selectedSearchFood = nil
         self.searchFoodList = []
+        self.isEditFood = false
     }
 }
 
@@ -231,15 +254,49 @@ extension FoodViewModel {
         }
     }
     
+    func getUploadImageUrl(foodIdx: Int, imageDir: ImageDir, image: UIImage, fridgeIdx: Int, foodName: String, foodDetail: String, foodCategory: String, foodShelfLife: String, foodOwnerIdx: Int, memo: String?, completion: @escaping (Bool) -> Void) {
+        let parameter: Parameters = ["ext": "jpeg", "dir": imageDir.rawValue]
+        ImageService.shared.getImageUrl(parameter: parameter) {[self] response in
+            if let response = response {
+                profileImgKey = response.imageKey
+                uploadProfileImage(image: image, url: response.presignedUrl, fridgeIdx: fridgeIdx, foodName: foodName, foodDetail: foodDetail, foodCategory: foodCategory, foodShelfLife: foodShelfLife, foodOwnerIdx: foodOwnerIdx, memo: memo, completion: completion)
+            }
+        }
+    }
+    
     func uploadProfileImage(image: UIImage, url: String, fridgeIdx: Int, foodName: String, foodDetail: String, foodCategory: String, foodShelfLife: String, foodOwnerIdx: Int, memo: String?, completion: @escaping (Bool) -> Void) {
         ImageService.shared.uploadImage(image: image, url: url) {
             self.postFood(fridgeIdx: fridgeIdx, foodName: foodName, foodDetail: foodDetail, foodCategory: foodCategory, foodShelfLife: foodShelfLife, foodOwnerIdx: foodOwnerIdx, memo: memo, imgUrl: self.profileImgKey, completion: completion)
         }
     }
     
+    func uploadProfileImage(foodIdx: Int, image: UIImage, url: String, fridgeIdx: Int, foodName: String, foodDetail: String, foodCategory: String, foodShelfLife: String, foodOwnerIdx: Int, memo: String?, completion: @escaping (Bool) -> Void) {
+        ImageService.shared.uploadImage(image: image, url: url) {
+            self.postFood(fridgeIdx: fridgeIdx, foodName: foodName, foodDetail: foodDetail, foodCategory: foodCategory, foodShelfLife: foodShelfLife, foodOwnerIdx: foodOwnerIdx, memo: memo, imgUrl: self.profileImgKey, completion: completion)
+        }
+    }
+    
+    func patchFood(foodIdx: Int, fridgeIdx: Int, foodName: String, foodDetail: String, foodCategory: String, foodShelfLife: String, foodOwnerIdx: Int, memo: String?, imgUrl: String?, completion: @escaping (Bool) -> Void) {
+        let foodAddModel: FoodAddRequestModel = FoodAddRequestModel(foodName: foodName, foodDetailName: foodDetail, foodCategory: foodCategory, shelfLife: foodShelfLife, memo: memo, imageUrl: imgUrl, ownerIdx: foodOwnerIdx)
+        
+        
+        foodService.patchFood(foodIdx: foodIdx, parameter: foodAddModel) { result in
+            if result {
+                FoodViewModel.shared.getFoodDetail(fridgeIdx: 0, foodIdx: foodIdx)
+                FridgeViewModel.shared.getAllFoodList(fridgeIdx: fridgeIdx)
+                completion(true)
+            }else {
+                completion(false)
+            }
+        }
+    }
+    
     
     func postFood(fridgeIdx: Int, foodName: String, foodDetail: String, foodCategory: String, foodShelfLife: String, foodOwnerIdx: Int, memo: String?, imgUrl: String?, completion: @escaping (Bool) -> Void) {
-        let parameter = FoodAddRequestModel(foodName: foodName, foodDetailName: foodDetail, foodCategory: foodCategory, shelfLife: foodShelfLife, memo: memo, imageUrl: imgUrl, ownerIdx: foodOwnerIdx)
+        var foodAddModel: [FoodAddRequestModel] = []
+        foodAddModel.append(FoodAddRequestModel(foodName: foodName, foodDetailName: foodDetail, foodCategory: foodCategory, shelfLife: foodShelfLife, memo: memo, imageUrl: imgUrl, ownerIdx: foodOwnerIdx))
+        
+        let parameter = FoodAddListModel(fridgeFoods: foodAddModel)
         
         foodService.postFood(fridgeIdx: fridgeIdx, parameter: parameter) { result in
             if result {

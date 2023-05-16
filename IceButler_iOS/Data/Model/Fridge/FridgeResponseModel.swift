@@ -17,3 +17,4 @@ struct FridgeFood: Codable {
     let foodImgUrl: String
     let shelfLife: Int
 }
+

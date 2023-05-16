@@ -44,8 +44,8 @@ class FridgeViewController: TabmanViewController {
     }
     
     private func setup() {
-//        FridgeViewModel.shared.getAllFoodList(fridgeIdx: 1)
-        FridgeViewModel.shared.setDefaultFridge()
+        FridgeViewModel.shared.setSavedFridgeIdx()
+        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
         
     }
     
@@ -148,7 +148,7 @@ class FridgeViewController: TabmanViewController {
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
         
         setupleftBarItems(title: FridgeViewModel.shared.defaultFridgeName)
-        print("FridgeViewModel.shared.defaultFridgeName --> \(FridgeViewModel.shared.defaultFridgeName)")
+//        print("FridgeViewModel.shared.defaultFridgeName --> \(FridgeViewModel.shared.defaultFridgeName)")
         
         let searchItem = UIBarButtonItem(image: UIImage(named: "searchIcon"), style: .done, target: self, action: #selector(moveToSearchVC))
         searchItem.tintColor = .white
@@ -175,9 +175,10 @@ class FridgeViewController: TabmanViewController {
     }
     
     @objc private func selectFridge() {
-        let selectVC = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as! SelectFrideViewController
-        selectVC.delegate = self
-        present(selectVC, animated: true, completion: nil)
+        guard let vc = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as? SelectFrideViewController else { return }
+        let selectVC = UINavigationController(rootViewController: vc)
+        selectVC.isNavigationBarHidden = true
+        present(selectVC, animated: true)
     }
     
     @objc private func moveToSearchVC() {
@@ -248,9 +249,14 @@ extension FridgeViewController: FoodAddSelectDelgate {
     }
 }
 
-extension FridgeViewController: FoodAddDelegate {
+extension FridgeViewController: FoodAddDelegate, SelectFridgeDelegate {
     func moveToFoodAddSelect() {
         moveToFoodAddSelectVC(animate: false)
+    }
+    
+    func updateMainFridge(title: String) {
+        setupleftBarItems(title: title)
+        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
     }
 }
 
@@ -261,9 +267,3 @@ extension FridgeViewController: UISheetPresentationControllerDelegate {
     }
 }
 
-extension FridgeViewController: SelectFridgeDelegate {
-    func updateMainFridge(title: String) {
-        setupleftBarItems(title: title)
-        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
-    }
-}

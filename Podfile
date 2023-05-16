@@ -11,10 +11,11 @@ target 'IceButler_iOS' do
   pod 'Tabman', '~> 3.0'
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'IQKeyboardManager'
-  pod 'Firebase/Analytics'
   pod "BSImagePicker", "~> 3.1"
   pod 'KakaoSDKUser'
   pod 'KakaoSDKAuth'
+  pod 'SnapKit'
+  pod 'Charts'
 
   target 'IceButler_iOSTests' do
     inherit! :search_paths

@@ -44,6 +44,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="emptyStar"/>
+                                <connections>
+                                    <action selector="didTapBookmarkButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="4d8-19-tJa"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GCh-uM-Cc0"/>
@@ -64,8 +67,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
                 <outlet property="backView" destination="WrX-3t-h1J" id="v7L-Xx-rhf"/>
-                <outlet property="bookmarkBtn" destination="dfv-9b-Qox" id="uaV-V5-2tH"/>
-                <outlet property="contentView" destination="WrX-3t-h1J" id="XRu-ge-6yf"/>
+                <outlet property="bookmarkButton" destination="dfv-9b-Qox" id="uaV-V5-2tH"/>
                 <outlet property="recipeImageView" destination="rwb-VB-b6j" id="Mja-gM-XdF"/>
                 <outlet property="recipeNameLabel" destination="YkM-HV-kK8" id="jwS-yA-sqD"/>
             </connections>
