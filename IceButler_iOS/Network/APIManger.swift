@@ -147,14 +147,34 @@ extension APIManger {
     }
     
     func postRecipeData<T: Codable, U: Decodable>(urlEndpointString: String,
-                                            responseDataType: U.Type,
-                                            requestDataType: T.Type,
-                                            parameter: T?,
-                                            completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+                                                  responseDataType: U.Type,
+                                                  requestDataType: T.Type,
+                                                  parameter: T?,
+                                                  completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
         guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
         
         AF
             .request(url, method: .post, parameters: parameter, encoder: .json, headers: self.headers)
+            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
+    
+    func postRecipeData<U: Decodable>(urlEndpointString: String,
+                                      responseDataType: U.Type,
+                                      completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+            
+        guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
+        
+        AF
+            .request(url, method: .post, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
                 print(response)
                 switch response.result {

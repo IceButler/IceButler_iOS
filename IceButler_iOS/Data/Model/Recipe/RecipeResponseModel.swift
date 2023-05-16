@@ -39,3 +39,7 @@ struct CookingProcess: Codable {
     let cookeryImgKey: String?
     let cookeryDescription: String
 }
+
+struct RecipeBookmarkResponseModel: Codable {
+    let status: Bool
+}
