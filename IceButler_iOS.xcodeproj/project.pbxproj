@@ -201,7 +201,7 @@
 		A2F9190C29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9190A29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift */; };
 		A2F9190D29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F9190B29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib */; };
 		B8A8CDBD1CF21CE19CDBE02B /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04876642E41E4A87114B79F2 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
-		D8A21758045158BC28C2523F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		D8A21758045158BC28C2523F /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		E0EE225783B2954C5FE71444 /* Pods_IceButler_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A723CF97AE242137E8FCE4E /* Pods_IceButler_iOSTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -455,7 +455,7 @@
 				A22B98BA2A0F4C8100797C81 /* DaumMap.framework in Frameworks */,
 				A22B98742A0F4C4E00797C81 /* SystemConfiguration.framework in Frameworks */,
 				A22B98C82A0F4FD300797C81 /* Metal.framework in Frameworks */,
-				D8A21758045158BC28C2523F /* BuildFile in Frameworks */,
+				D8A21758045158BC28C2523F /* (null) in Frameworks */,
 				4A77E0D94D27FC9143378E86 /* Pods_IceButler_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1763,7 +1763,7 @@
 				CODE_SIGN_ENTITLEMENTS = IceButler_iOS/IceButler_iOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 643M65W7HH;
+				DEVELOPMENT_TEAM = Q927Z26DP6;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1808,7 +1808,7 @@
 				CODE_SIGN_ENTITLEMENTS = IceButler_iOS/IceButler_iOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 643M65W7HH;
+				DEVELOPMENT_TEAM = Q927Z26DP6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
