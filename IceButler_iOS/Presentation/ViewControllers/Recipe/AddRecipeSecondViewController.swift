@@ -147,8 +147,8 @@ class AddRecipeSecondViewController: UIViewController, ReceiveFirstDataDelegate 
     }
     
     @IBAction func didTapCompletionButton(_ sender: Any) {
-        Task { @MainActor in
-            if completionButton.backgroundColor == .availableBlue {
+        if completionButton.backgroundColor == .availableBlue {
+            Task { @MainActor in
                 try await RecipeViewModel.shared.postRecipe(recipeImg: representativeImage,
                                                         recipeName: menuName,
                                                         category: category,
@@ -157,19 +157,20 @@ class AddRecipeSecondViewController: UIViewController, ReceiveFirstDataDelegate 
                                                         ingredientList: ingredientList,
                                                         cookingProcessList: addedCookingProcessList) { isSuccess in
                     if isSuccess {
-                        let alert = UIAlertController(title: "성공", message: "레시피 추가에 성공했습니다.", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "레시피 등록 성공", message: "'마이페이지 > 마이레시피'에서 확인하실 수 있습니다.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
-                            // TODO: 마이레시피로 이동
                             self.navigationController?.popToRootViewController(animated: true)
                         }))
                         self.present(alert, animated: true)
                     } else {
-                        let alert = UIAlertController(title: "실패", message: "레시피 추가에 실패했습니다. 다시 시도해주세요.", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "레시피 등록 실패", message: "레시피 등록에 실패했습니다. 잠시 후 다시 시도해주세요.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default))
                         self.present(alert, animated: true)
                     }
                 }
             }
+        } else {
+            showBaseAlert(title: "조리과정 개수 제한", content: "조리과정은 최소 3개 이상 입력해야 합니다.")
         }
     }
     

@@ -227,8 +227,18 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
             addRecipeSecondViewController.secondDateDelegate = self
             firstDateDelegate?.receiveDataFromFirstAddVC(addedCookingProcessList: addedCookingProcessList, representativeImage: addRepresentativeImageButton.imageView!.image!, menuName: menuNameTextField.text!, category: categoryOpenButton.titleLabel!.text!, amount: Int(amountTextField.text!) ?? 0, timeRequired: Int(timeRequiredTextField.text!) ?? 0, addedIngredientList: addedIngredientList)
             self.navigationController?.pushViewController(addRecipeSecondViewController, animated: true)
+        } else {
+            if addRepresentativeImageButton.imageView!.image!.isEqual(UIImage(named: "imageAddIcon")) ||
+               menuNameTextField.text?.isEmpty ?? true ||
+               categoryOpenButton.backgroundColor != .focusSkyBlue ||
+               amountTextField.text?.isEmpty ?? true ||
+               timeRequiredTextField.text?.isEmpty ?? true {
+                showBaseAlert(title: "필수 항목 입력", content: "모든 항목을 입력해야 합니다.")
+            }
+            else if ingredientTableView.numberOfRows(inSection: 0) < 2 {
+                showBaseAlert(title: "재료 개수 제한", content: "재료는 최소 2개 이상 입력해야 합니다.")
+            }
         }
-        // TODO: alert 띄우기
     }
     
     private func authorizePhotoAccess() {
@@ -364,6 +374,17 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
             }
         }
         changeNextButtonColor()
+    }
+}
+
+extension UIViewController {
+    func showBaseAlert(title: String, content: String, leadingConstant: Double? = nil, trailingConstant: Double? = nil) {
+        let alertStoryboard = UIStoryboard(name: "Alert", bundle: nil)
+        let baseAlertViewController = alertStoryboard.instantiateViewController(withIdentifier: "BaseAlertViewController") as! BaseAlertViewController
+        baseAlertViewController.configure(title: title, content: content, leadingConstant: leadingConstant, trailingConstant: trailingConstant)
+        baseAlertViewController.modalPresentationStyle = .overFullScreen
+        baseAlertViewController.modalTransitionStyle = .crossDissolve
+        present(baseAlertViewController, animated: true)
     }
 }
 
