@@ -46,24 +46,6 @@
             </objects>
             <point key="canvasLocation" x="1865" y="96"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="2Z9-IY-NNQ">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bpm-d5-icF" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qz1-7N-y9M">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="5mo-41-cS5"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wjx-OR-AEh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="989" y="96"/>
-        </scene>
         <!--Recipe In Fridge View Controller-->
         <scene sceneID="V5n-m1-Bs1">
             <objects>
@@ -493,7 +475,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOi-TJ-cIs">
-                                        <rect key="frame" x="16" y="662" width="361" height="49"/>
+                                        <rect key="frame" x="16" y="652" width="361" height="49"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="49" id="alk-90-dZz"/>
                                         </constraints>

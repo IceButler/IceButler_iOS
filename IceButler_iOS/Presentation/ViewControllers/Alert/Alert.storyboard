@@ -325,24 +325,7 @@
             </objects>
             <point key="canvasLocation" x="241.98473282442748" y="1376.7605633802818"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="uAU-qO-BJ7">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="2lC-4x-hIh" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Sd-e5-OJO">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="uJE-zl-efK" kind="relationship" relationship="rootViewController" id="Zh6-uo-aIn"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NYK-RN-AWf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-825" y="1377"/>
-        </scene>
-	 <!--Info Alert View Controller-->
+        <!--Info Alert View Controller-->
         <scene sceneID="Hhr-YL-K0Z">
             <objects>
                 <viewController storyboardIdentifier="InfoAlertViewController" id="oMa-ZO-Ncn" customClass="InfoAlertViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -359,12 +342,6 @@
                                         <color key="textColor" red="0.16078431369999999" green="0.4039215686" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아래의 경우만 냉장고 삭제가 가능합니다.  1. 냉장고 주인을 위임하는 경우 2. 냉장고 멤버가 존재하지 않는 경우" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Sy-Dg-qND">
-                                        <rect key="frame" x="-16288" y="94" width="32889" height="71.666666666666686"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Exx-g3-TuB">
                                         <rect key="frame" x="101.66666666666666" y="197" width="110" height="38"/>
                                         <color key="backgroundColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -379,6 +356,12 @@
                                             <action selector="didTapConfirmButton:" destination="oMa-ZO-Ncn" eventType="touchUpInside" id="ZGf-0x-Ik7"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="아래의 경우만 냉장고 삭제가 가능합니다.  1. 냉장고 주인을 위임하는 경우 2. 냉장고 멤버가 존재하지 않는 경우" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Sy-Dg-qND">
+                                        <rect key="frame" x="18" y="89" width="276" height="88"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
