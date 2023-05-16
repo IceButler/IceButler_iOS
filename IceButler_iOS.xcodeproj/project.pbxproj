@@ -121,6 +121,9 @@
 		95BC85AA2A07F13100181183 /* RecipeIngredientTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BC85A82A07F13100181183 /* RecipeIngredientTableViewCell.xib */; };
 		A20B91822A11513F00C3FCA4 /* KakaoMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20B91812A11513F00C3FCA4 /* KakaoMapService.swift */; };
 		A20B91842A11549E00C3FCA4 /* KakaoMapDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20B91832A11549E00C3FCA4 /* KakaoMapDataModel.swift */; };
+		A21B23842A13F9E700C240CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A21B23832A13F9E700C240CA /* GoogleService-Info.plist */; };
+		A21B23872A13FAB500C240CA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A21B23862A13FAB500C240CA /* FirebaseAnalytics */; };
+		A21B23892A13FAB500C240CA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = A21B23882A13FAB500C240CA /* FirebaseMessaging */; };
 		A220B1632A026E430048592B /* MemberSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */; };
 		A220B1662A05411D0048592B /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */; };
 		A220B1672A05411D0048592B /* MemberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */; };
@@ -201,7 +204,7 @@
 		A2F9190C29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9190A29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift */; };
 		A2F9190D29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F9190B29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib */; };
 		B8A8CDBD1CF21CE19CDBE02B /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04876642E41E4A87114B79F2 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
-		D8A21758045158BC28C2523F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		D8A21758045158BC28C2523F /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		E0EE225783B2954C5FE71444 /* Pods_IceButler_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A723CF97AE242137E8FCE4E /* Pods_IceButler_iOSTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -351,6 +354,7 @@
 		A20B91812A11513F00C3FCA4 /* KakaoMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapService.swift; sourceTree = "<group>"; };
 		A20B91832A11549E00C3FCA4 /* KakaoMapDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapDataModel.swift; sourceTree = "<group>"; };
 		A214EF35946305B554FDDE73 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A21B23832A13F9E700C240CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSearchTableViewCell.swift; sourceTree = "<group>"; };
 		A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -447,15 +451,17 @@
 			files = (
 				A29C59492A1193A300E8D227 /* WebKit.framework in Frameworks */,
 				A22B98CD2A0F503F00797C81 /* libc++.tbd in Frameworks */,
+				A21B23892A13FAB500C240CA /* FirebaseMessaging in Frameworks */,
 				A22B98CC2A0F503700797C81 /* libsqlite3.tbd in Frameworks */,
 				A22B98CB2A0F502600797C81 /* libxml2.tbd in Frameworks */,
+				A21B23872A13FAB500C240CA /* FirebaseAnalytics in Frameworks */,
 				A22B98722A0F4C4600797C81 /* QuartzCore.framework in Frameworks */,
 				A22B986E2A0F4C3500797C81 /* CoreLocation.framework in Frameworks */,
 				A22B98BB2A0F4C8600797C81 /* DaumMap.framework in Frameworks */,
 				A22B98BA2A0F4C8100797C81 /* DaumMap.framework in Frameworks */,
 				A22B98742A0F4C4E00797C81 /* SystemConfiguration.framework in Frameworks */,
 				A22B98C82A0F4FD300797C81 /* Metal.framework in Frameworks */,
-				D8A21758045158BC28C2523F /* BuildFile in Frameworks */,
+				D8A21758045158BC28C2523F /* (null) in Frameworks */,
 				4A77E0D94D27FC9143378E86 /* Pods_IceButler_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -737,6 +743,7 @@
 				73DC2F3A29DAA69200F47ECD /* Data */,
 				73F0D27029D2E1260038BD0C /* Global */,
 				73F0D24729D2E0000038BD0C /* Info.plist */,
+				A21B23832A13F9E700C240CA /* GoogleService-Info.plist */,
 				73DC2F3B29DAA69800F47ECD /* Network */,
 				73F0D26F29D2E1130038BD0C /* Presentation */,
 			);
@@ -1190,6 +1197,10 @@
 			dependencies = (
 			);
 			name = IceButler_iOS;
+			packageProductDependencies = (
+				A21B23862A13FAB500C240CA /* FirebaseAnalytics */,
+				A21B23882A13FAB500C240CA /* FirebaseMessaging */,
+			);
 			productName = IceButler_iOS;
 			productReference = 73F0D23629D2DFFE0038BD0C /* IceButler_iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -1266,6 +1277,9 @@
 				ko,
 			);
 			mainGroup = 73F0D22D29D2DFFE0038BD0C;
+			packageReferences = (
+				A21B23852A13FAB500C240CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 73F0D23729D2DFFE0038BD0C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1334,6 +1348,7 @@
 				735584BD2A0624740077E69E /* ConsumeGraph.storyboard in Resources */,
 				A22B98AF2A0F4C8100797C81 /* point_sprite.png in Resources */,
 				A2F9190929EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib in Resources */,
+				A21B23842A13F9E700C240CA /* GoogleService-Info.plist in Resources */,
 				A22B98A62A0F4C8100797C81 /* map_pin_shadow@3x.png in Resources */,
 				738F4B4929FB88BD0043AC07 /* SearchFood.storyboard in Resources */,
 				73F62A4829DD7F30003D779F /* FoodAddSelect.storyboard in Resources */,
@@ -1772,6 +1787,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceButler_iOS/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"냉집사\"에서 바코드 인식을 위해 카메라 접근을 허용해주세요.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "주변 식료품점 조회를 위해 현재 위치 정보 획득 권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "주변 식료품점 조회를 위해 현재 위치 정보 획득 권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "주변 식료품점 조회를 위해 현재 위치 정보 획득 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"냉집사\"에서 사진 첨부를 위해 사진 접근을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1791,7 +1809,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/nayeon/iOSProjects/IceButler_iOS/Header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/gimchowon/Desktop/협업/IceButler/IceButler_iOS/Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1816,6 +1834,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceButler_iOS/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"냉집사\"에서 바코드 인식을 위해 카메라 접근을 허용해주세요.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "주변 식료품점 조회를 위해 현재 위치 정보 획득 권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "주변 식료품점 조회를 위해 현재 위치 정보 획득 권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "주변 식료품점 조회를 위해 현재 위치 정보 획득 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"냉집사\"에서 사진 첨부를 위해 사진 접근을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1835,7 +1856,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/nayeon/iOSProjects/IceButler_iOS/Header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/gimchowon/Desktop/협업/IceButler/IceButler_iOS/Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1961,6 +1982,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A21B23852A13FAB500C240CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A21B23862A13FAB500C240CA /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A21B23852A13FAB500C240CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		A21B23882A13FAB500C240CA /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A21B23852A13FAB500C240CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 73F0D22E29D2DFFE0038BD0C /* Project object */;
 }
