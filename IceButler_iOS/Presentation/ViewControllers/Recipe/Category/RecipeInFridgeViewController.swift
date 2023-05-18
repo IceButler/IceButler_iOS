@@ -10,24 +10,30 @@ import UIKit
 class RecipeInFridgeViewController: UIViewController {
 
     @IBOutlet weak var recipeCollectionView: UICollectionView!
+    private var loadingView: LoadingReusableView?
+    private var currentLoadedPageNumber: Int = -1
+    private var isLoading: Bool = false
+    private var isFirstFetch: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
         setup()
         setupLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchData()
+        // 사용자가 냉장고를 변경했으면 (fridgeIdx가 변경됐으면) 다시 fetchData() 해야함
     }
     
     private func fetchData() {
         if APIManger.shared.getIsMultiFridge() {
-            RecipeViewModel.shared.getFridgeRecipeList(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx())
+            RecipeViewModel.shared.getFridgeRecipeList(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx(), pageNumberToLoad: currentLoadedPageNumber + 1)
         } else {
-            RecipeViewModel.shared.getFridgeRecipeList(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx())
+            RecipeViewModel.shared.getFridgeRecipeList(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx(), pageNumberToLoad: currentLoadedPageNumber + 1)
         }
+        currentLoadedPageNumber += 1
     }
     
     private func setup() {
@@ -37,6 +43,8 @@ class RecipeInFridgeViewController: UIViewController {
 
         let recipeCollectionViewCell = UINib(nibName: "RecipeCollectionViewCell", bundle: nil)
         recipeCollectionView.register(recipeCollectionViewCell, forCellWithReuseIdentifier: "RecipeCollectionViewCell")
+        let loadingReusableCell = UINib(nibName: "LoadingReusableView", bundle: nil)
+        recipeCollectionView.register(loadingReusableCell, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "LoadingView")
     }
     
     private func setupLayout() {
@@ -48,7 +56,7 @@ class RecipeInFridgeViewController: UIViewController {
     }
 }
 
-extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return RecipeViewModel.shared.fridgeRecipeList.count
     }
@@ -69,5 +77,66 @@ extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
+    
+    /* CollectionView Footer: LoadingView 설정 */
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if self.isLoading == true || RecipeViewModel.shared.fridgeRecipeIsLastPage {
+            return CGSize.zero
+        } else {
+            return CGSize(width: collectionView.frame.size.width, height: 50)
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionFooter {
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "LoadingView", for: indexPath) as! LoadingReusableView
+            loadingView = footerView
+            loadingView?.backgroundColor = UIColor.clear
+            loadingView?.isHidden = false
+            if isFirstFetch {
+                loadingView?.isHidden = true
+                isFirstFetch = false
+            }
+
+            return footerView
+        }
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        if elementKind == UICollectionView.elementKindSectionFooter {
+            if self.isLoading {
+                self.loadingView?.activityIndicatorView.startAnimating()
+            } else {
+                self.loadingView?.activityIndicatorView.stopAnimating()
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        if elementKind == UICollectionView.elementKindSectionFooter {
+            self.loadingView?.activityIndicatorView.stopAnimating()
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if !RecipeViewModel.shared.fridgeRecipeIsLastPage,
+           indexPath.row == RecipeViewModel.shared.fridgeRecipeList.count - 1,
+           self.isLoading == false {
+            loadMoreData()
+        }
+    }
+
+    func loadMoreData() {
+        if !self.isLoading {
+            self.isLoading = true
+            DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) {
+                DispatchQueue.main.async {
+                    self.fetchData()
+                    self.isLoading = false
+                }
+            }
+        }
     }
 }

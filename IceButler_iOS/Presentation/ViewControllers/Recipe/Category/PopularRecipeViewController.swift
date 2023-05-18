@@ -10,6 +10,7 @@ import UIKit
 class PopularRecipeViewController: UIViewController {
 
     @IBOutlet weak var recipeCollectionView: UICollectionView!
+    private var currentLoadedPageNumber: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +25,9 @@ class PopularRecipeViewController: UIViewController {
     
     private func fetchData() {
         if APIManger.shared.getIsMultiFridge() {
-            RecipeViewModel.shared.getPopularRecipeList(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx())
+            RecipeViewModel.shared.getPopularRecipeList(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx(), pageNumberToLoad: currentLoadedPageNumber)
         } else {
-            RecipeViewModel.shared.getPopularRecipeList(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx())
+            RecipeViewModel.shared.getPopularRecipeList(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx(), pageNumberToLoad: currentLoadedPageNumber)
         }
     }
     

@@ -10,22 +10,24 @@ import Alamofire
 
 class RecipeService {
     
-    func getFridgeRecipes(fridgeType: FridgeType, fridgeIdx: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
-        let parameter: Parameters = ["category" : "냉장고"]
+    func getFridgeRecipes(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
+        let parameter: Parameters = ["category" : "냉장고", "page" : pageNumberToLoad, "size" : 12]
         switch fridgeType {
         case .homeUse:
+            print("\(fridgeIdx) - 가정용")
             APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response.data)
             }
         case .multiUse:
+            print("\(fridgeIdx) - 공용")
             APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response.data)
             }
         }
     }
     
-    func getPopularRecipes(fridgeType: FridgeType, fridgeIdx: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
-        let parameter: Parameters = ["category" : "인기"]
+    func getPopularRecipes(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
+        let parameter: Parameters = ["category" : "인기", "page" : pageNumberToLoad, "size" : 12]
         switch fridgeType {
         case .homeUse:
             APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in

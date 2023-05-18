@@ -97,6 +97,8 @@
 		73F62A5829E00F94003D779F /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A5729E00F94003D779F /* UIButton+.swift */; };
 		95488DC229E7C2AC009AE17A /* PolicyWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95488DC129E7C2AC009AE17A /* PolicyWebViewController.swift */; };
 		95488DC429EADF94009AE17A /* PolicyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95488DC329EADF94009AE17A /* PolicyType.swift */; };
+		95607D712A168F5E00C1F089 /* LoadingReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95607D6F2A168F5E00C1F089 /* LoadingReusableView.swift */; };
+		95607D722A168F5E00C1F089 /* LoadingReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95607D702A168F5E00C1F089 /* LoadingReusableView.xib */; };
 		95A398A729FA5D37009CDDDC /* Recipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A398A629FA5D37009CDDDC /* Recipe.storyboard */; };
 		95A398A929FAAB99009CDDDC /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398A829FAAB99009CDDDC /* RecipeViewController.swift */; };
 		95A398AC29FBCA5F009CDDDC /* RecipeInFridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398AB29FBCA5F009CDDDC /* RecipeInFridgeViewController.swift */; };
@@ -326,6 +328,8 @@
 		95488DC129E7C2AC009AE17A /* PolicyWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PolicyWebViewController.swift; path = IceButler_iOS/Presentation/ViewControllers/MyPage/PolicyWebViewController.swift; sourceTree = SOURCE_ROOT; };
 		95488DC329EADF94009AE17A /* PolicyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyType.swift; sourceTree = "<group>"; };
 		9551650B2A13871D000213DE /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		95607D6F2A168F5E00C1F089 /* LoadingReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingReusableView.swift; sourceTree = "<group>"; };
+		95607D702A168F5E00C1F089 /* LoadingReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingReusableView.xib; sourceTree = "<group>"; };
 		95A398A629FA5D37009CDDDC /* Recipe.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recipe.storyboard; sourceTree = "<group>"; };
 		95A398A829FAAB99009CDDDC /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		95A398AB29FBCA5F009CDDDC /* RecipeInFridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInFridgeViewController.swift; sourceTree = "<group>"; };
@@ -1107,6 +1111,8 @@
 				A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */,
 				73CC35142A07E60B00096492 /* FoodRemoveRankCell.swift */,
 				73CC35152A07E60C00096492 /* FoodRemoveRankCell.xib */,
+				95607D6F2A168F5E00C1F089 /* LoadingReusableView.swift */,
+				95607D702A168F5E00C1F089 /* LoadingReusableView.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1307,6 +1313,7 @@
 				A22B98A82A0F4C8100797C81 /* th_line.png in Resources */,
 				A22B98A12A0F4C8100797C81 /* shadow_balloon.png in Resources */,
 				A22B98B92A0F4C8100797C81 /* map_pin_shadow.png in Resources */,
+				95607D722A168F5E00C1F089 /* LoadingReusableView.xib in Resources */,
 				A22B98B02A0F4C8100797C81 /* map_pinup_custom.png in Resources */,
 				7339CD6D29E5B390002A6D78 /* AuthMain.storyboard in Resources */,
 				A220B1672A05411D0048592B /* MemberCollectionViewCell.xib in Resources */,
@@ -1553,6 +1560,7 @@
 				735584C42A062DE70077E69E /* GraphViewModel.swift in Sources */,
 				738CAC9029E32858009EF9D2 /* FoodService.swift in Sources */,
 				95A398BC29FD82DD009CDDDC /* RecipeService.swift in Sources */,
+				95607D712A168F5E00C1F089 /* LoadingReusableView.swift in Sources */,
 				73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */,
 				95A398C129FEFC43009CDDDC /* BookmarkRecipeViewController.swift in Sources */,
 				95A398B329FC3A4F009CDDDC /* RecipeCollectionViewCell.swift in Sources */,

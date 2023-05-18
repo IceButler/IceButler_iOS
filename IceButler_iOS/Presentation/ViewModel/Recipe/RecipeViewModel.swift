@@ -17,6 +17,11 @@ class RecipeViewModel: ObservableObject {
     @Published var fridgeRecipeList: [Recipe] = []
     @Published var popularRecipeList: [Recipe] = []
     @Published var bookmarkRecipeList: [Recipe] = []
+//    @Published var myRecipeList: [Recipe] = []
+    var fridgeRecipeIsLastPage: Bool = false
+    var popularRecipeIsLastPage: Bool = false
+    var bookmarkRecipeIsLastPage: Bool = false
+//    var myRecipeIsLastPage: Bool = false
     
     private var recentlyUpdatedList: RecipeListType!
     private var recipeInFridgeVC: RecipeInFridgeViewController? = nil
@@ -36,22 +41,21 @@ class RecipeViewModel: ObservableObject {
     func reloadDataInFridgeVC() { recipeInFridgeVC?.reloadCV() }
     func reloadDataInPopularVC() { popularRecipeVC?.reloadCV() }
     
-    func getFridgeRecipeList(fridgeType: FridgeType, fridgeIdx: Int) {
-        recipeService.getFridgeRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx) { response in
+    func getFridgeRecipeList(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int) {
+        recipeService.getFridgeRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx, pageNumberToLoad: pageNumberToLoad) { response in
             self.recentlyUpdatedList = RecipeListType.recipeInFridge
-            self.fridgeRecipeList.removeAll()
-            response?.recipeMainResList.forEach { recipe in
+            response?.content.forEach { recipe in
                 self.fridgeRecipeList.append(recipe)
             }
+            self.fridgeRecipeIsLastPage = response?.last ?? false
             self.recipeInFridgeVC?.reloadCV()
         }
     }
     
-    func getPopularRecipeList(fridgeType: FridgeType, fridgeIdx: Int) {
-        recipeService.getPopularRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx) { response in
+    func getPopularRecipeList(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int) {
+        recipeService.getPopularRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx, pageNumberToLoad: pageNumberToLoad) { response in
             self.recentlyUpdatedList = RecipeListType.popularRecipe
-            self.popularRecipeList.removeAll()
-            response?.recipeMainResList.forEach { recipe in
+            response?.content.forEach { recipe in
                 self.popularRecipeList.append(recipe)
             }
             self.popularRecipeVC?.reloadCV()
@@ -62,7 +66,7 @@ class RecipeViewModel: ObservableObject {
         recipeService.getBookmarkRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx) { response in
             self.recentlyUpdatedList = RecipeListType.bookmarkRecipe
             self.bookmarkRecipeList.removeAll()
-            response?.recipeMainResList.forEach { recipe in
+            response?.content.forEach { recipe in
                 self.bookmarkRecipeList.append(recipe)
             }
             self.bookmarkRecipeVC?.reloadCV()
