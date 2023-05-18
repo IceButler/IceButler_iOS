@@ -67,14 +67,16 @@ class SelectFrideViewController: UIViewController {
                                                       name: fridge.fridgeName,
                                                       comment: fridge.comment,
                                                       users: fridge.users,
-                                                      userCnt: fridge.userCnt))
+                                                      userCnt: fridge.userCnt,
+                                                      isMulti: false))
             })
             data.multiFridgeResList?.forEach({ fridge in
                 myFridgeData.append(CommonFridgeModel(idx: fridge.multiFridgeIdx,
                                                       name: fridge.multiFridgeName,
                                                       comment: fridge.comment,
                                                       users: fridge.users,
-                                                      userCnt: fridge.userCnt))
+                                                      userCnt: fridge.userCnt,
+                                                      isMulti: true))
             })
         }
     }
@@ -121,13 +123,16 @@ extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row < fridgeCount { APIManger.shared.setIsMultiFridge(data: false) }
-        else { APIManger.shared.setIsMultiFridge(data: true) }
+        if indexPath.row < fridgeCount { APIManger.shared.setIsMultiFridge(isMulti: false) }
+        else { APIManger.shared.setIsMultiFridge(isMulti: true) }
         
         let index = myFridgeData[indexPath.row].idx!
         APIManger.shared.setFridgeIdx(index: index)
         UserDefaults.standard.setValue(index, forKey: "selectedFridgeIdx")
         UserDefaults.standard.setValue(myFridgeData[indexPath.row].name, forKey: "selectedFridgeName")
+        UserDefaults.standard.setValue(myFridgeData[indexPath.row].isMulti, forKey: "selectedFridgeIsMulti")
+        
+        
         delegate?.updateMainFridge(title: myFridgeData[indexPath.row].name ?? "냉장고 이름")
         
         self.dismiss(animated: true)

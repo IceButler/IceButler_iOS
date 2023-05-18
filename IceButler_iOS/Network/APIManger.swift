@@ -31,7 +31,7 @@ extension APIManger {
     func setFridgeIdx(index: Int) { fridgeIdx = index }
     func getFridgeIdx() -> Int { return fridgeIdx }
     
-    func setIsMultiFridge(data: Bool) { isMultiFridge = data }
+    func setIsMultiFridge(isMulti: Bool) { isMultiFridge = isMulti }
     func getIsMultiFridge() -> Bool { return isMultiFridge }
 }
 
