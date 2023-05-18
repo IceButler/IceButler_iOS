@@ -11,12 +11,15 @@ import Pageboy
 
 class RecipeViewController: TabmanViewController {
 
+    @IBOutlet weak var recipeAddButton: UIButton!
+    
     private var searchBar: UISearchBar! = nil
     private var viewControllerList: Array<UIViewController> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        setupLayout()
         initSearchBar()
         setupTabman()
     }
@@ -31,9 +34,14 @@ class RecipeViewController: TabmanViewController {
         setSearchBarRightView()
     }
     
-    @objc func didTapButton(sender: UIButton!) {
+    @objc func didTapStarButton(sender: UIButton!) {
         guard let bookmarkRecipeViewController = storyboard!.instantiateViewController(withIdentifier: "BookmarkRecipeViewController") as? BookmarkRecipeViewController else { return }
         self.navigationController?.pushViewController(bookmarkRecipeViewController, animated: true)
+    }
+    
+    @IBAction func didTapAddButton(_ sender: Any) {
+        guard let addRecipeViewController = storyboard!.instantiateViewController(withIdentifier: "AddRecipeViewController") as? AddRecipeViewController else { return }
+        self.navigationController?.pushViewController(addRecipeViewController, animated: true)
     }
     
     private func setupNavigationBar() {
@@ -49,7 +57,7 @@ class RecipeViewController: TabmanViewController {
         // right item
         let bookmarkBtn = UIButton()
         bookmarkBtn.setImage(UIImage(named: "star"), for: .normal)
-        bookmarkBtn.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        bookmarkBtn.addTarget(self, action: #selector(didTapStarButton), for: .touchUpInside)
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: bookmarkBtn)
         
@@ -75,6 +83,13 @@ class RecipeViewController: TabmanViewController {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
             statusBar?.backgroundColor = UIColor.navigationColor
         }
+    }
+    
+    private func setupLayout() {
+        recipeAddButton.backgroundColor = .white
+        recipeAddButton.layer.masksToBounds = true
+        recipeAddButton.layer.cornerRadius = recipeAddButton.frame.height / 2
+        recipeAddButton.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 20, spread: 0)
     }
     
     private func initSearchBar() {
@@ -145,7 +160,7 @@ class RecipeViewController: TabmanViewController {
 
 extension RecipeViewController: PageboyViewControllerDataSource, TMBarDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
-        return TMBarItem(title: RecipeCategory.allCases[index].rawValue)
+        return TMBarItem(title: RecipeListType.allCases[index].rawValue)
     }
     func numberOfViewControllers(in pageboyViewController: Pageboy.PageboyViewController) -> Int {
         return viewControllerList.count

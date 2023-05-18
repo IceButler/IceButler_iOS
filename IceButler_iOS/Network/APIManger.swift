@@ -153,16 +153,35 @@ extension APIManger {
             .resume()
     }
     
-    func postRecipeData<U: Decodable>(urlEndpointString: String,
+    func postRecipeData<T: Codable, U: Decodable>(urlEndpointString: String,
                                                   responseDataType: U.Type,
+                                                  requestDataType: T.Type,
+                                                  parameter: T?,
                                                   completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+        guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
         
+        AF
+            .request(url, method: .post, parameters: parameter, encoder: .json, headers: self.headers)
+            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
+    
+    func postRecipeData<U: Decodable>(urlEndpointString: String,
+                                      responseDataType: U.Type,
+                                      completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
         guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
         
         AF
             .request(url, method: .post, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-                
                 print(response)
                 switch response.result {
                 case .success(let success):
@@ -210,6 +229,14 @@ extension APIManger {
                     print(error.localizedDescription)
                 }
             }.resume()
+    }
+    
+    func getImageUrl(url: String, parameter: Parameters?) async throws -> ImageResponseModel? {
+        guard let url = URL(string: url) else { return nil }
+        return try await AF
+            .request(url, method: .get, parameters: parameter, headers: nil)
+            .serializingDecodable(ImageResponseModel.self)
+            .value
     }
     
     func getGpt<T: Codable>(url: String, responseDataType: T.Type,  parameter: Parameters?, completionHandler: @escaping (T?)->Void) {

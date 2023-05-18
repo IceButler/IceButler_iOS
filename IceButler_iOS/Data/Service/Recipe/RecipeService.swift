@@ -56,4 +56,15 @@ class RecipeService {
             completion(response.data)
         }
     }
+    
+    func postRecipe(parameter: RecipeAddRequestModel, completion: @escaping (Bool) -> Void) {
+        APIManger.shared.postRecipeData(urlEndpointString: "/recipes", responseDataType: RecipeResponseModel.self, requestDataType: RecipeAddRequestModel.self, parameter: parameter) { response in
+            print(response)
+            if response.status == "OK" {
+                completion(true)
+            }else {
+                completion(false)
+            }
+        }
+    }
 }
