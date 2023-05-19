@@ -20,10 +20,6 @@ class FridgeService {
     }
     
     func getAllFood(fridgeIdx: Int, completion: @escaping (FridgeResponseModel?) -> Void) {
-//        APIManger.shared.getData(urlEndpointString: "/fridges/\(fridgeIdx)/foods", responseDataType: FridgeResponseModel.self, requestDataType: FridgeResponseModel.self, parameter: nil) { response in
-//            completion(response.data)
-//        }
-
         setUrl()
         APIManger.shared.getData(urlEndpointString: urlStr,
                                  responseDataType: FridgeResponseModel.self,
@@ -35,9 +31,6 @@ class FridgeService {
     
     func getCategoryFood(fridgeIdx: Int, category: String,  completion: @escaping (FridgeResponseModel?) -> Void) {
         let parameter: Parameters = ["category" : category]
-//        APIManger.shared.getData(urlEndpointString: "/fridges/\(fridgeIdx)/foods", responseDataType: FridgeResponseModel.self, parameter: parameter) {  response in
-//            completion(response.data)
-//        }
         setUrl()
         APIManger.shared.getData(urlEndpointString: urlStr,
                                  responseDataType: FridgeResponseModel.self,
@@ -57,9 +50,13 @@ class FridgeService {
         })
     }
     
-    func addFridge(name: String, comment: String, members: [Int], completion: @escaping ((Int?) -> Void)) {
+    func addFridge(isMulti: Bool, name: String, comment: String, members: [Int], completion: @escaping ((Int?) -> Void)) {
+        var fridgeType: String = ""
+        if isMulti { fridgeType = "multi" }
+        else { fridgeType = "fridge" }
+        
         let req = FridgeRequestModel(fridgeName: name, fridgeComment: comment, members: members)
-        APIManger.shared.postData(urlEndpointString: "/fridges/register",
+        APIManger.shared.postData(urlEndpointString: "/fridges/register?fridgeType=\(fridgeType)",
                                   responseDataType: Int.self,
                                   requestDataType: FridgeRequestModel.self,
                                   parameter: req,

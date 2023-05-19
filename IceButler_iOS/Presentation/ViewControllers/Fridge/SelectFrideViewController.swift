@@ -123,12 +123,21 @@ extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row < fridgeCount { APIManger.shared.setIsMultiFridge(isMulti: false) }
-        else { APIManger.shared.setIsMultiFridge(isMulti: true) }
+
+        if indexPath.row < fridgeCount {
+            APIManger.shared.setIsMultiFridge(data: false)
+            UserDefaults.standard.setValue(false, forKey: "isMulti")
+        }
+        else {
+            APIManger.shared.setIsMultiFridge(data: true)
+            UserDefaults.standard.setValue(true, forKey: "isMulti")
+        }
+
         
         let index = myFridgeData[indexPath.row].idx!
         APIManger.shared.setFridgeIdx(index: index)
         UserDefaults.standard.setValue(index, forKey: "selectedFridgeIdx")
+        
         UserDefaults.standard.setValue(myFridgeData[indexPath.row].name, forKey: "selectedFridgeName")
         UserDefaults.standard.setValue(myFridgeData[indexPath.row].isMulti, forKey: "selectedFridgeIsMulti")
         

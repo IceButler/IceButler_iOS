@@ -10,17 +10,13 @@ import Alamofire
 
 class FoodService {
     func getAllFood(fridgeIdx: Int, foodIdx: Int, completion: @escaping (FoodDetailResponseModel?) -> Void) {
-        APIManger.shared.getData(urlEndpointString: "/fridges/\(fridgeIdx)/foods/\(foodIdx)", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodDetailResponseModel.self, parameter: nil) { response in
+        APIManger.shared.getData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/foods/\(foodIdx)", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodDetailResponseModel.self, parameter: nil) { response in
             completion(response.data)
         }
     }
     
     func getFoodOwnerList(fridgeIdx: Int, completion: @escaping (FoodOwnerResponseModel?) -> Void) {
-        var urlStr = ""
-        if APIManger.shared.getIsMultiFridge() { urlStr = "/multiFridges/\(fridgeIdx)/members" }
-        else { urlStr = "/fridges/\(fridgeIdx)/members" }
-        
-        APIManger.shared.getData(urlEndpointString: urlStr, responseDataType: FoodOwnerResponseModel.self, parameter: nil) { response in
+        APIManger.shared.getData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/members", responseDataType: FoodOwnerResponseModel.self, parameter: nil) { response in
             completion(response.data)
         }
     }
@@ -34,7 +30,17 @@ class FoodService {
     }
     
     func postFood(fridgeIdx: Int, parameter: FoodAddListModel, completion: @escaping (Bool) -> Void) {
-        APIManger.shared.postData(urlEndpointString: "/fridges/\(fridgeIdx)/food", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodAddListModel.self, parameter: parameter) { response in
+        APIManger.shared.postData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/food", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodAddListModel.self, parameter: parameter) { response in
+            if response.status == "OK" {
+                completion(true)
+            }else {
+                completion(false)
+            }
+        }
+    }
+    
+    func patchFood(foodIdx: Int, parameter: FoodAddRequestModel, completion: @escaping (Bool) -> Void) {
+        APIManger.shared.patchData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/foods/\(foodIdx)", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodAddRequestModel.self, parameter: parameter) { response in
             if response.status == "OK" {
                 completion(true)
             }else {
