@@ -1763,7 +1763,7 @@
 				CODE_SIGN_ENTITLEMENTS = IceButler_iOS/IceButler_iOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q927Z26DP6;
+				DEVELOPMENT_TEAM = 643M65W7HH;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1791,7 +1791,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/nayeon/iOSProjects/IceButler_iOS/Header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/yoosang/Desktop/IceButler_iOS/Header.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1808,7 +1808,7 @@
 				CODE_SIGN_ENTITLEMENTS = IceButler_iOS/IceButler_iOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q927Z26DP6;
+				DEVELOPMENT_TEAM = 643M65W7HH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -1835,7 +1835,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/nayeon/iOSProjects/IceButler_iOS/Header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/yoosang/Desktop/IceButler_iOS/Header.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
