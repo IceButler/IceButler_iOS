@@ -71,12 +71,12 @@ extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
         
         RecipeViewModel.shared.getFridgeRecipeCellInfo(index: indexPath.row) { recipe in
-            cell.setImage(imageUrl: recipe!.recipeImgUrl)
-            cell.setName(name: recipe!.recipeName)
-            cell.setCategory(category: recipe!.recipeCategory)
-            cell.setPercent(percent: recipe!.percentageOfFood)
-            cell.setLikeStatus(status: recipe!.recipeLikeStatus)
-            cell.configure(idx: recipe!.recipeIdx)
+            cell.setImage(imageUrl: recipe.recipeImgUrl)
+            cell.setName(name: recipe.recipeName)
+            cell.setCategory(category: recipe.recipeCategory)
+            cell.setPercent(percent: recipe.percentageOfFood)
+            cell.setLikeStatus(status: recipe.recipeLikeStatus)
+            cell.configure(idx: recipe.recipeIdx)
         }
         
         return cell

@@ -43,14 +43,15 @@ class RecipeService {
         }
     }
     
-    func getBookmarkRecipes(fridgeType: FridgeType, fridgeIdx: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
+    func getBookmarkRecipes(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
+        let parameter: Parameters = ["page" : pageNumberToLoad, "size" : PAGING_SIZE]
         switch fridgeType {
         case .homeUse:
-            APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)/bookmark", responseDataType: RecipeResponseModel.self, parameter: nil) { response in
+            APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)/bookmark", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response.data)
             }
         case .multiUse:
-            APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/\(fridgeIdx)/bookmark", responseDataType: RecipeResponseModel.self, parameter: nil) { response in
+            APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/\(fridgeIdx)/bookmark", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response.data)
             }
         }
