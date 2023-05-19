@@ -10,6 +10,7 @@ import UIKit
 class RecipeInFridgeViewController: UIViewController {
 
     @IBOutlet weak var recipeCollectionView: UICollectionView!
+    private var LOADING_VIEW_HEIGHT: Double = 50.0
     private var loadingView: LoadingReusableView?
     private var currentLoadedPageNumber: Int = -1
     private var isLoading: Bool = false
@@ -52,8 +53,12 @@ class RecipeInFridgeViewController: UIViewController {
         recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
     }
     
-    func updateCV() {
-        recipeCollectionView.performBatchUpdates(nil)
+    func updateCV(indexArray: [IndexPath]) {
+        if currentLoadedPageNumber == 0 {
+            recipeCollectionView.reloadData()
+        } else {
+            recipeCollectionView.insertItems(at: indexArray)
+        }
     }
 }
 
@@ -85,7 +90,7 @@ extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionVi
         if self.isLoading == true || RecipeViewModel.shared.fridgeRecipeIsLastPage {
             return CGSize.zero
         } else {
-            return CGSize(width: collectionView.frame.size.width, height: 50)
+            return CGSize(width: collectionView.frame.size.width, height: LOADING_VIEW_HEIGHT)
         }
     }
 

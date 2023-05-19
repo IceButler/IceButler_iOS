@@ -38,21 +38,26 @@ class RecipeViewModel: ObservableObject {
     }
     
     func getFridgeRecipeList(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int) {
+        var indexArrayToInsert: [IndexPath] = []
         recipeService.getFridgeRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx, pageNumberToLoad: pageNumberToLoad) { response in
             response?.content.forEach { recipe in
+                indexArrayToInsert.append(IndexPath(item: self.fridgeRecipeList.count, section: 0))
                 self.fridgeRecipeList.append(recipe)
             }
             self.fridgeRecipeIsLastPage = response?.last ?? false
-            self.recipeInFridgeVC?.updateCV()
+            self.recipeInFridgeVC?.updateCV(indexArray: indexArrayToInsert)
         }
     }
     
     func getPopularRecipeList(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int) {
+        var indexArrayToInsert: [IndexPath] = []
         recipeService.getPopularRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx, pageNumberToLoad: pageNumberToLoad) { response in
             response?.content.forEach { recipe in
+                indexArrayToInsert.append(IndexPath(item: self.popularRecipeList.count, section: 0))
                 self.popularRecipeList.append(recipe)
             }
-            self.popularRecipeVC?.updateCV()
+            self.popularRecipeIsLastPage = response?.last ?? false
+            self.popularRecipeVC?.updateCV(indexArray: indexArrayToInsert)
         }
     }
     
