@@ -23,8 +23,8 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jZU-XU-zdR">
                                 <rect key="frame" x="6" y="12" width="48" height="44.666666666666671"/>
-                                <color key="backgroundColor" red="0.59607843140000005" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.16078431372549018" green="0.3529411764705882" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.76078431372549016" green="0.82352941176470584" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="3Md-E5-MRJ"/>
                                     <constraint firstAttribute="width" constant="48" id="Idg-5r-Sf2"/>
