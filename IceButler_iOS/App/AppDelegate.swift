@@ -56,6 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate : MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("파이어베이스 토큰: \(fcmToken)")
+        if let token = fcmToken {
+            AuthViewModel.shared.setDeviceToken(token: token)
+        }
     }
 }
 
