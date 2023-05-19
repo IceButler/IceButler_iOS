@@ -26,6 +26,8 @@ class FoodViewModel: ObservableObject {
     var cancelLabels: Set<AnyCancellable> = []
     private var profileImgKey: String?
     
+    var uploadedFoodImgUrl: String = "" // 테스트용
+    
     func food(completion: @escaping (FoodDetailResponseModel) -> Void) {
         $food.sink { food in
             if food != nil {
@@ -237,10 +239,30 @@ extension FoodViewModel {
         }
     }
     
+    /// 장보기 완료 후 식품추가 요청에 필요한 이미지 업로드 요청 메소드
+    func getUploadImageUrl(imageDir: ImageDir, image: UIImage, completion: @escaping (String) -> Void) {
+        let parameter: Parameters = ["ext": "jpeg", "dir": imageDir.rawValue]
+        ImageService.shared.getImageUrl(parameter: parameter) {[self] response in
+            // uploadProfileImage 호출
+            if let response = response {
+                uploadProfileImage(image: image, url: response.presignedUrl)
+                uploadedFoodImgUrl = response.presignedUrl
+                completion(response.imageKey.trimmingCharacters(in: ["food/"]))
+            }
+        }
+    }
+    
+    func uploadProfileImage(image: UIImage, url: String) {
+        ImageService.shared.uploadImage(image: image, url: url) {
+                // 이미지 업로드
+            self.uploadedFoodImgUrl = ""
+        }
+    }
+    
     
     func postFood(fridgeIdx: Int, foodName: String, foodDetail: String, foodCategory: String, foodShelfLife: String, foodOwnerIdx: Int, memo: String?, imgUrl: String?, completion: @escaping (Bool) -> Void) {
         var foodAddModel: [FoodAddRequestModel] = []
-        foodAddModel.append(FoodAddRequestModel(foodName: foodName, foodDetailName: foodDetail, foodCategory: foodCategory, shelfLife: foodShelfLife, memo: memo, imageUrl: imgUrl, ownerIdx: foodOwnerIdx))
+        foodAddModel.append(FoodAddRequestModel(foodName: foodName, foodDetailName: foodDetail, foodCategory: foodCategory, shelfLife: foodShelfLife, memo: memo, imgKey: imgUrl, ownerIdx: foodOwnerIdx))
         
         let parameter = FoodAddListModel(fridgeFoods: foodAddModel)
         

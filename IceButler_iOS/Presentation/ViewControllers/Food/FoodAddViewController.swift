@@ -298,7 +298,7 @@ class FoodAddViewController: UIViewController {
                                                       foodCategory: "",
                                                       shelfLife: "",
                                                       memo: nil,
-                                                      imageUrl: nil,
+                                                      imgKey: nil,
                                                       ownerIdx: -1))
             }
         }
@@ -409,6 +409,11 @@ class FoodAddViewController: UIViewController {
             foodMemoTextView.backgroundColor = .focusSkyBlue
             foodMemoTextView.textColor = .black
         }
+        
+        if foodData.imgKey == nil {
+            foodImage = nil
+            self.foodImageCollectionView.reloadData()
+        } 
         
     }
     
@@ -569,19 +574,14 @@ class FoodAddViewController: UIViewController {
             if foodMemoTextView.text != "" && foodMemoTextView.text != "메모내용 or 없음" {
                 savedFoods[currentFoodIndex].memo = foodMemoTextView.text
             }
-            // TODO: 이미지 url 임시저장
             if foodImage != nil {
-                let parameter: Parameters = ["ext": "jpeg", "dir": ImageDir.Food.rawValue]
-                ImageService.shared.getImageUrl(parameter: parameter, completion: { [weak self] response in
-                    if let response = response {
-                        self?.savedFoods[(self?.currentFoodIndex)!].imageUrl = response.imageKey
-                        print("임시저장된 Img KEY --> \(response.imageKey)")
-                        print("임시저장된 Img presignedUrl --> \(response.presignedUrl)")
-                        ImageService.shared.uploadImage(image: (self?.foodImage)!, url: response.presignedUrl, compeltion: {  })
-                    }
-                })
+                
+                FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food, image: foodImage!) { [weak self] imgUrl in
+                    self?.savedFoods[(self?.currentFoodIndex)!].imgKey = imgUrl
+                    
+                }
             }
-            else { savedFoods[currentFoodIndex].imageUrl = nil }
+            else { savedFoods[currentFoodIndex].imgKey = nil }
             
             print("임시저장된 식품 정보 --> index: \(currentFoodIndex) \n\(savedFoods[currentFoodIndex])")
         }
@@ -914,6 +914,8 @@ extension FoodAddViewController: UICollectionViewDelegate, UICollectionViewDataS
             if foodImage != nil {
                 cell.setImage(image: foodImage!)
                 cell.hiddenFoodImageAddIcon()
+            } else {
+                cell.showFoodImageAddIcon()
             }
             
             return cell
