@@ -57,6 +57,13 @@ class RecipeService {
         }
     }
     
+    func getMyRecipes(pageNumberToLoad: Int, completion: @escaping (MyRecipeResponseModel?) -> Void) {
+        let parameter: Parameters = ["page" : pageNumberToLoad, "size" : PAGING_SIZE]
+        APIManger.shared.getRecipeData(urlEndpointString: "/recipes/myrecipe", responseDataType: MyRecipeResponseModel.self, parameter: parameter) { response in
+            completion(response.data)
+        }
+    }
+    
     func postBookmarkStatus(recipeIdx: Int, completion: @escaping (RecipeBookmarkResponseModel?) -> Void) {
         APIManger.shared.postRecipeData(urlEndpointString: "/recipes/\(recipeIdx)/bookmark", responseDataType: RecipeBookmarkResponseModel.self) { response in
             completion(response.data)

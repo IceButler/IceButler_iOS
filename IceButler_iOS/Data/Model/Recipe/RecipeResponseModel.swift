@@ -30,6 +30,27 @@ struct Recipe: Codable {
     let recipeLikeStatus: Bool
 }
 
+struct MyRecipeResponseModel: Codable {
+    let content: [MyRecipe]
+    let pageable: Pageable
+    let totalPages: Int
+    let totalElements: Int
+    let last: Bool
+    let size: Int
+    let number: Int
+    let sort: Sort
+    let numberOfElements: Int
+    let first: Bool
+    let empty: Bool
+}
+
+struct MyRecipe: Codable {
+    let recipeIdx: Int
+    let recipeImgUrl: String
+    let recipeName: String
+    let recipeCategory: String
+}
+
 struct Pageable: Codable {
     let sort: Sort
     let offset: Int

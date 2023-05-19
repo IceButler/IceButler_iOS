@@ -17,15 +17,16 @@ class RecipeViewModel: ObservableObject {
     @Published var fridgeRecipeList: [Recipe] = []
     @Published var popularRecipeList: [Recipe] = []
     @Published var bookmarkRecipeList: [Recipe] = []
-//    @Published var myRecipeList: [Recipe] = []
+    @Published var myRecipeList: [MyRecipe] = []
     var fridgeRecipeIsLastPage: Bool = false
     var popularRecipeIsLastPage: Bool = false
     var bookmarkRecipeIsLastPage: Bool = false
-//    var myRecipeIsLastPage: Bool = false
+    var myRecipeIsLastPage: Bool = false
     
     private var recipeInFridgeVC: RecipeInFridgeViewController? = nil
     private var popularRecipeVC: PopularRecipeViewController? = nil
     private var bookmarkRecipeVC: BookmarkRecipeViewController? = nil
+    private var myRecipeVC: MyRecipeViewController? = nil
     
     func setRecipeInFridgeVC(recipeInFridgeVC: RecipeInFridgeViewController) {
         self.recipeInFridgeVC = recipeInFridgeVC
@@ -35,6 +36,9 @@ class RecipeViewModel: ObservableObject {
     }
     func setBookmarkRecipeVC(bookmarkRecipeVC: BookmarkRecipeViewController) {
         self.bookmarkRecipeVC = bookmarkRecipeVC
+    }
+    func setMyRecipeVC(myRecipeVC: MyRecipeViewController) {
+        self.myRecipeVC = myRecipeVC
     }
     
     func getFridgeRecipeList(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int) {
@@ -77,6 +81,22 @@ class RecipeViewModel: ObservableObject {
         }
     }
     
+    func getMyRecipeList(pageNumberToLoad: Int) {
+        var indexArrayToInsert: [IndexPath] = []
+        if pageNumberToLoad == 0 {
+            self.myRecipeList.removeAll()
+            self.myRecipeIsLastPage = false
+        }
+        recipeService.getMyRecipes(pageNumberToLoad: pageNumberToLoad) { response in
+            response?.content.forEach { recipe in
+                indexArrayToInsert.append(IndexPath(item: self.myRecipeList.count, section: 0))
+                self.myRecipeList.append(recipe)
+            }
+            self.myRecipeIsLastPage = response?.last ?? false
+            self.myRecipeVC?.updateCV(indexArray: indexArrayToInsert)
+        }
+    }
+    
     func getFridgeRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
         completion(fridgeRecipeList[index])
     }
@@ -87,6 +107,10 @@ class RecipeViewModel: ObservableObject {
     
     func getBookmarkRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
         completion(bookmarkRecipeList[index])
+    }
+    
+    func getMyRecipeCellInfo(index: Int, completion: @escaping (MyRecipe) -> Void) {
+        completion(myRecipeList[index])
     }
     
     func updateBookmarkStatus(recipeIdx: Int, completion: @escaping (Bool) -> Void) {
