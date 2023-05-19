@@ -182,7 +182,11 @@ class FridgeViewController: TabmanViewController {
     }
     
     @objc private func moveToSearchVC() {
+        let searchFoodVC = UIStoryboard(name: "SearchFood", bundle: nil).instantiateViewController(withIdentifier: "SearchFoodViewController") as! SearchFoodViewController
         
+        searchFoodVC.setSearchCategory(searchCategory: .Fridge)
+        
+        self.navigationController?.pushViewController(searchFoodVC, animated: true)
     }
     
     @objc private func moveToAlarmVC() {

@@ -64,7 +64,7 @@ extension MeatViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let foodIdx = FridgeViewModel.shared.foodIdx(foodListIdx:1, index: indexPath.row)
-        FoodViewModel.shared.getFoodDetail(fridgeIdx: 1, foodIdx: foodIdx)
+        FoodViewModel.shared.getFoodDetail(foodIdx: foodIdx)
         
         let foodDetailVC = UIStoryboard(name: "FoodDetail", bundle: nil).instantiateViewController(identifier: "FoodDetailViewController") as! FoodDetailViewController
         

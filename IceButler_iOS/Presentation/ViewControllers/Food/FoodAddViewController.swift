@@ -721,7 +721,7 @@ class FoodAddViewController: UIViewController {
                     if result {
                         let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
-                            FoodViewModel.shared.getFoodDetail(fridgeIdx: 0, foodIdx: self.foodIdx)
+                            FoodViewModel.shared.getFoodDetail( foodIdx: self.foodIdx)
                             FoodViewModel.shared.isEditFood = false
                             self.navigationController?.popViewController(animated: true)
                         }))
@@ -745,7 +745,7 @@ class FoodAddViewController: UIViewController {
                         let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
                             FoodViewModel.shared.isEditFood = false
-                            FoodViewModel.shared.getFoodDetail(fridgeIdx: 0, foodIdx: self.foodIdx)
+                            FoodViewModel.shared.getFoodDetail( foodIdx: self.foodIdx)
                             self.navigationController?.popViewController(animated: true)
                         }))
                         self.present(alert, animated: true)

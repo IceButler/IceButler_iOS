@@ -23,6 +23,8 @@ class FoodViewModel: ObservableObject {
     @Published var searchFoodList: [SearchFoodResponse] = []
     @Published var selectedSearchFood: SearchFoodResponse?
     @Published var isEditFood: Bool = false
+    @Published var fridgeSearchFoodList: [FridgeSearchFoodResponse] = []
+    @Published var selectedFridgeSearchFood: FridgeSearchFoodResponse?
     
     var cancelLabels: Set<AnyCancellable> = []
     private var profileImgKey: String?
@@ -184,6 +186,62 @@ class FoodViewModel: ObservableObject {
         }.store(in: &cancelLabels)
     }
     
+    
+    func isFridgeSearchFoodList(completion: @escaping (Bool) -> Void) {
+        $fridgeSearchFoodList.sink { fridgeSearchFoodList in
+            if fridgeSearchFoodList.count == 0 {
+                completion(false)
+            }else{
+                completion(true)
+            }
+        }.store(in: &cancelLabels)
+    }
+    
+    func fridgeSearchFoodIdx(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (Int) -> Void) {
+        $fridgeSearchFoodList.filter { fridgeSearchFoodList in
+            index < fridgeSearchFoodList.count && fridgeSearchFoodList.count != 0
+        }.sink { fridgeSearchFoodList in
+            completion(fridgeSearchFoodList[index].fridgeFoodIdx)
+        }.store(in: &cancelLabels)
+    }
+    
+    func fridgeSearchFoodName(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
+        $fridgeSearchFoodList.filter { fridgeSearchFoodList in
+            index < fridgeSearchFoodList.count && fridgeSearchFoodList.count != 0
+        }.sink { fridgeSearchFoodList in
+            completion(fridgeSearchFoodList[index].foodName)
+        }.store(in: &cancelLabels)
+    }
+    
+    func fridgeSearchFoodImg(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (String) -> Void) {
+        $fridgeSearchFoodList.filter { fridgeSearchFoodList in
+            index < fridgeSearchFoodList.count && fridgeSearchFoodList.count != 0
+        }.sink { fridgeSearchFoodList in
+            completion(fridgeSearchFoodList[index].foodImgUrl)
+        }.store(in: &cancelLabels)
+    }
+    
+    func fridgeSearchFoodDay(index:Int, store: inout Set<AnyCancellable>, completion: @escaping (Int) -> Void) {
+        $fridgeSearchFoodList.filter { fridgeSearchFoodList in
+            index < fridgeSearchFoodList.count && fridgeSearchFoodList.count != 0
+        }.sink { fridgeSearchFoodList in
+            completion(fridgeSearchFoodList[index].shelfLife)
+        }.store(in: &cancelLabels)
+    }
+    
+    func fridgeSearchFoodListCount() -> Int {
+        return fridgeSearchFoodList.count
+    }
+    
+    func selectedFridgeSearchFood(completion: @escaping (FridgeSearchFoodResponse) -> Void) {
+        $selectedFridgeSearchFood.filter { selectedFridgeSearchFood in
+            selectedFridgeSearchFood != nil
+        }.sink { selectedFridgeSearchFood in
+            completion(selectedFridgeSearchFood!)
+        }.store(in: &cancelLabels)
+    }
+    
+    
     func isEditFood(completion: @escaping (Bool) -> Void) {
         $isEditFood.sink { isEditFood in
             completion(isEditFood)
@@ -210,6 +268,8 @@ class FoodViewModel: ObservableObject {
         self.selectedSearchFood = nil
         self.searchFoodList = []
         self.isEditFood = false
+        self.selectedFridgeSearchFood = nil
+        self.fridgeSearchFoodList = []
     }
 }
 
@@ -218,15 +278,15 @@ class FoodViewModel: ObservableObject {
 
 
 extension FoodViewModel {
-    func getFoodDetail(fridgeIdx: Int, foodIdx: Int) {
-        foodService.getAllFood(fridgeIdx: fridgeIdx, foodIdx: foodIdx) { foodDetail in
+    func getFoodDetail(foodIdx: Int) {
+        foodService.getAllFood(foodIdx: foodIdx) { foodDetail in
             self.food = foodDetail
         }
     }
 
     
     func getFoodOwnerList(fridgeIdx: Int) {
-        foodService.getFoodOwnerList(fridgeIdx: fridgeIdx) { foodOwnerList in
+        foodService.getFoodOwnerList() { foodOwnerList in
             self.foodOwnerList.removeAll()
             foodOwnerList?.fridgeUsers.forEach({ foodOwner in
                 self.foodOwnerList.append(foodOwner)
@@ -282,7 +342,7 @@ extension FoodViewModel {
         
         foodService.patchFood(foodIdx: foodIdx, parameter: foodAddModel) { result in
             if result {
-                FoodViewModel.shared.getFoodDetail(fridgeIdx: 0, foodIdx: foodIdx)
+                FoodViewModel.shared.getFoodDetail(foodIdx: foodIdx)
                 FridgeViewModel.shared.getAllFoodList(fridgeIdx: fridgeIdx)
                 completion(true)
             }else {
@@ -298,7 +358,7 @@ extension FoodViewModel {
         
         let parameter = FoodAddListModel(fridgeFoods: foodAddModel)
         
-        foodService.postFood(fridgeIdx: fridgeIdx, parameter: parameter) { result in
+        foodService.postFood(parameter: parameter) { result in
             if result {
                 FridgeViewModel.shared.getAllFoodList(fridgeIdx: fridgeIdx)
                 completion(true)
@@ -328,7 +388,20 @@ extension FoodViewModel {
         }
     }
     
+    func getFridgeSearchFood(word: String) {
+        foodService.getFridgeSearchFood(word: word) { result in
+            if let result = result {
+                self.fridgeSearchFoodList = result
+            }
+        }
+    }
+    
     func selectSearchFood(index: Int) {
         selectedSearchFood = searchFoodList[index]
+    }
+    
+    func selectFridgeSearchFood(index: Int) {
+        selectedFridgeSearchFood = fridgeSearchFoodList[index]
+        getFoodDetail(foodIdx: selectedFridgeSearchFood?.fridgeFoodIdx ?? 0)
     }
 }

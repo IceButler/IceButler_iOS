@@ -22,6 +22,7 @@ class APIManger {
     func setupObserver() {
         AuthViewModel.shared.accessToken { token in
             self.headers = ["Authorization": token]
+            print(self.headers)
         }
     }
     
@@ -115,6 +116,7 @@ extension APIManger {
                                completionHandler: @escaping (GeneralResponseListModel<U>)->Void) {
         
         guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
+        print(url)
         
         AF
             .request(url, method: .get, parameters: parameter, encoding: URLEncoding.queryString, headers: self.headers)

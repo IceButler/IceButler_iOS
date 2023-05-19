@@ -75,7 +75,22 @@ class SearchFoodViewController: UIViewController {
                 }
             }
         }else if searchCategory == .Fridge {
-            
+            FoodViewModel.shared.isFridgeSearchFoodList { result in
+                if result {
+                    self.searchFoodCollectionView.isHidden = false
+                    self.serachResultLabel.isHidden = true
+                    
+                    UIView.transition(with: self.searchFoodCollectionView,
+                                      duration: 0.35,
+                                      options: .transitionCrossDissolve,
+                                      animations: { () -> Void in
+                        self.searchFoodCollectionView.reloadData()},
+                                      completion: nil)
+                }else {
+                    self.searchFoodCollectionView.isHidden = true
+                    self.serachResultLabel.isHidden = false
+                }
+            }
         }
     }
     
@@ -138,6 +153,7 @@ class SearchFoodViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
             self.fridgeDelegate?.moveToFoodAddSelect()
         }else if searchCategory == .Fridge {
+            FoodViewModel.shared.deleteAll()
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -151,7 +167,7 @@ extension SearchFoodViewController: UICollectionViewDelegate, UICollectionViewDa
         if searchCategory == .Food {
             return FoodViewModel.shared.searchFoodListCount()
         }else {
-            return 0
+            return FoodViewModel.shared.fridgeSearchFoodListCount()
         }
         
     }
@@ -170,12 +186,19 @@ extension SearchFoodViewController: UICollectionViewDelegate, UICollectionViewDa
             
             cell.foodDdayLabel.isHidden = true
         }else if searchCategory == .Fridge {
+            FoodViewModel.shared.fridgeSearchFoodImg(index: indexPath.row, store: &cell.cancellabels) { foodImg in
+                cell.setFoodImage(foodImage: foodImg)
+            }
+            
+            FoodViewModel.shared.fridgeSearchFoodName(index: indexPath.row, store: &cell.cancellabels) { foodName in
+                cell.setFoodName(foodName: foodName)
+            }
+            
+            FoodViewModel.shared.fridgeSearchFoodDay(index: indexPath.row, store: &cell.cancellabels) { day in
+                cell.setDday(foodDday: day)
+            }
             
         }
-        
-        
-        
-        
         return cell
     }
     
@@ -186,6 +209,12 @@ extension SearchFoodViewController: UICollectionViewDelegate, UICollectionViewDa
             let foodAddVC = UIStoryboard(name: "FoodAdd", bundle: nil).instantiateViewController(withIdentifier: "FoodAddViewController") as! FoodAddViewController
             
             self.navigationController?.pushViewController(foodAddVC, animated: true)
+        }else {
+            FoodViewModel.shared.selectFridgeSearchFood(index: indexPath.row)
+            
+            let foodDetailVC = UIStoryboard(name: "FoodDetail", bundle: nil).instantiateViewController(withIdentifier: "FoodDetailViewController") as! FoodDetailViewController
+            
+            self.navigationController?.pushViewController(foodDetailVC, animated: true)
         }
       
     }
@@ -197,6 +226,8 @@ extension SearchFoodViewController: UISearchBarDelegate {
         if let word = searchBar.text {
             if searchCategory == .Food {
                 FoodViewModel.shared.getSearchFood(word: word)
+            }else {
+                FoodViewModel.shared.getFridgeSearchFood(word: word)
             }
         }
     }
