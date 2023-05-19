@@ -44,8 +44,8 @@ class PopularRecipeViewController: UIViewController {
         recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
     }
     
-    func reloadCV() {
-        recipeCollectionView.reloadData()
+    func updateCV() {
+        recipeCollectionView.performBatchUpdates(nil)
     }
 }
 

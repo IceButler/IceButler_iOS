@@ -25,6 +25,7 @@ class RecipeInFridgeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // 사용자가 냉장고를 변경했으면 (fridgeIdx가 변경됐으면) 다시 fetchData() 해야함
+        // isFirstFetch, currentLoadedPageNumber도 다시 초기화
     }
     
     private func fetchData() {
@@ -51,8 +52,8 @@ class RecipeInFridgeViewController: UIViewController {
         recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
     }
     
-    func reloadCV() {
-        recipeCollectionView.reloadData()
+    func updateCV() {
+        recipeCollectionView.performBatchUpdates(nil)
     }
 }
 

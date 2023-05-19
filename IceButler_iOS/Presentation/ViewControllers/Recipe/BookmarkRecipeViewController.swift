@@ -84,8 +84,8 @@ class BookmarkRecipeViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
-    func reloadCV() {
-        recipeCollectionView.reloadData()
+    func updateCV() {
+        recipeCollectionView.performBatchUpdates(nil)
     }
 }
 

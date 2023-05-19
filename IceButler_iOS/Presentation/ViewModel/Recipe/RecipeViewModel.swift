@@ -23,12 +23,10 @@ class RecipeViewModel: ObservableObject {
     var bookmarkRecipeIsLastPage: Bool = false
 //    var myRecipeIsLastPage: Bool = false
     
-    private var recentlyUpdatedList: RecipeListType!
     private var recipeInFridgeVC: RecipeInFridgeViewController? = nil
     private var popularRecipeVC: PopularRecipeViewController? = nil
     private var bookmarkRecipeVC: BookmarkRecipeViewController? = nil
     
-    func getRecentlyUpdatedList() -> RecipeListType { return recentlyUpdatedList }
     func setRecipeInFridgeVC(recipeInFridgeVC: RecipeInFridgeViewController) {
         self.recipeInFridgeVC = recipeInFridgeVC
     }
@@ -38,38 +36,33 @@ class RecipeViewModel: ObservableObject {
     func setBookmarkRecipeVC(bookmarkRecipeVC: BookmarkRecipeViewController) {
         self.bookmarkRecipeVC = bookmarkRecipeVC
     }
-    func reloadDataInFridgeVC() { recipeInFridgeVC?.reloadCV() }
-    func reloadDataInPopularVC() { popularRecipeVC?.reloadCV() }
     
     func getFridgeRecipeList(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int) {
         recipeService.getFridgeRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx, pageNumberToLoad: pageNumberToLoad) { response in
-            self.recentlyUpdatedList = RecipeListType.recipeInFridge
             response?.content.forEach { recipe in
                 self.fridgeRecipeList.append(recipe)
             }
             self.fridgeRecipeIsLastPage = response?.last ?? false
-            self.recipeInFridgeVC?.reloadCV()
+            self.recipeInFridgeVC?.updateCV()
         }
     }
     
     func getPopularRecipeList(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int) {
         recipeService.getPopularRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx, pageNumberToLoad: pageNumberToLoad) { response in
-            self.recentlyUpdatedList = RecipeListType.popularRecipe
             response?.content.forEach { recipe in
                 self.popularRecipeList.append(recipe)
             }
-            self.popularRecipeVC?.reloadCV()
+            self.popularRecipeVC?.updateCV()
         }
     }
     
     func getBookmarkRecipeList(fridgeType: FridgeType, fridgeIdx: Int) {
         recipeService.getBookmarkRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx) { response in
-            self.recentlyUpdatedList = RecipeListType.bookmarkRecipe
             self.bookmarkRecipeList.removeAll()
             response?.content.forEach { recipe in
                 self.bookmarkRecipeList.append(recipe)
             }
-            self.bookmarkRecipeVC?.reloadCV()
+            self.bookmarkRecipeVC?.updateCV()
         }
     }
     
