@@ -8,6 +8,7 @@
 import UIKit
 import BSImagePicker
 import Photos
+import Alamofire
 
 
 protocol FoodAddDelegate: AnyObject {
@@ -370,7 +371,7 @@ class FoodAddViewController: UIViewController {
                                                       foodCategory: "",
                                                       shelfLife: "",
                                                       memo: nil,
-                                                      imageUrl: nil,
+                                                      imgKey: nil,
                                                       ownerIdx: -1))
             }
         }
@@ -485,6 +486,11 @@ class FoodAddViewController: UIViewController {
             foodMemoTextView.backgroundColor = .focusSkyBlue
             foodMemoTextView.textColor = .black
         }
+        
+        if foodData.imgKey == nil {
+            foodImage = nil
+            self.foodImageCollectionView.reloadData()
+        } 
         
     }
     
@@ -621,49 +627,77 @@ class FoodAddViewController: UIViewController {
     }
     
     private func preSaveFoodInfo() {
+        if savedFoods.count > 0 {
+            if date != nil {
+                let dateFormat = DateFormatter()
+                dateFormat.dateFormat = "yyyy-MM-dd"
+                savedFoods[currentFoodIndex].shelfLife = dateFormat.string(from: date!)
+            }
+            if foodNameTextView.text != "" && foodNameTextView.text != "식품명을 입력해주세요." {
+                savedFoods[currentFoodIndex].foodName = foodNameTextView.text
+            }
+            if foodDetailTextView.text != "" && foodDetailTextView.text != "식품 상세명을 입력해주세요." {
+                savedFoods[currentFoodIndex].foodDetailName = foodDetailTextView.text
+            }
+            if selectedFoodCategory != nil && categoryOpenButton.title(for: .normal) != "카테고리를 선택해주세요." {
+                savedFoods[currentFoodIndex].foodCategory = selectedFoodCategory!.rawValue
+            }
+            if datePickerOpenButton.title(for: .normal) != "소비기한을 입력해주세요." {
+                savedFoods[currentFoodIndex].shelfLife = datePickerOpenButton.title(for: .normal)!
+            }
+            if foodOwnerIdx != -1 {
+                savedFoods[currentFoodIndex].ownerIdx = foodOwnerIdx ?? -1
+            }
+            if foodMemoTextView.text != "" && foodMemoTextView.text != "메모내용 or 없음" {
+                savedFoods[currentFoodIndex].memo = foodMemoTextView.text
+            }
+            if foodImage != nil {
+                
+                FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food, image: foodImage!) { [weak self] imgUrl in
+                    self?.savedFoods[(self?.currentFoodIndex)!].imgKey = imgUrl
+                    
+                }
+            }
+            else { savedFoods[currentFoodIndex].imgKey = nil }
+            
+            print("임시저장된 식품 정보 --> index: \(currentFoodIndex) \n\(savedFoods[currentFoodIndex])")
 
-//        if date != nil {
-//            let dateFromat = DateFormatter()
-//            dateFromat.dateFormat = "yyyy-MM-dd"
-//            savedFoods[currentFoodIndex].shelfLife = dateFromat.string(from: date!)
-//        }
-//        if foodNameTextView.text != "" && foodNameTextView.text != "식품명을 입력해주세요." {
-//            savedFoods[currentFoodIndex].foodName = foodNameTextView.text
-//        }
-//        if foodDetailTextView.text != "" && foodDetailTextView.text != "식품 상세명을 입력해주세요." {
-//            savedFoods[currentFoodIndex].foodDetailName = foodDetailTextView.text
-//        }
-//        if selectedFoodCategory != nil && categoryOpenButton.title(for: .normal) != "카테고리를 선택해주세요." {
-//            savedFoods[currentFoodIndex].foodCategory = selectedFoodCategory!.rawValue
-//        }
-//        if datePickerOpenButton.title(for: .normal) != "소비기한을 입력해주세요." {
-//            savedFoods[currentFoodIndex].shelfLife = datePickerOpenButton.title(for: .normal)!
-//        }
-//        if foodOwnerIdx != -1 {
-//            savedFoods[currentFoodIndex].ownerIdx = foodOwnerIdx ?? -1
-//        }
-//        if foodMemoTextView.text != "" && foodMemoTextView.text != "메모내용 or 없음" {
-//            savedFoods[currentFoodIndex].memo = foodMemoTextView.text
-//        }
-        // TODO: 이미지 url 임시저장
-//        if foodImage != nil {
-//            savedFoods[currentFoodIndex].imageUrl
-//            let parameter: Parameters = ["ext": "jpeg", "dir": imageDir.rawValue]
-//            ImageService.shared.getImageUrl(parameter: parameter) {[self] response in
-//                if let response = response {
-//                    profileImgKey = response.imageKey
-//                    uploadProfileImage(image: image, url: response.presignedUrl, fridgeIdx: fridgeIdx, foodName: foodName, foodDetail: foodDetail, foodCategory: foodCategory, foodShelfLife: foodShelfLife, foodOwnerIdx: foodOwnerIdx, memo: memo, completion: completion)
-//                }
-//            }
-//        }
-        
-//        print("임시저장된 식품 정보 --> index: \(currentFoodIndex) \n\(savedFoods[currentFoodIndex])")
+        }
     }
     
     @IBAction func foodAdd(_ sender: Any) {
         preSaveFoodInfo()
         
+        if savedFoods.count > 0 {
+            if checkForSaveFoodInfo() {
+                let fridgeIdx = APIManger.shared.getFridgeIdx()
+                let param = FoodAddListModel(fridgeFoods: savedFoods)
+                
+                print("요청할 식품 정보들 --> \(param)")
+                
+                APIManger.shared.postData(urlEndpointString: "/fridges/\(fridgeIdx)/food",
+                                          responseDataType: FoodAddRequestModel.self,
+                                          requestDataType: FoodAddListModel.self,
+                                          parameter: param,
+                                          completionHandler: { [weak self] response in
+
+                    print("장보기 완료 후 식품추가 요청 결과 ----> \(response)")
+                    if response.statusCode == 200 {
+                        self?.showAlert(title: "", message: "음식 등록에 성공하였습니다!")
+                        let storyboard = UIStoryboard(name: "Cart", bundle: nil)
+                        let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController")
+                        self?.navigationController?.pushViewController(cartVC, animated: true)
+                    } else {
+                        self?.showAlert(title: "", message: "음식 등록에 실패하였습니다")
+                    }
+                    return
+                })
+            }
+            
+        } else {
+
         if isEdit {
+
             if date == nil {
                 showAlert(title: "유통기한 오류", message: "유통 기한을 입력해주세요.")
                 return
@@ -1082,8 +1116,9 @@ extension FoodAddViewController: UICollectionViewDelegate, UICollectionViewDataS
             if foodImage != nil {
                 cell.setImage(image: foodImage!)
                 cell.hiddenFoodImageAddIcon()
-            }else {
-                
+
+            } else {
+                cell.showFoodImageAddIcon()
             }
             
             return cell
