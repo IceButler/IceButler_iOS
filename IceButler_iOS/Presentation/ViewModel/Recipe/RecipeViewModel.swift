@@ -18,6 +18,10 @@ class RecipeViewModel: ObservableObject {
     @Published var popularRecipeList: [Recipe] = []
     @Published var bookmarkRecipeList: [Recipe] = []
     @Published var myRecipeList: [MyRecipe] = []
+    var fridgeIdxOfFridgeRecipe: Int = -1
+    var fridgeIdxOfPopularRecipe: Int = -1
+    var fridgeTypeOfFridgeRecipe: FridgeType = .homeUse
+    var fridgeTypeOfPopularRecipe: FridgeType = .homeUse
     var fridgeRecipeIsLastPage: Bool = false
     var popularRecipeIsLastPage: Bool = false
     var bookmarkRecipeIsLastPage: Bool = false
@@ -41,9 +45,13 @@ class RecipeViewModel: ObservableObject {
         self.myRecipeVC = myRecipeVC
     }
     
-    func getFridgeRecipeList(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int) {
+    func getFridgeRecipeList(pageNumberToLoad: Int) {
         var indexArrayToInsert: [IndexPath] = []
-        recipeService.getFridgeRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx, pageNumberToLoad: pageNumberToLoad) { response in
+        if pageNumberToLoad == 0 {
+            self.fridgeRecipeList.removeAll()
+            self.fridgeRecipeIsLastPage = false
+        }
+        recipeService.getFridgeRecipes(fridgeType: fridgeTypeOfFridgeRecipe, fridgeIdx: fridgeIdxOfFridgeRecipe, pageNumberToLoad: pageNumberToLoad) { response in
             response?.content.forEach { recipe in
                 indexArrayToInsert.append(IndexPath(item: self.fridgeRecipeList.count, section: 0))
                 self.fridgeRecipeList.append(recipe)
@@ -53,9 +61,13 @@ class RecipeViewModel: ObservableObject {
         }
     }
     
-    func getPopularRecipeList(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int) {
+    func getPopularRecipeList(pageNumberToLoad: Int) {
         var indexArrayToInsert: [IndexPath] = []
-        recipeService.getPopularRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx, pageNumberToLoad: pageNumberToLoad) { response in
+        if pageNumberToLoad == 0 {
+            self.popularRecipeList.removeAll()
+            self.popularRecipeIsLastPage = false
+        }
+        recipeService.getPopularRecipes(fridgeType: fridgeTypeOfPopularRecipe, fridgeIdx: fridgeIdxOfPopularRecipe, pageNumberToLoad: pageNumberToLoad) { response in
             response?.content.forEach { recipe in
                 indexArrayToInsert.append(IndexPath(item: self.popularRecipeList.count, section: 0))
                 self.popularRecipeList.append(recipe)

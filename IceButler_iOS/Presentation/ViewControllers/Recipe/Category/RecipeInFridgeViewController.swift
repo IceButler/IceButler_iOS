@@ -25,15 +25,26 @@ class RecipeInFridgeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // 사용자가 냉장고를 변경했으면 (fridgeIdx가 변경됐으면) 다시 fetchData() 해야함
-        // isFirstFetch, currentLoadedPageNumber도 다시 초기화
+        
+        let fridgeType: FridgeType
+        if APIManger.shared.getIsMultiFridge() { fridgeType = FridgeType.multiUse }
+        else { fridgeType = FridgeType.homeUse }
+        // 사용자가 냉장고를 변경했을 경우
+        if APIManger.shared.getFridgeIdx() != RecipeViewModel.shared.fridgeIdxOfFridgeRecipe ||
+           fridgeType != RecipeViewModel.shared.fridgeTypeOfFridgeRecipe {
+            currentLoadedPageNumber = -1
+            fetchData()
+        }
     }
     
     private func fetchData() {
+        RecipeViewModel.shared.fridgeIdxOfFridgeRecipe = APIManger.shared.getFridgeIdx()
         if APIManger.shared.getIsMultiFridge() {
-            RecipeViewModel.shared.getFridgeRecipeList(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx(), pageNumberToLoad: currentLoadedPageNumber + 1)
+            RecipeViewModel.shared.fridgeTypeOfFridgeRecipe = .multiUse
+            RecipeViewModel.shared.getFridgeRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
         } else {
-            RecipeViewModel.shared.getFridgeRecipeList(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx(), pageNumberToLoad: currentLoadedPageNumber + 1)
+            RecipeViewModel.shared.fridgeTypeOfFridgeRecipe = .homeUse
+            RecipeViewModel.shared.getFridgeRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
         }
         currentLoadedPageNumber += 1
     }
