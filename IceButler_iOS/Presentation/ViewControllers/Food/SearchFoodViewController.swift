@@ -7,6 +7,13 @@
 
 import UIKit
 
+enum SearchCategory {
+    case Food
+    case Fridge
+}
+
+
+
 class SearchFoodViewController: UIViewController {
     
     @IBOutlet weak var searchFoodCollectionView: UICollectionView!
@@ -15,6 +22,7 @@ class SearchFoodViewController: UIViewController {
     private var delegate: BarCodeAddProtocol?
     private var fridgeDelegate: FoodAddDelegate?
     private var isFirst = true
+    private var searchCategory: SearchCategory?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +40,12 @@ class SearchFoodViewController: UIViewController {
         let cell = UINib(nibName: "FoodCell", bundle: nil)
         searchFoodCollectionView.register(cell, forCellWithReuseIdentifier: "FoodCell")
         
-        serachResultLabel.text = "식품을 검색해보세요!"
+        if searchCategory == .Food {
+            serachResultLabel.text = "식품을 검색해보세요!"
+        }else if searchCategory == .Fridge {
+            serachResultLabel.text = "냉장고 내 식품을 검색해보세요!"
+        }
+        
     }
     
     private func setupLayout() {
@@ -43,23 +56,40 @@ class SearchFoodViewController: UIViewController {
         }
     }
     
-
-    
     private func setupObserver() {
-        FoodViewModel.shared.isSearchFoodList { result in
-            if result {
-                self.searchFoodCollectionView.isHidden = false
-                self.serachResultLabel.isHidden = true
-                
-                UIView.transition(with: self.searchFoodCollectionView,
-                                  duration: 0.35,
-                                  options: .transitionCrossDissolve,
-                                  animations: { () -> Void in
-                    self.searchFoodCollectionView.reloadData()},
-                                  completion: nil)
-            }else {
-                self.searchFoodCollectionView.isHidden = true
-                self.serachResultLabel.isHidden = false
+        if searchCategory == .Food {
+            FoodViewModel.shared.isSearchFoodList { result in
+                if result {
+                    self.searchFoodCollectionView.isHidden = false
+                    self.serachResultLabel.isHidden = true
+                    
+                    UIView.transition(with: self.searchFoodCollectionView,
+                                      duration: 0.35,
+                                      options: .transitionCrossDissolve,
+                                      animations: { () -> Void in
+                        self.searchFoodCollectionView.reloadData()},
+                                      completion: nil)
+                }else {
+                    self.searchFoodCollectionView.isHidden = true
+                    self.serachResultLabel.isHidden = false
+                }
+            }
+        }else if searchCategory == .Fridge {
+            FoodViewModel.shared.isFridgeSearchFoodList { result in
+                if result {
+                    self.searchFoodCollectionView.isHidden = false
+                    self.serachResultLabel.isHidden = true
+                    
+                    UIView.transition(with: self.searchFoodCollectionView,
+                                      duration: 0.35,
+                                      options: .transitionCrossDissolve,
+                                      animations: { () -> Void in
+                        self.searchFoodCollectionView.reloadData()},
+                                      completion: nil)
+                }else {
+                    self.searchFoodCollectionView.isHidden = true
+                    self.serachResultLabel.isHidden = false
+                }
             }
         }
     }
@@ -118,9 +148,14 @@ class SearchFoodViewController: UIViewController {
     
     
     @objc private func backToScene() {
-        FoodViewModel.shared.deleteAll()
-        self.navigationController?.popViewController(animated: true)
-        self.fridgeDelegate?.moveToFoodAddSelect()
+        if searchCategory == .Food {
+            FoodViewModel.shared.deleteAll()
+            self.navigationController?.popViewController(animated: true)
+            self.fridgeDelegate?.moveToFoodAddSelect()
+        }else if searchCategory == .Fridge {
+            FoodViewModel.shared.deleteAll()
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 
 
@@ -129,31 +164,59 @@ class SearchFoodViewController: UIViewController {
 
 extension SearchFoodViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return FoodViewModel.shared.searchFoodListCount()
+        if searchCategory == .Food {
+            return FoodViewModel.shared.searchFoodListCount()
+        }else {
+            return FoodViewModel.shared.fridgeSearchFoodListCount()
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCell", for: indexPath) as! FoodCell
         
-        FoodViewModel.shared.searchFoodImg(index: indexPath.row, store: &cell.cancellabels) { foodImg in
-            cell.setFoodImage(foodImage: foodImg)
+        if searchCategory == .Food {
+            FoodViewModel.shared.searchFoodImg(index: indexPath.row, store: &cell.cancellabels) { foodImg in
+                cell.setFoodImage(foodImage: foodImg)
+            }
+            
+            FoodViewModel.shared.searchFoodName(index: indexPath.row, store: &cell.cancellabels) { foodName in
+                cell.setFoodName(foodName: foodName)
+            }
+            
+            cell.foodDdayLabel.isHidden = true
+        }else if searchCategory == .Fridge {
+            FoodViewModel.shared.fridgeSearchFoodImg(index: indexPath.row, store: &cell.cancellabels) { foodImg in
+                cell.setFoodImage(foodImage: foodImg)
+            }
+            
+            FoodViewModel.shared.fridgeSearchFoodName(index: indexPath.row, store: &cell.cancellabels) { foodName in
+                cell.setFoodName(foodName: foodName)
+            }
+            
+            FoodViewModel.shared.fridgeSearchFoodDay(index: indexPath.row, store: &cell.cancellabels) { day in
+                cell.setDday(foodDday: day)
+            }
+            
         }
-        
-        FoodViewModel.shared.searchFoodName(index: indexPath.row, store: &cell.cancellabels) { foodName in
-            cell.setFoodName(foodName: foodName)
-        }
-        
-        cell.foodDdayLabel.isHidden = true
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        FoodViewModel.shared.selectSearchFood(index: indexPath.row)
+        if searchCategory == .Food {
+            FoodViewModel.shared.selectSearchFood(index: indexPath.row)
 
-        let foodAddVC = UIStoryboard(name: "FoodAdd", bundle: nil).instantiateViewController(withIdentifier: "FoodAddViewController") as! FoodAddViewController
-        
-        self.navigationController?.pushViewController(foodAddVC, animated: true)
+            let foodAddVC = UIStoryboard(name: "FoodAdd", bundle: nil).instantiateViewController(withIdentifier: "FoodAddViewController") as! FoodAddViewController
+            
+            self.navigationController?.pushViewController(foodAddVC, animated: true)
+        }else {
+            FoodViewModel.shared.selectFridgeSearchFood(index: indexPath.row)
+            
+            let foodDetailVC = UIStoryboard(name: "FoodDetail", bundle: nil).instantiateViewController(withIdentifier: "FoodDetailViewController") as! FoodDetailViewController
+            
+            self.navigationController?.pushViewController(foodDetailVC, animated: true)
+        }
+      
     }
     
 }
@@ -161,15 +224,19 @@ extension SearchFoodViewController: UICollectionViewDelegate, UICollectionViewDa
 extension SearchFoodViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let word = searchBar.text {
-            FoodViewModel.shared.getSearchFood(word: word)
+            if searchCategory == .Food {
+                FoodViewModel.shared.getSearchFood(word: word)
+            }else {
+                FoodViewModel.shared.getFridgeSearchFood(word: word)
+            }
         }
     }
     
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        self.serachResultLabel.text = "검색 결과가 없습니다."
-//        searchBar.resignFirstResponder()
-//        if let word = searchBar.text {
-//            FoodViewModel.shared.getSearchFood(word: word)
-//        }
-//    }
+}
+
+
+extension SearchFoodViewController {
+    func setSearchCategory(searchCategory: SearchCategory) {
+        self.searchCategory = searchCategory
+    }
 }

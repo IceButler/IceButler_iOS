@@ -40,6 +40,8 @@ class FoodCell: UICollectionViewCell {
     func setDday(foodDday: Int) {
         if foodDday > 0 {
             foodDdayLabel.text = "D+" + foodDday.description
+        }else if foodDday == 0 {
+            foodDdayLabel.text = "D-" + foodDday.description
         }else {
             foodDdayLabel.text = "D" + foodDday.description
         }

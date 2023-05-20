@@ -182,7 +182,11 @@ class FridgeViewController: TabmanViewController {
     }
     
     @objc private func moveToSearchVC() {
+        let searchFoodVC = UIStoryboard(name: "SearchFood", bundle: nil).instantiateViewController(withIdentifier: "SearchFoodViewController") as! SearchFoodViewController
         
+        searchFoodVC.setSearchCategory(searchCategory: .Fridge)
+        
+        self.navigationController?.pushViewController(searchFoodVC, animated: true)
     }
     
     @objc private func moveToAlarmVC() {
@@ -245,6 +249,7 @@ extension FridgeViewController: FoodAddSelectDelgate {
     
     func moveToSearchFoodVC(searchFoodVC: SearchFoodViewController) {
         searchFoodVC.setFridgeDelegate(fridgeDelegate: self)
+        searchFoodVC.setSearchCategory(searchCategory: .Food)
         navigationController?.pushViewController(searchFoodVC, animated: true)
     }
 }
