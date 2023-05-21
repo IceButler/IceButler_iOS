@@ -92,13 +92,15 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     func setPercent(percent: Int) {
         percentLabel.text = String(percent) + "%"
         
-        // 50%~79%:빨간색, 80%~99%:노란색, 100%:초록색
-        if 50 <= percent, percent < 80 {
-            percentLabel.backgroundColor = .pinkCell
+        // 0~49%:노란색, 50~79%:주황색, 80%99%:노란색, 100%:초록색
+        if 0 <= percent, percent < 50 {
+            percentLabel.backgroundColor = .pinkTagColor
+        } else if 50 <= percent, percent < 80 {
+            percentLabel.backgroundColor = .orangeTagColor
         } else if 80 <= percent, percent < 100 {
-            percentLabel.backgroundColor = .yellowCell
+            percentLabel.backgroundColor = .yellowTagColor
         } else {
-            percentLabel.backgroundColor = .greenCell
+            percentLabel.backgroundColor = .greenTagColor
         }
     }
     

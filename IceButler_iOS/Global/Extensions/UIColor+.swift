@@ -169,4 +169,31 @@ extension UIColor{
         alpha: 1
     )
 
+    static let pinkTagColor = UIColor(
+        red: 255/255,
+        green: 184/255,
+        blue: 174/255,
+        alpha: 1
+    )
+    
+    static let orangeTagColor = UIColor(
+        red: 255/255,
+        green: 187/255,
+        blue: 149/255,
+        alpha: 1
+    )
+    
+    static let yellowTagColor = UIColor(
+        red: 255/255,
+        green: 233/255,
+        blue: 156/255,
+        alpha: 1
+    )
+    
+    static let greenTagColor = UIColor(
+        red: 196/255,
+        green: 232/255,
+        blue: 169/255,
+        alpha: 1
+    )
 }
