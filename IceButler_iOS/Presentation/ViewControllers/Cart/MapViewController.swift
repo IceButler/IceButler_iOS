@@ -55,9 +55,9 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         setupLocation()
-        fetchKakaoData()
         setupView()
         setupMapView()
+        fetchKakaoData()
         setupNavigationBar()
     }
     
