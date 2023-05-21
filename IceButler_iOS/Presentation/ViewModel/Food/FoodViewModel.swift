@@ -341,7 +341,7 @@ extension FoodViewModel {
             if let response = response {
                 uploadProfileImage(image: image, url: response.presignedUrl)
                 uploadedFoodImgUrl = response.presignedUrl
-                completion(response.imageKey.trimmingCharacters(in: ["food/"]))
+                completion(response.imageKey)
             }
         }
     }
@@ -360,7 +360,7 @@ extension FoodViewModel {
     }
     
     func patchFood(foodIdx: Int, fridgeIdx: Int, foodName: String, foodDetail: String, foodCategory: String, foodShelfLife: String, foodOwnerIdx: Int, memo: String?, imgUrl: String?, completion: @escaping (Bool) -> Void) {
-        let foodAddModel: FoodAddRequestModel = FoodAddRequestModel(foodName: foodName, foodDetailName: foodDetail, foodCategory: foodCategory, shelfLife: foodShelfLife, memo: memo, imageUrl: imgUrl, ownerIdx: foodOwnerIdx)
+        let foodAddModel: FoodAddRequestModel = FoodAddRequestModel(foodName: foodName, foodDetailName: foodDetail, foodCategory: foodCategory, shelfLife: foodShelfLife, memo: memo, imgKey: imgUrl, ownerIdx: foodOwnerIdx)
         
         
         foodService.patchFood(foodIdx: foodIdx, parameter: foodAddModel) { result in
