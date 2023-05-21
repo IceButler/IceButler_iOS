@@ -81,6 +81,14 @@ class PopularRecipeViewController: BaseViewController {
 
 extension PopularRecipeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if !isFirstFetch {
+            if RecipeViewModel.shared.popularRecipeList.isEmpty {
+                collectionView.setEmptyView(message: "인기 레시피가 없습니다.")
+            }
+            else {
+                collectionView.restore()
+            }
+        }
         return RecipeViewModel.shared.popularRecipeList.count
     }
     

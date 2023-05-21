@@ -105,6 +105,14 @@ class MyRecipeViewController: BaseViewController {
 
 extension MyRecipeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if !isFirstFetch {
+            if RecipeViewModel.shared.myRecipeList.isEmpty {
+                collectionView.setEmptyView(message: "내가 만든 마이레시피가 없습니다.")
+            }
+            else {
+                collectionView.restore()
+            }
+        }
         return RecipeViewModel.shared.myRecipeList.count
     }
     

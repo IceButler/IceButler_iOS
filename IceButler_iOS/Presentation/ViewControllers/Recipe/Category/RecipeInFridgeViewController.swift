@@ -81,6 +81,14 @@ class RecipeInFridgeViewController: BaseViewController {
 
 extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if !isFirstFetch {
+            if RecipeViewModel.shared.fridgeRecipeList.isEmpty {
+                collectionView.setEmptyView(message: "냉장고에 식품을 추가해보세요!")
+            }
+            else {
+                collectionView.restore()
+            }
+        }
         return RecipeViewModel.shared.fridgeRecipeList.count
     }
     
@@ -161,6 +169,36 @@ extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionVi
                 }
             }
         }
+    }
+}
+
+extension UICollectionView {
+    func setEmptyView(message: String) {
+        let emptyView: UIView = {
+            let view = UIView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.width, height: self.bounds.height))
+            return view
+        }()
+        let messageLabel: UILabel = {
+            let label = UILabel()
+            label.text = message
+            label.textColor = .signatureBlue
+            label.font = .systemFont(ofSize: 20, weight: .bold)
+            label.textAlignment = .center
+            label.numberOfLines = 0;
+            label.sizeToFit()
+            return label
+        }()
+        emptyView.addSubview(messageLabel)
+        messageLabel.snp.makeConstraints {
+            $0.left.equalTo(emptyView.snp.left).offset(70)
+            $0.right.equalTo(emptyView.snp.right).offset(-70)
+            $0.centerY.equalTo(emptyView.snp.centerY)
+        }
+        self.backgroundView = emptyView
+    }
+    
+    func restore() {
+        self.backgroundView = nil
     }
 }
 

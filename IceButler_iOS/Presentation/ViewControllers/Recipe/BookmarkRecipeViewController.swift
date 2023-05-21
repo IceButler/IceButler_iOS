@@ -109,6 +109,14 @@ class BookmarkRecipeViewController: BaseViewController {
 
 extension BookmarkRecipeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if !isFirstFetch {
+            if RecipeViewModel.shared.bookmarkRecipeList.isEmpty {
+                collectionView.setEmptyView(message: "즐겨찾기한 레시피가 없습니다.")
+            }
+            else {
+                collectionView.restore()
+            }
+        }
         return RecipeViewModel.shared.bookmarkRecipeList.count
     }
     
