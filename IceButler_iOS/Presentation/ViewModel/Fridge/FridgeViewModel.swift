@@ -581,12 +581,12 @@ class FridgeViewModel: ObservableObject {
                 /// 최초 로딩에 보여질 냉장고 기본값 설정
                 if response.data?.fridgeList?.count ?? 0 > 0 {
                     APIManger.shared.setFridgeIdx(index: (response.data?.fridgeList![0].fridgeIdx)!)
-                    APIManger.shared.setIsMultiFridge(data: false)
+                    APIManger.shared.setIsMultiFridge(isMulti: false)
                     self?.defaultFridgeName = (response.data?.fridgeList![0].fridgeName)!
                     
                 } else if response.data?.multiFridgeResList?.count ?? 0 > 0 {
                     APIManger.shared.setFridgeIdx(index: (response.data?.multiFridgeResList![0].multiFridgeIdx)!)
-                    APIManger.shared.setIsMultiFridge(data: true)
+                    APIManger.shared.setIsMultiFridge(isMulti: true)
                     self?.defaultFridgeName = (response.data?.multiFridgeResList![0].multiFridgeName)!
                 }
                 print("default fridge idx --> \(APIManger.shared.getFridgeIdx())")
@@ -614,15 +614,25 @@ class FridgeViewModel: ObservableObject {
         
         /// 이전에 선택된 냉장고가 있다면 해당 냉장고로 기본 설정
     func setSavedFridgeIdx() {
-        guard let idx = UserDefaults.standard.value(forKey: "selectedFridgeIdx") as? Int else {return}
-        guard let name = UserDefaults.standard.value(forKey: "selectedFridgeName") as? String else {return}
-        guard let isMultiFridge = UserDefaults.standard.value(forKey: "isMulti") as? Bool else {return}
+
+        if let idx = UserDefaults.standard.value(forKey: "selectedFridgeIdx"),
+           let name = UserDefaults.standard.value(forKey: "selectedFridgeName"),
+           let isMulti = UserDefaults.standard.value(forKey: "selectedFridgeIsMulti"){
+            APIManger.shared.setFridgeIdx(index: idx as! Int)
+            APIManger.shared.setIsMultiFridge(isMulti: isMulti as! Bool)
+            self.defaultFridgeName = name as! String
+            print("현재 냉장고 Idx : \(idx as! Int) | 공용여부 : \(isMulti as! Bool)")
+        }
+
+//        guard let idx = UserDefaults.standard.value(forKey: "selectedFridgeIdx") as? Int else {return}
+//        guard let name = UserDefaults.standard.value(forKey: "selectedFridgeName") as? String else {return}
+//        guard let isMultiFridge = UserDefaults.standard.value(forKey: "isMulti") as? Bool else {return}
         
-        APIManger.shared.setFridgeIdx(index: idx)
-        APIManger.shared.setIsMultiFridge(data: isMultiFridge)
-        self.defaultFridgeName = name
+//        APIManger.shared.setFridgeIdx(index: idx)
+//        APIManger.shared.setIsMultiFridge(data: isMultiFridge)
+//        self.defaultFridgeName = name
         
-      
+     
     }
 
 }

@@ -22,6 +22,7 @@ class APIManger {
     func setupObserver() {
         AuthViewModel.shared.accessToken { token in
             self.headers = ["Authorization": token]
+            print(self.headers)
         }
     }
     
@@ -39,7 +40,7 @@ extension APIManger {
     func setFridgeIdx(index: Int) { fridgeIdx = index }
     func getFridgeIdx() -> Int { return fridgeIdx }
     
-    func setIsMultiFridge(data: Bool) { isMultiFridge = data }
+    func setIsMultiFridge(isMulti: Bool) { isMultiFridge = isMulti }
     func getIsMultiFridge() -> Bool { return isMultiFridge }
 }
 
@@ -115,6 +116,7 @@ extension APIManger {
                                completionHandler: @escaping (GeneralResponseListModel<U>)->Void) {
         
         guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
+        print(url)
         
         AF
             .request(url, method: .get, parameters: parameter, encoding: URLEncoding.queryString, headers: self.headers)

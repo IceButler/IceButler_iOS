@@ -28,6 +28,12 @@ class AuthViewModel: NSObject, ObservableObject {
     
     private var profileImgKey: String?
     
+    private var deviceToken: String = ""
+    
+    func setDeviceToken(token: String) {
+        deviceToken = token
+        print("디바이스 토큰 값 설정됨 --> \(deviceToken)")
+    }
     
     func userEmail(completion: @escaping (String) -> Void) {
         $userEmail.filter { userEmail in
@@ -101,7 +107,7 @@ extension AuthViewModel {
     
     
     func login(userEmail: String) {
-        let parameter = AuthLoginRequest(email: userEmail, provider: self.authProvider!.rawValue)
+        let parameter = AuthLoginRequest(email: userEmail, provider: self.authProvider!.rawValue, fcmToken: deviceToken)
         
         authService.requestLogin(parameter: parameter) { response in
             if let response = response {
@@ -151,9 +157,9 @@ extension AuthViewModel {
         let parameter: AuthJoinUserRequestModel
 
         if let profileImageKey = self.profileImgKey {
-            parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickname!, profileImgKey: profileImageKey)
+            parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickname!, profileImgKey: profileImageKey, fcmToken: deviceToken)
         }else {
-            parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickname!, profileImgKey: nil)
+            parameter = AuthJoinUserRequestModel(email: userEmail!, provider: (authProvider?.rawValue)!, nickname: userNickname!, profileImgKey: nil, fcmToken: deviceToken)
         }
         
         self.authService.joinUser(parameter: parameter) { response in
