@@ -111,6 +111,7 @@ class RecipeViewModel: ObservableObject {
         var recipeUrlList: [String?] = []
         var foodList: [Ingredient] = []
         var cookeryList: [CookingProcess] = []
+        var isEmptyUrlList: Bool = true
         
         // get ImageKey
         let thumbnailResponse = try await ImageService.shared.getRecipeImageUrl(parameter: thumbnailParameter)
@@ -122,6 +123,7 @@ class RecipeViewModel: ObservableObject {
                 recipeImgKeyList.append(nil)
                 recipeUrlList.append(nil)
             } else {
+                isEmptyUrlList = false
                 let response = try await ImageService.shared.getRecipeImageUrl(parameter: recipeImageParameter)
                 recipeImgKeyList.append(response?.imageKey)
                 recipeUrlList.append(response?.presignedUrl)
@@ -148,6 +150,9 @@ class RecipeViewModel: ObservableObject {
                 if result {
                     // upload Image
                     ImageService.shared.uploadRecipeImage(image: recipeImg, url: thumbnailUrl!) {
+                        if isEmptyUrlList {
+                            completion(true)
+                        }
                         for i in cookingProcessList.indices {
                             if cookingProcessList[i][0] != nil {
                                 ImageService.shared.uploadRecipeImage(image: cookingProcessList[i][0] as! UIImage, url: recipeUrlList[i]!) {

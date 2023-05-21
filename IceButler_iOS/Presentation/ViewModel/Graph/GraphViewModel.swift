@@ -74,7 +74,7 @@ class GraphViewModel: ObservableObject {
 
 extension GraphViewModel {
     func fetchWasteList(fridgeIdx: Int, year: Int, month: Int) {
-        graphService.getWaste(fridgeIdx: fridgeIdx, year: year, month: month) { wasteList in
+        graphService.getWaste(year: year, month: month) { wasteList in
             wasteList.sorted {
                 $0.percentage < $1.percentage
             }
@@ -83,7 +83,7 @@ extension GraphViewModel {
     }
     
     func fetchConsumeList(fridgeIdx: Int, year: Int, month: Int) {
-        graphService.getWaste(fridgeIdx: fridgeIdx, year: year, month: month) { wasteList in
+        graphService.getWaste( year: year, month: month) { wasteList in
             wasteList.sorted {
                 $0.percentage < $1.percentage
             }

@@ -25,6 +25,11 @@ struct SearchFoodResponse: Codable {
     let foodName, foodCategory, foodImgUrl: String
 }
 
+struct FridgeSearchFoodResponse: Codable {
+    let fridgeFoodIdx, shelfLife: Int
+    let foodName, foodImgUrl: String
+}
+
 
 struct FoodOwnerResponseModel: Codable {
     let fridgeUsers: [FoodOwner]
