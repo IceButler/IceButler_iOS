@@ -23,32 +23,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         setupLayout()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        // cell index
-        guard let superView = self.superview as? UICollectionView else { return }
-        let indexPath = superView.indexPath(for: self)
-        // 가장 최근 업데이트된 레시피 리스트
-        let recipeListType = RecipeViewModel.shared.getRecentlyUpdatedList()
-        switch recipeListType {
-        case .recipeInFridge:
-            RecipeViewModel.shared.getFridgeRecipeCellInfo(index: indexPath!.row) { response in
-                if response != nil {
-                    self.setLikeStatus(status: response!.recipeLikeStatus)
-                }
-            }
-        case .popularRecipe:
-            RecipeViewModel.shared.getPopularRecipeCellInfo(index: indexPath!.row) { response in
-                if response != nil {
-                    self.setLikeStatus(status: response!.recipeLikeStatus)
-                }
-            }
-        case .bookmarkRecipe:
-            return
-        }
-    }
-    
     @IBAction func didTapBookmarkButton(_ sender: Any) {
         RecipeViewModel.shared.updateBookmarkStatus(recipeIdx: idx) { bookmarkStatus in
             self.setLikeStatus(status: bookmarkStatus)
@@ -118,21 +92,23 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     func setPercent(percent: Int) {
         percentLabel.text = String(percent) + "%"
         
-        // 50%~79%:빨간색, 80%~99%:노란색, 100%:초록색
-        if 50 <= percent, percent < 80 {
-            percentLabel.backgroundColor = .pinkCell
+        // 0~49%:노란색, 50~79%:주황색, 80%99%:노란색, 100%:초록색
+        if 0 <= percent, percent < 50 {
+            percentLabel.backgroundColor = .pinkTagColor
+        } else if 50 <= percent, percent < 80 {
+            percentLabel.backgroundColor = .orangeTagColor
         } else if 80 <= percent, percent < 100 {
-            percentLabel.backgroundColor = .yellowCell
+            percentLabel.backgroundColor = .yellowTagColor
         } else {
-            percentLabel.backgroundColor = .greenCell
+            percentLabel.backgroundColor = .greenTagColor
         }
     }
     
     func setLikeStatus(status: Bool) {
         if status {
-            bookmarkButton.imageView?.image = UIImage(named: "smallStar")
+            bookmarkButton.setImage(UIImage(named: "smallStar"), for: .normal)
         } else {
-            bookmarkButton.imageView?.image = UIImage(named: "emptyStar")
+            bookmarkButton.setImage(UIImage(named: "emptyStar"), for: .normal)
         }
     }
     

@@ -17,13 +17,21 @@ class RecipeViewModel: ObservableObject {
     @Published var fridgeRecipeList: [Recipe] = []
     @Published var popularRecipeList: [Recipe] = []
     @Published var bookmarkRecipeList: [Recipe] = []
+    @Published var myRecipeList: [MyRecipe] = []
+    var fridgeIdxOfFridgeRecipe: Int = -1
+    var fridgeIdxOfPopularRecipe: Int = -1
+    var fridgeTypeOfFridgeRecipe: FridgeType = .homeUse
+    var fridgeTypeOfPopularRecipe: FridgeType = .homeUse
+    var fridgeRecipeIsLastPage: Bool = false
+    var popularRecipeIsLastPage: Bool = false
+    var bookmarkRecipeIsLastPage: Bool = false
+    var myRecipeIsLastPage: Bool = false
     
-    private var recentlyUpdatedList: RecipeListType!
     private var recipeInFridgeVC: RecipeInFridgeViewController? = nil
     private var popularRecipeVC: PopularRecipeViewController? = nil
     private var bookmarkRecipeVC: BookmarkRecipeViewController? = nil
+    private var myRecipeVC: MyRecipeViewController? = nil
     
-    func getRecentlyUpdatedList() -> RecipeListType { return recentlyUpdatedList }
     func setRecipeInFridgeVC(recipeInFridgeVC: RecipeInFridgeViewController) {
         self.recipeInFridgeVC = recipeInFridgeVC
     }
@@ -33,60 +41,88 @@ class RecipeViewModel: ObservableObject {
     func setBookmarkRecipeVC(bookmarkRecipeVC: BookmarkRecipeViewController) {
         self.bookmarkRecipeVC = bookmarkRecipeVC
     }
-    func reloadDataInFridgeVC() { recipeInFridgeVC?.reloadCV() }
-    func reloadDataInPopularVC() { popularRecipeVC?.reloadCV() }
+    func setMyRecipeVC(myRecipeVC: MyRecipeViewController) {
+        self.myRecipeVC = myRecipeVC
+    }
     
-    func getFridgeRecipeList(fridgeType: FridgeType, fridgeIdx: Int) {
-        recipeService.getFridgeRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx) { response in
-            self.recentlyUpdatedList = RecipeListType.recipeInFridge
+    func getFridgeRecipeList(pageNumberToLoad: Int) {
+        var indexArrayToInsert: [IndexPath] = []
+        if pageNumberToLoad == 0 {
             self.fridgeRecipeList.removeAll()
-            response?.recipeMainResList.forEach { recipe in
+            self.fridgeRecipeIsLastPage = false
+        }
+        recipeService.getFridgeRecipes(fridgeType: fridgeTypeOfFridgeRecipe, fridgeIdx: fridgeIdxOfFridgeRecipe, pageNumberToLoad: pageNumberToLoad) { response in
+            response?.content.forEach { recipe in
+                indexArrayToInsert.append(IndexPath(item: self.fridgeRecipeList.count, section: 0))
                 self.fridgeRecipeList.append(recipe)
             }
-            self.recipeInFridgeVC?.reloadCV()
+            self.fridgeRecipeIsLastPage = response?.last ?? false
+            self.recipeInFridgeVC?.updateCV(indexArray: indexArrayToInsert)
         }
     }
     
-    func getPopularRecipeList(fridgeType: FridgeType, fridgeIdx: Int) {
-        recipeService.getPopularRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx) { response in
-            self.recentlyUpdatedList = RecipeListType.popularRecipe
+    func getPopularRecipeList(pageNumberToLoad: Int) {
+        var indexArrayToInsert: [IndexPath] = []
+        if pageNumberToLoad == 0 {
             self.popularRecipeList.removeAll()
-            response?.recipeMainResList.forEach { recipe in
+            self.popularRecipeIsLastPage = false
+        }
+        recipeService.getPopularRecipes(fridgeType: fridgeTypeOfPopularRecipe, fridgeIdx: fridgeIdxOfPopularRecipe, pageNumberToLoad: pageNumberToLoad) { response in
+            response?.content.forEach { recipe in
+                indexArrayToInsert.append(IndexPath(item: self.popularRecipeList.count, section: 0))
                 self.popularRecipeList.append(recipe)
             }
-            self.popularRecipeVC?.reloadCV()
+            self.popularRecipeIsLastPage = response?.last ?? false
+            self.popularRecipeVC?.updateCV(indexArray: indexArrayToInsert)
         }
     }
     
-    func getBookmarkRecipeList(fridgeType: FridgeType, fridgeIdx: Int) {
-        recipeService.getBookmarkRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx) { response in
-            self.recentlyUpdatedList = RecipeListType.bookmarkRecipe
+    func getBookmarkRecipeList(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int) {
+        var indexArrayToInsert: [IndexPath] = []
+        if pageNumberToLoad == 0 {
             self.bookmarkRecipeList.removeAll()
-            response?.recipeMainResList.forEach { recipe in
+            self.bookmarkRecipeIsLastPage = false
+        }
+        recipeService.getBookmarkRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx, pageNumberToLoad: pageNumberToLoad) { response in
+            response?.content.forEach { recipe in
+                indexArrayToInsert.append(IndexPath(item: self.bookmarkRecipeList.count, section: 0))
                 self.bookmarkRecipeList.append(recipe)
             }
-            self.bookmarkRecipeVC?.reloadCV()
+            self.bookmarkRecipeIsLastPage = response?.last ?? false
+            self.bookmarkRecipeVC?.updateCV(indexArray: indexArrayToInsert)
         }
     }
     
-    func getFridgeRecipeCellInfo(index: Int, completion: @escaping (Recipe?) -> Void) {
-        if index < fridgeRecipeList.count {
-            completion(fridgeRecipeList[index])
-        } else {
-            completion(nil)
+    func getMyRecipeList(pageNumberToLoad: Int) {
+        var indexArrayToInsert: [IndexPath] = []
+        if pageNumberToLoad == 0 {
+            self.myRecipeList.removeAll()
+            self.myRecipeIsLastPage = false
+        }
+        recipeService.getMyRecipes(pageNumberToLoad: pageNumberToLoad) { response in
+            response?.content.forEach { recipe in
+                indexArrayToInsert.append(IndexPath(item: self.myRecipeList.count, section: 0))
+                self.myRecipeList.append(recipe)
+            }
+            self.myRecipeIsLastPage = response?.last ?? false
+            self.myRecipeVC?.updateCV(indexArray: indexArrayToInsert)
         }
     }
     
-    func getPopularRecipeCellInfo(index: Int, completion: @escaping (Recipe?) -> Void) {
-        if index < popularRecipeList.count {
-            completion(popularRecipeList[index])
-        } else {
-            completion(nil)
-        }
+    func getFridgeRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
+        completion(fridgeRecipeList[index])
+    }
+    
+    func getPopularRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
+        completion(popularRecipeList[index])
     }
     
     func getBookmarkRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
         completion(bookmarkRecipeList[index])
+    }
+    
+    func getMyRecipeCellInfo(index: Int, completion: @escaping (MyRecipe) -> Void) {
+        completion(myRecipeList[index])
     }
     
     func updateBookmarkStatus(recipeIdx: Int, completion: @escaping (Bool) -> Void) {

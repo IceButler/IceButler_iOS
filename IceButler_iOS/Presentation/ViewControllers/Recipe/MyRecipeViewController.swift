@@ -1,16 +1,16 @@
 //
-//  PopularRecipeViewController.swift
+//  MyRecipeViewController.swift
 //  IceButler_iOS
 //
-//  Created by 김나연 on 2023/04/28.
+//  Created by 김나연 on 2023/05/20.
 //
 
 import UIKit
 import JGProgressHUD
 
-class PopularRecipeViewController: BaseViewController {
+class MyRecipeViewController: BaseViewController {
 
-    @IBOutlet weak var recipeCollectionView: UICollectionView!
+    @IBOutlet var recipeCollectionView: UICollectionView!
     private var LOADING_VIEW_HEIGHT: Double = 50.0
     private var loadingView: LoadingReusableView?
     private var currentLoadedPageNumber: Int = -1
@@ -20,41 +20,25 @@ class PopularRecipeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
+        setupNavigationBar()
         setup()
         setupLayout()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let fridgeType: FridgeType
-        if APIManger.shared.getIsMultiFridge() { fridgeType = FridgeType.multiUse }
-        else { fridgeType = FridgeType.homeUse }
-        // 사용자가 냉장고를 변경했을 경우
-        if APIManger.shared.getFridgeIdx() != RecipeViewModel.shared.fridgeIdxOfPopularRecipe ||
-           fridgeType != RecipeViewModel.shared.fridgeTypeOfFridgeRecipe {
-            currentLoadedPageNumber = -1
-            fetchData()
-        }
+    @IBAction func didTapBackButton(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     private func fetchData() {
         if currentLoadedPageNumber == -1 {
             showLoading()
         }
-        RecipeViewModel.shared.fridgeIdxOfPopularRecipe = APIManger.shared.getFridgeIdx()
-        if APIManger.shared.getIsMultiFridge() {
-            RecipeViewModel.shared.fridgeTypeOfPopularRecipe = .multiUse
-            RecipeViewModel.shared.getPopularRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
-        } else {
-            RecipeViewModel.shared.fridgeTypeOfPopularRecipe = .homeUse
-            RecipeViewModel.shared.getPopularRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
-        }
+        RecipeViewModel.shared.getMyRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
         currentLoadedPageNumber += 1
     }
     
     private func setup() {
-        RecipeViewModel.shared.setPopularRecipeVC(popularRecipeVC: self)
+        RecipeViewModel.shared.setMyRecipeVC(myRecipeVC: self)
         recipeCollectionView.delegate = self
         recipeCollectionView.dataSource = self
 
@@ -69,6 +53,46 @@ class PopularRecipeViewController: BaseViewController {
         loadingView?.activityIndicatorView.hidesWhenStopped = true
     }
     
+    private func setupNavigationBar() {
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.backgroundColor = .navigationColor
+        self.navigationController?.navigationBar.standardAppearance.backgroundColor = .navigationColor
+        
+        let title = UILabel()
+        title.text = "마이 레시피"
+        title.font = .systemFont(ofSize: 18, weight: .bold)
+        title.textColor = .white
+        title.textAlignment = .left
+        title.sizeToFit()
+        
+        self.navigationItem.leftBarButtonItems?.append(UIBarButtonItem(customView: title))
+        
+        if #available(iOS 13.0, *) {
+            let app = UIApplication.shared
+            let statusBarHeight: CGFloat = app.statusBarFrame.size.height
+            
+            let statusbarView = UIView()
+            statusbarView.backgroundColor = UIColor.navigationColor
+            view.addSubview(statusbarView)
+            
+            statusbarView.translatesAutoresizingMaskIntoConstraints = false
+            statusbarView.heightAnchor
+                .constraint(equalToConstant: statusBarHeight).isActive = true
+            statusbarView.widthAnchor
+                .constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
+            statusbarView.topAnchor
+                .constraint(equalTo: view.topAnchor).isActive = true
+            statusbarView.centerXAnchor
+                .constraint(equalTo: view.centerXAnchor).isActive = true
+            
+        } else {
+            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+            statusBar?.backgroundColor = UIColor.navigationColor
+        }
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    
     func updateCV(indexArray: [IndexPath]) {
         if currentLoadedPageNumber == 0 {
             recipeCollectionView.reloadData()
@@ -79,29 +103,29 @@ class PopularRecipeViewController: BaseViewController {
     }
 }
 
-extension PopularRecipeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MyRecipeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if !isFirstFetch {
-            if RecipeViewModel.shared.popularRecipeList.isEmpty {
-                collectionView.setEmptyView(message: "인기 레시피가 없습니다.")
+            if RecipeViewModel.shared.myRecipeList.isEmpty {
+                collectionView.setEmptyView(message: "내가 만든 마이레시피가 없습니다.")
             }
             else {
                 collectionView.restore()
             }
         }
-        return RecipeViewModel.shared.popularRecipeList.count
+        return RecipeViewModel.shared.myRecipeList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
         
-        RecipeViewModel.shared.getPopularRecipeCellInfo(index: indexPath.row) { recipe in
+        RecipeViewModel.shared.getMyRecipeCellInfo(index: indexPath.row) { recipe in
             cell.setImage(imageUrl: recipe.recipeImgUrl)
             cell.setName(name: recipe.recipeName)
             cell.setCategory(category: recipe.recipeCategory)
-            cell.setPercent(percent: recipe.percentageOfFood)
-            cell.setLikeStatus(status: recipe.recipeLikeStatus)
             cell.configure(idx: recipe.recipeIdx)
+            cell.bookmarkButton.isHidden = true
+            cell.percentLabel.isHidden = true
         }
         
         return cell
@@ -112,7 +136,7 @@ extension PopularRecipeViewController: UICollectionViewDelegate, UICollectionVie
     
     /* CollectionView Footer: LoadingView 설정 */
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        if self.isLoading == true || RecipeViewModel.shared.popularRecipeIsLastPage {
+        if self.isLoading == true || RecipeViewModel.shared.myRecipeIsLastPage {
             return CGSize.zero
         } else {
             return CGSize(width: collectionView.frame.size.width, height: LOADING_VIEW_HEIGHT)
@@ -152,8 +176,8 @@ extension PopularRecipeViewController: UICollectionViewDelegate, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if !RecipeViewModel.shared.popularRecipeIsLastPage,
-           indexPath.row == RecipeViewModel.shared.popularRecipeList.count - 1,
+        if !RecipeViewModel.shared.myRecipeIsLastPage,
+           indexPath.row == RecipeViewModel.shared.myRecipeList.count - 1,
            self.isLoading == false {
             loadMoreData()
         }

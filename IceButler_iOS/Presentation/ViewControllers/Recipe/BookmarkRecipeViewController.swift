@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import JGProgressHUD
 
-class BookmarkRecipeViewController: UIViewController {
+class BookmarkRecipeViewController: BaseViewController {
 
     @IBOutlet weak var recipeCollectionView: UICollectionView!
+    private var LOADING_VIEW_HEIGHT: Double = 50.0
+    private var loadingView: LoadingReusableView?
+    private var currentLoadedPageNumber: Int = -1
+    private var isLoading: Bool = false
+    private var isFirstFetch: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +30,15 @@ class BookmarkRecipeViewController: UIViewController {
     }
     
     private func fetchData() {
-        if APIManger.shared.getIsMultiFridge() {
-            RecipeViewModel.shared.getBookmarkRecipeList(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx())
-        } else {
-            RecipeViewModel.shared.getBookmarkRecipeList(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx())
+        if currentLoadedPageNumber == -1 {
+            showLoading()
         }
+        if APIManger.shared.getIsMultiFridge() {
+            RecipeViewModel.shared.getBookmarkRecipeList(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx(), pageNumberToLoad: currentLoadedPageNumber + 1)
+        } else {
+            RecipeViewModel.shared.getBookmarkRecipeList(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx(), pageNumberToLoad: currentLoadedPageNumber + 1)
+        }
+        currentLoadedPageNumber += 1
     }
     
     private func setup() {
@@ -38,10 +48,13 @@ class BookmarkRecipeViewController: UIViewController {
 
         let recipeCollectionViewCell = UINib(nibName: "RecipeCollectionViewCell", bundle: nil)
         recipeCollectionView.register(recipeCollectionViewCell, forCellWithReuseIdentifier: "RecipeCollectionViewCell")
+        let loadingReusableCell = UINib(nibName: "LoadingReusableView", bundle: nil)
+        recipeCollectionView.register(loadingReusableCell, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "LoadingView")
     }
     
     private func setupLayout() {
         recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
+        loadingView?.activityIndicatorView.hidesWhenStopped = true
     }
     
     private func setupNavigationBar() {
@@ -84,13 +97,26 @@ class BookmarkRecipeViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
-    func reloadCV() {
-        recipeCollectionView.reloadData()
+    func updateCV(indexArray: [IndexPath]) {
+        if currentLoadedPageNumber == 0 {
+            recipeCollectionView.reloadData()
+        } else {
+            recipeCollectionView.insertItems(at: indexArray)
+        }
+        hideLoading()
     }
 }
 
-extension BookmarkRecipeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension BookmarkRecipeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if !isFirstFetch {
+            if RecipeViewModel.shared.bookmarkRecipeList.isEmpty {
+                collectionView.setEmptyView(message: "즐겨찾기한 레시피가 없습니다.")
+            }
+            else {
+                collectionView.restore()
+            }
+        }
         return RecipeViewModel.shared.bookmarkRecipeList.count
     }
     
@@ -110,5 +136,66 @@ extension BookmarkRecipeViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
+    
+    /* CollectionView Footer: LoadingView 설정 */
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if self.isLoading == true || RecipeViewModel.shared.bookmarkRecipeIsLastPage {
+            return CGSize.zero
+        } else {
+            return CGSize(width: collectionView.frame.size.width, height: LOADING_VIEW_HEIGHT)
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionFooter {
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "LoadingView", for: indexPath) as! LoadingReusableView
+            loadingView = footerView
+            loadingView?.backgroundColor = UIColor.clear
+            loadingView?.isHidden = false
+            if isFirstFetch {
+                loadingView?.isHidden = true
+                isFirstFetch = false
+            }
+
+            return footerView
+        }
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        if elementKind == UICollectionView.elementKindSectionFooter {
+            if self.isLoading {
+                self.loadingView?.activityIndicatorView.startAnimating()
+            } else {
+                self.loadingView?.activityIndicatorView.stopAnimating()
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        if elementKind == UICollectionView.elementKindSectionFooter {
+            self.loadingView?.activityIndicatorView.stopAnimating()
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if !RecipeViewModel.shared.bookmarkRecipeIsLastPage,
+           indexPath.row == RecipeViewModel.shared.bookmarkRecipeList.count - 1,
+           self.isLoading == false {
+            loadMoreData()
+        }
+    }
+
+    func loadMoreData() {
+        if !self.isLoading {
+            self.isLoading = true
+            DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) {
+                DispatchQueue.main.async {
+                    self.fetchData()
+                    self.isLoading = false
+                }
+            }
+        }
     }
 }

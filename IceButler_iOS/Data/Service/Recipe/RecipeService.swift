@@ -9,45 +9,58 @@ import Foundation
 import Alamofire
 
 class RecipeService {
-    
-    func getFridgeRecipes(fridgeType: FridgeType, fridgeIdx: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
-        let parameter: Parameters = ["category" : "냉장고"]
+    var PAGING_SIZE: Int = 12
+ 
+    func getFridgeRecipes(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
+        let parameter: Parameters = ["category" : "냉장고", "page" : pageNumberToLoad, "size" : PAGING_SIZE]
         switch fridgeType {
         case .homeUse:
+            print("\(fridgeIdx) - 가정용")
             APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response.data)
             }
         case .multiUse:
+            print("\(fridgeIdx) - 공용")
             APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response.data)
             }
         }
     }
     
-    func getPopularRecipes(fridgeType: FridgeType, fridgeIdx: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
-        let parameter: Parameters = ["category" : "인기"]
+    func getPopularRecipes(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
+        let parameter: Parameters = ["category" : "인기", "page" : pageNumberToLoad, "size" : PAGING_SIZE]
         switch fridgeType {
         case .homeUse:
+            print("\(fridgeIdx) - 가정용")
             APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response.data)
             }
         case .multiUse:
+            print("\(fridgeIdx) - 공용")
             APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response.data)
             }
         }
     }
     
-    func getBookmarkRecipes(fridgeType: FridgeType, fridgeIdx: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
+    func getBookmarkRecipes(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
+        let parameter: Parameters = ["page" : pageNumberToLoad, "size" : PAGING_SIZE]
         switch fridgeType {
         case .homeUse:
-            APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)/bookmark", responseDataType: RecipeResponseModel.self, parameter: nil) { response in
+            APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)/bookmark", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response.data)
             }
         case .multiUse:
-            APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/\(fridgeIdx)/bookmark", responseDataType: RecipeResponseModel.self, parameter: nil) { response in
+            APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/\(fridgeIdx)/bookmark", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response.data)
             }
+        }
+    }
+    
+    func getMyRecipes(pageNumberToLoad: Int, completion: @escaping (MyRecipeResponseModel?) -> Void) {
+        let parameter: Parameters = ["page" : pageNumberToLoad, "size" : PAGING_SIZE]
+        APIManger.shared.getRecipeData(urlEndpointString: "/recipes/myrecipe", responseDataType: MyRecipeResponseModel.self, parameter: parameter) { response in
+            completion(response.data)
         }
     }
     
