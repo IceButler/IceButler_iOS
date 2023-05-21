@@ -21,6 +21,7 @@ class FridgeViewController: TabmanViewController {
     @IBOutlet weak var noFridgeLabel: UILabel!
     @IBOutlet weak var fridgeAddButton: UIButton!
     
+    @IBOutlet var deleteSelectedView: UIView!
     
     private var viewControllerList: Array<UIViewController> = []
     
@@ -47,12 +48,22 @@ class FridgeViewController: TabmanViewController {
         FridgeViewModel.shared.setSavedFridgeIdx()
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
         
+        deleteSelectedView.isHidden = true
+        
     }
     
     private func setupObserver() {
         AuthViewModel.shared.isJoin { isJoin in
             if isJoin {
                 self.view.makeToast("회원가입이 완료되었습니다!", duration: 1.0, position: .center)
+            }
+        }
+        
+        FridgeViewModel.shared.isSelectedFood { isSelectedFood in
+            if isSelectedFood {
+                self.deleteSelectedView.isHidden = false
+            }else {
+                self.deleteSelectedView.isHidden = true
             }
         }
     }
@@ -198,6 +209,13 @@ class FridgeViewController: TabmanViewController {
 
     @IBAction func foodAdd(_ sender: Any) {
         moveToFoodAddSelectVC(animate: true)
+    }
+    
+    @IBAction func foodDelete(_ sender: Any) {
+    }
+    
+    
+    @IBAction func foodEat(_ sender: Any) {
     }
     
     private func moveToFoodAddSelectVC(animate: Bool) {

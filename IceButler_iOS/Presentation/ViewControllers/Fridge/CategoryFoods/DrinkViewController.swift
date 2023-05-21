@@ -57,6 +57,8 @@ extension DrinkViewController: UICollectionViewDelegate, UICollectionViewDataSou
             cell.setFoodImage(foodImage: foodImage)
         }
         
+        cell.setFoodIdx(foodIdx: FridgeViewModel.shared.foodIdx(foodListIdx:4, index: indexPath.row))
+        
         return cell
     }
     

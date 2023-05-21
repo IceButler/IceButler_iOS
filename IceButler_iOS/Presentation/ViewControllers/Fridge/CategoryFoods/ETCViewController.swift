@@ -58,6 +58,8 @@ extension ETCViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             cell.setFoodImage(foodImage: foodImage)
         }
         
+        cell.setFoodIdx(foodIdx: FridgeViewModel.shared.foodIdx(foodListIdx:10, index: indexPath.row))
+        
         return cell
     }
     

@@ -58,6 +58,8 @@ extension SideViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.setFoodImage(foodImage: foodImage)
         }
         
+        cell.setFoodIdx(foodIdx: FridgeViewModel.shared.foodIdx(foodListIdx:6, index: indexPath.row))
+        
         return cell
     }
     

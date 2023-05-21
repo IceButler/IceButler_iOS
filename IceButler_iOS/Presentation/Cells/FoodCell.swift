@@ -13,13 +13,18 @@ class FoodCell: UICollectionViewCell {
     @IBOutlet weak var foodImageView: UIImageView!
     @IBOutlet weak var foodNameLabel: UILabel!
     @IBOutlet weak var foodDdayLabel: UILabel!
+    @IBOutlet var selectedImageView: UIImageView!
+    
+    private var foodIdx: Int?
     
     var cancellabels: Set<AnyCancellable> = []
+    
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        setup()
         setupLayout()
     }
     
@@ -29,8 +34,50 @@ class FoodCell: UICollectionViewCell {
         cancellabels.removeAll()
     }
     
+    private func setup() {
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(longGestureAction))
+        longGesture.minimumPressDuration = 1
+        self.addGestureRecognizer(longGesture)
+        
+        FridgeViewModel.shared.isSelectedFood { isSelectedFood in
+            if isSelectedFood {
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGestureAction))
+                self.addGestureRecognizer(tapGesture)
+            }
+        }
+       
+        
+        selectedImageView.isHidden = true
+    }
+    
     private func setupLayout() {
         foodImageView.layer.cornerRadius = foodImageView.frame.width / 2
+    }
+    
+    
+    @objc private func longGestureAction() {
+        if FridgeViewModel.shared.getIsSelectedFood() == false {
+            if let foodIdx = self.foodIdx {
+                if FridgeViewModel.shared.tapDeleteFoodIdx(foodIdx: foodIdx) {
+                    selectedImageView.isHidden = false
+                }else {
+                    selectedImageView.isHidden = true
+                }
+                FridgeViewModel.shared.setIsSelectedFood(isSelected: true)
+            }
+        }
+    }
+    
+    @objc private func tapGestureAction() {
+        if FridgeViewModel.shared.getIsSelectedFood() {
+            if let foodIdx = self.foodIdx {
+                if FridgeViewModel.shared.tapDeleteFoodIdx(foodIdx: foodIdx) {
+                    selectedImageView.isHidden = false
+                }else {
+                    selectedImageView.isHidden = true
+                }
+            }
+        }
     }
     
     func setFoodName(foodName: String) {
@@ -52,6 +99,10 @@ class FoodCell: UICollectionViewCell {
         if let url = URL(string: foodImage) {
             foodImageView.kf.setImage(with: url)
         }
+    }
+    
+    func setFoodIdx(foodIdx: Int) {
+        self.foodIdx = foodIdx
     }
 
 }

@@ -58,6 +58,8 @@ extension SeasoningViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.setFoodImage(foodImage: foodImage)
         }
         
+        cell.setFoodIdx(foodIdx: FridgeViewModel.shared.foodIdx(foodListIdx:8, index: indexPath.row))
+        
         return cell
     }
     

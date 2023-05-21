@@ -24,6 +24,8 @@ class FridgeViewModel: ObservableObject {
     @Published var seasoningFoodList: [FridgeFood] = []
     @Published var processedFoodList: [FridgeFood] = []
     @Published var etcFoodList: [FridgeFood] = []
+    @Published var isSelectedFood: Bool = false
+    @Published var deleteFoodIdx: [Int] = []
     
     var searchMemberResults: [FridgeUser] = []
     
@@ -569,6 +571,44 @@ class FridgeViewModel: ObservableObject {
         }
         
     }
+    
+    func isSelectedFood(completion: @escaping (Bool) -> Void) {
+        $isSelectedFood.sink { isSelectedFood in
+            completion(isSelectedFood)
+        }.store(in: &cancelLabels)
+    }
+    
+    func setIsSelectedFood(isSelected: Bool) {
+        isSelectedFood = isSelected
+    }
+    
+    func getIsSelectedFood()-> Bool {
+        return isSelectedFood
+    }
+    
+    func tapDeleteFoodIdx(foodIdx: Int) -> Bool {
+        var index = -10
+        
+        for i in 0..<deleteFoodIdx.count {
+            if deleteFoodIdx[i] == foodIdx {
+                index = i
+            }
+        }
+        
+        if index == -10 {
+            deleteFoodIdx.append(foodIdx)
+            return true
+        }else {
+            deleteFoodIdx.remove(at: index)
+            if deleteFoodIdx.count == 0 {
+                isSelectedFood = false
+            }
+            return false
+        }
+    }
+    
+}
+extension FridgeViewModel {
     
     func setDefaultFridge() {
         APIManger.shared.getData(urlEndpointString: "/fridges",

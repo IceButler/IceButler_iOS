@@ -58,6 +58,8 @@ extension SnackViewController: UICollectionViewDelegate, UICollectionViewDataSou
             cell.setFoodImage(foodImage: foodImage)
         }
         
+        cell.setFoodIdx(foodIdx: FridgeViewModel.shared.foodIdx(foodListIdx:7, index: indexPath.row))
+        
         return cell
     }
     

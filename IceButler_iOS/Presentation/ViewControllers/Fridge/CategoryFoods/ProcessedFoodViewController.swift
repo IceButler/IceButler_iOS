@@ -58,6 +58,8 @@ extension ProcessedFoodViewController: UICollectionViewDelegate, UICollectionVie
             cell.setFoodImage(foodImage: foodImage)
         }
         
+        cell.setFoodIdx(foodIdx: FridgeViewModel.shared.foodIdx(foodListIdx:9, index: indexPath.row))
+        
         return cell
     }
     
