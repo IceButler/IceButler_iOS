@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import JGProgressHUD
 
-class MyRecipeViewController: UIViewController {
+class MyRecipeViewController: BaseViewController {
 
     @IBOutlet var recipeCollectionView: UICollectionView!
     private var LOADING_VIEW_HEIGHT: Double = 50.0
@@ -29,6 +30,9 @@ class MyRecipeViewController: UIViewController {
     }
     
     private func fetchData() {
+        if currentLoadedPageNumber == -1 {
+            showLoading()
+        }
         RecipeViewModel.shared.getMyRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
         currentLoadedPageNumber += 1
     }
@@ -46,6 +50,7 @@ class MyRecipeViewController: UIViewController {
     
     private func setupLayout() {
         recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
+        loadingView?.activityIndicatorView.hidesWhenStopped = true
     }
     
     private func setupNavigationBar() {
@@ -94,6 +99,7 @@ class MyRecipeViewController: UIViewController {
         } else {
             recipeCollectionView.insertItems(at: indexArray)
         }
+        hideLoading()
     }
 }
 

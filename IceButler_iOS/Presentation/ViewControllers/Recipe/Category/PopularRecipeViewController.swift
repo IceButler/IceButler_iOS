@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import JGProgressHUD
 
-class PopularRecipeViewController: UIViewController {
+class PopularRecipeViewController: BaseViewController {
 
     @IBOutlet weak var recipeCollectionView: UICollectionView!
     private var LOADING_VIEW_HEIGHT: Double = 50.0
@@ -38,6 +39,9 @@ class PopularRecipeViewController: UIViewController {
     }
     
     private func fetchData() {
+        if currentLoadedPageNumber == -1 {
+            showLoading()
+        }
         RecipeViewModel.shared.fridgeIdxOfPopularRecipe = APIManger.shared.getFridgeIdx()
         if APIManger.shared.getIsMultiFridge() {
             RecipeViewModel.shared.fridgeTypeOfPopularRecipe = .multiUse
@@ -62,6 +66,7 @@ class PopularRecipeViewController: UIViewController {
     
     private func setupLayout() {
         recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
+        loadingView?.activityIndicatorView.hidesWhenStopped = true
     }
     
     func updateCV(indexArray: [IndexPath]) {
@@ -70,6 +75,7 @@ class PopularRecipeViewController: UIViewController {
         } else {
             recipeCollectionView.insertItems(at: indexArray)
         }
+        hideLoading()
     }
 }
 

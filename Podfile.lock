@@ -6,6 +6,7 @@ PODS:
   - Charts/Core (4.1.0):
     - SwiftAlgorithms (~> 1.0)
   - IQKeyboardManager (6.5.11)
+  - JGProgressHUD (2.2)
   - KakaoSDKAuth (2.15.0):
     - KakaoSDKCommon (= 2.15.0)
   - KakaoSDKCommon (2.15.0):
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - BSImagePicker (~> 3.1)
   - Charts
   - IQKeyboardManager
+  - JGProgressHUD
   - KakaoSDKAuth
   - KakaoSDKUser
   - Kingfisher
@@ -43,6 +45,7 @@ SPEC REPOS:
     - BSImagePicker
     - Charts
     - IQKeyboardManager
+    - JGProgressHUD
     - KakaoSDKAuth
     - KakaoSDKCommon
     - KakaoSDKUser
@@ -58,6 +61,7 @@ SPEC CHECKSUMS:
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
   Charts: 354f86803d11d9c35de280587fef50d1af063978
   IQKeyboardManager: ef43ce1ba1e5aaf4adf222c0a46f39761f246879
+  JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   KakaoSDKAuth: 0fe5cf1756e8a9f66f8fc77826061aafa93034f3
   KakaoSDKCommon: 89d863b7f34398e6fb93a0acb28a204908551a39
   KakaoSDKUser: a997ca5c4c18ece2ab30646ff74841bc29d4399d
@@ -68,6 +72,6 @@ SPEC CHECKSUMS:
   Tabman: a5880789298f81d3f2cdd6510b54ae637cfd8e09
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 01e03f08e66316a932da35fa4ed2767f736d8636
+PODFILE CHECKSUM: 43b6eb9b0fd6c984500dbba31e53b5dbeebcc8e3
 
 COCOAPODS: 1.12.0

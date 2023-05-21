@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A77E0D94D27FC9143378E86 /* Pods_IceButler_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A214EF35946305B554FDDE73 /* Pods_IceButler_iOS.framework */; };
+		0F52FA5C565443E2A963EBE0 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25CC464FC99C2092B763CF3D /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
+		18DC72E91F2455895C7B43CF /* Pods_IceButler_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175DCF1CDCBAD1006137676F /* Pods_IceButler_iOSTests.framework */; };
 		73178AC629EC40A6001C3AA4 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73178AC529EC40A6001C3AA4 /* UserService.swift */; };
 		7339CD6D29E5B390002A6D78 /* AuthMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7339CD6C29E5B390002A6D78 /* AuthMain.storyboard */; };
 		7339CD6F29E5B39D002A6D78 /* AuthMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339CD6E29E5B39D002A6D78 /* AuthMainViewController.swift */; };
@@ -203,9 +204,8 @@
 		A2F9190929EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F9190729EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib */; };
 		A2F9190C29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9190A29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift */; };
 		A2F9190D29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F9190B29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib */; };
-		B8A8CDBD1CF21CE19CDBE02B /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04876642E41E4A87114B79F2 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */; };
-		D8A21758045158BC28C2523F /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		E0EE225783B2954C5FE71444 /* Pods_IceButler_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A723CF97AE242137E8FCE4E /* Pods_IceButler_iOSTests.framework */; };
+		BD38B42E43FA02E78169C5CD /* Pods_IceButler_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E441AACB2712D7D1AAEA203 /* Pods_IceButler_iOS.framework */; };
+		D8A21758045158BC28C2523F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,13 +226,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04876642E41E4A87114B79F2 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS_IceButler_iOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0D2ECB63B125F5D275143CD5 /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		1A723CF97AE242137E8FCE4E /* Pods_IceButler_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C3BBE5D799782B0BFEE7ED7 /* Pods-IceButler_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		3E52BC11FB87FA609AE701D3 /* Pods-IceButler_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOSTests.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOSTests/Pods-IceButler_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		58CFFCD5D575B09230A1AACA /* Pods-IceButler_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOSTests/Pods-IceButler_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6D70602744292D4CF2F9D9B5 /* Pods-IceButler_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		15C8F287525B8BD8F465E884 /* Pods-IceButler_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		175DCF1CDCBAD1006137676F /* Pods_IceButler_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		25CC464FC99C2092B763CF3D /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS_IceButler_iOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E441AACB2712D7D1AAEA203 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48C75EB4A0CACCAFF57F29C4 /* Pods-IceButler_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		540EE8A01C52BDAF7285FEFA /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		73178AC529EC40A6001C3AA4 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		7339CD6C29E5B390002A6D78 /* AuthMain.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthMain.storyboard; sourceTree = "<group>"; };
 		7339CD6E29E5B39D002A6D78 /* AuthMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMainViewController.swift; sourceTree = "<group>"; };
@@ -326,6 +325,7 @@
 		73F62A5129DFDADF003D779F /* FoodCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCell.swift; sourceTree = "<group>"; };
 		73F62A5229DFDADF003D779F /* FoodCategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCategoryCell.xib; sourceTree = "<group>"; };
 		73F62A5729E00F94003D779F /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		94F8590CC24262281B16352E /* Pods-IceButler_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOSTests.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOSTests/Pods-IceButler_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		95488DC129E7C2AC009AE17A /* PolicyWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PolicyWebViewController.swift; path = IceButler_iOS/Presentation/ViewControllers/MyPage/PolicyWebViewController.swift; sourceTree = SOURCE_ROOT; };
 		95488DC329EADF94009AE17A /* PolicyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyType.swift; sourceTree = "<group>"; };
 		9551650B2A13871D000213DE /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
@@ -356,7 +356,6 @@
 		95BC85A82A07F13100181183 /* RecipeIngredientTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeIngredientTableViewCell.xib; sourceTree = "<group>"; };
 		A20B91812A11513F00C3FCA4 /* KakaoMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapService.swift; sourceTree = "<group>"; };
 		A20B91832A11549E00C3FCA4 /* KakaoMapDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapDataModel.swift; sourceTree = "<group>"; };
-		A214EF35946305B554FDDE73 /* Pods_IceButler_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IceButler_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSearchTableViewCell.swift; sourceTree = "<group>"; };
 		A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -443,7 +442,8 @@
 		A2F9190729EC188200E17FEB /* SelectedFoodNameCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedFoodNameCollectionViewCell.xib; sourceTree = "<group>"; };
 		A2F9190A29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2F9190B29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
-		C8BBE799568A8C1A45DA4837 /* Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D19216C0635B8A2D12C93548 /* Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig"; path = "Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D4B76851839E13E9F9936DF8 /* Pods-IceButler_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceButler_iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-IceButler_iOSTests/Pods-IceButler_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -461,8 +461,8 @@
 				A22B98BA2A0F4C8100797C81 /* DaumMap.framework in Frameworks */,
 				A22B98742A0F4C4E00797C81 /* SystemConfiguration.framework in Frameworks */,
 				A22B98C82A0F4FD300797C81 /* Metal.framework in Frameworks */,
-				D8A21758045158BC28C2523F /* (null) in Frameworks */,
-				4A77E0D94D27FC9143378E86 /* Pods_IceButler_iOS.framework in Frameworks */,
+				D8A21758045158BC28C2523F /* BuildFile in Frameworks */,
+				BD38B42E43FA02E78169C5CD /* Pods_IceButler_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,7 +470,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0EE225783B2954C5FE71444 /* Pods_IceButler_iOSTests.framework in Frameworks */,
+				18DC72E91F2455895C7B43CF /* Pods_IceButler_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,7 +478,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8A8CDBD1CF21CE19CDBE02B /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */,
+				0F52FA5C565443E2A963EBE0 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,12 +488,12 @@
 		3F75B132BEEF22C92E9D3961 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2C3BBE5D799782B0BFEE7ED7 /* Pods-IceButler_iOS.debug.xcconfig */,
-				6D70602744292D4CF2F9D9B5 /* Pods-IceButler_iOS.release.xcconfig */,
-				0D2ECB63B125F5D275143CD5 /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */,
-				C8BBE799568A8C1A45DA4837 /* Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig */,
-				58CFFCD5D575B09230A1AACA /* Pods-IceButler_iOSTests.debug.xcconfig */,
-				3E52BC11FB87FA609AE701D3 /* Pods-IceButler_iOSTests.release.xcconfig */,
+				15C8F287525B8BD8F465E884 /* Pods-IceButler_iOS.debug.xcconfig */,
+				48C75EB4A0CACCAFF57F29C4 /* Pods-IceButler_iOS.release.xcconfig */,
+				540EE8A01C52BDAF7285FEFA /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */,
+				D19216C0635B8A2D12C93548 /* Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig */,
+				D4B76851839E13E9F9936DF8 /* Pods-IceButler_iOSTests.debug.xcconfig */,
+				94F8590CC24262281B16352E /* Pods-IceButler_iOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1174,9 +1174,9 @@
 				A22B98732A0F4C4E00797C81 /* SystemConfiguration.framework */,
 				A22B98712A0F4C4600797C81 /* QuartzCore.framework */,
 				A22B986D2A0F4C3500797C81 /* CoreLocation.framework */,
-				A214EF35946305B554FDDE73 /* Pods_IceButler_iOS.framework */,
-				04876642E41E4A87114B79F2 /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */,
-				1A723CF97AE242137E8FCE4E /* Pods_IceButler_iOSTests.framework */,
+				2E441AACB2712D7D1AAEA203 /* Pods_IceButler_iOS.framework */,
+				25CC464FC99C2092B763CF3D /* Pods_IceButler_iOS_IceButler_iOSUITests.framework */,
+				175DCF1CDCBAD1006137676F /* Pods_IceButler_iOSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1188,11 +1188,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73F0D26029D2E0000038BD0C /* Build configuration list for PBXNativeTarget "IceButler_iOS" */;
 			buildPhases = (
-				0D369F08AB45103317D9E72B /* [CP] Check Pods Manifest.lock */,
+				5E70364623F2813213CA3C97 /* [CP] Check Pods Manifest.lock */,
 				73F0D23229D2DFFE0038BD0C /* Sources */,
 				73F0D23329D2DFFE0038BD0C /* Frameworks */,
 				73F0D23429D2DFFE0038BD0C /* Resources */,
-				90DA8CF802D87C8E5186BFF2 /* [CP] Embed Pods Frameworks */,
+				F58F51AE3CCBA8EDA8A15492 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1207,7 +1207,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73F0D26329D2E0000038BD0C /* Build configuration list for PBXNativeTarget "IceButler_iOSTests" */;
 			buildPhases = (
-				C3BB8A58A37D47808BD70DAE /* [CP] Check Pods Manifest.lock */,
+				04A1881AF80D7FB37A5BD3A8 /* [CP] Check Pods Manifest.lock */,
 				73F0D24829D2E0000038BD0C /* Sources */,
 				73F0D24929D2E0000038BD0C /* Frameworks */,
 				73F0D24A29D2E0000038BD0C /* Resources */,
@@ -1226,11 +1226,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73F0D26629D2E0000038BD0C /* Build configuration list for PBXNativeTarget "IceButler_iOSUITests" */;
 			buildPhases = (
-				05170AC7891588D4FDB1FA9B /* [CP] Check Pods Manifest.lock */,
+				DE9DF7A33E595C9DEF318C16 /* [CP] Check Pods Manifest.lock */,
 				73F0D25229D2E0000038BD0C /* Sources */,
 				73F0D25329D2E0000038BD0C /* Frameworks */,
 				73F0D25429D2E0000038BD0C /* Resources */,
-				75A34FD5E2174A496E60C813 /* [CP] Embed Pods Frameworks */,
+				4D685AA9F6387DEC2FE02E17 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1376,7 +1376,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		05170AC7891588D4FDB1FA9B /* [CP] Check Pods Manifest.lock */ = {
+		04A1881AF80D7FB37A5BD3A8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1391,14 +1391,31 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-IceButler_iOS-IceButler_iOSUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-IceButler_iOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0D369F08AB45103317D9E72B /* [CP] Check Pods Manifest.lock */ = {
+		4D685AA9F6387DEC2FE02E17 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E70364623F2813213CA3C97 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1420,41 +1437,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		75A34FD5E2174A496E60C813 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		90DA8CF802D87C8E5186BFF2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C3BB8A58A37D47808BD70DAE /* [CP] Check Pods Manifest.lock */ = {
+		DE9DF7A33E595C9DEF318C16 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1469,11 +1452,28 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-IceButler_iOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-IceButler_iOS-IceButler_iOSUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F58F51AE3CCBA8EDA8A15492 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1766,7 +1766,7 @@
 		};
 		73F0D26129D2E0000038BD0C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C3BBE5D799782B0BFEE7ED7 /* Pods-IceButler_iOS.debug.xcconfig */;
+			baseConfigurationReference = 15C8F287525B8BD8F465E884 /* Pods-IceButler_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1811,7 +1811,7 @@
 		};
 		73F0D26229D2E0000038BD0C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D70602744292D4CF2F9D9B5 /* Pods-IceButler_iOS.release.xcconfig */;
+			baseConfigurationReference = 48C75EB4A0CACCAFF57F29C4 /* Pods-IceButler_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1855,7 +1855,7 @@
 		};
 		73F0D26429D2E0000038BD0C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 58CFFCD5D575B09230A1AACA /* Pods-IceButler_iOSTests.debug.xcconfig */;
+			baseConfigurationReference = D4B76851839E13E9F9936DF8 /* Pods-IceButler_iOSTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1876,7 +1876,7 @@
 		};
 		73F0D26529D2E0000038BD0C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E52BC11FB87FA609AE701D3 /* Pods-IceButler_iOSTests.release.xcconfig */;
+			baseConfigurationReference = 94F8590CC24262281B16352E /* Pods-IceButler_iOSTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1897,7 +1897,7 @@
 		};
 		73F0D26729D2E0000038BD0C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D2ECB63B125F5D275143CD5 /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */;
+			baseConfigurationReference = 540EE8A01C52BDAF7285FEFA /* Pods-IceButler_iOS-IceButler_iOSUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1916,7 +1916,7 @@
 		};
 		73F0D26829D2E0000038BD0C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C8BBE799568A8C1A45DA4837 /* Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig */;
+			baseConfigurationReference = D19216C0635B8A2D12C93548 /* Pods-IceButler_iOS-IceButler_iOSUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

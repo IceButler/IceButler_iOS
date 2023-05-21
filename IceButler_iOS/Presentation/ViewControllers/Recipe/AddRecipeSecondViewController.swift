@@ -7,8 +7,9 @@
 
 import UIKit
 import Photos
+import JGProgressHUD
 
-class AddRecipeSecondViewController: UIViewController, ReceiveFirstDataDelegate {
+class AddRecipeSecondViewController: BaseViewController, ReceiveFirstDataDelegate {
     private let TEXTVIEW_MAX_LENGTH = 200
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -149,6 +150,7 @@ class AddRecipeSecondViewController: UIViewController, ReceiveFirstDataDelegate 
     @IBAction func didTapCompletionButton(_ sender: Any) {
         if completionButton.backgroundColor == .availableBlue {
             Task { @MainActor in
+                self.showLoading()
                 try await RecipeViewModel.shared.postRecipe(recipeImg: representativeImage,
                                                         recipeName: menuName,
                                                         category: category,
@@ -156,6 +158,7 @@ class AddRecipeSecondViewController: UIViewController, ReceiveFirstDataDelegate 
                                                         timeRequired: timeRequired,
                                                         ingredientList: ingredientList,
                                                         cookingProcessList: addedCookingProcessList) { isSuccess in
+                    self.hideLoading()
                     if isSuccess {
                         let alert = UIAlertController(title: "레시피 등록 성공", message: "'마이페이지 > 마이레시피'에서 확인하실 수 있습니다.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in

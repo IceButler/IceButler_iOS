@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import JGProgressHUD
 
-class RecipeInFridgeViewController: UIViewController {
+class RecipeInFridgeViewController: BaseViewController {
 
     @IBOutlet weak var recipeCollectionView: UICollectionView!
     private var LOADING_VIEW_HEIGHT: Double = 50.0
@@ -38,6 +39,9 @@ class RecipeInFridgeViewController: UIViewController {
     }
     
     private func fetchData() {
+        if currentLoadedPageNumber == -1 {
+            showLoading()
+        }
         RecipeViewModel.shared.fridgeIdxOfFridgeRecipe = APIManger.shared.getFridgeIdx()
         if APIManger.shared.getIsMultiFridge() {
             RecipeViewModel.shared.fridgeTypeOfFridgeRecipe = .multiUse
@@ -62,6 +66,7 @@ class RecipeInFridgeViewController: UIViewController {
     
     private func setupLayout() {
         recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
+        loadingView?.activityIndicatorView.hidesWhenStopped = true
     }
     
     func updateCV(indexArray: [IndexPath]) {
@@ -70,6 +75,7 @@ class RecipeInFridgeViewController: UIViewController {
         } else {
             recipeCollectionView.insertItems(at: indexArray)
         }
+        hideLoading()
     }
 }
 
@@ -154,6 +160,26 @@ extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionVi
                     self.isLoading = false
                 }
             }
+        }
+    }
+}
+
+class BaseViewController: UIViewController {
+    lazy var hud: JGProgressHUD = {
+        let loader = JGProgressHUD()
+        loader.hudView.backgroundColor = .black.withAlphaComponent(0.2)
+        return loader
+    }()
+
+    func showLoading() {
+        DispatchQueue.main.async {
+            self.hud.show(in: self.view, animated: true)
+        }
+    }
+
+    func hideLoading() {
+        DispatchQueue.main.async {
+            self.hud.dismiss(animated: false)
         }
     }
 }

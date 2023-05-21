@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import JGProgressHUD
 
-class BookmarkRecipeViewController: UIViewController {
+class BookmarkRecipeViewController: BaseViewController {
 
     @IBOutlet weak var recipeCollectionView: UICollectionView!
     private var LOADING_VIEW_HEIGHT: Double = 50.0
@@ -29,6 +30,9 @@ class BookmarkRecipeViewController: UIViewController {
     }
     
     private func fetchData() {
+        if currentLoadedPageNumber == -1 {
+            showLoading()
+        }
         if APIManger.shared.getIsMultiFridge() {
             RecipeViewModel.shared.getBookmarkRecipeList(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx(), pageNumberToLoad: currentLoadedPageNumber + 1)
         } else {
@@ -50,6 +54,7 @@ class BookmarkRecipeViewController: UIViewController {
     
     private func setupLayout() {
         recipeCollectionView.collectionViewLayout = RecipeCollectionViewFlowLayout()
+        loadingView?.activityIndicatorView.hidesWhenStopped = true
     }
     
     private func setupNavigationBar() {
@@ -98,6 +103,7 @@ class BookmarkRecipeViewController: UIViewController {
         } else {
             recipeCollectionView.insertItems(at: indexArray)
         }
+        hideLoading()
     }
 }
 
