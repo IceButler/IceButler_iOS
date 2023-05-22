@@ -36,6 +36,7 @@ class MyPageViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setupNavigationBar()
         self.tabBarController?.tabBar.isHidden = false
         AuthViewModel.shared.isModify = false
     }
