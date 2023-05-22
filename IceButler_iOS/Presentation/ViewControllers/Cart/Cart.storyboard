@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -323,6 +323,14 @@
                                             <constraint firstAttribute="width" constant="50" id="cDq-Cb-Ty1"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxx-Dq-fvY">
+                                        <rect key="frame" x="215.33333333333334" y="15.000000000000004" width="68.333333333333343" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="길찾기"/>
+                                        <connections>
+                                            <action selector="moveToNavigation:" destination="k7t-tL-utM" eventType="touchUpInside" id="bMd-ir-fTl"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGrayColor"/>
                                 <constraints>
@@ -330,10 +338,12 @@
                                     <constraint firstItem="M66-43-e8K" firstAttribute="top" secondItem="W0I-UL-plq" secondAttribute="bottom" constant="8" id="3Yp-e3-335"/>
                                     <constraint firstItem="bIe-M9-LKd" firstAttribute="top" secondItem="PFC-qs-OLM" secondAttribute="top" constant="8" id="4He-JJ-xox"/>
                                     <constraint firstItem="W0I-UL-plq" firstAttribute="top" secondItem="PFC-qs-OLM" secondAttribute="top" constant="24" id="9sE-Qn-vUp"/>
+                                    <constraint firstItem="nPh-RC-FbV" firstAttribute="leading" secondItem="sxx-Dq-fvY" secondAttribute="trailing" constant="20" id="KaO-bj-Cxm"/>
                                     <constraint firstAttribute="bottom" secondItem="M66-43-e8K" secondAttribute="bottom" constant="14" id="SuQ-Gr-Hnu"/>
                                     <constraint firstAttribute="trailing" secondItem="nPh-RC-FbV" secondAttribute="trailing" constant="16" id="TU4-aC-5Cw"/>
                                     <constraint firstItem="W0I-UL-plq" firstAttribute="leading" secondItem="PFC-qs-OLM" secondAttribute="leading" constant="24" id="WcX-VZ-A07"/>
                                     <constraint firstItem="bIe-M9-LKd" firstAttribute="centerX" secondItem="PFC-qs-OLM" secondAttribute="centerX" id="ccU-Ib-ORd"/>
+                                    <constraint firstItem="sxx-Dq-fvY" firstAttribute="top" secondItem="PFC-qs-OLM" secondAttribute="top" constant="15" id="dBJ-tc-NQK"/>
                                     <constraint firstItem="nPh-RC-FbV" firstAttribute="centerY" secondItem="W0I-UL-plq" secondAttribute="centerY" id="l86-do-obp"/>
                                     <constraint firstItem="M66-43-e8K" firstAttribute="leading" secondItem="PFC-qs-OLM" secondAttribute="leading" constant="24" id="oQ0-jy-1NV"/>
                                     <constraint firstAttribute="height" constant="166" id="rm4-Kd-36H"/>

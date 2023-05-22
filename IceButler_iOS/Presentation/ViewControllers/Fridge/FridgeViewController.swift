@@ -280,6 +280,7 @@ extension FridgeViewController: PageboyViewControllerDataSource, TMBarDataSource
     }
     
     func viewController(for pageboyViewController: Pageboy.PageboyViewController, at index: Pageboy.PageboyViewController.PageIndex) -> UIViewController? {
+        FoodViewModel.shared.setIsSelectedFood(isSelected: false)
         return viewControllerList[index]
     }
     
