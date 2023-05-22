@@ -29,6 +29,13 @@ class SelectFrideViewController: UIViewController {
         setupTableView()
         setupLayout()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
+        setupTableView()
+        setupLayout()
+    }
     
     private func fetchData() {
         DispatchQueue.main.async {
@@ -44,6 +51,7 @@ class SelectFrideViewController: UIViewController {
                 
                 switch response.statusCode {
                 case 200:
+                    self?.myFridgeData.removeAll()
                     self?.configureData(data: response.data)
                     self?.tableView.reloadData()
                     self?.containerViewHeight.constant = CGFloat(55 * (self?.myFridgeData.count ?? 0) + 120)

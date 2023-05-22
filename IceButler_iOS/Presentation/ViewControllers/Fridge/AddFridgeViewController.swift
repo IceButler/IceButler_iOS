@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class AddFridgeViewController: UIViewController {
 
@@ -65,35 +66,48 @@ class AddFridgeViewController: UIViewController {
     }
     
     @IBAction func didTapMemberSearchButton(_ sender: UIButton) {
-        if searchTextField.text?.count ?? 0 > 0 {
-            FridgeViewModel.shared.searchMember(nickname: searchTextField.text!, completion: {
-                self.searchMember = FridgeViewModel.shared.searchMemberResults
-                self.tableViewHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
-                self.memberCollectionView.isHidden = true
-                self.searchResultContainerView.isHidden = false
-                self.memberSearchTableView.reloadData()
-            })
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            if self.searchTextField.text?.count ?? 0 > 0 {
+                FridgeViewModel.shared.searchMember(nickname: self.searchTextField.text!, completion: {
+                    self.searchMember = FridgeViewModel.shared.searchMemberResults
+                    self.tableViewHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
+                    self.memberCollectionView.isHidden = true
+                    self.searchResultContainerView.isHidden = false
+                    self.memberSearchTableView.reloadData()
+                })
+            }
+            else { self.showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
+            
+            hud.dismiss(animated: true)
         }
-        else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        var memberIdx:[Int] = []
-        selectedMember.forEach { member in memberIdx.append(member.userIdx) }
-        
-        FridgeViewModel.shared.requestAddFridge(isMulti: isMultifridge,
-                                                name: fridgeNameTextField.text!,
-                                                comment: fridgeDetailTextView.text!,
-                                                members: memberIdx,
-                                                completion: { [weak self] result in
-            if result {
-//                self?.showAlert(title: nil, message: "냉장고를 성공적으로 추가하였습니다!", confirmTitle: "확인")
-                self?.dismiss(animated: true)
-            }
-            else {
-                self?.showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인")
-            }
-        })
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            var memberIdx:[Int] = []
+            self.selectedMember.forEach { member in memberIdx.append(member.userIdx) }
+            
+            FridgeViewModel.shared.requestAddFridge(isMulti: self.isMultifridge,
+                                                    name: self.fridgeNameTextField.text!,
+                                                    comment: self.fridgeDetailTextView.text!,
+                                                    members: memberIdx,
+                                                    completion: { [weak self] result in
+                if result { self?.dismiss(animated: true) }
+                else { self?.showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인") }
+            })
+            
+            hud.dismiss(animated: true)
+        }
     }
     
     // MARK: Life Cycle Methods
