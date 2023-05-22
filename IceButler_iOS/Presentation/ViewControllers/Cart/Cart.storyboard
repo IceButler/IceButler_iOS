@@ -564,6 +564,7 @@
                         <outlet property="collectionView" destination="3nC-cd-ZNc" id="1Qb-D1-iBa"/>
                         <outlet property="completeButton" destination="0hY-5k-2P7" id="M4R-WF-zjF"/>
                         <outlet property="resultTableViewHeight" destination="nca-Yk-pLY" id="lhy-q1-9dJ"/>
+                        <outlet property="searchButton" destination="cfZ-De-FsC" id="FjV-fO-2py"/>
                         <outlet property="searchContainerView" destination="N0S-YS-Ug1" id="4vn-kS-v6J"/>
                         <outlet property="searchResultContainerView" destination="tbw-0B-IXD" id="XPO-KU-bgx"/>
                         <outlet property="searchResultTableView" destination="6r9-Zn-TSK" id="ZMG-vj-1tw"/>
