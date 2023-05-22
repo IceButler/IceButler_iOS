@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast_Swift
 
 class FoodDetailViewController: UIViewController {
 
@@ -118,6 +119,34 @@ class FoodDetailViewController: UIViewController {
     }
     
     @objc private func deleteFood() {
+        let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(withIdentifier: "AlertViewController") as! AlertViewController
+        
+        let foodIdx = FoodViewModel.shared.getFood().fridgeFoodIdx
+        
+        alertVC.configure(title: "식품 삭제", content: "해당 식품을 삭제하시겠습니까?", leftButtonTitle: "폐기", righttButtonTitle: "섭취") {
+            FoodViewModel.shared.deleteFoods { result in
+                if result {
+                    self.view.makeToast("해당 식품이 정상적으로 삭제되었습니다.", duration: 1.0, position: .center)
+                    self.navigationController?.popViewController(animated: true)
+                }else {
+                    self.view.makeToast("식품 삭제에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
+                }
+            }
+        } leftCompletion: {
+            FoodViewModel.shared.eatFoods(foodIdx: foodIdx) { result in
+                if result {
+                    self.view.makeToast("해당 식품이 정상적으로 섭취 처리되었습니다.", duration: 1.0, position: .center)
+                    self.navigationController?.popViewController(animated: true)
+                }else {
+                    self.view.makeToast("식품 섭취 처리에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
+                }
+            }
+        }
+        
+        alertVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(alertVC, animated: true)
+
     }
     
     private func setupObserver() {

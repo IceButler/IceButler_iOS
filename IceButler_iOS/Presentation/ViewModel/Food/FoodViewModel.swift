@@ -41,6 +41,10 @@ class FoodViewModel: ObservableObject {
         }.store(in: &cancelLabels)
     }
     
+    func getFood() -> FoodDetailResponseModel {
+        return food!
+    }
+    
     func getFood(completion: @escaping (FoodDetailResponseModel) -> Void) {
         completion(food!)
     }
@@ -335,6 +339,7 @@ extension FoodViewModel {
             completion(result)
             if result {
                 self.deleteFoodIdx.removeAll()
+                self.isSelectedFood = false
                 FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
             }
         }
@@ -357,6 +362,7 @@ extension FoodViewModel {
             completion(result)
             if result {
                 self.deleteFoodIdx.removeAll()
+                self.isSelectedFood = false
                 FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
             }
         }

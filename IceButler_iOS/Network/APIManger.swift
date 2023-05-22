@@ -317,6 +317,33 @@ extension APIManger {
             .resume()
     }
     
+    func deleteDataKR<T: Codable, U: Decodable>(urlEndpointString: String,
+                                            responseDataType: U.Type,
+                                            requestDataType: T.Type,
+                                            parameter: T?,
+                                            completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+        
+        let urlStr = BASE_URL + urlEndpointString
+        let encodedStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let url = URL(string: encodedStr)!
+        
+        AF
+            .request(url, method: .delete, parameters: parameter, encoder: .json, headers: self.headers)
+            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
+    
+    
+    
     func deleteData<U: Decodable>(urlEndpointString: String,
                                             responseDataType: U.Type,
                                             completionHandler: @escaping (GeneralResponseModel<U>)->Void) {

@@ -30,6 +30,9 @@ class AlertViewController: UIViewController {
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
     
+    @IBOutlet var cancelButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayouts()
@@ -64,6 +67,8 @@ class AlertViewController: UIViewController {
         self.rightButton.backgroundColor = UIColor.signatureBlue
         self.rightButton.tintColor = .white
         self.rightButton.layer.cornerRadius = 16
+        
+        cancelButton.layer.cornerRadius = cancelButton.frame.width / 2
     }
     
     public func configure(title: String, content: String, leftButtonTitle: String, righttButtonTitle: String, rightCompletion: @escaping () -> Void, leftCompletion: @escaping () -> Void) {
@@ -96,5 +101,10 @@ class AlertViewController: UIViewController {
         self.dismiss(animated: true)
         rightCompletion!()
     }
-
+    
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
 }

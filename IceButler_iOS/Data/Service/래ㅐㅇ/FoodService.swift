@@ -83,13 +83,12 @@ class FoodService {
         APIManger.shared.getListData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/search", responseDataType: FridgeSearchFoodResponse.self, parameter: parameter) { response in
             completion(response.data)
         }
-        
     }
     
     func deleteFoods(deleteFoods: [Int] ,completion: @escaping (Bool) -> Void) {
         let parameters = FoodDeleteModel(deleteFoods: deleteFoods)
         
-        APIManger.shared.deleteData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/foods?type=폐기", responseDataType: FoodDeleteModel.self, requestDataType: FoodDeleteModel.self, parameter: parameters) { result in
+        APIManger.shared.deleteDataKR(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/foods?type=폐기", responseDataType: FoodDeleteModel.self, requestDataType: FoodDeleteModel.self, parameter: parameters) { result in
             if result.status == "OK" {
                 completion(true)
             }else {
@@ -101,7 +100,7 @@ class FoodService {
     func eatFoods(deleteFoods: [Int] ,completion: @escaping (Bool) -> Void) {
         let parameters = FoodDeleteModel(deleteFoods: deleteFoods)
         
-        APIManger.shared.deleteData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/foods?type=섭취", responseDataType: FoodDeleteModel.self, requestDataType: FoodDeleteModel.self, parameter: parameters) { result in
+        APIManger.shared.deleteDataKR(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/foods?type=섭취", responseDataType: FoodDeleteModel.self, requestDataType: FoodDeleteModel.self, parameter: parameters) { result in
             if result.status == "OK" {
                 completion(true)
             }else {

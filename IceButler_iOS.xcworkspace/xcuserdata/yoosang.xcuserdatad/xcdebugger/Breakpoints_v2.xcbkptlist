@@ -3,4 +3,69 @@
    uuid = "3783933F-A2D7-44D3-8F26-64B06E224B22"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7EF20B27-13A5-4E10-9D3D-E8C4A28D7044"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IceButler_iOS/Presentation/ViewModel/Food/FoodViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
+            landmarkName = "deleteFoods(foodIdx:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7EF20B27-13A5-4E10-9D3D-E8C4A28D7044 - 34d7e077304877a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IceButler_iOS.FoodViewModel.deleteFoods(foodIdx: Swift.Int, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "IceButler_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yoosang/Desktop/IceButler_iOS/IceButler_iOS/Presentation/ViewModel/Food/FoodViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "360"
+                  endingLineNumber = "360"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "7EF20B27-13A5-4E10-9D3D-E8C4A28D7044 - 59a6947fa0e79627"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in IceButler_iOS.FoodViewModel.deleteFoods(foodIdx: Swift.Int, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "IceButler_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yoosang/Desktop/IceButler_iOS/IceButler_iOS/Presentation/ViewModel/Food/FoodViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  uuid = "7EF20B27-13A5-4E10-9D3D-E8C4A28D7044 - 34d7e077304877a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IceButler_iOS.FoodViewModel.deleteFoods(foodIdx: Swift.Int, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "IceButler_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yoosang/Desktop/IceButler_iOS/IceButler_iOS/Presentation/ViewModel/Food/FoodViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "360"
+                  endingLineNumber = "360"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
