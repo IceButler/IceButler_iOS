@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 
 class CartViewController: UIViewController {
@@ -27,15 +28,36 @@ class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
-        setup()
         setupNavigationBar()
-        setupLayout()
-        setupTableView()
+        
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            self.configure()
+            self.setup()
+            self.setupLayout()
+            self.setupTableView()
+            
+            hud.dismiss(animated: true)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        configure()
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            self.configure()
+            
+            hud.dismiss(animated: true)
+        }
+
         self.alertView.isHidden = true
         self.addFoodButton.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
