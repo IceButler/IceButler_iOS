@@ -53,6 +53,7 @@ class CartViewController: UIViewController {
             hud.style = .light
             hud.show(in: self.view)
             
+            self.setupNavigationBar()
             self.configure()
             
             hud.dismiss(animated: true)
@@ -200,7 +201,7 @@ class CartViewController: UIViewController {
           
         } else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-            statusBar?.backgroundColor = UIColor.red
+            statusBar?.backgroundColor = UIColor.white
         }
         
         /// set up title
