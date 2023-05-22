@@ -83,7 +83,6 @@ class FoodService {
         APIManger.shared.getListData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/search", responseDataType: FridgeSearchFoodResponse.self, parameter: parameter) { response in
             completion(response.data)
         }
-        
     }
     
     func deleteFoods(deleteFoods: [Int] ,completion: @escaping (Bool) -> Void) {
