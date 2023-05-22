@@ -16,3 +16,7 @@ struct FoodAddRequestModel: Codable {
     var memo, imgKey: String?
     var ownerIdx: Int
 }
+
+struct FoodDeleteModel: Codable {
+    let deleteFoods: [Int]
+}

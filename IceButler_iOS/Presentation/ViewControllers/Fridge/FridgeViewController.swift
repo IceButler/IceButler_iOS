@@ -59,7 +59,7 @@ class FridgeViewController: TabmanViewController {
             }
         }
         
-        FridgeViewModel.shared.isSelectedFood { isSelectedFood in
+        FoodViewModel.shared.isSelectedFood { isSelectedFood in
             if isSelectedFood {
                 self.deleteSelectedView.isHidden = false
             }else {
@@ -212,10 +212,44 @@ class FridgeViewController: TabmanViewController {
     }
     
     @IBAction func foodDelete(_ sender: Any) {
+        let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(identifier: "AlertViewController") as! AlertViewController
+        
+        alertVC.configure(title: "식품 삭제", content: "해당 식품을 삭제하시겠습니까?", leftButtonTitle: "취소", righttButtonTitle: "삭제") {
+            FoodViewModel.shared.deleteFoods { result in
+                if result {
+                    self.view.makeToast("해당 식품이 정상적으로 삭제되었습니다.", duration: 1.0, position: .center)
+                }else {
+                    self.view.makeToast("식품 삭제에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
+                }
+            }
+        } leftCompletion: {
+        }
+        
+        alertVC.modalPresentationStyle = .fullScreen
+
+        self.present(alertVC, animated: true)
     }
     
     
     @IBAction func foodEat(_ sender: Any) {
+        
+        let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(identifier: "AlertViewController") as! AlertViewController
+        
+        alertVC.configure(title: "식품 섭취", content: "해당 식품을 섭취하시겠습니까?", leftButtonTitle: "취소", righttButtonTitle: "섭취") {
+            FoodViewModel.shared.eatFoods { result in
+                if result {
+                    self.view.makeToast("해당 식품이 정상적으로 섭취 처리되었습니다.", duration: 1.0, position: .center)
+                }else {
+                    self.view.makeToast("식품 섭취 처리에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
+                }
+            }
+        } leftCompletion: {
+        }
+        
+        alertVC.modalPresentationStyle = .fullScreen
+
+        self.present(alertVC, animated: true)
+
     }
     
     private func moveToFoodAddSelectVC(animate: Bool) {
@@ -228,6 +262,12 @@ class FridgeViewController: TabmanViewController {
         foodAddVC.modalPresentationStyle = .overFullScreen
         
         self.present(foodAddVC, animated: animate)
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
     }
 }
 

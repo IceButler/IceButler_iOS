@@ -39,10 +39,13 @@ class FoodCell: UICollectionViewCell {
         longGesture.minimumPressDuration = 1
         self.addGestureRecognizer(longGesture)
         
-        FridgeViewModel.shared.isSelectedFood { isSelectedFood in
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGestureAction))
+        
+        FoodViewModel.shared.isSelectedFood { isSelectedFood in
             if isSelectedFood {
-                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGestureAction))
                 self.addGestureRecognizer(tapGesture)
+            }else {
+                self.removeGestureRecognizer(tapGesture)
             }
         }
        
@@ -56,22 +59,22 @@ class FoodCell: UICollectionViewCell {
     
     
     @objc private func longGestureAction() {
-        if FridgeViewModel.shared.getIsSelectedFood() == false {
+        if FoodViewModel.shared.getIsSelectedFood() == false {
             if let foodIdx = self.foodIdx {
-                if FridgeViewModel.shared.tapDeleteFoodIdx(foodIdx: foodIdx) {
+                if FoodViewModel.shared.tapDeleteFoodIdx(foodIdx: foodIdx) {
                     selectedImageView.isHidden = false
                 }else {
                     selectedImageView.isHidden = true
                 }
-                FridgeViewModel.shared.setIsSelectedFood(isSelected: true)
+                FoodViewModel.shared.setIsSelectedFood(isSelected: true)
             }
         }
     }
     
     @objc private func tapGestureAction() {
-        if FridgeViewModel.shared.getIsSelectedFood() {
+        if FoodViewModel.shared.getIsSelectedFood() {
             if let foodIdx = self.foodIdx {
-                if FridgeViewModel.shared.tapDeleteFoodIdx(foodIdx: foodIdx) {
+                if FoodViewModel.shared.tapDeleteFoodIdx(foodIdx: foodIdx) {
                     selectedImageView.isHidden = false
                 }else {
                     selectedImageView.isHidden = true
