@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 protocol SelectFridgeDelegate {
     func updateMainFridge(title: String)
@@ -30,20 +31,30 @@ class SelectFrideViewController: UIViewController {
     }
     
     private func fetchData() {
-        APIManger.shared.getData(urlEndpointString: "/fridges",
-                                 responseDataType: MyFridgeResponseModel.self,
-                                 requestDataType: MyFridgeResponseModel.self,
-                                 parameter: nil) { [weak self] response in
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
             
-            switch response.statusCode {
-            case 200:
-                self?.configureData(data: response.data)
-                self?.tableView.reloadData()
-                self?.containerViewHeight.constant = CGFloat(55 * (self?.myFridgeData.count ?? 0) + 120)
-            default:
-                self?.showAlert(message: "마이냉장고 조회에 실패하였습니다")
+            APIManger.shared.getData(urlEndpointString: "/fridges",
+                                     responseDataType: MyFridgeResponseModel.self,
+                                     requestDataType: MyFridgeResponseModel.self,
+                                     parameter: nil) { [weak self] response in
+                
+                switch response.statusCode {
+                case 200:
+                    self?.configureData(data: response.data)
+                    self?.tableView.reloadData()
+                    self?.containerViewHeight.constant = CGFloat(55 * (self?.myFridgeData.count ?? 0) + 120)
+                default:
+                    self?.showAlert(message: "마이냉장고 조회에 실패하였습니다")
+                }
             }
+            
+            hud.dismiss(animated: true)
         }
+        
     }
     
     private func setupLayout() {

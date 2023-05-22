@@ -190,7 +190,7 @@ class FridgeViewController: TabmanViewController {
     }
     
     @objc private func moveToAlarmVC() {
-        
+        // TODO: 알림 화면으로 전환
     }
     
 

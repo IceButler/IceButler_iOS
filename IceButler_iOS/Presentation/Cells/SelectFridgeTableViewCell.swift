@@ -34,10 +34,10 @@ class SelectFridgeTableViewCell: UITableViewCell {
     public func setIsSavedFridge(isSaved: Bool) {
         if isSaved {
             fridgeNameLabel.textColor = UIColor(red: 41/255, green: 103/255, blue: 185/255, alpha: 1)
-            fridgeImg.image = UIImage(named: "noFridge")
+            fridgeImg.image = UIImage(named: "selectedFridge")
         } else {
             fridgeNameLabel.textColor = .black
-            fridgeImg.image = UIImage(named: "shareFridgeIcon")
+            fridgeImg.image = UIImage(named: "notSelectedFridge")
         }
         selectImg.isHidden = !isSaved
         
