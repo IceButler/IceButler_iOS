@@ -36,6 +36,8 @@ class FridgeViewController: TabmanViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
         self.noFridgeImageView.isHidden = true
@@ -190,7 +192,7 @@ class FridgeViewController: TabmanViewController {
     }
     
     @objc private func moveToAlarmVC() {
-        
+        // TODO: 알림 화면으로 전환
     }
     
 

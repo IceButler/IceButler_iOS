@@ -677,7 +677,11 @@ class FoodAddViewController: UIViewController {
                 
                 print("요청할 식품 정보들 --> \(param)")
                 
-                APIManger.shared.postData(urlEndpointString: "/fridges/\(fridgeIdx)/food",
+                var url = ""
+                if APIManger.shared.getIsMultiFridge() { url = "/multiFridges/\(fridgeIdx)/food" }
+                else { url = "/fridges/\(fridgeIdx)/food" }
+                
+                APIManger.shared.postData(urlEndpointString: url,
                                           responseDataType: FoodAddRequestModel.self,
                                           requestDataType: FoodAddListModel.self,
                                           parameter: param,
