@@ -8,7 +8,17 @@
 import Foundation
 
 struct RecipeResponseModel: Codable {
-    let recipeMainResList: [Recipe]
+    let content: [Recipe]
+    let pageable: Pageable
+    let totalPages: Int
+    let totalElements: Int
+    let last: Bool
+    let size: Int
+    let number: Int
+    let sort: Sort
+    let numberOfElements: Int
+    let first: Bool
+    let empty: Bool
 }
 
 struct Recipe: Codable {
@@ -18,6 +28,42 @@ struct Recipe: Codable {
     let recipeCategory: String
     let percentageOfFood: Int
     let recipeLikeStatus: Bool
+}
+
+struct MyRecipeResponseModel: Codable {
+    let content: [MyRecipe]
+    let pageable: Pageable
+    let totalPages: Int
+    let totalElements: Int
+    let last: Bool
+    let size: Int
+    let number: Int
+    let sort: Sort
+    let numberOfElements: Int
+    let first: Bool
+    let empty: Bool
+}
+
+struct MyRecipe: Codable {
+    let recipeIdx: Int
+    let recipeImgUrl: String
+    let recipeName: String
+    let recipeCategory: String
+}
+
+struct Pageable: Codable {
+    let sort: Sort
+    let offset: Int
+    let pageNumber: Int
+    let pageSize: Int
+    let paged: Bool
+    let unpaged: Bool
+}
+
+struct Sort: Codable {
+    let empty: Bool
+    let sorted: Bool
+    let unsorted: Bool
 }
 
 struct RecipeAddRequestModel: Codable {

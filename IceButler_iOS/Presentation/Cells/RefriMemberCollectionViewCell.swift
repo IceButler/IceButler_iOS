@@ -35,6 +35,8 @@ class RefriMemberCollectionViewCell: UICollectionViewCell {
         if let imgUrlStr = data.profileImgUrl {
             let url = URL(string: imgUrlStr)
             imgView.kf.setImage(with: url)
+        } else {
+            imgView.image = UIImage(systemName: "person.fill")
         }
         if data.role == "OWNER" { setupMainMemberProfile()  }
         else { crownImg.isHidden = true }

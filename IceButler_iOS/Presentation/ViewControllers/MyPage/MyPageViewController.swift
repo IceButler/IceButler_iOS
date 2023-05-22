@@ -142,7 +142,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                 let myRefriVC = UIStoryboard(name: "MyRefrigerator", bundle: nil).instantiateViewController(identifier: "MyRefrigeratorViewController") as! MyRefrigeratorViewController
                 self.navigationController?.pushViewController(myRefriVC, animated: true)
             case 1:
-                print("마이 레시피 화면으로 전환")
+                let myRecipeVC = UIStoryboard(name: "Recipe", bundle: nil).instantiateViewController(identifier: "MyRecipeViewController") as! MyRecipeViewController
+                self.navigationController?.pushViewController(myRecipeVC, animated: true)
             default: return
             }
         case 1:

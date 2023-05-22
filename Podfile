@@ -16,6 +16,7 @@ target 'IceButler_iOS' do
   pod 'KakaoSDKAuth'
   pod 'SnapKit'
   pod 'Charts'
+  pod 'JGProgressHUD'
 
   target 'IceButler_iOSTests' do
     inherit! :search_paths
