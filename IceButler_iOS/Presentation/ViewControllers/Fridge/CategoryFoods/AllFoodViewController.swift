@@ -85,6 +85,8 @@ extension AllFoodViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.setFoodImage(foodImage: foodImage)
         }
         
+        cell.setFoodIdx(foodIdx: FridgeViewModel.shared.foodIdx(foodListIdx:0, index: indexPath.row))
+        
         return cell
     }
     

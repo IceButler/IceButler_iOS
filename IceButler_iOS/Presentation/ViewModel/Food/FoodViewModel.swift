@@ -25,6 +25,8 @@ class FoodViewModel: ObservableObject {
     @Published var isEditFood: Bool = false
     @Published var fridgeSearchFoodList: [FridgeSearchFoodResponse] = []
     @Published var selectedFridgeSearchFood: FridgeSearchFoodResponse?
+    @Published var isSelectedFood: Bool = false
+    @Published var deleteFoodIdx: [Int] = []
     
     var cancelLabels: Set<AnyCancellable> = []
     private var profileImgKey: String?
@@ -273,6 +275,42 @@ class FoodViewModel: ObservableObject {
         self.selectedFridgeSearchFood = nil
         self.fridgeSearchFoodList = []
     }
+    
+    
+    func isSelectedFood(completion: @escaping (Bool) -> Void) {
+        $isSelectedFood.sink { isSelectedFood in
+            completion(isSelectedFood)
+        }.store(in: &cancelLabels)
+    }
+    
+    func setIsSelectedFood(isSelected: Bool) {
+        isSelectedFood = isSelected
+    }
+    
+    func getIsSelectedFood()-> Bool {
+        return isSelectedFood
+    }
+    
+    func tapDeleteFoodIdx(foodIdx: Int) -> Bool {
+        var index = -10
+        
+        for i in 0..<deleteFoodIdx.count {
+            if deleteFoodIdx[i] == foodIdx {
+                index = i
+            }
+        }
+        
+        if index == -10 {
+            deleteFoodIdx.append(foodIdx)
+            return true
+        }else {
+            deleteFoodIdx.remove(at: index)
+            if deleteFoodIdx.count == 0 {
+                isSelectedFood = false
+            }
+            return false
+        }
+    }
 }
 
 
@@ -280,6 +318,51 @@ class FoodViewModel: ObservableObject {
 
 
 extension FoodViewModel {
+    func eatFoods(completion: @escaping (Bool) -> Void) {
+        foodService.eatFoods(deleteFoods: deleteFoodIdx) { result in
+            completion(result)
+            if result {
+                self.deleteFoodIdx.removeAll()
+                self.isSelectedFood = false
+                FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+            }
+        }
+    }
+    
+    func eatFoods(foodIdx: Int, completion: @escaping (Bool) -> Void) {
+        deleteFoodIdx.append(foodIdx)
+        foodService.eatFoods(deleteFoods: deleteFoodIdx) { result in
+            completion(result)
+            if result {
+                self.deleteFoodIdx.removeAll()
+                FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+            }
+        }
+    }
+    
+    func deleteFoods(completion: @escaping (Bool) -> Void) {
+        foodService.deleteFoods(deleteFoods: deleteFoodIdx) { result in
+            completion(result)
+            if result {
+                self.deleteFoodIdx.removeAll()
+                self.isSelectedFood = false
+                FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+            }
+        }
+    }
+    
+    func deleteFoods(foodIdx: Int, completion: @escaping (Bool) -> Void) {
+        deleteFoodIdx.append(foodIdx)
+        foodService.deleteFoods(deleteFoods: deleteFoodIdx) { result in
+            completion(result)
+            if result {
+                self.deleteFoodIdx.removeAll()
+                FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+            }
+        }
+    }
+    
+    
     func getFoodDetail(foodIdx: Int) {
         foodService.getAllFood(foodIdx: foodIdx) { foodDetail in
             self.food = foodDetail

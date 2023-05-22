@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -65,25 +65,78 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="fridgeAdd" title="냉장고 추가"/>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9t3-ki-Xbx">
+                                <rect key="frame" x="0.0" y="716" width="393" height="102"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eli-Zl-z9v">
+                                        <rect key="frame" x="196" y="14.666666666666629" width="1" height="65.333333333333329"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="1" id="ec4-3b-nTI"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DtC-4i-lyc">
+                                        <rect key="frame" x="70" y="24" width="56" height="50"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="white_trash_icon" imagePlacement="top" title="폐기">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="13"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="foodDelete:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Oub-PW-rQd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lOb-ZK-Gp6">
+                                        <rect key="frame" x="267" y="22" width="56" height="52"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="eat" imagePlacement="top" title="섭취">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="13"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="foodEat:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="GRG-KC-X3Y"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.26666666666666666" green="0.49803921568627452" blue="0.79607843137254897" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Eli-Zl-z9v" firstAttribute="leading" secondItem="DtC-4i-lyc" secondAttribute="trailing" constant="70" id="0kz-HE-jmt"/>
+                                    <constraint firstAttribute="bottom" secondItem="Eli-Zl-z9v" secondAttribute="bottom" constant="22" id="273-T0-uHI"/>
+                                    <constraint firstItem="Eli-Zl-z9v" firstAttribute="top" secondItem="9t3-ki-Xbx" secondAttribute="top" constant="14.5" id="H6b-HG-Hj6"/>
+                                    <constraint firstItem="DtC-4i-lyc" firstAttribute="leading" secondItem="9t3-ki-Xbx" secondAttribute="leading" constant="70" id="Hjm-19-uqv"/>
+                                    <constraint firstAttribute="trailing" secondItem="lOb-ZK-Gp6" secondAttribute="trailing" constant="70" id="Rs2-JP-mut"/>
+                                    <constraint firstItem="DtC-4i-lyc" firstAttribute="top" secondItem="9t3-ki-Xbx" secondAttribute="top" constant="24" id="WmR-Cu-3gL"/>
+                                    <constraint firstItem="lOb-ZK-Gp6" firstAttribute="leading" secondItem="Eli-Zl-z9v" secondAttribute="trailing" constant="70" id="ZK2-ke-JU5"/>
+                                    <constraint firstAttribute="bottom" secondItem="DtC-4i-lyc" secondAttribute="bottom" constant="28" id="bdo-7I-9y2"/>
+                                    <constraint firstItem="Eli-Zl-z9v" firstAttribute="centerX" secondItem="9t3-ki-Xbx" secondAttribute="centerX" id="evV-fn-Mj0"/>
+                                    <constraint firstAttribute="bottom" secondItem="lOb-ZK-Gp6" secondAttribute="bottom" constant="28" id="fae-rf-tIK"/>
+                                    <constraint firstAttribute="height" constant="102" id="oeK-VV-bmD"/>
+                                    <constraint firstItem="lOb-ZK-Gp6" firstAttribute="top" secondItem="9t3-ki-Xbx" secondAttribute="top" constant="22" id="qqJ-oB-4it"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4HG-QS-PTu" secondAttribute="trailing" id="Can-1z-p8a"/>
                             <constraint firstItem="leM-Z5-H2v" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Had-eF-9la"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="9t3-ki-Xbx" secondAttribute="bottom" id="Hjq-h7-CRq"/>
                             <constraint firstItem="4HG-QS-PTu" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Lbo-X5-sml"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="1RL-eN-Gn3" secondAttribute="bottom" constant="34" id="Lby-9j-nAA"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1RL-eN-Gn3" secondAttribute="trailing" constant="21" id="Lkr-c2-BgR"/>
                             <constraint firstItem="IiX-Gg-iGw" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Pgq-iU-qsp"/>
                             <constraint firstItem="4HG-QS-PTu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="SO7-dr-IbU"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9t3-ki-Xbx" secondAttribute="trailing" id="aXE-z3-N57"/>
                             <constraint firstItem="WfT-xr-l2h" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="bup-Nd-x98"/>
                             <constraint firstItem="WfT-xr-l2h" firstAttribute="top" secondItem="IiX-Gg-iGw" secondAttribute="bottom" constant="60" id="cP8-Hp-2sp"/>
                             <constraint firstItem="leM-Z5-H2v" firstAttribute="top" secondItem="4HG-QS-PTu" secondAttribute="bottom" constant="176" id="dd6-OG-ARK"/>
                             <constraint firstItem="IiX-Gg-iGw" firstAttribute="top" secondItem="leM-Z5-H2v" secondAttribute="bottom" constant="21" id="eP7-8U-iAX"/>
+                            <constraint firstItem="9t3-ki-Xbx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="iD2-3x-nfJ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="barView" destination="4HG-QS-PTu" id="VPX-V8-4MH"/>
+                        <outlet property="deleteSelectedView" destination="9t3-ki-Xbx" id="wCv-Lx-bLI"/>
                         <outlet property="foodAddButton" destination="1RL-eN-Gn3" id="heZ-1L-nSq"/>
                         <outlet property="fridgeAddButton" destination="WfT-xr-l2h" id="OFy-LL-vfc"/>
                         <outlet property="noFridgeImageView" destination="leM-Z5-H2v" id="ThM-3P-3oD"/>
@@ -1005,11 +1058,13 @@
         <image name="addFridgeTitleIcon" width="85.333335876464844" height="18"/>
         <image name="add_icon" width="23.666666030883789" height="23.666666030883789"/>
         <image name="backIcon" width="12.666666984558105" height="21.666666030883789"/>
+        <image name="eat" width="21.333333969116211" height="27.333333969116211"/>
         <image name="fridgeAdd" width="18" height="18"/>
         <image name="noFridge" width="45" height="64"/>
         <image name="rightArrow" width="9.3333330154418945" height="16"/>
         <image name="search" width="18" height="18"/>
         <image name="wasteIcon" width="50" height="50"/>
+        <image name="white_trash_icon" width="21" height="27"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

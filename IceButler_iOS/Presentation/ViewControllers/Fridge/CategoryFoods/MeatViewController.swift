@@ -59,6 +59,8 @@ extension MeatViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.setFoodImage(foodImage: foodImage)
         }
         
+        cell.setFoodIdx(foodIdx: FridgeViewModel.shared.foodIdx(foodListIdx:1, index: indexPath.row))
+        
         return cell
     }
     

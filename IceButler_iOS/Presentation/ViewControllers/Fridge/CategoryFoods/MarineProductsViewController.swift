@@ -57,6 +57,8 @@ extension MarineProductsViewController: UICollectionViewDelegate, UICollectionVi
             cell.setFoodImage(foodImage: foodImage)
         }
         
+        cell.setFoodIdx(foodIdx: FridgeViewModel.shared.foodIdx(foodListIdx:5, index: indexPath.row))
+        
         return cell
     }
     

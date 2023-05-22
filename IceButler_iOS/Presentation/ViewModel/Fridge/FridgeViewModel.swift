@@ -24,6 +24,7 @@ class FridgeViewModel: ObservableObject {
     @Published var seasoningFoodList: [FridgeFood] = []
     @Published var processedFoodList: [FridgeFood] = []
     @Published var etcFoodList: [FridgeFood] = []
+
     
     var searchMemberResults: [FridgeUser] = []
     
@@ -569,6 +570,11 @@ class FridgeViewModel: ObservableObject {
         }
         
     }
+    
+
+}
+extension FridgeViewModel {
+
     
     func setDefaultFridge() {
         APIManger.shared.getData(urlEndpointString: "/fridges",
