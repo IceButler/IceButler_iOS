@@ -14,6 +14,7 @@ protocol MyRefrigeratorTableViewCellDelegate {
 
 class MyRefrigeratorTableViewCell: UITableViewCell {
 
+    var fridgeOwnerIdx: Int = -1
     var delegate: MyRefrigeratorTableViewCellDelegate?
     private var memberInfos: [FridgeUser] = []
     
@@ -23,6 +24,8 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var moreView: UIView!
+    
+    @IBOutlet var notOwnerMoreView: UIView!
     
     @IBOutlet weak var commentLabel: UILabel!
     
@@ -43,19 +46,21 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        [containerView, moreView].forEach { view in
+        [containerView, moreView, notOwnerMoreView].forEach { view in
             view.backgroundColor = .white
             view.layer.shadowColor = UIColor.gray.cgColor
-            view.layer.shadowOpacity = 0.15
+            view.layer.shadowOpacity = 0.2
             view.layer.shadowRadius = 10
             view.layer.shadowOffset = CGSize(width: 0, height: 5)
             view.layer.shadowPath = nil
         }
-        moreView.layer.cornerRadius = 12
+        moreView.layer.cornerRadius = 16
+        notOwnerMoreView.layer.cornerRadius = 20
     }
     
     public func configureFridge(data: Fridge?) {
         if let data = data {
+            fridgeOwnerIdx = data.users![0].userIdx
             refrigeratorNameLabel.text = data.fridgeName
             memberNumLabel.text = "\(data.userCnt!)"
             commentLabel.text = data.comment
@@ -73,8 +78,18 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     }
     
     @IBAction func didTapMoreButton(_ sender: UIButton) {
-        if moreView.isHidden { moreView.isHidden = false }
-        else { moreView.isHidden = true }
+        /// 유저가 오너인 냉장고의 경우 moreView 히든 해제
+        /// 유저가 오너가 아닌, 멤버인 경우 notOwnerMoreView 히든 해제
+        UserService().getUserInfo { [weak self] userInfo in
+            if userInfo.userIdx == self?.fridgeOwnerIdx {
+                if ((self?.moreView.isHidden) == true) { self?.moreView.isHidden = false }
+                else { self?.moreView.isHidden = true }
+                
+            } else {
+                if ((self?.notOwnerMoreView.isHidden) == true) { self?.notOwnerMoreView.isHidden = false }
+                else { self?.notOwnerMoreView.isHidden = true }
+            }
+        }
     }
     
     @IBAction func didTapEditButton(_ sender: UIButton) {
