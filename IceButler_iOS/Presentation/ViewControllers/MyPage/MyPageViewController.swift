@@ -91,6 +91,14 @@ class MyPageViewController: UIViewController {
             statusBar?.backgroundColor = UIColor.navigationColor
         }
         
+        let titleLabel = UILabel()
+        titleLabel.text = "마이페이지"
+        titleLabel.textAlignment = .left
+        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        titleLabel.textColor = .white
+        titleLabel.sizeToFit()
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
+        
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
         self.tabBarController?.tabBar.isHidden = false
     }
