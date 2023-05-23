@@ -70,6 +70,7 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     
     public func configureMultiFridge(data: MultiFridgeRes?) {
         if let data = data {
+            fridgeOwnerIdx = data.users![0].userIdx
             refrigeratorNameLabel.text = data.multiFridgeName
             memberNumLabel.text = "\(data.userCnt!)"
             commentLabel.text = data.comment
