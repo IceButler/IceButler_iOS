@@ -11,6 +11,13 @@ import JGProgressHUD
 
 class MyPageViewController: UIViewController {
     
+    private let iconImgNameList: [[String]] = [
+        ["myFridges", "myRecipe"],    /// 마이 냉장고, 마이 레시피
+        ["proVersion"],   /// 프로버전
+        ["logout", "signout"],    /// 로그아웃, 회원탈퇴
+        ["tos", "privatePolicy"] /// 약관안내, 개인정보처리방침
+    ]
+    
     private let sectionList = ["My", "내 결제", "계정 설정", "앱 정보"]
     private let menuList = [
         ["마이 냉장고", "마이 레시피"],
@@ -147,6 +154,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MypageMenuTableViewCell", for: indexPath) as? MypageMenuTableViewCell else { return UITableViewCell() }
+        cell.menuImgView.image = UIImage(named: iconImgNameList[indexPath.section][indexPath.row])
         cell.menuNameLabel.text = self.menuList[indexPath.section][indexPath.row]
         return cell
     }
