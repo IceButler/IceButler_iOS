@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import JGProgressHUD
 
 class MyPageViewController: UIViewController {
     
@@ -42,18 +43,27 @@ class MyPageViewController: UIViewController {
     }
     
     private func configure() {
-        UserViewModel.shared.getUserInfo()
-        
-        
-        UserViewModel.shared.userInfo { user in
-            if let imageUrlString = user.profileImgUrl {
-                if let imageUrl = URL(string: imageUrlString) {
-                    self.profileImgView.kf.setImage(with: imageUrl)
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            UserViewModel.shared.getUserInfo()
+            
+            UserViewModel.shared.userInfo { user in
+                if let imageUrlString = user.profileImgUrl {
+                    if let imageUrl = URL(string: imageUrlString) {
+                        self.profileImgView.kf.setImage(with: imageUrl)
+                    }
                 }
+                self.nicknameLabel.text = user.nickname
+                self.emailLabel.text = user.email
             }
-            self.nicknameLabel.text = user.nickname
-            self.emailLabel.text = user.email
+            
+            hud.dismiss(animated: true)
         }
+        
     }
     
     private func setupNavigationBar() {
