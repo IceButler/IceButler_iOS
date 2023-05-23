@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class MyRefrigeratorViewController: UIViewController {
 
@@ -62,13 +63,22 @@ class MyRefrigeratorViewController: UIViewController {
     }
     
     private func fetchData() {
-        
-        APIManger.shared.getData(urlEndpointString: "/fridges",
-                                 responseDataType: MyFridgeResponseModel.self,
-                                 parameter: nil) { [weak self] response in
-            if let data = response.data { self?.data = data }
-            self?.tableView.reloadData()
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            APIManger.shared.getData(urlEndpointString: "/fridges",
+                                     responseDataType: MyFridgeResponseModel.self,
+                                     parameter: nil) { [weak self] response in
+                if let data = response.data { self?.data = data }
+                self?.tableView.reloadData()
+            }
+            
+            hud.dismiss(animated: true)
         }
+        
     }
 }
 

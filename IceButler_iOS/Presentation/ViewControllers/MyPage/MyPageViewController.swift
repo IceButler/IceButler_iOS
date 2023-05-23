@@ -109,7 +109,6 @@ class MyPageViewController: UIViewController {
     }
     
     @IBAction func didTapEditProfileButton(_ sender: UIButton) {
-        // TODO: 프로필 편집 화면으로 이동
         let authUserInfoVC = UIStoryboard(name: "AuthUserInfo", bundle: nil).instantiateViewController(identifier: "AuthUserInfoViewController") as! AuthUserInfoViewController
         
         authUserInfoVC.setEditMode(mode: .Modify)
@@ -145,7 +144,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: 섹션/행 별로 화면 전환 구분
+        /// 섹션,행 별로 화면 전환 구분
         switch indexPath.section {
         case 0:
             switch indexPath.row {
