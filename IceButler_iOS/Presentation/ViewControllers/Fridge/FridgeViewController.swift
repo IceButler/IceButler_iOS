@@ -204,7 +204,8 @@ class FridgeViewController: TabmanViewController {
     }
     
     @objc private func moveToAlarmVC() {
-        // TODO: 알림 화면으로 전환
+        let notificationVC = UIStoryboard(name: "Fridge", bundle: nil).instantiateViewController(withIdentifier: "NotificationViewController") as! NotificationViewController
+        self.navigationController?.pushViewController(notificationVC, animated: true)
     }
     
 

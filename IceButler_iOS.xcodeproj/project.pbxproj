@@ -174,6 +174,9 @@
 		A258498329E6A6CB00E75568 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498229E6A6CB00E75568 /* MyPageViewController.swift */; };
 		A258498529E6B02400E75568 /* MypageMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498429E6B02400E75568 /* MypageMenuTableViewCell.swift */; };
 		A258498729E7BE0A00E75568 /* AddFoodSearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A258498629E7BE0A00E75568 /* AddFoodSearchResultTableViewCell.swift */; };
+		A26D95D22A1CA5720008B9E6 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26D95D12A1CA5720008B9E6 /* NotificationViewController.swift */; };
+		A26D95D52A1CA7550008B9E6 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26D95D32A1CA7550008B9E6 /* NotificationTableViewCell.swift */; };
+		A26D95D62A1CA7550008B9E6 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A26D95D42A1CA7550008B9E6 /* NotificationTableViewCell.xib */; };
 		A27302DD29D74EE10060944D /* FoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */; };
 		A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */; };
 		A27302E629D853090060944D /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A27302E529D853090060944D /* Alert.storyboard */; };
@@ -414,6 +417,9 @@
 		A258498229E6A6CB00E75568 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		A258498429E6B02400E75568 /* MypageMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageMenuTableViewCell.swift; sourceTree = "<group>"; };
 		A258498629E7BE0A00E75568 /* AddFoodSearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodSearchResultTableViewCell.swift; sourceTree = "<group>"; };
+		A26D95D12A1CA5720008B9E6 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		A26D95D32A1CA7550008B9E6 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		A26D95D42A1CA7550008B9E6 /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		A27302DB29D74EE10060944D /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
 		A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCollectionViewCell.xib; sourceTree = "<group>"; };
 		A27302E529D853090060944D /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
@@ -468,7 +474,7 @@
 				A22B98BA2A0F4C8100797C81 /* DaumMap.framework in Frameworks */,
 				A22B98742A0F4C4E00797C81 /* SystemConfiguration.framework in Frameworks */,
 				A22B98C82A0F4FD300797C81 /* Metal.framework in Frameworks */,
-				D8A21758045158BC28C2523F /* BuildFile in Frameworks */,
+				D8A21758045158BC28C2523F /* (null) in Frameworks */,
 				BD38B42E43FA02E78169C5CD /* Pods_IceButler_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -921,6 +927,7 @@
 				73F62A4729DD7F30003D779F /* FoodAddSelect.storyboard */,
 				73F62A4929DD7F45003D779F /* FoodAddSelectViewController.swift */,
 				A2A164C22A00DA6A008132D2 /* AddFridgeViewController.swift */,
+				A26D95D12A1CA5720008B9E6 /* NotificationViewController.swift */,
 			);
 			path = Fridge;
 			sourceTree = "<group>";
@@ -1124,6 +1131,8 @@
 				73CC35152A07E60C00096492 /* FoodRemoveRankCell.xib */,
 				95607D6F2A168F5E00C1F089 /* LoadingReusableView.swift */,
 				95607D702A168F5E00C1F089 /* LoadingReusableView.xib */,
+				A26D95D32A1CA7550008B9E6 /* NotificationTableViewCell.swift */,
+				A26D95D42A1CA7550008B9E6 /* NotificationTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1344,6 +1353,7 @@
 				95B515792A0C76F1000CFC47 /* RecipeCookingProcessCell.xib in Resources */,
 				A2EA101529F53EDE000D600B /* MyRefrigerator.storyboard in Resources */,
 				A22B98A52A0F4C8100797C81 /* map_pinup@3x.png in Resources */,
+				A26D95D62A1CA7550008B9E6 /* NotificationTableViewCell.xib in Resources */,
 				A22B98AB2A0F4C8100797C81 /* map_pin@3x.png in Resources */,
 				73CC35172A07E60C00096492 /* FoodRemoveRankCell.xib in Resources */,
 				A2EA101F29F5448F000D600B /* RefriMemberCollectionViewCell.xib in Resources */,
@@ -1506,11 +1516,13 @@
 				95A398AC29FBCA5F009CDDDC /* RecipeInFridgeViewController.swift in Sources */,
 				A28A765629D749C700D127EA /* CartMainTableViewCell.swift in Sources */,
 				A28A764429D54F1C00D127EA /* DefaultTabBarController.swift in Sources */,
+				A26D95D52A1CA7550008B9E6 /* NotificationTableViewCell.swift in Sources */,
 				A28A764729D5527A00D127EA /* UIDevice+.swift in Sources */,
 				73B7373429E250430097806F /* SideViewController.swift in Sources */,
 				A2EA102229F556AC000D600B /* MyRefrigeratorViewModel.swift in Sources */,
 				738CAC8A29E32773009EF9D2 /* FoodViewModel.swift in Sources */,
 				95BC85A62A06959300181183 /* AddRecipeSecondViewController.swift in Sources */,
+				A26D95D22A1CA5720008B9E6 /* NotificationViewController.swift in Sources */,
 				A2F9190829EC188200E17FEB /* SelectedFoodNameCollectionViewCell.swift in Sources */,
 				95A398AE29FBCA77009CDDDC /* PopularRecipeViewController.swift in Sources */,
 				73F26FC629DAA94B009E364B /* CartService.swift in Sources */,
@@ -1869,7 +1881,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/yoosang/Desktop/IceButler_iOS/Header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/gimchowon/Desktop/Ice_temp/IceButler_iOS/Header.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
