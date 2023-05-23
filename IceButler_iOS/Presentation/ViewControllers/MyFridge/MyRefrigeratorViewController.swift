@@ -21,6 +21,7 @@ class MyRefrigeratorViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setupNavigationBar()
         fetchData()
         tableView.reloadData()
     }
