@@ -110,9 +110,9 @@ extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let recipeDetailViewController = storyboard!.instantiateViewController(withIdentifier: "RecipeDetailViewController") as? RecipeDetailViewController else { return }
         let selectedRecipeCell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
-        let recipeIdx = selectedRecipeCell.idx!
-        recipeDetailViewController.configure(recipeIdx: recipeIdx)
-        self.navigationController?.pushViewController(recipeDetailViewController, animated: true)
+        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!)
+        recipeDetailViewController.modalPresentationStyle = .overFullScreen
+        self.present(recipeDetailViewController, animated: true)
     }
     
     /* CollectionView Footer: LoadingView 설정 */
