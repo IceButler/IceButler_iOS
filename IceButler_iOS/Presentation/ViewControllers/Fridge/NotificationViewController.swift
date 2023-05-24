@@ -68,22 +68,32 @@ class NotificationViewController: UIViewController {
     }
     
     private func setupTableView() {
+        let nibName = UINib(nibName: "NotificationTableViewCell", bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: "NotificationTableViewCell")
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
     }
     
-    
     // MARK: @objc methods
-    @objc private func didTapBackItem() {
-        navigationController?.popViewController(animated: true)
-    }
+    @objc private func didTapBackItem() { navigationController?.popViewController(animated: true) }
 }
 
 // MARK: tableView delgate extension
 extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 100 }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 4 // TODO: API 명세서에 따라 수정 예정
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "공지날짜"   // TODO: '오늘', '어제' 등의 title이 오도록 수정
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 3    // TODO: API 명세서에 따라 수정 예정
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

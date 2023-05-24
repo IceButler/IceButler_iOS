@@ -9,13 +9,15 @@ import UIKit
 
 class NotificationTableViewCell: UITableViewCell {
 
+    @IBOutlet var containerView: UIView!
+    
     @IBOutlet var iconImgView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var contentLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        setupLayout()
+        setupLayout()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,6 +26,7 @@ class NotificationTableViewCell: UITableViewCell {
     
     
     private func setupLayout() {
-        iconImgView.layer.cornerRadius = iconImgView.frame.width / 2
+        self.selectionStyle = .none
+        containerView.layer.cornerRadius = 12
     }
 }
