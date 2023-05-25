@@ -195,10 +195,7 @@ class AddFridgeViewController: UIViewController {
     }
     
     private func isEmptyInputs() -> Bool {
-        if checkFridgeType()
-            && checkFridgeName()
-            && checkFridgeDetail()
-            && checkFridgeMember() { return true }
+        if checkFridgeType() && checkFridgeName() { return true }
         else { return false }
     }
     
@@ -243,16 +240,16 @@ extension AddFridgeViewController {
     }
     
     /// 냉장고 세부사항 입력 여부
-    private func checkFridgeDetail() -> Bool {
-        if (fridgeDetailTextView.text.count > 0)
-            && (fridgeDetailTextView.text != "200자 이내로 작성해주세요.") { return true }
-        else { return false }
-    }
+//    private func checkFridgeDetail() -> Bool {
+//        if (fridgeDetailTextView.text.count > 0)
+//            && (fridgeDetailTextView.text != "200자 이내로 작성해주세요.") { return true }
+//        else { return false }
+//    }
     
     /// 냉장고 멤버 추가 여부
-    private func checkFridgeMember() -> Bool {
-        return (selectedMember.count > 0) ? true : false
-    }
+//    private func checkFridgeMember() -> Bool {
+//        return (selectedMember.count > 0) ? true : false
+//    }
     
     /// 완료 버튼 활성/비활성 설정
     private func setCompleteButtonMode() {

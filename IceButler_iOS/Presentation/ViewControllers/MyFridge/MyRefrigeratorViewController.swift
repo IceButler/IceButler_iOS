@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class MyRefrigeratorViewController: UIViewController {
 
@@ -20,6 +21,7 @@ class MyRefrigeratorViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setupNavigationBar()
         fetchData()
         tableView.reloadData()
     }
@@ -31,7 +33,7 @@ class MyRefrigeratorViewController: UIViewController {
             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
             
             let statusbarView = UIView()
-            statusbarView.backgroundColor = UIColor.signatureLightBlue
+            statusbarView.backgroundColor = UIColor.navigationColor
             view.addSubview(statusbarView)
           
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +51,22 @@ class MyRefrigeratorViewController: UIViewController {
             statusBar?.backgroundColor = UIColor.red
         }
         
-        self.navigationController?.navigationBar.backgroundColor = .signatureLightBlue
+        
+        /// set up title
+        let titleLabel = UILabel()
+        titleLabel.text = "마이 냉장고"
+        titleLabel.textAlignment = .left
+        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        titleLabel.textColor = .white
+        titleLabel.sizeToFit()
+        
+        /// set up right item
+        let backItem = UIBarButtonItem(image: UIImage(named: "backIcon"), style: .done, target: self, action: #selector(didTapBackItem))
+        let titleItem = UIBarButtonItem(customView: titleLabel)
+        backItem.tintColor = .white
+        self.navigationItem.leftBarButtonItems = [ backItem, titleItem ]
+        
+        self.navigationController?.navigationBar.backgroundColor = .navigationColor
         self.tabBarController?.tabBar.isHidden = false
         
     }
@@ -62,14 +79,26 @@ class MyRefrigeratorViewController: UIViewController {
     }
     
     private func fetchData() {
-        
-        APIManger.shared.getData(urlEndpointString: "/fridges",
-                                 responseDataType: MyFridgeResponseModel.self,
-                                 parameter: nil) { [weak self] response in
-            if let data = response.data { self?.data = data }
-            self?.tableView.reloadData()
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            APIManger.shared.getData(urlEndpointString: "/fridges",
+                                     responseDataType: MyFridgeResponseModel.self,
+                                     parameter: nil) { [weak self] response in
+                if let data = response.data { self?.data = data }
+                self?.tableView.reloadData()
+            }
+            
+            hud.dismiss(animated: true)
         }
+        
     }
+    
+    // MARK: @objc methods
+    @objc private func didTapBackItem() { self.navigationController?.popViewController(animated: true) }
 }
 
 extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSource {

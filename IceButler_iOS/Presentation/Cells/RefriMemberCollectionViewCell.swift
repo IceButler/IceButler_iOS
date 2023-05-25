@@ -19,6 +19,8 @@ class RefriMemberCollectionViewCell: UICollectionViewCell {
     }
     
     public func setupLayout() {
+        imgView.tintColor = UIColor(red: 194/255, green: 210/255, blue: 227/255, alpha: 1)
+        imgView.backgroundColor = UIColor(red: 41/255, green: 90/255, blue: 153/255, alpha: 1)
         imgView.layer.cornerRadius = imgView.frame.width / 2 - 2
     }
     
@@ -27,7 +29,7 @@ class RefriMemberCollectionViewCell: UICollectionViewCell {
         imgView.layer.cornerRadius = imgView.frame.width / 2 - 2
         imgView.layer.borderColor = UIColor.signatureLightBlue.cgColor
         imgView.layer.borderWidth = 3.0
-        imgView.backgroundColor = .white    // 삭제 예정
+        nickname.font = .systemFont(ofSize: 10, weight: .heavy)
     }
 
     public func configure(data: FridgeUser) {
@@ -35,9 +37,8 @@ class RefriMemberCollectionViewCell: UICollectionViewCell {
         if let imgUrlStr = data.profileImgUrl {
             let url = URL(string: imgUrlStr)
             imgView.kf.setImage(with: url)
-        } else {
-            imgView.image = UIImage(systemName: "person.fill")
         }
+        else { imgView.image = UIImage(named: "person.fill") }
         if data.role == "OWNER" { setupMainMemberProfile()  }
         else { crownImg.isHidden = true }
     }

@@ -189,6 +189,7 @@ class FridgeViewController: TabmanViewController {
     
     @objc private func selectFridge() {
         guard let vc = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as? SelectFrideViewController else { return }
+        vc.delegate = self
         let selectVC = UINavigationController(rootViewController: vc)
         selectVC.isNavigationBarHidden = true
         present(selectVC, animated: true)
@@ -321,8 +322,10 @@ extension FridgeViewController: FoodAddDelegate, SelectFridgeDelegate {
     }
     
     func updateMainFridge(title: String) {
+        print("웨않되냐고")
         setupleftBarItems(title: title)
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+        
     }
 }
 
