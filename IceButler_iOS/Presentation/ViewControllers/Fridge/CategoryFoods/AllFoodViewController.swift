@@ -44,6 +44,14 @@ class AllFoodViewController: UIViewController {
     }
     
     private func setupLayout() {
+        discardImageView.isHidden = true
+        discardCategoryLabel.isHidden = true
+        discardLabel.isHidden = true
+        
+        rightArrowTopContstraint.constant = 45.87
+        notDiscardLabel.isHidden = false
+        
+        
         wasteInfoView.layer.cornerRadius = 20
         wasteInfoView.layer.shadowOffset = CGSize(width: 0, height: 4)
         wasteInfoView.layer.shadowColor = CGColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.1)
@@ -63,24 +71,25 @@ class AllFoodViewController: UIViewController {
         
         FridgeViewModel.shared.fridgeDiscard { fridgeDiscard in
             if let fridgeDiscard = fridgeDiscard {
-                self.discardImageView.isHidden = false
-                self.discardCategoryLabel.isHidden = false
-                self.discardLabel.isHidden = false
-                
-                self.rightArrowTopContstraint.constant = 32.08
-                self.notDiscardLabel.isHidden = true
-                
                 if let url = URL(string: fridgeDiscard.discardFoodImgUrl ?? "") {
+                    self.discardImageView.isHidden = false
+                    self.discardCategoryLabel.isHidden = false
+                    self.discardLabel.isHidden = false
+                    
+                    self.rightArrowTopContstraint.constant = 32.08
+                    self.notDiscardLabel.isHidden = true
+                    
                     self.discardImageView.kf.setImage(with: url)
+                    self.discardCategoryLabel.text = fridgeDiscard.discardFoodCategory
+                }else {
+                    self.discardImageView.image = nil
+                    self.discardImageView.isHidden = true
+                    self.discardCategoryLabel.isHidden = true
+                    self.discardLabel.isHidden = true
+                    
+                    self.rightArrowTopContstraint.constant = 45.87
+                    self.notDiscardLabel.isHidden = false
                 }
-                self.discardCategoryLabel.text = fridgeDiscard.discardFoodCategory
-            }else {
-                self.discardImageView.isHidden = true
-                self.discardCategoryLabel.isHidden = true
-                self.discardLabel.isHidden = true
-                
-                self.rightArrowTopContstraint.constant = 45.87
-                self.notDiscardLabel.isHidden = false
             }
         }
     }
