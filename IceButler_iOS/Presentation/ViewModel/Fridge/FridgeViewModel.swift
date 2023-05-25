@@ -24,6 +24,7 @@ class FridgeViewModel: ObservableObject {
     @Published var seasoningFoodList: [FridgeFood] = []
     @Published var processedFoodList: [FridgeFood] = []
     @Published var etcFoodList: [FridgeFood] = []
+    @Published var fridgeDiscard: FridgeDiscard?
 
     
     var searchMemberResults: [FridgeUser] = []
@@ -31,6 +32,14 @@ class FridgeViewModel: ObservableObject {
     var cancelLabels: Set<AnyCancellable> = []
     
     var defaultFridgeName: String = "냉장고 미선택"
+    
+    func fridgeDiscard(completion: @escaping (FridgeDiscard) -> Void) {
+        $fridgeDiscard.filter { fridgeDiscard in
+            fridgeDiscard != nil
+        }.sink { frdigeDiscard in
+            completion(frdigeDiscard!)
+        }.store(in: &cancelLabels)
+    }
     
     func allFoodList(foodListIdx: Int, completion: @escaping ([FridgeFood])-> Void) {
         switch foodListIdx {
@@ -495,6 +504,7 @@ class FridgeViewModel: ObservableObject {
     func getAllFoodList(fridgeIdx: Int) {
         fridgeService.getAllFood(fridgeIdx: fridgeIdx) { response in
             self.allFoodList.removeAll()
+            self.fridgeDiscard = response?.fridgeDiscard
             response?.foodList.forEach({ food in
                 self.allFoodList.append(food)
             })

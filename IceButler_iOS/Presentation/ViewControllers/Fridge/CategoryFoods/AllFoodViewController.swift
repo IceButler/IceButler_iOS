@@ -6,10 +6,15 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AllFoodViewController: UIViewController {
     
     @IBOutlet weak var wasteInfoView: UIView!
+    
+    
+    @IBOutlet var discardImageView: UIImageView!
+    @IBOutlet var discardLabel: UILabel!
     
     @IBOutlet weak var foodCollectionView: UICollectionView!
     
@@ -50,6 +55,13 @@ class AllFoodViewController: UIViewController {
     private func setupObserver() {
         FridgeViewModel.shared.isChangeAllFoodList(foodListIdx:0) {
             self.foodCollectionView.reloadData()
+        }
+        
+        FridgeViewModel.shared.fridgeDiscard { fridgeDiscard in
+            if let url = URL(string: fridgeDiscard.discardFoodImgUrl ?? "") {
+                self.discardImageView.kf.setImage(with: url)
+            }
+            self.discardLabel.text = fridgeDiscard.discardFoodCategory
         }
     }
 
