@@ -33,11 +33,9 @@ class FridgeViewModel: ObservableObject {
     
     var defaultFridgeName: String = "냉장고 미선택"
     
-    func fridgeDiscard(completion: @escaping (FridgeDiscard) -> Void) {
-        $fridgeDiscard.filter { fridgeDiscard in
-            fridgeDiscard != nil
-        }.sink { frdigeDiscard in
-            completion(frdigeDiscard!)
+    func fridgeDiscard(completion: @escaping (FridgeDiscard?) -> Void) {
+        $fridgeDiscard.sink { frdigeDiscard in
+            completion(frdigeDiscard)
         }.store(in: &cancelLabels)
     }
     

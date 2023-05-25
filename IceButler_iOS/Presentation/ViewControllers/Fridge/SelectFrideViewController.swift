@@ -143,6 +143,8 @@ extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+        
+        
         if indexPath.row < fridgeCount {
             APIManger.shared.setIsMultiFridge(isMulti: false)
             UserDefaults.standard.setValue(false, forKey: "isMulti")

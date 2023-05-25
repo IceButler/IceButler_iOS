@@ -27,7 +27,6 @@ class AllFoodViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        FridgeViewModel.shared.getAllFoodList(fridgeIdx: 1)
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
     }
     
@@ -58,10 +57,15 @@ class AllFoodViewController: UIViewController {
         }
         
         FridgeViewModel.shared.fridgeDiscard { fridgeDiscard in
-            if let url = URL(string: fridgeDiscard.discardFoodImgUrl ?? "") {
-                self.discardImageView.kf.setImage(with: url)
+            if let fridgeDiscard = fridgeDiscard {
+                if let url = URL(string: fridgeDiscard.discardFoodImgUrl ?? "") {
+                    self.discardImageView.kf.setImage(with: url)
+                }
+                self.discardLabel.text = fridgeDiscard.discardFoodCategory
+            }else {
+                self.discardImageView.image = nil
+                self.discardLabel.text = ""
             }
-            self.discardLabel.text = fridgeDiscard.discardFoodCategory
         }
     }
 
