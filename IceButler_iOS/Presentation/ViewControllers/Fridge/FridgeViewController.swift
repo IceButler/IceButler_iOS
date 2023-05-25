@@ -228,7 +228,7 @@ class FridgeViewController: TabmanViewController {
         } leftCompletion: {
         }
         
-        alertVC.modalPresentationStyle = .fullScreen
+        alertVC.modalPresentationStyle = .overFullScreen
 
         self.present(alertVC, animated: true)
     }
@@ -249,7 +249,7 @@ class FridgeViewController: TabmanViewController {
         } leftCompletion: {
         }
         
-        alertVC.modalPresentationStyle = .fullScreen
+        alertVC.modalPresentationStyle = .overFullScreen
 
         self.present(alertVC, animated: true)
 
