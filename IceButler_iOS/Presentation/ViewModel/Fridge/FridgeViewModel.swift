@@ -103,12 +103,95 @@ class FridgeViewModel: ObservableObject {
         }
     }
     
+    func isNoFoodList(foodListIdx: Int, completion: @escaping ()-> Void) {
+        switch foodListIdx {
+        case 0:
+            $allFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 1:
+            $meatFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 2:
+            $fruitFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 3:
+            $vegetableFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 4:
+            $drinkFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 5:
+            $marineProductsFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 6:
+            $sideFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 7:
+            $snackFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 8:
+            $seasoningFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 9:
+            $processedFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 10:
+            $etcFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        default:
+            break
+        }
+    }
+    
     func isChangeAllFoodList(foodListIdx: Int, completion: @escaping () -> Void) {
         switch foodListIdx {
         case 0:
             $allFoodList.filter { allFoodList in
-                //                allFoodList.count > 0
-                allFoodList.count > -1
+                allFoodList.count > 0
             }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)

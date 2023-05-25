@@ -9,6 +9,7 @@ import UIKit
 
 class MeatViewController: UIViewController {
     
+    @IBOutlet var noFoodLabel: UILabel!
     @IBOutlet weak var foodCollectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -35,6 +36,13 @@ class MeatViewController: UIViewController {
     private func setupObserver() {
         FridgeViewModel.shared.isChangeAllFoodList(foodListIdx:1) {
             self.foodCollectionView.reloadData()
+            self.noFoodLabel.isHidden = true
+            self.foodCollectionView.isHidden = false
+        }
+        
+        FridgeViewModel.shared.isNoFoodList(foodListIdx: 1) {
+            self.foodCollectionView.isHidden = true
+            self.noFoodLabel.isHidden = false
         }
     }
 }

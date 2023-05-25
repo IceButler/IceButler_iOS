@@ -21,6 +21,7 @@ class AllFoodViewController: UIViewController {
     
     @IBOutlet var rightArrowTopContstraint: NSLayoutConstraint!
     
+    @IBOutlet var noFoodLabel: UILabel!
     @IBOutlet weak var foodCollectionView: UICollectionView!
     
 
@@ -67,6 +68,13 @@ class AllFoodViewController: UIViewController {
     private func setupObserver() {
         FridgeViewModel.shared.isChangeAllFoodList(foodListIdx:0) {
             self.foodCollectionView.reloadData()
+            self.noFoodLabel.isHidden = true
+            self.foodCollectionView.isHidden = false
+        }
+        
+        FridgeViewModel.shared.isNoFoodList(foodListIdx: 0) {
+            self.foodCollectionView.isHidden = true
+            self.noFoodLabel.isHidden = false
         }
         
         FridgeViewModel.shared.fridgeDiscard { fridgeDiscard in

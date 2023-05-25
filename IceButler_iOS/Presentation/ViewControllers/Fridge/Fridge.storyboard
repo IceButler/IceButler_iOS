@@ -671,6 +671,12 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고에 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJc-pg-a86">
+                                <rect key="frame" x="64.666666666666686" y="412.66666666666669" width="264" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jJ2-4A-Mv6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -678,10 +684,14 @@
                             <constraint firstItem="jJ2-4A-Mv6" firstAttribute="trailing" secondItem="eDq-AZ-PyD" secondAttribute="trailing" constant="16" id="Bf3-af-vXh"/>
                             <constraint firstItem="jJ2-4A-Mv6" firstAttribute="bottom" secondItem="Lbj-Vf-FVS" secondAttribute="bottom" id="Tlg-EA-kdf"/>
                             <constraint firstItem="jJ2-4A-Mv6" firstAttribute="trailing" secondItem="Lbj-Vf-FVS" secondAttribute="trailing" id="Yev-7s-cIn"/>
+                            <constraint firstItem="cJc-pg-a86" firstAttribute="centerX" secondItem="Ro6-Cn-wDP" secondAttribute="centerX" id="aWj-0I-8Sr"/>
+                            <constraint firstItem="cJc-pg-a86" firstAttribute="centerX" secondItem="Ro6-Cn-wDP" secondAttribute="centerX" id="c3y-J3-SKa"/>
                             <constraint firstItem="Lbj-Vf-FVS" firstAttribute="leading" secondItem="jJ2-4A-Mv6" secondAttribute="leading" id="g3O-Pv-aoO"/>
                             <constraint firstItem="eDq-AZ-PyD" firstAttribute="leading" secondItem="Ro6-Cn-wDP" secondAttribute="leading" constant="16" id="jT2-nY-Mke"/>
                             <constraint firstItem="eDq-AZ-PyD" firstAttribute="top" secondItem="jJ2-4A-Mv6" secondAttribute="top" constant="20" id="k4s-Jo-zGU"/>
                             <constraint firstItem="Lbj-Vf-FVS" firstAttribute="top" secondItem="eDq-AZ-PyD" secondAttribute="bottom" constant="22" id="oks-Ku-eeS"/>
+                            <constraint firstItem="cJc-pg-a86" firstAttribute="centerY" secondItem="Ro6-Cn-wDP" secondAttribute="centerY" id="tRM-4S-xg5"/>
+                            <constraint firstItem="cJc-pg-a86" firstAttribute="centerY" secondItem="Ro6-Cn-wDP" secondAttribute="centerY" id="xvy-9p-gjz"/>
                         </constraints>
                     </view>
                     <connections>
@@ -689,6 +699,7 @@
                         <outlet property="discardImageView" destination="ZMv-sx-Fy7" id="blN-YM-snd"/>
                         <outlet property="discardLabel" destination="cqf-VM-9uG" id="T3P-ua-Hmx"/>
                         <outlet property="foodCollectionView" destination="Lbj-Vf-FVS" id="UGv-lV-LhL"/>
+                        <outlet property="noFoodLabel" destination="cJc-pg-a86" id="RLd-25-QDO"/>
                         <outlet property="notDiscardLabel" destination="4YD-iO-SrT" id="uuA-Nn-Gvq"/>
                         <outlet property="rightArrowTopContstraint" destination="BfJ-CT-KOP" id="xf9-HP-sDO"/>
                         <outlet property="wasteInfoView" destination="eDq-AZ-PyD" id="wkP-TM-X40"/>
@@ -722,18 +733,27 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고에 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgc-Nx-iRZ">
+                                <rect key="frame" x="64.666666666666686" y="412.66666666666669" width="264" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WYm-IK-kaC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Kgc-Nx-iRZ" firstAttribute="centerY" secondItem="Oqx-Oe-pRk" secondAttribute="centerY" id="6Ky-Vw-Tng"/>
                             <constraint firstItem="Nug-5X-r5A" firstAttribute="leading" secondItem="WYm-IK-kaC" secondAttribute="leading" id="KAn-Ab-GZN"/>
                             <constraint firstItem="Nug-5X-r5A" firstAttribute="top" secondItem="WYm-IK-kaC" secondAttribute="top" id="O3t-9d-nhr"/>
                             <constraint firstItem="WYm-IK-kaC" firstAttribute="bottom" secondItem="Nug-5X-r5A" secondAttribute="bottom" id="UHa-Sc-4ob"/>
+                            <constraint firstItem="Kgc-Nx-iRZ" firstAttribute="centerX" secondItem="Oqx-Oe-pRk" secondAttribute="centerX" id="nNJ-i7-alX"/>
                             <constraint firstItem="WYm-IK-kaC" firstAttribute="trailing" secondItem="Nug-5X-r5A" secondAttribute="trailing" id="rN7-aR-V9G"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="foodCollectionView" destination="Nug-5X-r5A" id="wXF-qH-75V"/>
+                        <outlet property="noFoodLabel" destination="Kgc-Nx-iRZ" id="epi-oG-Ayh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hUY-qV-nFT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -759,6 +779,12 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고에 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qr5-7V-GaM">
+                                <rect key="frame" x="64.666666666666686" y="412.66666666666669" width="264" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tnm-6e-6Mi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -766,11 +792,14 @@
                             <constraint firstItem="tnm-6e-6Mi" firstAttribute="trailing" secondItem="akT-TQ-XFt" secondAttribute="trailing" id="GfB-UX-JvE"/>
                             <constraint firstItem="tnm-6e-6Mi" firstAttribute="bottom" secondItem="akT-TQ-XFt" secondAttribute="bottom" id="O7c-ut-NTH"/>
                             <constraint firstItem="akT-TQ-XFt" firstAttribute="leading" secondItem="tnm-6e-6Mi" secondAttribute="leading" id="fHz-5m-4F6"/>
+                            <constraint firstItem="Qr5-7V-GaM" firstAttribute="centerX" secondItem="XMx-mp-VDw" secondAttribute="centerX" id="j8o-Sa-7kd"/>
+                            <constraint firstItem="Qr5-7V-GaM" firstAttribute="centerY" secondItem="XMx-mp-VDw" secondAttribute="centerY" id="jG3-Uz-Gh8"/>
                             <constraint firstItem="akT-TQ-XFt" firstAttribute="top" secondItem="tnm-6e-6Mi" secondAttribute="top" id="xJy-yq-8bY"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="foodCollectionView" destination="akT-TQ-XFt" id="5Ry-Rj-QQ5"/>
+                        <outlet property="noFoodLabel" destination="Qr5-7V-GaM" id="Igr-Eh-JKa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fw5-9X-2as" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -796,18 +825,27 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고에 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yI-T5-16a">
+                                <rect key="frame" x="64.666666666666686" y="412.66666666666669" width="264" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Edi-dF-4tu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="3Tv-4X-kNu" firstAttribute="leading" secondItem="Edi-dF-4tu" secondAttribute="leading" id="NXH-AF-bs8"/>
+                            <constraint firstItem="4yI-T5-16a" firstAttribute="centerX" secondItem="vRu-oF-DTB" secondAttribute="centerX" id="cno-4G-819"/>
                             <constraint firstItem="3Tv-4X-kNu" firstAttribute="top" secondItem="Edi-dF-4tu" secondAttribute="top" id="rW0-Qc-ta3"/>
                             <constraint firstItem="Edi-dF-4tu" firstAttribute="bottom" secondItem="3Tv-4X-kNu" secondAttribute="bottom" id="sMc-Rw-0Gc"/>
                             <constraint firstItem="Edi-dF-4tu" firstAttribute="trailing" secondItem="3Tv-4X-kNu" secondAttribute="trailing" id="sY2-4f-qry"/>
+                            <constraint firstItem="4yI-T5-16a" firstAttribute="centerY" secondItem="vRu-oF-DTB" secondAttribute="centerY" id="uyD-9F-hRj"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="foodCollectionView" destination="3Tv-4X-kNu" id="3H8-AE-kdh"/>
+                        <outlet property="noFoodLabel" destination="4yI-T5-16a" id="JQt-kL-1yg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zn-tD-LSS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -833,18 +871,27 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고에 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5Q-xB-cdA">
+                                <rect key="frame" x="64.666666666666686" y="412.66666666666669" width="264" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oyD-zF-3ol"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="y5Q-xB-cdA" firstAttribute="centerY" secondItem="Jgo-tg-5zS" secondAttribute="centerY" id="TEv-zI-HL6"/>
                             <constraint firstItem="oyD-zF-3ol" firstAttribute="trailing" secondItem="zW3-BP-zhD" secondAttribute="trailing" id="YUF-80-r37"/>
                             <constraint firstItem="zW3-BP-zhD" firstAttribute="leading" secondItem="oyD-zF-3ol" secondAttribute="leading" id="dd4-pQ-VxU"/>
+                            <constraint firstItem="y5Q-xB-cdA" firstAttribute="centerX" secondItem="Jgo-tg-5zS" secondAttribute="centerX" id="oVG-Vr-FKj"/>
                             <constraint firstItem="oyD-zF-3ol" firstAttribute="bottom" secondItem="zW3-BP-zhD" secondAttribute="bottom" id="rVV-M2-AMy"/>
                             <constraint firstItem="zW3-BP-zhD" firstAttribute="top" secondItem="oyD-zF-3ol" secondAttribute="top" id="yOf-vG-GmW"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="foodCollectionView" destination="zW3-BP-zhD" id="kyd-Yq-PvY"/>
+                        <outlet property="noFoodLabel" destination="y5Q-xB-cdA" id="hzE-5L-YcI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EfA-gu-Gp6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -870,6 +917,12 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고에 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGZ-n3-Lii">
+                                <rect key="frame" x="64.666666666666686" y="412.66666666666669" width="264" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pBQ-DD-mZP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -878,10 +931,13 @@
                             <constraint firstItem="pBQ-DD-mZP" firstAttribute="trailing" secondItem="JfI-on-9xZ" secondAttribute="trailing" id="Brw-0y-14Y"/>
                             <constraint firstItem="pBQ-DD-mZP" firstAttribute="bottom" secondItem="JfI-on-9xZ" secondAttribute="bottom" id="P6a-sr-YVu"/>
                             <constraint firstItem="JfI-on-9xZ" firstAttribute="leading" secondItem="pBQ-DD-mZP" secondAttribute="leading" id="S1M-aB-qBN"/>
+                            <constraint firstItem="GGZ-n3-Lii" firstAttribute="centerX" secondItem="1v1-Rk-Jd3" secondAttribute="centerX" id="fxg-dq-USV"/>
+                            <constraint firstItem="GGZ-n3-Lii" firstAttribute="centerY" secondItem="1v1-Rk-Jd3" secondAttribute="centerY" id="sJC-re-cOe"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="foodCollectionView" destination="JfI-on-9xZ" id="B9A-Cp-hcZ"/>
+                        <outlet property="noFoodLabel" destination="GGZ-n3-Lii" id="k5N-ND-BFq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FHG-o5-adn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -907,18 +963,27 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고에 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRS-hf-0CR">
+                                <rect key="frame" x="64.666666666666686" y="412.66666666666669" width="264" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Zqf-mO-tgc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Zqf-mO-tgc" firstAttribute="bottom" secondItem="oVs-fR-pDI" secondAttribute="bottom" id="4bv-yi-bun"/>
                             <constraint firstItem="oVs-fR-pDI" firstAttribute="top" secondItem="Zqf-mO-tgc" secondAttribute="top" id="9eG-wt-0kE"/>
+                            <constraint firstItem="ZRS-hf-0CR" firstAttribute="centerX" secondItem="MRh-Pv-hhY" secondAttribute="centerX" id="NAV-fe-fNL"/>
+                            <constraint firstItem="ZRS-hf-0CR" firstAttribute="centerY" secondItem="MRh-Pv-hhY" secondAttribute="centerY" id="a11-tx-zta"/>
                             <constraint firstItem="oVs-fR-pDI" firstAttribute="leading" secondItem="Zqf-mO-tgc" secondAttribute="leading" id="f8P-Uv-egD"/>
                             <constraint firstItem="Zqf-mO-tgc" firstAttribute="trailing" secondItem="oVs-fR-pDI" secondAttribute="trailing" id="gKR-tY-kJ3"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="foodCollectionView" destination="oVs-fR-pDI" id="f1e-aY-xtS"/>
+                        <outlet property="noFoodLabel" destination="ZRS-hf-0CR" id="0y4-60-sAQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3yX-bM-0UF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -944,18 +1009,27 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고에 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bro-E7-xMy">
+                                <rect key="frame" x="64.666666666666686" y="412.66666666666669" width="264" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ikP-0q-Jhe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="00i-W9-LGZ" firstAttribute="top" secondItem="ikP-0q-Jhe" secondAttribute="top" id="2i7-Q4-D1C"/>
                             <constraint firstItem="ikP-0q-Jhe" firstAttribute="bottom" secondItem="00i-W9-LGZ" secondAttribute="bottom" id="9R3-14-LsX"/>
+                            <constraint firstItem="Bro-E7-xMy" firstAttribute="centerX" secondItem="fyu-m4-ZaV" secondAttribute="centerX" id="AZj-qG-0Zh"/>
+                            <constraint firstItem="Bro-E7-xMy" firstAttribute="centerY" secondItem="fyu-m4-ZaV" secondAttribute="centerY" id="Bvs-dB-NEt"/>
                             <constraint firstItem="00i-W9-LGZ" firstAttribute="leading" secondItem="ikP-0q-Jhe" secondAttribute="leading" id="Ldg-IP-oLV"/>
                             <constraint firstItem="ikP-0q-Jhe" firstAttribute="trailing" secondItem="00i-W9-LGZ" secondAttribute="trailing" id="sCP-2i-ain"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="foodCollectionView" destination="00i-W9-LGZ" id="yZ3-aS-EaH"/>
+                        <outlet property="noFoodLabel" destination="Bro-E7-xMy" id="e72-v5-KJJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3zQ-qP-jjx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -981,11 +1055,19 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고에 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljq-PN-1PQ">
+                                <rect key="frame" x="64.666666666666686" y="412.66666666666669" width="264" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.26666666666666666" green="0.49803921568627452" blue="0.79607843137254897" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6iM-ye-ykK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Ljq-PN-1PQ" firstAttribute="centerY" secondItem="Jle-Zz-wDC" secondAttribute="centerY" id="0Tr-3B-oRc"/>
                             <constraint firstItem="6iM-ye-ykK" firstAttribute="bottom" secondItem="4Q9-mC-9Gv" secondAttribute="bottom" id="Lpf-OA-nZO"/>
+                            <constraint firstItem="Ljq-PN-1PQ" firstAttribute="centerX" secondItem="Jle-Zz-wDC" secondAttribute="centerX" id="eMl-dZ-Osz"/>
                             <constraint firstItem="6iM-ye-ykK" firstAttribute="trailing" secondItem="4Q9-mC-9Gv" secondAttribute="trailing" id="ehY-pz-AXJ"/>
                             <constraint firstItem="4Q9-mC-9Gv" firstAttribute="leading" secondItem="6iM-ye-ykK" secondAttribute="leading" id="gTg-A1-uCw"/>
                             <constraint firstItem="4Q9-mC-9Gv" firstAttribute="top" secondItem="6iM-ye-ykK" secondAttribute="top" id="kVR-GW-CVx"/>
@@ -993,6 +1075,7 @@
                     </view>
                     <connections>
                         <outlet property="foodCollectionView" destination="4Q9-mC-9Gv" id="HXX-km-yS9"/>
+                        <outlet property="noFoodLabel" destination="Ljq-PN-1PQ" id="lMM-8D-YNG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnp-p9-72G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1018,18 +1101,27 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고에 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voc-kR-U89">
+                                <rect key="frame" x="64.666666666666686" y="412.66666666666669" width="264" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GKa-YR-dXH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="tyR-YY-gy6" firstAttribute="leading" secondItem="GKa-YR-dXH" secondAttribute="leading" id="2kS-QI-fwW"/>
                             <constraint firstItem="GKa-YR-dXH" firstAttribute="trailing" secondItem="tyR-YY-gy6" secondAttribute="trailing" id="KXc-Sn-hEm"/>
+                            <constraint firstItem="voc-kR-U89" firstAttribute="centerY" secondItem="Y2I-lj-MJ1" secondAttribute="centerY" id="Tqd-Br-D2o"/>
+                            <constraint firstItem="voc-kR-U89" firstAttribute="centerX" secondItem="Y2I-lj-MJ1" secondAttribute="centerX" id="Ui3-W6-3JN"/>
                             <constraint firstItem="tyR-YY-gy6" firstAttribute="top" secondItem="GKa-YR-dXH" secondAttribute="top" id="oNk-34-2ya"/>
                             <constraint firstItem="GKa-YR-dXH" firstAttribute="bottom" secondItem="tyR-YY-gy6" secondAttribute="bottom" id="rEC-7J-eE5"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="foodCollectionView" destination="tyR-YY-gy6" id="0gu-Cn-ceL"/>
+                        <outlet property="noFoodLabel" destination="voc-kR-U89" id="pab-r9-GN6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Faf-uN-Q1N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1055,18 +1147,27 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고에 식품을 추가해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rb-Ip-zR8">
+                                <rect key="frame" x="64.666666666666686" y="412.66666666666669" width="264" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="boa-Wz-6PZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="7rb-Ip-zR8" firstAttribute="centerX" secondItem="hhQ-qv-xW8" secondAttribute="centerX" id="G5w-He-8eU"/>
                             <constraint firstItem="AuH-vi-bHj" firstAttribute="leading" secondItem="boa-Wz-6PZ" secondAttribute="leading" id="Rxr-CG-OLK"/>
                             <constraint firstItem="boa-Wz-6PZ" firstAttribute="bottom" secondItem="AuH-vi-bHj" secondAttribute="bottom" id="ZqA-k5-iwq"/>
                             <constraint firstItem="AuH-vi-bHj" firstAttribute="top" secondItem="boa-Wz-6PZ" secondAttribute="top" id="j2r-2Q-oId"/>
+                            <constraint firstItem="7rb-Ip-zR8" firstAttribute="centerY" secondItem="hhQ-qv-xW8" secondAttribute="centerY" id="lkX-h6-8Kb"/>
                             <constraint firstItem="boa-Wz-6PZ" firstAttribute="trailing" secondItem="AuH-vi-bHj" secondAttribute="trailing" id="r3Y-Db-VxF"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="foodCollectionView" destination="AuH-vi-bHj" id="O6l-AL-Vul"/>
+                        <outlet property="noFoodLabel" destination="7rb-Ip-zR8" id="kTm-op-lmU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ch8-b4-Vhv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
