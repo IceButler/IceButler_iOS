@@ -14,7 +14,12 @@ class AllFoodViewController: UIViewController {
     
     
     @IBOutlet var discardImageView: UIImageView!
+    
     @IBOutlet var discardLabel: UILabel!
+    @IBOutlet var discardCategoryLabel: UILabel!
+    @IBOutlet var notDiscardLabel: UILabel!
+    
+    @IBOutlet var rightArrowTopContstraint: NSLayoutConstraint!
     
     @IBOutlet weak var foodCollectionView: UICollectionView!
     
@@ -58,13 +63,24 @@ class AllFoodViewController: UIViewController {
         
         FridgeViewModel.shared.fridgeDiscard { fridgeDiscard in
             if let fridgeDiscard = fridgeDiscard {
+                self.discardImageView.isHidden = false
+                self.discardCategoryLabel.isHidden = false
+                self.discardLabel.isHidden = false
+                
+                self.rightArrowTopContstraint.constant = 32.08
+                self.notDiscardLabel.isHidden = true
+                
                 if let url = URL(string: fridgeDiscard.discardFoodImgUrl ?? "") {
                     self.discardImageView.kf.setImage(with: url)
                 }
-                self.discardLabel.text = fridgeDiscard.discardFoodCategory
+                self.discardCategoryLabel.text = fridgeDiscard.discardFoodCategory
             }else {
-                self.discardImageView.image = nil
-                self.discardLabel.text = ""
+                self.discardImageView.isHidden = true
+                self.discardCategoryLabel.isHidden = true
+                self.discardLabel.isHidden = true
+                
+                self.rightArrowTopContstraint.constant = 45.87
+                self.notDiscardLabel.isHidden = false
             }
         }
     }

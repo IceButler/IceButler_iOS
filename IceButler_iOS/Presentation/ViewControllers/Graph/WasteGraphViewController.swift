@@ -64,6 +64,8 @@ class WasteGraphViewController: UIViewController {
         pieChartView.highlightPerTapEnabled = false
         pieChartView.rotationEnabled = false
         pieChartView.rotationWithTwoFingers = false
+        pieChartView.legend.orientation = .vertical
+        pieChartView.legend.horizontalAlignment = .right
         
         if pieDataEntryList.count == 0 {
             pieChartView.data = nil

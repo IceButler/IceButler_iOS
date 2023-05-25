@@ -631,6 +631,12 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="낭비와 소비 통계를 확인해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4YD-iO-SrT">
+                                        <rect key="frame" x="38" y="44" width="211" height="20"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43529411759999997" green="0.63137254899999995" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
@@ -644,8 +650,10 @@
                                     <constraint firstItem="pvk-qC-Dtd" firstAttribute="leading" secondItem="ZMv-sx-Fy7" secondAttribute="trailing" constant="12" id="QdQ-8A-zsL"/>
                                     <constraint firstAttribute="height" constant="106" id="Qmx-xL-PAV"/>
                                     <constraint firstItem="pvk-qC-Dtd" firstAttribute="top" secondItem="cqf-VM-9uG" secondAttribute="bottom" constant="11" id="SW8-AJ-exU"/>
+                                    <constraint firstItem="4YD-iO-SrT" firstAttribute="leading" secondItem="eDq-AZ-PyD" secondAttribute="leading" constant="38" id="Tvg-ob-sHU"/>
                                     <constraint firstAttribute="bottom" secondItem="ZMv-sx-Fy7" secondAttribute="bottom" constant="28" id="qYY-0f-ILh"/>
                                     <constraint firstAttribute="trailing" secondItem="1ma-cv-0kn" secondAttribute="trailing" constant="27.329999999999998" id="skO-2c-VRp"/>
+                                    <constraint firstItem="4YD-iO-SrT" firstAttribute="top" secondItem="eDq-AZ-PyD" secondAttribute="top" constant="44" id="xOR-2V-cic"/>
                                     <constraint firstItem="7Bn-do-EOB" firstAttribute="leading" secondItem="ZMv-sx-Fy7" secondAttribute="trailing" constant="15" id="yG5-oS-l68"/>
                                 </constraints>
                                 <connections>
@@ -677,9 +685,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="discardCategoryLabel" destination="pvk-qC-Dtd" id="uoT-UE-98u"/>
                         <outlet property="discardImageView" destination="ZMv-sx-Fy7" id="blN-YM-snd"/>
-                        <outlet property="discardLabel" destination="pvk-qC-Dtd" id="jDo-Fr-mYW"/>
+                        <outlet property="discardLabel" destination="cqf-VM-9uG" id="T3P-ua-Hmx"/>
                         <outlet property="foodCollectionView" destination="Lbj-Vf-FVS" id="UGv-lV-LhL"/>
+                        <outlet property="notDiscardLabel" destination="4YD-iO-SrT" id="uuA-Nn-Gvq"/>
+                        <outlet property="rightArrowTopContstraint" destination="BfJ-CT-KOP" id="xf9-HP-sDO"/>
                         <outlet property="wasteInfoView" destination="eDq-AZ-PyD" id="wkP-TM-X40"/>
                     </connections>
                 </viewController>
