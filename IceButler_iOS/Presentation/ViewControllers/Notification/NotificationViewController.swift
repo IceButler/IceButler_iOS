@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import JGProgressHUD
+import Toast_Swift
 
 class NotificationViewController: UIViewController {
 
@@ -14,6 +16,7 @@ class NotificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configure()
         setupNavigationBar()
         setupTableView()
     }
@@ -21,6 +24,38 @@ class NotificationViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
+    }
+    
+    private func configure() {
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            self.fetchData()
+            
+            hud.dismiss(animated: true)
+        }
+    }
+    
+    private func fetchData() {
+        let idx = APIManger.shared.getFridgeIdx()
+        APIManger.shared.getData(urlEndpointString: "/users/notification",
+                                 responseDataType: NotificationResponseModel.self,
+                                 parameter: nil,
+                                 completionHandler: { [weak self] response in
+            switch response.statusCode {
+            case 200:
+                print("*-*-*-*-*-* Fetch 공지 데이터 *-*-*-*-*-*")
+                print(response.data)
+                // TODO: 데이터 처리
+                
+            default:
+                self?.view.makeToast("공지를 불러오는데 실패하였습니다.", duration: 1.0, position: .center)
+            }
+            
+        })
     }
     
     private func setupNavigationBar() {

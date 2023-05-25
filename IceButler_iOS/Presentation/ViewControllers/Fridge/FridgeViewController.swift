@@ -204,7 +204,7 @@ class FridgeViewController: TabmanViewController {
     }
     
     @objc private func moveToAlarmVC() {
-        let notificationVC = UIStoryboard(name: "Fridge", bundle: nil).instantiateViewController(withIdentifier: "NotificationViewController") as! NotificationViewController
+        let notificationVC = UIStoryboard(name: "Notification", bundle: nil).instantiateViewController(withIdentifier: "NotificationViewController") as! NotificationViewController
         self.navigationController?.pushViewController(notificationVC, animated: true)
     }
     

@@ -236,46 +236,6 @@
             </objects>
             <point key="canvasLocation" x="70.992366412213741" y="-521.12676056338034"/>
         </scene>
-        <!--Notification View Controller-->
-        <scene sceneID="8cT-LK-9Jc">
-            <objects>
-                <viewController storyboardIdentifier="NotificationViewController" id="S8h-0a-HHA" customClass="NotificationViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="gcO-K9-5PQ">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0hJ-Uw-fzI">
-                                <rect key="frame" x="3" y="59" width="387" height="793"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="NotificationTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationTableViewCell" id="AfR-yE-wsJ" customClass="NotificationTableViewCell" customModule="IceButler_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="387" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AfR-yE-wsJ" id="uMv-e6-4wr">
-                                            <rect key="frame" x="0.0" y="0.0" width="387" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="vcO-Ow-xYs"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="0hJ-Uw-fzI" secondAttribute="bottom" id="CXN-CW-u7r"/>
-                            <constraint firstItem="0hJ-Uw-fzI" firstAttribute="top" secondItem="vcO-Ow-xYs" secondAttribute="top" id="LAG-0u-QPT"/>
-                            <constraint firstItem="0hJ-Uw-fzI" firstAttribute="leading" secondItem="vcO-Ow-xYs" secondAttribute="leading" constant="3" id="gjV-qQ-iTs"/>
-                            <constraint firstItem="vcO-Ow-xYs" firstAttribute="trailing" secondItem="0hJ-Uw-fzI" secondAttribute="trailing" constant="3" id="pA1-Te-Jrw"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="0hJ-Uw-fzI" id="4vd-cC-hnT"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="F1C-0p-fit" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="934" y="-504"/>
-        </scene>
         <!--Add Fridge View Controller-->
         <scene sceneID="8mZ-Mc-Kf6">
             <objects>

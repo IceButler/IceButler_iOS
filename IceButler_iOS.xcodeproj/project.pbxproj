@@ -131,6 +131,7 @@
 		A220B1632A026E430048592B /* MemberSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */; };
 		A220B1662A05411D0048592B /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */; };
 		A220B1672A05411D0048592B /* MemberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */; };
+		A22AFF802A1EFBBF00D2E9B9 /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A22AFF7F2A1EFBBF00D2E9B9 /* Notification.storyboard */; };
 		A22B986E2A0F4C3500797C81 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A22B986D2A0F4C3500797C81 /* CoreLocation.framework */; };
 		A22B98722A0F4C4600797C81 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A22B98712A0F4C4600797C81 /* QuartzCore.framework */; };
 		A22B98742A0F4C4E00797C81 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A22B98732A0F4C4E00797C81 /* SystemConfiguration.framework */; };
@@ -181,6 +182,7 @@
 		A27302DE29D74EE10060944D /* FoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */; };
 		A27302E629D853090060944D /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A27302E529D853090060944D /* Alert.storyboard */; };
 		A27302E829D853160060944D /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27302E729D853160060944D /* AlertViewController.swift */; };
+		A27C791A2A1EF5DA0003A444 /* NotificationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27C79192A1EF5DA0003A444 /* NotificationResponseModel.swift */; };
 		A28A763F29D54DEF00D127EA /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A28A763E29D54DEF00D127EA /* Cart.storyboard */; };
 		A28A764229D54EFA00D127EA /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A764129D54EFA00D127EA /* CartViewController.swift */; };
 		A28A764429D54F1C00D127EA /* DefaultTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A764329D54F1C00D127EA /* DefaultTabBarController.swift */; };
@@ -211,7 +213,7 @@
 		A2F9190C29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9190A29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.swift */; };
 		A2F9190D29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F9190B29EC18AD00E17FEB /* FoodCategoryCollectionViewCell.xib */; };
 		BD38B42E43FA02E78169C5CD /* Pods_IceButler_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E441AACB2712D7D1AAEA203 /* Pods_IceButler_iOS.framework */; };
-		D8A21758045158BC28C2523F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		D8A21758045158BC28C2523F /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -367,6 +369,7 @@
 		A220B1622A026E430048592B /* MemberSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSearchTableViewCell.swift; sourceTree = "<group>"; };
 		A220B1642A05411D0048592B /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		A220B1652A05411D0048592B /* MemberCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCollectionViewCell.xib; sourceTree = "<group>"; };
+		A22AFF7F2A1EFBBF00D2E9B9 /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
 		A22B986D2A0F4C3500797C81 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A22B98712A0F4C4600797C81 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A22B98732A0F4C4E00797C81 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -424,6 +427,7 @@
 		A27302DC29D74EE10060944D /* FoodCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCollectionViewCell.xib; sourceTree = "<group>"; };
 		A27302E529D853090060944D /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		A27302E729D853160060944D /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		A27C79192A1EF5DA0003A444 /* NotificationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationResponseModel.swift; sourceTree = "<group>"; };
 		A28A763E29D54DEF00D127EA /* Cart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cart.storyboard; sourceTree = "<group>"; };
 		A28A764129D54EFA00D127EA /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		A28A764329D54F1C00D127EA /* DefaultTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabBarController.swift; sourceTree = "<group>"; };
@@ -830,6 +834,7 @@
 		73F26FBD29DAA716009E364B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A27C79182A1EF5BC0003A444 /* Notification */,
 				735584C82A06B1930077E69E /* Graph */,
 				95A398BD29FD8C01009CDDDC /* Recipe */,
 				A2EA102329F5A60C000D600B /* MyFridge */,
@@ -927,7 +932,6 @@
 				73F62A4729DD7F30003D779F /* FoodAddSelect.storyboard */,
 				73F62A4929DD7F45003D779F /* FoodAddSelectViewController.swift */,
 				A2A164C22A00DA6A008132D2 /* AddFridgeViewController.swift */,
-				A26D95D12A1CA5720008B9E6 /* NotificationViewController.swift */,
 			);
 			path = Fridge;
 			sourceTree = "<group>";
@@ -977,6 +981,15 @@
 				95A398BE29FD8C13009CDDDC /* RecipeResponseModel.swift */,
 			);
 			path = Recipe;
+			sourceTree = "<group>";
+		};
+		A22AFF7E2A1EFB9500D2E9B9 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				A26D95D12A1CA5720008B9E6 /* NotificationViewController.swift */,
+				A22AFF7F2A1EFBBF00D2E9B9 /* Notification.storyboard */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		A22B98782A0F4C8100797C81 /* DaumMap.embeddedframework */ = {
@@ -1060,6 +1073,14 @@
 			path = Alert;
 			sourceTree = "<group>";
 		};
+		A27C79182A1EF5BC0003A444 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				A27C79192A1EF5DA0003A444 /* NotificationResponseModel.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		A28A763D29D54D6F00D127EA /* Cart */ = {
 			isa = PBXGroup;
 			children = (
@@ -1140,6 +1161,7 @@
 		A28A764B29D6F01200D127EA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A22AFF7E2A1EFB9500D2E9B9 /* Notification */,
 				735584B32A0569AB0077E69E /* Graph */,
 				A27302E429D852F20060944D /* Alert */,
 				7339CD6B29E5B381002A6D78 /* Auth */,
@@ -1364,6 +1386,7 @@
 				738CAC8529E310CF009EF9D2 /* FoodDetail.storyboard in Resources */,
 				A22B98A72A0F4C8100797C81 /* copyright.png in Resources */,
 				73F62A4029DD01CA003D779F /* BarCodeAdd.storyboard in Resources */,
+				A22AFF802A1EFBBF00D2E9B9 /* Notification.storyboard in Resources */,
 				73F62A4629DD6015003D779F /* FoodAdd.storyboard in Resources */,
 				A2EA101B29F5407D000D600B /* MyRefrigeratorTableViewCell.xib in Resources */,
 				735584BD2A0624740077E69E /* ConsumeGraph.storyboard in Resources */,
@@ -1542,6 +1565,7 @@
 				73F62A5329DFDADF003D779F /* FoodCategoryCell.swift in Sources */,
 				95A398B929FD7B38009CDDDC /* FridgeType.swift in Sources */,
 				735584BB2A06244E0077E69E /* WasteGraphViewController.swift in Sources */,
+				A27C791A2A1EF5DA0003A444 /* NotificationResponseModel.swift in Sources */,
 				73F62A5829E00F94003D779F /* UIButton+.swift in Sources */,
 				73178AC629EC40A6001C3AA4 /* UserService.swift in Sources */,
 				95A398C32A001303009CDDDC /* SearchFoodViewController.swift in Sources */,
