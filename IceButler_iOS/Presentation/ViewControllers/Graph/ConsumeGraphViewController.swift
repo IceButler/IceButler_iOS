@@ -66,6 +66,12 @@ class ConsumeGraphViewController: UIViewController {
         pieChartView.highlightPerTapEnabled = false
         pieChartView.rotationEnabled = false
         pieChartView.rotationWithTwoFingers = false
+        pieChartView.legend.orientation = .vertical
+        pieChartView.legend.horizontalAlignment = .right
+        pieChartView.legend.verticalAlignment = .center
+        pieChartView.legend.yEntrySpace = 3
+        
+        pieChartView.legend.font = UIFont.systemFont(ofSize: 12)
         
         if pieDataEntryList.count == 0 {
             pieChartView.data = nil
