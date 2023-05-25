@@ -54,6 +54,7 @@ class FoodCell: UICollectionViewCell {
     }
     
     private func setupLayout() {
+        foodImageView.backgroundColor = UIColor(red: 196 / 255, green: 232 / 255, blue: 169 / 255, alpha: 0.3)
         foodImageView.layer.cornerRadius = foodImageView.frame.width / 2
     }
     
