@@ -96,7 +96,7 @@ class FoodViewModel: ObservableObject {
         $foodOwnerList.filter { foodOwnerList in
             index < foodOwnerList.count
         }.sink { foodOwnerList in
-            completion((foodOwnerList[index].profileImage)!)
+            completion((foodOwnerList[index].profileImage) ?? "")
         }.store(in: &store)
     }
     
