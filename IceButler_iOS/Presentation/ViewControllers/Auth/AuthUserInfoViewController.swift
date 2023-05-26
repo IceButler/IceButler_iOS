@@ -124,8 +124,10 @@ class AuthUserInfoViewController: UIViewController {
                         self.userImageView.kf.setImage(with: imageUrl)
                     }
                 }
+                AuthViewModel.shared.userNickname = user.nickname
                 self.userNicknameTextField.text = user.nickname
                 self.userEmailLabel.text = user.email
+                self.joinButton.backgroundColor = .availableBlue
             }
             
             AuthViewModel.shared.isModify { isModify in
@@ -149,7 +151,9 @@ class AuthUserInfoViewController: UIViewController {
                 self.userNicknameTextField.backgroundColor = .focusSkyBlue
                 self.userNicknameAlertLabel.textColor = .textDeepBlue
                 self.userNicknameAlertLabel.text = "사용할 수 있는 닉네임입니다."
-                self.joinButton.backgroundColor = .availableBlue
+                if self.mode == .Join {
+                    self.joinButton.backgroundColor = .availableBlue
+                }
             }
             self.isExistence = isExistence
         }
