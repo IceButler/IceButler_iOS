@@ -206,17 +206,21 @@ class AuthUserInfoViewController: UIViewController {
     
     
     @IBAction func join(_ sender: Any) {
-        if isExistence {
-            showAlert(title: "닉네임 입력", message: "닉네임 중복확인 후 프로필 편집을 시도해주세요.")
+        if mode == .Join {
+            if isExistence {
+                showAlert(title: "닉네임 입력", message: "닉네임 중복확인 후 프로필 편집을 시도해주세요.")
+            }else {
+                if profileImage != nil {
+                    AuthViewModel.shared.getUploadImageUrl(imageDir: .Profile, image: profileImage!, mode: mode)
+                }else {
+                    AuthViewModel.shared.joinUser()
+                }
+            }
         }else {
             if profileImage != nil {
                 AuthViewModel.shared.getUploadImageUrl(imageDir: .Profile, image: profileImage!, mode: mode)
             }else {
-                if mode == .Join {
-                    AuthViewModel.shared.joinUser()
-                }else {
-                    AuthViewModel.shared.modifyUser()
-                }
+                AuthViewModel.shared.modifyUser()
             }
         }
     }
