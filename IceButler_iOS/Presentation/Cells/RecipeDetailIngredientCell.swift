@@ -14,4 +14,7 @@ class RecipeDetailIngredientCell: UICollectionViewCell {
         super.awakeFromNib()
     }
 
+    func setIngredient(ingredientText: String) {
+        ingredientLabel.text = ingredientText
+    }
 }

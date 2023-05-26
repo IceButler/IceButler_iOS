@@ -616,10 +616,16 @@
                                     <navigationItem id="AUt-LO-Ype">
                                         <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" id="t0Z-B8-4KC">
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="didTapXButton:" destination="LfP-6H-ryq" id="UCa-ck-KCm"/>
+                                            </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="ellipsis_vertical" id="Uj5-ag-cIv">
-                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem image="ellipsis_vertical" id="Uj5-ag-cIv">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </barButtonItem>
+                                            <barButtonItem image="emptyBlackStar" id="SI9-bO-ZuC"/>
+                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -758,13 +764,13 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wdF-eX-UbF">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wdF-eX-UbF" customClass="IntrinsicCollectionView" customModule="IceButler_iOS" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="409.66666666666663" width="361" height="22"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="22" id="efS-kp-CIm"/>
+                                                    <constraint firstAttribute="height" priority="251" constant="22" id="efS-kp-CIm"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3sr-d1-fgP">
+                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="3sr-d1-fgP">
                                                     <size key="itemSize" width="128" height="128"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -845,10 +851,23 @@
                             <constraint firstItem="BAn-O5-Oyt" firstAttribute="top" secondItem="0pg-E4-TYn" secondAttribute="bottom" id="ltw-7R-Jbl"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="amountLabel" destination="Ip6-4E-ZlT" id="7GN-sc-E1d"/>
+                        <outlet property="amountView" destination="5Se-by-2GR" id="9di-9K-vFu"/>
+                        <outlet property="bookmarkButton" destination="SI9-bO-ZuC" id="sMY-EM-J39"/>
+                        <outlet property="categoryLabel" destination="HlW-Lz-G2C" id="aEu-xT-ydf"/>
+                        <outlet property="categoryView" destination="TNi-kz-t02" id="TFT-1i-khG"/>
+                        <outlet property="cookingProcessTableView" destination="HjI-Fx-rPC" id="PCS-bV-hxR"/>
+                        <outlet property="ingredientCollectionView" destination="wdF-eX-UbF" id="HCd-C0-8YG"/>
+                        <outlet property="recipeNameLabel" destination="nQf-Jh-qyv" id="lod-Tg-l1h"/>
+                        <outlet property="representativeImageView" destination="vC0-Jr-OQT" id="fXe-cz-cCM"/>
+                        <outlet property="timeRequiredLabel" destination="LtA-Mr-9hX" id="UtE-B4-woI"/>
+                        <outlet property="timeRequiredView" destination="dIP-ax-9NY" id="YLQ-mS-uLE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wnL-qi-0VQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2791.6030534351144" y="2138.7323943661972"/>
+            <point key="canvasLocation" x="1865" y="2149"/>
         </scene>
         <!--Add Recipe Second View Controller-->
         <scene sceneID="xAY-2b-nYS">
@@ -1001,6 +1020,7 @@
         <image name="alarmClockCircle" width="31" height="31"/>
         <image name="back" width="13" height="23"/>
         <image name="ellipsis_vertical" width="27" height="27"/>
+        <image name="emptyBlackStar" width="27" height="27"/>
         <image name="horizontalEllipsisCircle" width="31" height="31"/>
         <image name="peopleCircle" width="31" height="31"/>
         <image name="plusCircle" width="30" height="30"/>

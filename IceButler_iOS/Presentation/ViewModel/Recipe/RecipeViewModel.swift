@@ -26,7 +26,6 @@ class RecipeViewModel: ObservableObject {
     var popularRecipeIsLastPage: Bool = false
     var bookmarkRecipeIsLastPage: Bool = false
     var myRecipeIsLastPage: Bool = false
-    var recipeDetail: RecipeDetailResponseModel? = nil
     
     private var recipeInFridgeVC: RecipeInFridgeViewController? = nil
     private var popularRecipeVC: PopularRecipeViewController? = nil
@@ -110,14 +109,9 @@ class RecipeViewModel: ObservableObject {
         }
     }
     
-    func getRecipeDetail(recipeIdx: Int, completion: @escaping (Bool) -> Void) {
+    func getRecipeDetail(recipeIdx: Int, completion: @escaping (RecipeDetailResponseModel?) -> Void) {
         recipeService.getRecipeDetail(recipeIdx: recipeIdx) { response in
-            if response != nil {
-                self.recipeDetail = response!
-                completion(true)
-            } else {
-                completion(false)
-            }
+            completion(response)
         }
     }
     
