@@ -77,7 +77,7 @@ class RecipeCollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         self.minimumLineSpacing = 4
         self.minimumInteritemSpacing = 16
-        let attributes = super.layoutAttributesForElements(in: rect)
+        let attributes = super.layoutAttributesForElements(in: rect)?.map { $0.copy() as! UICollectionViewLayoutAttributes }
  
         var leftMargin = 0.0
         var maxY: CGFloat = -1.0

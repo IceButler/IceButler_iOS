@@ -19,7 +19,7 @@ class RecipeDetailViewController: UIViewController {
     @IBOutlet var amountView: UIView!
     @IBOutlet var amountLabel: UILabel!
     @IBOutlet var timeRequiredView: UIView!
-    @IBOutlet var timeRequiredLabel: UIView!
+    @IBOutlet var timeRequiredLabel: UILabel!
     @IBOutlet var ingredientCollectionView: UICollectionView!
     @IBOutlet var cookingProcessTableView: UITableView!
     private var ingredientTextList: [String] = []
@@ -28,7 +28,6 @@ class RecipeDetailViewController: UIViewController {
         super.viewDidLoad()
         fetchData()
         setup()
-        setupLayout()
         setupNavigationBar()
     }
     
@@ -41,6 +40,7 @@ class RecipeDetailViewController: UIViewController {
                 }
                 self.ingredientCollectionView.reloadData()
                 // TODO: 테이블뷰 reloadData()
+                self.setupLayout()
             }
         }
     }
@@ -54,10 +54,30 @@ class RecipeDetailViewController: UIViewController {
     }
     
     private func setupLayout() {
+        // 대표사진
+        if let url = URL(string: recipeDatail.recipeImgUrl) {
+            representativeImageView.kf.setImage(with: url)
+            representativeImageView.contentMode = .scaleAspectFill
+        }
+        // 레시피명
+        recipeNameLabel.text = recipeDatail.recipeName
+        // 카테고리, 분량, 소요시간
+        categoryLabel.text = recipeDatail.recipeCategory
+        categoryView.layer.cornerRadius = categoryView.frame.height / 2
+        categoryView.layer.masksToBounds = true
+        amountLabel.text = "\(recipeDatail.quantity)인분"
+        amountView.layer.cornerRadius = categoryView.frame.height / 2
+        amountView.layer.masksToBounds = true
+        timeRequiredLabel.text = "\(recipeDatail.leadTime)분"
+        timeRequiredView.layer.cornerRadius = categoryView.frame.height / 2
+        timeRequiredView.layer.masksToBounds = true
+        // 재료
         ingredientCollectionView.collectionViewLayout = RecipeCollectionViewLeftAlignFlowLayout()
         if let flowLayout = ingredientCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
+        // 조리과정
+        
     }
     
     func configure(recipeIdx: Int) {
