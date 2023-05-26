@@ -29,3 +29,10 @@ struct PageableModel: Codable {
 struct SortModel: Codable {
     let empty, sorted, unsorted: Bool?
 }
+
+
+// MARK: 서버로부터 가져온 데이터를 후처리 한 후의 모델
+struct NotificationData {
+    var createdAt: [String]
+    var content: [[Notification]]
+}

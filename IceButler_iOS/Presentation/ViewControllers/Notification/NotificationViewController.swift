@@ -10,7 +10,16 @@ import JGProgressHUD
 import Toast_Swift
 
 class NotificationViewController: UIViewController {
+    
+    private var createdAtList: [String] = []
+    private var notifications: [String : [Notification]] = [:]
+    
+    private var dateList: [String] = []
+    
+//    private var notifications: [Notification] = []
+//    private var notifications: NotificationData!
 
+    @IBOutlet var nothingLabel: UILabel!
     @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -40,22 +49,59 @@ class NotificationViewController: UIViewController {
     }
     
     private func fetchData() {
-        let idx = APIManger.shared.getFridgeIdx()
         APIManger.shared.getData(urlEndpointString: "/users/notification",
                                  responseDataType: NotificationResponseModel.self,
                                  parameter: nil,
                                  completionHandler: { [weak self] response in
             switch response.statusCode {
             case 200:
-                print("*-*-*-*-*-* Fetch 공지 데이터 *-*-*-*-*-*")
-                print(response.data)
-                // TODO: 데이터 처리
+//                print("*-*-*-*-*-* Fetch 공지 데이터 *-*-*-*-*-*")
+//                print(response.data)
+                
+                if let data = response.data {
+                    if data.content.count > 0 {
+                        self?.setupData(data: data.content)
+                    }
+                    else {
+                        self?.nothingLabel.isHidden = false
+                        self?.tableView.isHidden = true
+                    }
+                }
+                else {
+                    self?.nothingLabel.isHidden = false
+                    self?.tableView.isHidden = true
+                }
                 
             default:
-                self?.view.makeToast("공지를 불러오는데 실패하였습니다.", duration: 1.0, position: .center)
+                self?.view.makeToast("알림 목록을 불러오는데 실패하였습니다.", duration: 1.0, position: .center)
             }
             
         })
+    }
+    
+    private func setupData(data: [Notification]) {
+        // TODO: 알림 데이터 처리
+        data.forEach { d in
+            if let createdAt = d.createdAt {
+                self.createdAtList.append(createdAt.toString())
+            }
+        }
+        
+        var temp: [Notification] = []
+        createdAtList.forEach { createdAt in
+            data.forEach { d in
+                if d.createdAt?.toString() == createdAt {
+                    temp.append(d)
+                }
+            }
+            notifications[createdAt] = temp
+            temp.removeAll()
+        }
+    }
+    
+    private func renameCreatedAtStr() {
+        // TODO: createdAt을 "n일전" 형태로 변경
+        
     }
     
     private func setupNavigationBar() {
@@ -120,19 +166,25 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 100 }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4 // TODO: API 명세서에 따라 수정 예정
+//        return 4 // TODO: API 명세서에 따라 수정 예정
+        return createdAtList.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "공지날짜"   // TODO: '오늘', '어제' 등의 title이 오도록 수정
+//        return "알림날짜"   // TODO: '오늘', '어제' 등의 title이 오도록 수정
+        if createdAtList.count > 0 { return createdAtList[section] }
+        else { return "알림날짜" }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3    // TODO: API 명세서에 따라 수정 예정
+//        return 3    // TODO: API 명세서에 따라 수정 예정
+        return notifications[createdAtList[section]]!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as? NotificationTableViewCell else { return UITableViewCell() }
+        // TODO: cell에 데이터 setting
+        cell.configure(data: notifications[createdAtList[indexPath.section]]![indexPath.row])
         return cell
     }
 }

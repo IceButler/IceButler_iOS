@@ -7,7 +7,16 @@
 
 import UIKit
 
+enum NotificationType: String {
+    case frdige = "냉장고"
+    case alarm = "유통기한"
+}
+
 class NotificationTableViewCell: UITableViewCell {
+    
+    private var type: NotificationType?
+    private var title: String = ""
+    private var content: String = ""
 
     @IBOutlet var containerView: UIView!
     
@@ -18,6 +27,7 @@ class NotificationTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()
+        setupData()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,5 +38,26 @@ class NotificationTableViewCell: UITableViewCell {
     private func setupLayout() {
         self.selectionStyle = .none
         containerView.layer.cornerRadius = 12
+    }
+    
+    private func setupData() {
+        titleLabel.text = type?.rawValue
+        contentLabel.text = content
+        
+        switch type{
+        case .frdige: iconImgView.image = UIImage(named: "fridge")
+        case .alarm: iconImgView.image = UIImage(named: "clock")
+        default: return
+        }
+    }
+    
+    func configure(data: Notification) {
+        switch data.pushNotificationType {
+        case "냉장고": type = NotificationType.frdige
+        case "유통기한": type = NotificationType.alarm
+        default: return
+        }
+        
+        if let info = data.notificationInfo { content = info }
     }
 }
