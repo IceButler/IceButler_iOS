@@ -17,7 +17,7 @@ struct NotificationResponseModel: Codable {
 
 struct Notification: Codable {
     let pushNotificationType, notificationInfo: String?
-    let createdAt: Date?
+    let createdAt: String?
 }
 
 struct PageableModel: Codable {

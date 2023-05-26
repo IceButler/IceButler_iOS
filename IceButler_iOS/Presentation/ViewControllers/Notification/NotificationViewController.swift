@@ -43,6 +43,7 @@ class NotificationViewController: UIViewController {
             hud.show(in: self.view)
             
             self.fetchData()
+            self.tableView.reloadData()
             
             hud.dismiss(animated: true)
         }
@@ -61,6 +62,7 @@ class NotificationViewController: UIViewController {
                 if let data = response.data {
                     if data.content.count > 0 {
                         self?.setupData(data: data.content)
+                        self?.tableView.reloadData()
                     }
                     else {
                         self?.nothingLabel.isHidden = false
@@ -83,14 +85,14 @@ class NotificationViewController: UIViewController {
         // TODO: 알림 데이터 처리
         data.forEach { d in
             if let createdAt = d.createdAt {
-                self.createdAtList.append(createdAt.toString())
+                self.createdAtList.append(createdAt)
             }
         }
         
         var temp: [Notification] = []
         createdAtList.forEach { createdAt in
             data.forEach { d in
-                if d.createdAt?.toString() == createdAt {
+                if d.createdAt == createdAt {
                     temp.append(d)
                 }
             }
@@ -166,25 +168,24 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 100 }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-//        return 4 // TODO: API 명세서에 따라 수정 예정
         return createdAtList.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "알림날짜"   // TODO: '오늘', '어제' 등의 title이 오도록 수정
         if createdAtList.count > 0 { return createdAtList[section] }
         else { return "알림날짜" }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 3    // TODO: API 명세서에 따라 수정 예정
         return notifications[createdAtList[section]]!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as? NotificationTableViewCell else { return UITableViewCell() }
         // TODO: cell에 데이터 setting
+        print(notifications[createdAtList[indexPath.section]]![indexPath.row])
         cell.configure(data: notifications[createdAtList[indexPath.section]]![indexPath.row])
+//        cell.setupData()
         return cell
     }
 }
