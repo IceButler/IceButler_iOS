@@ -15,9 +15,6 @@ class NotificationViewController: UIViewController {
     private var notifications: [String : [Notification]] = [:]
     
     private var dateList: [String] = []
-    
-//    private var notifications: [Notification] = []
-//    private var notifications: NotificationData!
 
     @IBOutlet var nothingLabel: UILabel!
     @IBOutlet var tableView: UITableView!
@@ -56,9 +53,6 @@ class NotificationViewController: UIViewController {
                                  completionHandler: { [weak self] response in
             switch response.statusCode {
             case 200:
-//                print("*-*-*-*-*-* Fetch 공지 데이터 *-*-*-*-*-*")
-//                print(response.data)
-                
                 if let data = response.data {
                     if data.content.count > 0 {
                         self?.setupData(data: data.content)
@@ -82,7 +76,6 @@ class NotificationViewController: UIViewController {
     }
     
     private func setupData(data: [Notification]) {
-        // TODO: 알림 데이터 처리
         data.forEach { d in
             if let createdAt = d.createdAt {
                 self.createdAtList.append(createdAt)
@@ -182,10 +175,8 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as? NotificationTableViewCell else { return UITableViewCell() }
-        // TODO: cell에 데이터 setting
         print(notifications[createdAtList[indexPath.section]]![indexPath.row])
         cell.configure(data: notifications[createdAtList[indexPath.section]]![indexPath.row])
-//        cell.setupData()
         return cell
     }
 }
