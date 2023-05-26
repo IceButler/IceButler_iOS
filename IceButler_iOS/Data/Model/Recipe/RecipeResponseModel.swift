@@ -74,6 +74,7 @@ struct RecipeDetailResponseModel: Codable {
     let leadTime: Int
     let recipeFoods: [Ingredient]
     let cookery: [Cookery]
+    let isSubscribe: Bool
 }
 
 struct RecipeAddRequestModel: Codable {

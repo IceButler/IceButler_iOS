@@ -859,6 +859,7 @@
                         <outlet property="categoryView" destination="TNi-kz-t02" id="TFT-1i-khG"/>
                         <outlet property="cookingProcessTableView" destination="HjI-Fx-rPC" id="PCS-bV-hxR"/>
                         <outlet property="ingredientCollectionView" destination="wdF-eX-UbF" id="HCd-C0-8YG"/>
+                        <outlet property="naviItem" destination="AUt-LO-Ype" id="djz-mQ-TCD"/>
                         <outlet property="recipeNameLabel" destination="nQf-Jh-qyv" id="lod-Tg-l1h"/>
                         <outlet property="representativeImageView" destination="vC0-Jr-OQT" id="fXe-cz-cCM"/>
                         <outlet property="timeRequiredLabel" destination="efc-JI-PEj" id="8UZ-2V-v5O"/>

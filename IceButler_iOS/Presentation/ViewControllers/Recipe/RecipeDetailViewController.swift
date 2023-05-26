@@ -11,6 +11,7 @@ class RecipeDetailViewController: UIViewController {
     
     private var recipeIdx: Int!
     private var recipeDatail: RecipeDetailResponseModel!
+    @IBOutlet var naviItem: UINavigationItem!
     @IBOutlet var bookmarkButton: UIBarButtonItem!
     @IBOutlet var representativeImageView: UIImageView!
     @IBOutlet var recipeNameLabel: UILabel!
@@ -54,6 +55,10 @@ class RecipeDetailViewController: UIViewController {
     }
     
     private func setupLayout() {
+        // 즐겨찾기
+        if recipeDatail.isSubscribe {
+            self.setLikeStatus(isTrue: true)
+        }
         // 대표사진
         if let url = URL(string: recipeDatail.recipeImgUrl) {
             representativeImageView.kf.setImage(with: url)
@@ -90,6 +95,22 @@ class RecipeDetailViewController: UIViewController {
     
     @IBAction func didTapXButton(_ sender: Any) {
         self.dismiss(animated: true)
+    }
+    
+    @objc private func didTapBookmarkButton(_ sender: Any) {
+        RecipeViewModel.shared.updateBookmarkStatus(recipeIdx: recipeIdx) { bookmarkStatus in
+            self.setLikeStatus(isTrue: bookmarkStatus)
+        }
+    }
+    
+    private func setLikeStatus(isTrue: Bool) {
+        if isTrue {
+            naviItem.rightBarButtonItems?.removeLast()
+            naviItem.rightBarButtonItems?.append(UIBarButtonItem(image: UIImage(named: "filledStar"), style: .plain, target: self, action: #selector(didTapBookmarkButton)))
+        } else {
+            naviItem.rightBarButtonItems?.removeLast()
+            naviItem.rightBarButtonItems?.append(UIBarButtonItem(image: UIImage(named: "emptyBlackStar"), style: .plain, target: self, action: #selector(didTapBookmarkButton)))
+        }
     }
 }
 
