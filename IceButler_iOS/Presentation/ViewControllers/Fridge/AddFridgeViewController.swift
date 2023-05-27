@@ -239,18 +239,6 @@ extension AddFridgeViewController {
         else { return false }
     }
     
-    /// 냉장고 세부사항 입력 여부
-//    private func checkFridgeDetail() -> Bool {
-//        if (fridgeDetailTextView.text.count > 0)
-//            && (fridgeDetailTextView.text != "200자 이내로 작성해주세요.") { return true }
-//        else { return false }
-//    }
-    
-    /// 냉장고 멤버 추가 여부
-//    private func checkFridgeMember() -> Bool {
-//        return (selectedMember.count > 0) ? true : false
-//    }
-    
     /// 완료 버튼 활성/비활성 설정
     private func setCompleteButtonMode() {
         if isEmptyInputs() {
@@ -302,10 +290,16 @@ extension AddFridgeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedMember.append(searchMember[indexPath.row])
-        self.searchResultContainerView.isHidden = true
-        self.memberCollectionView.isHidden = false
-        self.memberCollectionView.reloadData()
+        UserService().getUserInfo { [weak self] userInfo in
+            if userInfo.userIdx == self?.searchMember[indexPath.row].userIdx {
+                self?.showAlert(title: "멤버 추가 실패", message: "본인을 냉장고 멤버로 추가할 수 없습니다.", confirmTitle: "확인")
+            } else {
+                self?.selectedMember.append((self?.searchMember[indexPath.row])!)
+                self?.searchResultContainerView.isHidden = true
+                self?.memberCollectionView.isHidden = false
+                self?.memberCollectionView.reloadData()
+            }
+        }
     }
 }
 
