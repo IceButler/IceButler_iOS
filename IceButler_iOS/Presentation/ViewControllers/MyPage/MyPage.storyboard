@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="-619" y="-2"/>
         </scene>
-        <!--마이페이지-->
+        <!--My Page View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="MyPageViewController" id="Y6W-OH-hqX" customClass="MyPageViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -43,7 +43,7 @@
                                                 <rect key="frame" x="25" y="30" width="343" height="92"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="92T-gT-4vI">
-                                                        <rect key="frame" x="20" y="19.333333333333332" width="60" height="53.666666666666671"/>
+                                                        <rect key="frame" x="20" y="18" width="60" height="56.666666666666671"/>
                                                         <color key="backgroundColor" red="0.16078431372549018" green="0.3529411764705882" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -184,7 +184,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="BgT-13-ttV" secondAttribute="trailing" id="vFO-aS-9bG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="마이페이지" id="ps0-BU-yBk"/>
+                    <navigationItem key="navigationItem" id="ps0-BU-yBk"/>
                     <connections>
                         <outlet property="editProfileButton" destination="Jxf-CV-6AS" id="hUb-Xt-ycp"/>
                         <outlet property="emailLabel" destination="zfF-da-hxc" id="fV9-7I-76N"/>

@@ -74,6 +74,7 @@ class CartViewController: UIViewController {
             switch response.statusCode {
             case 200:
                 self?.noRefrigeratorView.isHidden = true
+                self?.addFoodButton.isHidden = false
                 self?.cartFoods.removeAll()
                 self?.cartFoods = response.data!
                 self?.cartMainTableView.reloadData()
@@ -87,6 +88,7 @@ class CartViewController: UIViewController {
                 }
             case 403:
                 self?.noRefrigeratorView.isHidden = false
+                self?.addFoodButton.isHidden = true
                 
             default: return
             }
@@ -118,6 +120,14 @@ class CartViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    @IBAction func didTapAddFridgeButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard.init(name: "Fridge", bundle: nil)
+        guard let addFridgeVC = storyboard.instantiateViewController(withIdentifier: "AddFridgeViewController") as? AddFridgeViewController else { return }
+        addFridgeVC.modalPresentationStyle = .overFullScreen
+        present(addFridgeVC, animated: true)
+    }
+    
+    
     @IBAction func didTapAddFoodButton(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "Cart", bundle: nil)
         guard let addFoodViewController = storyboard.instantiateViewController(withIdentifier: "AddFoodViewController") as? AddFoodViewController else { return }
@@ -146,7 +156,7 @@ class CartViewController: UIViewController {
                                       leftButtonTitle: "취소",
                                       righttButtonTitle: "확인",
                                       rightCompletion: {
-            CartViewModel.shared.deleteFood(cartId: APIManger.shared.getFridgeIdx())  // 임시 ID
+            CartViewModel.shared.deleteFood(cartId: APIManger.shared.getFridgeIdx())
             
             let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
             guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "SelectAlertViewController") as? CompleteBuyingViewController else { return }
@@ -155,7 +165,7 @@ class CartViewController: UIViewController {
                 let name = CartViewModel.shared.removeFoodNames[i]
                 alertViewController.completeFoods.append(BuyedFood(idx: idx, name: name))
             })
-//            alertViewController.completeFoods = CartViewModel.shared.removeFoodNames
+
             self.navigationController?.pushViewController(alertViewController, animated: true)
             },
                                       leftCompletion: {
@@ -172,7 +182,7 @@ class CartViewController: UIViewController {
     }
     
     func showAlertView() {
-        self.tabBarController?.tabBar.isHidden = true
+//        self.tabBarController?.tabBar.isHidden = true
         self.addFoodButton.isHidden = true
         self.alertView.backgroundColor = .signatureBlue
         self.alertView.isHidden = false
@@ -233,7 +243,7 @@ class CartViewController: UIViewController {
         self.addFoodButton.backgroundColor = UIColor.signatureDeepBlue
         self.addFoodButton.backgroundColor = UIColor.signatureDeepBlue
         self.addFoodButton.layer.cornerRadius = self.addFoodButton.frame.width / 2
-        self.addRefrigeratorButton.layer.cornerRadius = 15
+        self.addRefrigeratorButton.layer.cornerRadius = 22
     }
     
     

@@ -27,13 +27,6 @@ class FoodCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        cancellabels.removeAll()
-//        self.isSelectedFood = false
-//    }
-    
-    
     private func setupGestureHandler() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction(_:)))
         longPressGesture.minimumPressDuration = 1

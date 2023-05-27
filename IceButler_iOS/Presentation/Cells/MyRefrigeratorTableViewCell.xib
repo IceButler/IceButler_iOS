@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -157,13 +158,36 @@
                             <constraint firstItem="eD9-Vw-VMO" firstAttribute="top" secondItem="viO-oe-DQe" secondAttribute="bottom" constant="4" id="vMV-PP-6kS"/>
                         </constraints>
                     </view>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ju-RM-m5s">
+                        <rect key="frame" x="235" y="42" width="95" height="42"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPz-29-BQA">
+                                <rect key="frame" x="18" y="5" width="66" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="trash" title="삭제">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapDeleteButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nwU-23-Hem"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="42" id="V66-eJ-rJn"/>
+                            <constraint firstAttribute="width" constant="95" id="w9Q-Aq-K3D"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="eLT-EG-alH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="768-Pd-yKs"/>
+                    <constraint firstItem="5ju-RM-m5s" firstAttribute="trailing" secondItem="hM7-0d-8mf" secondAttribute="trailing" id="F8a-34-Mnx"/>
                     <constraint firstAttribute="trailing" secondItem="eLT-EG-alH" secondAttribute="trailing" constant="20" id="Fen-ma-mul"/>
                     <constraint firstItem="eLT-EG-alH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Fv1-xI-Tno"/>
                     <constraint firstAttribute="bottom" secondItem="eLT-EG-alH" secondAttribute="bottom" constant="15" id="PTX-Xt-wq6"/>
                     <constraint firstItem="iiT-dd-uHf" firstAttribute="trailing" secondItem="hM7-0d-8mf" secondAttribute="trailing" id="QAB-g6-ilh"/>
+                    <constraint firstItem="5ju-RM-m5s" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="42" id="Z8H-yS-VeZ"/>
                     <constraint firstItem="iiT-dd-uHf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="42" id="tVr-Iq-hFK"/>
                 </constraints>
             </tableViewCellContentView>
@@ -174,6 +198,7 @@
                 <outlet property="containerView" destination="eLT-EG-alH" id="hpB-wa-Ml3"/>
                 <outlet property="memberNumLabel" destination="BeD-6g-uTi" id="uc3-Si-zaf"/>
                 <outlet property="moreView" destination="iiT-dd-uHf" id="4zs-91-Eqq"/>
+                <outlet property="notOwnerMoreView" destination="5ju-RM-m5s" id="xxs-hi-BCX"/>
                 <outlet property="refrigeratorNameLabel" destination="nko-gj-1Rp" id="ouU-JK-wZi"/>
             </connections>
             <point key="canvasLocation" x="117.55725190839694" y="19.718309859154932"/>
@@ -185,5 +210,8 @@
         <image name="pencil" width="20.666666030883789" height="20.666666030883789"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="trash" width="15.333333015441895" height="20"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

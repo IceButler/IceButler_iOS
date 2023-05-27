@@ -187,8 +187,14 @@ class AddFoodViewController: UIViewController {
     private func selfAddFood(foodName: String) {
         if let category = selectedCategory {
             selectedFoods.append(AddFood(foodName: foodName, foodCategory: category))
+            selectedFoodNames.append(foodName)
+            
+            searchResultContainerView.isHidden = true
+            collectionView.isHidden = false
             collectionView.reloadData()
-            print(selectedFoods)
+            
+            checkSelectedFoodNamesCount()
+        
         } else {
             let alert = UIAlertController(title: nil, message: "카테고리를 먼저 선택해주세요!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .default))

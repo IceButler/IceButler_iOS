@@ -109,6 +109,12 @@ class RecipeViewModel: ObservableObject {
         }
     }
     
+    func getRecipeDetail(recipeIdx: Int, completion: @escaping (RecipeDetailResponseModel?) -> Void) {
+        recipeService.getRecipeDetail(recipeIdx: recipeIdx) { response in
+            completion(response)
+        }
+    }
+    
     func getFridgeRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
         completion(fridgeRecipeList[index])
     }

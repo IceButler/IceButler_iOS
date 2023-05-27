@@ -49,7 +49,6 @@ class EditMyFridgeViewController: UIViewController {
     @IBOutlet weak var completeButton: UIButton!
     
     @IBAction func didTapMemberSearchButton(_ sender: UIButton) {
-        // TODO: 닉네임으로 멤버 검색
         if memberSearchTextField.text?.count ?? 0 > 0 {
             searchMember.removeAll()
             FridgeViewModel.shared.searchMemberResults.removeAll()
@@ -95,8 +94,6 @@ class EditMyFridgeViewController: UIViewController {
                                                  members: memberIdxs,
                                                  newOwnerIdx: newOwner.userIdx)
             
-//            print("param --> \(param)")
-            
             var urlStr = ""
             if isMulti { urlStr = "/multiFridges/\(fridgeIdx)" }
             else { urlStr = "/fridges/\(fridgeIdx)" }
@@ -138,7 +135,7 @@ class EditMyFridgeViewController: UIViewController {
             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
             
             let statusbarView = UIView()
-            statusbarView.backgroundColor = UIColor.signatureLightBlue
+            statusbarView.backgroundColor = UIColor.navigationColor
             view.addSubview(statusbarView)
           
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -156,7 +153,7 @@ class EditMyFridgeViewController: UIViewController {
             statusBar?.backgroundColor = UIColor.red
         }
         
-        self.navigationController?.navigationBar.backgroundColor = .signatureLightBlue
+        self.navigationController?.navigationBar.backgroundColor = .navigationColor
         self.tabBarController?.tabBar.isHidden = false
         
         let mainText = UILabel()

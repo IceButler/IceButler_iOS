@@ -31,6 +31,7 @@ class MapViewController: UIViewController {
     @IBOutlet var storeAddressLabel: UILabel!
     @IBOutlet var storePhoneNumLabel: UILabel!
     
+    private var url: URL?
     
     
     @IBAction func didTapCurrentLocationButton(_ sender: UIButton) {
@@ -202,6 +203,19 @@ class MapViewController: UIViewController {
 
         }
     }
+    
+    
+    @IBAction func moveToNavigation(_ sender: Any) {
+        
+        let appStoreURL = URL(string: "http://itunes.apple.com/app/id311867728?mt=8")!
+
+        if UIApplication.shared.canOpenURL(url!) {
+            UIApplication.shared.open(url!)
+        }else {
+            UIApplication.shared.open(appStoreURL)
+        }
+    }
+    
 }
 
 // MARK: Delegate Extensions
@@ -216,6 +230,14 @@ extension MapViewController: MTMapViewDelegate {
         storeNameLabel.text = storeData[poiItem.tag].place_name
         storeAddressLabel.text = storeData[poiItem.tag].road_address_name
         storePhoneNumLabel.text = (storeData[poiItem.tag].phone!.count > 0) ? storeData[poiItem.tag].phone : "전화번호가 없습니다."
+        
+        guard let dlat = storeData[poiItem.tag].y else {return false}
+        guard let dlng = storeData[poiItem.tag].x else {return false}
+        guard let placeName = storeData[poiItem.tag].place_name else {return false}
+        
+        let urlStr = "nmap://route/walk?dlat=\(dlat)&dlng=\(dlng)&dname=\(placeName)&appname=yoosang.IceButler-iOS"
+        let encodedStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        url = URL(string: encodedStr)!
         
         return false
     }

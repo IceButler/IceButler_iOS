@@ -66,6 +66,17 @@ struct Sort: Codable {
     let unsorted: Bool
 }
 
+struct RecipeDetailResponseModel: Codable {
+    let recipeImgUrl: String
+    let recipeName: String
+    let recipeCategory: String
+    let quantity: Int
+    let leadTime: Int
+    let recipeFoods: [Ingredient]
+    let cookery: [Cookery]
+    let isSubscribe: Bool
+}
+
 struct RecipeAddRequestModel: Codable {
     let recipeName: String
     let recipeImgKey: String
@@ -84,6 +95,12 @@ struct Ingredient: Codable {
 struct CookingProcess: Codable {
     let cookeryImgKey: String?
     let cookeryDescription: String
+}
+
+struct Cookery: Codable {
+    let nextIdx: Int
+    let description: String
+    let cookeryImgUrl: String?
 }
 
 struct RecipeBookmarkResponseModel: Codable {
