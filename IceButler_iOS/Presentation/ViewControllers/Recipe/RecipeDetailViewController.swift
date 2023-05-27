@@ -40,7 +40,7 @@ class RecipeDetailViewController: UIViewController {
                     self.ingredientTextList.append(ingredient.foodName + " " + ingredient.foodDetail)
                 }
                 self.ingredientCollectionView.reloadData()
-                // TODO: 테이블뷰 reloadData()
+                self.cookingProcessTableView.reloadData()
                 self.setupLayout()
             }
         }
@@ -49,9 +49,14 @@ class RecipeDetailViewController: UIViewController {
     private func setup() {
         ingredientCollectionView.delegate = self
         ingredientCollectionView.dataSource = self
+        cookingProcessTableView.delegate = self
+        cookingProcessTableView.dataSource = self
+        cookingProcessTableView.rowHeight = UITableView.automaticDimension
         
         let recipeIngredientCell = UINib(nibName: "RecipeDetailIngredientCell", bundle: nil)
         ingredientCollectionView.register(recipeIngredientCell, forCellWithReuseIdentifier: "RecipeDetailIngredientCell")
+        let cookingProcessCell = UINib(nibName: "RecipeDetailCookingProcessCell", bundle: nil)
+        cookingProcessTableView.register(cookingProcessCell, forCellReuseIdentifier: "RecipeDetailCookingProcessCell")
     }
     
     private func setupLayout() {
@@ -82,7 +87,7 @@ class RecipeDetailViewController: UIViewController {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
         // 조리과정
-        
+        cookingProcessTableView.separatorStyle = .none
     }
     
     func configure(recipeIdx: Int) {
@@ -132,6 +137,26 @@ extension RecipeDetailViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: ingredientTextList[indexPath.row].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]).width + 10, height: 22)
+    }
+}
+
+extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let numOfCookeryStep = recipeDatail?.cookery.count {
+            return numOfCookeryStep
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeDetailCookingProcessCell", for: indexPath) as? RecipeDetailCookingProcessCell else {return UITableViewCell()}
+        let cookery = recipeDatail.cookery[indexPath.row]
+        cell.configure(stepNum: cookery.nextIdx + 1, description: cookery.description, cookeryImgUrl: cookery.cookeryImgUrl)
+        cell.selectionStyle = .none
+        cell.backgroundColor = UIColor.clear
+        
+        return cell
     }
 }
 

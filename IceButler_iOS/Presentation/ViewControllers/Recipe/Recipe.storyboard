@@ -629,11 +629,11 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAn-O5-Oyt">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAn-O5-Oyt">
                                 <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LtA-Mr-9hX">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="875"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="790"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vC0-Jr-OQT">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="222"/>
@@ -747,7 +747,7 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="0Ks-Jd-3Mq">
-                                                <rect key="frame" x="16" y="358" width="361" height="17"/>
+                                                <rect key="frame" x="16" y="341" width="361" height="17"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="재료" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Frx-l4-Pw0">
                                                         <rect key="frame" x="0.0" y="0.0" width="24.333333333333332" height="17"/>
@@ -764,8 +764,8 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wdF-eX-UbF" customClass="IntrinsicCollectionView" customModule="IceButler_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="388" width="361" height="22"/>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wdF-eX-UbF" customClass="IntrinsicCollectionView" customModule="IceButler_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="371" width="361" height="22"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="251" constant="22" id="efS-kp-CIm"/>
@@ -779,7 +779,7 @@
                                                 <cells/>
                                             </collectionView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="rTr-vV-vYm">
-                                                <rect key="frame" x="16" y="427" width="361" height="17"/>
+                                                <rect key="frame" x="16" y="410" width="361" height="17"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레시피" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ao2-vU-T3u">
                                                         <rect key="frame" x="0.0" y="0.0" width="36.333333333333336" height="17"/>
@@ -796,8 +796,8 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="361" placeholderIntrinsicHeight="398" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="HjI-Fx-rPC">
-                                                <rect key="frame" x="16" y="457" width="361" height="398"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="361" placeholderIntrinsicHeight="300" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="HjI-Fx-rPC" customClass="IntrinsicTableView" customModule="IceButler_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="440" width="361" height="300"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </tableView>
                                         </subviews>
@@ -813,7 +813,7 @@
                                             <constraint firstItem="HjI-Fx-rPC" firstAttribute="top" secondItem="rTr-vV-vYm" secondAttribute="bottom" constant="13" id="Nos-aA-OZ4"/>
                                             <constraint firstItem="HjI-Fx-rPC" firstAttribute="leading" secondItem="LtA-Mr-9hX" secondAttribute="leading" constant="16" id="OxB-Za-kTh"/>
                                             <constraint firstItem="wdF-eX-UbF" firstAttribute="top" secondItem="0Ks-Jd-3Mq" secondAttribute="bottom" constant="13" id="Qpy-Fb-T11"/>
-                                            <constraint firstItem="0Ks-Jd-3Mq" firstAttribute="top" secondItem="yRr-rY-GuQ" secondAttribute="bottom" constant="33" id="Sxm-TI-bRb"/>
+                                            <constraint firstItem="0Ks-Jd-3Mq" firstAttribute="top" secondItem="yRr-rY-GuQ" secondAttribute="bottom" constant="16" id="Sxm-TI-bRb"/>
                                             <constraint firstItem="nQf-Jh-qyv" firstAttribute="leading" secondItem="LtA-Mr-9hX" secondAttribute="leading" constant="50" id="Xt0-vn-cZv"/>
                                             <constraint firstAttribute="trailing" secondItem="0Ks-Jd-3Mq" secondAttribute="trailing" constant="16" id="YGN-LH-9zq"/>
                                             <constraint firstItem="yRr-rY-GuQ" firstAttribute="centerX" secondItem="LtA-Mr-9hX" secondAttribute="centerX" id="Yfa-nv-280"/>
@@ -821,7 +821,7 @@
                                             <constraint firstItem="yRr-rY-GuQ" firstAttribute="top" secondItem="nQf-Jh-qyv" secondAttribute="bottom" constant="30" id="e9v-vf-99t"/>
                                             <constraint firstItem="rTr-vV-vYm" firstAttribute="leading" secondItem="0Ks-Jd-3Mq" secondAttribute="leading" id="fck-eX-eeY"/>
                                             <constraint firstItem="rTr-vV-vYm" firstAttribute="top" secondItem="wdF-eX-UbF" secondAttribute="bottom" constant="17" id="gYd-t9-3m7"/>
-                                            <constraint firstAttribute="bottom" secondItem="HjI-Fx-rPC" secondAttribute="bottom" constant="20" id="glG-Sa-eIm"/>
+                                            <constraint firstAttribute="bottom" secondItem="HjI-Fx-rPC" secondAttribute="bottom" constant="50" id="glG-Sa-eIm"/>
                                             <constraint firstAttribute="trailing" secondItem="vC0-Jr-OQT" secondAttribute="trailing" id="tOo-Ym-zPa"/>
                                             <constraint firstItem="nQf-Jh-qyv" firstAttribute="top" secondItem="vC0-Jr-OQT" secondAttribute="bottom" constant="30" id="vIG-hV-fs4"/>
                                             <constraint firstItem="vC0-Jr-OQT" firstAttribute="top" secondItem="LtA-Mr-9hX" secondAttribute="top" id="wWP-ht-esx"/>
