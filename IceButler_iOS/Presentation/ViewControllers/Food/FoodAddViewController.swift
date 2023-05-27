@@ -9,6 +9,7 @@ import UIKit
 import BSImagePicker
 import Photos
 import Alamofire
+import JGProgressHUD
 
 
 protocol FoodAddDelegate: AnyObject {
@@ -258,18 +259,17 @@ class FoodAddViewController: UIViewController {
             
             if FoodViewModel.shared.isEditFood == true && FoodViewModel.shared.foodOwnerListCount() != 0 {
                 let editFood = FoodViewModel.shared.getFood()
-                
-                for i in 0..<FoodViewModel.shared.foodOwnerListCount() {
-                    if FoodViewModel.shared.foodOwnerListName(index: i) == editFood.owner {
-                        self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: i)
+                if let foodOwner = editFood.owner {
+                    for i in 0..<FoodViewModel.shared.foodOwnerListCount() {
+                        if FoodViewModel.shared.foodOwnerListName(index: i) == editFood.owner {
+                            self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: i)
+                            
+                            self.ownerOpenButton.tintColor = .black
+                            self.ownerOpenButton.backgroundColor = .focusSkyBlue
+                            self.ownerOpenButton.setTitle(editFood.owner ?? "", for: .normal)
+                        }
                     }
                 }
-                
-                self.ownerOpenButton.tintColor = .black
-                self.ownerOpenButton.backgroundColor = .focusSkyBlue
-                self.ownerOpenButton.setTitle(editFood.owner ?? "", for: .normal)
-                
-               
             }
         }
         
@@ -302,7 +302,12 @@ class FoodAddViewController: UIViewController {
                     
                     
                     self.foodNameTextView.text = food.foodName
+                    self.foodNameTextView.textColor = .black
+                    self.foodNameTextView.backgroundColor = .focusSkyBlue
+                    
                     self.foodDetailTextView.text = food.foodDetailName
+                    self.foodDetailTextView.textColor = .black
+                    self.foodDetailTextView.backgroundColor = .focusSkyBlue
                     
                     for i in 0..<FoodCategory.allCases.count {
                         if FoodCategory.allCases[i].rawValue == food.foodCategory {
@@ -330,12 +335,14 @@ class FoodAddViewController: UIViewController {
                     
                     self.foodImageUrl = food.imgURL
                     
-                    
-                    for i in 0..<FoodViewModel.shared.foodOwnerListCount() {
-                        if FoodViewModel.shared.foodOwnerListName(index: i) == food.owner {
-                            self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: i)
+                    if let foodOwner = food.owner {
+                        for i in 0..<FoodViewModel.shared.foodOwnerListCount() {
+                            if FoodViewModel.shared.foodOwnerListName(index: i) == food.owner {
+                                self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: i)
+                            }
                         }
                     }
+                   
                     
                     self.foodAddButton.backgroundColor = .availableBlue
                 }
@@ -745,101 +752,125 @@ class FoodAddViewController: UIViewController {
             let dateString = dateFromat.string(from: date!)
             
             if isEdit {
-                if foodImage != nil {
-                    let fridgeIdx = APIManger.shared.getFridgeIdx()
-                    
-                    FoodViewModel.shared.getUploadImageUrl(foodIdx: foodIdx,
-                                                           imageDir: ImageDir.Food,
-                                                           image: foodImage!,
-                                                           fridgeIdx: fridgeIdx,
-                                                           foodName: foodNameTextView.text,
-                                                           foodDetail: foodDetailTextView.text,
-                                                           foodCategory: selectedFoodCategory!.rawValue,
-                                                           foodShelfLife: dateString,
-                                                           foodOwnerIdx: foodOwnerIdx,
-                                                           memo: memo) { result in
-                        if result {
-                            let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
-                                FoodViewModel.shared.getFoodDetail( foodIdx: self.foodIdx)
-                                FoodViewModel.shared.isEditFood = false
-                                self.navigationController?.popViewController(animated: true)
-                            }))
-                            self.present(alert, animated: true)
-                        }else {
-                            self.showAlert(title: "실패", message: "음식 수정에 실패하셨습니다. 다시 시도해주세요.")
-                        }
+                DispatchQueue.main.async { [self] in
+                    let hud = JGProgressHUD()
+                    hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+                    hud.style = .light
+                    hud.show(in: self.view)
+                    if foodImage != nil {
+                        let fridgeIdx = APIManger.shared.getFridgeIdx()
                         
-                    }
-                } else {
-                    let fridgeIdx = APIManger.shared.getFridgeIdx()
-                    FoodViewModel.shared.patchFood(foodIdx: self.foodIdx, fridgeIdx: fridgeIdx,
-                                                   foodName: foodNameTextView.text,
-                                                   foodDetail: foodDetailTextView.text,
-                                                   foodCategory: selectedFoodCategory!.rawValue,
-                                                   foodShelfLife: dateString,
-                                                   foodOwnerIdx: foodOwnerIdx,
-                                                   memo: memo,
-                                                   imgUrl: self.foodImageUrl) { result in
-                        if result {
-                            let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
-                                FoodViewModel.shared.isEditFood = false
-                                FoodViewModel.shared.getFoodDetail( foodIdx: self.foodIdx)
-                                self.navigationController?.popViewController(animated: true)
-                            }))
-                            self.present(alert, animated: true)
-                        }else {
-                            self.showAlert(title: "실패", message: "음식 수정에 실패하셨습니다. 다시 시도해주세요.")
+                        FoodViewModel.shared.getUploadImageUrl(foodIdx: foodIdx,
+                                                               imageDir: ImageDir.Food,
+                                                               image: foodImage!,
+                                                               fridgeIdx: fridgeIdx,
+                                                               foodName: foodNameTextView.text,
+                                                               foodDetail: foodDetailTextView.text,
+                                                               foodCategory: selectedFoodCategory!.rawValue,
+                                                               foodShelfLife: dateString,
+                                                               foodOwnerIdx: foodOwnerIdx,
+                                                               memo: memo) { result in
+                            hud.dismiss(animated: true)
+                            if result {
+                                let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                                    FoodViewModel.shared.getFoodDetail( foodIdx: self.foodIdx)
+                                    FoodViewModel.shared.isEditFood = false
+                                    self.navigationController?.popViewController(animated: true)
+                                }))
+                                self.present(alert, animated: true)
+                            }else {
+                                self.showAlert(title: "실패", message: "음식 수정에 실패하셨습니다. 다시 시도해주세요.")
+                            }
+                            
+                        }
+                    } else {
+                        let fridgeIdx = APIManger.shared.getFridgeIdx()
+                        FoodViewModel.shared.patchFood(foodIdx: self.foodIdx, fridgeIdx: fridgeIdx,
+                                                       foodName: foodNameTextView.text,
+                                                       foodDetail: foodDetailTextView.text,
+                                                       foodCategory: selectedFoodCategory!.rawValue,
+                                                       foodShelfLife: dateString,
+                                                       foodOwnerIdx: foodOwnerIdx,
+                                                       memo: memo,
+                                                       imgUrl: self.foodImageUrl) { result in
+                            hud.dismiss(animated: true)
+                            if result {
+                                let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                                    FoodViewModel.shared.isEditFood = false
+                                    FoodViewModel.shared.getFoodDetail( foodIdx: self.foodIdx)
+                                    self.navigationController?.popViewController(animated: true)
+                                }))
+                                self.present(alert, animated: true)
+                            }else {
+                                self.showAlert(title: "실패", message: "음식 수정에 실패하셨습니다. 다시 시도해주세요.")
+                            }
                         }
                     }
+                    
+                    
                 }
+                
+                
             }else {
-                if foodImage != nil {
-                    let fridgeIdx = APIManger.shared.getFridgeIdx()
-                    FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food,
-                                                           image: foodImage!,
-                                                           fridgeIdx: fridgeIdx,
-                                                           foodName: foodNameTextView.text,
-                                                           foodDetail: foodDetailTextView.text,
-                                                           foodCategory: selectedFoodCategory!.rawValue,
-                                                           foodShelfLife: dateString,
-                                                           foodOwnerIdx: foodOwnerIdx,
-                                                           memo: memo) { result in
-                        if result {
-                            let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
-                                FoodViewModel.shared.deleteAll()
-                                self.navigationController?.popViewController(animated: true)
-                            }))
-                            self.present(alert, animated: true)
-                        }else {
-                            self.showAlert(title: "실패", message: "음식 등록에 실패하셨습니다. 다시 시도해주세요.")
-                        }
+                DispatchQueue.main.async { [self] in
+                    let hud = JGProgressHUD()
+                    hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+                    hud.style = .light
+                    hud.show(in: self.view)
+                    
+                    if foodImage != nil {
+                        let fridgeIdx = APIManger.shared.getFridgeIdx()
+                        FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food,
+                                                               image: foodImage!,
+                                                               fridgeIdx: fridgeIdx,
+                                                               foodName: foodNameTextView.text,
+                                                               foodDetail: foodDetailTextView.text,
+                                                               foodCategory: selectedFoodCategory!.rawValue,
+                                                               foodShelfLife: dateString,
+                                                               foodOwnerIdx: foodOwnerIdx,
+                                                               memo: memo) { result in
+                            hud.dismiss(animated: true)
+                            if result {
+                                let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                                    FoodViewModel.shared.deleteAll()
+                                    self.navigationController?.popViewController(animated: true)
+                                }))
+                                self.present(alert, animated: true)
+                            }else {
+                                self.showAlert(title: "실패", message: "음식 등록에 실패하셨습니다. 다시 시도해주세요.")
+                            }
 
-                    }
-                } else {
-                    let fridgeIdx = APIManger.shared.getFridgeIdx()
-                    FoodViewModel.shared.postFood(fridgeIdx: fridgeIdx,
-                                                  foodName: foodNameTextView.text,
-                                                  foodDetail: foodDetailTextView.text,
-                                                  foodCategory: selectedFoodCategory!.rawValue,
-                                                  foodShelfLife: dateString,
-                                                  foodOwnerIdx: foodOwnerIdx,
-                                                  memo: memo,
-                                                  imgUrl: nil) { result in
-                        if result {
-                            let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
-                                FoodViewModel.shared.deleteAll()
-                                self.navigationController?.popViewController(animated: true)
-                            }))
-                            self.present(alert, animated: true)
-                        }else {
-                            self.showAlert(title: "실패", message: "음식 등록에 실패하셨습니다. 다시 시도해주세요.")
+                        }
+                    } else {
+                        let fridgeIdx = APIManger.shared.getFridgeIdx()
+                        FoodViewModel.shared.postFood(fridgeIdx: fridgeIdx,
+                                                      foodName: foodNameTextView.text,
+                                                      foodDetail: foodDetailTextView.text,
+                                                      foodCategory: selectedFoodCategory!.rawValue,
+                                                      foodShelfLife: dateString,
+                                                      foodOwnerIdx: foodOwnerIdx,
+                                                      memo: memo,
+                                                      imgUrl: nil) { result in
+                            hud.dismiss(animated: true)
+                            if result {
+                                let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                                    FoodViewModel.shared.deleteAll()
+                                    self.navigationController?.popViewController(animated: true)
+                                }))
+                                self.present(alert, animated: true)
+                            }else {
+                                self.showAlert(title: "실패", message: "음식 등록에 실패하셨습니다. 다시 시도해주세요.")
+                            }
                         }
                     }
                 }
+                
+                
+                
             }
         }
     }
