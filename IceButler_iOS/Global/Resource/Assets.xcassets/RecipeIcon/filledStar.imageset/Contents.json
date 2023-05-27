@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "star.png",
+      "filename" : "ion_star.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "star 1.png",
+      "filename" : "ion_star 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "star 2.png",
+      "filename" : "ion_star 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
