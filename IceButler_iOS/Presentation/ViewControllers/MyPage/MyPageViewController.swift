@@ -47,6 +47,7 @@ class MyPageViewController: UIViewController {
         setupNavigationBar()
         self.tabBarController?.tabBar.isHidden = false
         AuthViewModel.shared.isModify = false
+        FoodViewModel.shared.setIsSelectedFood(isSelected: false)
     }
     
     private func configure() {
