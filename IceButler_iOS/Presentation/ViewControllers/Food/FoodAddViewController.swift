@@ -542,7 +542,7 @@ class FoodAddViewController: UIViewController {
         
         
         date = foodDatePicker.date
-        FoodViewModel.shared.setIsFoodDetailName(index: 4)
+        FoodViewModel.shared.setIsFoodAddComplete(index: 3)
     }
     
     
@@ -730,10 +730,7 @@ class FoodAddViewController: UIViewController {
                 showAlert(title: "오류", message: "카테고리를 선택해주세요.")
                 return
             }
-            if foodOwnerIdx == nil {
-                showAlert(title: "오류", message: "음식 소유자를 선택해주세요.")
-                return
-            }
+
             let memo: String?
             
             if foodMemoTextView.text == "" || foodMemoTextView.text == "메모내용 or 없음" {
@@ -758,7 +755,7 @@ class FoodAddViewController: UIViewController {
                                                            foodDetail: foodDetailTextView.text,
                                                            foodCategory: selectedFoodCategory!.rawValue,
                                                            foodShelfLife: dateString,
-                                                           foodOwnerIdx: foodOwnerIdx!,
+                                                           foodOwnerIdx: foodOwnerIdx,
                                                            memo: memo) { result in
                         if result {
                             let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
@@ -780,7 +777,7 @@ class FoodAddViewController: UIViewController {
                                                    foodDetail: foodDetailTextView.text,
                                                    foodCategory: selectedFoodCategory!.rawValue,
                                                    foodShelfLife: dateString,
-                                                   foodOwnerIdx: foodOwnerIdx!,
+                                                   foodOwnerIdx: foodOwnerIdx,
                                                    memo: memo,
                                                    imgUrl: self.foodImageUrl) { result in
                         if result {
@@ -806,7 +803,7 @@ class FoodAddViewController: UIViewController {
                                                            foodDetail: foodDetailTextView.text,
                                                            foodCategory: selectedFoodCategory!.rawValue,
                                                            foodShelfLife: dateString,
-                                                           foodOwnerIdx: foodOwnerIdx!,
+                                                           foodOwnerIdx: foodOwnerIdx,
                                                            memo: memo) { result in
                         if result {
                             let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
@@ -827,7 +824,7 @@ class FoodAddViewController: UIViewController {
                                                   foodDetail: foodDetailTextView.text,
                                                   foodCategory: selectedFoodCategory!.rawValue,
                                                   foodShelfLife: dateString,
-                                                  foodOwnerIdx: foodOwnerIdx!,
+                                                  foodOwnerIdx: foodOwnerIdx,
                                                   memo: memo,
                                                   imgUrl: nil) { result in
                         if result {
@@ -979,11 +976,10 @@ class FoodAddViewController: UIViewController {
             switch tableView.tag {
             case 0 :
                 selectFoodCategory(index: indexPath.row)
-                FoodViewModel.shared.setIsFoodDetailName(index: 2)
+                FoodViewModel.shared.setIsFoodAddComplete(index: 2)
             case 1:
                 selectOwner(index: indexPath.row)
                 self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: indexPath.row)
-                FoodViewModel.shared.setIsFoodDetailName(index: 3)
             default:
                 return
             }
@@ -999,13 +995,12 @@ class FoodAddViewController: UIViewController {
             case 0 :
                 if textView.text == "식품명을 입력해주세요." {
                     focusTextView(textView: textView)
-                    FoodViewModel.shared.setIsFoodDetailName(index: 0)
                 }
                 break
             case 1:
                 if textView.text == "식품 상세명을 입력해주세요." {
                     focusTextView(textView: textView)
-                    FoodViewModel.shared.setIsFoodDetailName(index: 1)
+                    
                 }
                 break
             case 2:
@@ -1018,14 +1013,13 @@ class FoodAddViewController: UIViewController {
             }
         }
         
+        
         func textViewDidEndEditing(_ textView: UITextView) {
             if textView.text != "" {
                 if textView.tag == 0 {
-                    
+                    FoodViewModel.shared.setIsFoodAddComplete(index: 1)
                 }else if textView.tag == 1 {
-                    
-                }else if textView.tag == 2 {
-                    
+                    FoodViewModel.shared.setIsFoodAddComplete(index: 0)
                 }
             }
             
@@ -1098,11 +1092,13 @@ class FoodAddViewController: UIViewController {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatGptCell", for: indexPath) as? ChatGptCell else {return}
                 FoodViewModel.shared.gptFoodNames(index: indexPath.row, store: &cell.cancelLabels) { foodName in
                     self.setFoodNameTextView(gptFoodName: foodName)
+                    FoodViewModel.shared.setIsFoodAddComplete(index: 1)
                 }
             }else if collectionView.tag == 1 {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatGptCell", for: indexPath) as? ChatGptCell else {return}
                 FoodViewModel.shared.gptFoodCategory(index: indexPath.row, store: &cell.cancelLabels) { foodCategory in
                     self.setFoodCategory(gptFoodCategory: foodCategory)
+                    FoodViewModel.shared.setIsFoodAddComplete(index: 2)
                 }
             }else if collectionView.tag == 2 {
                 if foodImage == nil {
