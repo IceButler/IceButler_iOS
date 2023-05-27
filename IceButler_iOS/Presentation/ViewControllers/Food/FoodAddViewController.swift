@@ -282,6 +282,7 @@ class FoodAddViewController: UIViewController {
                 self.foodDetailTextView.text = barcodeFood?.foodDetailName
                 self.foodDetailTextView.textColor = .black
                 self.foodDetailTextView.backgroundColor = .focusSkyBlue
+                FoodViewModel.shared.setIsFoodAddComplete(index: 0)
             }
         }
         
