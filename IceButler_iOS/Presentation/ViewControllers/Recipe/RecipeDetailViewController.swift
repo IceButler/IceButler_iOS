@@ -10,6 +10,7 @@ import UIKit
 class RecipeDetailViewController: UIViewController {
     
     private var recipeIdx: Int!
+    private var isFromMyRecipe: Bool = false
     private var recipeDatail: RecipeDetailResponseModel!
     @IBOutlet var naviItem: UINavigationItem!
     @IBOutlet var representativeImageView: UIImageView!
@@ -59,11 +60,13 @@ class RecipeDetailViewController: UIViewController {
     }
     
     private func setupLayout() {
-        // 즐겨찾기
-        if recipeDatail.isSubscribe {
-            self.setLikeStatus(isTrue: true)
-        } else {
-            self.setLikeStatus(isTrue: false)
+        if !isFromMyRecipe {
+            // 즐겨찾기
+            if recipeDatail.isSubscribe {
+                self.setLikeStatus(isTrue: true)
+            } else {
+                self.setLikeStatus(isTrue: false)
+            }
         }
         // 대표사진
         if let url = URL(string: recipeDatail.recipeImgUrl) {
@@ -91,8 +94,11 @@ class RecipeDetailViewController: UIViewController {
         cookingProcessTableView.separatorStyle = .none
     }
     
-    func configure(recipeIdx: Int) {
+    func configure(recipeIdx: Int, isFromMyRecipe: Bool? = nil) {
         self.recipeIdx = recipeIdx
+        if isFromMyRecipe != nil {
+            self.isFromMyRecipe = isFromMyRecipe!
+        }
     }
     
     private func setupNavigationBar() {
