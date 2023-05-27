@@ -12,9 +12,9 @@ import Toast_Swift
 class NotificationViewController: UIViewController {
     
     private var createdAtList: [String] = []
-    private var notifications: [String : [Notification]] = [:]
-    
+    private var renameCreatedAtList: [String : String] = [:]
     private var dateList: [String] = []
+    private var notifications: [String : [Notification]] = [:]
 
     @IBOutlet var nothingLabel: UILabel!
     @IBOutlet var tableView: UITableView!
@@ -81,6 +81,7 @@ class NotificationViewController: UIViewController {
                 self.createdAtList.append(createdAt)
             }
         }
+        renameCreatedAtStr()
         
         var temp: [Notification] = []
         createdAtList.forEach { createdAt in
@@ -89,13 +90,39 @@ class NotificationViewController: UIViewController {
                     temp.append(d)
                 }
             }
-            notifications[createdAt] = temp
+            let date = renameCreatedAtList[createdAt]
+            notifications[date!] = temp
             temp.removeAll()
         }
+        notifications.forEach { n in dateList.append(n.key) }
     }
     
     private func renameCreatedAtStr() {
-        // TODO: createdAt을 "n일전" 형태로 변경
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+
+        createdAtList.forEach { date in
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = TimeZone(identifier: "UTC")
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            let dateOfDate = Calendar.current.dateComponents([.year, .month, .day], from: Date() + 32400)
+            let dateOfToday = Calendar.current.dateComponents([.year, .month, .day], from: formatter.date(from: date)!)
+            
+            let offsetComps = Calendar.current.dateComponents([.year,.month,.day], from: dateOfToday, to: dateOfDate)
+            
+            if case let (y?, m?, d?) = (offsetComps.year, offsetComps.month, offsetComps.day) {
+                if (y == 0) && (m == 0) {
+                    if d == 0 { renameCreatedAtList[date] = "오늘" }
+                    else if d < 8 { renameCreatedAtList[date] = "\(d)일전" }
+                    else if (d > 8) && (d < 15) { renameCreatedAtList[date] = "1주전" }
+                    else if (d > 14) && (d < 22) { renameCreatedAtList[date] = "2주전" }
+                    else { renameCreatedAtList[date] = "오래 전" }
+                }
+                else { renameCreatedAtList[date] = "오래 전" }
+            }
+        }
         
     }
     
@@ -160,23 +187,15 @@ class NotificationViewController: UIViewController {
 extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 100 }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return createdAtList.count
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { return notifications.keys.count }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if createdAtList.count > 0 { return createdAtList[section] }
-        else { return "알림날짜" }
-    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? { return dateList[section] }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notifications[createdAtList[section]]!.count
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return notifications[dateList[section]]!.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as? NotificationTableViewCell else { return UITableViewCell() }
-        print(notifications[createdAtList[indexPath.section]]![indexPath.row])
-        cell.configure(data: notifications[createdAtList[indexPath.section]]![indexPath.row])
+        cell.configure(data: notifications[dateList[indexPath.section]]![indexPath.row])
         return cell
     }
 }
