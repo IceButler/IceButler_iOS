@@ -27,6 +27,9 @@ class FoodViewModel: ObservableObject {
     @Published var selectedFridgeSearchFood: FridgeSearchFoodResponse?
     @Published var isSelectedFood: Bool = false
     @Published var deleteFoodIdx: [Int] = []
+    @Published var isFoodAddComplete = false
+    
+    var isFoodAddCompleteList = [false, false, false, false, false]
     
     var cancelLabels: Set<AnyCancellable> = []
     private var profileImgKey: String?
@@ -266,6 +269,12 @@ class FoodViewModel: ObservableObject {
         return 0
     }
     
+    func isFoodAddCmplete(completion: @escaping (Bool) -> Void) {
+        $isFoodAddComplete.sink { isFoodAddComplete in
+            completion(isFoodAddComplete)
+        }.store(in: &cancelLabels)
+    }
+    
     
     func deleteAll() {
         self.food = nil
@@ -278,6 +287,8 @@ class FoodViewModel: ObservableObject {
         self.isEditFood = false
         self.selectedFridgeSearchFood = nil
         self.fridgeSearchFoodList = []
+        self.isFoodAddComplete = false
+        self.isFoodAddCompleteList = [false, false, false, false, false]
     }
     
     
@@ -314,6 +325,22 @@ class FoodViewModel: ObservableObject {
             }
             return false
         }
+    }
+    
+    
+    
+    func setIsFoodDetailName(index: Int) {
+        isFoodAddCompleteList[index] = true
+        
+        var result = true
+        
+        isFoodAddCompleteList.forEach { isFoodAddComplete in
+            if isFoodAddComplete == false {
+                result = false
+            }
+        }
+        
+        isFoodAddComplete = result
     }
 }
 

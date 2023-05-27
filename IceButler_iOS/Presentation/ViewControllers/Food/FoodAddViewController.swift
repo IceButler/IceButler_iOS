@@ -168,6 +168,7 @@ class FoodAddViewController: UIViewController {
             collectionView?.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         }
         
+        foodAddButton.layer.cornerRadius = 30
         
         if let flowLayout = foodImageCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -264,8 +265,6 @@ class FoodAddViewController: UIViewController {
                     }
                 }
                 
-                print(self.foodOwnerIdx)
-                
                 self.ownerOpenButton.tintColor = .black
                 self.ownerOpenButton.backgroundColor = .focusSkyBlue
                 self.ownerOpenButton.setTitle(editFood.owner ?? "", for: .normal)
@@ -323,7 +322,7 @@ class FoodAddViewController: UIViewController {
                     }
                     
                     self.date = date
-                    
+                    self.foodDatePicker.date = date!
                     
                     
                     self.foodMemoTextView.text = food.memo
@@ -336,7 +335,15 @@ class FoodAddViewController: UIViewController {
                             self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: i)
                         }
                     }
+                    
+                    self.foodAddButton.backgroundColor = .availableBlue
                 }
+            }
+        }
+        
+        FoodViewModel.shared.isFoodAddCmplete { isFoodAddCmplete in
+            if isFoodAddCmplete == true && self.isEdit == false {
+                self.foodAddButton.backgroundColor = .availableBlue
             }
         }
         
@@ -535,6 +542,7 @@ class FoodAddViewController: UIViewController {
         
         
         date = foodDatePicker.date
+        FoodViewModel.shared.setIsFoodDetailName(index: 4)
     }
     
     
@@ -971,9 +979,11 @@ class FoodAddViewController: UIViewController {
             switch tableView.tag {
             case 0 :
                 selectFoodCategory(index: indexPath.row)
+                FoodViewModel.shared.setIsFoodDetailName(index: 2)
             case 1:
                 selectOwner(index: indexPath.row)
                 self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: indexPath.row)
+                FoodViewModel.shared.setIsFoodDetailName(index: 3)
             default:
                 return
             }
@@ -989,11 +999,13 @@ class FoodAddViewController: UIViewController {
             case 0 :
                 if textView.text == "식품명을 입력해주세요." {
                     focusTextView(textView: textView)
+                    FoodViewModel.shared.setIsFoodDetailName(index: 0)
                 }
                 break
             case 1:
                 if textView.text == "식품 상세명을 입력해주세요." {
                     focusTextView(textView: textView)
+                    FoodViewModel.shared.setIsFoodDetailName(index: 1)
                 }
                 break
             case 2:
@@ -1007,6 +1019,16 @@ class FoodAddViewController: UIViewController {
         }
         
         func textViewDidEndEditing(_ textView: UITextView) {
+            if textView.text != "" {
+                if textView.tag == 0 {
+                    
+                }else if textView.tag == 1 {
+                    
+                }else if textView.tag == 2 {
+                    
+                }
+            }
+            
             if textView.tag == 1 {
                 FoodViewModel.shared.getGptFood(foodDetailName: textView.text)
             }
