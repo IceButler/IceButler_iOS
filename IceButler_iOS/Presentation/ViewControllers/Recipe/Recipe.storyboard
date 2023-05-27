@@ -620,12 +620,9 @@
                                                 <action selector="didTapXButton:" destination="LfP-6H-ryq" id="UCa-ck-KCm"/>
                                             </connections>
                                         </barButtonItem>
-                                        <rightBarButtonItems>
-                                            <barButtonItem image="ellipsis_vertical" id="Uj5-ag-cIv">
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </barButtonItem>
-                                            <barButtonItem image="emptyBlackStar" id="SI9-bO-ZuC"/>
-                                        </rightBarButtonItems>
+                                        <barButtonItem key="rightBarButtonItem" image="ellipsis_vertical" id="Uj5-ag-cIv">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -854,7 +851,6 @@
                     <connections>
                         <outlet property="amountLabel" destination="Ip6-4E-ZlT" id="7GN-sc-E1d"/>
                         <outlet property="amountView" destination="5Se-by-2GR" id="9di-9K-vFu"/>
-                        <outlet property="bookmarkButton" destination="SI9-bO-ZuC" id="sMY-EM-J39"/>
                         <outlet property="categoryLabel" destination="HlW-Lz-G2C" id="aEu-xT-ydf"/>
                         <outlet property="categoryView" destination="TNi-kz-t02" id="TFT-1i-khG"/>
                         <outlet property="cookingProcessTableView" destination="HjI-Fx-rPC" id="PCS-bV-hxR"/>
@@ -1021,7 +1017,6 @@
         <image name="alarmClockCircle" width="31" height="31"/>
         <image name="back" width="13" height="23"/>
         <image name="ellipsis_vertical" width="27" height="27"/>
-        <image name="emptyBlackStar" width="27" height="27"/>
         <image name="horizontalEllipsisCircle" width="31" height="31"/>
         <image name="peopleCircle" width="31" height="31"/>
         <image name="plusCircle" width="30" height="30"/>
