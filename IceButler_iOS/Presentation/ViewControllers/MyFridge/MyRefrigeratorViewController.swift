@@ -194,7 +194,7 @@ extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
         },
                           leftCompletion: { self.dismiss(animated: true) })
         
-        alertVC.modalPresentationStyle = .fullScreen
+        alertVC.modalPresentationStyle = .overFullScreen
         present(alertVC, animated: true)
         
     }

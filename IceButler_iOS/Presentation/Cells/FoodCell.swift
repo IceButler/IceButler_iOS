@@ -48,12 +48,18 @@ class FoodCell: UICollectionViewCell {
                 self.removeGestureRecognizer(tapGesture)
             }
         }
-       
         
-        selectedImageView.isHidden = true
+        self.selectedImageView.isHidden = true
+        
+        FoodViewModel.shared.isSelectedFood { result in
+            if result == false {
+                self.selectedImageView.isHidden = true
+            }
+        }
     }
     
     private func setupLayout() {
+        foodImageView.backgroundColor = UIColor(red: 196 / 255, green: 232 / 255, blue: 169 / 255, alpha: 0.3)
         foodImageView.layer.cornerRadius = foodImageView.frame.width / 2
     }
     
@@ -62,11 +68,11 @@ class FoodCell: UICollectionViewCell {
         if FoodViewModel.shared.getIsSelectedFood() == false {
             if let foodIdx = self.foodIdx {
                 if FoodViewModel.shared.tapDeleteFoodIdx(foodIdx: foodIdx) {
-                    selectedImageView.isHidden = false
+                    self.selectedImageView.isHidden = false
+                    FoodViewModel.shared.setIsSelectedFood(isSelected: true)
                 }else {
-                    selectedImageView.isHidden = true
+                    self.selectedImageView.isHidden = true
                 }
-                FoodViewModel.shared.setIsSelectedFood(isSelected: true)
             }
         }
     }
@@ -75,13 +81,14 @@ class FoodCell: UICollectionViewCell {
         if FoodViewModel.shared.getIsSelectedFood() {
             if let foodIdx = self.foodIdx {
                 if FoodViewModel.shared.tapDeleteFoodIdx(foodIdx: foodIdx) {
-                    selectedImageView.isHidden = false
+                    self.selectedImageView.isHidden = false
                 }else {
-                    selectedImageView.isHidden = true
+                    self.selectedImageView.isHidden = true
                 }
             }
         }
     }
+    
     
     func setFoodName(foodName: String) {
         foodNameLabel.text = foodName

@@ -330,10 +330,19 @@
                                             <constraint firstAttribute="width" constant="50" id="cDq-Cb-Ty1"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxx-Dq-fvY">
-                                        <rect key="frame" x="215.33333333333334" y="15.000000000000004" width="68.333333333333343" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="길찾기"/>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxx-Dq-fvY">
+                                        <rect key="frame" x="222.66666666666666" y="21.333333333333371" width="65.999999999999972" height="25"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="66" id="5NL-Vn-bnn"/>
+                                            <constraint firstAttribute="height" constant="25" id="pfw-to-TSm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="tintColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
+                                        <state key="normal" title="길찾기" image="navigationIcon">
+                                            <color key="titleColor" red="0.2666666667" green="0.49803921569999998" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="moveToNavigation:" destination="k7t-tL-utM" eventType="touchUpInside" id="bMd-ir-fTl"/>
                                         </connections>
@@ -345,12 +354,12 @@
                                     <constraint firstItem="M66-43-e8K" firstAttribute="top" secondItem="W0I-UL-plq" secondAttribute="bottom" constant="8" id="3Yp-e3-335"/>
                                     <constraint firstItem="bIe-M9-LKd" firstAttribute="top" secondItem="PFC-qs-OLM" secondAttribute="top" constant="8" id="4He-JJ-xox"/>
                                     <constraint firstItem="W0I-UL-plq" firstAttribute="top" secondItem="PFC-qs-OLM" secondAttribute="top" constant="24" id="9sE-Qn-vUp"/>
-                                    <constraint firstItem="nPh-RC-FbV" firstAttribute="leading" secondItem="sxx-Dq-fvY" secondAttribute="trailing" constant="20" id="KaO-bj-Cxm"/>
+                                    <constraint firstItem="nPh-RC-FbV" firstAttribute="leading" secondItem="sxx-Dq-fvY" secondAttribute="trailing" constant="15" id="KaO-bj-Cxm"/>
                                     <constraint firstAttribute="bottom" secondItem="M66-43-e8K" secondAttribute="bottom" constant="14" id="SuQ-Gr-Hnu"/>
                                     <constraint firstAttribute="trailing" secondItem="nPh-RC-FbV" secondAttribute="trailing" constant="16" id="TU4-aC-5Cw"/>
+                                    <constraint firstItem="nPh-RC-FbV" firstAttribute="centerY" secondItem="sxx-Dq-fvY" secondAttribute="centerY" id="Tcn-dm-dJf"/>
                                     <constraint firstItem="W0I-UL-plq" firstAttribute="leading" secondItem="PFC-qs-OLM" secondAttribute="leading" constant="24" id="WcX-VZ-A07"/>
                                     <constraint firstItem="bIe-M9-LKd" firstAttribute="centerX" secondItem="PFC-qs-OLM" secondAttribute="centerX" id="ccU-Ib-ORd"/>
-                                    <constraint firstItem="sxx-Dq-fvY" firstAttribute="top" secondItem="PFC-qs-OLM" secondAttribute="top" constant="15" id="dBJ-tc-NQK"/>
                                     <constraint firstItem="nPh-RC-FbV" firstAttribute="centerY" secondItem="W0I-UL-plq" secondAttribute="centerY" id="l86-do-obp"/>
                                     <constraint firstItem="M66-43-e8K" firstAttribute="leading" secondItem="PFC-qs-OLM" secondAttribute="leading" constant="24" id="oQ0-jy-1NV"/>
                                     <constraint firstAttribute="height" constant="166" id="rm4-Kd-36H"/>
@@ -378,6 +387,7 @@
                         <outlet property="currentLocationButton" destination="YK6-NE-xf7" id="uWQ-H2-5fA"/>
                         <outlet property="infoInnerView" destination="M66-43-e8K" id="cZd-lE-Uor"/>
                         <outlet property="infoView" destination="PFC-qs-OLM" id="apT-8Z-Ipe"/>
+                        <outlet property="navigationButton" destination="sxx-Dq-fvY" id="9KL-h8-PQa"/>
                         <outlet property="storeAddressLabel" destination="R3Y-RJ-vwo" id="tSD-oz-GXj"/>
                         <outlet property="storeNameLabel" destination="W0I-UL-plq" id="Wpz-xU-gJx"/>
                         <outlet property="storePhoneNumLabel" destination="Ik5-Zc-gqL" id="npd-NK-Vdv"/>
@@ -616,6 +626,7 @@
         <image name="currentLocationIcon" width="88" height="88"/>
         <image name="deleteIcon" width="16.333333969116211" height="20.333333969116211"/>
         <image name="map" width="21" height="22"/>
+        <image name="navigationIcon" width="9.3333330154418945" height="11.333333015441895"/>
         <image name="noFridge" width="45" height="64"/>
         <image name="phoneIcon" width="22" height="22"/>
         <image name="plus" catalog="system" width="128" height="113"/>

@@ -37,7 +37,7 @@ struct FoodOwnerResponseModel: Codable {
 
 struct FoodOwner: Codable {
     let userIdx: Int
-    let nickName, profileImage: String?
+    let nickName, profileImageUrl: String?
 }
 
 

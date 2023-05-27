@@ -31,6 +31,9 @@ class MapViewController: UIViewController {
     @IBOutlet var storeAddressLabel: UILabel!
     @IBOutlet var storePhoneNumLabel: UILabel!
     
+    @IBOutlet var navigationButton: UIButton!
+    
+    
     private var url: URL?
     
     
@@ -70,6 +73,14 @@ class MapViewController: UIViewController {
         setupView()
         setupMapView()
         setupNavigationBar()
+        setupLayout()
+    }
+    
+    private func setupLayout() {
+        navigationButton.layer.cornerRadius = 10
+        navigationButton.layer.shadowColor = CGColor(red: 0, green: 0, blue: 0, alpha: 0.05)
+        navigationButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        navigationButton.layer.shadowOpacity = 2
     }
     
     private func setupNavigationBar() {

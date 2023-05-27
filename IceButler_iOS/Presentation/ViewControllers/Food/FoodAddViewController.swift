@@ -168,6 +168,7 @@ class FoodAddViewController: UIViewController {
             collectionView?.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         }
         
+        foodAddButton.layer.cornerRadius = 30
         
         if let flowLayout = foodImageCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -256,19 +257,19 @@ class FoodAddViewController: UIViewController {
             
             
             if FoodViewModel.shared.isEditFood == true && FoodViewModel.shared.foodOwnerListCount() != 0 {
-                FoodViewModel.shared.getFood { food in
-                    for i in 0..<FoodViewModel.shared.foodOwnerListCount() {
-                        if FoodViewModel.shared.foodOwnerListName(index: i) == food.owner {
-                            self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: i)
-                        }
+                let editFood = FoodViewModel.shared.getFood()
+                
+                for i in 0..<FoodViewModel.shared.foodOwnerListCount() {
+                    if FoodViewModel.shared.foodOwnerListName(index: i) == editFood.owner {
+                        self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: i)
                     }
-                    
-                    print(self.foodOwnerIdx)
-                    
-                    self.ownerOpenButton.tintColor = .black
-                    self.ownerOpenButton.backgroundColor = .focusSkyBlue
-                    self.ownerOpenButton.setTitle(food.owner ?? "", for: .normal)
                 }
+                
+                self.ownerOpenButton.tintColor = .black
+                self.ownerOpenButton.backgroundColor = .focusSkyBlue
+                self.ownerOpenButton.setTitle(editFood.owner ?? "", for: .normal)
+                
+               
             }
         }
         
@@ -281,6 +282,7 @@ class FoodAddViewController: UIViewController {
                 self.foodDetailTextView.text = barcodeFood?.foodDetailName
                 self.foodDetailTextView.textColor = .black
                 self.foodDetailTextView.backgroundColor = .focusSkyBlue
+                FoodViewModel.shared.setIsFoodAddComplete(index: 0)
             }
         }
         
@@ -321,7 +323,7 @@ class FoodAddViewController: UIViewController {
                     }
                     
                     self.date = date
-                    
+                    self.foodDatePicker.date = date!
                     
                     
                     self.foodMemoTextView.text = food.memo
@@ -334,7 +336,15 @@ class FoodAddViewController: UIViewController {
                             self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: i)
                         }
                     }
+                    
+                    self.foodAddButton.backgroundColor = .availableBlue
                 }
+            }
+        }
+        
+        FoodViewModel.shared.isFoodAddCmplete { isFoodAddCmplete in
+            if isFoodAddCmplete == true && self.isEdit == false {
+                self.foodAddButton.backgroundColor = .availableBlue
             }
         }
         
@@ -533,6 +543,7 @@ class FoodAddViewController: UIViewController {
         
         
         date = foodDatePicker.date
+        FoodViewModel.shared.setIsFoodAddComplete(index: 3)
     }
     
     
@@ -701,43 +712,39 @@ class FoodAddViewController: UIViewController {
             }
             
         } else {
+            if date == nil {
+                showAlert(title: "유통기한 오류", message: "유통 기한을 입력해주세요.")
+                return
+            }else if date! < Date() {
+                showAlert(title: "유통기한 오류", message: "유통기한이 지난 제품은 등록 할 수 없습니다.")
+                return
+            }
+            if foodNameTextView.text == "" || foodNameTextView.text == "식품명을 입력해주세요." {
+                showAlert(title: "오류", message: "식품명을 입력해주세요.")
+                return
+            }
+            if foodDetailTextView.text == "" || foodDetailTextView.text == "식품 상세명을 입력해주세요." {
+                showAlert(title: "오류", message: "식품 상세명을 입력해주세요.")
+                return
+            }
+            if selectedFoodCategory == nil {
+                showAlert(title: "오류", message: "카테고리를 선택해주세요.")
+                return
+            }
+
+            let memo: String?
+            
+            if foodMemoTextView.text == "" || foodMemoTextView.text == "메모내용 or 없음" {
+                memo = nil
+            }else {
+                memo = foodMemoTextView.text
+            }
+            
+            let dateFromat = DateFormatter()
+            dateFromat.dateFormat = "yyyy-MM-dd"
+            let dateString = dateFromat.string(from: date!)
+            
             if isEdit {
-                if date == nil {
-                    showAlert(title: "유통기한 오류", message: "유통 기한을 입력해주세요.")
-                    return
-                }else if date! < Date() {
-                    showAlert(title: "유통기한 오류", message: "유통기한이 지난 제품은 등록 할 수 없습니다.")
-                    return
-                }
-                if foodNameTextView.text == "" || foodNameTextView.text == "식품명을 입력해주세요." {
-                    showAlert(title: "오류", message: "식품명을 입력해주세요.")
-                    return
-                }
-                if foodDetailTextView.text == "" || foodDetailTextView.text == "식품 상세명을 입력해주세요." {
-                    showAlert(title: "오류", message: "식품 상세명을 입력해주세요.")
-                    return
-                }
-                if selectedFoodCategory == nil {
-                    showAlert(title: "오류", message: "카테고리를 선택해주세요.")
-                    return
-                }
-                if foodOwnerIdx == nil {
-                    showAlert(title: "오류", message: "음식 소유자를 선택해주세요.")
-                    return
-                }
-                let memo: String?
-                
-                if foodMemoTextView.text == "" || foodMemoTextView.text == "메모내용 or 없음" {
-                    memo = nil
-                }else {
-                    memo = foodMemoTextView.text
-                }
-                
-                let dateFromat = DateFormatter()
-                dateFromat.dateFormat = "yyyy-MM-dd"
-                let dateString = dateFromat.string(from: date!)
-                
-                
                 if foodImage != nil {
                     let fridgeIdx = APIManger.shared.getFridgeIdx()
                     
@@ -749,7 +756,7 @@ class FoodAddViewController: UIViewController {
                                                            foodDetail: foodDetailTextView.text,
                                                            foodCategory: selectedFoodCategory!.rawValue,
                                                            foodShelfLife: dateString,
-                                                           foodOwnerIdx: foodOwnerIdx!,
+                                                           foodOwnerIdx: foodOwnerIdx,
                                                            memo: memo) { result in
                         if result {
                             let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
@@ -771,7 +778,7 @@ class FoodAddViewController: UIViewController {
                                                    foodDetail: foodDetailTextView.text,
                                                    foodCategory: selectedFoodCategory!.rawValue,
                                                    foodShelfLife: dateString,
-                                                   foodOwnerIdx: foodOwnerIdx!,
+                                                   foodOwnerIdx: foodOwnerIdx,
                                                    memo: memo,
                                                    imgUrl: self.foodImageUrl) { result in
                         if result {
@@ -787,123 +794,55 @@ class FoodAddViewController: UIViewController {
                         }
                     }
                 }
+            }else {
+                if foodImage != nil {
+                    let fridgeIdx = APIManger.shared.getFridgeIdx()
+                    FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food,
+                                                           image: foodImage!,
+                                                           fridgeIdx: fridgeIdx,
+                                                           foodName: foodNameTextView.text,
+                                                           foodDetail: foodDetailTextView.text,
+                                                           foodCategory: selectedFoodCategory!.rawValue,
+                                                           foodShelfLife: dateString,
+                                                           foodOwnerIdx: foodOwnerIdx,
+                                                           memo: memo) { result in
+                        if result {
+                            let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                                FoodViewModel.shared.deleteAll()
+                                self.navigationController?.popViewController(animated: true)
+                            }))
+                            self.present(alert, animated: true)
+                        }else {
+                            self.showAlert(title: "실패", message: "음식 등록에 실패하셨습니다. 다시 시도해주세요.")
+                        }
+
+                    }
+                } else {
+                    let fridgeIdx = APIManger.shared.getFridgeIdx()
+                    FoodViewModel.shared.postFood(fridgeIdx: fridgeIdx,
+                                                  foodName: foodNameTextView.text,
+                                                  foodDetail: foodDetailTextView.text,
+                                                  foodCategory: selectedFoodCategory!.rawValue,
+                                                  foodShelfLife: dateString,
+                                                  foodOwnerIdx: foodOwnerIdx,
+                                                  memo: memo,
+                                                  imgUrl: nil) { result in
+                        if result {
+                            let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                                FoodViewModel.shared.deleteAll()
+                                self.navigationController?.popViewController(animated: true)
+                            }))
+                            self.present(alert, animated: true)
+                        }else {
+                            self.showAlert(title: "실패", message: "음식 등록에 실패하셨습니다. 다시 시도해주세요.")
+                        }
+                    }
+                }
             }
         }
     }
-//            else {
-//                if savedFoods.count > 0 {
-//                    if checkForSaveFoodInfo() {
-//                        let fridgeIdx = APIManger.shared.getFridgeIdx()
-//                        let param = FoodAddListModel(fridgeFoods: savedFoods)
-//
-//                        APIManger.shared.postData(urlEndpointString: "/fridges/\(fridgeIdx)/food",
-//                                                  responseDataType: FoodAddRequestModel.self,
-//                                                  requestDataType: FoodAddListModel.self,
-//                                                  parameter: param,
-//                                                  completionHandler: { [weak self] response in
-//
-//                            print("장보기 완료 후 식품추가 요청 결과 ----> \(response)")
-//                            if response.statusCode == 200 {
-//                                self?.showAlert(title: "", message: "음식 등록에 성공하였습니다!")
-//                                let storyboard = UIStoryboard(name: "Cart", bundle: nil)
-//                                let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController")
-//                                self?.navigationController?.pushViewController(cartVC, animated: true)
-//                            } else {
-//                                self?.showAlert(title: "", message: "음식 등록에 실패하였습니다")
-//                            }
-//                            return
-//                        })
-//                    }
-//
-//                } else {
-//                    if date == nil {
-//                        showAlert(title: "유통기한 오류", message: "유통 기한을 입력해주세요.")
-//                        return
-//                    }else if date! < Date() {
-//                        showAlert(title: "유통기한 오류", message: "유통기한이 지난 제품은 등록 할 수 없습니다.")
-//                        return
-//                    }
-//
-//                    if foodNameTextView.text == "" || foodNameTextView.text == "식품명을 입력해주세요." {
-//                        showAlert(title: "오류", message: "식품명을 입력해주세요.")
-//                        return
-//                    }
-//
-//                    if foodDetailTextView.text == "" || foodDetailTextView.text == "식품 상세명을 입력해주세요." {
-//                        showAlert(title: "오류", message: "식품 상세명을 입력해주세요.")
-//                        return
-//                    }
-//
-//                    if selectedFoodCategory == nil {
-//                        showAlert(title: "오류", message: "카테고리를 선택해주세요.")
-//                        return
-//                    }
-//
-//                    if foodOwnerIdx == nil {
-//                        showAlert(title: "오류", message: "음식 소유자를 선택해주세요.")
-//                        return
-//                    }
-//
-//                    let memo: String?
-//
-//                    if foodMemoTextView.text == "" || foodMemoTextView.text == "메모내용 or 없음" {
-//                        memo = nil
-//                    }else {
-//                        memo = foodMemoTextView.text
-//                    }
-//
-//                    let dateFromat = DateFormatter()
-//                    dateFromat.dateFormat = "yyyy-MM-dd"
-//                    let dateString = dateFromat.string(from: date!)
-//
-//                    if foodImage != nil {
-//                        let fridgeIdx = APIManger.shared.getFridgeIdx()
-//                        FoodViewModel.shared.getUploadImageUrl(imageDir: ImageDir.Food,
-//                                                               image: foodImage!,
-//                                                               fridgeIdx: fridgeIdx,
-//                                                               foodName: foodNameTextView.text,
-//                                                               foodDetail: foodDetailTextView.text,
-//                                                               foodCategory: selectedFoodCategory!.rawValue,
-//                                                               foodShelfLife: dateString,
-//                                                               foodOwnerIdx: foodOwnerIdx!,
-//                                                               memo: memo) { result in
-//                            if result {
-//                                let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
-//                                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
-//                                    FoodViewModel.shared.deleteAll()
-//                                    self.navigationController?.popViewController(animated: true)
-//                                }))
-//                                self.present(alert, animated: true)
-//                            }else {
-//                                self.showAlert(title: "실패", message: "음식 등록에 실패하셨습니다. 다시 시도해주세요.")
-//                            }
-//
-//                        }
-//                    } else {
-//                        let fridgeIdx = APIManger.shared.getFridgeIdx()
-//                        FoodViewModel.shared.postFood(fridgeIdx: fridgeIdx,
-//                                                      foodName: foodNameTextView.text,
-//                                                      foodDetail: foodDetailTextView.text,
-//                                                      foodCategory: selectedFoodCategory!.rawValue,
-//                                                      foodShelfLife: dateString,
-//                                                      foodOwnerIdx: foodOwnerIdx!,
-//                                                      memo: memo,
-//                                                      imgUrl: nil) { result in
-//                            if result {
-//                                let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
-//                                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
-//                                    FoodViewModel.shared.deleteAll()
-//                                    self.navigationController?.popViewController(animated: true)
-//                                }))
-//                                self.present(alert, animated: true)
-//                            }else {
-//                                self.showAlert(title: "실패", message: "음식 등록에 실패하셨습니다. 다시 시도해주세요.")
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
         
         func checkForSaveFoodInfo() -> Bool {
             var result = true
@@ -990,7 +929,6 @@ class FoodAddViewController: UIViewController {
         }
 }
 
-// MARK: -
     
     extension FoodAddViewController: UITableViewDelegate, UITableViewDataSource {
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -1022,6 +960,10 @@ class FoodAddViewController: UIViewController {
                     cell.configure(name: ownerName, isSelect: false)
                 }
                 
+                FoodViewModel.shared.foodOwnerListImage(index: indexPath.row, store: &cell.cancellabels) { url in
+                    cell.setImage(imageUrl: url)
+                }
+                
                 cell.selectionStyle = .none
                 cell.isFocus(focus: isOpenOwnerTableView)
                 
@@ -1035,6 +977,7 @@ class FoodAddViewController: UIViewController {
             switch tableView.tag {
             case 0 :
                 selectFoodCategory(index: indexPath.row)
+                FoodViewModel.shared.setIsFoodAddComplete(index: 2)
             case 1:
                 selectOwner(index: indexPath.row)
                 self.foodOwnerIdx = FoodViewModel.shared.foodOwnerListIdx(index: indexPath.row)
@@ -1045,16 +988,6 @@ class FoodAddViewController: UIViewController {
     }
     
 
-
-
-
-
-
-
-
-
-
-// MARK: -
 
 
     extension FoodAddViewController: UITextViewDelegate {
@@ -1068,6 +1001,7 @@ class FoodAddViewController: UIViewController {
             case 1:
                 if textView.text == "식품 상세명을 입력해주세요." {
                     focusTextView(textView: textView)
+                    
                 }
                 break
             case 2:
@@ -1080,7 +1014,16 @@ class FoodAddViewController: UIViewController {
             }
         }
         
+        
         func textViewDidEndEditing(_ textView: UITextView) {
+            if textView.text != "" {
+                if textView.tag == 0 {
+                    FoodViewModel.shared.setIsFoodAddComplete(index: 1)
+                }else if textView.tag == 1 {
+                    FoodViewModel.shared.setIsFoodAddComplete(index: 0)
+                }
+            }
+            
             if textView.tag == 1 {
                 FoodViewModel.shared.getGptFood(foodDetailName: textView.text)
             }
@@ -1150,11 +1093,13 @@ class FoodAddViewController: UIViewController {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatGptCell", for: indexPath) as? ChatGptCell else {return}
                 FoodViewModel.shared.gptFoodNames(index: indexPath.row, store: &cell.cancelLabels) { foodName in
                     self.setFoodNameTextView(gptFoodName: foodName)
+                    FoodViewModel.shared.setIsFoodAddComplete(index: 1)
                 }
             }else if collectionView.tag == 1 {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatGptCell", for: indexPath) as? ChatGptCell else {return}
                 FoodViewModel.shared.gptFoodCategory(index: indexPath.row, store: &cell.cancelLabels) { foodCategory in
                     self.setFoodCategory(gptFoodCategory: foodCategory)
+                    FoodViewModel.shared.setIsFoodAddComplete(index: 2)
                 }
             }else if collectionView.tag == 2 {
                 if foodImage == nil {

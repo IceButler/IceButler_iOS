@@ -24,6 +24,7 @@ class FridgeViewModel: ObservableObject {
     @Published var seasoningFoodList: [FridgeFood] = []
     @Published var processedFoodList: [FridgeFood] = []
     @Published var etcFoodList: [FridgeFood] = []
+    @Published var fridgeDiscard: FridgeDiscard?
 
     
     var searchMemberResults: [FridgeUser] = []
@@ -31,6 +32,12 @@ class FridgeViewModel: ObservableObject {
     var cancelLabels: Set<AnyCancellable> = []
     
     var defaultFridgeName: String = "냉장고 미선택"
+    
+    func fridgeDiscard(completion: @escaping (FridgeDiscard?) -> Void) {
+        $fridgeDiscard.sink { frdigeDiscard in
+            completion(frdigeDiscard)
+        }.store(in: &cancelLabels)
+    }
     
     func allFoodList(foodListIdx: Int, completion: @escaping ([FridgeFood])-> Void) {
         switch foodListIdx {
@@ -96,12 +103,95 @@ class FridgeViewModel: ObservableObject {
         }
     }
     
+    func isNoFoodList(foodListIdx: Int, completion: @escaping ()-> Void) {
+        switch foodListIdx {
+        case 0:
+            $allFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 1:
+            $meatFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 2:
+            $fruitFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 3:
+            $vegetableFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 4:
+            $drinkFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 5:
+            $marineProductsFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 6:
+            $sideFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 7:
+            $snackFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 8:
+            $seasoningFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 9:
+            $processedFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 10:
+            $etcFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        default:
+            break
+        }
+    }
+    
     func isChangeAllFoodList(foodListIdx: Int, completion: @escaping () -> Void) {
         switch foodListIdx {
         case 0:
             $allFoodList.filter { allFoodList in
-                //                allFoodList.count > 0
-                allFoodList.count > -1
+                allFoodList.count > 0
             }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
@@ -495,6 +585,7 @@ class FridgeViewModel: ObservableObject {
     func getAllFoodList(fridgeIdx: Int) {
         fridgeService.getAllFood(fridgeIdx: fridgeIdx) { response in
             self.allFoodList.removeAll()
+            self.fridgeDiscard = response?.fridgeDiscard
             response?.foodList.forEach({ food in
                 self.allFoodList.append(food)
             })
