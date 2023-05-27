@@ -3,4 +3,54 @@
    uuid = "3783933F-A2D7-44D3-8F26-64B06E224B22"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "389A1BB4-7844-4E0A-AA70-7FDE09AE2936"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IceButler_iOS/Network/APIManger.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "postData(urlEndpointString:responseDataType:requestDataType:parameter:completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "389A1BB4-7844-4E0A-AA70-7FDE09AE2936 - f2a17cf5355f1fbc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IceButler_iOS.APIManger.postData&lt;&#x3c4;_0_0, &#x3c4;_0_1 where &#x3c4;_0_0: Swift.Decodable, &#x3c4;_0_0: Swift.Encodable, &#x3c4;_0_1: Swift.Decodable, &#x3c4;_0_1: Swift.Encodable&gt;(urlEndpointString: Swift.String, responseDataType: &#x3c4;_0_1.Type, requestDataType: &#x3c4;_0_0.Type, parameter: Swift.Optional&lt;&#x3c4;_0_0&gt;, completionHandler: (IceButler_iOS.GeneralResponseModel&lt;&#x3c4;_0_1&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "IceButler_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yoosang/Desktop/IceButler_iOS/IceButler_iOS/Network/APIManger.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "141"
+                  endingLineNumber = "141"
+                  offsetFromSymbolStart = "352">
+               </Location>
+               <Location
+                  uuid = "389A1BB4-7844-4E0A-AA70-7FDE09AE2936 - f2a17cf5355f1fbc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IceButler_iOS.APIManger.postData&lt;&#x3c4;_0_0, &#x3c4;_0_1 where &#x3c4;_0_0: Swift.Decodable, &#x3c4;_0_0: Swift.Encodable, &#x3c4;_0_1: Swift.Decodable, &#x3c4;_0_1: Swift.Encodable&gt;(urlEndpointString: Swift.String, responseDataType: &#x3c4;_0_1.Type, requestDataType: &#x3c4;_0_0.Type, parameter: Swift.Optional&lt;&#x3c4;_0_0&gt;, completionHandler: (IceButler_iOS.GeneralResponseModel&lt;&#x3c4;_0_1&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "IceButler_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yoosang/Desktop/IceButler_iOS/IceButler_iOS/Network/APIManger.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "141"
+                  endingLineNumber = "141"
+                  offsetFromSymbolStart = "1320">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

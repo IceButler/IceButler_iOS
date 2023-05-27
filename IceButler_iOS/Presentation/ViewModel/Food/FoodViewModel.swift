@@ -275,6 +275,12 @@ class FoodViewModel: ObservableObject {
         }.store(in: &cancelLabels)
     }
     
+    func deleteFoodIdx(completion: @escaping ([Int]) -> Void) {
+        $deleteFoodIdx.sink { deleteFoodIdx in
+            completion(deleteFoodIdx)
+        }.store(in: &cancelLabels)
+    }
+    
     
     func deleteAll() {
         self.food = nil
@@ -292,6 +298,8 @@ class FoodViewModel: ObservableObject {
     }
     
     
+    
+    
     func isSelectedFood(completion: @escaping (Bool) -> Void) {
         $isSelectedFood.sink { isSelectedFood in
             completion(isSelectedFood)
@@ -299,8 +307,12 @@ class FoodViewModel: ObservableObject {
     }
     
     func setIsSelectedFood(isSelected: Bool) {
+        if isSelected == false {
+            deleteFoodIdx.removeAll()
+        }
         isSelectedFood = isSelected
     }
+    
     
     func getIsSelectedFood()-> Bool {
         return isSelectedFood
