@@ -32,6 +32,10 @@ class AddRecipeSecondViewController: BaseViewController, ReceiveFirstDataDelegat
     private var timeRequired: Int!
     private var ingredientList: [[String]]!
     
+    // 레시피 수정
+    private var recipeIdx: Int? = nil
+    private var isEditMode: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -53,6 +57,7 @@ class AddRecipeSecondViewController: BaseViewController, ReceiveFirstDataDelegat
     
     private func setupNavigationBar() {
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
         self.navigationController?.navigationBar.standardAppearance.backgroundColor = .navigationColor
         
@@ -114,6 +119,11 @@ class AddRecipeSecondViewController: BaseViewController, ReceiveFirstDataDelegat
         completionButton.layer.cornerRadius = completionButton.frame.height / 2
         completionButton.layer.masksToBounds = true
         completionButton.backgroundColor = .disabledButtonGray
+    }
+    
+    func configure(recipeIdx: Int, isEditMode: Bool) {
+        self.recipeIdx = recipeIdx
+        self.isEditMode = isEditMode
     }
     
     @IBAction func didTapBackButton(_ sender: Any) {
@@ -304,7 +314,7 @@ extension AddRecipeSecondViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCookingProcessCell", for: indexPath) as? RecipeCookingProcessCell else {return UITableViewCell()}
         
-        cell.configure(indexPath: indexPath, image: addedCookingProcessList[indexPath.row][0] as? UIImage, description: addedCookingProcessList[indexPath.row][1]! as! String)
+        cell.configure(indexPath: indexPath, cookingProcessList: addedCookingProcessList)
         cell.selectionStyle = .none
         cell.deleteButtonTappedDelegate = self
         cell.addImageButtonTappedDelegate = self

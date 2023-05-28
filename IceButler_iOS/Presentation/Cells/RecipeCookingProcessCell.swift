@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class RecipeCookingProcessCell: CustomTableViewCell {
 
@@ -37,12 +38,22 @@ class RecipeCookingProcessCell: CustomTableViewCell {
         deleteButtonTappedDelegate?.tappedCellDeleteButton(indexPath: indexPath)
     }
     
-    func configure(indexPath: IndexPath, image: UIImage?, description: String) {
+    func configure(indexPath: IndexPath, cookingProcessList: [[Any?]]) {
         self.indexPath = indexPath
+        
+        let image = cookingProcessList[indexPath.row][0]
+        let description = cookingProcessList[indexPath.row][1]! as! String
         if image == nil {
             addImageButton.setImage(UIImage(named: "imageAddIcon"), for: .normal)
         } else {
-            addImageButton.setImage(image, for: .normal)
+            if image is UIImage {
+                addImageButton.setImage(image as? UIImage, for: .normal)
+            } else {
+                if let url = URL(string: image as! String) {
+                    addImageButton.kf.setImage(with: url, for: .normal)
+                    addImageButton.contentMode = .scaleAspectFill
+                }
+            }
         }
         cookingProcessTextView.text = description
     }

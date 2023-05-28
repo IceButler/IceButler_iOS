@@ -11,7 +11,7 @@ class RecipeDetailViewController: UIViewController {
     
     private var recipeIdx: Int!
     private var isFromMyRecipe: Bool = false
-    private var recipeDatail: RecipeDetailResponseModel!
+    private var recipeDetail: RecipeDetailResponseModel!
     @IBOutlet var naviItem: UINavigationItem!
     @IBOutlet var representativeImageView: UIImageView!
     @IBOutlet var recipeNameLabel: UILabel!
@@ -32,10 +32,14 @@ class RecipeDetailViewController: UIViewController {
         setupNavigationBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     private func fetchData() {
         RecipeViewModel.shared.getRecipeDetail(recipeIdx: recipeIdx) { response in
             if response != nil {
-                self.recipeDatail = response
+                self.recipeDetail = response
                 response?.recipeFoods.forEach { ingredient in
                     self.ingredientTextList.append(ingredient.foodName + " " + ingredient.foodDetail)
                 }
@@ -62,27 +66,27 @@ class RecipeDetailViewController: UIViewController {
     private func setupLayout() {
         if !isFromMyRecipe {
             // 즐겨찾기
-            if recipeDatail.isSubscribe {
+            if recipeDetail.isSubscribe {
                 self.setLikeStatus(isTrue: true)
             } else {
                 self.setLikeStatus(isTrue: false)
             }
         }
         // 대표사진
-        if let url = URL(string: recipeDatail.recipeImgUrl) {
+        if let url = URL(string: recipeDetail.recipeImgUrl) {
             representativeImageView.kf.setImage(with: url)
             representativeImageView.contentMode = .scaleAspectFill
         }
         // 레시피명
-        recipeNameLabel.text = recipeDatail.recipeName
+        recipeNameLabel.text = recipeDetail.recipeName
         // 카테고리, 분량, 소요시간
-        categoryLabel.text = recipeDatail.recipeCategory
+        categoryLabel.text = recipeDetail.recipeCategory
         categoryView.layer.cornerRadius = categoryView.frame.height / 2
         categoryView.layer.masksToBounds = true
-        amountLabel.text = "\(recipeDatail.quantity)인분"
+        amountLabel.text = "\(recipeDetail.quantity)인분"
         amountView.layer.cornerRadius = categoryView.frame.height / 2
         amountView.layer.masksToBounds = true
-        timeRequiredLabel.text = "\(recipeDatail.leadTime)분"
+        timeRequiredLabel.text = "\(recipeDetail.leadTime)분"
         timeRequiredView.layer.cornerRadius = categoryView.frame.height / 2
         timeRequiredView.layer.masksToBounds = true
         // 재료
@@ -103,6 +107,37 @@ class RecipeDetailViewController: UIViewController {
     
     private func setupNavigationBar() {
         self.tabBarController?.tabBar.isHidden = true
+        // pop up menu
+        if isFromMyRecipe {
+            var menuItems: [UIAction] {
+                return [
+                    UIAction(title: "레시피 수정", image: UIImage(named: "pencil"), handler: { _ in
+                        guard let addRecipeViewController = self.storyboard!.instantiateViewController(withIdentifier: "AddRecipeViewController") as? AddRecipeViewController else { return }
+                        addRecipeViewController.configure(recipeIdx: self.recipeIdx, isEditMode: self.isFromMyRecipe, recipeDetail: self.recipeDetail)
+                        self.navigationController?.pushViewController(addRecipeViewController, animated: true)
+                    }),
+                    UIAction(title: "레시피 삭제", image: UIImage(named: "trash"), attributes: .destructive, handler: { _ in
+                        
+                    })
+                ]
+            }
+            var menu: UIMenu {
+                return UIMenu(title: "", options: [], children: menuItems)
+            }
+            naviItem.rightBarButtonItems?.first?.menu = menu
+        } else {
+            var menuItems: [UIAction] {
+                return [
+                    UIAction(title: "신고", image: UIImage(named: "redReportIcon"), attributes: .destructive, handler: { _ in
+                        
+                    })
+                ]
+            }
+            var menu: UIMenu {
+                return UIMenu(title: "", options: [], children: menuItems)
+            }
+            naviItem.rightBarButtonItems?.first?.menu = menu
+        }
     }
     
     @IBAction func didTapXButton(_ sender: Any) {
@@ -129,7 +164,7 @@ class RecipeDetailViewController: UIViewController {
 
 extension RecipeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let numOfIngredient = recipeDatail?.recipeFoods.count {
+        if let numOfIngredient = recipeDetail?.recipeFoods.count {
             return numOfIngredient
         } else {
             return 0
@@ -150,7 +185,7 @@ extension RecipeDetailViewController: UICollectionViewDelegate, UICollectionView
 
 extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let numOfCookeryStep = recipeDatail?.cookery.count {
+        if let numOfCookeryStep = recipeDetail?.cookery.count {
             return numOfCookeryStep
         } else {
             return 0
@@ -159,7 +194,7 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeDetailCookingProcessCell", for: indexPath) as? RecipeDetailCookingProcessCell else {return UITableViewCell()}
-        let cookery = recipeDatail.cookery[indexPath.row]
+        let cookery = recipeDetail.cookery[indexPath.row]
         cell.configure(stepNum: cookery.nextIdx + 1, description: cookery.description, cookeryImgUrl: cookery.cookeryImgUrl)
         cell.selectionStyle = .none
         cell.backgroundColor = UIColor.clear
