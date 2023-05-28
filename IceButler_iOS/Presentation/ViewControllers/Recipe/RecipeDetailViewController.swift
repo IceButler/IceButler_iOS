@@ -161,18 +161,31 @@ class RecipeDetailViewController: BaseViewController {
                 return [
                     UIAction(title: "신고", image: UIImage(named: "redReportIcon"), attributes: .destructive, handler: { _ in
                         let actionSheet = UIAlertController(title: "신고 사유 선택\n(부적절한 신고는 처리되지 않습니다.)", message: nil, preferredStyle: .actionSheet)
+                        let promotionStr = "홍보/도배"
+                        let obsceneMaterialStr = "음란물/유해한 정보"
+                        let poorContentStr = "내용이 부실함"
+                        let unsuitableStr = "게시글 성격에 부적합함"
                         [
-                          UIAlertAction(title: "홍보/도배", style: .destructive, handler: { _ in
-                              
+                          UIAlertAction(title: promotionStr, style: .destructive, handler: { _ in
+                              self.showLoading()
+                              RecipeViewModel.shared.reportRecipe(recipeIdx: self.recipeIdx, reason: promotionStr) { isSuccess in
+                                  self.showReportResultAlert(isSuccess)
+                              }
                           }),
-                          UIAlertAction(title: "음란물/유해한 정보", style: .destructive, handler: { _ in
-                              
+                          UIAlertAction(title: obsceneMaterialStr, style: .destructive, handler: { _ in
+                              RecipeViewModel.shared.reportRecipe(recipeIdx: self.recipeIdx, reason: obsceneMaterialStr) { isSuccess in
+                                  self.showReportResultAlert(isSuccess)
+                              }
                           }),
-                          UIAlertAction(title: "내용이 부실함", style: .destructive, handler: { _ in
-                              
+                          UIAlertAction(title: poorContentStr, style: .destructive, handler: { _ in
+                              RecipeViewModel.shared.reportRecipe(recipeIdx: self.recipeIdx, reason: poorContentStr) { isSuccess in
+                                  self.showReportResultAlert(isSuccess)
+                              }
                           }),
-                          UIAlertAction(title: "게시글 성격에 부적합함", style: .destructive, handler: { _ in
-                              
+                          UIAlertAction(title: unsuitableStr, style: .destructive, handler: { _ in
+                              RecipeViewModel.shared.reportRecipe(recipeIdx: self.recipeIdx, reason: unsuitableStr) { isSuccess in
+                                  self.showReportResultAlert(isSuccess)
+                              }
                           }),
                           UIAlertAction(title: "취소", style: .cancel)
                         ].forEach{ actionSheet.addAction($0) }
@@ -185,6 +198,19 @@ class RecipeDetailViewController: BaseViewController {
                 return UIMenu(title: "", options: [], children: menuItems)
             }
             naviItem.rightBarButtonItems?.first?.menu = menu
+        }
+    }
+    
+    func showReportResultAlert(_ isSuccess: Bool) {
+        self.hideLoading()
+        if isSuccess {
+            let alert = UIAlertController(title: "레시피 신고 완료", message: "신고가 정상적으로 처리되었습니다.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            self.present(alert, animated: true)
+        } else {
+            let alert = UIAlertController(title: "레시피 신고 실패", message: "레시피 신고에 실패했습니다. 잠시 후 다시 시도해주세요.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            self.present(alert, animated: true)
         }
     }
     

@@ -289,4 +289,11 @@ class RecipeViewModel: ObservableObject {
             completion(result)
         }
     }
+    
+    func reportRecipe(recipeIdx: Int, reason: String, completion: @escaping (Bool) -> Void) {
+        let parameter = RecipeReportRequestModel(reason: reason)
+        recipeService.reportRecipe(recipeIdx: recipeIdx, parameter: parameter) { result in
+            completion(result)
+        }
+    }
 }

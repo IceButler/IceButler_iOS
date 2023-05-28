@@ -97,6 +97,10 @@ struct RecipeModifyRequestModel: Codable {
     let cookeryList: [CookingProcess]
 }
 
+struct RecipeReportRequestModel: Codable {
+    let reason: String
+}
+
 struct Ingredient: Codable {
     let foodName: String
     let foodDetail: String
