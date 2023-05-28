@@ -130,7 +130,24 @@ class RecipeDetailViewController: UIViewController {
             var menuItems: [UIAction] {
                 return [
                     UIAction(title: "신고", image: UIImage(named: "redReportIcon"), attributes: .destructive, handler: { _ in
-                        
+                        let actionSheet = UIAlertController(title: "신고 사유 선택\n(부적절한 신고는 처리되지 않습니다.)", message: nil, preferredStyle: .actionSheet)
+                        [
+                          UIAlertAction(title: "홍보/도배", style: .destructive, handler: { _ in
+                              
+                          }),
+                          UIAlertAction(title: "음란물/유해한 정보", style: .destructive, handler: { _ in
+                              
+                          }),
+                          UIAlertAction(title: "내용이 부실함", style: .destructive, handler: { _ in
+                              
+                          }),
+                          UIAlertAction(title: "게시글 성격에 부적합함", style: .destructive, handler: { _ in
+                              
+                          }),
+                          UIAlertAction(title: "취소", style: .cancel)
+                        ].forEach{ actionSheet.addAction($0) }
+
+                        self.present(actionSheet, animated: true)
                     })
                 ]
             }
