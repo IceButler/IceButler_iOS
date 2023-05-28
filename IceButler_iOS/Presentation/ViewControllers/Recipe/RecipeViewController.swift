@@ -20,7 +20,6 @@ class RecipeViewController: TabmanViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupLayout()
-        initSearchBar()
         setupTabman()
     }
     
@@ -31,12 +30,16 @@ class RecipeViewController: TabmanViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setSearchBarRightView()
+//        setSearchBarRightView()
     }
     
     @objc func didTapStarButton(sender: UIButton!) {
         guard let bookmarkRecipeViewController = storyboard!.instantiateViewController(withIdentifier: "BookmarkRecipeViewController") as? BookmarkRecipeViewController else { return }
         self.navigationController?.pushViewController(bookmarkRecipeViewController, animated: true)
+    }
+    
+    @objc func didTapSearchButton(sender: UIButton!) {
+        // TODO: 레시피 검색 화면으로 이동 + 검색바 포커스
     }
     
     @IBAction func didTapAddButton(_ sender: Any) {
@@ -48,18 +51,17 @@ class RecipeViewController: TabmanViewController {
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
         
         // left item
+        let fixedSpace = UIBarButtonItem(systemItem: .fixedSpace)
+        fixedSpace.width = 20
         let mainText = UILabel()
         mainText.text = "레시피"
         mainText.textColor = .white
-        mainText.font = .systemFont(ofSize: 17, weight: .bold)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: mainText)
+        mainText.font = .systemFont(ofSize: 17, weight: .heavy)
+        navigationItem.setLeftBarButtonItems([fixedSpace, UIBarButtonItem(customView: mainText)], animated: true)
         
         // right item
-        let bookmarkBtn = UIButton()
-        bookmarkBtn.setImage(UIImage(named: "star"), for: .normal)
-        bookmarkBtn.addTarget(self, action: #selector(didTapStarButton), for: .touchUpInside)
-
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: bookmarkBtn)
+        let buttonItems: [UIBarButtonItem] = [UIBarButtonItem(image: UIImage(named: "star"), style: .plain, target: self, action: #selector(didTapStarButton)), UIBarButtonItem(image: UIImage(named: "searchIcon"), style: .plain, target: self, action: #selector(didTapSearchButton))]
+        navigationItem.setRightBarButtonItems(buttonItems, animated: true)
         
         if #available(iOS 13.0, *) {
             let app = UIApplication.shared
@@ -92,36 +94,36 @@ class RecipeViewController: TabmanViewController {
         recipeAddButton.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 20, spread: 0)
     }
     
-    private func initSearchBar() {
-        searchBar = UISearchBar()
-        searchBar.layoutIfNeeded()
-        searchBar.layoutSubviews()
-        searchBar.placeholder = "식품 재료/메뉴명"
-        searchBar.backgroundColor = .clear
-        searchBar.searchTextField.font = .systemFont(ofSize: 16, weight: .regular)
-        searchBar.searchTextField.textColor = .white
-        searchBar.searchTextField.backgroundColor = UIColor.white.withAlphaComponent(0.4)
-        searchBar.searchTextField.layer.cornerRadius = 22
-        searchBar.searchTextField.layer.masksToBounds = true
-        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
-            textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
-        }
-        // 왼쪽 기본 돋보기 이미지 빼기
-        searchBar.searchTextField.leftViewMode = .never
-        searchBar.setImage(UIImage(), for: UISearchBar.Icon.search, state: .normal)
-        
-        // titleView
-        self.navigationItem.titleView = searchBar
-    }
+//    private func initSearchBar() {
+//        searchBar = UISearchBar()
+//        searchBar.layoutIfNeeded()
+//        searchBar.layoutSubviews()
+//        searchBar.placeholder = "식품 재료/메뉴명"
+//        searchBar.backgroundColor = .clear
+//        searchBar.searchTextField.font = .systemFont(ofSize: 16, weight: .regular)
+//        searchBar.searchTextField.textColor = .white
+//        searchBar.searchTextField.backgroundColor = UIColor.white.withAlphaComponent(0.4)
+//        searchBar.searchTextField.layer.cornerRadius = 22
+//        searchBar.searchTextField.layer.masksToBounds = true
+//        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+//            textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+//        }
+//        // 왼쪽 기본 돋보기 이미지 빼기
+//        searchBar.searchTextField.leftViewMode = .never
+//        searchBar.setImage(UIImage(), for: UISearchBar.Icon.search, state: .normal)
+//
+//        // titleView
+//        self.navigationItem.titleView = searchBar
+//    }
     
-    private func setSearchBarRightView() {
-        // 오른쪽에 검색 버튼(돋보기) 넣기
-        searchBar.searchTextField.clearButtonMode = .never
-        let searchBtn = UIButton(type: .custom)
-        searchBtn.setImage(UIImage(named: "searchIcon"), for: .normal)
-        searchBar.searchTextField.rightView = searchBtn
-        searchBar.searchTextField.rightViewMode = .always
-    }
+//    private func setSearchBarRightView() {
+//        // 오른쪽에 검색 버튼(돋보기) 넣기
+//        searchBar.searchTextField.clearButtonMode = .never
+//        let searchBtn = UIButton(type: .custom)
+//        searchBtn.setImage(UIImage(named: "searchIcon"), for: .normal)
+//        searchBar.searchTextField.rightView = searchBtn
+//        searchBar.searchTextField.rightViewMode = .always
+//    }
     
     private func setupTabman() {
         let recipeInFridgeVC = storyboard?.instantiateViewController(identifier: "RecipeInFridgeViewController") as! RecipeInFridgeViewController
