@@ -40,6 +40,7 @@ class RecipeDetailViewController: UIViewController {
         RecipeViewModel.shared.getRecipeDetail(recipeIdx: recipeIdx) { response in
             if response != nil {
                 self.recipeDetail = response
+                self.ingredientTextList.removeAll()
                 response?.recipeFoods.forEach { ingredient in
                     self.ingredientTextList.append(ingredient.foodName + " " + ingredient.foodDetail)
                 }
@@ -164,17 +165,12 @@ class RecipeDetailViewController: UIViewController {
 
 extension RecipeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let numOfIngredient = recipeDetail?.recipeFoods.count {
-            return numOfIngredient
-        } else {
-            return 0
-        }
+        return ingredientTextList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeDetailIngredientCell", for: indexPath) as! RecipeDetailIngredientCell
         cell.setIngredient(ingredientText: ingredientTextList[indexPath.row])
-        
         return cell
     }
     
