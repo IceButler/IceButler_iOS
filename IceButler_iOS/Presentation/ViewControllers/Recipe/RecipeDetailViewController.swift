@@ -7,10 +7,11 @@
 
 import UIKit
 
-class RecipeDetailViewController: UIViewController {
+class RecipeDetailViewController: BaseViewController {
     
     private var recipeIdx: Int!
-    private var recipeDatail: RecipeDetailResponseModel!
+    private var isFromMyRecipe: Bool = false
+    private var recipeDetail: RecipeDetailResponseModel!
     @IBOutlet var naviItem: UINavigationItem!
     @IBOutlet var representativeImageView: UIImageView!
     @IBOutlet var recipeNameLabel: UILabel!
@@ -26,21 +27,36 @@ class RecipeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
         setup()
         setupNavigationBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        fetchData()
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     private func fetchData() {
         RecipeViewModel.shared.getRecipeDetail(recipeIdx: recipeIdx) { response in
-            if response != nil {
-                self.recipeDatail = response
-                response?.recipeFoods.forEach { ingredient in
-                    self.ingredientTextList.append(ingredient.foodName + " " + ingredient.foodDetail)
+            // 삭제된 레시피 클릭 시 존재하지 않는 레시피 예외처리
+            if response?.statusCode == 404 {
+                let alert = UIAlertController(title: "존재하지 않는 레시피", message: "삭제되었거나 존재하지 않는 레시피입니다.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: { action in
+                    self.dismiss(animated: true)
+                }))
+                self.present(alert, animated: true)
+            } else {
+                if let data = response?.data {
+                    // 정상 처리
+                    self.recipeDetail = data
+                    self.ingredientTextList.removeAll()
+                    data.recipeFoods.forEach { ingredient in
+                        self.ingredientTextList.append(ingredient.foodName + " " + ingredient.foodDetail)
+                    }
+                    self.ingredientCollectionView.reloadData()
+                    self.cookingProcessTableView.reloadData()
+                    self.setupLayout()
                 }
-                self.ingredientCollectionView.reloadData()
-                self.cookingProcessTableView.reloadData()
-                self.setupLayout()
             }
         }
     }
@@ -59,27 +75,29 @@ class RecipeDetailViewController: UIViewController {
     }
     
     private func setupLayout() {
-        // 즐겨찾기
-        if recipeDatail.isSubscribe {
-            self.setLikeStatus(isTrue: true)
-        } else {
-            self.setLikeStatus(isTrue: false)
+        if !isFromMyRecipe {
+            // 즐겨찾기
+            if recipeDetail.isSubscribe {
+                self.setLikeStatus(isTrue: true)
+            } else {
+                self.setLikeStatus(isTrue: false)
+            }
         }
         // 대표사진
-        if let url = URL(string: recipeDatail.recipeImgUrl) {
+        if let url = URL(string: recipeDetail.recipeImgUrl) {
             representativeImageView.kf.setImage(with: url)
             representativeImageView.contentMode = .scaleAspectFill
         }
         // 레시피명
-        recipeNameLabel.text = recipeDatail.recipeName
+        recipeNameLabel.text = recipeDetail.recipeName
         // 카테고리, 분량, 소요시간
-        categoryLabel.text = recipeDatail.recipeCategory
+        categoryLabel.text = recipeDetail.recipeCategory
         categoryView.layer.cornerRadius = categoryView.frame.height / 2
         categoryView.layer.masksToBounds = true
-        amountLabel.text = "\(recipeDatail.quantity)인분"
+        amountLabel.text = "\(recipeDetail.quantity)인분"
         amountView.layer.cornerRadius = categoryView.frame.height / 2
         amountView.layer.masksToBounds = true
-        timeRequiredLabel.text = "\(recipeDatail.leadTime)분"
+        timeRequiredLabel.text = "\(recipeDetail.leadTime)분"
         timeRequiredView.layer.cornerRadius = categoryView.frame.height / 2
         timeRequiredView.layer.masksToBounds = true
         // 재료
@@ -91,12 +109,109 @@ class RecipeDetailViewController: UIViewController {
         cookingProcessTableView.separatorStyle = .none
     }
     
-    func configure(recipeIdx: Int) {
+    func configure(recipeIdx: Int, isFromMyRecipe: Bool? = nil) {
         self.recipeIdx = recipeIdx
+        if isFromMyRecipe != nil {
+            self.isFromMyRecipe = isFromMyRecipe!
+        }
     }
     
     private func setupNavigationBar() {
         self.tabBarController?.tabBar.isHidden = true
+        // pop up menu
+        if isFromMyRecipe {
+            var menuItems: [UIAction] {
+                return [
+                    UIAction(title: "레시피 수정", image: UIImage(named: "pencil"), handler: { _ in
+                        guard let addRecipeViewController = self.storyboard!.instantiateViewController(withIdentifier: "AddRecipeViewController") as? AddRecipeViewController else { return }
+                        addRecipeViewController.configure(recipeIdx: self.recipeIdx, isEditMode: self.isFromMyRecipe, recipeDetail: self.recipeDetail)
+                        self.navigationController?.pushViewController(addRecipeViewController, animated: true)
+                    }),
+                    UIAction(title: "레시피 삭제", image: UIImage(named: "trash"), attributes: .destructive, handler: { _ in
+                        let alertStoryboard = UIStoryboard.init(name: "Alert", bundle: nil)
+                        guard let alertViewController = alertStoryboard.instantiateViewController(withIdentifier: "AlertViewController")as? AlertViewController else { return }
+                        alertViewController.configure(title: "마이레시피 삭제", content: "해당 레시피를 삭제하시겠습니까?", leftButtonTitle: "취소", righttButtonTitle: "삭제", rightCompletion: {
+                            self.showLoading()
+                            RecipeViewModel.shared.deleteRecipe(recipeIdx: self.recipeIdx) { isSuccess in
+                                self.hideLoading()
+                                if isSuccess {
+                                    let alert = UIAlertController(title: "레시피 삭제 성공", message: "레시피 삭제가 정상적으로 처리되었습니다.", preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                                        self.dismiss(animated: true)
+                                    }))
+                                    self.present(alert, animated: true)
+                                } else {
+                                    let alert = UIAlertController(title: "레시피 삭제 실패", message: "레시피 삭제에 실패했습니다. 잠시 후 다시 시도해주세요.", preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: "확인", style: .default))
+                                    self.present(alert, animated: true)
+                                }}
+                        }, leftCompletion: {})
+                        alertViewController.modalPresentationStyle = .overFullScreen
+                        alertViewController.modalTransitionStyle = .crossDissolve
+                        self.present(alertViewController, animated: true)
+                    })
+                ]
+            }
+            var menu: UIMenu {
+                return UIMenu(title: "", options: [], children: menuItems)
+            }
+            naviItem.rightBarButtonItems?.first?.menu = menu
+        } else {
+            var menuItems: [UIAction] {
+                return [
+                    UIAction(title: "신고", image: UIImage(named: "redReportIcon"), attributes: .destructive, handler: { _ in
+                        let actionSheet = UIAlertController(title: "신고 사유 선택\n(부적절한 신고는 처리되지 않습니다.)", message: nil, preferredStyle: .actionSheet)
+                        let promotionStr = "홍보/도배"
+                        let obsceneMaterialStr = "음란물/유해한 정보"
+                        let poorContentStr = "내용이 부실함"
+                        let unsuitableStr = "게시글 성격에 부적합함"
+                        [
+                          UIAlertAction(title: promotionStr, style: .destructive, handler: { _ in
+                              self.showLoading()
+                              RecipeViewModel.shared.reportRecipe(recipeIdx: self.recipeIdx, reason: promotionStr) { isSuccess in
+                                  self.showReportResultAlert(isSuccess)
+                              }
+                          }),
+                          UIAlertAction(title: obsceneMaterialStr, style: .destructive, handler: { _ in
+                              RecipeViewModel.shared.reportRecipe(recipeIdx: self.recipeIdx, reason: obsceneMaterialStr) { isSuccess in
+                                  self.showReportResultAlert(isSuccess)
+                              }
+                          }),
+                          UIAlertAction(title: poorContentStr, style: .destructive, handler: { _ in
+                              RecipeViewModel.shared.reportRecipe(recipeIdx: self.recipeIdx, reason: poorContentStr) { isSuccess in
+                                  self.showReportResultAlert(isSuccess)
+                              }
+                          }),
+                          UIAlertAction(title: unsuitableStr, style: .destructive, handler: { _ in
+                              RecipeViewModel.shared.reportRecipe(recipeIdx: self.recipeIdx, reason: unsuitableStr) { isSuccess in
+                                  self.showReportResultAlert(isSuccess)
+                              }
+                          }),
+                          UIAlertAction(title: "취소", style: .cancel)
+                        ].forEach{ actionSheet.addAction($0) }
+
+                        self.present(actionSheet, animated: true)
+                    })
+                ]
+            }
+            var menu: UIMenu {
+                return UIMenu(title: "", options: [], children: menuItems)
+            }
+            naviItem.rightBarButtonItems?.first?.menu = menu
+        }
+    }
+    
+    func showReportResultAlert(_ isSuccess: Bool) {
+        self.hideLoading()
+        if isSuccess {
+            let alert = UIAlertController(title: "레시피 신고 완료", message: "신고가 정상적으로 처리되었습니다.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            self.present(alert, animated: true)
+        } else {
+            let alert = UIAlertController(title: "레시피 신고 실패", message: "레시피 신고에 실패했습니다. 잠시 후 다시 시도해주세요.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            self.present(alert, animated: true)
+        }
     }
     
     @IBAction func didTapXButton(_ sender: Any) {
@@ -123,17 +238,12 @@ class RecipeDetailViewController: UIViewController {
 
 extension RecipeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let numOfIngredient = recipeDatail?.recipeFoods.count {
-            return numOfIngredient
-        } else {
-            return 0
-        }
+        return ingredientTextList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeDetailIngredientCell", for: indexPath) as! RecipeDetailIngredientCell
         cell.setIngredient(ingredientText: ingredientTextList[indexPath.row])
-        
         return cell
     }
     
@@ -144,7 +254,7 @@ extension RecipeDetailViewController: UICollectionViewDelegate, UICollectionView
 
 extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let numOfCookeryStep = recipeDatail?.cookery.count {
+        if let numOfCookeryStep = recipeDetail?.cookery.count {
             return numOfCookeryStep
         } else {
             return 0
@@ -153,7 +263,7 @@ extension RecipeDetailViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeDetailCookingProcessCell", for: indexPath) as? RecipeDetailCookingProcessCell else {return UITableViewCell()}
-        let cookery = recipeDatail.cookery[indexPath.row]
+        let cookery = recipeDetail.cookery[indexPath.row]
         cell.configure(stepNum: cookery.nextIdx + 1, description: cookery.description, cookeryImgUrl: cookery.cookeryImgUrl)
         cell.selectionStyle = .none
         cell.backgroundColor = UIColor.clear

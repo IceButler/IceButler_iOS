@@ -47,6 +47,11 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
     weak var firstDateDelegate: ReceiveFirstDataDelegate?
     private var addedCookingProcessList: [[Any?]] = []
     
+    // 레시피 수정
+    private var recipeIdx: Int? = nil
+    private var isEditMode: Bool = false
+    private var recipeDetail: RecipeDetailResponseModel? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -86,11 +91,16 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
     
     private func setupNavigationBar() {
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
         self.navigationController?.navigationBar.standardAppearance.backgroundColor = .navigationColor
         
         let title = UILabel()
-        title.text = "레시피 추가"
+        if isEditMode {
+            title.text = "레시피 수정"
+        } else {
+            title.text = "레시피 추가"
+        }
         title.font = .systemFont(ofSize: 18, weight: .bold)
         title.textColor = .white
         title.textAlignment = .left
@@ -131,6 +141,9 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
         addRepresentativeImageButton.setImage(UIImage(named: "imageAddIcon"), for: .normal)
         categoryTableView.separatorStyle = .none
         ingredientTableView.separatorStyle = .none
+        if isEditMode {
+            setupLayoutForEdit()
+        }
     }
     
     private func setupPlaceholder() {
@@ -186,6 +199,44 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
         nextButton.backgroundColor = .disabledButtonGray
     }
     
+    private func setupLayoutForEdit() {
+        if let url = URL(string: recipeDetail!.recipeImgUrl) {
+            addRepresentativeImageButton.kf.setImage(with: url, for: .normal)
+            addRepresentativeImageButton.contentMode = .scaleAspectFill
+        }
+        // 메뉴명
+        menuNameView.backgroundColor = .focusSkyBlue
+        menuNameTextField.text = recipeDetail!.recipeName
+        let attributedTitle = NSAttributedString(string: recipeDetail!.recipeCategory, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.black])
+        // 카테고리
+        categoryOpenButton.backgroundColor = .focusSkyBlue
+        categoryTableView.backgroundColor = .focusTableViewSkyBlue
+        categoryOpenButton.setAttributedTitle(attributedTitle, for: .normal)
+        // 분량 및 소요시간
+        amountView.backgroundColor = .focusSkyBlue
+        amountTextField.text = "\(recipeDetail!.quantity)"
+        timeRequiredView.backgroundColor = .focusSkyBlue
+        timeRequiredTextField.text = "\(recipeDetail!.leadTime)"
+        // 재료
+        for ingredient in recipeDetail!.recipeFoods {
+            addedIngredientList.append([ingredient.foodName, ingredient.foodDetail])
+        }
+        ingredientStackViewTopConstraintToIngredientTableView.priority = UILayoutPriority(1000)
+        ingredientTableView.reloadData()
+        scrollView.invalidateIntrinsicContentSize()
+        // 조리과정
+        for cookery in recipeDetail!.cookery {
+            addedCookingProcessList.append([cookery.cookeryImgUrl, cookery.description])
+        }
+        changeNextButtonColor()
+    }
+    
+    func configure(recipeIdx: Int, isEditMode: Bool, recipeDetail: RecipeDetailResponseModel) {
+        self.recipeIdx = recipeIdx
+        self.isEditMode = isEditMode
+        self.recipeDetail = recipeDetail
+    }
+    
     @IBAction func didTapBackButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -223,6 +274,9 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
     @IBAction func didTapNextButton(_ sender: Any) {
         if nextButton.backgroundColor == .availableBlue {
             guard let addRecipeSecondViewController = storyboard!.instantiateViewController(withIdentifier: "AddRecipeSecondViewController") as? AddRecipeSecondViewController else { return }
+            if isEditMode {
+                addRecipeSecondViewController.configure(recipeIdx: recipeIdx!, isEditMode: isEditMode)
+            }
             self.firstDateDelegate = addRecipeSecondViewController
             addRecipeSecondViewController.secondDateDelegate = self
             firstDateDelegate?.receiveDataFromFirstAddVC(addedCookingProcessList: addedCookingProcessList, representativeImage: addRepresentativeImageButton.imageView!.image!, menuName: menuNameTextField.text!, category: categoryOpenButton.titleLabel!.text!, amount: Int(amountTextField.text!) ?? 0, timeRequired: Int(timeRequiredTextField.text!) ?? 0, addedIngredientList: addedIngredientList)

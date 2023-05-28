@@ -10,7 +10,7 @@ import Alamofire
 
 class RecipeService {
     var PAGING_SIZE: Int = 12
- 
+    
     func getFridgeRecipes(fridgeType: FridgeType, fridgeIdx: Int, pageNumberToLoad: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
         let parameter: Parameters = ["category" : "냉장고", "page" : pageNumberToLoad, "size" : PAGING_SIZE]
         switch fridgeType {
@@ -64,9 +64,9 @@ class RecipeService {
         }
     }
     
-    func getRecipeDetail(recipeIdx: Int, completion: @escaping (RecipeDetailResponseModel?) -> Void) {
+    func getRecipeDetail(recipeIdx: Int, completion: @escaping (GeneralResponseModel<RecipeDetailResponseModel>?) -> Void) {
         APIManger.shared.getRecipeData(urlEndpointString: "/recipes/detail/\(recipeIdx)", responseDataType: RecipeDetailResponseModel.self, parameter: nil) { response in
-            completion(response.data)
+            completion(response)
         }
     }
     
@@ -81,7 +81,40 @@ class RecipeService {
             print(response)
             if response.status == "OK" {
                 completion(true)
-            }else {
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    func modifyRecipe(recipeIdx: Int, parameter: RecipeModifyRequestModel, completion: @escaping (Bool) -> Void) {
+        APIManger.shared.patchRecipeData(urlEndpointString: "/recipes/\(recipeIdx)/modify", responseDataType: RecipeResponseModel.self, requestDataType: RecipeModifyRequestModel.self, parameter: parameter) { response in
+            print(response)
+            if response.status == "OK" {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    func deleteRecipe(recipeIdx: Int, completion: @escaping (Bool) -> Void) {
+        APIManger.shared.deleteRecipeData(urlEndpointString: "/recipes/\(recipeIdx)/myrecipe", responseDataType: RecipeResponseModel.self) { response in
+            print(response)
+            if response.status == "OK" {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    func reportRecipe(recipeIdx: Int, parameter: RecipeReportRequestModel, completion: @escaping (Bool) -> Void) {
+        APIManger.shared.postRecipeData(urlEndpointString: "/recipes/\(recipeIdx)/report", responseDataType: RecipeResponseModel.self, requestDataType: RecipeReportRequestModel.self, parameter: parameter) { response in
+            print(response)
+            if response.status == "OK" {
+                completion(true)
+            } else {
                 completion(false)
             }
         }
