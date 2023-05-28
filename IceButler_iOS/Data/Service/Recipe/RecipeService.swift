@@ -64,9 +64,9 @@ class RecipeService {
         }
     }
     
-    func getRecipeDetail(recipeIdx: Int, completion: @escaping (RecipeDetailResponseModel?) -> Void) {
+    func getRecipeDetail(recipeIdx: Int, completion: @escaping (GeneralResponseModel<RecipeDetailResponseModel>?) -> Void) {
         APIManger.shared.getRecipeData(urlEndpointString: "/recipes/detail/\(recipeIdx)", responseDataType: RecipeDetailResponseModel.self, parameter: nil) { response in
-            completion(response.data)
+            completion(response)
         }
     }
     
@@ -81,7 +81,7 @@ class RecipeService {
             print(response)
             if response.status == "OK" {
                 completion(true)
-            }else {
+            } else {
                 completion(false)
             }
         }
@@ -92,7 +92,18 @@ class RecipeService {
             print(response)
             if response.status == "OK" {
                 completion(true)
-            }else {
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    func deleteRecipe(recipeIdx: Int, completion: @escaping (Bool) -> Void) {
+        APIManger.shared.deleteRecipeData(urlEndpointString: "/recipes/\(recipeIdx)/myrecipe", responseDataType: RecipeResponseModel.self) { response in
+            print(response)
+            if response.status == "OK" {
+                completion(true)
+            } else {
                 completion(false)
             }
         }

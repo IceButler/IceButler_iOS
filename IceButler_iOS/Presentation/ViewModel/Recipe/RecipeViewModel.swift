@@ -109,7 +109,7 @@ class RecipeViewModel: ObservableObject {
         }
     }
     
-    func getRecipeDetail(recipeIdx: Int, completion: @escaping (RecipeDetailResponseModel?) -> Void) {
+    func getRecipeDetail(recipeIdx: Int, completion: @escaping (GeneralResponseModel<RecipeDetailResponseModel>?) -> Void) {
         recipeService.getRecipeDetail(recipeIdx: recipeIdx) { response in
             completion(response)
         }
@@ -219,9 +219,6 @@ class RecipeViewModel: ObservableObject {
                       ingredientList: [[String]],
                       cookingProcessList: [[Any?]],
                       completion: @escaping (Bool) -> Void) async throws {
-        // 사진은 이미 업로드된 이미지... 만약 디테일에 있는 거랑 같은 거면 업로드할 것 없고
-        // 사진 바꿨으면 업로드해서 서버 주고... 근데 킹피셔가 String->UIImage로 타입 바꿔주긴 함.
-        // 그대로 전부 보내도 ㄱㅊ긴함
         let thumbnailParameter: Parameters = ["ext": "jpeg", "dir": ImageDir.RecipeThumbnail.rawValue]
         let recipeImageParameter: Parameters = ["ext": "jpeg", "dir": ImageDir.RecipeImage.rawValue]
         var thumbnailImgKey: String?
@@ -284,6 +281,12 @@ class RecipeViewModel: ObservableObject {
                     completion(false)
                 }
             }
+        }
+    }
+    
+    func deleteRecipe(recipeIdx: Int, completion: @escaping (Bool) -> Void) {
+        recipeService.deleteRecipe(recipeIdx: recipeIdx) { result in
+            completion(result)
         }
     }
 }

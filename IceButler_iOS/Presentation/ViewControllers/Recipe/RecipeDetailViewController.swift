@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecipeDetailViewController: UIViewController {
+class RecipeDetailViewController: BaseViewController {
     
     private var recipeIdx: Int!
     private var isFromMyRecipe: Bool = false
@@ -38,15 +38,25 @@ class RecipeDetailViewController: UIViewController {
     
     private func fetchData() {
         RecipeViewModel.shared.getRecipeDetail(recipeIdx: recipeIdx) { response in
-            if response != nil {
-                self.recipeDetail = response
-                self.ingredientTextList.removeAll()
-                response?.recipeFoods.forEach { ingredient in
-                    self.ingredientTextList.append(ingredient.foodName + " " + ingredient.foodDetail)
+            // 삭제된 레시피 클릭 시 존재하지 않는 레시피 예외처리
+            if response?.statusCode == 404 {
+                let alert = UIAlertController(title: "존재하지 않는 레시피", message: "삭제되었거나 존재하지 않는 레시피입니다.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: { action in
+                    self.dismiss(animated: true)
+                }))
+                self.present(alert, animated: true)
+            } else {
+                if let data = response?.data {
+                    // 정상 처리
+                    self.recipeDetail = data
+                    self.ingredientTextList.removeAll()
+                    data.recipeFoods.forEach { ingredient in
+                        self.ingredientTextList.append(ingredient.foodName + " " + ingredient.foodDetail)
+                    }
+                    self.ingredientCollectionView.reloadData()
+                    self.cookingProcessTableView.reloadData()
+                    self.setupLayout()
                 }
-                self.ingredientCollectionView.reloadData()
-                self.cookingProcessTableView.reloadData()
-                self.setupLayout()
             }
         }
     }
@@ -118,7 +128,27 @@ class RecipeDetailViewController: UIViewController {
                         self.navigationController?.pushViewController(addRecipeViewController, animated: true)
                     }),
                     UIAction(title: "레시피 삭제", image: UIImage(named: "trash"), attributes: .destructive, handler: { _ in
-                        
+                        let alertStoryboard = UIStoryboard.init(name: "Alert", bundle: nil)
+                        guard let alertViewController = alertStoryboard.instantiateViewController(withIdentifier: "AlertViewController")as? AlertViewController else { return }
+                        alertViewController.configure(title: "마이레시피 삭제", content: "해당 레시피를 삭제하시겠습니까?", leftButtonTitle: "취소", righttButtonTitle: "삭제", rightCompletion: {
+                            self.showLoading()
+                            RecipeViewModel.shared.deleteRecipe(recipeIdx: self.recipeIdx) { isSuccess in
+                                self.hideLoading()
+                                if isSuccess {
+                                    let alert = UIAlertController(title: "레시피 삭제 성공", message: "레시피 삭제가 정상적으로 처리되었습니다.", preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                                        self.dismiss(animated: true)
+                                    }))
+                                    self.present(alert, animated: true)
+                                } else {
+                                    let alert = UIAlertController(title: "레시피 삭제 실패", message: "레시피 삭제에 실패했습니다. 잠시 후 다시 시도해주세요.", preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: "확인", style: .default))
+                                    self.present(alert, animated: true)
+                                }}
+                        }, leftCompletion: {})
+                        alertViewController.modalPresentationStyle = .overFullScreen
+                        alertViewController.modalTransitionStyle = .crossDissolve
+                        self.present(alertViewController, animated: true)
                     })
                 ]
             }
