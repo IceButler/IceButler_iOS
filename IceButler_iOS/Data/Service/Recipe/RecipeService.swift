@@ -86,4 +86,15 @@ class RecipeService {
             }
         }
     }
+    
+    func modifyRecipe(recipeIdx: Int, parameter: RecipeModifyRequestModel, completion: @escaping (Bool) -> Void) {
+        APIManger.shared.patchRecipeData(urlEndpointString: "/recipes/\(recipeIdx)/modify", responseDataType: RecipeResponseModel.self, requestDataType: RecipeModifyRequestModel.self, parameter: parameter) { response in
+            print(response)
+            if response.status == "OK" {
+                completion(true)
+            }else {
+                completion(false)
+            }
+        }
+    }
 }

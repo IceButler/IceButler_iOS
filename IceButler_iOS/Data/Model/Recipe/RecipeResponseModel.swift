@@ -87,6 +87,16 @@ struct RecipeAddRequestModel: Codable {
     let cookeryList: [CookingProcess]
 }
 
+struct RecipeModifyRequestModel: Codable {
+    let recipeName: String
+    let recipeImgKey: String
+    let recipeCategory: String
+    let leadTime: Int
+    let quantity: Int
+    let foodList: [Ingredient]
+    let cookeryList: [CookingProcess]
+}
+
 struct Ingredient: Codable {
     let foodName: String
     let foodDetail: String

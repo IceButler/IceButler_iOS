@@ -27,12 +27,12 @@ class RecipeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
         setup()
         setupNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        fetchData()
         self.navigationController?.isNavigationBarHidden = true
     }
     

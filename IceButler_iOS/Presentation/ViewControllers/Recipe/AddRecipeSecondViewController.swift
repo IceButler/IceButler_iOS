@@ -159,26 +159,64 @@ class AddRecipeSecondViewController: BaseViewController, ReceiveFirstDataDelegat
     
     @IBAction func didTapCompletionButton(_ sender: Any) {
         if completionButton.backgroundColor == .availableBlue {
-            Task { @MainActor in
-                self.showLoading()
-                try await RecipeViewModel.shared.postRecipe(recipeImg: representativeImage,
-                                                        recipeName: menuName,
-                                                        category: category,
-                                                        amount: amount,
-                                                        timeRequired: timeRequired,
-                                                        ingredientList: ingredientList,
-                                                        cookingProcessList: addedCookingProcessList) { isSuccess in
-                    self.hideLoading()
-                    if isSuccess {
-                        let alert = UIAlertController(title: "레시피 등록 성공", message: "'마이페이지 > 마이레시피'에서 확인하실 수 있습니다.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
-                            self.navigationController?.popToRootViewController(animated: true)
-                        }))
-                        self.present(alert, animated: true)
+            if isEditMode {
+                // 레시피 수정
+                for i in addedCookingProcessList.indices {
+                    let cell = cookingProcessTableView.cellForRow(at: IndexPath(item: i, section: 0)) as! RecipeCookingProcessCell
+                    let cellImage = cell.addImageButton.imageView?.image
+                    if cellImage == UIImage(named: "imageAddIcon") {
+                        addedCookingProcessList[i][0] = nil
                     } else {
-                        let alert = UIAlertController(title: "레시피 등록 실패", message: "레시피 등록에 실패했습니다. 잠시 후 다시 시도해주세요.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "확인", style: .default))
-                        self.present(alert, animated: true)
+                        addedCookingProcessList[i][0] = cellImage
+                    }
+                }
+                Task { @MainActor in
+                    self.showLoading()
+                    try await RecipeViewModel.shared.modifyRecipe(recipeIdx: recipeIdx!,
+                                                                  recipeImg: representativeImage,
+                                                                  recipeName: menuName,
+                                                                  category: category,
+                                                                  amount: amount,
+                                                                  timeRequired: timeRequired,
+                                                                  ingredientList: ingredientList,
+                                                                  cookingProcessList: addedCookingProcessList) { isSuccess in
+                        self.hideLoading()
+                        if isSuccess {
+                            let alert = UIAlertController(title: "레시피 수정 성공", message: "레시피 수정이 정상적으로 처리되었습니다.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                                self.navigationController?.popToRootViewController(animated: true)
+                            }))
+                            self.present(alert, animated: true)
+                        } else {
+                            let alert = UIAlertController(title: "레시피 수정 실패", message: "레시피 수정에 실패했습니다. 잠시 후 다시 시도해주세요.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "확인", style: .default))
+                            self.present(alert, animated: true)
+                        }
+                    }
+                }
+            } else {
+                // 레시피 추가
+                Task { @MainActor in
+                    self.showLoading()
+                    try await RecipeViewModel.shared.postRecipe(recipeImg: representativeImage,
+                                                                recipeName: menuName,
+                                                                category: category,
+                                                                amount: amount,
+                                                                timeRequired: timeRequired,
+                                                                ingredientList: ingredientList,
+                                                                cookingProcessList: addedCookingProcessList) { isSuccess in
+                        self.hideLoading()
+                        if isSuccess {
+                            let alert = UIAlertController(title: "레시피 등록 성공", message: "'마이페이지 > 마이레시피'에서 확인하실 수 있습니다.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                                self.navigationController?.popToRootViewController(animated: true)
+                            }))
+                            self.present(alert, animated: true)
+                        } else {
+                            let alert = UIAlertController(title: "레시피 등록 실패", message: "레시피 등록에 실패했습니다. 잠시 후 다시 시도해주세요.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "확인", style: .default))
+                            self.present(alert, animated: true)
+                        }
                     }
                 }
             }

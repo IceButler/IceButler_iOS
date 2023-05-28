@@ -200,8 +200,6 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
     }
     
     private func setupLayoutForEdit() {
-        // 사진은 이미 업로드된 이미지... 만약 디테일에 있는 거랑 같은 거면 업로드할 것 없고
-        // 사진 바꿨으면 업로드해서 서버 주고... 근데 킹피셔가 String->UIImage로 타입 바꿔주긴 함. 그대로 전부 보내도 ㄱㅊ긴함
         if let url = URL(string: recipeDetail!.recipeImgUrl) {
             addRepresentativeImageButton.kf.setImage(with: url, for: .normal)
             addRepresentativeImageButton.contentMode = .scaleAspectFill
@@ -230,7 +228,6 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
         for cookery in recipeDetail!.cookery {
             addedCookingProcessList.append([cookery.cookeryImgUrl, cookery.description])
         }
-        // 기본적으로 textfield 배경색 파랗게 하기
         changeNextButtonColor()
     }
     

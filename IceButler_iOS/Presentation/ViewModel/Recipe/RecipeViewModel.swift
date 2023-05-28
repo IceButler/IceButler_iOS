@@ -209,4 +209,81 @@ class RecipeViewModel: ObservableObject {
             }
         }
     }
+    
+    func modifyRecipe(recipeIdx: Int,
+                      recipeImg: UIImage,
+                      recipeName: String,
+                      category: String,
+                      amount: Int,
+                      timeRequired: Int,
+                      ingredientList: [[String]],
+                      cookingProcessList: [[Any?]],
+                      completion: @escaping (Bool) -> Void) async throws {
+        // 사진은 이미 업로드된 이미지... 만약 디테일에 있는 거랑 같은 거면 업로드할 것 없고
+        // 사진 바꿨으면 업로드해서 서버 주고... 근데 킹피셔가 String->UIImage로 타입 바꿔주긴 함.
+        // 그대로 전부 보내도 ㄱㅊ긴함
+        let thumbnailParameter: Parameters = ["ext": "jpeg", "dir": ImageDir.RecipeThumbnail.rawValue]
+        let recipeImageParameter: Parameters = ["ext": "jpeg", "dir": ImageDir.RecipeImage.rawValue]
+        var thumbnailImgKey: String?
+        var thumbnailUrl: String?
+        var recipeImgKeyList: [String?] = []
+        var recipeUrlList: [String?] = []
+        var foodList: [Ingredient] = []
+        var cookeryList: [CookingProcess] = []
+        var isEmptyUrlList: Bool = true
+        
+        // get ImageKey
+        let thumbnailResponse = try await ImageService.shared.getRecipeImageUrl(parameter: thumbnailParameter)
+        thumbnailImgKey = thumbnailResponse?.imageKey
+        thumbnailUrl = thumbnailResponse?.presignedUrl
+        
+        for i in cookingProcessList.indices {
+            if cookingProcessList[i][0] == nil {
+                recipeImgKeyList.append(nil)
+                recipeUrlList.append(nil)
+            } else {
+                isEmptyUrlList = false
+                let response = try await ImageService.shared.getRecipeImageUrl(parameter: recipeImageParameter)
+                recipeImgKeyList.append(response?.imageKey)
+                recipeUrlList.append(response?.presignedUrl)
+            }
+        }
+        
+        // 재료 list
+        for i in ingredientList.indices {
+            foodList.append(Ingredient(foodName: ingredientList[i][0], foodDetail: ingredientList[i][1]))
+        }
+        // 조리과정 list
+        for i in cookingProcessList.indices {
+            if cookingProcessList[i][0] != nil {
+                cookeryList.append(CookingProcess(cookeryImgKey: recipeImgKeyList[i], cookeryDescription: (cookingProcessList[i][1] as? String)!))
+            } else {
+                cookeryList.append(CookingProcess(cookeryImgKey: nil, cookeryDescription: (cookingProcessList[i][1] as? String)!))
+            }
+        }
+        
+        // patch api 연결
+        if cookeryList.count == cookingProcessList.count {
+            let parameter = RecipeModifyRequestModel(recipeName: recipeName, recipeImgKey: thumbnailImgKey!, recipeCategory: category, leadTime: timeRequired, quantity: amount, foodList: foodList, cookeryList: cookeryList)
+            self.recipeService.modifyRecipe(recipeIdx: recipeIdx, parameter: parameter) { result in
+                if result {
+                    // upload Image
+                    ImageService.shared.uploadRecipeImage(image: recipeImg, url: thumbnailUrl!) {
+                        if isEmptyUrlList {
+                            completion(true)
+                        }
+                        for i in cookingProcessList.indices {
+                            if cookingProcessList[i][0] != nil {
+                                ImageService.shared.uploadRecipeImage(image: cookingProcessList[i][0] as! UIImage, url: recipeUrlList[i]!) {
+                                    completion(true)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    completion(false)
+                }
+            }
+        }
+    }
 }
