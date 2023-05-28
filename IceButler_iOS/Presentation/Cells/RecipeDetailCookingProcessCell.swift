@@ -29,6 +29,7 @@ class RecipeDetailCookingProcessCell: UITableViewCell {
         descriptionLabel.text = description
         if let cookeryImgUrl = cookeryImgUrl {
             if let url = URL(string: cookeryImgUrl) {
+                cookeryImageView.isHidden = false
                 cookeryImageView.kf.setImage(with: url)
                 cookeryImageView.contentMode = .scaleAspectFill
             }
