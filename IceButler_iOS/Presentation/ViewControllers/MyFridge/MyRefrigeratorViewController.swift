@@ -12,7 +12,7 @@ class MyRefrigeratorViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     private var data: MyFridgeResponseModel?
-    private var tableCellHeight = 188
+    private var tableCellHeight = 198
     private var highlightedCellIdx = -1
     
     override func viewDidLoad() {
@@ -91,7 +91,6 @@ class MyRefrigeratorViewController: UIViewController {
                                      responseDataType: MyFridgeResponseModel.self,
                                      parameter: nil) { [weak self] response in
                 if let data = response.data { self?.data = data }
-//                self?.tableView.reloadData()
                 self?.reloadTableViewAnimation()
             }
             
@@ -114,12 +113,7 @@ class MyRefrigeratorViewController: UIViewController {
 
 extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return CGFloat(tableCellHeight)
-        if indexPath.row == highlightedCellIdx {
-            return CGFloat(tableCellHeight)
-        } else {
-            return 188
-        }
+        return 198
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -148,12 +142,14 @@ extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
-    func didTapViewCommentButton(index: Int, isHighlighted: Bool) {
-        if isHighlighted { tableCellHeight = 228 }
-        else { tableCellHeight = 188 }
-        highlightedCellIdx = index
-        reloadTableViewAnimation()
-    }
+//    func didTapViewCommentButton(index: Int, isHighlighted: Bool) {
+//        if isHighlighted { tableCellHeight = 258 }
+//        else { tableCellHeight = 198 }
+//        highlightedCellIdx = index
+//        reloadTableViewAnimation()
+//        self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+//
+//    }
     
     func didTapEditButton(index: Int) {
         guard let editViewController = storyboard?.instantiateViewController(withIdentifier: "EditMyFridgeViewController") as? EditMyFridgeViewController else { return }

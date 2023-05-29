@@ -10,7 +10,6 @@ import UIKit
 protocol MyRefrigeratorTableViewCellDelegate {
     func didTapEditButton(index: Int)
     func didTapDeleteButton(index: Int)
-    func didTapViewCommentButton(index: Int, isHighlighted: Bool)
 }
 
 class MyRefrigeratorTableViewCell: UITableViewCell {
@@ -29,15 +28,14 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     
     @IBOutlet var notOwnerMoreView: UIView!
     
-    @IBOutlet weak var commentLabel: UILabel!
-    
-    @IBOutlet var commentHeight: NSLayoutConstraint!
-    @IBOutlet var commentLabelHeight: NSLayoutConstraint!
+    @IBOutlet var commentTextView: UITextView!
+    @IBOutlet var commentDetailView: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCollectionView()
         setupLayout()
+        setEventHandler()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -59,8 +57,15 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
             view.layer.shadowOffset = CGSize(width: 0, height: 5)
             view.layer.shadowPath = nil
         }
+        containerView.layer.cornerRadius = 12
         moreView.layer.cornerRadius = 16
         notOwnerMoreView.layer.cornerRadius = 20
+        commentDetailView.layer.cornerRadius = 12
+    }
+    
+    private func setEventHandler() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapCommentDetailView))
+        commentDetailView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     public func configureFridge(data: Fridge?) {
@@ -68,7 +73,8 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
             fridgeOwnerIdx = data.users![0].userIdx
             refrigeratorNameLabel.text = data.fridgeName
             memberNumLabel.text = "\(data.userCnt!)"
-            commentLabel.text = data.comment
+            commentTextView.text = data.comment
+            commentDetailView.text = data.comment
             memberInfos = data.users!
         }
     }
@@ -78,7 +84,8 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
             fridgeOwnerIdx = data.users![0].userIdx
             refrigeratorNameLabel.text = data.multiFridgeName
             memberNumLabel.text = "\(data.userCnt!)"
-            commentLabel.text = data.comment
+            commentTextView.text = data.comment
+            commentDetailView.text = data.comment
             memberInfos = data.users!
         }
     }
@@ -109,21 +116,23 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     
     
     @IBAction func didTapViewCommentButton(_ sender: Any) {
-        print("didTapViewCommentButton called --> \(self.tag)")}
-
-//        isHighlightedComment = !isHighlightedComment
-//        if isHighlightedComment {
-//            print("편다")
-//            commentLabelHeight.constant = 60 }
-//        else {
-//            print("접는다")
-//            commentLabelHeight.constant = 20 }
-//
-//
-//        delegate?.didTapViewCommentButton(index: self.tag, isHighlighted: isHighlightedComment)
+        UIView.transition(with: self.commentDetailView,
+                          duration: 0.2,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+            self.commentDetailView.isHidden = false },
+                          completion: nil);
     }
     
-    
+    // MARK: @objc methods
+    @objc private func didTapCommentDetailView() {
+        UIView.transition(with: self.commentDetailView,
+                          duration: 0.2,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+            self.commentDetailView.isHidden = true },
+                          completion: nil);
+    }
 }
 
 extension MyRefrigeratorTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
