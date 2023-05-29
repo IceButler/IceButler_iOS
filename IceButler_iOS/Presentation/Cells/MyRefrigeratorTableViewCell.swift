@@ -10,6 +10,7 @@ import UIKit
 protocol MyRefrigeratorTableViewCellDelegate {
     func didTapEditButton(index: Int)
     func didTapDeleteButton(index: Int)
+    func didTapViewCommentButton(index: Int, isHighlighted: Bool)
 }
 
 class MyRefrigeratorTableViewCell: UITableViewCell {
@@ -17,6 +18,7 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     var fridgeOwnerIdx: Int = -1
     var delegate: MyRefrigeratorTableViewCellDelegate?
     private var memberInfos: [FridgeUser] = []
+    private var isHighlightedComment = false
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var refrigeratorNameLabel: UILabel!
@@ -28,6 +30,9 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     @IBOutlet var notOwnerMoreView: UIView!
     
     @IBOutlet weak var commentLabel: UILabel!
+    
+    @IBOutlet var commentHeight: NSLayoutConstraint!
+    @IBOutlet var commentLabelHeight: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -101,6 +106,23 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
     @IBAction func didTapDeleteButton(_ sender: UIButton) {
         delegate?.didTapDeleteButton(index: self.tag)
     }
+    
+    
+    @IBAction func didTapViewCommentButton(_ sender: Any) {
+        print("didTapViewCommentButton called --> \(self.tag)")}
+
+//        isHighlightedComment = !isHighlightedComment
+//        if isHighlightedComment {
+//            print("편다")
+//            commentLabelHeight.constant = 60 }
+//        else {
+//            print("접는다")
+//            commentLabelHeight.constant = 20 }
+//
+//
+//        delegate?.didTapViewCommentButton(index: self.tag, isHighlighted: isHighlightedComment)
+    }
+    
     
 }
 

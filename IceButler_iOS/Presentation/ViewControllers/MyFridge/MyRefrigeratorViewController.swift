@@ -12,6 +12,8 @@ class MyRefrigeratorViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     private var data: MyFridgeResponseModel?
+    private var tableCellHeight = 188
+    private var highlightedCellIdx = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,12 +91,21 @@ class MyRefrigeratorViewController: UIViewController {
                                      responseDataType: MyFridgeResponseModel.self,
                                      parameter: nil) { [weak self] response in
                 if let data = response.data { self?.data = data }
-                self?.tableView.reloadData()
+//                self?.tableView.reloadData()
+                self?.reloadTableViewAnimation()
             }
             
             hud.dismiss(animated: true)
         }
-        
+    }
+    
+    private func reloadTableViewAnimation() {
+        UIView.transition(with: self.tableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                          self.tableView.reloadData()},
+                          completion: nil);
     }
     
     // MARK: @objc methods
@@ -102,7 +113,14 @@ class MyRefrigeratorViewController: UIViewController {
 }
 
 extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 188 }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return CGFloat(tableCellHeight)
+        if indexPath.row == highlightedCellIdx {
+            return CGFloat(tableCellHeight)
+        } else {
+            return 188
+        }
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let fridgeList = data?.fridgeList,
@@ -130,6 +148,13 @@ extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
+    func didTapViewCommentButton(index: Int, isHighlighted: Bool) {
+        if isHighlighted { tableCellHeight = 228 }
+        else { tableCellHeight = 188 }
+        highlightedCellIdx = index
+        reloadTableViewAnimation()
+    }
+    
     func didTapEditButton(index: Int) {
         guard let editViewController = storyboard?.instantiateViewController(withIdentifier: "EditMyFridgeViewController") as? EditMyFridgeViewController else { return }
         
@@ -201,7 +226,7 @@ extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
 }
 
 extension MyRefrigeratorViewController: FridgeRemoveDelegate {
-    func reloadMyFridgeVC() { self.tableView.reloadData() }
+    func reloadMyFridgeVC() { self.reloadTableViewAnimation() }
     
     func showMessageFailToRemoveFridge(message: String) {
         let alert = UIAlertController(title: "냉장고 삭제 실패", message: message, preferredStyle: .alert)
