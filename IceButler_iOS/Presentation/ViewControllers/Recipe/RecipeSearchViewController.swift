@@ -100,21 +100,20 @@ class RecipeSearchViewController: BaseViewController {
     private func createCategorySelectionButton(category: RecipeSearchUICategory) -> UIButton {
         selectedCategory = category
         let keywordSelectionBtn = UIButton(type: .custom)
-        keywordSelectionBtn.frame = CGRect(x: 0, y: 0, width: 110, height: 36)
-        keywordSelectionBtn.layer.cornerRadius = keywordSelectionBtn.frame.height / 2
-        keywordSelectionBtn.layer.masksToBounds = true
+        keywordSelectionBtn.frame = CGRect(x: 0, y: 0, width: 90, height: 36)
         keywordSelectionBtn.setTitle(category.rawValue, for: .normal)
         keywordSelectionBtn.setTitleColor(.signatureBlue, for: .normal)
         keywordSelectionBtn.titleLabel?.font = .systemFont(ofSize: 16)
-        keywordSelectionBtn.setImage(UIImage(named: "blueDownArrow"), for: .normal)
-//        keywordSelectionBtn.semanticContentAttribute = .forceRightToLeft
         keywordSelectionBtn.backgroundColor = .white.withAlphaComponent(0.9)
+        keywordSelectionBtn.layer.cornerRadius = keywordSelectionBtn.frame.height / 2
+        keywordSelectionBtn.layer.masksToBounds = true
+        keywordSelectionBtn.layer.applyShadow(color: .black, alpha: 0.2, x: 0, y: 4, blur: 10, spread: 0)
         keywordSelectionBtn.addTarget(self, action: #selector(didTapCategorySelectionBtn), for: .touchUpInside)
         return keywordSelectionBtn
     }
     
     private func initSearchBar() {
-        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 200, height: 0))
+        searchBar = UISearchBar()
         searchBar.layoutIfNeeded()
         searchBar.layoutSubviews()
         searchBar.placeholder = ""
@@ -131,7 +130,7 @@ class RecipeSearchViewController: BaseViewController {
         // 왼쪽 기본 돋보기 이미지 빼기
         searchBar.searchTextField.leftViewMode = .never
         searchBar.setImage(UIImage(), for: UISearchBar.Icon.search, state: .normal)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchBar)
+        navigationItem.titleView = searchBar
     }
     
     private func setSearchBarRightView() {
