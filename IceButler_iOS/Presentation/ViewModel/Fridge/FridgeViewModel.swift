@@ -705,6 +705,9 @@ extension FridgeViewModel {
     
     func requestAddFridge(isMulti: Bool, name: String, comment: String, members: [Int], completion: @escaping ((Bool)->Void)) {
         fridgeService.addFridge(isMulti: isMulti, name: name, comment: comment, members: members, completion: { response in
+            if let fridgeId = response {
+                APIManger.shared.setFridgeIdx(index: fridgeId)
+            }
             completion((response != nil) ? true : false)
         })
     }
@@ -721,14 +724,6 @@ extension FridgeViewModel {
             print("현재 냉장고 Idx : \(idx as! Int) | 공용여부 : \(isMulti as! Bool)")
         }
 
-//        guard let idx = UserDefaults.standard.value(forKey: "selectedFridgeIdx") as? Int else {return}
-//        guard let name = UserDefaults.standard.value(forKey: "selectedFridgeName") as? String else {return}
-//        guard let isMultiFridge = UserDefaults.standard.value(forKey: "isMulti") as? Bool else {return}
-        
-//        APIManger.shared.setFridgeIdx(index: idx)
-//        APIManger.shared.setIsMultiFridge(data: isMultiFridge)
-//        self.defaultFridgeName = name
-        
      
     }
 

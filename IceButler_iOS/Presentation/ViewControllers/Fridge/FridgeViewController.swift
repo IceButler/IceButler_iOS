@@ -25,13 +25,14 @@ class FridgeViewController: TabmanViewController {
     
     private var viewControllerList: Array<UIViewController> = []
     
+    private var bar: TMBar.ButtonBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         setup()
         setupNavigationBar()
-        setupTabman()
         setupLayout()
         setupObserver()
     }
@@ -41,9 +42,6 @@ class FridgeViewController: TabmanViewController {
         
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
-        self.noFridgeImageView.isHidden = true
-        self.noFridgeLabel.isHidden = true
-        self.fridgeAddButton.isHidden = true
     }
     
     private func setup() {
@@ -55,6 +53,26 @@ class FridgeViewController: TabmanViewController {
     }
     
     private func setupObserver() {
+        APIManger.shared.fridgeIdx { fridgeIdx in
+            if fridgeIdx == -1 {
+                self.noFridgeImageView.isHidden = false
+                self.noFridgeLabel.isHidden = false
+                self.fridgeAddButton.isHidden = false
+                self.foodAddButton.isHidden = true
+                if let bar = self.bar {
+                    self.removeBar(bar)
+                }
+            }else {
+                FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+                self.noFridgeImageView.isHidden = true
+                self.noFridgeLabel.isHidden = true
+                self.fridgeAddButton.isHidden = true
+                self.foodAddButton.isHidden = false
+                self.setupTabman()
+            }
+        }
+        
+        
         AuthViewModel.shared.isJoin { isJoin in
             if isJoin {
                 self.view.makeToast("회원가입이 완료되었습니다!", duration: 1.0, position: .center)
@@ -93,7 +111,7 @@ class FridgeViewController: TabmanViewController {
     }
     
     private func setupTabBar() {
-        let bar = TMBar.ButtonBar()
+        bar = TMBar.ButtonBar()
         
         bar.backgroundView.style = .clear
         
@@ -124,6 +142,8 @@ class FridgeViewController: TabmanViewController {
     
     private func setupLayout() {
         self.view.backgroundColor = .white
+        
+        fridgeAddButton.layer.cornerRadius = 20
         
         foodAddButton.backgroundColor = .white
         
@@ -209,6 +229,12 @@ class FridgeViewController: TabmanViewController {
     }
     
 
+    @IBAction func fridgeAdd(_ sender: Any) {
+        let fridgeAddVC = UIStoryboard(name: "Fridge", bundle: nil).instantiateViewController(withIdentifier: "AddFridgeViewController") as! AddFridgeViewController
+        
+        fridgeAddVC.modalPresentationStyle = .overFullScreen
+        present(fridgeAddVC, animated: true)
+    }
     
 
     @IBAction func foodAdd(_ sender: Any) {

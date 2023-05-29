@@ -7,17 +7,20 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 private let BASE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/dev/dev-ice-bulter-main"
 private let RECIPE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/dev/dev-ice-bulter-recipe"
 
-class APIManger {
+class APIManger: ObservableObject  {
     static let shared = APIManger()
     
     private var headers: HTTPHeaders?
     
-    private var fridgeIdx: Int = -1
+    @Published var fridgeIdx: Int = -1
     private var isMultiFridge: Bool = false
+    
+    private var cancelLabels: Set<AnyCancellable> = []
     
     func setupObserver() {
         AuthViewModel.shared.accessToken { token in
@@ -42,6 +45,12 @@ extension APIManger {
     
     func setIsMultiFridge(isMulti: Bool) { isMultiFridge = isMulti }
     func getIsMultiFridge() -> Bool { return isMultiFridge }
+    
+    func fridgeIdx(completion: @escaping (Int) -> Void) {
+        $fridgeIdx.sink { fridgeIdx in
+            completion(fridgeIdx)
+        }.store(in: &cancelLabels)
+    }
 }
 
 extension APIManger {
