@@ -78,11 +78,12 @@ class NotificationViewController: UIViewController {
     private func setupData(data: [Notification]) {
         data.forEach { d in
             if let createdAt = d.createdAt {
-                self.createdAtList.append(createdAt)
+                if !(createdAtList.contains(createdAt)) {
+                    self.createdAtList.append(createdAt)
+                }
             }
         }
-        renameCreatedAtStr()
-        
+
         var temp: [Notification] = []
         createdAtList.forEach { createdAt in
             data.forEach { d in
@@ -90,26 +91,21 @@ class NotificationViewController: UIViewController {
                     temp.append(d)
                 }
             }
-            let date = renameCreatedAtList[createdAt]
-            notifications[date!] = temp
+            notifications[createdAt] = temp
             temp.removeAll()
         }
-        notifications.forEach { n in dateList.append(n.key) }
     }
     
     private func renameCreatedAtStr() {
         let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(identifier: "UTC")
         formatter.dateFormat = "yyyy-MM-dd"
+        
 
         createdAtList.forEach { date in
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = TimeZone(identifier: "UTC")
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            
             let dateOfDate = Calendar.current.dateComponents([.year, .month, .day], from: Date() + 32400)
             let dateOfToday = Calendar.current.dateComponents([.year, .month, .day], from: formatter.date(from: date)!)
-            
             let offsetComps = Calendar.current.dateComponents([.year,.month,.day], from: dateOfToday, to: dateOfDate)
             
             if case let (y?, m?, d?) = (offsetComps.year, offsetComps.month, offsetComps.day) {
@@ -185,17 +181,20 @@ class NotificationViewController: UIViewController {
 
 // MARK: tableView delgate extension
 extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 100 }
-    
-    func numberOfSections(in tableView: UITableView) -> Int { return notifications.keys.count }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? { return dateList[section] }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return notifications[dateList[section]]!.count }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as? NotificationTableViewCell else { return UITableViewCell() }
-        cell.configure(data: notifications[dateList[indexPath.section]]![indexPath.row])
-        return cell
-    }
-}
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 100 }
+
+    func numberOfSections(in tableView: UITableView) -> Int { return createdAtList.count }
+
+     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if createdAtList.count > 0 { return createdAtList[section] }
+        else { return "알림날짜" }
+     }
+
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return notifications[createdAtList[section]]!.count }
+
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as? NotificationTableViewCell else { return UITableViewCell() }
+         cell.configure(data: notifications[createdAtList[indexPath.section]]![indexPath.row])
+         return cell
+     }
+ }
