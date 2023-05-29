@@ -31,7 +31,6 @@ class FridgeViewController: TabmanViewController {
         
         setup()
         setupNavigationBar()
-        setupTabman()
         setupLayout()
         setupObserver()
     }
@@ -44,11 +43,36 @@ class FridgeViewController: TabmanViewController {
         self.noFridgeImageView.isHidden = true
         self.noFridgeLabel.isHidden = true
         self.fridgeAddButton.isHidden = true
+        
+        if APIManger.shared.getFridgeIdx() != -1 {
+            self.noFridgeImageView.isHidden = true
+            self.noFridgeLabel.isHidden = true
+            self.fridgeAddButton.isHidden = true
+            self.foodAddButton.isHidden = false
+        }else {
+            self.noFridgeImageView.isHidden = false
+            self.noFridgeLabel.isHidden = false
+            self.fridgeAddButton.isHidden = false
+            self.foodAddButton.isHidden = true
+        }
     }
     
     private func setup() {
         FridgeViewModel.shared.setSavedFridgeIdx()
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+        
+        if APIManger.shared.getFridgeIdx() != -1 {
+            self.noFridgeImageView.isHidden = true
+            self.noFridgeLabel.isHidden = true
+            self.fridgeAddButton.isHidden = true
+            self.foodAddButton.isHidden = false
+            setupTabman()
+        }else {
+            self.noFridgeImageView.isHidden = false
+            self.noFridgeLabel.isHidden = false
+            self.fridgeAddButton.isHidden = false
+            self.foodAddButton.isHidden = true
+        }
         
         deleteSelectedView.isHidden = true
         
@@ -124,6 +148,8 @@ class FridgeViewController: TabmanViewController {
     
     private func setupLayout() {
         self.view.backgroundColor = .white
+        
+        fridgeAddButton.layer.cornerRadius = 20
         
         foodAddButton.backgroundColor = .white
         
@@ -209,6 +235,12 @@ class FridgeViewController: TabmanViewController {
     }
     
 
+    @IBAction func fridgeAdd(_ sender: Any) {
+        let fridgeAddVC = UIStoryboard(name: "Fridge", bundle: nil).instantiateViewController(withIdentifier: "AddFridgeViewController") as! AddFridgeViewController
+        
+        fridgeAddVC.modalPresentationStyle = .overFullScreen
+        present(fridgeAddVC, animated: true)
+    }
     
 
     @IBAction func foodAdd(_ sender: Any) {

@@ -721,14 +721,6 @@ extension FridgeViewModel {
             print("현재 냉장고 Idx : \(idx as! Int) | 공용여부 : \(isMulti as! Bool)")
         }
 
-//        guard let idx = UserDefaults.standard.value(forKey: "selectedFridgeIdx") as? Int else {return}
-//        guard let name = UserDefaults.standard.value(forKey: "selectedFridgeName") as? String else {return}
-//        guard let isMultiFridge = UserDefaults.standard.value(forKey: "isMulti") as? Bool else {return}
-        
-//        APIManger.shared.setFridgeIdx(index: idx)
-//        APIManger.shared.setIsMultiFridge(data: isMultiFridge)
-//        self.defaultFridgeName = name
-        
      
     }
 
