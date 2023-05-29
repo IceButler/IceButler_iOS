@@ -25,6 +25,8 @@ class FridgeViewController: TabmanViewController {
     
     private var viewControllerList: Array<UIViewController> = []
     
+    private var bar: TMBar.ButtonBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,7 +59,11 @@ class FridgeViewController: TabmanViewController {
                 self.noFridgeLabel.isHidden = false
                 self.fridgeAddButton.isHidden = false
                 self.foodAddButton.isHidden = true
+                if let bar = self.bar {
+                    self.removeBar(bar)
+                }
             }else {
+                FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
                 self.noFridgeImageView.isHidden = true
                 self.noFridgeLabel.isHidden = true
                 self.fridgeAddButton.isHidden = true
@@ -105,7 +111,7 @@ class FridgeViewController: TabmanViewController {
     }
     
     private func setupTabBar() {
-        let bar = TMBar.ButtonBar()
+        bar = TMBar.ButtonBar()
         
         bar.backgroundView.style = .clear
         

@@ -102,7 +102,10 @@ class AddFridgeViewController: UIViewController {
                                                     comment: self.fridgeDetailTextView.text!,
                                                     members: memberIdx,
                                                     completion: { [weak self] result in
-                if result { self?.dismiss(animated: true) }
+                if result {
+                    self?.dismiss(animated: true)
+                    FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+                }
                 else { self?.showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인") }
             })
             
