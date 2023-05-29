@@ -172,17 +172,18 @@ class MapViewController: UIViewController {
         let longitude = locationManager.location?.coordinate.longitude
         let latitude = locationManager.location?.coordinate.latitude
         
-        currentLa = latitude!
-        currentLo = longitude!
-        
-        let currentPoint = MTMapPOIItem()
-        currentPoint.tag = 1
-        currentPoint.itemName = nil
-        currentPoint.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude!, longitude: longitude!))
-        currentPoint.markerType = .redPin
-        mapView.addPOIItems([currentPoint])
-        
-        mapView.setMapCenter(.init(geoCoord: .init(latitude: latitude!, longitude: longitude!)), animated: true)
+        if let currentLa = latitude,
+           let currentLo = longitude {
+            
+            let currentPoint = MTMapPOIItem()
+            currentPoint.tag = 1
+            currentPoint.itemName = nil
+            currentPoint.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude!, longitude: longitude!))
+            currentPoint.markerType = .redPin
+            mapView.addPOIItems([currentPoint])
+            
+            mapView.setMapCenter(.init(geoCoord: .init(latitude: latitude!, longitude: longitude!)), animated: true)
+        }
     }
     
     func loadViewAnimation(tag: Int) {
