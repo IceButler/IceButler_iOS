@@ -18,6 +18,7 @@ class RecipeViewModel: ObservableObject {
     @Published var popularRecipeList: [Recipe] = []
     @Published var bookmarkRecipeList: [Recipe] = []
     @Published var myRecipeList: [MyRecipe] = []
+    @Published var searchRecipeList: [Recipe] = []
     var fridgeIdxOfFridgeRecipe: Int = -1
     var fridgeIdxOfPopularRecipe: Int = -1
     var fridgeTypeOfFridgeRecipe: FridgeType = .homeUse
@@ -26,11 +27,13 @@ class RecipeViewModel: ObservableObject {
     var popularRecipeIsLastPage: Bool = false
     var bookmarkRecipeIsLastPage: Bool = false
     var myRecipeIsLastPage: Bool = false
+    var searchRecipeIsLastPage: Bool = false
     
     private var recipeInFridgeVC: RecipeInFridgeViewController? = nil
     private var popularRecipeVC: PopularRecipeViewController? = nil
     private var bookmarkRecipeVC: BookmarkRecipeViewController? = nil
     private var myRecipeVC: MyRecipeViewController? = nil
+    private var recipeSearchVC: RecipeSearchViewController? = nil
     
     func setRecipeInFridgeVC(recipeInFridgeVC: RecipeInFridgeViewController) {
         self.recipeInFridgeVC = recipeInFridgeVC
@@ -43,6 +46,9 @@ class RecipeViewModel: ObservableObject {
     }
     func setMyRecipeVC(myRecipeVC: MyRecipeViewController) {
         self.myRecipeVC = myRecipeVC
+    }
+    func setRecipeSearchVC(recipeSearchVC: RecipeSearchViewController) {
+        self.recipeSearchVC = recipeSearchVC
     }
     
     func getFridgeRecipeList(pageNumberToLoad: Int) {
@@ -109,6 +115,36 @@ class RecipeViewModel: ObservableObject {
         }
     }
     
+    func getRecipeSearchList(fridgeIdx: Int, fridgeType: FridgeType, category: RecipeSearchUICategory, keyword: String, pageNumberToLoad: Int) {
+        var indexArrayToInsert: [IndexPath] = []
+        if pageNumberToLoad == 0 {
+            self.searchRecipeList = []
+            self.searchRecipeIsLastPage = false
+        }
+        switch category {
+        case .recipeName:
+            recipeService.getSearchRecipes(fridgeIdx: fridgeIdx, fridgeType: fridgeType, category: RecipeSearchAPICategory.recipe.rawValue, keyword: keyword, pageNumberToLoad: pageNumberToLoad) { response in
+                if let response = response {
+                    response.content.forEach { recipe in
+                        indexArrayToInsert.append(IndexPath(item: self.searchRecipeList.count, section: 0))
+                        self.searchRecipeList.append(recipe)
+                    }
+                    self.searchRecipeIsLastPage = response.last
+                    self.recipeSearchVC?.updateCV(indexArray: indexArrayToInsert)
+                }
+            }
+        case .ingredientName:
+            recipeService.getSearchRecipes(fridgeIdx: fridgeIdx, fridgeType: fridgeType, category: RecipeSearchAPICategory.food.rawValue, keyword: keyword, pageNumberToLoad: pageNumberToLoad) { response in
+                response?.content.forEach { recipe in
+                    indexArrayToInsert.append(IndexPath(item: self.searchRecipeList.count, section: 0))
+                    self.searchRecipeList.append(recipe)
+                }
+                self.searchRecipeIsLastPage = response?.last ?? false
+                self.recipeSearchVC?.updateCV(indexArray: indexArrayToInsert)
+            }
+        }
+    }
+    
     func getRecipeDetail(recipeIdx: Int, completion: @escaping (GeneralResponseModel<RecipeDetailResponseModel>?) -> Void) {
         recipeService.getRecipeDetail(recipeIdx: recipeIdx) { response in
             completion(response)
@@ -129,6 +165,10 @@ class RecipeViewModel: ObservableObject {
     
     func getMyRecipeCellInfo(index: Int, completion: @escaping (MyRecipe) -> Void) {
         completion(myRecipeList[index])
+    }
+    
+    func getSearchRecipeCellInfo(index: Int, completion: @escaping (Recipe) -> Void) {
+        completion(searchRecipeList[index])
     }
     
     func updateBookmarkStatus(recipeIdx: Int, completion: @escaping (Bool) -> Void) {
