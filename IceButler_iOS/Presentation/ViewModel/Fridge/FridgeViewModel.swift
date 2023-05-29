@@ -705,6 +705,9 @@ extension FridgeViewModel {
     
     func requestAddFridge(isMulti: Bool, name: String, comment: String, members: [Int], completion: @escaping ((Bool)->Void)) {
         fridgeService.addFridge(isMulti: isMulti, name: name, comment: comment, members: members, completion: { response in
+            if let fridgeId = response {
+                APIManger.shared.setFridgeIdx(index: fridgeId)
+            }
             completion((response != nil) ? true : false)
         })
     }

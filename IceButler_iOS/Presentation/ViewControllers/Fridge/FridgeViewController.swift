@@ -40,45 +40,33 @@ class FridgeViewController: TabmanViewController {
         
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
-        self.noFridgeImageView.isHidden = true
-        self.noFridgeLabel.isHidden = true
-        self.fridgeAddButton.isHidden = true
-        
-        if APIManger.shared.getFridgeIdx() != -1 {
-            self.noFridgeImageView.isHidden = true
-            self.noFridgeLabel.isHidden = true
-            self.fridgeAddButton.isHidden = true
-            self.foodAddButton.isHidden = false
-        }else {
-            self.noFridgeImageView.isHidden = false
-            self.noFridgeLabel.isHidden = false
-            self.fridgeAddButton.isHidden = false
-            self.foodAddButton.isHidden = true
-        }
     }
     
     private func setup() {
         FridgeViewModel.shared.setSavedFridgeIdx()
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
         
-        if APIManger.shared.getFridgeIdx() != -1 {
-            self.noFridgeImageView.isHidden = true
-            self.noFridgeLabel.isHidden = true
-            self.fridgeAddButton.isHidden = true
-            self.foodAddButton.isHidden = false
-            setupTabman()
-        }else {
-            self.noFridgeImageView.isHidden = false
-            self.noFridgeLabel.isHidden = false
-            self.fridgeAddButton.isHidden = false
-            self.foodAddButton.isHidden = true
-        }
-        
         deleteSelectedView.isHidden = true
         
     }
     
     private func setupObserver() {
+        APIManger.shared.fridgeIdx { fridgeIdx in
+            if fridgeIdx == -1 {
+                self.noFridgeImageView.isHidden = false
+                self.noFridgeLabel.isHidden = false
+                self.fridgeAddButton.isHidden = false
+                self.foodAddButton.isHidden = true
+            }else {
+                self.noFridgeImageView.isHidden = true
+                self.noFridgeLabel.isHidden = true
+                self.fridgeAddButton.isHidden = true
+                self.foodAddButton.isHidden = false
+                self.setupTabman()
+            }
+        }
+        
+        
         AuthViewModel.shared.isJoin { isJoin in
             if isJoin {
                 self.view.makeToast("회원가입이 완료되었습니다!", duration: 1.0, position: .center)
