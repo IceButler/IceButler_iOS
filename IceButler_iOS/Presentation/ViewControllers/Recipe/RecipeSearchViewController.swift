@@ -140,6 +140,10 @@ class RecipeSearchViewController: BaseViewController {
         searchBtn.setImage(UIImage(named: "searchWhiteIcon"), for: .normal)
         searchBar.searchTextField.rightView = searchBtn
         searchBar.searchTextField.rightViewMode = .always
+        // 검색 버튼 탭 제스처 등록
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapSearchButton(_:)))
+        searchBar.searchTextField.rightView!.addGestureRecognizer(tapGesture)
+        searchBar.searchTextField.rightView!.isUserInteractionEnabled = true
     }
     
     @objc func didTapCategorySelectionBtn(sender: UIButton!) {
@@ -159,6 +163,13 @@ class RecipeSearchViewController: BaseViewController {
         self.present(actionSheet, animated: true)
     }
     
+    @objc func didTapSearchButton(_ gesture: UITapGestureRecognizer) {
+        view.endEditing(true)
+        currentLoadedPageNumber = -1
+        keyword = searchBar.searchTextField.text
+        fetchData()
+    }
+    
     @IBAction func didTapBackButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -175,7 +186,6 @@ class RecipeSearchViewController: BaseViewController {
 
 extension RecipeSearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // 검색버튼 누를 때도 똑같이 해야함
         view.endEditing(true)
         currentLoadedPageNumber = -1
         keyword = textField.text
