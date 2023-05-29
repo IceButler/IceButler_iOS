@@ -115,30 +115,32 @@ class RecipeViewModel: ObservableObject {
         }
     }
     
-    func getRecipeSearchList(category: RecipeSearchUICategory, keyword: String, pageNumberToLoad: Int) {
+    func getRecipeSearchList(fridgeIdx: Int, fridgeType: FridgeType, category: RecipeSearchUICategory, keyword: String, pageNumberToLoad: Int) {
         var indexArrayToInsert: [IndexPath] = []
         if pageNumberToLoad == 0 {
-            self.searchRecipeList.removeAll()
+            self.searchRecipeList = []
             self.searchRecipeIsLastPage = false
         }
         switch category {
         case .recipeName:
-            recipeService.getSearchRecipes(category: RecipeSearchAPICategory.recipe.rawValue, keyword: keyword, pageNumberToLoad: pageNumberToLoad) { response in
-                response?.content.forEach { recipe in
-                    indexArrayToInsert.append(IndexPath(item: self.searchRecipeList.count, section: 0))
-                    self.searchRecipeList.append(recipe)
+            recipeService.getSearchRecipes(fridgeIdx: fridgeIdx, fridgeType: fridgeType, category: RecipeSearchAPICategory.recipe.rawValue, keyword: keyword, pageNumberToLoad: pageNumberToLoad) { response in
+                if let response = response {
+                    response.content.forEach { recipe in
+                        indexArrayToInsert.append(IndexPath(item: self.searchRecipeList.count, section: 0))
+                        self.searchRecipeList.append(recipe)
+                    }
+                    self.searchRecipeIsLastPage = response.last
+                    self.recipeSearchVC?.updateCV(indexArray: indexArrayToInsert)
                 }
-                self.searchRecipeIsLastPage = response?.last ?? false
-                self.recipeInFridgeVC?.updateCV(indexArray: indexArrayToInsert)
             }
         case .ingredientName:
-            recipeService.getSearchRecipes(category: RecipeSearchAPICategory.food.rawValue, keyword: keyword, pageNumberToLoad: pageNumberToLoad) { response in
+            recipeService.getSearchRecipes(fridgeIdx: fridgeIdx, fridgeType: fridgeType, category: RecipeSearchAPICategory.food.rawValue, keyword: keyword, pageNumberToLoad: pageNumberToLoad) { response in
                 response?.content.forEach { recipe in
                     indexArrayToInsert.append(IndexPath(item: self.searchRecipeList.count, section: 0))
                     self.searchRecipeList.append(recipe)
                 }
                 self.searchRecipeIsLastPage = response?.last ?? false
-                self.recipeInFridgeVC?.updateCV(indexArray: indexArrayToInsert)
+                self.recipeSearchVC?.updateCV(indexArray: indexArrayToInsert)
             }
         }
     }

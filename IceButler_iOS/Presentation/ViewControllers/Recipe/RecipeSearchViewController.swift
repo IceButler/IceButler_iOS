@@ -43,7 +43,12 @@ class RecipeSearchViewController: BaseViewController {
             if currentLoadedPageNumber == -1 {
                 showLoading()
             }
-            RecipeViewModel.shared.getRecipeSearchList(category: selectedCategory, keyword: keyword, pageNumberToLoad: currentLoadedPageNumber + 1)
+            let fridgeIdx = APIManger.shared.getFridgeIdx()
+            if APIManger.shared.getIsMultiFridge() {
+                RecipeViewModel.shared.getRecipeSearchList(fridgeIdx: fridgeIdx, fridgeType: FridgeType.multiUse, category: selectedCategory, keyword: keyword, pageNumberToLoad: currentLoadedPageNumber + 1)
+            } else {
+                RecipeViewModel.shared.getRecipeSearchList(fridgeIdx: fridgeIdx, fridgeType: FridgeType.homeUse, category: selectedCategory, keyword: keyword, pageNumberToLoad: currentLoadedPageNumber + 1)
+            }
             currentLoadedPageNumber += 1
         }
     }
@@ -119,15 +124,13 @@ class RecipeSearchViewController: BaseViewController {
         searchBar.searchTextField.layer.cornerRadius = searchBar.searchTextField.frame.height / 2
         searchBar.searchTextField.layer.masksToBounds = true
         searchBar.searchTextField.delegate = self
+        searchBar.searchTextField.returnKeyType = .search
         if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
             textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
         }
         // 왼쪽 기본 돋보기 이미지 빼기
         searchBar.searchTextField.leftViewMode = .never
         searchBar.setImage(UIImage(), for: UISearchBar.Icon.search, state: .normal)
-        //
-        searchBar.searchTextField.returnKeyType = .search
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchBar)
     }
     
@@ -173,7 +176,9 @@ class RecipeSearchViewController: BaseViewController {
 
 extension RecipeSearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // 키보드 내려가게, 검색버튼 누를 때도 똑같이 해야함
+        // 검색버튼 누를 때도 똑같이 해야함
+        view.endEditing(true)
+        currentLoadedPageNumber = -1
         keyword = textField.text
         fetchData()
         return true
