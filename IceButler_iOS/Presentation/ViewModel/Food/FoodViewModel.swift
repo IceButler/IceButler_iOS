@@ -44,8 +44,8 @@ class FoodViewModel: ObservableObject {
         }.store(in: &cancelLabels)
     }
     
-    func getFood() -> FoodDetailResponseModel {
-        return food!
+    func getFood() -> FoodDetailResponseModel? {
+        return food
     }
     
     func getFood(completion: @escaping (FoodDetailResponseModel) -> Void) {

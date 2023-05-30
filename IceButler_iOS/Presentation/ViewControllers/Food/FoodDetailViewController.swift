@@ -122,7 +122,7 @@ class FoodDetailViewController: UIViewController {
     @objc private func deleteFood() {
         let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(withIdentifier: "AlertViewController") as! AlertViewController
         
-        let foodIdx = FoodViewModel.shared.getFood().fridgeFoodIdx
+        guard let foodIdx = FoodViewModel.shared.getFood()?.fridgeFoodIdx else {return}
         
         alertVC.configure(title: "식품 삭제", content: "해당 식품을 삭제하시겠습니까?", leftButtonTitle: "폐기", righttButtonTitle: "섭취") {
             DispatchQueue.main.async { [self] in

@@ -258,7 +258,7 @@ class FoodAddViewController: UIViewController {
             
             
             if FoodViewModel.shared.isEditFood == true && FoodViewModel.shared.foodOwnerListCount() != 0 {
-                let editFood = FoodViewModel.shared.getFood()
+                guard let editFood = FoodViewModel.shared.getFood() else {return}
                 if let foodOwner = editFood.owner {
                     for i in 0..<FoodViewModel.shared.foodOwnerListCount() {
                         if FoodViewModel.shared.foodOwnerListName(index: i) == editFood.owner {
@@ -398,6 +398,9 @@ class FoodAddViewController: UIViewController {
     
     @objc private func backToScene() {
         if isEdit {
+            let food = FoodViewModel.shared.getFood()
+            FoodViewModel.shared.deleteAll()
+            FoodViewModel.shared.food = food
             navigationController?.popViewController(animated: true)
         }else {
             FoodViewModel.shared.deleteAll()
