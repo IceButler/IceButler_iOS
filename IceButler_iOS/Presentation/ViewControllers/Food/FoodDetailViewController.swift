@@ -214,6 +214,7 @@ extension FoodDetailViewController: UICollectionViewDelegate, UICollectionViewDa
         cell.hiddenFoodImageAddIcon()
         
         FoodViewModel.shared.foodImage { imgUrl in
+            print(imgUrl)
             cell.configure(imageUrl: imgUrl)
         }
         

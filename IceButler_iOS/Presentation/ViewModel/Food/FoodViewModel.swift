@@ -451,7 +451,7 @@ extension FoodViewModel {
         ImageService.shared.getImageUrl(parameter: parameter) {[self] response in
             if let response = response {
                 profileImgKey = response.imageKey
-                uploadProfileImage(image: image, url: response.presignedUrl, fridgeIdx: fridgeIdx, foodName: foodName, foodDetail: foodDetail, foodCategory: foodCategory, foodShelfLife: foodShelfLife, foodOwnerIdx: foodOwnerIdx, memo: memo, completion: completion)
+                uploadProfileImage(foodIdx: foodIdx, image: image, url: response.presignedUrl, fridgeIdx: fridgeIdx, foodName: foodName, foodDetail: foodDetail, foodCategory: foodCategory, foodShelfLife: foodShelfLife, foodOwnerIdx: foodOwnerIdx, memo: memo, completion: completion)
             }
         }
     }
@@ -485,7 +485,7 @@ extension FoodViewModel {
 
     func uploadProfileImage(foodIdx: Int, image: UIImage, url: String, fridgeIdx: Int, foodName: String, foodDetail: String, foodCategory: String, foodShelfLife: String, foodOwnerIdx: Int?, memo: String?, completion: @escaping (Bool) -> Void) {
         ImageService.shared.uploadImage(image: image, url: url) {
-            self.postFood(fridgeIdx: fridgeIdx, foodName: foodName, foodDetail: foodDetail, foodCategory: foodCategory, foodShelfLife: foodShelfLife, foodOwnerIdx: foodOwnerIdx, memo: memo, imgUrl: self.profileImgKey, completion: completion)
+            self.patchFood(foodIdx: foodIdx, fridgeIdx: fridgeIdx, foodName: foodName, foodDetail: foodDetail, foodCategory: foodCategory, foodShelfLife: foodShelfLife, foodOwnerIdx: foodOwnerIdx, memo: memo, imgUrl: self.profileImgKey, completion: completion)
         }
     }
     
