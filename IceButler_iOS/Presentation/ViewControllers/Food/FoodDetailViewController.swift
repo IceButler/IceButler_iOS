@@ -182,6 +182,8 @@ class FoodDetailViewController: UIViewController {
             
             if food.day > 0 {
                 self.foodDdayLabel.text = "D+" + food.day.description
+            }else if food.day == 0 {
+                self.foodDdayLabel.text = "D-" + food.day.description
             }else {
                 self.foodDdayLabel.text = "D" + food.day.description
             }
