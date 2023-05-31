@@ -81,8 +81,7 @@ class EditMyFridgeViewController: UIViewController {
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        if let name = fridgeNameTextField.text,
-           let comment = fridgeCommentTextView.text,
+        if let name = fridgeNameTextField.text
            selectedMember.count > 0,
            let newOwner = mandatedMember {
             
@@ -90,7 +89,7 @@ class EditMyFridgeViewController: UIViewController {
             selectedMember.forEach { member in memberIdxs.append(UserIndexModel(userIdx: member.userIdx)) }
             
             let param = EditedFridgeRequestModel(fridgeName: name,
-                                                 fridgeComment: comment,
+                                                 fridgeComment: (fridgeCommentTextView.text == "200자 이내로 작성해주세요.") ? "" : fridgeCommentTextView.text,
                                                  members: memberIdxs,
                                                  newOwnerIdx: newOwner.userIdx)
             
@@ -112,9 +111,6 @@ class EditMyFridgeViewController: UIViewController {
         } else {
             showAlert(title: nil, message: "모든 정보를 입력해주세요!", confirmTitle: "확인")
         }
-           
-            
-        
     }
     
     
@@ -378,7 +374,7 @@ extension EditMyFridgeViewController: UITextViewDelegate {
         if textView.text.count > 0 {
             fridgeCommentContainerView.backgroundColor = .focusTableViewSkyBlue
         } else {
-            fridgeCommentContainerView.backgroundColor = .systemGray6
+            fridgeCommentContainerView.backgroundColor = .notInputColor
         }
     }
     
@@ -386,6 +382,7 @@ extension EditMyFridgeViewController: UITextViewDelegate {
         if textView.text.count == 0 {
             textView.text = "200자 이내로 작성해주세요."
             textView.textColor = .lightGray
+            fridgeCommentContainerView.backgroundColor = .notInputColor
         }
     }
 }
