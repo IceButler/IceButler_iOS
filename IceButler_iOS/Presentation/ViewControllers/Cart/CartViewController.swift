@@ -96,7 +96,7 @@ class CartViewController: UIViewController {
                     self?.cartMainTableView.isHidden = false
                     self?.nothingFoodLabel.isHidden = true
                 }
-            case 403:
+            case 403, 404:
                 self?.noRefrigeratorView.isHidden = false
                 self?.addFoodButton.isHidden = true
                 
