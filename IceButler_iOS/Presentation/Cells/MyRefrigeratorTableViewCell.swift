@@ -10,6 +10,7 @@ import UIKit
 protocol MyRefrigeratorTableViewCellDelegate {
     func didTapEditButton(index: Int)
     func didTapDeleteButton(index: Int)
+    func didTapAnyOfView()
 }
 
 class MyRefrigeratorTableViewCell: UITableViewCell {
@@ -35,7 +36,7 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
         super.awakeFromNib()
         setupCollectionView()
         setupLayout()
-        setEventHandler()
+        setupGestureRecognizers()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -68,6 +69,14 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
         commentDetailView.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    private func setupGestureRecognizers() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapCommentDetailView))
+        commentDetailView.addGestureRecognizer(tapGestureRecognizer)
+        
+        let viewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapAnyOfView))
+        self.containerView.addGestureRecognizer(viewTapGestureRecognizer)
+    }
+    
     public func configureFridge(data: Fridge?) {
         if let data = data {
             fridgeOwnerIdx = data.users![0].userIdx
@@ -88,6 +97,11 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
             commentDetailView.text = data.comment
             memberInfos = data.users!
         }
+    }
+    
+    public func setupViewIsHidden() {
+        moreView.isHidden = true
+        notOwnerMoreView.isHidden = true
     }
     
     @IBAction func didTapMoreButton(_ sender: UIButton) {
@@ -133,6 +147,7 @@ class MyRefrigeratorTableViewCell: UITableViewCell {
             self.commentDetailView.isHidden = true },
                           completion: nil);
     }
+    @objc private func didTapAnyOfView() { delegate?.didTapAnyOfView() }
 }
 
 extension MyRefrigeratorTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {

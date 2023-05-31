@@ -81,7 +81,7 @@ class EditMyFridgeViewController: UIViewController {
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        if let name = fridgeNameTextField.text
+        if let name = fridgeNameTextField.text,
            selectedMember.count > 0,
            let newOwner = mandatedMember {
             
