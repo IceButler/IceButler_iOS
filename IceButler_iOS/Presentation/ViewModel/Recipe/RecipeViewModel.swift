@@ -58,12 +58,21 @@ class RecipeViewModel: ObservableObject {
             self.fridgeRecipeIsLastPage = false
         }
         recipeService.getFridgeRecipes(fridgeType: fridgeTypeOfFridgeRecipe, fridgeIdx: fridgeIdxOfFridgeRecipe, pageNumberToLoad: pageNumberToLoad) { response in
-            response?.content.forEach { recipe in
-                indexArrayToInsert.append(IndexPath(item: self.fridgeRecipeList.count, section: 0))
-                self.fridgeRecipeList.append(recipe)
+            if let data = response?.data {
+                data.content.forEach { recipe in
+                    indexArrayToInsert.append(IndexPath(item: self.fridgeRecipeList.count, section: 0))
+                    self.fridgeRecipeList.append(recipe)
+                }
+                self.fridgeRecipeIsLastPage = data.last
+                self.recipeInFridgeVC?.updateCV(indexArray: indexArrayToInsert)
+            } else {
+                // 레시피 response data값이 nil일 경우
+                if let description = response?.description {
+                    self.recipeInFridgeVC?.showServerErrorAlert(description: description)
+                } else {
+                    self.recipeInFridgeVC?.showServerErrorAlert()
+                }
             }
-            self.fridgeRecipeIsLastPage = response?.last ?? false
-            self.recipeInFridgeVC?.updateCV(indexArray: indexArrayToInsert)
         }
     }
     
@@ -74,12 +83,21 @@ class RecipeViewModel: ObservableObject {
             self.popularRecipeIsLastPage = false
         }
         recipeService.getPopularRecipes(fridgeType: fridgeTypeOfPopularRecipe, fridgeIdx: fridgeIdxOfPopularRecipe, pageNumberToLoad: pageNumberToLoad) { response in
-            response?.content.forEach { recipe in
-                indexArrayToInsert.append(IndexPath(item: self.popularRecipeList.count, section: 0))
-                self.popularRecipeList.append(recipe)
+            if let data = response?.data {
+                data.content.forEach { recipe in
+                    indexArrayToInsert.append(IndexPath(item: self.popularRecipeList.count, section: 0))
+                    self.popularRecipeList.append(recipe)
+                }
+                self.popularRecipeIsLastPage = data.last
+                self.popularRecipeVC?.updateCV(indexArray: indexArrayToInsert)
+            } else {
+                // 레시피 response data값이 nil일 경우
+                if let description = response?.description {
+                    self.popularRecipeVC?.showServerErrorAlert(description: description)
+                } else {
+                    self.popularRecipeVC?.showServerErrorAlert()
+                }
             }
-            self.popularRecipeIsLastPage = response?.last ?? false
-            self.popularRecipeVC?.updateCV(indexArray: indexArrayToInsert)
         }
     }
     
@@ -90,12 +108,21 @@ class RecipeViewModel: ObservableObject {
             self.bookmarkRecipeIsLastPage = false
         }
         recipeService.getBookmarkRecipes(fridgeType: fridgeType, fridgeIdx: fridgeIdx, pageNumberToLoad: pageNumberToLoad) { response in
-            response?.content.forEach { recipe in
-                indexArrayToInsert.append(IndexPath(item: self.bookmarkRecipeList.count, section: 0))
-                self.bookmarkRecipeList.append(recipe)
+            if let data = response?.data {
+                data.content.forEach { recipe in
+                    indexArrayToInsert.append(IndexPath(item: self.bookmarkRecipeList.count, section: 0))
+                    self.bookmarkRecipeList.append(recipe)
+                }
+                self.bookmarkRecipeIsLastPage = data.last
+                self.bookmarkRecipeVC?.updateCV(indexArray: indexArrayToInsert)
+            } else {
+                // 레시피 response data값이 nil일 경우
+                if let description = response?.description {
+                    self.bookmarkRecipeVC?.showServerErrorAlert(description: description)
+                } else {
+                    self.bookmarkRecipeVC?.showServerErrorAlert()
+                }
             }
-            self.bookmarkRecipeIsLastPage = response?.last ?? false
-            self.bookmarkRecipeVC?.updateCV(indexArray: indexArrayToInsert)
         }
     }
     
@@ -106,12 +133,21 @@ class RecipeViewModel: ObservableObject {
             self.myRecipeIsLastPage = false
         }
         recipeService.getMyRecipes(pageNumberToLoad: pageNumberToLoad) { response in
-            response?.content.forEach { recipe in
-                indexArrayToInsert.append(IndexPath(item: self.myRecipeList.count, section: 0))
-                self.myRecipeList.append(recipe)
+            if let data = response?.data {
+                data.content.forEach { recipe in
+                    indexArrayToInsert.append(IndexPath(item: self.myRecipeList.count, section: 0))
+                    self.myRecipeList.append(recipe)
+                }
+                self.myRecipeIsLastPage = data.last
+                self.myRecipeVC?.updateCV(indexArray: indexArrayToInsert)
+            } else {
+                // 레시피 response data값이 nil일 경우
+                if let description = response?.description {
+                    self.myRecipeVC?.showServerErrorAlert(description: description)
+                } else {
+                    self.myRecipeVC?.showServerErrorAlert()
+                }
             }
-            self.myRecipeIsLastPage = response?.last ?? false
-            self.myRecipeVC?.updateCV(indexArray: indexArrayToInsert)
         }
     }
     

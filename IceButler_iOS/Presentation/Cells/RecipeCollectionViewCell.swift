@@ -10,10 +10,10 @@ import Kingfisher
 
 class RecipeCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var recipeImageView: UIImageView!
-    @IBOutlet weak var bookmarkButton: UIButton!
-    @IBOutlet weak var recipeNameLabel: UILabel!
+    @IBOutlet var backView: UIView!
+    @IBOutlet var recipeImageView: UIImageView!
+    @IBOutlet var recipeNameLabel: UILabel!
+    @IBOutlet var bookmarkButton: UIButton!
     var foodTypeLabel: BasePaddingLabel!
     var percentLabel: BasePaddingLabel!
     var idx: Int!
