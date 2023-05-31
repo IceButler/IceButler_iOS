@@ -249,6 +249,12 @@ class EditMyFridgeViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    private func isAlreadyAdded(member: FridgeUser) -> Bool {
+        var isAlready = false
+        selectedMember.forEach { m in if member.userIdx == m.userIdx { isAlready = true } }
+        return isAlready
+    }
+    
     public func setFridgeIdx(index: Int) { fridgeIdx = index }
     
     public func setFridgeData(isMulti: Bool,
@@ -323,10 +329,15 @@ extension EditMyFridgeViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.tag == 0 {
-            selectedMember.append(FridgeUser(nickname: searchMember[indexPath.row].nickname,
-                                             role: "MEMBER",
-                                             profileImgUrl: searchMember[indexPath.row].profileImgUrl,
-                                             userIdx: searchMember[indexPath.row].userIdx))
+            if !self.isAlreadyAdded(member: searchMember[indexPath.row]) {
+                selectedMember.append(FridgeUser(nickname: searchMember[indexPath.row].nickname,
+                                                 role: "MEMBER",
+                                                 profileImgUrl: searchMember[indexPath.row].profileImgUrl,
+                                                 userIdx: searchMember[indexPath.row].userIdx))
+            } else {
+                self.showAlert(title: nil, message: "이미 추가된 멤버입니다!", confirmTitle: "확인")
+            }
+            
             
             self.memberSearchResultContainerView.isHidden = true
             self.selectedMemberCollectionView.isHidden = false
