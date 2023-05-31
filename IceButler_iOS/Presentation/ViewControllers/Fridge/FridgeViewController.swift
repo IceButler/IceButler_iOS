@@ -26,6 +26,7 @@ class FridgeViewController: TabmanViewController {
     private var viewControllerList: Array<UIViewController> = []
     
     private var bar: TMBar.ButtonBar!
+    private var isBar = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +69,12 @@ class FridgeViewController: TabmanViewController {
                 self.noFridgeLabel.isHidden = true
                 self.fridgeAddButton.isHidden = true
                 self.foodAddButton.isHidden = false
-                self.setupTabman()
+                if self.isBar == false {
+                    self.setupTabman()
+                }else {
+                    self.addBar(self.bar, dataSource: self, at: .top)
+                }
+                
             }
         }
         
@@ -138,6 +144,7 @@ class FridgeViewController: TabmanViewController {
         bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
         
         addBar(bar, dataSource: self, at: .top)
+        isBar = true
     }
     
     private func setupLayout() {

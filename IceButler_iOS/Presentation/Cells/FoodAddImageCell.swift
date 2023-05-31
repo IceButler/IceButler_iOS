@@ -32,8 +32,6 @@ class FoodAddImageCell: UICollectionViewCell {
     }
 
     func showFoodImageAddIcon() {
-        foodImageView.image = UIImage()
-        foodImageView.backgroundColor = .notInputColor
         foodImageAddImageView.isHidden = false
     }
 }
