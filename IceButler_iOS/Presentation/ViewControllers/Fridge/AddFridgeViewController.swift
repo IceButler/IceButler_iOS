@@ -202,6 +202,17 @@ class AddFridgeViewController: UIViewController {
         else { return false }
     }
     
+    private func isAlreadyAddedMember(member: FridgeUser) -> Bool {
+        var isAlready = false
+        selectedMember.forEach { m in if member.userIdx == m.userIdx { isAlready = true } }
+        return isAlready
+    }
+    
+    private func hiddenSearchResultView() {
+        self.searchResultContainerView.isHidden = true
+        self.memberCollectionView.isHidden = false
+        self.memberCollectionView.reloadData()
+    }
     
     // MARK: @objc methods
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -293,16 +304,23 @@ extension AddFridgeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UserService().getUserInfo { [weak self] userInfo in
-            if userInfo.userIdx == self?.searchMember[indexPath.row].userIdx {
-                self?.showAlert(title: "멤버 추가 실패", message: "본인을 냉장고 멤버로 추가할 수 없습니다.", confirmTitle: "확인")
-            } else {
-                self?.selectedMember.append((self?.searchMember[indexPath.row])!)
-                self?.searchResultContainerView.isHidden = true
-                self?.memberCollectionView.isHidden = false
-                self?.memberCollectionView.reloadData()
+        if self.isAlreadyAddedMember(member: searchMember[indexPath.row]) {
+            showAlert(title: nil, message: "이미 추가된 멤버입니다!", confirmTitle: "확인")
+            hiddenSearchResultView()
+            
+        } else {
+            UserService().getUserInfo { [weak self] userInfo in
+                if userInfo.userIdx == self?.searchMember[indexPath.row].userIdx {
+                    self?.showAlert(title: "멤버 추가 실패", message: "본인을 냉장고 멤버로 추가할 수 없습니다.", confirmTitle: "확인")
+                    self?.hiddenSearchResultView()
+                    
+                } else {
+                    self?.selectedMember.append((self?.searchMember[indexPath.row])!)
+                    self?.hiddenSearchResultView()
+                }
             }
         }
+        
     }
 }
 

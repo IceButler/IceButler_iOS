@@ -249,7 +249,7 @@ class EditMyFridgeViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    private func isAlreadyAdded(member: FridgeUser) -> Bool {
+    private func isAlreadyAddedMember(member: FridgeUser) -> Bool {
         var isAlready = false
         selectedMember.forEach { m in if member.userIdx == m.userIdx { isAlready = true } }
         return isAlready
@@ -329,7 +329,7 @@ extension EditMyFridgeViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.tag == 0 {
-            if !self.isAlreadyAdded(member: searchMember[indexPath.row]) {
+            if !self.isAlreadyAddedMember(member: searchMember[indexPath.row]) {
                 selectedMember.append(FridgeUser(nickname: searchMember[indexPath.row].nickname,
                                                  role: "MEMBER",
                                                  profileImgUrl: searchMember[indexPath.row].profileImgUrl,
