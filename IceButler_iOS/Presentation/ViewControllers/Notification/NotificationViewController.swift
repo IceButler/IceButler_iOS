@@ -96,32 +96,6 @@ class NotificationViewController: UIViewController {
         }
     }
     
-    private func renameCreatedAtStr() {
-        let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(identifier: "UTC")
-        formatter.dateFormat = "yyyy-MM-dd"
-        
-
-        createdAtList.forEach { date in
-            
-            let dateOfDate = Calendar.current.dateComponents([.year, .month, .day], from: Date() + 32400)
-            let dateOfToday = Calendar.current.dateComponents([.year, .month, .day], from: formatter.date(from: date)!)
-            let offsetComps = Calendar.current.dateComponents([.year,.month,.day], from: dateOfToday, to: dateOfDate)
-            
-            if case let (y?, m?, d?) = (offsetComps.year, offsetComps.month, offsetComps.day) {
-                if (y == 0) && (m == 0) {
-                    if d == 0 { renameCreatedAtList[date] = "오늘" }
-                    else if d < 8 { renameCreatedAtList[date] = "\(d)일전" }
-                    else if (d > 8) && (d < 15) { renameCreatedAtList[date] = "1주전" }
-                    else if (d > 14) && (d < 22) { renameCreatedAtList[date] = "2주전" }
-                    else { renameCreatedAtList[date] = "오래 전" }
-                }
-                else { renameCreatedAtList[date] = "오래 전" }
-            }
-        }
-        
-    }
-    
     private func setupNavigationBar() {
         /// setting status bar background color
         if #available(iOS 13.0, *) {

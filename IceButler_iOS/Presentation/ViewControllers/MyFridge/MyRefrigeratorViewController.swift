@@ -20,6 +20,7 @@ class MyRefrigeratorViewController: UIViewController {
         fetchData()
         setupNavigationBar()
         setupTableView()
+//        setupGestureRecognizers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +99,8 @@ class MyRefrigeratorViewController: UIViewController {
         }
     }
     
+    
+    
     private func reloadTableViewAnimation() {
         UIView.transition(with: self.tableView,
                           duration: 0.35,
@@ -109,6 +112,7 @@ class MyRefrigeratorViewController: UIViewController {
     
     // MARK: @objc methods
     @objc private func didTapBackItem() { self.navigationController?.popViewController(animated: true) }
+    
 }
 
 extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSource {
@@ -135,7 +139,7 @@ extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSour
             let frigeratorCount = data?.fridgeList?.count ?? 0
             cell.configureMultiFridge(data: data?.multiFridgeResList![indexPath.row - frigeratorCount])
         }
-        cell.moreView.isHidden = true
+        cell.setupViewIsHidden()
         cell.collectionView.reloadData()
         return cell
     }
@@ -150,6 +154,8 @@ extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
 //        self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
 //
 //    }
+    
+    func didTapAnyOfView() { reloadTableViewAnimation() }
     
     func didTapEditButton(index: Int) {
         guard let editViewController = storyboard?.instantiateViewController(withIdentifier: "EditMyFridgeViewController") as? EditMyFridgeViewController else { return }

@@ -35,12 +35,12 @@ class NotificationTableViewCell: UITableViewCell {
 
     func configure(data: Notification) {
         switch data.pushNotificationType {
-        case "냉장고":
+        case "":
             iconImgView.image = UIImage(named: "fridge")
             titleLabel.text = "냉장고"
         default:
             iconImgView.image = UIImage(named: "clock")
-            titleLabel.text = "유통기한"
+            titleLabel.text = data.pushNotificationType
         }
         
         if let info = data.notificationInfo {
