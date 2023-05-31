@@ -7,7 +7,7 @@
 
 import UIKit
 import JGProgressHUD
-
+import CoreLocation
 
 class CartViewController: UIViewController {
     @IBOutlet weak var cartMainTableView: UITableView!
@@ -24,11 +24,13 @@ class CartViewController: UIViewController {
     @IBOutlet weak var completeBuyingButton: UIButton!
     
     private var cartFoods: [CartResponseModel] = []
+    private var locationManager : CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationBar()
+        setupLocation()
         
         DispatchQueue.main.async {
             let hud = JGProgressHUD()
@@ -63,6 +65,13 @@ class CartViewController: UIViewController {
         self.alertView.isHidden = true
         self.addFoodButton.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func setupLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
     
     /// 장바구니 조회 요청 메소드
@@ -282,5 +291,21 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         cell.reloadCV()
         cell.backgroundColor = cell.contentView.backgroundColor
         return cell
+    }
+}
+
+extension CartViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("GPS 권한 설정됨")
+        case .notDetermined:
+            print("GPS 권한 설정되지 않음")
+            locationManager.requestWhenInUseAuthorization()
+        case .denied:
+            print("GPS 권한 거부됨")
+            locationManager.requestWhenInUseAuthorization()
+        default: return
+        }
     }
 }
