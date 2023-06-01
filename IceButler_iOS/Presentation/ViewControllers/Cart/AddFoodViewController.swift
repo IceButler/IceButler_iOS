@@ -10,9 +10,9 @@ import JGProgressHUD
 
 // MARK: 장바구니에서 플로팅 버튼을 탭하는 경우 나오는 '식품 추가' 화면
 class AddFoodViewController: UIViewController {
-
+    
     private let category = [
-        "육류", "과일", "채소", "음료", "수산물", "반찬", "간식", "조미료", "가공식품", "기타"
+        "육류", "과일", "채소", "음료", "수산물", "반찬", "조미료", "가공식품", "기타"
     ]
     
     private var searchResults: [AddFoodResponseModel] = []
