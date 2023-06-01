@@ -64,6 +64,20 @@ class RecipeService {
         }
     }
     
+    func getSearchRecipes(fridgeIdx: Int, fridgeType: FridgeType, category: String, keyword: String, pageNumberToLoad: Int, completion: @escaping (RecipeResponseModel?) -> Void) {
+        let parameter: Parameters = ["keyword" : keyword, "page" : pageNumberToLoad, "size" : PAGING_SIZE, "category" : category]
+        switch fridgeType {
+        case .homeUse:
+            APIManger.shared.getRecipeData(urlEndpointString: "/recipes/search/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
+                completion(response.data)
+            }
+        case .multiUse:
+            APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/search/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
+                completion(response.data)
+            }
+        }
+    }
+    
     func getRecipeDetail(recipeIdx: Int, completion: @escaping (GeneralResponseModel<RecipeDetailResponseModel>?) -> Void) {
         APIManger.shared.getRecipeData(urlEndpointString: "/recipes/detail/\(recipeIdx)", responseDataType: RecipeDetailResponseModel.self, parameter: nil) { response in
             completion(response)

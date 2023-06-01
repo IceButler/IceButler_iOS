@@ -867,6 +867,52 @@
             </objects>
             <point key="canvasLocation" x="2694" y="2149"/>
         </scene>
+        <!--Recipe Search View Controller-->
+        <scene sceneID="IqX-uL-LQb">
+            <objects>
+                <viewController storyboardIdentifier="RecipeSearchViewController" id="q31-Ul-ijI" customClass="RecipeSearchViewController" customModule="IceButler_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zVT-h8-FMb">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Pjr-wf-cPx">
+                                <rect key="frame" x="0.0" y="59" width="393" height="793"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DNy-lj-S3e">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Aiq-uV-cSN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Pjr-wf-cPx" secondAttribute="bottom" id="6Vh-7L-0RW"/>
+                            <constraint firstItem="Aiq-uV-cSN" firstAttribute="trailing" secondItem="Pjr-wf-cPx" secondAttribute="trailing" id="It8-a2-A1U"/>
+                            <constraint firstItem="Pjr-wf-cPx" firstAttribute="leading" secondItem="Aiq-uV-cSN" secondAttribute="leading" id="ktV-oU-6aG"/>
+                            <constraint firstItem="Pjr-wf-cPx" firstAttribute="top" secondItem="Aiq-uV-cSN" secondAttribute="top" id="qbm-Nq-wGc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="wgC-kB-uDK">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="ioD-2b-Tx2">
+                            <inset key="imageInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="didTapBackButton:" destination="q31-Ul-ijI" id="bId-5s-tGI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="recipeCollectionView" destination="Pjr-wf-cPx" id="FvN-ia-hXH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V76-ny-YBw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3456" y="2149"/>
+        </scene>
         <!--Add Recipe Second View Controller-->
         <scene sceneID="xAY-2b-nYS">
             <objects>
