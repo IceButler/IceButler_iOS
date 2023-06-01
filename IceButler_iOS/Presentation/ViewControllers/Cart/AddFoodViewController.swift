@@ -81,7 +81,7 @@ class AddFoodViewController: UIViewController {
             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
             
             let statusbarView = UIView()
-            statusbarView.backgroundColor = UIColor.signatureLightBlue
+            statusbarView.backgroundColor = UIColor.navigationColor
             view.addSubview(statusbarView)
           
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,10 +96,11 @@ class AddFoodViewController: UIViewController {
           
         } else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-            statusBar?.backgroundColor = UIColor.signatureLightBlue
+            statusBar?.backgroundColor = UIColor.navigationColor
         }
         
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.backgroundColor = .navigationColor
         
     }
     
