@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="391" height="826"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chM-gB-dUN">
-                                        <rect key="frame" x="0.0" y="0.0" width="391" height="826"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="391" height="707"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="식품명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gv0-Ud-E98">
                                                 <rect key="frame" x="16" y="20" width="38" height="22"/>
@@ -229,6 +229,7 @@
                                             <constraint firstItem="Gv0-Ud-E98" firstAttribute="top" secondItem="chM-gB-dUN" secondAttribute="top" constant="20" id="bie-fS-d8h"/>
                                             <constraint firstItem="kmG-ub-vwZ" firstAttribute="leading" secondItem="chM-gB-dUN" secondAttribute="leading" constant="17" id="bnh-ua-GZA"/>
                                             <constraint firstAttribute="trailing" secondItem="kmG-ub-vwZ" secondAttribute="trailing" constant="15" id="ci4-TO-uHr"/>
+                                            <constraint firstAttribute="bottom" secondItem="wt1-cl-XNQ" secondAttribute="bottom" constant="10" id="eYC-4P-LXY"/>
                                             <constraint firstAttribute="trailing" secondItem="7LZ-d8-XP7" secondAttribute="trailing" constant="15" id="f0d-8y-zsm"/>
                                             <constraint firstAttribute="trailing" secondItem="SId-P0-37v" secondAttribute="trailing" constant="15" id="gg8-vA-orv"/>
                                             <constraint firstItem="SId-P0-37v" firstAttribute="leading" secondItem="chM-gB-dUN" secondAttribute="leading" constant="17" id="k7k-mp-IJC"/>
@@ -245,11 +246,10 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="chM-gB-dUN" firstAttribute="height" secondItem="seO-pV-gC8" secondAttribute="height" id="9aL-sY-SbO"/>
                                     <constraint firstItem="chM-gB-dUN" firstAttribute="leading" secondItem="3qW-QP-aLd" secondAttribute="leading" id="AEP-lW-z7k"/>
                                     <constraint firstItem="chM-gB-dUN" firstAttribute="bottom" secondItem="3qW-QP-aLd" secondAttribute="bottom" id="QBc-UY-KNz"/>
-                                    <constraint firstItem="chM-gB-dUN" firstAttribute="width" secondItem="seO-pV-gC8" secondAttribute="width" id="RQ3-L2-Fe1"/>
                                     <constraint firstItem="chM-gB-dUN" firstAttribute="trailing" secondItem="3qW-QP-aLd" secondAttribute="trailing" id="aD7-pe-rzD"/>
+                                    <constraint firstItem="chM-gB-dUN" firstAttribute="centerX" secondItem="seO-pV-gC8" secondAttribute="centerX" id="dH8-mX-bky"/>
                                     <constraint firstItem="chM-gB-dUN" firstAttribute="top" secondItem="3qW-QP-aLd" secondAttribute="top" id="f8A-lc-NIk"/>
                                     <constraint firstItem="chM-gB-dUN" firstAttribute="top" secondItem="UgL-pe-TJb" secondAttribute="top" id="odd-GL-EeT"/>
                                 </constraints>

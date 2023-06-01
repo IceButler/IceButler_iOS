@@ -169,7 +169,7 @@ class FoodAddViewController: UIViewController {
             collectionView?.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         }
         
-        foodAddButton.layer.cornerRadius = 30
+        foodAddButton.layer.cornerRadius = 20
         
         if let flowLayout = foodImageCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
