@@ -26,7 +26,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1RL-eN-Gn3">
-                                <rect key="frame" x="324" y="736" width="48" height="48"/>
+                                <rect key="frame" x="329" y="744" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Ihg-OE-nXf"/>
                                     <constraint firstAttribute="width" constant="48" id="qus-dd-CUa"/>
@@ -72,8 +72,8 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4HG-QS-PTu" secondAttribute="trailing" id="Can-1z-p8a"/>
                             <constraint firstItem="leM-Z5-H2v" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Had-eF-9la"/>
                             <constraint firstItem="4HG-QS-PTu" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Lbo-X5-sml"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="1RL-eN-Gn3" secondAttribute="bottom" constant="34" id="Lby-9j-nAA"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1RL-eN-Gn3" secondAttribute="trailing" constant="21" id="Lkr-c2-BgR"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="1RL-eN-Gn3" secondAttribute="bottom" constant="26" id="Lby-9j-nAA"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1RL-eN-Gn3" secondAttribute="trailing" constant="16" id="Lkr-c2-BgR"/>
                             <constraint firstItem="IiX-Gg-iGw" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Pgq-iU-qsp"/>
                             <constraint firstItem="4HG-QS-PTu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="SO7-dr-IbU"/>
                             <constraint firstItem="WfT-xr-l2h" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="bup-Nd-x98"/>
