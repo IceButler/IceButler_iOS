@@ -1,8 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "main.png",
-      "idiom" : "universal"
+      "filename" : "fridge@1x.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "fridge@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "fridge@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

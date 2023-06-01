@@ -101,6 +101,24 @@ class MyRecipeViewController: BaseViewController {
         }
         hideLoading()
     }
+    
+    func showServerErrorAlert(description: String? = nil) {
+        hideLoading()
+        recipeCollectionView.setEmptyView(message: "냉장고에 식품을 추가해보세요!")
+        if let description = description {
+            let alert = UIAlertController(title: "서버 오류 발생", message: description, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                self.navigationController?.popToRootViewController(animated: true)
+            }))
+            self.present(alert, animated: true)
+        } else {
+            let alert = UIAlertController(title: "서버 오류 발생", message: "데이터를 불러올 수 없습니다. 잠시 후에 다시 시도해주세요.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                self.navigationController?.popToRootViewController(animated: true)
+            }))
+            self.present(alert, animated: true)
+        }
+    }
 }
 
 extension MyRecipeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

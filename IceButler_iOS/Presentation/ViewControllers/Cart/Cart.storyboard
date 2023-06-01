@@ -129,7 +129,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="3dM-hU-VfC"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiL-ij-FjJ">
-                                <rect key="frame" x="325" y="730" width="48" height="48"/>
+                                <rect key="frame" x="329" y="744" width="48" height="48"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="EVX-1p-L4k"/>
@@ -137,7 +137,7 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
+                                <buttonConfiguration key="configuration" style="plain" image="addButtonIcon"/>
                                 <connections>
                                     <action selector="didTapAddFoodButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zqn-R0-dO8"/>
                                 </connections>
@@ -192,14 +192,14 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="jik-K7-b5P" secondAttribute="bottom" id="3D1-WB-Pv8"/>
                             <constraint firstItem="1ng-35-uro" firstAttribute="leading" secondItem="jik-K7-b5P" secondAttribute="leading" id="4w1-9q-cIS"/>
                             <constraint firstItem="1ng-35-uro" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="6oa-IK-Ste"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="tiL-ij-FjJ" secondAttribute="trailing" constant="20" id="DZA-vn-2dV"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="tiL-ij-FjJ" secondAttribute="trailing" constant="16" id="DZA-vn-2dV"/>
                             <constraint firstItem="lhy-s4-QRN" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="E6h-b5-4SX"/>
                             <constraint firstItem="5By-y0-7hb" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="GcO-lJ-GcH"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jik-K7-b5P" secondAttribute="trailing" id="OTU-zj-bbo"/>
                             <constraint firstItem="jik-K7-b5P" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="QN3-eC-yPf"/>
                             <constraint firstItem="5By-y0-7hb" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="VP0-5b-BTf"/>
                             <constraint firstItem="lhy-s4-QRN" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="gWd-Nq-0GU"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="tiL-ij-FjJ" secondAttribute="bottom" constant="40" id="n2o-6r-nl5"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="tiL-ij-FjJ" secondAttribute="bottom" constant="26" id="n2o-6r-nl5"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1ng-35-uro" secondAttribute="trailing" id="tp8-Jw-B7O"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="1ng-35-uro" secondAttribute="bottom" id="vVh-oL-O7v"/>
                             <constraint firstItem="jik-K7-b5P" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="w8P-Mc-fZO"/>
@@ -620,6 +620,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="addButtonIcon" width="20.333333969116211" height="20.333333969116211"/>
         <image name="addressIcon" width="30" height="30"/>
         <image name="back" width="13" height="23"/>
         <image name="chevron_right_blue" width="9.3333330154418945" height="16"/>

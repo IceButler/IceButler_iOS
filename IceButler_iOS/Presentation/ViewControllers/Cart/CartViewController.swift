@@ -7,7 +7,7 @@
 
 import UIKit
 import JGProgressHUD
-
+import CoreLocation
 
 class CartViewController: UIViewController {
     @IBOutlet weak var cartMainTableView: UITableView!
@@ -24,11 +24,13 @@ class CartViewController: UIViewController {
     @IBOutlet weak var completeBuyingButton: UIButton!
     
     private var cartFoods: [CartResponseModel] = []
+    private var locationManager : CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationBar()
+        setupLocation()
         
         DispatchQueue.main.async {
             let hud = JGProgressHUD()
@@ -65,6 +67,13 @@ class CartViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    private func setupLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
     /// 장바구니 조회 요청 메소드
     func fetchCartData(urlStr: String) {
         APIManger.shared.getData(urlEndpointString: urlStr,
@@ -87,7 +96,7 @@ class CartViewController: UIViewController {
                     self?.cartMainTableView.isHidden = false
                     self?.nothingFoodLabel.isHidden = true
                 }
-            case 403:
+            case 403, 404:
                 self?.noRefrigeratorView.isHidden = false
                 self?.addFoodButton.isHidden = true
                 
@@ -241,9 +250,9 @@ class CartViewController: UIViewController {
     private func setupLayout() {
         self.cartMainTableView.backgroundColor = .clear
         self.alertView.layer.cornerRadius = 15
-        self.addFoodButton.backgroundColor = UIColor.signatureDeepBlue
-        self.addFoodButton.backgroundColor = UIColor.signatureDeepBlue
+        self.addFoodButton.backgroundColor = UIColor.white
         self.addFoodButton.layer.cornerRadius = self.addFoodButton.frame.width / 2
+        self.addFoodButton.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 20, spread: 0)
         self.addRefrigeratorButton.layer.cornerRadius = 22
     }
     
@@ -282,5 +291,21 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         cell.reloadCV()
         cell.backgroundColor = cell.contentView.backgroundColor
         return cell
+    }
+}
+
+extension CartViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("GPS 권한 설정됨")
+        case .notDetermined:
+            print("GPS 권한 설정되지 않음")
+            locationManager.requestWhenInUseAuthorization()
+        case .denied:
+            print("GPS 권한 거부됨")
+            locationManager.requestWhenInUseAuthorization()
+        default: return
+        }
     }
 }
