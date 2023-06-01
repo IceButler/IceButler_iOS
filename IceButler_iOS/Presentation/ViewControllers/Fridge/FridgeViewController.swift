@@ -149,15 +149,10 @@ class FridgeViewController: TabmanViewController {
     
     private func setupLayout() {
         self.view.backgroundColor = .white
-        
         fridgeAddButton.layer.cornerRadius = 20
-        
         foodAddButton.backgroundColor = .white
-        
         foodAddButton.layer.cornerRadius = foodAddButton.frame.width / 2
-        foodAddButton.layer.shadowColor = CGColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0.1)
-        foodAddButton.layer.shadowOpacity = 1
-        foodAddButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        foodAddButton.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 20, spread: 0)
     }
     
     private func setupNavigationBar() {
