@@ -52,7 +52,6 @@
 		73B7373029E2501A0097806F /* DrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7372F29E2501A0097806F /* DrinkViewController.swift */; };
 		73B7373229E250330097806F /* MarineProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7373129E250330097806F /* MarineProductsViewController.swift */; };
 		73B7373429E250430097806F /* SideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7373329E250430097806F /* SideViewController.swift */; };
-		73B7373629E2504A0097806F /* SnackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7373529E2504A0097806F /* SnackViewController.swift */; };
 		73B7373829E2505B0097806F /* SeasoningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7373729E2505B0097806F /* SeasoningViewController.swift */; };
 		73B7373A29E250680097806F /* ProcessedFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7373929E250680097806F /* ProcessedFoodViewController.swift */; };
 		73B7373C29E250700097806F /* ETCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7373B29E250700097806F /* ETCViewController.swift */; };
@@ -289,7 +288,6 @@
 		73B7372F29E2501A0097806F /* DrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkViewController.swift; sourceTree = "<group>"; };
 		73B7373129E250330097806F /* MarineProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarineProductsViewController.swift; sourceTree = "<group>"; };
 		73B7373329E250430097806F /* SideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideViewController.swift; sourceTree = "<group>"; };
-		73B7373529E2504A0097806F /* SnackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackViewController.swift; sourceTree = "<group>"; };
 		73B7373729E2505B0097806F /* SeasoningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasoningViewController.swift; sourceTree = "<group>"; };
 		73B7373929E250680097806F /* ProcessedFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedFoodViewController.swift; sourceTree = "<group>"; };
 		73B7373B29E250700097806F /* ETCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETCViewController.swift; sourceTree = "<group>"; };
@@ -660,7 +658,6 @@
 				73B7372F29E2501A0097806F /* DrinkViewController.swift */,
 				73B7373129E250330097806F /* MarineProductsViewController.swift */,
 				73B7373329E250430097806F /* SideViewController.swift */,
-				73B7373529E2504A0097806F /* SnackViewController.swift */,
 				73B7373729E2505B0097806F /* SeasoningViewController.swift */,
 				73B7373929E250680097806F /* ProcessedFoodViewController.swift */,
 				73B7373B29E250700097806F /* ETCViewController.swift */,
@@ -1646,7 +1643,6 @@
 				95A257512A1B041D00ABDC93 /* RecipeDetailIngredientCell.swift in Sources */,
 				A2EA102729F829DC000D600B /* SelectFrideViewController.swift in Sources */,
 				73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */,
-				73B7373629E2504A0097806F /* SnackViewController.swift in Sources */,
 				7339CD8E29E788BE002A6D78 /* ImageDir.swift in Sources */,
 				A2EA102A29F84E6A000D600B /* SelectFridgeTableViewCell.swift in Sources */,
 				73CF93B029E945BF0007CB7A /* UserResponseModel.swift in Sources */,

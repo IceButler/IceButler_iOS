@@ -632,13 +632,6 @@ class FridgeViewModel: ObservableObject {
             })
         }
         
-        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Snack.rawValue) { response in
-            self.snackFoodList.removeAll()
-            response?.foodList.forEach({ food in
-                self.snackFoodList.append(food)
-            })
-        }
-        
         fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Seasoning.rawValue) { response in
             self.seasoningFoodList.removeAll()
             response?.foodList.forEach({ food in
