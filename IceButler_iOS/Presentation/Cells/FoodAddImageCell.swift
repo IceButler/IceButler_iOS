@@ -13,7 +13,12 @@ class FoodAddImageCell: UICollectionViewCell {
     @IBOutlet weak var foodImageAddImageView: UIImageView!
     
     override func awakeFromNib() {
+        setupLayout()
         super.awakeFromNib()
+    }
+    
+    private func setupLayout() {
+        foodImageView.layer.cornerRadius = 10
     }
     
     func configure(imageUrl: String) {
