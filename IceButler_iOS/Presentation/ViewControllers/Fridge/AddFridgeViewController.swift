@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class AddFridgeViewController: UIViewController {
 
@@ -65,35 +66,51 @@ class AddFridgeViewController: UIViewController {
     }
     
     @IBAction func didTapMemberSearchButton(_ sender: UIButton) {
-        if searchTextField.text?.count ?? 0 > 0 {
-            FridgeViewModel.shared.searchMember(nickname: searchTextField.text!, completion: {
-                self.searchMember = FridgeViewModel.shared.searchMemberResults
-                self.tableViewHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
-                self.memberCollectionView.isHidden = true
-                self.searchResultContainerView.isHidden = false
-                self.memberSearchTableView.reloadData()
-            })
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            if self.searchTextField.text?.count ?? 0 > 0 {
+                FridgeViewModel.shared.searchMember(nickname: self.searchTextField.text!, completion: {
+                    self.searchMember = FridgeViewModel.shared.searchMemberResults
+                    self.tableViewHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
+                    self.memberCollectionView.isHidden = true
+                    self.searchResultContainerView.isHidden = false
+                    self.memberSearchTableView.reloadData()
+                })
+            }
+            else { self.showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
+            
+            hud.dismiss(animated: true)
         }
-        else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
-        var memberIdx:[Int] = []
-        selectedMember.forEach { member in memberIdx.append(member.userIdx) }
-        
-        FridgeViewModel.shared.requestAddFridge(isMulti: isMultifridge,
-                                                name: fridgeNameTextField.text!,
-                                                comment: fridgeDetailTextView.text!,
-                                                members: memberIdx,
-                                                completion: { [weak self] result in
-            if result {
-//                self?.showAlert(title: nil, message: "냉장고를 성공적으로 추가하였습니다!", confirmTitle: "확인")
-                self?.dismiss(animated: true)
-            }
-            else {
-                self?.showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인")
-            }
-        })
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            var memberIdx:[Int] = []
+            self.selectedMember.forEach { member in memberIdx.append(member.userIdx) }
+            
+            FridgeViewModel.shared.requestAddFridge(isMulti: self.isMultifridge,
+                                                    name: self.fridgeNameTextField.text!,
+                                                    comment: self.fridgeDetailTextView.text!,
+                                                    members: memberIdx,
+                                                    completion: { [weak self] result in
+                if result {
+                    self?.dismiss(animated: true)
+                    FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+                }
+                else { self?.showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인") }
+            })
+            
+            hud.dismiss(animated: true)
+        }
     }
     
     // MARK: Life Cycle Methods
@@ -181,13 +198,21 @@ class AddFridgeViewController: UIViewController {
     }
     
     private func isEmptyInputs() -> Bool {
-        if checkFridgeType()
-            && checkFridgeName()
-            && checkFridgeDetail()
-            && checkFridgeMember() { return true }
+        if checkFridgeType() && checkFridgeName() { return true }
         else { return false }
     }
     
+    private func isAlreadyAddedMember(member: FridgeUser) -> Bool {
+        var isAlready = false
+        selectedMember.forEach { m in if member.userIdx == m.userIdx { isAlready = true } }
+        return isAlready
+    }
+    
+    private func hiddenSearchResultView() {
+        self.searchResultContainerView.isHidden = true
+        self.memberCollectionView.isHidden = false
+        self.memberCollectionView.reloadData()
+    }
     
     // MARK: @objc methods
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -226,18 +251,6 @@ extension AddFridgeViewController {
     private func checkFridgeName() -> Bool {
         if fridgeNameTextField.text?.count ?? 0 > 0 { return true }
         else { return false }
-    }
-    
-    /// 냉장고 세부사항 입력 여부
-    private func checkFridgeDetail() -> Bool {
-        if (fridgeDetailTextView.text.count > 0)
-            && (fridgeDetailTextView.text != "200자 이내로 작성해주세요.") { return true }
-        else { return false }
-    }
-    
-    /// 냉장고 멤버 추가 여부
-    private func checkFridgeMember() -> Bool {
-        return (selectedMember.count > 0) ? true : false
     }
     
     /// 완료 버튼 활성/비활성 설정
@@ -291,10 +304,23 @@ extension AddFridgeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedMember.append(searchMember[indexPath.row])
-        self.searchResultContainerView.isHidden = true
-        self.memberCollectionView.isHidden = false
-        self.memberCollectionView.reloadData()
+        if self.isAlreadyAddedMember(member: searchMember[indexPath.row]) {
+            showAlert(title: nil, message: "이미 추가된 멤버입니다!", confirmTitle: "확인")
+            hiddenSearchResultView()
+            
+        } else {
+            UserService().getUserInfo { [weak self] userInfo in
+                if userInfo.userIdx == self?.searchMember[indexPath.row].userIdx {
+                    self?.showAlert(title: "멤버 추가 실패", message: "본인을 냉장고 멤버로 추가할 수 없습니다.", confirmTitle: "확인")
+                    self?.hiddenSearchResultView()
+                    
+                } else {
+                    self?.selectedMember.append((self?.searchMember[indexPath.row])!)
+                    self?.hiddenSearchResultView()
+                }
+            }
+        }
+        
     }
 }
 

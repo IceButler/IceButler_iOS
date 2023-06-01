@@ -14,7 +14,7 @@ class KakaoMapService {
 
     private let KakaoURL = "https://dapi.kakao.com/v2/local/search/category.json?query="
     private let categoryCode = "&category_group_code=" + "MT1,CS2"  /// MT1 - 대형마트, CS2 - 편의점
-    private let radius = "&radius=" + "20000"    /// 반경 2km 내로 검색 범위 제한
+    private let radius = "&radius=" + "2000"    /// 반경 2km 내로 검색 범위 제한
 //    private let page = "&page="
 //    private let size = "&size=15"
 //    private let sort = "&sort=distance" //거리순

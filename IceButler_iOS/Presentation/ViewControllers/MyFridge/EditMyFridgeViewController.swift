@@ -49,7 +49,6 @@ class EditMyFridgeViewController: UIViewController {
     @IBOutlet weak var completeButton: UIButton!
     
     @IBAction func didTapMemberSearchButton(_ sender: UIButton) {
-        // TODO: 닉네임으로 멤버 검색
         if memberSearchTextField.text?.count ?? 0 > 0 {
             searchMember.removeAll()
             FridgeViewModel.shared.searchMemberResults.removeAll()
@@ -83,7 +82,6 @@ class EditMyFridgeViewController: UIViewController {
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
         if let name = fridgeNameTextField.text,
-           let comment = fridgeCommentTextView.text,
            selectedMember.count > 0,
            let newOwner = mandatedMember {
             
@@ -91,11 +89,9 @@ class EditMyFridgeViewController: UIViewController {
             selectedMember.forEach { member in memberIdxs.append(UserIndexModel(userIdx: member.userIdx)) }
             
             let param = EditedFridgeRequestModel(fridgeName: name,
-                                                 fridgeComment: comment,
+                                                 fridgeComment: (fridgeCommentTextView.text == "200자 이내로 작성해주세요.") ? "" : fridgeCommentTextView.text,
                                                  members: memberIdxs,
                                                  newOwnerIdx: newOwner.userIdx)
-            
-//            print("param --> \(param)")
             
             var urlStr = ""
             if isMulti { urlStr = "/multiFridges/\(fridgeIdx)" }
@@ -115,9 +111,6 @@ class EditMyFridgeViewController: UIViewController {
         } else {
             showAlert(title: nil, message: "모든 정보를 입력해주세요!", confirmTitle: "확인")
         }
-           
-            
-        
     }
     
     
@@ -138,7 +131,7 @@ class EditMyFridgeViewController: UIViewController {
             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
             
             let statusbarView = UIView()
-            statusbarView.backgroundColor = UIColor.signatureLightBlue
+            statusbarView.backgroundColor = UIColor.navigationColor
             view.addSubview(statusbarView)
           
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -156,7 +149,7 @@ class EditMyFridgeViewController: UIViewController {
             statusBar?.backgroundColor = UIColor.red
         }
         
-        self.navigationController?.navigationBar.backgroundColor = .signatureLightBlue
+        self.navigationController?.navigationBar.backgroundColor = .navigationColor
         self.tabBarController?.tabBar.isHidden = false
         
         let mainText = UILabel()
@@ -256,6 +249,12 @@ class EditMyFridgeViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    private func isAlreadyAddedMember(member: FridgeUser) -> Bool {
+        var isAlready = false
+        selectedMember.forEach { m in if member.userIdx == m.userIdx { isAlready = true } }
+        return isAlready
+    }
+    
     public func setFridgeIdx(index: Int) { fridgeIdx = index }
     
     public func setFridgeData(isMulti: Bool,
@@ -330,10 +329,15 @@ extension EditMyFridgeViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.tag == 0 {
-            selectedMember.append(FridgeUser(nickname: searchMember[indexPath.row].nickname,
-                                             role: "MEMBER",
-                                             profileImgUrl: searchMember[indexPath.row].profileImgUrl,
-                                             userIdx: searchMember[indexPath.row].userIdx))
+            if !self.isAlreadyAddedMember(member: searchMember[indexPath.row]) {
+                selectedMember.append(FridgeUser(nickname: searchMember[indexPath.row].nickname,
+                                                 role: "MEMBER",
+                                                 profileImgUrl: searchMember[indexPath.row].profileImgUrl,
+                                                 userIdx: searchMember[indexPath.row].userIdx))
+            } else {
+                self.showAlert(title: nil, message: "이미 추가된 멤버입니다!", confirmTitle: "확인")
+            }
+            
             
             self.memberSearchResultContainerView.isHidden = true
             self.selectedMemberCollectionView.isHidden = false
@@ -381,7 +385,7 @@ extension EditMyFridgeViewController: UITextViewDelegate {
         if textView.text.count > 0 {
             fridgeCommentContainerView.backgroundColor = .focusTableViewSkyBlue
         } else {
-            fridgeCommentContainerView.backgroundColor = .systemGray6
+            fridgeCommentContainerView.backgroundColor = .notInputColor
         }
     }
     
@@ -389,6 +393,7 @@ extension EditMyFridgeViewController: UITextViewDelegate {
         if textView.text.count == 0 {
             textView.text = "200자 이내로 작성해주세요."
             textView.textColor = .lightGray
+            fridgeCommentContainerView.backgroundColor = .notInputColor
         }
     }
 }

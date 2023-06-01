@@ -31,4 +31,7 @@ class FoodAddImageCell: UICollectionViewCell {
         foodImageAddImageView.isHidden = true
     }
 
+    func showFoodImageAddIcon() {
+        foodImageAddImageView.isHidden = false
+    }
 }

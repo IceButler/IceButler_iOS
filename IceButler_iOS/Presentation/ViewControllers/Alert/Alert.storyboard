@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -80,17 +80,33 @@
                                     <constraint firstItem="ceT-BT-7Ve" firstAttribute="centerX" secondItem="cs5-wK-1uQ" secondAttribute="centerX" id="oBj-CL-LOF"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InK-aJ-qrc">
+                                <rect key="frame" x="303" y="266" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="TDB-5Y-eg6"/>
+                                    <constraint firstAttribute="width" constant="50" id="WYF-D8-r5i"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="xmark"/>
+                                <connections>
+                                    <action selector="cancelAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="orc-n9-bZW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="cs5-wK-1uQ" firstAttribute="top" secondItem="InK-aJ-qrc" secondAttribute="bottom" constant="20" id="CPq-G6-fV3"/>
                             <constraint firstItem="cs5-wK-1uQ" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="D28-bW-zcQ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="InK-aJ-qrc" secondAttribute="trailing" constant="40" id="ExS-f9-xXM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cs5-wK-1uQ" secondAttribute="trailing" constant="40" id="y8F-hp-HLt"/>
                             <constraint firstItem="cs5-wK-1uQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="zET-UM-lMy"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="D1k-o4-h2G"/>
                     <connections>
+                        <outlet property="cancelButton" destination="InK-aJ-qrc" id="NfA-ud-f8B"/>
                         <outlet property="containerView" destination="cs5-wK-1uQ" id="ohH-29-hvp"/>
                         <outlet property="contentLabel" destination="xNY-C3-TrT" id="NZb-P2-biC"/>
                         <outlet property="leftButton" destination="YoU-57-QtL" id="MZ9-ah-bO3"/>
@@ -395,6 +411,7 @@
     </scenes>
     <resources>
         <image name="check" width="24" height="22"/>
+        <image name="xmark" width="11.333333015441895" height="11.333333015441895"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

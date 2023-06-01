@@ -24,6 +24,7 @@ class RecipeViewController: TabmanViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        FoodViewModel.shared.setIsSelectedFood(isSelected: false)
     }
     
     @objc func didTapStarButton(sender: UIButton!) {

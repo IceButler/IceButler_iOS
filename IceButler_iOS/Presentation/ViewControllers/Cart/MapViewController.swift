@@ -31,6 +31,10 @@ class MapViewController: UIViewController {
     @IBOutlet var storeAddressLabel: UILabel!
     @IBOutlet var storePhoneNumLabel: UILabel!
     
+    @IBOutlet var navigationButton: UIButton!
+    
+    
+    private var url: URL?
     
     
     @IBAction func didTapCurrentLocationButton(_ sender: UIButton) {
@@ -55,9 +59,9 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         setupLocation()
-        fetchKakaoData()
         setupView()
         setupMapView()
+        fetchKakaoData()
         setupNavigationBar()
     }
     
@@ -65,10 +69,18 @@ class MapViewController: UIViewController {
         super.viewWillAppear(animated)
         
         setupLocation()
-        fetchKakaoData()
         setupView()
         setupMapView()
+        fetchKakaoData()
         setupNavigationBar()
+        setupLayout()
+    }
+    
+    private func setupLayout() {
+        navigationButton.layer.cornerRadius = 10
+        navigationButton.layer.shadowColor = CGColor(red: 0, green: 0, blue: 0, alpha: 0.05)
+        navigationButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        navigationButton.layer.shadowOpacity = 2
     }
     
     private func setupNavigationBar() {
@@ -160,17 +172,29 @@ class MapViewController: UIViewController {
         let longitude = locationManager.location?.coordinate.longitude
         let latitude = locationManager.location?.coordinate.latitude
         
-        currentLa = latitude!
-        currentLo = longitude!
-        
-        let currentPoint = MTMapPOIItem()
-        currentPoint.tag = 1
-        currentPoint.itemName = nil
-        currentPoint.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude!, longitude: longitude!))
-        currentPoint.markerType = .redPin
-        mapView.addPOIItems([currentPoint])
-        
-        mapView.setMapCenter(.init(geoCoord: .init(latitude: latitude!, longitude: longitude!)), animated: true)
+        if let _ = latitude,
+           let _ = longitude {
+            
+            self.currentLa = latitude!
+            self.currentLo = longitude!
+            
+            let currentPoint = MTMapPOIItem()
+            currentPoint.tag = 1
+            currentPoint.itemName = nil
+            currentPoint.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: currentLa, longitude: longitude!))
+            currentPoint.markerType = .redPin
+            mapView.addPOIItems([currentPoint])
+            
+            mapView.setMapCenter(.init(geoCoord: .init(latitude: currentLa, longitude: currentLo)), animated: true)
+            
+        } else {
+            let alert = UIAlertController(title: "식료품점 조회 실패", message: "위치 정보 수집 권한이 설정되어 있지 않습니다!", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .default) { _ in
+                self.navigationController?.popViewController(animated: true)
+            }
+            alert.addAction(action)
+            present(alert, animated: true)
+        }
     }
     
     func loadViewAnimation(tag: Int) {
@@ -202,6 +226,19 @@ class MapViewController: UIViewController {
 
         }
     }
+    
+    
+    @IBAction func moveToNavigation(_ sender: Any) {
+        
+        let appStoreURL = URL(string: "http://itunes.apple.com/app/id311867728?mt=8")!
+
+        if UIApplication.shared.canOpenURL(url!) {
+            UIApplication.shared.open(url!)
+        }else {
+            UIApplication.shared.open(appStoreURL)
+        }
+    }
+    
 }
 
 // MARK: Delegate Extensions
@@ -217,6 +254,14 @@ extension MapViewController: MTMapViewDelegate {
         storeAddressLabel.text = storeData[poiItem.tag].road_address_name
         storePhoneNumLabel.text = (storeData[poiItem.tag].phone!.count > 0) ? storeData[poiItem.tag].phone : "전화번호가 없습니다."
         
+        guard let dlat = storeData[poiItem.tag].y else {return false}
+        guard let dlng = storeData[poiItem.tag].x else {return false}
+        guard let placeName = storeData[poiItem.tag].place_name else {return false}
+        
+        let urlStr = "nmap://route/walk?dlat=\(dlat)&dlng=\(dlng)&dname=\(placeName)&appname=yoosang.IceButler-iOS"
+        let encodedStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        url = URL(string: encodedStr)!
+        
         return false
     }
 }
@@ -228,8 +273,10 @@ extension MapViewController: CLLocationManagerDelegate {
             print("GPS 권한 설정됨")
         case .notDetermined:
             print("GPS 권한 설정되지 않음")
+            locationManager.requestWhenInUseAuthorization()
         case .denied:
             print("GPS 권한 거부됨")
+            locationManager.requestWhenInUseAuthorization()
         default: return
         }
     }
@@ -239,8 +286,10 @@ extension MapViewController: CLLocationManagerDelegate {
 // MARK: 카카오맵 API 사용 관련 메소드
 extension MapViewController {
     private func fetchKakaoData() {
-        KakaoMapService.shared.getNearStoreData(x: currentLo,
-                                                y: currentLa,
+        let longitude = locationManager.location?.coordinate.longitude
+        let latitude = locationManager.location?.coordinate.latitude
+        KakaoMapService.shared.getNearStoreData(x: self.currentLo,
+                                                y: self.currentLa,
                                                 completion: { [weak self] response in
             
             if response.documents.count > 0 {

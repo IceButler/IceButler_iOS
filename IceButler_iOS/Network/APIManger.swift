@@ -7,21 +7,25 @@
 
 import Foundation
 import Alamofire
+import Combine
 
 private let BASE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/dev/dev-ice-bulter-main"
 private let RECIPE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/dev/dev-ice-bulter-recipe"
 
-class APIManger {
+class APIManger: ObservableObject  {
     static let shared = APIManger()
     
     private var headers: HTTPHeaders?
     
-    private var fridgeIdx: Int = -1
+    @Published var fridgeIdx: Int = -1
     private var isMultiFridge: Bool = false
+    
+    private var cancelLabels: Set<AnyCancellable> = []
     
     func setupObserver() {
         AuthViewModel.shared.accessToken { token in
             self.headers = ["Authorization": token]
+            print(self.headers)
         }
     }
     
@@ -39,8 +43,14 @@ extension APIManger {
     func setFridgeIdx(index: Int) { fridgeIdx = index }
     func getFridgeIdx() -> Int { return fridgeIdx }
     
-    func setIsMultiFridge(data: Bool) { isMultiFridge = data }
+    func setIsMultiFridge(isMulti: Bool) { isMultiFridge = isMulti }
     func getIsMultiFridge() -> Bool { return isMultiFridge }
+    
+    func fridgeIdx(completion: @escaping (Int) -> Void) {
+        $fridgeIdx.sink { fridgeIdx in
+            completion(fridgeIdx)
+        }.store(in: &cancelLabels)
+    }
 }
 
 extension APIManger {
@@ -115,6 +125,7 @@ extension APIManger {
                                completionHandler: @escaping (GeneralResponseListModel<U>)->Void) {
         
         guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
+        print(url)
         
         AF
             .request(url, method: .get, parameters: parameter, encoding: URLEncoding.queryString, headers: self.headers)
@@ -314,6 +325,33 @@ extension APIManger {
             }
             .resume()
     }
+    
+    func deleteDataKR<T: Codable, U: Decodable>(urlEndpointString: String,
+                                            responseDataType: U.Type,
+                                            requestDataType: T.Type,
+                                            parameter: T?,
+                                            completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+        
+        let urlStr = BASE_URL + urlEndpointString
+        let encodedStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let url = URL(string: encodedStr)!
+        
+        AF
+            .request(url, method: .delete, parameters: parameter, encoder: .json, headers: self.headers)
+            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
+    
+    
     
     func deleteData<U: Decodable>(urlEndpointString: String,
                                             responseDataType: U.Type,

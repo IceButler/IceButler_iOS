@@ -17,12 +17,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="59" height="94"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HRw-E5-YrZ">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HRw-E5-YrZ">
                         <rect key="frame" x="0.0" y="0.0" width="59" height="59"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.98039215686274506" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="59" id="CWs-ir-ZBD"/>
                             <constraint firstAttribute="height" constant="59" id="hLY-mS-dzq"/>
+                        </constraints>
+                    </imageView>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectedCheck" translatesAutoresizingMaskIntoConstraints="NO" id="oGf-2f-8ns">
+                        <rect key="frame" x="18.666666666666668" y="18.666666666666668" width="22.000000000000004" height="22.000000000000004"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="RXY-06-U38"/>
+                            <constraint firstAttribute="width" constant="22" id="rnu-aa-8TY"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abI-3u-VB1">
@@ -51,10 +58,12 @@
                 <constraint firstItem="abI-3u-VB1" firstAttribute="top" secondItem="HRw-E5-YrZ" secondAttribute="bottom" constant="10" id="Wk3-Ff-Dbk"/>
                 <constraint firstItem="abI-3u-VB1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="XOO-7x-UMZ"/>
                 <constraint firstItem="HRw-E5-YrZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Xba-rF-Bl9"/>
+                <constraint firstItem="oGf-2f-8ns" firstAttribute="centerY" secondItem="HRw-E5-YrZ" secondAttribute="centerY" id="a5V-Vc-Uti"/>
                 <constraint firstItem="TSZ-Y0-C5Q" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="brW-FJ-Y3e"/>
                 <constraint firstAttribute="bottom" secondItem="TSZ-Y0-C5Q" secondAttribute="bottom" id="ik6-qb-kTe"/>
                 <constraint firstItem="TSZ-Y0-C5Q" firstAttribute="top" secondItem="abI-3u-VB1" secondAttribute="bottom" id="nx1-eU-gdL"/>
                 <constraint firstItem="HRw-E5-YrZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="pVM-lw-gFR"/>
+                <constraint firstItem="oGf-2f-8ns" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="qbw-97-6lU"/>
                 <constraint firstAttribute="trailing" secondItem="HRw-E5-YrZ" secondAttribute="trailing" id="sfX-Fw-L0m"/>
                 <constraint firstAttribute="trailing" secondItem="TSZ-Y0-C5Q" secondAttribute="trailing" id="tVF-7s-dor"/>
             </constraints>
@@ -62,8 +71,12 @@
                 <outlet property="foodDdayLabel" destination="TSZ-Y0-C5Q" id="rQf-EP-7A6"/>
                 <outlet property="foodImageView" destination="HRw-E5-YrZ" id="ZHu-OX-7mT"/>
                 <outlet property="foodNameLabel" destination="abI-3u-VB1" id="3FH-yX-PAK"/>
+                <outlet property="selectedImageView" destination="oGf-2f-8ns" id="CEy-zd-QZ6"/>
             </connections>
             <point key="canvasLocation" x="109.16030534351144" y="-11.971830985915494"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="selectedCheck" width="23" height="23"/>
+    </resources>
 </document>

@@ -24,12 +24,20 @@ class FridgeViewModel: ObservableObject {
     @Published var seasoningFoodList: [FridgeFood] = []
     @Published var processedFoodList: [FridgeFood] = []
     @Published var etcFoodList: [FridgeFood] = []
+    @Published var fridgeDiscard: FridgeDiscard?
+
     
     var searchMemberResults: [FridgeUser] = []
     
     var cancelLabels: Set<AnyCancellable> = []
     
     var defaultFridgeName: String = "냉장고 미선택"
+    
+    func fridgeDiscard(completion: @escaping (FridgeDiscard?) -> Void) {
+        $fridgeDiscard.sink { frdigeDiscard in
+            completion(frdigeDiscard)
+        }.store(in: &cancelLabels)
+    }
     
     func allFoodList(foodListIdx: Int, completion: @escaping ([FridgeFood])-> Void) {
         switch foodListIdx {
@@ -95,12 +103,95 @@ class FridgeViewModel: ObservableObject {
         }
     }
     
+    func isNoFoodList(foodListIdx: Int, completion: @escaping ()-> Void) {
+        switch foodListIdx {
+        case 0:
+            $allFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 1:
+            $meatFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 2:
+            $fruitFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 3:
+            $vegetableFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 4:
+            $drinkFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 5:
+            $marineProductsFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 6:
+            $sideFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 7:
+            $snackFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 8:
+            $seasoningFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 9:
+            $processedFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        case 10:
+            $etcFoodList.filter({ allFoodList in
+                allFoodList.count == 0
+            }).sink { allFoodList in
+                completion()
+            }.store(in: &cancelLabels)
+            break
+        default:
+            break
+        }
+    }
+    
     func isChangeAllFoodList(foodListIdx: Int, completion: @escaping () -> Void) {
         switch foodListIdx {
         case 0:
             $allFoodList.filter { allFoodList in
-                //                allFoodList.count > 0
-                allFoodList.count > -1
+                allFoodList.count > 0
             }.sink { allFoodList in
                 completion()
             }.store(in: &cancelLabels)
@@ -494,6 +585,7 @@ class FridgeViewModel: ObservableObject {
     func getAllFoodList(fridgeIdx: Int) {
         fridgeService.getAllFood(fridgeIdx: fridgeIdx) { response in
             self.allFoodList.removeAll()
+            self.fridgeDiscard = response?.fridgeDiscard
             response?.foodList.forEach({ food in
                 self.allFoodList.append(food)
             })
@@ -570,6 +662,11 @@ class FridgeViewModel: ObservableObject {
         
     }
     
+
+}
+extension FridgeViewModel {
+
+    
     func setDefaultFridge() {
         APIManger.shared.getData(urlEndpointString: "/fridges",
                                  responseDataType: MyFridgeResponseModel.self,
@@ -581,12 +678,12 @@ class FridgeViewModel: ObservableObject {
                 /// 최초 로딩에 보여질 냉장고 기본값 설정
                 if response.data?.fridgeList?.count ?? 0 > 0 {
                     APIManger.shared.setFridgeIdx(index: (response.data?.fridgeList![0].fridgeIdx)!)
-                    APIManger.shared.setIsMultiFridge(data: false)
+                    APIManger.shared.setIsMultiFridge(isMulti: false)
                     self?.defaultFridgeName = (response.data?.fridgeList![0].fridgeName)!
                     
                 } else if response.data?.multiFridgeResList?.count ?? 0 > 0 {
                     APIManger.shared.setFridgeIdx(index: (response.data?.multiFridgeResList![0].multiFridgeIdx)!)
-                    APIManger.shared.setIsMultiFridge(data: true)
+                    APIManger.shared.setIsMultiFridge(isMulti: true)
                     self?.defaultFridgeName = (response.data?.multiFridgeResList![0].multiFridgeName)!
                 }
                 print("default fridge idx --> \(APIManger.shared.getFridgeIdx())")
@@ -608,21 +705,26 @@ class FridgeViewModel: ObservableObject {
     
     func requestAddFridge(isMulti: Bool, name: String, comment: String, members: [Int], completion: @escaping ((Bool)->Void)) {
         fridgeService.addFridge(isMulti: isMulti, name: name, comment: comment, members: members, completion: { response in
+            if let fridgeId = response {
+                APIManger.shared.setFridgeIdx(index: fridgeId)
+            }
             completion((response != nil) ? true : false)
         })
     }
         
         /// 이전에 선택된 냉장고가 있다면 해당 냉장고로 기본 설정
     func setSavedFridgeIdx() {
-        guard let idx = UserDefaults.standard.value(forKey: "selectedFridgeIdx") as? Int else {return}
-        guard let name = UserDefaults.standard.value(forKey: "selectedFridgeName") as? String else {return}
-        guard let isMultiFridge = UserDefaults.standard.value(forKey: "isMulti") as? Bool else {return}
-        
-        APIManger.shared.setFridgeIdx(index: idx)
-        APIManger.shared.setIsMultiFridge(data: isMultiFridge)
-        self.defaultFridgeName = name
-        
-      
+
+        if let idx = UserDefaults.standard.value(forKey: "selectedFridgeIdx"),
+           let name = UserDefaults.standard.value(forKey: "selectedFridgeName"),
+           let isMulti = UserDefaults.standard.value(forKey: "selectedFridgeIsMulti"){
+            APIManger.shared.setFridgeIdx(index: idx as! Int)
+            APIManger.shared.setIsMultiFridge(isMulti: isMulti as! Bool)
+            self.defaultFridgeName = name as! String
+            print("현재 냉장고 Idx : \(idx as! Int) | 공용여부 : \(isMulti as! Bool)")
+        }
+
+     
     }
 
 }

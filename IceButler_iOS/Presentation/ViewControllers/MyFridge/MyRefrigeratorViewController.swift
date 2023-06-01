@@ -6,20 +6,25 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class MyRefrigeratorViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     private var data: MyFridgeResponseModel?
+    private var tableCellHeight = 198
+    private var highlightedCellIdx = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
         setupNavigationBar()
         setupTableView()
+//        setupGestureRecognizers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setupNavigationBar()
         fetchData()
         tableView.reloadData()
     }
@@ -31,7 +36,7 @@ class MyRefrigeratorViewController: UIViewController {
             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
             
             let statusbarView = UIView()
-            statusbarView.backgroundColor = UIColor.signatureLightBlue
+            statusbarView.backgroundColor = UIColor.navigationColor
             view.addSubview(statusbarView)
           
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +54,22 @@ class MyRefrigeratorViewController: UIViewController {
             statusBar?.backgroundColor = UIColor.red
         }
         
-        self.navigationController?.navigationBar.backgroundColor = .signatureLightBlue
+        
+        /// set up title
+        let titleLabel = UILabel()
+        titleLabel.text = "마이 냉장고"
+        titleLabel.textAlignment = .left
+        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        titleLabel.textColor = .white
+        titleLabel.sizeToFit()
+        
+        /// set up right item
+        let backItem = UIBarButtonItem(image: UIImage(named: "backIcon"), style: .done, target: self, action: #selector(didTapBackItem))
+        let titleItem = UIBarButtonItem(customView: titleLabel)
+        backItem.tintColor = .white
+        self.navigationItem.leftBarButtonItems = [ backItem, titleItem ]
+        
+        self.navigationController?.navigationBar.backgroundColor = .navigationColor
         self.tabBarController?.tabBar.isHidden = false
         
     }
@@ -62,18 +82,43 @@ class MyRefrigeratorViewController: UIViewController {
     }
     
     private func fetchData() {
-        
-        APIManger.shared.getData(urlEndpointString: "/fridges",
-                                 responseDataType: MyFridgeResponseModel.self,
-                                 parameter: nil) { [weak self] response in
-            if let data = response.data { self?.data = data }
-            self?.tableView.reloadData()
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            APIManger.shared.getData(urlEndpointString: "/fridges",
+                                     responseDataType: MyFridgeResponseModel.self,
+                                     parameter: nil) { [weak self] response in
+                if let data = response.data { self?.data = data }
+                self?.reloadTableViewAnimation()
+            }
+            
+            hud.dismiss(animated: true)
         }
     }
+    
+    
+    
+    private func reloadTableViewAnimation() {
+        UIView.transition(with: self.tableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                          self.tableView.reloadData()},
+                          completion: nil);
+    }
+    
+    // MARK: @objc methods
+    @objc private func didTapBackItem() { self.navigationController?.popViewController(animated: true) }
+    
 }
 
 extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 188 }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 198
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let fridgeList = data?.fridgeList,
@@ -94,13 +139,24 @@ extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSour
             let frigeratorCount = data?.fridgeList?.count ?? 0
             cell.configureMultiFridge(data: data?.multiFridgeResList![indexPath.row - frigeratorCount])
         }
-        cell.moreView.isHidden = true
+        cell.setupViewIsHidden()
         cell.collectionView.reloadData()
         return cell
     }
 }
 
 extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
+//    func didTapViewCommentButton(index: Int, isHighlighted: Bool) {
+//        if isHighlighted { tableCellHeight = 258 }
+//        else { tableCellHeight = 198 }
+//        highlightedCellIdx = index
+//        reloadTableViewAnimation()
+//        self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+//
+//    }
+    
+    func didTapAnyOfView() { reloadTableViewAnimation() }
+    
     func didTapEditButton(index: Int) {
         guard let editViewController = storyboard?.instantiateViewController(withIdentifier: "EditMyFridgeViewController") as? EditMyFridgeViewController else { return }
         
@@ -165,14 +221,14 @@ extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
         },
                           leftCompletion: { self.dismiss(animated: true) })
         
-        alertVC.modalPresentationStyle = .fullScreen
+        alertVC.modalPresentationStyle = .overFullScreen
         present(alertVC, animated: true)
         
     }
 }
 
 extension MyRefrigeratorViewController: FridgeRemoveDelegate {
-    func reloadMyFridgeVC() { self.tableView.reloadData() }
+    func reloadMyFridgeVC() { self.reloadTableViewAnimation() }
     
     func showMessageFailToRemoveFridge(message: String) {
         let alert = UIAlertController(title: "냉장고 삭제 실패", message: message, preferredStyle: .alert)

@@ -7,6 +7,8 @@
 
 import UIKit
 import KakaoSDKCommon
+import Firebase
+import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        FirebaseApp.configure()
+
+        UNUserNotificationCenter.current().delegate = self
+        Messaging.messaging().delegate = self
+
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter
+          .current()
+          .requestAuthorization(
+            options: authOptions,completionHandler: { (_, _) in }
+          )
+        application.registerForRemoteNotifications()
         
         KakaoSDK.initSDK(appKey: "6ffb34c7506f98598acd861ffdaeaf5b")
         
@@ -38,3 +53,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate : MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("파이어베이스 토큰: \(fcmToken)")
+        if let token = fcmToken {
+            AuthViewModel.shared.setDeviceToken(token: token)
+        }
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+  // Receive displayed notifications for iOS 10 devices.
+  func userNotificationCenter(_ center: UNUserNotificationCenter,
+                              willPresent notification: UNNotification) async
+    -> UNNotificationPresentationOptions {
+    let userInfo = notification.request.content.userInfo
+
+    // With swizzling disabled you must let Messaging know about the message, for Analytics
+    // Messaging.messaging().appDidReceiveMessage(userInfo)
+
+    // ...
+
+    // Print full message.
+    print(userInfo)
+
+    // Change this to your preferred presentation option
+    return [[.alert, .sound]]
+  }
+
+  func userNotificationCenter(_ center: UNUserNotificationCenter,
+                              didReceive response: UNNotificationResponse) async {
+    let userInfo = response.notification.request.content.userInfo
+
+    // ...
+
+    // With swizzling disabled you must let Messaging know about the message, for Analytics
+    // Messaging.messaging().appDidReceiveMessage(userInfo)
+
+    // Print full message.
+    print(userInfo)
+  }
+}

@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import Kingfisher
 
 enum KindCell: String {
     case waste = "낭비"
@@ -40,7 +41,12 @@ class FoodRemoveRankCell: UICollectionViewCell {
     func configure(data: FoodGraphList, color: UIColor, kind: KindCell) {
         self.backgroundColor = color
         
+        if let url = URL(string: data.foodCategoryImgUrl) {
+            categoryImageView.kf.setImage(with: url)
+        }
+        
         categoryLabel.text = data.foodCategory
+        
         wasteLabel.text = String(format: "%.1f", data.percentage*100) + "% | \(data.count)개가 \(kind.rawValue)되었어요."
     }
 

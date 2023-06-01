@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 class GraphService {
-    func getWaste(fridgeIdx: Int, year: Int, month: Int, completion: @escaping ([FoodGraphList]) -> Void) {
+    func getWaste( year: Int, month: Int, completion: @escaping ([FoodGraphList]) -> Void) {
         let parameters: Parameters = ["deleteCategory": "폐기",
                                      "year": year,
                                      "month": month]
@@ -22,7 +22,7 @@ class GraphService {
         }
     }
     
-    func getConsume(fridgeIdx: Int, year: Int, month: Int, completion: @escaping ([FoodGraphList]) -> Void) {
+    func getConsume( year: Int, month: Int, completion: @escaping ([FoodGraphList]) -> Void) {
         let parameters: Parameters = ["deleteCategory": "섭취",
                                      "year": year,
                                      "month": month]

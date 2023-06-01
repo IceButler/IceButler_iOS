@@ -124,8 +124,10 @@ class AuthUserInfoViewController: UIViewController {
                         self.userImageView.kf.setImage(with: imageUrl)
                     }
                 }
+                AuthViewModel.shared.userNickname = user.nickname
                 self.userNicknameTextField.text = user.nickname
                 self.userEmailLabel.text = user.email
+                self.joinButton.backgroundColor = .availableBlue
             }
             
             AuthViewModel.shared.isModify { isModify in
@@ -149,7 +151,9 @@ class AuthUserInfoViewController: UIViewController {
                 self.userNicknameTextField.backgroundColor = .focusSkyBlue
                 self.userNicknameAlertLabel.textColor = .textDeepBlue
                 self.userNicknameAlertLabel.text = "사용할 수 있는 닉네임입니다."
-                self.joinButton.backgroundColor = .availableBlue
+                if self.mode == .Join {
+                    self.joinButton.backgroundColor = .availableBlue
+                }
             }
             self.isExistence = isExistence
         }
@@ -206,17 +210,21 @@ class AuthUserInfoViewController: UIViewController {
     
     
     @IBAction func join(_ sender: Any) {
-        if isExistence {
-            showAlert(title: "닉네임 입력", message: "닉네임 중복확인 후 프로필 편집을 시도해주세요.")
+        if mode == .Join {
+            if isExistence {
+                showAlert(title: "닉네임 입력", message: "닉네임 중복확인 후 프로필 편집을 시도해주세요.")
+            }else {
+                if profileImage != nil {
+                    AuthViewModel.shared.getUploadImageUrl(imageDir: .Profile, image: profileImage!, mode: mode)
+                }else {
+                    AuthViewModel.shared.joinUser()
+                }
+            }
         }else {
             if profileImage != nil {
                 AuthViewModel.shared.getUploadImageUrl(imageDir: .Profile, image: profileImage!, mode: mode)
             }else {
-                if mode == .Join {
-                    AuthViewModel.shared.joinUser()
-                }else {
-                    AuthViewModel.shared.modifyUser()
-                }
+                AuthViewModel.shared.modifyUser()
             }
         }
     }

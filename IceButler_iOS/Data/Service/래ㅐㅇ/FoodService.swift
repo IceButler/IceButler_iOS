@@ -9,13 +9,13 @@ import Foundation
 import Alamofire
 
 class FoodService {
-    func getAllFood(fridgeIdx: Int, foodIdx: Int, completion: @escaping (FoodDetailResponseModel?) -> Void) {
+    func getAllFood(foodIdx: Int, completion: @escaping (FoodDetailResponseModel?) -> Void) {
         APIManger.shared.getData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/foods/\(foodIdx)", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodDetailResponseModel.self, parameter: nil) { response in
             completion(response.data)
         }
     }
     
-    func getFoodOwnerList(fridgeIdx: Int, completion: @escaping (FoodOwnerResponseModel?) -> Void) {
+    func getFoodOwnerList(completion: @escaping (FoodOwnerResponseModel?) -> Void) {
         APIManger.shared.getData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/members", responseDataType: FoodOwnerResponseModel.self, parameter: nil) { response in
             completion(response.data)
         }
@@ -29,7 +29,7 @@ class FoodService {
         }
     }
     
-    func postFood(fridgeIdx: Int, parameter: FoodAddListModel, completion: @escaping (Bool) -> Void) {
+    func postFood(parameter: FoodAddListModel, completion: @escaping (Bool) -> Void) {
         APIManger.shared.postData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/food", responseDataType: FoodDetailResponseModel.self, requestDataType: FoodAddListModel.self, parameter: parameter) { response in
             if response.status == "OK" {
                 completion(true)
@@ -69,9 +69,43 @@ class FoodService {
     
     func getSearchFood(word: String, completion: @escaping ([SearchFoodResponse]?) -> Void) {
         let parameter: Parameters = ["word" : word]
+        
         APIManger.shared.getListData(urlEndpointString: "/foods", responseDataType: SearchFoodResponse.self, parameter: parameter) { response in
             completion(response.data)
         }
         
+    }
+    
+    
+    func getFridgeSearchFood(word: String, completion: @escaping ([FridgeSearchFoodResponse]?) -> Void) {
+        let parameter: Parameters = ["keyword" : word]
+        
+        APIManger.shared.getListData(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/search", responseDataType: FridgeSearchFoodResponse.self, parameter: parameter) { response in
+            completion(response.data)
+        }
+    }
+    
+    func deleteFoods(deleteFoods: [Int] ,completion: @escaping (Bool) -> Void) {
+        let parameters = FoodDeleteModel(deleteFoods: deleteFoods)
+        
+        APIManger.shared.deleteDataKR(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/foods?type=폐기", responseDataType: FoodDeleteModel.self, requestDataType: FoodDeleteModel.self, parameter: parameters) { result in
+            if result.status == "OK" {
+                completion(true)
+            }else {
+                completion(false)
+            }
+        }
+    }
+    
+    func eatFoods(deleteFoods: [Int] ,completion: @escaping (Bool) -> Void) {
+        let parameters = FoodDeleteModel(deleteFoods: deleteFoods)
+        
+        APIManger.shared.deleteDataKR(urlEndpointString: APIManger.shared.getFridgeUrl() + "/" + APIManger.shared.getFridgeIdx().description + "/foods?type=섭취", responseDataType: FoodDeleteModel.self, requestDataType: FoodDeleteModel.self, parameter: parameters) { result in
+            if result.status == "OK" {
+                completion(true)
+            }else {
+                completion(false)
+            }
+        }
     }
 }

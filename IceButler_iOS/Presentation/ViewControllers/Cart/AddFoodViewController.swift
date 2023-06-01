@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 // MARK: 장바구니에서 플로팅 버튼을 탭하는 경우 나오는 '식품 추가' 화면
 class AddFoodViewController: UIViewController {
@@ -22,6 +23,7 @@ class AddFoodViewController: UIViewController {
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var searchContainerView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet var searchButton: UIButton!
     @IBOutlet weak var completeButton: UIButton!
     
     @IBOutlet weak var searchResultContainerView: UIView!
@@ -53,10 +55,23 @@ class AddFoodViewController: UIViewController {
     
     @IBAction func didTapSearchButton(_ sender: UIButton) {
         self.view.endEditing(true)
+        searchButton.isEnabled = false
+   
         if let _ = searchTextField.text {
             searchResults.removeAll()
-            getSearchResults(inputKeyword: searchTextField.text!)
+            
+            DispatchQueue.main.async {
+                let hud = JGProgressHUD()
+                hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+                hud.style = .light
+                hud.show(in: self.view)
+                
+                self.getSearchResults(inputKeyword: self.searchTextField.text!)
+                
+                hud.dismiss(animated: true)
+            }
         }
+        searchButton.isEnabled = true
     }
     
     // MARK: helper methods
@@ -172,8 +187,14 @@ class AddFoodViewController: UIViewController {
     private func selfAddFood(foodName: String) {
         if let category = selectedCategory {
             selectedFoods.append(AddFood(foodName: foodName, foodCategory: category))
+            selectedFoodNames.append(foodName)
+            
+            searchResultContainerView.isHidden = true
+            collectionView.isHidden = false
             collectionView.reloadData()
-            print(selectedFoods)
+            
+            checkSelectedFoodNamesCount()
+        
         } else {
             let alert = UIAlertController(title: nil, message: "카테고리를 먼저 선택해주세요!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .default))

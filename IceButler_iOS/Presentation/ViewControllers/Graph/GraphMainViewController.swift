@@ -33,6 +33,9 @@ class GraphMainViewController: TabmanViewController {
         let componets = calendar.dateComponents([.month, .year], from: date)
         date = calendar.date(from: componets) ?? Date()
         
+        GraphViewModel.shared.fetchWasteList(year: componets.year!, month: componets.month!)
+        GraphViewModel.shared.fetchConsumeList(year: componets.year!, month: componets.month!)
+        
         setDateLabel()
     }
     
@@ -141,8 +144,8 @@ class GraphMainViewController: TabmanViewController {
         date = calendar.date(byAdding: DateComponents(month: -1), to: date) ?? Date()
         let componets = calendar.dateComponents([.month, .year], from: date)
         setDateLabel()
-        GraphViewModel.shared.fetchWasteList(fridgeIdx: 1, year: componets.year!, month: componets.month!)
-        GraphViewModel.shared.fetchConsumeList(fridgeIdx: 1, year: componets.year!, month: componets.month!)
+        GraphViewModel.shared.fetchWasteList(year: componets.year!, month: componets.month!)
+        GraphViewModel.shared.fetchConsumeList(year: componets.year!, month: componets.month!)
     }
     
     
@@ -150,8 +153,8 @@ class GraphMainViewController: TabmanViewController {
         date = calendar.date(byAdding: DateComponents(month: 1), to: date) ?? Date()
         let componets = calendar.dateComponents([.month, .year], from: date)
         setDateLabel()
-        GraphViewModel.shared.fetchWasteList(fridgeIdx: 1, year: componets.year!, month: componets.month!)
-        GraphViewModel.shared.fetchConsumeList(fridgeIdx: 1, year: componets.year!, month: componets.month!)
+        GraphViewModel.shared.fetchWasteList( year: componets.year!, month: componets.month!)
+        GraphViewModel.shared.fetchConsumeList( year: componets.year!, month: componets.month!)
     }
     
 

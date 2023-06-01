@@ -21,8 +21,12 @@ class FridgeViewController: TabmanViewController {
     @IBOutlet weak var noFridgeLabel: UILabel!
     @IBOutlet weak var fridgeAddButton: UIButton!
     
+    @IBOutlet var deleteSelectedView: UIView!
     
     private var viewControllerList: Array<UIViewController> = []
+    
+    private var bar: TMBar.ButtonBar!
+    private var isBar = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,29 +34,62 @@ class FridgeViewController: TabmanViewController {
         
         setup()
         setupNavigationBar()
-        setupTabman()
         setupLayout()
         setupObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
-        self.noFridgeImageView.isHidden = true
-        self.noFridgeLabel.isHidden = true
-        self.fridgeAddButton.isHidden = true
     }
     
     private func setup() {
         FridgeViewModel.shared.setSavedFridgeIdx()
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
         
+        deleteSelectedView.isHidden = true
+        
     }
     
     private func setupObserver() {
+        APIManger.shared.fridgeIdx { fridgeIdx in
+            if fridgeIdx == -1 {
+                self.noFridgeImageView.isHidden = false
+                self.noFridgeLabel.isHidden = false
+                self.fridgeAddButton.isHidden = false
+                self.foodAddButton.isHidden = true
+                if let bar = self.bar {
+                    self.removeBar(bar)
+                }
+            }else {
+                FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+                self.noFridgeImageView.isHidden = true
+                self.noFridgeLabel.isHidden = true
+                self.fridgeAddButton.isHidden = true
+                self.foodAddButton.isHidden = false
+                if self.isBar == false {
+                    self.setupTabman()
+                }else {
+                    self.addBar(self.bar, dataSource: self, at: .top)
+                }
+                
+            }
+        }
+        
+        
         AuthViewModel.shared.isJoin { isJoin in
             if isJoin {
                 self.view.makeToast("회원가입이 완료되었습니다!", duration: 1.0, position: .center)
+            }
+        }
+        
+        FoodViewModel.shared.isSelectedFood { isSelectedFood in
+            if isSelectedFood {
+                self.deleteSelectedView.isHidden = false
+            }else {
+                self.deleteSelectedView.isHidden = true
             }
         }
     }
@@ -80,7 +117,7 @@ class FridgeViewController: TabmanViewController {
     }
     
     private func setupTabBar() {
-        let bar = TMBar.ButtonBar()
+        bar = TMBar.ButtonBar()
         
         bar.backgroundView.style = .clear
         
@@ -107,10 +144,12 @@ class FridgeViewController: TabmanViewController {
         bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
         
         addBar(bar, dataSource: self, at: .top)
+        isBar = true
     }
     
     private func setupLayout() {
         self.view.backgroundColor = .white
+        fridgeAddButton.layer.cornerRadius = 20
         foodAddButton.backgroundColor = .white
         foodAddButton.layer.cornerRadius = foodAddButton.frame.width / 2
         foodAddButton.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 20, spread: 0)
@@ -172,24 +211,77 @@ class FridgeViewController: TabmanViewController {
     
     @objc private func selectFridge() {
         guard let vc = storyboard?.instantiateViewController(identifier: "SelectFrideViewController") as? SelectFrideViewController else { return }
+        vc.delegate = self
         let selectVC = UINavigationController(rootViewController: vc)
         selectVC.isNavigationBarHidden = true
         present(selectVC, animated: true)
     }
     
     @objc private func moveToSearchVC() {
+        let searchFoodVC = UIStoryboard(name: "SearchFood", bundle: nil).instantiateViewController(withIdentifier: "SearchFoodViewController") as! SearchFoodViewController
         
+        searchFoodVC.setSearchCategory(searchCategory: .Fridge)
+        
+        self.navigationController?.pushViewController(searchFoodVC, animated: true)
     }
     
     @objc private func moveToAlarmVC() {
-        
+        let notificationVC = UIStoryboard(name: "Notification", bundle: nil).instantiateViewController(withIdentifier: "NotificationViewController") as! NotificationViewController
+        self.navigationController?.pushViewController(notificationVC, animated: true)
     }
     
 
+    @IBAction func fridgeAdd(_ sender: Any) {
+        let fridgeAddVC = UIStoryboard(name: "Fridge", bundle: nil).instantiateViewController(withIdentifier: "AddFridgeViewController") as! AddFridgeViewController
+        
+        fridgeAddVC.modalPresentationStyle = .overFullScreen
+        present(fridgeAddVC, animated: true)
+    }
     
 
     @IBAction func foodAdd(_ sender: Any) {
         moveToFoodAddSelectVC(animate: true)
+    }
+    
+    @IBAction func foodDelete(_ sender: Any) {
+        let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(identifier: "AlertViewController") as! AlertViewController
+        
+        alertVC.configure(title: "식품 삭제", content: "해당 식품을 삭제하시겠습니까?", leftButtonTitle: "취소", righttButtonTitle: "삭제") {
+            FoodViewModel.shared.deleteFoods { result in
+                if result {
+                    self.view.makeToast("해당 식품이 정상적으로 삭제되었습니다.", duration: 1.0, position: .center)
+                }else {
+                    self.view.makeToast("식품 삭제에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
+                }
+            }
+        } leftCompletion: {
+        }
+        
+        alertVC.modalPresentationStyle = .overFullScreen
+
+        self.present(alertVC, animated: true)
+    }
+    
+    
+    @IBAction func foodEat(_ sender: Any) {
+        
+        let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(identifier: "AlertViewController") as! AlertViewController
+        
+        alertVC.configure(title: "식품 섭취", content: "해당 식품을 섭취하시겠습니까?", leftButtonTitle: "취소", righttButtonTitle: "섭취") {
+            FoodViewModel.shared.eatFoods { result in
+                if result {
+                    self.view.makeToast("해당 식품이 정상적으로 섭취 처리되었습니다.", duration: 1.0, position: .center)
+                }else {
+                    self.view.makeToast("식품 섭취 처리에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
+                }
+            }
+        } leftCompletion: {
+        }
+        
+        alertVC.modalPresentationStyle = .overFullScreen
+
+        self.present(alertVC, animated: true)
+
     }
     
     private func moveToFoodAddSelectVC(animate: Bool) {
@@ -203,6 +295,12 @@ class FridgeViewController: TabmanViewController {
         
         self.present(foodAddVC, animated: animate)
     }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
+    }
 }
 
 
@@ -212,6 +310,7 @@ extension FridgeViewController: PageboyViewControllerDataSource, TMBarDataSource
     }
     
     func viewController(for pageboyViewController: Pageboy.PageboyViewController, at index: Pageboy.PageboyViewController.PageIndex) -> UIViewController? {
+        FoodViewModel.shared.setIsSelectedFood(isSelected: false)
         return viewControllerList[index]
     }
     
@@ -241,6 +340,7 @@ extension FridgeViewController: FoodAddSelectDelgate {
     
     func moveToSearchFoodVC(searchFoodVC: SearchFoodViewController) {
         searchFoodVC.setFridgeDelegate(fridgeDelegate: self)
+        searchFoodVC.setSearchCategory(searchCategory: .Food)
         navigationController?.pushViewController(searchFoodVC, animated: true)
     }
 }
@@ -251,8 +351,10 @@ extension FridgeViewController: FoodAddDelegate, SelectFridgeDelegate {
     }
     
     func updateMainFridge(title: String) {
+        print("웨않되냐고")
         setupleftBarItems(title: title)
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+        
     }
 }
 

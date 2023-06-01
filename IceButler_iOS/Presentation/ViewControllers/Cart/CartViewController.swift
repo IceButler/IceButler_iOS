@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import JGProgressHUD
+import CoreLocation
 
 class CartViewController: UIViewController {
     @IBOutlet weak var cartMainTableView: UITableView!
@@ -23,22 +24,54 @@ class CartViewController: UIViewController {
     @IBOutlet weak var completeBuyingButton: UIButton!
     
     private var cartFoods: [CartResponseModel] = []
+    private var locationManager : CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
-        setup()
         setupNavigationBar()
-        setupLayout()
-        setupTableView()
+        setupLocation()
+        
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            self.configure()
+            self.setup()
+            self.setupLayout()
+            self.setupTableView()
+            
+            hud.dismiss(animated: true)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        configure()
+        FoodViewModel.shared.setIsSelectedFood(isSelected: false)
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            self.setupNavigationBar()
+            self.configure()
+            
+            hud.dismiss(animated: true)
+        }
+
         self.alertView.isHidden = true
         self.addFoodButton.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func setupLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
     
     /// 장바구니 조회 요청 메소드
@@ -51,6 +84,7 @@ class CartViewController: UIViewController {
             switch response.statusCode {
             case 200:
                 self?.noRefrigeratorView.isHidden = true
+                self?.addFoodButton.isHidden = false
                 self?.cartFoods.removeAll()
                 self?.cartFoods = response.data!
                 self?.cartMainTableView.reloadData()
@@ -62,8 +96,9 @@ class CartViewController: UIViewController {
                     self?.cartMainTableView.isHidden = false
                     self?.nothingFoodLabel.isHidden = true
                 }
-            case 403:
+            case 403, 404:
                 self?.noRefrigeratorView.isHidden = false
+                self?.addFoodButton.isHidden = true
                 
             default: return
             }
@@ -95,6 +130,14 @@ class CartViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    @IBAction func didTapAddFridgeButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard.init(name: "Fridge", bundle: nil)
+        guard let addFridgeVC = storyboard.instantiateViewController(withIdentifier: "AddFridgeViewController") as? AddFridgeViewController else { return }
+        addFridgeVC.modalPresentationStyle = .overFullScreen
+        present(addFridgeVC, animated: true)
+    }
+    
+    
     @IBAction func didTapAddFoodButton(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "Cart", bundle: nil)
         guard let addFoodViewController = storyboard.instantiateViewController(withIdentifier: "AddFoodViewController") as? AddFoodViewController else { return }
@@ -123,7 +166,7 @@ class CartViewController: UIViewController {
                                       leftButtonTitle: "취소",
                                       righttButtonTitle: "확인",
                                       rightCompletion: {
-            CartViewModel.shared.deleteFood(cartId: APIManger.shared.getFridgeIdx())  // 임시 ID
+            CartViewModel.shared.deleteFood(cartId: APIManger.shared.getFridgeIdx())
             
             let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
             guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "SelectAlertViewController") as? CompleteBuyingViewController else { return }
@@ -132,7 +175,7 @@ class CartViewController: UIViewController {
                 let name = CartViewModel.shared.removeFoodNames[i]
                 alertViewController.completeFoods.append(BuyedFood(idx: idx, name: name))
             })
-//            alertViewController.completeFoods = CartViewModel.shared.removeFoodNames
+
             self.navigationController?.pushViewController(alertViewController, animated: true)
             },
                                       leftCompletion: {
@@ -149,7 +192,7 @@ class CartViewController: UIViewController {
     }
     
     func showAlertView() {
-        self.tabBarController?.tabBar.isHidden = true
+//        self.tabBarController?.tabBar.isHidden = true
         self.addFoodButton.isHidden = true
         self.alertView.backgroundColor = .signatureBlue
         self.alertView.isHidden = false
@@ -178,7 +221,7 @@ class CartViewController: UIViewController {
           
         } else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-            statusBar?.backgroundColor = UIColor.red
+            statusBar?.backgroundColor = UIColor.white
         }
         
         /// set up title
@@ -210,7 +253,7 @@ class CartViewController: UIViewController {
         self.addFoodButton.backgroundColor = UIColor.white
         self.addFoodButton.layer.cornerRadius = self.addFoodButton.frame.width / 2
         self.addFoodButton.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 20, spread: 0)
-        self.addRefrigeratorButton.layer.cornerRadius = 15
+        self.addRefrigeratorButton.layer.cornerRadius = 22
     }
     
     
@@ -248,5 +291,21 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         cell.reloadCV()
         cell.backgroundColor = cell.contentView.backgroundColor
         return cell
+    }
+}
+
+extension CartViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("GPS 권한 설정됨")
+        case .notDetermined:
+            print("GPS 권한 설정되지 않음")
+            locationManager.requestWhenInUseAuthorization()
+        case .denied:
+            print("GPS 권한 거부됨")
+            locationManager.requestWhenInUseAuthorization()
+        default: return
+        }
     }
 }

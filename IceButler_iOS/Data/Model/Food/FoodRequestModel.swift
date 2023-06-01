@@ -13,6 +13,10 @@ struct FoodAddListModel: Codable {
 
 struct FoodAddRequestModel: Codable {
     var foodName, foodDetailName, foodCategory, shelfLife: String
-    var memo, imageUrl: String?
-    var ownerIdx: Int
+    var memo, imgKey: String?
+    var ownerIdx: Int?
+}
+
+struct FoodDeleteModel: Codable {
+    let deleteFoods: [Int]
 }

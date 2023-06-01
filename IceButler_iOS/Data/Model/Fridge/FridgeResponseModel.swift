@@ -8,7 +8,12 @@
 import Foundation
 
 struct FridgeResponseModel: Codable {
+    let fridgeDiscard: FridgeDiscard
     let foodList: [FridgeFood]
+}
+
+struct FridgeDiscard: Codable {
+    let discardFoodCategory, discardFoodImgUrl: String?
 }
 
 struct FridgeFood: Codable {

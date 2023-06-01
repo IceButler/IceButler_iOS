@@ -7,13 +7,19 @@
 
 import UIKit
 import Kingfisher
+import JGProgressHUD
 
 class MyPageViewController: UIViewController {
     
-    private let sectionList = ["My", "내 결제", "계정 설정", "앱 정보"]
+    private let iconImgNameList: [[String]] = [
+        ["myFridges", "myRecipe"],    /// 마이 냉장고, 마이 레시피
+        ["logout", "signout"],    /// 로그아웃, 회원탈퇴
+        ["tos", "privatePolicy"] /// 약관안내, 개인정보처리방침
+    ]
+    
+    private let sectionList = ["My", "계정 설정", "앱 정보"]
     private let menuList = [
         ["마이 냉장고", "마이 레시피"],
-        ["Pro 버전"],
         ["로그아웃", "회원탈퇴"],
         ["약관 안내", "개인 정보 처리 방침"]
     ]
@@ -36,23 +42,34 @@ class MyPageViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setupNavigationBar()
         self.tabBarController?.tabBar.isHidden = false
         AuthViewModel.shared.isModify = false
+        FoodViewModel.shared.setIsSelectedFood(isSelected: false)
     }
     
     private func configure() {
-        UserViewModel.shared.getUserInfo()
-        
-        
-        UserViewModel.shared.userInfo { user in
-            if let imageUrlString = user.profileImgUrl {
-                if let imageUrl = URL(string: imageUrlString) {
-                    self.profileImgView.kf.setImage(with: imageUrl)
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            UserViewModel.shared.getUserInfo()
+            
+            UserViewModel.shared.userInfo { user in
+                if let imageUrlString = user.profileImgUrl {
+                    if let imageUrl = URL(string: imageUrlString) {
+                        self.profileImgView.kf.setImage(with: imageUrl)
+                    }
                 }
+                self.nicknameLabel.text = user.nickname
+                self.emailLabel.text = user.email
             }
-            self.nicknameLabel.text = user.nickname
-            self.emailLabel.text = user.email
+            
+            hud.dismiss(animated: true)
         }
+        
     }
     
     private func setupNavigationBar() {
@@ -80,6 +97,14 @@ class MyPageViewController: UIViewController {
             statusBar?.backgroundColor = UIColor.navigationColor
         }
         
+        let titleLabel = UILabel()
+        titleLabel.text = "마이페이지"
+        titleLabel.textAlignment = .left
+        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        titleLabel.textColor = .white
+        titleLabel.sizeToFit()
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
+        
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -98,7 +123,6 @@ class MyPageViewController: UIViewController {
     }
     
     @IBAction func didTapEditProfileButton(_ sender: UIButton) {
-        // TODO: 프로필 편집 화면으로 이동
         let authUserInfoVC = UIStoryboard(name: "AuthUserInfo", bundle: nil).instantiateViewController(identifier: "AuthUserInfoViewController") as! AuthUserInfoViewController
         
         authUserInfoVC.setEditMode(mode: .Modify)
@@ -129,12 +153,13 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MypageMenuTableViewCell", for: indexPath) as? MypageMenuTableViewCell else { return UITableViewCell() }
+        cell.menuImgView.image = UIImage(named: iconImgNameList[indexPath.section][indexPath.row])
         cell.menuNameLabel.text = self.menuList[indexPath.section][indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: 섹션/행 별로 화면 전환 구분
+        /// 섹션,행 별로 화면 전환 구분
         switch indexPath.section {
         case 0:
             switch indexPath.row {
@@ -147,8 +172,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             default: return
             }
         case 1:
-            print("Pro 결제 화면으로 전환")
-        case 2:
             switch indexPath.row {
             case 0:
                 let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(identifier: "AlertViewController") as! AlertViewController
@@ -171,7 +194,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                 self.present(alertVC, animated: true)
             default: return
             }
-        case 3:
+        case 2:
             switch indexPath.row {
             case 0:
                 showPolicyWebVC(policyType: .tosGuide)

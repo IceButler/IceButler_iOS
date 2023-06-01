@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import Kingfisher
 
 class FoodOwnerCell: UITableViewCell {
     
@@ -42,12 +43,22 @@ class FoodOwnerCell: UITableViewCell {
     func configure(name: String, isSelect: Bool) {
         ownerNameLabel.text = name
         
+        
+        
+        
+        
         if isSelect {
             ownerNameLabel.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight(rawValue: 700))
         }else {
             ownerNameLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         }
         
+    }
+    
+    func setImage(imageUrl: String) {
+        if let url = URL(string: imageUrl) {
+            ownerSelectImageView.kf.setImage(with: url)
+        }
     }
     
     func isFocus(focus: Bool) {
@@ -57,8 +68,5 @@ class FoodOwnerCell: UITableViewCell {
         }
     }
     
-    func selectedOwnerCell() {
-        
-    }
     
 }

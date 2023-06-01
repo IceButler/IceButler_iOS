@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 protocol SelectFridgeDelegate {
     func updateMainFridge(title: String)
@@ -28,22 +29,40 @@ class SelectFrideViewController: UIViewController {
         setupTableView()
         setupLayout()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
+        setupTableView()
+        setupLayout()
+    }
     
     private func fetchData() {
-        APIManger.shared.getData(urlEndpointString: "/fridges",
-                                 responseDataType: MyFridgeResponseModel.self,
-                                 requestDataType: MyFridgeResponseModel.self,
-                                 parameter: nil) { [weak self] response in
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
             
-            switch response.statusCode {
-            case 200:
-                self?.configureData(data: response.data)
-                self?.tableView.reloadData()
-                self?.containerViewHeight.constant = CGFloat(55 * (self?.myFridgeData.count ?? 0) + 120)
-            default:
-                self?.showAlert(message: "마이냉장고 조회에 실패하였습니다")
+            APIManger.shared.getData(urlEndpointString: "/fridges",
+                                     responseDataType: MyFridgeResponseModel.self,
+                                     requestDataType: MyFridgeResponseModel.self,
+                                     parameter: nil) { [weak self] response in
+                
+                switch response.statusCode {
+                case 200:
+                    self?.myFridgeData.removeAll()
+                    self?.configureData(data: response.data)
+                    self?.tableView.reloadData()
+                    self?.containerViewHeight.constant = CGFloat(55 * (self?.myFridgeData.count ?? 0) + 120)
+                default:
+                    self?.showAlert(message: "마이냉장고 조회에 실패하였습니다")
+                }
             }
+            
+            hud.dismiss(animated: true)
         }
+        
     }
     
     private func setupLayout() {
@@ -67,14 +86,16 @@ class SelectFrideViewController: UIViewController {
                                                       name: fridge.fridgeName,
                                                       comment: fridge.comment,
                                                       users: fridge.users,
-                                                      userCnt: fridge.userCnt))
+                                                      userCnt: fridge.userCnt,
+                                                      isMulti: false))
             })
             data.multiFridgeResList?.forEach({ fridge in
                 myFridgeData.append(CommonFridgeModel(idx: fridge.multiFridgeIdx,
                                                       name: fridge.multiFridgeName,
                                                       comment: fridge.comment,
                                                       users: fridge.users,
-                                                      userCnt: fridge.userCnt))
+                                                      userCnt: fridge.userCnt,
+                                                      isMulti: true))
             })
         }
     }
@@ -121,20 +142,27 @@ extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        
+        
         if indexPath.row < fridgeCount {
-            APIManger.shared.setIsMultiFridge(data: false)
+            APIManger.shared.setIsMultiFridge(isMulti: false)
             UserDefaults.standard.setValue(false, forKey: "isMulti")
         }
         else {
-            APIManger.shared.setIsMultiFridge(data: true)
+            APIManger.shared.setIsMultiFridge(isMulti: true)
             UserDefaults.standard.setValue(true, forKey: "isMulti")
         }
+
         
         let index = myFridgeData[indexPath.row].idx!
         APIManger.shared.setFridgeIdx(index: index)
         UserDefaults.standard.setValue(index, forKey: "selectedFridgeIdx")
         
         UserDefaults.standard.setValue(myFridgeData[indexPath.row].name, forKey: "selectedFridgeName")
+        UserDefaults.standard.setValue(myFridgeData[indexPath.row].isMulti, forKey: "selectedFridgeIsMulti")
+        
+        
         delegate?.updateMainFridge(title: myFridgeData[indexPath.row].name ?? "냉장고 이름")
         
         self.dismiss(animated: true)

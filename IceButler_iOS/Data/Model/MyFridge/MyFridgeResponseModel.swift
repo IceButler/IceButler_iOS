@@ -37,4 +37,5 @@ struct CommonFridgeModel {
     let name, comment: String?
     let users: [FridgeUser]?
     let userCnt: Int?
+    let isMulti: Bool?
 }

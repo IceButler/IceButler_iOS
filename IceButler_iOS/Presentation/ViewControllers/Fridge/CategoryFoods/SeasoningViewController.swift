@@ -9,6 +9,7 @@ import UIKit
 
 class SeasoningViewController: UIViewController {
 
+    @IBOutlet var noFoodLabel: UILabel!
     @IBOutlet weak var foodCollectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -34,6 +35,13 @@ class SeasoningViewController: UIViewController {
     private func setupObserver() {
         FridgeViewModel.shared.isChangeAllFoodList(foodListIdx:8) {
             self.foodCollectionView.reloadData()
+            self.noFoodLabel.isHidden = true
+            self.foodCollectionView.isHidden = false
+        }
+        
+        FridgeViewModel.shared.isNoFoodList(foodListIdx: 8) {
+            self.foodCollectionView.isHidden = true
+            self.noFoodLabel.isHidden = false
         }
     }
 }
@@ -58,12 +66,14 @@ extension SeasoningViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.setFoodImage(foodImage: foodImage)
         }
         
+        cell.setFoodIdx(foodIdx: FridgeViewModel.shared.foodIdx(foodListIdx:8, index: indexPath.row))
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let foodIdx = FridgeViewModel.shared.foodIdx(foodListIdx: 8, index: indexPath.row)
-        FoodViewModel.shared.getFoodDetail(fridgeIdx: 1, foodIdx: foodIdx)
+        FoodViewModel.shared.getFoodDetail( foodIdx: foodIdx)
         
         let foodDetailVC = UIStoryboard(name: "FoodDetail", bundle: nil).instantiateViewController(identifier: "FoodDetailViewController") as! FoodDetailViewController
         

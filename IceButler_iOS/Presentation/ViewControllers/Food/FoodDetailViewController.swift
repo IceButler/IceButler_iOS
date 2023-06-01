@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Toast_Swift
+import JGProgressHUD
 
 class FoodDetailViewController: UIViewController {
 
@@ -118,6 +120,55 @@ class FoodDetailViewController: UIViewController {
     }
     
     @objc private func deleteFood() {
+        let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(withIdentifier: "AlertViewController") as! AlertViewController
+        
+        guard let foodIdx = FoodViewModel.shared.getFood()?.fridgeFoodIdx else {return}
+        
+        alertVC.configure(title: "식품 삭제", content: "해당 식품을 삭제하시겠습니까?", leftButtonTitle: "폐기", righttButtonTitle: "섭취") {
+            DispatchQueue.main.async { [self] in
+                let hud = JGProgressHUD()
+                hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+                hud.style = .light
+                hud.show(in: self.view)
+                
+                FoodViewModel.shared.eatFoods(foodIdx: foodIdx) { result in
+                    
+                    hud.dismiss(animated: true)
+                    if result {
+                        self.view.makeToast("해당 식품이 정상적으로 섭취 처리되었습니다.", duration: 1.0, position: .center)
+                        self.navigationController?.popViewController(animated: true)
+                    }else {
+                        self.view.makeToast("식품 섭취 처리에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
+                    }
+                }
+            }
+            
+        } leftCompletion: {
+            DispatchQueue.main.async { [self] in
+                let hud = JGProgressHUD()
+                hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+                hud.style = .light
+                hud.show(in: self.view)
+                
+                FoodViewModel.shared.deleteFoods(foodIdx: foodIdx) { result in
+                    hud.dismiss(animated: true)
+                    if result {
+                        self.view.makeToast("해당 식품이 정상적으로 삭제되었습니다.", duration: 1.0, position: .center)
+                        self.navigationController?.popViewController(animated: true)
+                    }else {
+                        self.view.makeToast("식품 삭제에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
+                    }
+                }
+                
+            }
+            
+           
+        }
+        
+        alertVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(alertVC, animated: true)
+
     }
     
     private func setupObserver() {
@@ -131,6 +182,8 @@ class FoodDetailViewController: UIViewController {
             
             if food.day > 0 {
                 self.foodDdayLabel.text = "D+" + food.day.description
+            }else if food.day == 0 {
+                self.foodDdayLabel.text = "D-" + food.day.description
             }else {
                 self.foodDdayLabel.text = "D" + food.day.description
             }
@@ -161,6 +214,7 @@ extension FoodDetailViewController: UICollectionViewDelegate, UICollectionViewDa
         cell.hiddenFoodImageAddIcon()
         
         FoodViewModel.shared.foodImage { imgUrl in
+            print(imgUrl)
             cell.configure(imageUrl: imgUrl)
         }
         
