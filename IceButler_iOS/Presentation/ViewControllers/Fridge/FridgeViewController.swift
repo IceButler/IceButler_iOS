@@ -102,12 +102,11 @@ class FridgeViewController: TabmanViewController {
         let drinkVC = storyboard?.instantiateViewController(withIdentifier: "DrinkViewController") as! DrinkViewController
         let marineProductsVC = storyboard?.instantiateViewController(withIdentifier: "MarineProductsViewController") as! MarineProductsViewController
         let sideVC = storyboard?.instantiateViewController(withIdentifier: "SideViewController") as! SideViewController
-        let snakVC = storyboard?.instantiateViewController(withIdentifier: "SnackViewController") as! SnackViewController
         let seassoningVC = storyboard?.instantiateViewController(withIdentifier: "SeasoningViewController") as! SeasoningViewController
         let processedFoodVC = storyboard?.instantiateViewController(withIdentifier: "ProcessedFoodViewController") as! ProcessedFoodViewController
         let etcVC = storyboard?.instantiateViewController(withIdentifier: "ETCViewController") as! ETCViewController
         
-        [allFoodVC, meatVC, fruitVC, vegetableVC, drinkVC, marineProductsVC, sideVC, snakVC, seassoningVC, processedFoodVC, etcVC].forEach { vc in
+        [allFoodVC, meatVC, fruitVC, vegetableVC, drinkVC, marineProductsVC, sideVC, seassoningVC, processedFoodVC, etcVC].forEach { vc in
             viewControllerList.append(vc)
         }
         

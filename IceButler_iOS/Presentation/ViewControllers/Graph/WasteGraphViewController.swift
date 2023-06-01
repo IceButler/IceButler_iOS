@@ -102,8 +102,6 @@ class WasteGraphViewController: UIViewController {
             return UIColor(red: 0.655, green: 0.763, blue: 0.908, alpha: 1)
         case FoodCategory.Side.rawValue:
             return UIColor(red: 1, green: 0.721, blue: 0.683, alpha: 1)
-        case FoodCategory.Snack.rawValue:
-            return UIColor(red: 0.9, green: 0.817, blue: 0.921, alpha: 1)
         case FoodCategory.Seasoning.rawValue:
             return UIColor(red: 0.713, green: 0.817, blue: 0.892, alpha: 1)
         case FoodCategory.ProcessedFood.rawValue:

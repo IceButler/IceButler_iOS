@@ -692,7 +692,6 @@ class FoodAddViewController: UIViewController {
     
     @IBAction func foodAdd(_ sender: Any) {
         preSaveFoodInfo()
-        
         if savedFoods.count > 0 {
             if checkForSaveFoodInfo() {
                 let fridgeIdx = APIManger.shared.getFridgeIdx()
