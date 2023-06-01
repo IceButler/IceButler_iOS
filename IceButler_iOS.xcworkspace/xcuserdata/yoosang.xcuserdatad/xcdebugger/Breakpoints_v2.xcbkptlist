@@ -3,4 +3,22 @@
    uuid = "3783933F-A2D7-44D3-8F26-64B06E224B22"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "15A5C0DC-15B5-4936-BE4B-DDEBE36B704B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IceButler_iOS/Presentation/ViewControllers/Food/FoodAddViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "729"
+            endingLineNumber = "729"
+            landmarkName = "foodAdd(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
