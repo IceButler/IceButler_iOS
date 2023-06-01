@@ -79,6 +79,8 @@ class FoodAddViewController: UIViewController {
     
     private var isEdit: Bool = false
     
+    private let today = Date()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -725,7 +727,7 @@ class FoodAddViewController: UIViewController {
             if date == nil {
                 showAlert(title: "유통기한 오류", message: "유통 기한을 입력해주세요.")
                 return
-            }else if date! < Date() {
+            }else if date! == today {
                 showAlert(title: "유통기한 오류", message: "유통기한이 지난 제품은 등록 할 수 없습니다.")
                 return
             }
