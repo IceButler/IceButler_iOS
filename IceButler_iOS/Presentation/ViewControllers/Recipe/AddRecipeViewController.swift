@@ -148,7 +148,7 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
     
     private func setupPlaceholder() {
         // 메뉴명
-        let menuNamePlaceholder = "영어, 한글, 숫자 (20자 이내)"
+        let menuNamePlaceholder = "20자 이내"
         menuNameTextField.attributedPlaceholder = NSAttributedString(string: menuNamePlaceholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderColor])
         // 레시피 카테고리
         let categoryPlaceholder = "카테고리를 선택해주세요."
