@@ -149,6 +149,6 @@ extension ConsumeGraphViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 30, right: 0)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
     }
 }
