@@ -65,4 +65,13 @@ class FridgeService {
             completion(response.data)
         })
     }
+    
+    func getAllFridge(completion: @escaping (MyFridgeResponseModel?) -> Void) {
+        APIManger.shared.getData(urlEndpointString: "/fridges",
+                                 responseDataType: MyFridgeResponseModel.self,
+                                 requestDataType: MyFridgeResponseModel.self,
+                                 parameter: nil) { response in
+            completion(response.data)
+        }
+    }
 }
