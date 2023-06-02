@@ -303,7 +303,11 @@ extension AddFoodViewController: UITextFieldDelegate {
 }
 
 extension AddFoodViewController: FoodCategoryCellDelegate {
-    func didTapCategoryButton(category: String) { selectedCategory = category }
+    func didTapCategoryButton(category: String, selected: Bool) {
+        if selected { self.selectedCategory = category }
+        else { self.selectedCategory = "" }
+        self.categoryCollectionView.reloadData()
+    }
 }
 
 extension AddFoodViewController: SelectedFoodCellDelegate {
