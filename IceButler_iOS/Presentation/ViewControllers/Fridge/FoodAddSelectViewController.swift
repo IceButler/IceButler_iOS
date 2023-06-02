@@ -70,6 +70,9 @@ extension FoodAddSelectViewController: BarCodeAddProtocol {
 }
 
 extension FoodAddSelectViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return tableView.layer.frame.height / 3
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
