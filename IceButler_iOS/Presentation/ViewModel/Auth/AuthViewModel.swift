@@ -209,6 +209,7 @@ extension AuthViewModel {
         authService.requestLogout {
             self.removeAllData()
             FridgeViewModel.shared.removeFridgeIdx()
+            UserViewModel.shared.userInfo = nil
         }
     }
     
