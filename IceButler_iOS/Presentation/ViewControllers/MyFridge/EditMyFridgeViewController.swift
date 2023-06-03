@@ -85,6 +85,11 @@ class EditMyFridgeViewController: UIViewController {
            selectedMember.count > 0,
            let newOwner = mandatedMember {
             
+            if name.count > 20 {
+                showAlert(title: "냉장고 수정 실패", message: "20자가 넘는 이름으로 수정할 수 없습니다.", confirmTitle: "확인")
+                return
+            }
+            
             var memberIdxs:[UserIndexModel] = []
             selectedMember.forEach { member in memberIdxs.append(UserIndexModel(userIdx: member.userIdx)) }
             
@@ -282,7 +287,15 @@ class EditMyFridgeViewController: UIViewController {
             
             switch textField {
             case fridgeNameTextField:
-                fridgeNameContainerView.backgroundColor = .focusTableViewSkyBlue
+                if let name = fridgeNameTextField.text {
+                    if name.count > 20 {
+                        fridgeNameContainerView.backgroundColor = UIColor(red: 255/255, green: 153/255, blue: 153/255, alpha: 1)
+                        self.view.makeToast("20자 이내의 이름을 입력해주세요!", duration: 1.0, position: .center)
+                    } else {
+                        fridgeNameContainerView.backgroundColor = .focusTableViewSkyBlue
+                    }
+                }
+                
             case memberSearchTextField:
                 memberSearchContainerView.backgroundColor = .focusTableViewSkyBlue
             case mandateTextField:
