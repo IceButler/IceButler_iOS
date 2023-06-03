@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol FoodAddSelectDelgate: AnyObject {
     func showFoodAddButton()
@@ -39,6 +40,14 @@ class FoodAddSelectViewController: UIViewController {
         foodAddSelectTableView.layer.cornerRadius = 20
         
         
+        cancelButton.snp.makeConstraints { make in
+            if UIDevice.hasNotch {
+                make.bottom.equalTo(self.view.snp.bottom).offset(126)
+            } else {
+                make.bottom.equalTo(self.view.snp.bottom).offset(86)
+            }
+        }
+        
         cancelButton.backgroundColor = .white
         
         cancelButton.layer.cornerRadius = cancelButton.frame.width / 2
@@ -70,6 +79,9 @@ extension FoodAddSelectViewController: BarCodeAddProtocol {
 }
 
 extension FoodAddSelectViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return tableView.layer.frame.height / 3
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }

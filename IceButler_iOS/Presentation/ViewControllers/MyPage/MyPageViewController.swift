@@ -62,6 +62,8 @@ class MyPageViewController: UIViewController {
                     if let imageUrl = URL(string: imageUrlString) {
                         self.profileImgView.kf.setImage(with: imageUrl)
                     }
+                }else {
+                    self.profileImgView.image = UIImage(named: "person.fill")
                 }
                 self.nicknameLabel.text = user.nickname
                 self.emailLabel.text = user.email

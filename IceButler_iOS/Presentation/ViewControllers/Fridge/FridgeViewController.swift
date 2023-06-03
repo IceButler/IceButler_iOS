@@ -63,6 +63,7 @@ class FridgeViewController: TabmanViewController {
                 if let bar = self.bar {
                     self.removeBar(bar)
                 }
+                self.setupleftBarItems(title: "냉장고 미선택")
             }else {
                 FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
                 self.noFridgeImageView.isHidden = true
@@ -74,7 +75,6 @@ class FridgeViewController: TabmanViewController {
                 }else {
                     self.addBar(self.bar, dataSource: self, at: .top)
                 }
-                
             }
         }
         
@@ -102,12 +102,11 @@ class FridgeViewController: TabmanViewController {
         let drinkVC = storyboard?.instantiateViewController(withIdentifier: "DrinkViewController") as! DrinkViewController
         let marineProductsVC = storyboard?.instantiateViewController(withIdentifier: "MarineProductsViewController") as! MarineProductsViewController
         let sideVC = storyboard?.instantiateViewController(withIdentifier: "SideViewController") as! SideViewController
-        let snakVC = storyboard?.instantiateViewController(withIdentifier: "SnackViewController") as! SnackViewController
         let seassoningVC = storyboard?.instantiateViewController(withIdentifier: "SeasoningViewController") as! SeasoningViewController
         let processedFoodVC = storyboard?.instantiateViewController(withIdentifier: "ProcessedFoodViewController") as! ProcessedFoodViewController
         let etcVC = storyboard?.instantiateViewController(withIdentifier: "ETCViewController") as! ETCViewController
         
-        [allFoodVC, meatVC, fruitVC, vegetableVC, drinkVC, marineProductsVC, sideVC, snakVC, seassoningVC, processedFoodVC, etcVC].forEach { vc in
+        [allFoodVC, meatVC, fruitVC, vegetableVC, drinkVC, marineProductsVC, sideVC, seassoningVC, processedFoodVC, etcVC].forEach { vc in
             viewControllerList.append(vc)
         }
         
@@ -149,15 +148,10 @@ class FridgeViewController: TabmanViewController {
     
     private func setupLayout() {
         self.view.backgroundColor = .white
-        
         fridgeAddButton.layer.cornerRadius = 20
-        
         foodAddButton.backgroundColor = .white
-        
         foodAddButton.layer.cornerRadius = foodAddButton.frame.width / 2
-        foodAddButton.layer.shadowColor = CGColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0.1)
-        foodAddButton.layer.shadowOpacity = 1
-        foodAddButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        foodAddButton.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 20, spread: 0)
     }
     
     private func setupNavigationBar() {

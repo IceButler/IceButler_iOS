@@ -26,6 +26,8 @@ class FridgeViewModel: ObservableObject {
     @Published var etcFoodList: [FridgeFood] = []
     @Published var fridgeDiscard: FridgeDiscard?
 
+    var fridgeList: [Fridge] = []
+    var multiFridgeList: [MultiFridgeRes] = []
     
     var searchMemberResults: [FridgeUser] = []
     
@@ -634,13 +636,6 @@ class FridgeViewModel: ObservableObject {
             })
         }
         
-        fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Snack.rawValue) { response in
-            self.snackFoodList.removeAll()
-            response?.foodList.forEach({ food in
-                self.snackFoodList.append(food)
-            })
-        }
-        
         fridgeService.getCategoryFood(fridgeIdx: fridgeIdx, category: FoodCategory.Seasoning.rawValue) { response in
             self.seasoningFoodList.removeAll()
             response?.foodList.forEach({ food in
@@ -713,7 +708,6 @@ extension FridgeViewModel {
             completion((response != nil) ? true : false)
         })
     }
-        
         /// 이전에 선택된 냉장고가 있다면 해당 냉장고로 기본 설정
     func setSavedFridgeIdx() {
 
@@ -725,6 +719,15 @@ extension FridgeViewModel {
             self.defaultFridgeName = name as! String
             print("현재 냉장고 Idx : \(idx as! Int) | 공용여부 : \(isMulti as! Bool)")
         }
+
+    }
+    
+    func removeFridgeIdx() {
+        UserDefaults.standard.removeObject(forKey: "selectedFridgeIdx")
+        UserDefaults.standard.removeObject(forKey: "selectedFridgeName")
+        UserDefaults.standard.removeObject(forKey: "selectedFridgeIsMulti")
+        
+        APIManger.shared.setFridgeIdx(index: -1)
     }
 
 }

@@ -16,7 +16,6 @@ enum FoodCategory: String, CaseIterable {
     case Drink = "음료"
     case MarineProducts = "수산물"
     case Side = "반찬"
-    case Snack = "간식"
     case Seasoning = "조미료"
     case ProcessedFood = "가공식품"
     case ETC = "기타"
@@ -37,8 +36,6 @@ extension FoodCategory {
             return UIColor(red: 0.655, green: 0.763, blue: 0.908, alpha: 1)
         case .Side:
             return UIColor(red: 1, green: 0.721, blue: 0.683, alpha: 1)
-        case .Snack:
-            return UIColor(red: 0.9, green: 0.817, blue: 0.921, alpha: 1)
         case .Seasoning:
             return UIColor(red: 0.713, green: 0.817, blue: 0.892, alpha: 1)
         case .ProcessedFood:

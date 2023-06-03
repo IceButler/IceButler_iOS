@@ -104,8 +104,6 @@ class ConsumeGraphViewController: UIViewController {
             return UIColor(red: 0.655, green: 0.763, blue: 0.908, alpha: 1)
         case FoodCategory.Side.rawValue:
             return UIColor(red: 1, green: 0.721, blue: 0.683, alpha: 1)
-        case FoodCategory.Snack.rawValue:
-            return UIColor(red: 0.9, green: 0.817, blue: 0.921, alpha: 1)
         case FoodCategory.Seasoning.rawValue:
             return UIColor(red: 0.713, green: 0.817, blue: 0.892, alpha: 1)
         case FoodCategory.ProcessedFood.rawValue:
@@ -151,6 +149,6 @@ extension ConsumeGraphViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 30, right: 0)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
     }
 }
