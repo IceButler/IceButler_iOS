@@ -50,6 +50,8 @@ class CartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         FoodViewModel.shared.setIsSelectedFood(isSelected: false)
+        CartViewModel.shared.removeFoodIdxes?.removeAll()
+        CartViewModel.shared.removeFoodNames.removeAll()
         DispatchQueue.main.async {
             let hud = JGProgressHUD()
             hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
@@ -251,7 +253,6 @@ class CartViewController: UIViewController {
     
     private func setupLayout() {
         self.cartMainTableView.backgroundColor = .clear
-        self.alertView.layer.cornerRadius = 15
         self.addFoodButton.backgroundColor = UIColor.white
         self.addFoodButton.layer.cornerRadius = self.addFoodButton.frame.width / 2
         self.addFoodButton.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 20, spread: 0)
