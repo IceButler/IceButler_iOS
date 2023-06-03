@@ -776,6 +776,7 @@ class FoodAddViewController: UIViewController {
                                                                memo: memo) { result in
                             hud.dismiss(animated: true)
                             if result {
+                                RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
                                 let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
                                 alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
                                     FoodViewModel.shared.getFoodDetail( foodIdx: self.foodIdx)
@@ -800,6 +801,7 @@ class FoodAddViewController: UIViewController {
                                                        imgUrl: self.foodImageUrl) { result in
                             hud.dismiss(animated: true)
                             if result {
+                                RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
                                 let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
                                 alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
                                     FoodViewModel.shared.isEditFood = false
