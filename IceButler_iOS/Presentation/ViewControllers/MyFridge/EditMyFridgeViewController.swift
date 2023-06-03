@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast_Swift
 
 class EditMyFridgeViewController: UIViewController {
 
@@ -55,10 +56,14 @@ class EditMyFridgeViewController: UIViewController {
 
             FridgeViewModel.shared.searchMember(nickname: memberSearchTextField.text!, completion: {
                 self.searchMember = FridgeViewModel.shared.searchMemberResults
-                self.memberResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
-                self.selectedMemberCollectionView.isHidden = true
-                self.memberSearchResultContainerView.isHidden = false
-                self.searchTableView.reloadData()
+                if self.searchMember.count > 0 {
+                    self.memberResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
+                    self.selectedMemberCollectionView.isHidden = true
+                    self.memberSearchResultContainerView.isHidden = false
+                    self.searchTableView.reloadData()
+                } else {
+                    self.view.makeToast("멤버 검색 결과가 없습니다!", duration: 1.0, position: .center)
+                }
             })
         }
         else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
@@ -71,10 +76,17 @@ class EditMyFridgeViewController: UIViewController {
             
             FridgeViewModel.shared.searchMember(nickname: mandateTextField.text!, completion: {
                 self.searchMember = FridgeViewModel.shared.searchMemberResults
-                self.mandateResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
-                self.mandateTableView.isHidden = false
-                self.mandateResultContainerView.isHidden = false
-                self.mandateTableView.reloadData()
+                if self.searchMember.count > 0 {
+                    self.mandateResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
+                    self.mandateTableView.isHidden = false
+                    self.mandateResultContainerView.isHidden = false
+                    self.mandateTableView.reloadData()
+                    
+                } else {
+                    self.view.makeToast("멤버 검색 결과가 없습니다!", duration: 1.0, position: .center)
+                    self.mandateTableView.isHidden = true
+                    self.mandateResultContainerView.isHidden = true
+                }
             })
         }
         else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
