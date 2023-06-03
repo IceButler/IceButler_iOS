@@ -26,12 +26,16 @@ class FridgeViewModel: ObservableObject {
     @Published var etcFoodList: [FridgeFood] = []
     @Published var fridgeDiscard: FridgeDiscard?
 
+    var fridgeList: [Fridge] = []
+    var multiFridgeList: [MultiFridgeRes] = []
     
     var searchMemberResults: [FridgeUser] = []
     
     var cancelLabels: Set<AnyCancellable> = []
     
     var defaultFridgeName: String = "냉장고 미선택"
+    
+    var currentFridgeName: String = ""
     
     func fridgeDiscard(completion: @escaping (FridgeDiscard?) -> Void) {
         $fridgeDiscard.sink { frdigeDiscard in
@@ -700,11 +704,12 @@ extension FridgeViewModel {
         fridgeService.addFridge(isMulti: isMulti, name: name, comment: comment, members: members, completion: { response in
             if let fridgeId = response {
                 APIManger.shared.setFridgeIdx(index: fridgeId)
+                UserDefaults.standard.setValue(fridgeId, forKey: "selectedFridgeIdx")
+                UserDefaults.standard.setValue(name, forKey: "selectedFridgeName")
             }
             completion((response != nil) ? true : false)
         })
     }
-        
         /// 이전에 선택된 냉장고가 있다면 해당 냉장고로 기본 설정
     func setSavedFridgeIdx() {
 
@@ -717,7 +722,14 @@ extension FridgeViewModel {
             print("현재 냉장고 Idx : \(idx as! Int) | 공용여부 : \(isMulti as! Bool)")
         }
 
-     
+    }
+    
+    func removeFridgeIdx() {
+        UserDefaults.standard.removeObject(forKey: "selectedFridgeIdx")
+        UserDefaults.standard.removeObject(forKey: "selectedFridgeName")
+        UserDefaults.standard.removeObject(forKey: "selectedFridgeIsMulti")
+        
+        APIManger.shared.setFridgeIdx(index: -1)
     }
 
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol FoodAddSelectDelgate: AnyObject {
     func showFoodAddButton()
@@ -38,6 +39,14 @@ class FoodAddSelectViewController: UIViewController {
     private func setupLayout() {
         foodAddSelectTableView.layer.cornerRadius = 20
         
+        
+        cancelButton.snp.makeConstraints { make in
+            if UIDevice.hasNotch {
+                make.bottom.equalTo(self.view.snp.bottom).offset(126)
+            } else {
+                make.bottom.equalTo(self.view.snp.bottom).offset(86)
+            }
+        }
         
         cancelButton.backgroundColor = .white
         

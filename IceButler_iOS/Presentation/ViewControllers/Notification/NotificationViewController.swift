@@ -129,6 +129,7 @@ class NotificationViewController: UIViewController {
         let backItem = UIButton()
         backItem.setImage(UIImage(named: "backIcon"), for: .normal)
         backItem.addTarget(self, action: #selector(didTapBackItem), for: .touchUpInside)
+        backItem.frame = CGRect(x: 0, y: 0, width: 35, height: 20)
         
         self.navigationItem.leftBarButtonItems = [
             UIBarButtonItem(customView: backItem),

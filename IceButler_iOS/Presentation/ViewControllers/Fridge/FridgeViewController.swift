@@ -63,6 +63,7 @@ class FridgeViewController: TabmanViewController {
                 if let bar = self.bar {
                     self.removeBar(bar)
                 }
+                self.setupleftBarItems(title: "냉장고 미선택")
             }else {
                 FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
                 self.noFridgeImageView.isHidden = true
@@ -74,7 +75,6 @@ class FridgeViewController: TabmanViewController {
                 }else {
                     self.addBar(self.bar, dataSource: self, at: .top)
                 }
-                
             }
         }
         
@@ -199,7 +199,7 @@ class FridgeViewController: TabmanViewController {
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.textAlignment = .left
-        titleLabel.font = UIFont.systemFont(ofSize: 17)
+        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         titleLabel.textColor = .white
         titleLabel.sizeToFit()
         
@@ -350,7 +350,6 @@ extension FridgeViewController: FoodAddDelegate, SelectFridgeDelegate {
     }
     
     func updateMainFridge(title: String) {
-        print("웨않되냐고")
         setupleftBarItems(title: title)
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
         

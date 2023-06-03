@@ -50,13 +50,14 @@ class CartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         FoodViewModel.shared.setIsSelectedFood(isSelected: false)
+        CartViewModel.shared.removeFoodIdxes?.removeAll()
+        CartViewModel.shared.removeFoodNames.removeAll()
         DispatchQueue.main.async {
             let hud = JGProgressHUD()
             hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
             hud.style = .light
             hud.show(in: self.view)
             
-            self.setupNavigationBar()
             self.configure()
             
             hud.dismiss(animated: true)
@@ -64,6 +65,7 @@ class CartViewController: UIViewController {
 
         self.alertView.isHidden = true
         self.addFoodButton.isHidden = false
+        self.setupNavigationBar()
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -179,7 +181,7 @@ class CartViewController: UIViewController {
             self.navigationController?.pushViewController(alertViewController, animated: true)
             },
                                       leftCompletion: {
-            
+            self.navigationController?.popViewController(animated: true)
             })
         self.navigationController?.pushViewController(alertViewController, animated: true)
     }
@@ -189,6 +191,7 @@ class CartViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         self.addFoodButton.isHidden = false
         self.alertView.isHidden = true
+        viewHeightConstraint.constant = CGFloat(170 * (cartFoods.count))
     }
     
     func showAlertView() {
@@ -196,6 +199,7 @@ class CartViewController: UIViewController {
         self.addFoodButton.isHidden = true
         self.alertView.backgroundColor = .signatureBlue
         self.alertView.isHidden = false
+        viewHeightConstraint.constant = CGFloat(170 * (cartFoods.count) + 120)
     }
     
     
@@ -249,7 +253,6 @@ class CartViewController: UIViewController {
     
     private func setupLayout() {
         self.cartMainTableView.backgroundColor = .clear
-        self.alertView.layer.cornerRadius = 15
         self.addFoodButton.backgroundColor = UIColor.white
         self.addFoodButton.layer.cornerRadius = self.addFoodButton.frame.width / 2
         self.addFoodButton.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 20, spread: 0)

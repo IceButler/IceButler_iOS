@@ -10,9 +10,9 @@ import JGProgressHUD
 
 // MARK: 장바구니에서 플로팅 버튼을 탭하는 경우 나오는 '식품 추가' 화면
 class AddFoodViewController: UIViewController {
-
+    
     private let category = [
-        "육류", "과일", "채소", "음료", "수산물", "반찬", "간식", "조미료", "가공식품", "기타"
+        "육류", "과일", "채소", "음료", "수산물", "반찬", "조미료", "가공식품", "기타"
     ]
     
     private var searchResults: [AddFoodResponseModel] = []
@@ -81,7 +81,7 @@ class AddFoodViewController: UIViewController {
             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
             
             let statusbarView = UIView()
-            statusbarView.backgroundColor = UIColor.signatureLightBlue
+            statusbarView.backgroundColor = UIColor.navigationColor
             view.addSubview(statusbarView)
           
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,10 +96,11 @@ class AddFoodViewController: UIViewController {
           
         } else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-            statusBar?.backgroundColor = UIColor.signatureLightBlue
+            statusBar?.backgroundColor = UIColor.navigationColor
         }
         
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.backgroundColor = .navigationColor
         
     }
     
@@ -108,7 +109,7 @@ class AddFoodViewController: UIViewController {
         self.searchTextField.borderStyle = .none
         self.completeButton.backgroundColor = .systemGray5
         self.completeButton.tintColor = .white
-        self.completeButton.layer.cornerRadius = 23
+        self.completeButton.layer.cornerRadius = 24
         
         searchResultContainerView.layer.cornerRadius = 23
         searchResultContainerView.isHidden = true
@@ -302,7 +303,11 @@ extension AddFoodViewController: UITextFieldDelegate {
 }
 
 extension AddFoodViewController: FoodCategoryCellDelegate {
-    func didTapCategoryButton(category: String) { selectedCategory = category }
+    func didTapCategoryButton(category: String, selected: Bool) {
+        if selected { self.selectedCategory = category }
+        else { self.selectedCategory = "" }
+        self.categoryCollectionView.reloadData()
+    }
 }
 
 extension AddFoodViewController: SelectedFoodCellDelegate {

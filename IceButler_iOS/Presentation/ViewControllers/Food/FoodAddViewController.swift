@@ -393,7 +393,7 @@ class FoodAddViewController: UIViewController {
                                                       shelfLife: "",
                                                       memo: nil,
                                                       imgKey: nil,
-                                                      ownerIdx: -1))
+                                                      ownerIdx: nil))
             }
         }
     }
@@ -425,37 +425,38 @@ class FoodAddViewController: UIViewController {
     
     /// 장보기 완료 후 여러 개의 식품 추가가 필요한 경우 '이전','다음' 버튼을 추가
     func setupBeforeAfterNavItems() {
-        let beforeButton: UIButton = {
-            let button = UIButton()
-            button.setTitle("이전", for: .normal)
-            button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
-            button.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
-            button.backgroundColor = .white
-            button.setTitleColor(.navigationColor, for: .normal)
-            button.layer.cornerRadius = 10
-            button.addTarget(self, action: #selector(didTapBeforeButton), for: .touchUpInside)
-            return button
-        }()
-        
-        let afterButton: UIButton = {
-            let button = UIButton()
-            button.setTitle("다음", for: .normal)
-            button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
-            button.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
-            button.backgroundColor = .white
-            button.setTitleColor(.navigationColor, for: .normal)
-            button.layer.cornerRadius = 10
-            button.addTarget(self, action: #selector(didTapAfterButton), for: .touchUpInside)
-            return button
-        }()
-        
-        if self.buyedFoods.count > 0 {
-            self.navigationItem.rightBarButtonItems = [
-                UIBarButtonItem(customView: afterButton),
-                UIBarButtonItem(customView: beforeButton)
-            ]
+        if (addedFoodNames.count > 1) && (buyedFoods.count > 1) {
+            let beforeButton: UIButton = {
+                let button = UIButton()
+                button.setTitle("이전", for: .normal)
+                button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+                button.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
+                button.backgroundColor = .white
+                button.setTitleColor(.navigationColor, for: .normal)
+                button.layer.cornerRadius = 10
+                button.addTarget(self, action: #selector(didTapBeforeButton), for: .touchUpInside)
+                return button
+            }()
+            
+            let afterButton: UIButton = {
+                let button = UIButton()
+                button.setTitle("다음", for: .normal)
+                button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+                button.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
+                button.backgroundColor = .white
+                button.setTitleColor(.navigationColor, for: .normal)
+                button.layer.cornerRadius = 10
+                button.addTarget(self, action: #selector(didTapAfterButton), for: .touchUpInside)
+                return button
+            }()
+            
+            if self.buyedFoods.count > 0 {
+                self.navigationItem.rightBarButtonItems = [
+                    UIBarButtonItem(customView: afterButton),
+                    UIBarButtonItem(customView: beforeButton)
+                ]
+            }
         }
-        
     }
     
     private func setupFoodData() {
@@ -670,8 +671,10 @@ class FoodAddViewController: UIViewController {
             if datePickerOpenButton.title(for: .normal) != "소비기한을 입력해주세요." {
                 savedFoods[currentFoodIndex].shelfLife = datePickerOpenButton.title(for: .normal)!
             }
-            if foodOwnerIdx != -1 {
-                savedFoods[currentFoodIndex].ownerIdx = foodOwnerIdx ?? -1
+            if let ownerIdx = foodOwnerIdx,
+                ownerIdx != -1 {
+                
+                savedFoods[currentFoodIndex].ownerIdx = foodOwnerIdx
             }
             if foodMemoTextView.text != "" && foodMemoTextView.text != "메모내용 or 없음" {
                 savedFoods[currentFoodIndex].memo = foodMemoTextView.text

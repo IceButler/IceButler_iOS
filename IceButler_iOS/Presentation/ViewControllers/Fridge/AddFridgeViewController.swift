@@ -8,9 +8,15 @@
 import UIKit
 import JGProgressHUD
 
+protocol AddFridgeDelegate {
+    func setNewFidgeNameTitle(name: String)
+}
+
 class AddFridgeViewController: UIViewController {
 
-    // MARK: @IBOutlet, Variables    
+    // MARK: @IBOutlet, Variables
+    var delegate: AddFridgeDelegate?
+    
     private var isPersonalfridge: Bool = false
     private var isMultifridge: Bool = false
     private var searchMember: [FridgeUser] = []
@@ -88,6 +94,18 @@ class AddFridgeViewController: UIViewController {
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
+        if let name = fridgeNameTextField.text {
+            if name.count > 20 {
+                showAlert(title: "냉장고 추가 실패", message: "20자가 넘는 이름을 가질 수 없습니다.", confirmTitle: "확인")
+                return
+            }
+        }
+        
+        if fridgeDetailTextView.text.count > 200 {
+            showAlert(title: "냉장고 추가 실패", message: "200자가 넘는 코멘트를 가질 수 없습니다.", confirmTitle: "확인")
+            return
+        }
+        
         DispatchQueue.main.async {
             let hud = JGProgressHUD()
             hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
@@ -97,13 +115,18 @@ class AddFridgeViewController: UIViewController {
             var memberIdx:[Int] = []
             self.selectedMember.forEach { member in memberIdx.append(member.userIdx) }
             
+            var comment = self.fridgeDetailTextView.text
+            if comment == "200자 이내로 작성해주세요." { comment = "" }
+            
             FridgeViewModel.shared.requestAddFridge(isMulti: self.isMultifridge,
                                                     name: self.fridgeNameTextField.text!,
-                                                    comment: self.fridgeDetailTextView.text!,
+                                                    comment: comment!,
                                                     members: memberIdx,
                                                     completion: { [weak self] result in
                 if result {
                     self?.dismiss(animated: true)
+                    FridgeViewModel.shared.currentFridgeName = (self?.fridgeNameTextField.text)!
+                    self?.delegate?.setNewFidgeNameTitle(name: FridgeViewModel.shared.currentFridgeName)
                     FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
                 }
                 else { self?.showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인") }
@@ -178,10 +201,10 @@ class AddFridgeViewController: UIViewController {
             nameFieldContainer,
             detailContainerView,
             searchResultContainerView,
-            memberSearchTableView,
-            completeButton
+            memberSearchTableView
             
         ].forEach { btn in btn?.layer.cornerRadius = 12 }
+        completeButton.layer.cornerRadius = 24
         searchContainerView.layer.cornerRadius = 20
     }
     
@@ -221,7 +244,15 @@ class AddFridgeViewController: UIViewController {
         if textField.text?.count ?? 0 > 0 {
             
             if textField == fridgeNameTextField {
-                nameFieldContainer.backgroundColor = .focusTableViewSkyBlue
+                if let name = fridgeNameTextField.text {
+                    if name.count > 20 {
+                        nameFieldContainer.backgroundColor = UIColor(red: 255/255, green: 219/255, blue: 219/255, alpha: 0.6)
+                        self.view.makeToast("20자 이내의 이름을 입력해주세요!", duration: 1.0, position: .center)
+                    } else {
+                        nameFieldContainer.backgroundColor = .focusTableViewSkyBlue
+                    }
+                }
+                
             } else if textField == searchTextField {
                 searchContainerView.backgroundColor = .focusTableViewSkyBlue
             }
@@ -270,15 +301,19 @@ extension AddFridgeViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
         textView.textColor = .black
+        detailContainerView.backgroundColor = .notInputColor
     }
     
     func textViewDidChange(_ textView: UITextView) {
         setCompleteButtonMode()
         
-        if textView.text.count > 0 {
-            detailContainerView.backgroundColor = .focusTableViewSkyBlue
+        if textView.text.count == 0 {
+            detailContainerView.backgroundColor = .notInputColor
+        } else if textView.text.count > 200 {
+            detailContainerView.backgroundColor = UIColor(red: 255/255, green: 219/255, blue: 219/255, alpha: 0.6)
+            self.view.makeToast("200자 이내의 코멘트를 입력해주세요!", duration: 1.0, position: .center)
         } else {
-            detailContainerView.backgroundColor = .systemGray6
+            detailContainerView.backgroundColor = .focusTableViewSkyBlue
         }
     }
     

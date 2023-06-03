@@ -85,6 +85,16 @@ class EditMyFridgeViewController: UIViewController {
            selectedMember.count > 0,
            let newOwner = mandatedMember {
             
+            if name.count > 20 {
+                showAlert(title: "냉장고 수정 실패", message: "20자가 넘는 이름으로 수정할 수 없습니다.", confirmTitle: "확인")
+                return
+            }
+            
+            if fridgeCommentTextView.text.count > 200 {
+                showAlert(title: "냉장고 수정 실패", message: "200자가 넘는 코멘트로 수정할 수 없습니다.", confirmTitle: "확인")
+                return
+            }
+            
             var memberIdxs:[UserIndexModel] = []
             selectedMember.forEach { member in memberIdxs.append(UserIndexModel(userIdx: member.userIdx)) }
             
@@ -160,11 +170,14 @@ class EditMyFridgeViewController: UIViewController {
         let backItem = UIButton()
         backItem.setImage(UIImage(named: "backIcon"), for: .normal)
         backItem.addTarget(self, action: #selector(didTapBackItem), for: .touchUpInside)
+        backItem.frame = CGRect(x: 0, y: 0, width: 35, height: 20)
         
         self.navigationItem.leftBarButtonItems = [
             UIBarButtonItem(customView: backItem),
             UIBarButtonItem(customView: mainText)
         ]
+        
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     private func setupLayouts() {
@@ -281,7 +294,15 @@ class EditMyFridgeViewController: UIViewController {
             
             switch textField {
             case fridgeNameTextField:
-                fridgeNameContainerView.backgroundColor = .focusTableViewSkyBlue
+                if let name = fridgeNameTextField.text {
+                    if name.count > 20 {
+                        fridgeNameContainerView.backgroundColor = UIColor(red: 255/255, green: 219/255, blue: 219/255, alpha: 0.6)
+                        self.view.makeToast("20자 이내의 이름을 입력해주세요!", duration: 1.0, position: .center)
+                    } else {
+                        fridgeNameContainerView.backgroundColor = .focusTableViewSkyBlue
+                    }
+                }
+                
             case memberSearchTextField:
                 memberSearchContainerView.backgroundColor = .focusTableViewSkyBlue
             case mandateTextField:
@@ -379,13 +400,17 @@ extension EditMyFridgeViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
         textView.textColor = .black
+        fridgeCommentContainerView.backgroundColor = .notInputColor
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        if textView.text.count > 0 {
-            fridgeCommentContainerView.backgroundColor = .focusTableViewSkyBlue
-        } else {
+        if textView.text.count == 0 {
             fridgeCommentContainerView.backgroundColor = .notInputColor
+        } else if textView.text.count > 200 {
+            fridgeCommentContainerView.backgroundColor = UIColor(red: 255/255, green: 219/255, blue: 219/255, alpha: 0.6)
+            self.view.makeToast("200자 이내의 코멘트를 입력해주세요!", duration: 1.0, position: .center)
+        } else {
+            fridgeCommentContainerView.backgroundColor = .focusTableViewSkyBlue
         }
     }
     

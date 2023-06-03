@@ -40,6 +40,11 @@ class CompleteBuyingViewController: UIViewController {
         CartViewModel.shared.removeFoodNames.removeAll()
     }
     @IBAction func didTapRightButton(_ sender: UIButton) {
+        if self.selectedFoods.count == 0 {
+            self.view.makeToast("1개 이상의 식품을 선택해주세요!", duration: 1.0, position: .bottom)
+            return
+        }
+        
         let storyboard = UIStoryboard.init(name: "FoodAdd", bundle: nil)
         guard let foodAddViewController = storyboard.instantiateViewController(withIdentifier: "FoodAddViewController") as? FoodAddViewController else { return }
         

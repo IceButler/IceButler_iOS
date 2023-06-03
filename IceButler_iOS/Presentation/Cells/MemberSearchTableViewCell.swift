@@ -28,7 +28,14 @@ class MemberSearchTableViewCell: UITableViewCell {
     
     public func configure(data: FridgeUser) {
         if let urlStr = data.profileImgUrl {
-            profileImgView.kf.setImage(with: URL(string: urlStr))
+            if urlStr == "https://ice-bulter-iamge-bucket.s3.ap-northeast-2.amazonaws.com/" {
+                profileImgView.image = UIImage(named: "defaultProfile")
+            } else {
+                let url = URL(string: urlStr)
+                profileImgView.kf.setImage(with: url)
+            }
+        } else {
+            profileImgView.image = UIImage(named: "defaultProfile")
         }
         nicknameLabel.text = data.nickname
     }
