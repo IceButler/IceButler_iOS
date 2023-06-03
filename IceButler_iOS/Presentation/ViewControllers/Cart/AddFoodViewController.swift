@@ -109,7 +109,7 @@ class AddFoodViewController: UIViewController {
         self.searchTextField.borderStyle = .none
         self.completeButton.backgroundColor = .systemGray5
         self.completeButton.tintColor = .white
-        self.completeButton.layer.cornerRadius = 23
+        self.completeButton.layer.cornerRadius = 24
         
         searchResultContainerView.layer.cornerRadius = 23
         searchResultContainerView.isHidden = true
