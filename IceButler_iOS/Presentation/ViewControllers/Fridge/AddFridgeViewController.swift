@@ -81,10 +81,19 @@ class AddFridgeViewController: UIViewController {
             if self.searchTextField.text?.count ?? 0 > 0 {
                 FridgeViewModel.shared.searchMember(nickname: self.searchTextField.text!, completion: {
                     self.searchMember = FridgeViewModel.shared.searchMemberResults
-                    self.tableViewHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
-                    self.memberCollectionView.isHidden = true
-                    self.searchResultContainerView.isHidden = false
-                    self.memberSearchTableView.reloadData()
+                    
+                    if self.searchMember.count > 0 {
+                        self.tableViewHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
+                        self.memberCollectionView.isHidden = true
+                        self.searchResultContainerView.isHidden = false
+                        self.memberSearchTableView.reloadData()
+                        
+                    } else {
+                        self.view.makeToast("멤버 검색 결과가 없습니다!", duration: 1.0, position: .center)
+                        self.memberCollectionView.isHidden = false
+                        self.searchResultContainerView.isHidden = true
+                    }
+                    
                 })
             }
             else { self.showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }

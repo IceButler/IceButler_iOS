@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 import Toast_Swift
 
 class EditMyFridgeViewController: UIViewController {
@@ -50,46 +51,65 @@ class EditMyFridgeViewController: UIViewController {
     @IBOutlet weak var completeButton: UIButton!
     
     @IBAction func didTapMemberSearchButton(_ sender: UIButton) {
-        if memberSearchTextField.text?.count ?? 0 > 0 {
-            searchMember.removeAll()
-            FridgeViewModel.shared.searchMemberResults.removeAll()
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            if self.memberSearchTextField.text?.count ?? 0 > 0 {
+                self.searchMember.removeAll()
+                FridgeViewModel.shared.searchMemberResults.removeAll()
 
-            FridgeViewModel.shared.searchMember(nickname: memberSearchTextField.text!, completion: {
-                self.searchMember = FridgeViewModel.shared.searchMemberResults
-                if self.searchMember.count > 0 {
-                    self.memberResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
-                    self.selectedMemberCollectionView.isHidden = true
-                    self.memberSearchResultContainerView.isHidden = false
-                    self.searchTableView.reloadData()
-                } else {
-                    self.view.makeToast("멤버 검색 결과가 없습니다!", duration: 1.0, position: .center)
-                }
-            })
+                FridgeViewModel.shared.searchMember(nickname: self.memberSearchTextField.text!, completion: {
+                    self.searchMember = FridgeViewModel.shared.searchMemberResults
+                    if self.searchMember.count > 0 {
+                        self.memberResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
+                        self.selectedMemberCollectionView.isHidden = true
+                        self.memberSearchResultContainerView.isHidden = false
+                        self.searchTableView.reloadData()
+                    } else {
+                        self.view.makeToast("멤버 검색 결과가 없습니다!", duration: 1.0, position: .center)
+                        self.memberSearchResultContainerView.isHidden = true
+                    }
+                })
+            }
+            else { self.showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
+            
+            hud.dismiss(animated: true)
         }
-        else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
     }
     
     @IBAction func didTapMandateSearchButton(_ sender: UIButton) {
-        if mandateTextField.text?.count ?? 0 > 0 {
-            searchMember.removeAll()
-            FridgeViewModel.shared.searchMemberResults.removeAll()
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
             
-            FridgeViewModel.shared.searchMember(nickname: mandateTextField.text!, completion: {
-                self.searchMember = FridgeViewModel.shared.searchMemberResults
-                if self.searchMember.count > 0 {
-                    self.mandateResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
-                    self.mandateTableView.isHidden = false
-                    self.mandateResultContainerView.isHidden = false
-                    self.mandateTableView.reloadData()
-                    
-                } else {
-                    self.view.makeToast("멤버 검색 결과가 없습니다!", duration: 1.0, position: .center)
-                    self.mandateTableView.isHidden = true
-                    self.mandateResultContainerView.isHidden = true
-                }
-            })
+            if self.mandateTextField.text?.count ?? 0 > 0 {
+                self.searchMember.removeAll()
+                FridgeViewModel.shared.searchMemberResults.removeAll()
+                
+                FridgeViewModel.shared.searchMember(nickname: self.mandateTextField.text!, completion: {
+                    self.searchMember = FridgeViewModel.shared.searchMemberResults
+                    if self.searchMember.count > 0 {
+                        self.mandateResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
+                        self.mandateTableView.isHidden = false
+                        self.mandateResultContainerView.isHidden = false
+                        self.mandateTableView.reloadData()
+                        
+                    } else {
+                        self.view.makeToast("멤버 검색 결과가 없습니다!", duration: 1.0, position: .center)
+                        self.mandateTableView.isHidden = true
+                        self.mandateResultContainerView.isHidden = true
+                    }
+                })
+            }
+            else { self.showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
+            
+            hud.dismiss(animated: true)
         }
-        else { showAlert(title: nil, message: "검색어(닉네임)를 입력해주세요!", confirmTitle: "확인") }
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
