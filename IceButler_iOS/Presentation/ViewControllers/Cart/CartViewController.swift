@@ -251,7 +251,6 @@ class CartViewController: UIViewController {
     
     private func setupLayout() {
         self.cartMainTableView.backgroundColor = .clear
-        self.alertView.layer.cornerRadius = 15
         self.addFoodButton.backgroundColor = UIColor.white
         self.addFoodButton.layer.cornerRadius = self.addFoodButton.frame.width / 2
         self.addFoodButton.layer.applyShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 20, spread: 0)
