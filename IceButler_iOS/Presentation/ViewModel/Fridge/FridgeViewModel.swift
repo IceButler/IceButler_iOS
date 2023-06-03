@@ -704,6 +704,8 @@ extension FridgeViewModel {
         fridgeService.addFridge(isMulti: isMulti, name: name, comment: comment, members: members, completion: { response in
             if let fridgeId = response {
                 APIManger.shared.setFridgeIdx(index: fridgeId)
+                UserDefaults.standard.setValue(fridgeId, forKey: "selectedFridgeIdx")
+                UserDefaults.standard.setValue(name, forKey: "selectedFridgeName")
             }
             completion((response != nil) ? true : false)
         })
