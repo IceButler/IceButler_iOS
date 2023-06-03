@@ -88,6 +88,13 @@ class AddFridgeViewController: UIViewController {
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
+        if let name = fridgeNameTextField.text {
+            if name.count > 20 {
+                showAlert(title: "냉장고 추가 실패", message: "20자가 넘는 이름을 가질 수 없습니다.", confirmTitle: "확인")
+                return
+            }
+        }
+        
         if fridgeDetailTextView.text.count > 200 {
             showAlert(title: "냉장고 추가 실패", message: "200자가 넘는 코멘트를 가질 수 없습니다.", confirmTitle: "확인")
             return
@@ -226,7 +233,15 @@ class AddFridgeViewController: UIViewController {
         if textField.text?.count ?? 0 > 0 {
             
             if textField == fridgeNameTextField {
-                nameFieldContainer.backgroundColor = .focusTableViewSkyBlue
+                if let name = fridgeNameTextField.text {
+                    if name.count > 20 {
+                        nameFieldContainer.backgroundColor = UIColor(red: 255/255, green: 153/255, blue: 153/255, alpha: 1)
+                        self.view.makeToast("20자 이내의 이름을 입력해주세요!", duration: 1.0, position: .center)
+                    } else {
+                        nameFieldContainer.backgroundColor = .focusTableViewSkyBlue
+                    }
+                }
+                
             } else if textField == searchTextField {
                 searchContainerView.backgroundColor = .focusTableViewSkyBlue
             }
