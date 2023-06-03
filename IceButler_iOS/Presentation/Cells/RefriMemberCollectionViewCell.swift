@@ -37,8 +37,13 @@ class RefriMemberCollectionViewCell: UICollectionViewCell {
     public func configure(data: FridgeUser) {
         nickname.text = data.nickname
         if let imgUrlStr = data.profileImgUrl {
-            let url = URL(string: imgUrlStr)
-            profileImgView.kf.setImage(with: url)
+            if (imgUrlStr == "https://ice-bulter-iamge-bucket.s3.ap-northeast-2.amazonaws.com/")
+                || (imgUrlStr == "https://ice-bulter-iamge-bucket.s3.ap-northeast-2.amazonaws.com/null") {
+                profileImgView.image = UIImage(named: "defaultProfile")
+            } else {
+                let url = URL(string: imgUrlStr)
+                profileImgView.kf.setImage(with: url)
+            }
         }
         else { profileImgView.image = UIImage(named: "defaultProfile") }
         if data.role == "OWNER" { setupMainMemberProfile()  }
