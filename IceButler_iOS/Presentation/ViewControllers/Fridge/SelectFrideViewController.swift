@@ -113,6 +113,7 @@ class SelectFrideViewController: UIViewController {
     
     @IBAction func didTapAddFridgeButton(_ sender: UIButton) {
         guard let vc = storyboard?.instantiateViewController(identifier: "AddFridgeViewController") as? AddFridgeViewController else { return }
+        vc.delegate = self
         let addVC = UINavigationController(rootViewController: vc)
         addVC.modalPresentationStyle = .fullScreen
         addVC.isNavigationBarHidden = true
@@ -168,4 +169,10 @@ extension SelectFrideViewController: UITableViewDelegate, UITableViewDataSource 
         self.dismiss(animated: true)
     }
         
+}
+
+extension SelectFrideViewController: AddFridgeDelegate {
+    func setNewFidgeNameTitle(name: String) {
+        self.delegate?.updateMainFridge(title: name)
+    }
 }

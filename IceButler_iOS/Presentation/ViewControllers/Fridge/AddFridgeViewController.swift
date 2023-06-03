@@ -8,9 +8,15 @@
 import UIKit
 import JGProgressHUD
 
+protocol AddFridgeDelegate {
+    func setNewFidgeNameTitle(name: String)
+}
+
 class AddFridgeViewController: UIViewController {
 
-    // MARK: @IBOutlet, Variables    
+    // MARK: @IBOutlet, Variables
+    var delegate: AddFridgeDelegate?
+    
     private var isPersonalfridge: Bool = false
     private var isMultifridge: Bool = false
     private var searchMember: [FridgeUser] = []
@@ -116,6 +122,8 @@ class AddFridgeViewController: UIViewController {
                                                     completion: { [weak self] result in
                 if result {
                     self?.dismiss(animated: true)
+                    FridgeViewModel.shared.currentFridgeName = (self?.fridgeNameTextField.text)!
+                    self?.delegate?.setNewFidgeNameTitle(name: FridgeViewModel.shared.currentFridgeName)
                     FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
                 }
                 else { self?.showAlert(title: nil, message: "냉장고 추가에 실패하였습니다", confirmTitle: "확인") }
