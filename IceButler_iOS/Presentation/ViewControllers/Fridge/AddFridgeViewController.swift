@@ -263,15 +263,17 @@ class AddFridgeViewController: UIViewController {
                 }
                 
             } else if textField == searchTextField {
+                searchResultContainerView.isHidden = true
+                memberCollectionView.isHidden = false
                 searchContainerView.backgroundColor = .focusTableViewSkyBlue
             }
             
         } else {
             
             if textField == fridgeNameTextField {
-                nameFieldContainer.backgroundColor = .systemGray6
+                nameFieldContainer.backgroundColor = .notInputColor
             } else if textField == searchTextField {
-                searchContainerView.backgroundColor = .systemGray6
+                searchContainerView.backgroundColor = .notInputColor
             }
             
         }

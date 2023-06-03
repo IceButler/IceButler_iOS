@@ -336,8 +336,11 @@ class EditMyFridgeViewController: UIViewController {
                 }
                 
             case memberSearchTextField:
+                memberSearchResultContainerView.isHidden = true
+                selectedMemberCollectionView.isHidden = false
                 memberSearchContainerView.backgroundColor = .focusTableViewSkyBlue
             case mandateTextField:
+                mandateResultContainerView.isHidden = true
                 mandateSearchContainerView.backgroundColor = .focusTableViewSkyBlue
             default: return
             }
@@ -346,11 +349,11 @@ class EditMyFridgeViewController: UIViewController {
 
             switch textField {
             case fridgeNameTextField:
-                fridgeNameContainerView.backgroundColor = .systemGray6
+                fridgeNameContainerView.backgroundColor = .notInputColor
             case memberSearchTextField:
-                memberSearchContainerView.backgroundColor = .systemGray6
+                memberSearchContainerView.backgroundColor = .notInputColor
             case mandateTextField:
-                mandateSearchContainerView.backgroundColor = .systemGray6
+                mandateSearchContainerView.backgroundColor = .notInputColor
             default: return
             }
         }
