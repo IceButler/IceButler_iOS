@@ -208,6 +208,8 @@ extension AuthViewModel {
     func logout() {
         authService.requestLogout {
             self.removeAllData()
+            FridgeViewModel.shared.removeFridgeIdx()
+            UserViewModel.shared.userInfo = nil
         }
     }
     

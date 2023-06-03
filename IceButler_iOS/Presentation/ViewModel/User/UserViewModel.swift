@@ -35,6 +35,8 @@ class UserViewModel: ObservableObject {
         userService.deleteUser { result in
             if result == true {
                 AuthViewModel.shared.removeAllData()
+                FridgeViewModel.shared.removeFridgeIdx()
+                self.userInfo = nil
             }
         }
     }

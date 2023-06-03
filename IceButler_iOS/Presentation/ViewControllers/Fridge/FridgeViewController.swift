@@ -63,6 +63,7 @@ class FridgeViewController: TabmanViewController {
                 if let bar = self.bar {
                     self.removeBar(bar)
                 }
+                self.setupleftBarItems(title: "냉장고 미선택")
             }else {
                 FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
                 self.noFridgeImageView.isHidden = true
@@ -74,7 +75,6 @@ class FridgeViewController: TabmanViewController {
                 }else {
                     self.addBar(self.bar, dataSource: self, at: .top)
                 }
-                
             }
         }
         
