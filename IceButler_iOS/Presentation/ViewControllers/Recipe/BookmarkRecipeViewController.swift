@@ -24,6 +24,18 @@ class BookmarkRecipeViewController: BaseViewController {
         setup()
         setupLayout()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // 상세 화면에서 레시피 즐겨찾기 했을 경우
+        if let cellIndexPath = RecipeViewModel.shared.cellIndexPathToRelaod {
+            var indexPaths: [IndexPath] = []
+            indexPaths.append(cellIndexPath)
+            recipeCollectionView.reloadItems(at: indexPaths)
+            RecipeViewModel.shared.cellIndexPathToRelaod = nil
+        }
+    }
 
     @IBAction func didTapBackBtn(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
@@ -157,8 +169,8 @@ extension BookmarkRecipeViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let recipeDetailViewController = storyboard!.instantiateViewController(withIdentifier: "RecipeDetailViewController") as? RecipeDetailViewController else { return }
         let selectedRecipeCell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
-        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!)
-        recipeDetailViewController.modalPresentationStyle = .overFullScreen
+        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!, indexPath: indexPath, recipeType: .bookmark)
+        recipeDetailViewController.modalPresentationStyle = .fullScreen
         self.present(recipeDetailViewController, animated: true)
     }
     

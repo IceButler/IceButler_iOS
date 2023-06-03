@@ -153,9 +153,9 @@ extension MyRecipeViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let recipeDetailViewController = storyboard!.instantiateViewController(withIdentifier: "RecipeDetailViewController") as? RecipeDetailViewController else { return }
         let selectedRecipeCell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
-        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!, isFromMyRecipe: true)
+        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!, indexPath: indexPath, recipeType: .myrecipe, isFromMyRecipe: true)
         let viewController = UINavigationController(rootViewController: recipeDetailViewController)
-        viewController.modalPresentationStyle = .overFullScreen
+        viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: true)
     }
     

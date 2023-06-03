@@ -32,3 +32,11 @@ enum RecipeSearchAPICategory: String, CaseIterable {
     case recipe = "레시피"
     case food = "음식"
 }
+
+enum RecipeType: CaseIterable {
+    case popular
+    case fridge
+    case bookmark
+    case myrecipe
+    case search
+}

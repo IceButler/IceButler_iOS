@@ -118,6 +118,26 @@ extension APIManger {
             }
             .resume()
     }
+    
+    func getRecipeData<U: Decodable>(urlEndpointString: String,
+                               responseDataType: U.Type,
+                               completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
+
+        guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
+
+        AF
+            .request(url, method: .get, encoding: URLEncoding.queryString, headers: self.headers)
+            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
+                print(response)
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
           
     func getListData<U: Decodable>(urlEndpointString: String,
                                responseDataType: U.Type,

@@ -135,4 +135,17 @@ class RecipeService {
             }
         }
     }
+    
+    func getRecipeInfo(fridgeType: FridgeType, fridgeIdx: Int, recipeIdx: Int, completion: @escaping (GeneralResponseModel<Recipe>) -> Void) {
+        switch fridgeType {
+        case .homeUse:
+            APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)/info/\(recipeIdx)", responseDataType: Recipe.self) { response in
+                completion(response)
+            }
+        case .multiUse:
+            APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/\(fridgeIdx)/info/\(recipeIdx)", responseDataType: Recipe.self) { response in
+                completion(response)
+            }
+        }
+    }
 }

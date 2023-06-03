@@ -10,6 +10,8 @@ import UIKit
 class RecipeDetailViewController: BaseViewController {
     
     private var recipeIdx: Int!
+    private var indexPath: IndexPath!
+    private var recipeType: RecipeType? = .none
     private var isFromMyRecipe: Bool = false
     private var recipeDetail: RecipeDetailResponseModel!
     @IBOutlet var naviItem: UINavigationItem!
@@ -109,10 +111,14 @@ class RecipeDetailViewController: BaseViewController {
         cookingProcessTableView.separatorStyle = .none
     }
     
-    func configure(recipeIdx: Int, isFromMyRecipe: Bool? = nil) {
+    func configure(recipeIdx: Int, indexPath: IndexPath, recipeType: RecipeType? = nil, isFromMyRecipe: Bool? = nil) {
         self.recipeIdx = recipeIdx
-        if isFromMyRecipe != nil {
-            self.isFromMyRecipe = isFromMyRecipe!
+        self.indexPath = indexPath
+        if let recipeType = recipeType {
+            self.recipeType = recipeType
+        }
+        if let isFromMyRecipe = isFromMyRecipe {
+            self.isFromMyRecipe = isFromMyRecipe
         }
     }
     
@@ -220,6 +226,7 @@ class RecipeDetailViewController: BaseViewController {
     
     @objc private func didTapBookmarkButton(_ sender: Any) {
         RecipeViewModel.shared.updateBookmarkStatus(recipeIdx: recipeIdx) { bookmarkStatus in
+            RecipeViewModel.shared.needToReloadCell(recipeIdx: self.recipeIdx, indexPath: self.indexPath, recipeType: self.recipeType)
             self.setLikeStatus(isTrue: bookmarkStatus)
         }
     }

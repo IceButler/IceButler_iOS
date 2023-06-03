@@ -28,14 +28,21 @@ class RecipeSearchViewController: BaseViewController {
         initSearchBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // 상세 화면에서 레시피 즐겨찾기 했을 경우
+        if let cellIndexPath = RecipeViewModel.shared.cellIndexPathToRelaod {
+            var indexPaths: [IndexPath] = []
+            indexPaths.append(cellIndexPath)
+            recipeCollectionView.reloadItems(at: indexPaths)
+            RecipeViewModel.shared.cellIndexPathToRelaod = nil
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setSearchBarRightView()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        RecipeViewModel.shared.searchRecipeList.removeAll()
     }
     
     private func fetchData() {
@@ -164,10 +171,12 @@ class RecipeSearchViewController: BaseViewController {
     }
     
     @objc func didTapSearchButton(_ gesture: UITapGestureRecognizer) {
-        view.endEditing(true)
-        currentLoadedPageNumber = -1
-        keyword = searchBar.searchTextField.text
-        fetchData()
+        if !(searchBar.searchTextField.text?.isEmpty ?? true) {
+            view.endEditing(true)
+            currentLoadedPageNumber = -1
+            keyword = searchBar.searchTextField.text
+            fetchData()
+        }
     }
     
     @IBAction func didTapBackButton(_ sender: Any) {
@@ -186,11 +195,14 @@ class RecipeSearchViewController: BaseViewController {
 
 extension RecipeSearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
-        currentLoadedPageNumber = -1
-        keyword = textField.text
-        fetchData()
-        return true
+        if !(textField.text?.isEmpty ?? true) {
+            view.endEditing(true)
+            currentLoadedPageNumber = -1
+            keyword = textField.text
+            fetchData()
+            return true
+        }
+        return false
     }
 }
 
@@ -225,8 +237,8 @@ extension RecipeSearchViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let recipeDetailViewController = storyboard!.instantiateViewController(withIdentifier: "RecipeDetailViewController") as? RecipeDetailViewController else { return }
         let selectedRecipeCell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
-        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!)
-        recipeDetailViewController.modalPresentationStyle = .overFullScreen
+        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!, indexPath: indexPath, recipeType: .search)
+        recipeDetailViewController.modalPresentationStyle = .fullScreen
         self.present(recipeDetailViewController, animated: true)
     }
     

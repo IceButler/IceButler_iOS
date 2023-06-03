@@ -43,6 +43,13 @@ class PopularRecipeViewController: BaseViewController {
                 fetchData()
                 RecipeViewModel.shared.needToUpdateRecipe(inPopular: false)
             }
+            // 상세 화면에서 레시피 즐겨찾기 했을 경우
+            else if let cellIndexPath = RecipeViewModel.shared.cellIndexPathToRelaod {
+                var indexPaths: [IndexPath] = []
+                indexPaths.append(cellIndexPath)
+                recipeCollectionView.reloadItems(at: indexPaths)
+                RecipeViewModel.shared.cellIndexPathToRelaod = nil
+            }
         }
     }
     
@@ -137,8 +144,8 @@ extension PopularRecipeViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let recipeDetailViewController = storyboard!.instantiateViewController(withIdentifier: "RecipeDetailViewController") as? RecipeDetailViewController else { return }
         let selectedRecipeCell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
-        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!)
-        recipeDetailViewController.modalPresentationStyle = .overFullScreen
+        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!, indexPath: indexPath, recipeType: .popular)
+        recipeDetailViewController.modalPresentationStyle = .fullScreen
         self.present(recipeDetailViewController, animated: true)
     }
     

@@ -25,6 +25,7 @@ class RecipeViewModel: ObservableObject {
     var fridgeTypeOfPopularRecipe: FridgeType = .homeUse
     var needToUpdateFridgeRecipe: Bool = false
     var needToUpdatePopularRecipe: Bool = false
+    var cellIndexPathToRelaod: IndexPath? = nil
     var fridgeRecipeIsLastPage: Bool = false
     var popularRecipeIsLastPage: Bool = false
     var bookmarkRecipeIsLastPage: Bool = false
@@ -385,6 +386,47 @@ class RecipeViewModel: ObservableObject {
         }
         if let inPopular = inPopular {
             needToUpdatePopularRecipe = inPopular
+        }
+    }
+    
+    func needToReloadCell(recipeIdx: Int, indexPath: IndexPath, recipeType: RecipeType? = nil) {
+        cellIndexPathToRelaod = indexPath
+        
+        switch APIManger.shared.getIsMultiFridge() {
+        case true:
+            recipeService.getRecipeInfo(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx(), recipeIdx: recipeIdx) { response in
+                if let recipe = response.data {
+                    switch recipeType {
+                    case .popular:
+                        self.popularRecipeList[indexPath.row] = recipe
+                    case .fridge:
+                        self.fridgeRecipeList[indexPath.row] = recipe
+                    case .bookmark:
+                        self.bookmarkRecipeList[indexPath.row] = recipe
+                    case .search:
+                        self.searchRecipeList[indexPath.row] = recipe
+                    default:
+                        break
+                    }
+                }
+            }
+        case false:
+            recipeService.getRecipeInfo(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx(), recipeIdx: recipeIdx) { response in
+                if let recipe = response.data {
+                    switch recipeType {
+                    case .popular:
+                        self.popularRecipeList[indexPath.row] = recipe
+                    case .fridge:
+                        self.fridgeRecipeList[indexPath.row] = recipe
+                    case .bookmark:
+                        self.bookmarkRecipeList[indexPath.row] = recipe
+                    case .search:
+                        self.searchRecipeList[indexPath.row] = recipe
+                    default:
+                        break
+                    }
+                }
+            }
         }
     }
 }
