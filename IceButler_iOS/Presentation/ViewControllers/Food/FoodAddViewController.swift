@@ -393,7 +393,7 @@ class FoodAddViewController: UIViewController {
                                                       shelfLife: "",
                                                       memo: nil,
                                                       imgKey: nil,
-                                                      ownerIdx: -1))
+                                                      ownerIdx: nil))
             }
         }
     }
@@ -671,8 +671,10 @@ class FoodAddViewController: UIViewController {
             if datePickerOpenButton.title(for: .normal) != "소비기한을 입력해주세요." {
                 savedFoods[currentFoodIndex].shelfLife = datePickerOpenButton.title(for: .normal)!
             }
-            if foodOwnerIdx != -1 {
-                savedFoods[currentFoodIndex].ownerIdx = foodOwnerIdx ?? -1
+            if let ownerIdx = foodOwnerIdx,
+                ownerIdx != -1 {
+                
+                savedFoods[currentFoodIndex].ownerIdx = foodOwnerIdx
             }
             if foodMemoTextView.text != "" && foodMemoTextView.text != "메모내용 or 없음" {
                 savedFoods[currentFoodIndex].memo = foodMemoTextView.text
