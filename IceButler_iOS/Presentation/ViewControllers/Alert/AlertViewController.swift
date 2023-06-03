@@ -83,6 +83,7 @@ class AlertViewController: UIViewController {
     private func setupContents() {
         self.titleLabel.text = titleText
         self.contentLabel.text = contentText
+        self.contentLabel.textAlignment = .center
         self.leftButton.setTitle(self.leftButtonTitle, for: .normal)
         self.rightButton.setTitle(self.righttButtonTitle, for: .normal)
     }
