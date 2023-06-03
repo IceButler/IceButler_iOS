@@ -88,6 +88,11 @@ class AddFridgeViewController: UIViewController {
     }
     
     @IBAction func didTapCompleteButton(_ sender: UIButton) {
+        if fridgeDetailTextView.text.count > 200 {
+            showAlert(title: "냉장고 추가 실패", message: "200자가 넘는 코멘트를 가질 수 없습니다.", confirmTitle: "확인")
+            return
+        }
+        
         DispatchQueue.main.async {
             let hud = JGProgressHUD()
             hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
@@ -270,15 +275,19 @@ extension AddFridgeViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
         textView.textColor = .black
+        detailContainerView.backgroundColor = .notInputColor
     }
     
     func textViewDidChange(_ textView: UITextView) {
         setCompleteButtonMode()
         
-        if textView.text.count > 0 {
-            detailContainerView.backgroundColor = .focusTableViewSkyBlue
+        if textView.text.count == 0 {
+            detailContainerView.backgroundColor = .notInputColor
+        } else if textView.text.count > 200 {
+            detailContainerView.backgroundColor = UIColor(red: 255/255, green: 153/255, blue: 153/255, alpha: 1)
+            self.view.makeToast("200자 이내의 코멘트를 입력해주세요!", duration: 1.0, position: .center)
         } else {
-            detailContainerView.backgroundColor = .systemGray6
+            detailContainerView.backgroundColor = .focusTableViewSkyBlue
         }
     }
     
