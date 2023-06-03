@@ -115,9 +115,12 @@ class AddFridgeViewController: UIViewController {
             var memberIdx:[Int] = []
             self.selectedMember.forEach { member in memberIdx.append(member.userIdx) }
             
+            var comment = self.fridgeDetailTextView.text
+            if comment == "200자 이내로 작성해주세요." { comment = "" }
+            
             FridgeViewModel.shared.requestAddFridge(isMulti: self.isMultifridge,
                                                     name: self.fridgeNameTextField.text!,
-                                                    comment: self.fridgeDetailTextView.text!,
+                                                    comment: comment!,
                                                     members: memberIdx,
                                                     completion: { [weak self] result in
                 if result {
