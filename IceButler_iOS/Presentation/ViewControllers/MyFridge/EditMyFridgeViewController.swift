@@ -294,7 +294,7 @@ class EditMyFridgeViewController: UIViewController {
             case fridgeNameTextField:
                 if let name = fridgeNameTextField.text {
                     if name.count > 20 {
-                        fridgeNameContainerView.backgroundColor = UIColor(red: 255/255, green: 153/255, blue: 153/255, alpha: 1)
+                        fridgeNameContainerView.backgroundColor = UIColor(red: 255/255, green: 219/255, blue: 219/255, alpha: 0.6)
                         self.view.makeToast("20자 이내의 이름을 입력해주세요!", duration: 1.0, position: .center)
                     } else {
                         fridgeNameContainerView.backgroundColor = .focusTableViewSkyBlue
@@ -405,7 +405,7 @@ extension EditMyFridgeViewController: UITextViewDelegate {
         if textView.text.count == 0 {
             fridgeCommentContainerView.backgroundColor = .notInputColor
         } else if textView.text.count > 200 {
-            fridgeCommentContainerView.backgroundColor = UIColor(red: 255/255, green: 153/255, blue: 153/255, alpha: 1)
+            fridgeCommentContainerView.backgroundColor = UIColor(red: 255/255, green: 219/255, blue: 219/255, alpha: 0.6)
             self.view.makeToast("200자 이내의 코멘트를 입력해주세요!", duration: 1.0, position: .center)
         } else {
             fridgeCommentContainerView.backgroundColor = .focusTableViewSkyBlue
