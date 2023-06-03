@@ -90,6 +90,11 @@ class EditMyFridgeViewController: UIViewController {
                 return
             }
             
+            if fridgeCommentTextView.text.count > 200 {
+                showAlert(title: "냉장고 수정 실패", message: "200자가 넘는 코멘트로 수정할 수 없습니다.", confirmTitle: "확인")
+                return
+            }
+            
             var memberIdxs:[UserIndexModel] = []
             selectedMember.forEach { member in memberIdxs.append(UserIndexModel(userIdx: member.userIdx)) }
             
@@ -393,13 +398,17 @@ extension EditMyFridgeViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
         textView.textColor = .black
+        fridgeCommentContainerView.backgroundColor = .notInputColor
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        if textView.text.count > 0 {
-            fridgeCommentContainerView.backgroundColor = .focusTableViewSkyBlue
-        } else {
+        if textView.text.count == 0 {
             fridgeCommentContainerView.backgroundColor = .notInputColor
+        } else if textView.text.count > 200 {
+            fridgeCommentContainerView.backgroundColor = UIColor(red: 255/255, green: 153/255, blue: 153/255, alpha: 1)
+            self.view.makeToast("200자 이내의 코멘트를 입력해주세요!", duration: 1.0, position: .center)
+        } else {
+            fridgeCommentContainerView.backgroundColor = .focusTableViewSkyBlue
         }
     }
     
