@@ -50,6 +50,8 @@ class CartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         FoodViewModel.shared.setIsSelectedFood(isSelected: false)
+        CartViewModel.shared.removeFoodIdxes?.removeAll()
+        CartViewModel.shared.removeFoodNames.removeAll()
         DispatchQueue.main.async {
             let hud = JGProgressHUD()
             hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
