@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,22 +36,22 @@
                                 <rect key="frame" x="40" y="336" width="313" height="180"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceT-BT-7Ve">
-                                        <rect key="frame" x="135.66666666666666" y="30" width="41.666666666666657" height="24"/>
+                                        <rect key="frame" x="135.66666666666666" y="25" width="41.666666666666657" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contentcontentcontentcontentcontent" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNY-C3-TrT">
-                                        <rect key="frame" x="25.666666666666686" y="76" width="262" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contentcontentcontentcontentcontent" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNY-C3-TrT">
+                                        <rect key="frame" x="20" y="73" width="273" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="apj-oB-m44">
-                                        <rect key="frame" x="35" y="121.66666666666667" width="243" height="33.333333333333329"/>
+                                        <rect key="frame" x="35" y="127" width="243" height="33"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoU-57-QtL">
-                                                <rect key="frame" x="0.0" y="0.0" width="111.66666666666667" height="33.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="111.66666666666667" height="33"/>
                                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="취소">
@@ -59,25 +59,31 @@
                                                 </buttonConfiguration>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmf-RB-uyk">
-                                                <rect key="frame" x="131.66666666666666" y="0.0" width="111.33333333333334" height="33.333333333333336"/>
+                                                <rect key="frame" x="131.66666666666666" y="0.0" width="111.33333333333334" height="33"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="확인">
                                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
                                                 </buttonConfiguration>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="Kut-fM-ach"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="apj-oB-m44" secondAttribute="trailing" constant="35" id="AlB-2o-wKY"/>
-                                    <constraint firstAttribute="bottom" secondItem="apj-oB-m44" secondAttribute="bottom" constant="25" id="L6l-sL-zyZ"/>
+                                    <constraint firstItem="xNY-C3-TrT" firstAttribute="centerY" secondItem="cs5-wK-1uQ" secondAttribute="centerY" id="DLR-fP-eqa"/>
+                                    <constraint firstAttribute="trailing" secondItem="xNY-C3-TrT" secondAttribute="trailing" constant="20" id="Hns-Om-Bha"/>
+                                    <constraint firstAttribute="bottom" secondItem="apj-oB-m44" secondAttribute="bottom" constant="20" id="L6l-sL-zyZ"/>
                                     <constraint firstItem="xNY-C3-TrT" firstAttribute="centerX" secondItem="cs5-wK-1uQ" secondAttribute="centerX" id="TRL-xe-9bb"/>
                                     <constraint firstItem="apj-oB-m44" firstAttribute="leading" secondItem="cs5-wK-1uQ" secondAttribute="leading" constant="35" id="Wpc-7V-437"/>
+                                    <constraint firstItem="xNY-C3-TrT" firstAttribute="leading" secondItem="cs5-wK-1uQ" secondAttribute="leading" constant="20" id="XO1-Tl-SrQ"/>
                                     <constraint firstAttribute="height" constant="180" id="izw-iy-eWE"/>
-                                    <constraint firstItem="xNY-C3-TrT" firstAttribute="centerY" secondItem="cs5-wK-1uQ" secondAttribute="centerY" constant="-5" id="kAU-89-fKW"/>
-                                    <constraint firstItem="ceT-BT-7Ve" firstAttribute="top" secondItem="cs5-wK-1uQ" secondAttribute="top" constant="30" id="lJM-fb-0Aw"/>
+                                    <constraint firstItem="ceT-BT-7Ve" firstAttribute="top" secondItem="cs5-wK-1uQ" secondAttribute="top" constant="25" id="kfG-wy-l3b"/>
                                     <constraint firstItem="ceT-BT-7Ve" firstAttribute="centerX" secondItem="cs5-wK-1uQ" secondAttribute="centerX" id="oBj-CL-LOF"/>
+                                    <constraint firstItem="apj-oB-m44" firstAttribute="top" secondItem="xNY-C3-TrT" secondAttribute="bottom" constant="20" id="smr-Uk-PRf"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InK-aJ-qrc">
@@ -112,6 +118,7 @@
                         <outlet property="leftButton" destination="YoU-57-QtL" id="MZ9-ah-bO3"/>
                         <outlet property="rightButton" destination="hmf-RB-uyk" id="QUf-dw-6OW"/>
                         <outlet property="titleLabel" destination="ceT-BT-7Ve" id="ZoJ-WD-dAg"/>
+                        <outlet property="viewHeight" destination="izw-iy-eWE" id="e8U-5M-FSy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

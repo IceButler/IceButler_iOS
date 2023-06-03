@@ -10,6 +10,8 @@ import UIKit
 
 class AlertViewController: UIViewController {
     
+    private var height: Int = 180
+    
     private var titleText: String = ""
     private var contentText: String = ""
     private var leftButtonTitle: String = ""
@@ -31,6 +33,8 @@ class AlertViewController: UIViewController {
     @IBOutlet weak var rightButton: UIButton!
     
     @IBOutlet var cancelButton: UIButton!
+    
+    @IBOutlet var viewHeight: NSLayoutConstraint!
     
     
     override func viewDidLoad() {
@@ -57,6 +61,7 @@ class AlertViewController: UIViewController {
     private func setupLayouts() {
         self.navigationController?.isNavigationBarHidden = true
         self.containerView.layer.cornerRadius = 15
+        self.viewHeight.constant = CGFloat(height)
         self.titleLabel.textColor = .signatureBlue
         
         self.leftButton.layer.borderColor = UIColor.lightGray.cgColor
@@ -91,6 +96,10 @@ class AlertViewController: UIViewController {
     func setButtonAction() {
         leftButton.addTarget(self, action: #selector(leftAction), for: .touchUpInside)
         rightButton.addTarget(self, action: #selector(rightAction), for: .touchUpInside)
+    }
+    
+    func setViewHeightConstant(constant: Int) {
+        height = constant
     }
     
     // MARK: @objc methods
