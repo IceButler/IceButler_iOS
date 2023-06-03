@@ -160,7 +160,7 @@ class RecipeViewModel: ObservableObject {
     func getRecipeSearchList(fridgeIdx: Int, fridgeType: FridgeType, category: RecipeSearchUICategory, keyword: String, pageNumberToLoad: Int) {
         var indexArrayToInsert: [IndexPath] = []
         if pageNumberToLoad == 0 {
-            self.searchRecipeList = []
+            self.searchRecipeList.removeAll()
             self.searchRecipeIsLastPage = false
         }
         switch category {
