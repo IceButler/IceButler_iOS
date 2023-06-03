@@ -35,6 +35,8 @@ class FridgeViewModel: ObservableObject {
     
     var defaultFridgeName: String = "냉장고 미선택"
     
+    var currentFridgeName: String = ""
+    
     func fridgeDiscard(completion: @escaping (FridgeDiscard?) -> Void) {
         $fridgeDiscard.sink { frdigeDiscard in
             completion(frdigeDiscard)
@@ -717,6 +719,7 @@ extension FridgeViewModel {
             self.defaultFridgeName = name as! String
             print("현재 냉장고 Idx : \(idx as! Int) | 공용여부 : \(isMulti as! Bool)")
         }
+
     }
     
     func removeFridgeIdx() {

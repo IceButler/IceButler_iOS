@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FoodCategoryCellDelegate {
-    func didTapCategoryButton(category: String)
+    func didTapCategoryButton(category: String, selected: Bool)
 }
 
 class FoodCategoryCollectionViewCell: UICollectionViewCell {
@@ -32,16 +32,7 @@ class FoodCategoryCollectionViewCell: UICollectionViewCell {
     
     public func didTapCategoryCell() {        
         self.isTapped = !self.isTapped
-        if self.isTapped {
-            self.containerView.layer.borderColor = UIColor.signatureBlue.cgColor
-            self.containerView.backgroundColor = .signatureLightBlue
-            self.categoryLabel.textColor = .signatureBlue
-        } else {
-            self.containerView.layer.borderColor = UIColor.lightGray.cgColor
-            self.containerView.backgroundColor = .white
-            self.categoryLabel.textColor = .lightGray
-        }
-        delegate?.didTapCategoryButton(category: self.categoryLabel.text!)
+        delegate?.didTapCategoryButton(category: self.categoryLabel.text!, selected: isTapped)
     }
     
     public func setSelectedMode(selected: Bool) {
@@ -56,4 +47,5 @@ class FoodCategoryCollectionViewCell: UICollectionViewCell {
             self.categoryLabel.textColor = .lightGray
         }
     }
+
 }

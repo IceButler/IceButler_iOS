@@ -189,6 +189,7 @@ class CartViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         self.addFoodButton.isHidden = false
         self.alertView.isHidden = true
+        viewHeightConstraint.constant = CGFloat(170 * (cartFoods.count))
     }
     
     func showAlertView() {
@@ -196,6 +197,7 @@ class CartViewController: UIViewController {
         self.addFoodButton.isHidden = true
         self.alertView.backgroundColor = .signatureBlue
         self.alertView.isHidden = false
+        viewHeightConstraint.constant = CGFloat(170 * (cartFoods.count) + 120)
     }
     
     
