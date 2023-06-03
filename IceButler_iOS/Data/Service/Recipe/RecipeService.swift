@@ -15,12 +15,12 @@ class RecipeService {
         let parameter: Parameters = ["category" : "냉장고", "page" : pageNumberToLoad, "size" : PAGING_SIZE]
         switch fridgeType {
         case .homeUse:
-            print("\(fridgeIdx) - 가정용")
+            print("\(fridgeIdx) - 가정용 - 냉장고")
             APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response)
             }
         case .multiUse:
-            print("\(fridgeIdx) - 공용")
+            print("\(fridgeIdx) - 공용 - 냉장고")
             APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response)
             }
@@ -31,12 +31,12 @@ class RecipeService {
         let parameter: Parameters = ["category" : "인기", "page" : pageNumberToLoad, "size" : PAGING_SIZE]
         switch fridgeType {
         case .homeUse:
-            print("\(fridgeIdx) - 가정용")
+            print("\(fridgeIdx) - 가정용 - 인기")
             APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response)
             }
         case .multiUse:
-            print("\(fridgeIdx) - 공용")
+            print("\(fridgeIdx) - 공용 - 인기")
             APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/\(fridgeIdx)", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response)
             }
@@ -47,10 +47,12 @@ class RecipeService {
         let parameter: Parameters = ["page" : pageNumberToLoad, "size" : PAGING_SIZE]
         switch fridgeType {
         case .homeUse:
+            print("\(fridgeIdx) - 가정용 - 즐겨찾기")
             APIManger.shared.getRecipeData(urlEndpointString: "/recipes/\(fridgeIdx)/bookmark", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response)
             }
         case .multiUse:
+            print("\(fridgeIdx) - 공용 - 즐겨찾기")
             APIManger.shared.getRecipeData(urlEndpointString: "/multiRecipes/\(fridgeIdx)/bookmark", responseDataType: RecipeResponseModel.self, parameter: parameter) { response in
                 completion(response)
             }

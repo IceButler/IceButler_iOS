@@ -108,6 +108,7 @@ class BookmarkRecipeViewController: BaseViewController {
     
     func showServerErrorAlert(description: String? = nil) {
         hideLoading()
+        currentLoadedPageNumber = -1
         recipeCollectionView.setEmptyView(message: "냉장고에 식품을 추가해보세요!")
         if let description = description {
             let alert = UIAlertController(title: "서버 오류 발생", message: description, preferredStyle: .alert)

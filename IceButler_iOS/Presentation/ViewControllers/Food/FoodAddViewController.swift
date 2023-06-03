@@ -708,9 +708,9 @@ class FoodAddViewController: UIViewController {
                                           requestDataType: FoodAddListModel.self,
                                           parameter: param,
                                           completionHandler: { [weak self] response in
-                    
                     print("장보기 완료 후 식품추가 요청 결과 ----> \(response)")
                     if response.statusCode == 200 {
+                        RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
                         self?.showAlert(title: "", message: "음식 등록에 성공하였습니다!")
                         let storyboard = UIStoryboard(name: "Cart", bundle: nil)
                         let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController")
@@ -837,6 +837,7 @@ class FoodAddViewController: UIViewController {
                                                                memo: memo) { result in
                             hud.dismiss(animated: true)
                             if result {
+                                RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
                                 let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
                                 alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
                                     FoodViewModel.shared.deleteAll()
@@ -860,6 +861,7 @@ class FoodAddViewController: UIViewController {
                                                       imgUrl: nil) { result in
                             hud.dismiss(animated: true)
                             if result {
+                                RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
                                 let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
                                 alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
                                     FoodViewModel.shared.deleteAll()
