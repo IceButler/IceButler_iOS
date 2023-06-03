@@ -176,6 +176,8 @@ class EditMyFridgeViewController: UIViewController {
             UIBarButtonItem(customView: backItem),
             UIBarButtonItem(customView: mainText)
         ]
+        
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     private func setupLayouts() {
