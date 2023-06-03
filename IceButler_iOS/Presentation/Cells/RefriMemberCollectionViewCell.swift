@@ -37,9 +37,6 @@ class RefriMemberCollectionViewCell: UICollectionViewCell {
     public func configure(data: FridgeUser) {
         nickname.text = data.nickname
         if let imgUrlStr = data.profileImgUrl {
-//            let url = URL(string: imgUrlStr)
-//            profileImgView.kf.setImage(with: url)
-            // TODO: 프로필 사진 미설정 유저인 경우에 profileImgUrl가 Null값으로 반환되도록 서버 수정되면 이하 if문은 삭제 예정
             if imgUrlStr == "https://ice-bulter-iamge-bucket.s3.ap-northeast-2.amazonaws.com/" {
                 profileImgView.image = UIImage(named: "defaultProfile")
             } else {
