@@ -58,7 +58,6 @@ class CartViewController: UIViewController {
             hud.style = .light
             hud.show(in: self.view)
             
-            self.setupNavigationBar()
             self.configure()
             
             hud.dismiss(animated: true)
@@ -66,6 +65,7 @@ class CartViewController: UIViewController {
 
         self.alertView.isHidden = true
         self.addFoodButton.isHidden = false
+        self.setupNavigationBar()
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -181,7 +181,7 @@ class CartViewController: UIViewController {
             self.navigationController?.pushViewController(alertViewController, animated: true)
             },
                                       leftCompletion: {
-            
+            self.navigationController?.popViewController(animated: true)
             })
         self.navigationController?.pushViewController(alertViewController, animated: true)
     }

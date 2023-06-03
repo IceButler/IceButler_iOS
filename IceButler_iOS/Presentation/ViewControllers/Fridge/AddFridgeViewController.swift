@@ -201,10 +201,10 @@ class AddFridgeViewController: UIViewController {
             nameFieldContainer,
             detailContainerView,
             searchResultContainerView,
-            memberSearchTableView,
-            completeButton
+            memberSearchTableView
             
         ].forEach { btn in btn?.layer.cornerRadius = 12 }
+        completeButton.layer.cornerRadius = 24
         searchContainerView.layer.cornerRadius = 20
     }
     
