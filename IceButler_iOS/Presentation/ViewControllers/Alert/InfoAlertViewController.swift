@@ -50,6 +50,7 @@ class InfoAlertViewController: UIViewController {
                 self?.dismiss(animated: true)
                 switch response.statusCode {
                 case 200:
+                    self?.updateDefaultFridgeInfo()
                     self?.delegate?.reloadMyFridgeVC()
                 default:
                     self?.delegate?.showMessageFailToRemoveFridge(message: response.description ?? "냉장고 삭제에 실패하였습니다")
@@ -63,6 +64,7 @@ class InfoAlertViewController: UIViewController {
                 self?.dismiss(animated: true)
                 switch response.statusCode {
                 case 200:
+                    self?.updateDefaultFridgeInfo()
                     self?.delegate?.reloadMyFridgeVC()
                 default:
                     self?.delegate?.showMessageFailToRemoveFridge(message: response.description ?? "냉장고 삭제에 실패하였습니다")
@@ -70,6 +72,14 @@ class InfoAlertViewController: UIViewController {
             })
         }
         
+    }
+    
+    private func updateDefaultFridgeInfo() {
+        if let removeIdx = UserDefaults.standard.value(forKey: "selectedFridgeIdx") {
+            if (removeIdx as! Int) == removeFridgeIdx {
+                FridgeViewModel.shared.removeFridgeIdx()
+            }
+        }
     }
     
     public func setIsOwner(ownerIdx: Int) {

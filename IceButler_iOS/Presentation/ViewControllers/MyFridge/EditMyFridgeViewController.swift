@@ -95,13 +95,11 @@ class EditMyFridgeViewController: UIViewController {
                     self.searchMember = FridgeViewModel.shared.searchMemberResults
                     if self.searchMember.count > 0 {
                         self.mandateResultTableHeight.constant = CGFloat(50 + 44 * FridgeViewModel.shared.searchMemberResults.count)
-                        self.mandateTableView.isHidden = false
                         self.mandateResultContainerView.isHidden = false
                         self.mandateTableView.reloadData()
                         
                     } else {
                         self.view.makeToast("멤버 검색 결과가 없습니다!", duration: 1.0, position: .center)
-                        self.mandateTableView.isHidden = true
                         self.mandateResultContainerView.isHidden = true
                     }
                 })
@@ -372,6 +370,7 @@ extension EditMyFridgeViewController: UITableViewDelegate, UITableViewDataSource
             cell.selectionStyle = .none
             cell.configure(data: self.searchMember[indexPath.row])
             return cell
+            
         } else if tableView.tag == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MandateTableViewCell", for: indexPath) as? MemberSearchTableViewCell else { return UITableViewCell() }
             cell.backgroundColor = .none

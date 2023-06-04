@@ -232,7 +232,7 @@ class FridgeViewController: TabmanViewController {
 
     @IBAction func fridgeAdd(_ sender: Any) {
         let fridgeAddVC = UIStoryboard(name: "Fridge", bundle: nil).instantiateViewController(withIdentifier: "AddFridgeViewController") as! AddFridgeViewController
-        
+        fridgeAddVC.delegate = self
         fridgeAddVC.modalPresentationStyle = .overFullScreen
         present(fridgeAddVC, animated: true)
     }
@@ -354,7 +354,6 @@ extension FridgeViewController: FoodAddDelegate, SelectFridgeDelegate {
     func updateMainFridge(title: String) {
         setupleftBarItems(title: title)
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
-        
     }
 }
 
@@ -365,3 +364,9 @@ extension FridgeViewController: UISheetPresentationControllerDelegate {
     }
 }
 
+extension FridgeViewController: AddFridgeDelegate {
+    func setNewFidgeNameTitle(name: String) {
+        setupleftBarItems(title: name)
+        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+    }
+}

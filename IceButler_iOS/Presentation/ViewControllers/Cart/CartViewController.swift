@@ -135,6 +135,7 @@ class CartViewController: UIViewController {
     @IBAction func didTapAddFridgeButton(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "Fridge", bundle: nil)
         guard let addFridgeVC = storyboard.instantiateViewController(withIdentifier: "AddFridgeViewController") as? AddFridgeViewController else { return }
+        addFridgeVC.delegate = self
         addFridgeVC.modalPresentationStyle = .overFullScreen
         present(addFridgeVC, animated: true)
     }
@@ -177,13 +178,17 @@ class CartViewController: UIViewController {
                 let name = CartViewModel.shared.removeFoodNames[i]
                 alertViewController.completeFoods.append(BuyedFood(idx: idx, name: name))
             })
+//            alertViewController.modalPresentationStyle = .overCurrentContext
+//            self.present(alertViewController, animated: true)
 
             self.navigationController?.pushViewController(alertViewController, animated: true)
             },
                                       leftCompletion: {
+//            self.dismiss(animated: true)
             self.navigationController?.popViewController(animated: true)
             })
-        self.navigationController?.pushViewController(alertViewController, animated: true)
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        present(alertViewController, animated: true)
     }
     
     
@@ -195,7 +200,6 @@ class CartViewController: UIViewController {
     }
     
     func showAlertView() {
-//        self.tabBarController?.tabBar.isHidden = true
         self.addFoodButton.isHidden = true
         self.alertView.backgroundColor = .signatureBlue
         self.alertView.isHidden = false
@@ -248,7 +252,7 @@ class CartViewController: UIViewController {
         
         self.navigationController?.navigationBar.backgroundColor = .navigationColor
         self.tabBarController?.tabBar.isHidden = false
-        
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     private func setupLayout() {
@@ -310,5 +314,13 @@ extension CartViewController: CLLocationManagerDelegate {
             locationManager.requestWhenInUseAuthorization()
         default: return
         }
+    }
+}
+
+extension CartViewController: AddFridgeDelegate {
+    func setNewFidgeNameTitle(name: String) {
+        configure()
+//        setupleftBarItems(title: name)
+        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
     }
 }

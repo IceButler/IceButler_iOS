@@ -257,21 +257,6 @@
             </objects>
             <point key="canvasLocation" x="242" y="693"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Fex-fY-rgi">
-            <objects>
-                <navigationController navigationBarHidden="YES" id="TyZ-J0-YnU" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="h0L-94-Jgj">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="e03-iN-Dkc" kind="relationship" relationship="rootViewController" id="4eZ-ge-egH"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cCf-eT-7Ru" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-825" y="693"/>
-        </scene>
         <!--Base Alert View Controller-->
         <scene sceneID="Lks-vZ-Pua">
             <objects>
