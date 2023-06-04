@@ -253,7 +253,7 @@
                                                 <rect key="frame" x="16" y="648" width="361" height="200"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bOw-XP-mgs">
-                                                        <rect key="frame" x="0.0" y="50" width="361" height="50"/>
+                                                        <rect key="frame" x="0.0" y="50" width="361" height="150"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MandateTableViewCell" id="6zN-2V-RRp" customClass="MemberSearchTableViewCell" customModule="IceButler_iOS" customModuleProvider="target">
@@ -299,7 +299,7 @@
                                                 <constraints>
                                                     <constraint firstItem="bOw-XP-mgs" firstAttribute="leading" secondItem="ymm-Ji-9hr" secondAttribute="leading" id="H60-a3-Dq6"/>
                                                     <constraint firstAttribute="trailing" secondItem="bOw-XP-mgs" secondAttribute="trailing" id="QCb-5c-IM0"/>
-                                                    <constraint firstAttribute="bottom" secondItem="bOw-XP-mgs" secondAttribute="bottom" constant="100" id="Zz4-3H-Ffb"/>
+                                                    <constraint firstAttribute="bottom" secondItem="bOw-XP-mgs" secondAttribute="bottom" id="Vjd-CX-Ioc"/>
                                                     <constraint firstAttribute="height" constant="200" id="pBH-8f-ozm"/>
                                                     <constraint firstItem="bOw-XP-mgs" firstAttribute="top" secondItem="ymm-Ji-9hr" secondAttribute="top" constant="50" id="uUk-C5-bcb"/>
                                                 </constraints>
@@ -393,7 +393,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhA-wo-8D9">
-                                        <rect key="frame" x="10" y="885" width="373" height="49"/>
+                                        <rect key="frame" x="10" y="931" width="373" height="49"/>
                                         <color key="backgroundColor" red="0.43529411764705883" green="0.63137254901960782" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="49" id="vlk-gm-YtC"/>
