@@ -403,8 +403,10 @@ class FoodAddViewController: UIViewController {
             let food = FoodViewModel.shared.getFood()
             FoodViewModel.shared.deleteAll()
             FoodViewModel.shared.food = food
+            self.foodImage = nil
             navigationController?.popViewController(animated: true)
         }else {
+            self.foodImage = nil
             FoodViewModel.shared.deleteAll()
             navigationController?.popViewController(animated: true)
             delegate?.moveToFoodAddSelect()
@@ -642,14 +644,28 @@ class FoodAddViewController: UIViewController {
                     thumbnail = result!
                 }
                 
-                let data = thumbnail.jpegData(compressionQuality: 0.7)
+                let data = thumbnail.jpegData(compressionQuality: 1)
                 guard let newImage = UIImage(data: data!) else {return}
                 
-                self.foodImage = newImage
+                self.foodImage = self.imageResize(image: newImage, newWidth: 79, newHeight: 79)
+                
+                if self.foodImageUrl != nil {
+                    self.foodImageUrl = nil
+                }
             }
             
             self.foodImageCollectionView.reloadData()
         }
+    }
+    
+    private func imageResize(image: UIImage, newWidth: CGFloat, newHeight: CGFloat) -> UIImage {
+        let size = CGSize(width: newWidth, height: newHeight)
+        let render = UIGraphicsImageRenderer(size: size)
+        let renderImage = render.image { context in
+            image.draw(in: CGRect(origin: .zero, size: size))
+        }
+        
+        return renderImage
     }
     
     private func preSaveFoodInfo() {
@@ -782,6 +798,7 @@ class FoodAddViewController: UIViewController {
                                 RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
                                 let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
                                 alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                                    self.foodImage = nil
                                     FoodViewModel.shared.getFoodDetail( foodIdx: self.foodIdx)
                                     FoodViewModel.shared.isEditFood = false
                                     self.navigationController?.popViewController(animated: true)
@@ -807,6 +824,7 @@ class FoodAddViewController: UIViewController {
                                 RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
                                 let alert = UIAlertController(title: "성공", message: "음식 수정에 성공하셨습니다.", preferredStyle: .alert)
                                 alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                                    self.foodImage = nil
                                     FoodViewModel.shared.isEditFood = false
                                     FoodViewModel.shared.getFoodDetail( foodIdx: self.foodIdx)
                                     self.navigationController?.popViewController(animated: true)
@@ -846,6 +864,7 @@ class FoodAddViewController: UIViewController {
                                 let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
                                 alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
                                     FoodViewModel.shared.deleteAll()
+                                    self.foodImage = nil
                                     self.navigationController?.popViewController(animated: true)
                                 }))
                                 self.present(alert, animated: true)
@@ -870,6 +889,7 @@ class FoodAddViewController: UIViewController {
                                 let alert = UIAlertController(title: "성공", message: "음식 등록에 성공하셨습니다.", preferredStyle: .alert)
                                 alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
                                     FoodViewModel.shared.deleteAll()
+                                    self.foodImage = nil
                                     self.navigationController?.popViewController(animated: true)
                                 }))
                                 self.present(alert, animated: true)
@@ -1115,13 +1135,24 @@ class FoodAddViewController: UIViewController {
             case 2:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodAddImageCell", for: indexPath) as? FoodAddImageCell else {return UICollectionViewCell()}
                 
-                if foodImage != nil {
-                    cell.setImage(image: foodImage!)
-                    cell.hiddenFoodImageAddIcon()
+                if isEdit {
+                    FoodViewModel.shared.foodImage { imgUrl in
+                        cell.configure(imageUrl: imgUrl ?? "")
+                    }
                     
-                } else {
-                    cell.showFoodImageAddIcon()
+                    if foodImage != nil {
+                        cell.setImage(image: foodImage!)
+                    }
+                }else {
+                    if foodImage != nil {
+                        cell.setImage(image: foodImage!)
+                    } else {
+                        cell.showFoodImageAddIcon()
+                    }
                 }
+                
+                
+                
                 
                 return cell
             default:
@@ -1144,9 +1175,7 @@ class FoodAddViewController: UIViewController {
                     FoodViewModel.shared.setIsFoodAddComplete(index: 2)
                 }
             }else if collectionView.tag == 2 {
-                if foodImage == nil {
-                    selectImage()
-                }
+                selectImage()
             }
         }
         

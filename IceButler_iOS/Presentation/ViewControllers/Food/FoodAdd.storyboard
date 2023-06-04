@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="1200"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xkO-9S-eDm">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1178"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1199"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="식품명*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JK2-Wm-fh4">
                                                 <rect key="frame" x="15" y="109" width="43" height="22"/>
@@ -159,10 +159,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hK6-W9-jKo">
-                                                <rect key="frame" x="0.0" y="1025" width="393" height="79"/>
+                                                <rect key="frame" x="0.0" y="1025" width="393" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="79" id="ufJ-1M-M4y"/>
+                                                    <constraint firstAttribute="height" constant="100" id="ufJ-1M-M4y"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VEe-Y4-aI6">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -325,7 +325,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uR-6L-Fvn">
-                                                <rect key="frame" x="15" y="1119" width="361" height="49"/>
+                                                <rect key="frame" x="15" y="1140" width="361" height="49"/>
                                                 <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="49" id="g2u-Kj-8RO"/>

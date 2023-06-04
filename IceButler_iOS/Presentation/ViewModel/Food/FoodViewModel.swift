@@ -53,11 +53,9 @@ class FoodViewModel: ObservableObject {
     }
     
     
-    func foodImage(completion: @escaping (String) -> Void) {
-        $food.filter({ food in
-            food?.imgURL != nil
-        }).sink { food in
-            completion((food?.imgURL)!)
+    func foodImage(completion: @escaping (String?) -> Void) {
+        $food.sink { food in
+            completion(food?.imgURL)
         }.store(in: &cancelLabels)
     }
     
