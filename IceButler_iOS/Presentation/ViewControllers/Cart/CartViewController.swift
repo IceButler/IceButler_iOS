@@ -135,6 +135,7 @@ class CartViewController: UIViewController {
     @IBAction func didTapAddFridgeButton(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "Fridge", bundle: nil)
         guard let addFridgeVC = storyboard.instantiateViewController(withIdentifier: "AddFridgeViewController") as? AddFridgeViewController else { return }
+        addFridgeVC.delegate = self
         addFridgeVC.modalPresentationStyle = .overFullScreen
         present(addFridgeVC, animated: true)
     }
@@ -310,5 +311,13 @@ extension CartViewController: CLLocationManagerDelegate {
             locationManager.requestWhenInUseAuthorization()
         default: return
         }
+    }
+}
+
+extension CartViewController: AddFridgeDelegate {
+    func setNewFidgeNameTitle(name: String) {
+        configure()
+//        setupleftBarItems(title: name)
+        FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
     }
 }
