@@ -25,6 +25,18 @@ class MyRecipeViewController: BaseViewController {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // 상세 화면에서 레시피 수정했을 경우
+        if let cellIndexPath = RecipeViewModel.shared.cellIndexPathToRelaod {
+            var indexPaths: [IndexPath] = []
+            indexPaths.append(cellIndexPath)
+            recipeCollectionView.reloadItems(at: indexPaths)
+            RecipeViewModel.shared.cellIndexPathToRelaod = nil
+        }
+    }
+    
     @IBAction func didTapBackButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }

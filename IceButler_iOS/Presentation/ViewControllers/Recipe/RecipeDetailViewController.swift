@@ -11,7 +11,7 @@ class RecipeDetailViewController: BaseViewController {
     
     private var recipeIdx: Int!
     private var indexPath: IndexPath!
-    private var recipeType: RecipeType? = .none
+    private var recipeType: RecipeType!
     private var isFromMyRecipe: Bool = false
     private var recipeDetail: RecipeDetailResponseModel!
     @IBOutlet var naviItem: UINavigationItem!
@@ -111,12 +111,10 @@ class RecipeDetailViewController: BaseViewController {
         cookingProcessTableView.separatorStyle = .none
     }
     
-    func configure(recipeIdx: Int, indexPath: IndexPath, recipeType: RecipeType? = nil, isFromMyRecipe: Bool? = nil) {
+    func configure(recipeIdx: Int, indexPath: IndexPath, recipeType: RecipeType, isFromMyRecipe: Bool? = nil) {
         self.recipeIdx = recipeIdx
         self.indexPath = indexPath
-        if let recipeType = recipeType {
-            self.recipeType = recipeType
-        }
+        self.recipeType = recipeType
         if let isFromMyRecipe = isFromMyRecipe {
             self.isFromMyRecipe = isFromMyRecipe
         }
@@ -130,7 +128,7 @@ class RecipeDetailViewController: BaseViewController {
                 return [
                     UIAction(title: "레시피 수정", image: UIImage(named: "pencil"), handler: { _ in
                         guard let addRecipeViewController = self.storyboard!.instantiateViewController(withIdentifier: "AddRecipeViewController") as? AddRecipeViewController else { return }
-                        addRecipeViewController.configure(recipeIdx: self.recipeIdx, isEditMode: self.isFromMyRecipe, recipeDetail: self.recipeDetail)
+                        addRecipeViewController.configure(recipeIdx: self.recipeIdx, indexPath: self.indexPath, isEditMode: self.isFromMyRecipe, recipeDetail: self.recipeDetail)
                         self.navigationController?.pushViewController(addRecipeViewController, animated: true)
                     }),
                     UIAction(title: "레시피 삭제", image: UIImage(named: "trash"), attributes: .destructive, handler: { _ in

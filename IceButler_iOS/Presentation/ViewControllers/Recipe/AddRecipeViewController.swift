@@ -49,6 +49,7 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
     
     // 레시피 수정
     private var recipeIdx: Int? = nil
+    private var indexPath: IndexPath? = nil
     private var isEditMode: Bool = false
     private var recipeDetail: RecipeDetailResponseModel? = nil
     
@@ -231,8 +232,9 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
         changeNextButtonColor()
     }
     
-    func configure(recipeIdx: Int, isEditMode: Bool, recipeDetail: RecipeDetailResponseModel) {
+    func configure(recipeIdx: Int, indexPath: IndexPath, isEditMode: Bool, recipeDetail: RecipeDetailResponseModel) {
         self.recipeIdx = recipeIdx
+        self.indexPath = indexPath
         self.isEditMode = isEditMode
         self.recipeDetail = recipeDetail
     }
@@ -275,7 +277,7 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
         if nextButton.backgroundColor == .availableBlue {
             guard let addRecipeSecondViewController = storyboard!.instantiateViewController(withIdentifier: "AddRecipeSecondViewController") as? AddRecipeSecondViewController else { return }
             if isEditMode {
-                addRecipeSecondViewController.configure(recipeIdx: recipeIdx!, isEditMode: isEditMode)
+                addRecipeSecondViewController.configure(recipeIdx: recipeIdx!, indexPath: indexPath!, isEditMode: isEditMode)
             }
             self.firstDateDelegate = addRecipeSecondViewController
             addRecipeSecondViewController.secondDateDelegate = self

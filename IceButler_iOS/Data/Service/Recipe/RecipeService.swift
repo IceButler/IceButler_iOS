@@ -148,4 +148,10 @@ class RecipeService {
             }
         }
     }
+    
+    func getMyRecipeInfo(recipeIdx: Int, completion: @escaping (GeneralResponseModel<MyRecipe>) -> Void) {
+        APIManger.shared.getRecipeData(urlEndpointString: "/recipes/myrecipe/\(recipeIdx)", responseDataType: MyRecipe.self) { response in
+            completion(response)
+        }
+    }
 }

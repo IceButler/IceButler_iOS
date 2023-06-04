@@ -34,6 +34,7 @@ class AddRecipeSecondViewController: BaseViewController, ReceiveFirstDataDelegat
     
     // 레시피 수정
     private var recipeIdx: Int? = nil
+    private var indexPath: IndexPath? = nil
     private var isEditMode: Bool = false
     
     override func viewDidLoad() {
@@ -121,8 +122,9 @@ class AddRecipeSecondViewController: BaseViewController, ReceiveFirstDataDelegat
         completionButton.backgroundColor = .disabledButtonGray
     }
     
-    func configure(recipeIdx: Int, isEditMode: Bool) {
+    func configure(recipeIdx: Int, indexPath: IndexPath, isEditMode: Bool) {
         self.recipeIdx = recipeIdx
+        self.indexPath = indexPath
         self.isEditMode = isEditMode
     }
     
@@ -182,6 +184,7 @@ class AddRecipeSecondViewController: BaseViewController, ReceiveFirstDataDelegat
                                                                   cookingProcessList: addedCookingProcessList) { isSuccess in
                         self.hideLoading()
                         if isSuccess {
+                            RecipeViewModel.shared.needToReloadCell(recipeIdx: self.recipeIdx!, indexPath: self.indexPath!, recipeType: .myrecipe)
                             let alert = UIAlertController(title: "레시피 수정 성공", message: "레시피 수정이 정상적으로 처리되었습니다.", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
                                 self.navigationController?.popToRootViewController(animated: true)

@@ -389,44 +389,53 @@ class RecipeViewModel: ObservableObject {
         }
     }
     
-    func needToReloadCell(recipeIdx: Int, indexPath: IndexPath, recipeType: RecipeType? = nil) {
+    func needToReloadCell(recipeIdx: Int, indexPath: IndexPath, recipeType: RecipeType) {
         cellIndexPathToRelaod = indexPath
         
-        switch APIManger.shared.getIsMultiFridge() {
-        case true:
-            recipeService.getRecipeInfo(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx(), recipeIdx: recipeIdx) { response in
-                if let recipe = response.data {
-                    switch recipeType {
-                    case .popular:
-                        self.popularRecipeList[indexPath.row] = recipe
-                    case .fridge:
-                        self.fridgeRecipeList[indexPath.row] = recipe
-                    case .bookmark:
-                        self.bookmarkRecipeList[indexPath.row] = recipe
-                    case .search:
-                        self.searchRecipeList[indexPath.row] = recipe
-                    default:
-                        break
-                    }
+        if recipeType == .myrecipe {
+            recipeService.getMyRecipeInfo(recipeIdx: recipeIdx) { response in
+                if let myRecipe = response.data {
+                    self.myRecipeList[indexPath.row] = myRecipe
                 }
             }
-        case false:
-            recipeService.getRecipeInfo(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx(), recipeIdx: recipeIdx) { response in
-                if let recipe = response.data {
-                    switch recipeType {
-                    case .popular:
-                        self.popularRecipeList[indexPath.row] = recipe
-                    case .fridge:
-                        self.fridgeRecipeList[indexPath.row] = recipe
-                    case .bookmark:
-                        self.bookmarkRecipeList[indexPath.row] = recipe
-                    case .search:
-                        self.searchRecipeList[indexPath.row] = recipe
-                    default:
-                        break
+        } else {
+            switch APIManger.shared.getIsMultiFridge() {
+            case true:
+                recipeService.getRecipeInfo(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx(), recipeIdx: recipeIdx) { response in
+                    if let recipe = response.data {
+                        switch recipeType {
+                        case .popular:
+                            self.popularRecipeList[indexPath.row] = recipe
+                        case .fridge:
+                            self.fridgeRecipeList[indexPath.row] = recipe
+                        case .bookmark:
+                            self.bookmarkRecipeList[indexPath.row] = recipe
+                        case .search:
+                            self.searchRecipeList[indexPath.row] = recipe
+                        default:
+                            break
+                        }
+                    }
+                }
+            case false:
+                recipeService.getRecipeInfo(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx(), recipeIdx: recipeIdx) { response in
+                    if let recipe = response.data {
+                        switch recipeType {
+                        case .popular:
+                            self.popularRecipeList[indexPath.row] = recipe
+                        case .fridge:
+                            self.fridgeRecipeList[indexPath.row] = recipe
+                        case .bookmark:
+                            self.bookmarkRecipeList[indexPath.row] = recipe
+                        case .search:
+                            self.searchRecipeList[indexPath.row] = recipe
+                        default:
+                            break
+                        }
                     }
                 }
             }
         }
+        
     }
 }
