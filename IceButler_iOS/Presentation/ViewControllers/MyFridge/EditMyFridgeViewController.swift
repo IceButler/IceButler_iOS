@@ -364,9 +364,7 @@ extension EditMyFridgeViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("cellForRowAt called --> tableview.tag = \(tableView.tag)")
         if tableView.tag == 0 {
-            print("cellForRowAt called - SearchTableViewCell")
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? MemberSearchTableViewCell else { return UITableViewCell() }
             cell.backgroundColor = .none
             cell.selectionStyle = .none
@@ -374,7 +372,6 @@ extension EditMyFridgeViewController: UITableViewDelegate, UITableViewDataSource
             return cell
             
         } else if tableView.tag == 1 {
-            print("cellForRowAt called - MandateTableViewCell")
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MandateTableViewCell", for: indexPath) as? MemberSearchTableViewCell else { return UITableViewCell() }
             cell.backgroundColor = .none
             cell.selectionStyle = .none
