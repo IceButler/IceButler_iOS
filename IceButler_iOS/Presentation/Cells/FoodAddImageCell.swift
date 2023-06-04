@@ -24,6 +24,11 @@ class FoodAddImageCell: UICollectionViewCell {
     func configure(imageUrl: String) {
         if let url = URL(string: imageUrl) {
             foodImageView.kf.setImage(with: url)
+            
+            if let image = foodImageView.image {
+                foodImageView.image = imageResize(image: image, newWidth: 49, newHeight: 49)
+            }
+           
             hiddenFoodImageAddIcon()
         }else {
             foodImageView.image = nil
@@ -42,5 +47,15 @@ class FoodAddImageCell: UICollectionViewCell {
 
     func showFoodImageAddIcon() {
         foodImageAddImageView.isHidden = false
+    }
+    
+    private func imageResize(image: UIImage, newWidth: CGFloat, newHeight: CGFloat) -> UIImage {
+        let size = CGSize(width: newWidth, height: newHeight)
+        let render = UIGraphicsImageRenderer(size: size)
+        let renderImage = render.image { context in
+            image.draw(in: CGRect(origin: .zero, size: size))
+        }
+        
+        return renderImage
     }
 }
