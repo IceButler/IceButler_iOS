@@ -37,7 +37,7 @@ class RecipeInFridgeViewController: BaseViewController {
                 currentLoadedPageNumber = -1
                 fetchData()
             }
-            // 사용자가 음식 추가/수정/삭제했을 경우
+            // 사용자가 음식 추가/수정/삭제 or 레시피 추가/수정했을 경우
             else if RecipeViewModel.shared.needToUpdateFridgeRecipe {
                 currentLoadedPageNumber = -1
                 fetchData()
