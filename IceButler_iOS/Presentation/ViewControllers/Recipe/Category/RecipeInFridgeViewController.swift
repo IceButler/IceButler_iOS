@@ -27,14 +27,29 @@ class RecipeInFridgeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let fridgeType: FridgeType
-        if APIManger.shared.getIsMultiFridge() { fridgeType = FridgeType.multiUse }
-        else { fridgeType = FridgeType.homeUse }
-        // 사용자가 냉장고를 변경했을 경우
-        if APIManger.shared.getFridgeIdx() != RecipeViewModel.shared.fridgeIdxOfFridgeRecipe ||
-           fridgeType != RecipeViewModel.shared.fridgeTypeOfFridgeRecipe {
-            currentLoadedPageNumber = -1
-            fetchData()
+        if !isFirstFetch {
+            let fridgeType: FridgeType
+            if APIManger.shared.getIsMultiFridge() { fridgeType = FridgeType.multiUse }
+            else { fridgeType = FridgeType.homeUse }
+            // 사용자가 냉장고를 변경했을 경우
+            if APIManger.shared.getFridgeIdx() != RecipeViewModel.shared.fridgeIdxOfFridgeRecipe ||
+               fridgeType != RecipeViewModel.shared.fridgeTypeOfFridgeRecipe {
+                currentLoadedPageNumber = -1
+                fetchData()
+            }
+            // 사용자가 음식 추가/수정/삭제했을 경우
+            else if RecipeViewModel.shared.needToUpdateFridgeRecipe {
+                currentLoadedPageNumber = -1
+                fetchData()
+                RecipeViewModel.shared.needToUpdateRecipe(inFridge: false)
+            }
+            // 상세 화면에서 레시피 즐겨찾기 했을 경우
+            else if let cellIndexPath = RecipeViewModel.shared.cellIndexPathToRelaod {
+                var indexPaths: [IndexPath] = []
+                indexPaths.append(cellIndexPath)
+                recipeCollectionView.reloadItems(at: indexPaths)
+                RecipeViewModel.shared.cellIndexPathToRelaod = nil
+            }
         }
     }
     
@@ -80,6 +95,7 @@ class RecipeInFridgeViewController: BaseViewController {
     
     func showServerErrorAlert(description: String? = nil) {
         hideLoading()
+        currentLoadedPageNumber = -1
         recipeCollectionView.setEmptyView(message: "냉장고에 식품을 추가해보세요!")
         if let description = description {
             let alert = UIAlertController(title: "서버 오류 발생", message: description, preferredStyle: .alert)
@@ -128,8 +144,8 @@ extension RecipeInFridgeViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let recipeDetailViewController = storyboard!.instantiateViewController(withIdentifier: "RecipeDetailViewController") as? RecipeDetailViewController else { return }
         let selectedRecipeCell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
-        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!)
-        recipeDetailViewController.modalPresentationStyle = .overFullScreen
+        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!, indexPath: indexPath, recipeType: .fridge)
+        recipeDetailViewController.modalPresentationStyle = .fullScreen
         self.present(recipeDetailViewController, animated: true)
     }
     

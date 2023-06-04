@@ -90,10 +90,10 @@ class RecipeViewController: TabmanViewController {
     }
     
     private func setupTabman() {
-        let recipeInFridgeVC = storyboard?.instantiateViewController(identifier: "RecipeInFridgeViewController") as! RecipeInFridgeViewController
         let popularRecipeVC = storyboard?.instantiateViewController(identifier: "PopularRecipeViewController") as! PopularRecipeViewController
+        let recipeInFridgeVC = storyboard?.instantiateViewController(identifier: "RecipeInFridgeViewController") as! RecipeInFridgeViewController
         
-        [recipeInFridgeVC, popularRecipeVC].forEach { vc in
+        [popularRecipeVC, recipeInFridgeVC].forEach { vc in
             viewControllerList.append(vc)
         }
         

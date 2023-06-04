@@ -23,6 +23,9 @@ class RecipeViewModel: ObservableObject {
     var fridgeIdxOfPopularRecipe: Int = -1
     var fridgeTypeOfFridgeRecipe: FridgeType = .homeUse
     var fridgeTypeOfPopularRecipe: FridgeType = .homeUse
+    var needToUpdateFridgeRecipe: Bool = false
+    var needToUpdatePopularRecipe: Bool = false
+    var cellIndexPathToRelaod: IndexPath? = nil
     var fridgeRecipeIsLastPage: Bool = false
     var popularRecipeIsLastPage: Bool = false
     var bookmarkRecipeIsLastPage: Bool = false
@@ -67,6 +70,7 @@ class RecipeViewModel: ObservableObject {
                 self.recipeInFridgeVC?.updateCV(indexArray: indexArrayToInsert)
             } else {
                 // 레시피 response data값이 nil일 경우
+                self.fridgeRecipeList.removeAll()
                 if let description = response?.description {
                     self.recipeInFridgeVC?.showServerErrorAlert(description: description)
                 } else {
@@ -92,6 +96,7 @@ class RecipeViewModel: ObservableObject {
                 self.popularRecipeVC?.updateCV(indexArray: indexArrayToInsert)
             } else {
                 // 레시피 response data값이 nil일 경우
+                self.popularRecipeList.removeAll()
                 if let description = response?.description {
                     self.popularRecipeVC?.showServerErrorAlert(description: description)
                 } else {
@@ -117,6 +122,7 @@ class RecipeViewModel: ObservableObject {
                 self.bookmarkRecipeVC?.updateCV(indexArray: indexArrayToInsert)
             } else {
                 // 레시피 response data값이 nil일 경우
+                self.bookmarkRecipeList.removeAll()
                 if let description = response?.description {
                     self.bookmarkRecipeVC?.showServerErrorAlert(description: description)
                 } else {
@@ -142,6 +148,7 @@ class RecipeViewModel: ObservableObject {
                 self.myRecipeVC?.updateCV(indexArray: indexArrayToInsert)
             } else {
                 // 레시피 response data값이 nil일 경우
+                self.myRecipeList.removeAll()
                 if let description = response?.description {
                     self.myRecipeVC?.showServerErrorAlert(description: description)
                 } else {
@@ -154,7 +161,7 @@ class RecipeViewModel: ObservableObject {
     func getRecipeSearchList(fridgeIdx: Int, fridgeType: FridgeType, category: RecipeSearchUICategory, keyword: String, pageNumberToLoad: Int) {
         var indexArrayToInsert: [IndexPath] = []
         if pageNumberToLoad == 0 {
-            self.searchRecipeList = []
+            self.searchRecipeList.removeAll()
             self.searchRecipeIsLastPage = false
         }
         switch category {
@@ -371,5 +378,64 @@ class RecipeViewModel: ObservableObject {
         recipeService.reportRecipe(recipeIdx: recipeIdx, parameter: parameter) { result in
             completion(result)
         }
+    }
+    
+    func needToUpdateRecipe(inFridge: Bool? = nil, inPopular: Bool? = nil) {
+        if let inFridge = inFridge {
+            needToUpdateFridgeRecipe = inFridge
+        }
+        if let inPopular = inPopular {
+            needToUpdatePopularRecipe = inPopular
+        }
+    }
+    
+    func needToReloadCell(recipeIdx: Int, indexPath: IndexPath, recipeType: RecipeType) {
+        cellIndexPathToRelaod = indexPath
+        
+        if recipeType == .myrecipe {
+            recipeService.getMyRecipeInfo(recipeIdx: recipeIdx) { response in
+                if let myRecipe = response.data {
+                    self.myRecipeList[indexPath.row] = myRecipe
+                }
+            }
+        } else {
+            switch APIManger.shared.getIsMultiFridge() {
+            case true:
+                recipeService.getRecipeInfo(fridgeType: FridgeType.multiUse, fridgeIdx: APIManger.shared.getFridgeIdx(), recipeIdx: recipeIdx) { response in
+                    if let recipe = response.data {
+                        switch recipeType {
+                        case .popular:
+                            self.popularRecipeList[indexPath.row] = recipe
+                        case .fridge:
+                            self.fridgeRecipeList[indexPath.row] = recipe
+                        case .bookmark:
+                            self.bookmarkRecipeList[indexPath.row] = recipe
+                        case .search:
+                            self.searchRecipeList[indexPath.row] = recipe
+                        default:
+                            break
+                        }
+                    }
+                }
+            case false:
+                recipeService.getRecipeInfo(fridgeType: FridgeType.homeUse, fridgeIdx: APIManger.shared.getFridgeIdx(), recipeIdx: recipeIdx) { response in
+                    if let recipe = response.data {
+                        switch recipeType {
+                        case .popular:
+                            self.popularRecipeList[indexPath.row] = recipe
+                        case .fridge:
+                            self.fridgeRecipeList[indexPath.row] = recipe
+                        case .bookmark:
+                            self.bookmarkRecipeList[indexPath.row] = recipe
+                        case .search:
+                            self.searchRecipeList[indexPath.row] = recipe
+                        default:
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        
     }
 }

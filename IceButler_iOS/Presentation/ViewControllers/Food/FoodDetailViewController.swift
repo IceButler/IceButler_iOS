@@ -135,6 +135,7 @@ class FoodDetailViewController: UIViewController {
                     
                     hud.dismiss(animated: true)
                     if result {
+                        RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
                         self.view.makeToast("해당 식품이 정상적으로 섭취 처리되었습니다.", duration: 1.0, position: .center)
                         self.navigationController?.popViewController(animated: true)
                     }else {
@@ -153,10 +154,11 @@ class FoodDetailViewController: UIViewController {
                 FoodViewModel.shared.deleteFoods(foodIdx: foodIdx) { result in
                     hud.dismiss(animated: true)
                     if result {
-                        self.view.makeToast("해당 식품이 정상적으로 삭제되었습니다.", duration: 1.0, position: .center)
+                        RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
+                        self.view.makeToast("해당 식품이 정상적으로 폐기 처리되었습니다.", duration: 1.0, position: .center)
                         self.navigationController?.popViewController(animated: true)
                     }else {
-                        self.view.makeToast("식품 삭제에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
+                        self.view.makeToast("식품 폐기 처리에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
                     }
                 }
                 

@@ -25,6 +25,18 @@ class MyRecipeViewController: BaseViewController {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // 상세 화면에서 레시피 수정했을 경우
+        if let cellIndexPath = RecipeViewModel.shared.cellIndexPathToRelaod {
+            var indexPaths: [IndexPath] = []
+            indexPaths.append(cellIndexPath)
+            recipeCollectionView.reloadItems(at: indexPaths)
+            RecipeViewModel.shared.cellIndexPathToRelaod = nil
+        }
+    }
+    
     @IBAction func didTapBackButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -104,6 +116,7 @@ class MyRecipeViewController: BaseViewController {
     
     func showServerErrorAlert(description: String? = nil) {
         hideLoading()
+        currentLoadedPageNumber = -1
         recipeCollectionView.setEmptyView(message: "냉장고에 식품을 추가해보세요!")
         if let description = description {
             let alert = UIAlertController(title: "서버 오류 발생", message: description, preferredStyle: .alert)
@@ -152,9 +165,9 @@ extension MyRecipeViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let recipeDetailViewController = storyboard!.instantiateViewController(withIdentifier: "RecipeDetailViewController") as? RecipeDetailViewController else { return }
         let selectedRecipeCell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
-        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!, isFromMyRecipe: true)
+        recipeDetailViewController.configure(recipeIdx: selectedRecipeCell.idx!, indexPath: indexPath, recipeType: .myrecipe, isFromMyRecipe: true)
         let viewController = UINavigationController(rootViewController: recipeDetailViewController)
-        viewController.modalPresentationStyle = .overFullScreen
+        viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: true)
     }
     

@@ -49,6 +49,7 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
     
     // 레시피 수정
     private var recipeIdx: Int? = nil
+    private var indexPath: IndexPath? = nil
     private var isEditMode: Bool = false
     private var recipeDetail: RecipeDetailResponseModel? = nil
     
@@ -148,7 +149,7 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
     
     private func setupPlaceholder() {
         // 메뉴명
-        let menuNamePlaceholder = "영어, 한글, 숫자 (20자 이내)"
+        let menuNamePlaceholder = "20자 이내"
         menuNameTextField.attributedPlaceholder = NSAttributedString(string: menuNamePlaceholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderColor])
         // 레시피 카테고리
         let categoryPlaceholder = "카테고리를 선택해주세요."
@@ -231,8 +232,9 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
         changeNextButtonColor()
     }
     
-    func configure(recipeIdx: Int, isEditMode: Bool, recipeDetail: RecipeDetailResponseModel) {
+    func configure(recipeIdx: Int, indexPath: IndexPath, isEditMode: Bool, recipeDetail: RecipeDetailResponseModel) {
         self.recipeIdx = recipeIdx
+        self.indexPath = indexPath
         self.isEditMode = isEditMode
         self.recipeDetail = recipeDetail
     }
@@ -275,7 +277,7 @@ class AddRecipeViewController: UIViewController, ReceiveSecondDataDelegate {
         if nextButton.backgroundColor == .availableBlue {
             guard let addRecipeSecondViewController = storyboard!.instantiateViewController(withIdentifier: "AddRecipeSecondViewController") as? AddRecipeSecondViewController else { return }
             if isEditMode {
-                addRecipeSecondViewController.configure(recipeIdx: recipeIdx!, isEditMode: isEditMode)
+                addRecipeSecondViewController.configure(recipeIdx: recipeIdx!, indexPath: indexPath!, isEditMode: isEditMode)
             }
             self.firstDateDelegate = addRecipeSecondViewController
             addRecipeSecondViewController.secondDateDelegate = self

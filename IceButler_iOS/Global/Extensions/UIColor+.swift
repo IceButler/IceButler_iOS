@@ -178,8 +178,8 @@ extension UIColor{
     
     static let orangeTagColor = UIColor(
         red: 255/255,
-        green: 187/255,
-        blue: 149/255,
+        green: 208/255,
+        blue: 152/255,
         alpha: 1
     )
     

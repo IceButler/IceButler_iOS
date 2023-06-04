@@ -245,12 +245,13 @@ class FridgeViewController: TabmanViewController {
     @IBAction func foodDelete(_ sender: Any) {
         let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(identifier: "AlertViewController") as! AlertViewController
         
-        alertVC.configure(title: "식품 삭제", content: "해당 식품을 삭제하시겠습니까?", leftButtonTitle: "취소", righttButtonTitle: "삭제") {
+        alertVC.configure(title: "식품 폐기", content: "해당 식품을 폐기 처리하시겠습니까?", leftButtonTitle: "취소", righttButtonTitle: "확인") {
             FoodViewModel.shared.deleteFoods { result in
                 if result {
-                    self.view.makeToast("해당 식품이 정상적으로 삭제되었습니다.", duration: 1.0, position: .center)
+                    RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
+                    self.view.makeToast("해당 식품이 정상적으로 폐기 처리되었습니다.", duration: 1.0, position: .center)
                 }else {
-                    self.view.makeToast("식품 삭제에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
+                    self.view.makeToast("식품 폐기 처리에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
                 }
             }
         } leftCompletion: {
@@ -266,9 +267,10 @@ class FridgeViewController: TabmanViewController {
         
         let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(identifier: "AlertViewController") as! AlertViewController
         
-        alertVC.configure(title: "식품 섭취", content: "해당 식품을 섭취하시겠습니까?", leftButtonTitle: "취소", righttButtonTitle: "섭취") {
+        alertVC.configure(title: "식품 섭취", content: "해당 식품을 섭취 처리하시겠습니까?", leftButtonTitle: "취소", righttButtonTitle: "확인") {
             FoodViewModel.shared.eatFoods { result in
                 if result {
+                    RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
                     self.view.makeToast("해당 식품이 정상적으로 섭취 처리되었습니다.", duration: 1.0, position: .center)
                 }else {
                     self.view.makeToast("식품 섭취 처리에 오류가 발생하였습니다. 다시 시도해주세요.", duration: 1.0, position: .center)
