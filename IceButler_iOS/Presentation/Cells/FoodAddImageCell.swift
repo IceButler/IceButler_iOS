@@ -24,11 +24,15 @@ class FoodAddImageCell: UICollectionViewCell {
     func configure(imageUrl: String) {
         if let url = URL(string: imageUrl) {
             foodImageView.kf.setImage(with: url)
+            hiddenFoodImageAddIcon()
+        }else {
+            foodImageView.image = nil
         }
     }
     
     func setImage(image: UIImage) {
         foodImageView.image = image
+        hiddenFoodImageAddIcon()
     }
     
     

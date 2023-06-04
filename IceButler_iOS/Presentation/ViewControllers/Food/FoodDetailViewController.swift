@@ -57,6 +57,7 @@ class FoodDetailViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
+        self.tabBarController?.tabBar.isHidden = true
         if #available(iOS 13.0, *) {
             let app = UIApplication.shared
             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
@@ -109,6 +110,7 @@ class FoodDetailViewController: UIViewController {
     
     @objc private func backToScene() {
         navigationController?.popViewController(animated: true)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     @objc private func moveToEdit() {
@@ -203,7 +205,7 @@ class FoodDetailViewController: UIViewController {
     
 }
 
-extension FoodDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension FoodDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
@@ -214,12 +216,15 @@ extension FoodDetailViewController: UICollectionViewDelegate, UICollectionViewDa
         cell.hiddenFoodImageAddIcon()
         
         FoodViewModel.shared.foodImage { imgUrl in
-            print(imgUrl)
-            cell.configure(imageUrl: imgUrl)
+            cell.configure(imageUrl: imgUrl ?? "")
         }
         
         return cell
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 79, height: 79)
+    }
     
 }
