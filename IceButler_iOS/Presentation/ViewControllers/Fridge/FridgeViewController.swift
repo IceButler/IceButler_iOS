@@ -43,6 +43,7 @@ class FridgeViewController: TabmanViewController {
         
         tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.isHidden = false
+        self.foodAddButton.isHidden = false
     }
     
     private func setup() {
