@@ -293,6 +293,9 @@ class FoodAddViewController: UIViewController {
             self.foodNameTextView.text = searchFood.foodName
             self.foodNameTextView.textColor = .black
             self.foodNameTextView.backgroundColor = .focusSkyBlue
+            
+            FoodViewModel.shared.setIsFoodAddComplete(index: 1)
+            FoodViewModel.shared.setIsFoodAddComplete(index: 2)
         }
         
         
