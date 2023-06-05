@@ -45,11 +45,6 @@ class RecipeSearchViewController: BaseViewController {
         setSearchBarRightView()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        RecipeViewModel.shared.searchRecipeList.removeAll()
-    }
-    
     private func fetchData() {
         if let keyword = keyword {
             if currentLoadedPageNumber == -1 {
@@ -186,6 +181,7 @@ class RecipeSearchViewController: BaseViewController {
     
     @IBAction func didTapBackButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
+        RecipeViewModel.shared.searchRecipeList.removeAll()
     }
         
     func updateCV(indexArray: [IndexPath]) {

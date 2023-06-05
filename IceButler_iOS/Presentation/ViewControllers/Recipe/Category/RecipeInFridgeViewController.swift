@@ -55,23 +55,45 @@ class RecipeInFridgeViewController: BaseViewController {
     
     private func fetchData() {
         // 냉장고 미선택인 경우 아예 레시피 조회 불가능
-        if APIManger.shared.getFridgeIdx() == -1 {
-            recipeCollectionView.setEmptyView(message: "냉장고를 선택해주세요.")
-            return
+        APIManger.shared.fridgeIdx { [self] fridgeIdx in
+//            RecipeViewModel.shared.fridgeRecipeList.removeAll()
+//            recipeCollectionView.reloadData()
+            if fridgeIdx == -1 {
+                recipeCollectionView.setEmptyView(message: "냉장고를 선택해주세요.")
+            } else {
+                if currentLoadedPageNumber == -1 {
+                    showLoading()
+                }
+                RecipeViewModel.shared.fridgeIdxOfFridgeRecipe = fridgeIdx
+                if APIManger.shared.getIsMultiFridge() {
+                    RecipeViewModel.shared.fridgeTypeOfFridgeRecipe = .multiUse
+                    RecipeViewModel.shared.getFridgeRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
+                } else {
+                    RecipeViewModel.shared.fridgeTypeOfFridgeRecipe = .homeUse
+                    RecipeViewModel.shared.getFridgeRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
+                }
+                currentLoadedPageNumber += 1
+            }
         }
-        
-        if currentLoadedPageNumber == -1 {
-            showLoading()
-        }
-        RecipeViewModel.shared.fridgeIdxOfFridgeRecipe = APIManger.shared.getFridgeIdx()
-        if APIManger.shared.getIsMultiFridge() {
-            RecipeViewModel.shared.fridgeTypeOfFridgeRecipe = .multiUse
-            RecipeViewModel.shared.getFridgeRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
-        } else {
-            RecipeViewModel.shared.fridgeTypeOfFridgeRecipe = .homeUse
-            RecipeViewModel.shared.getFridgeRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
-        }
-        currentLoadedPageNumber += 1
+//        // 냉장고 미선택인 경우 아예 레시피 조회 불가능
+//        if APIManger.shared.getFridgeIdx() == -1 {
+//            RecipeViewModel.shared.fridgeRecipeList.removeAll()
+//            recipeCollectionView.setEmptyView(message: "냉장고를 선택해주세요.")
+//            return
+//        }
+//
+//        if currentLoadedPageNumber == -1 {
+//            showLoading()
+//        }
+//        RecipeViewModel.shared.fridgeIdxOfFridgeRecipe = APIManger.shared.getFridgeIdx()
+//        if APIManger.shared.getIsMultiFridge() {
+//            RecipeViewModel.shared.fridgeTypeOfFridgeRecipe = .multiUse
+//            RecipeViewModel.shared.getFridgeRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
+//        } else {
+//            RecipeViewModel.shared.fridgeTypeOfFridgeRecipe = .homeUse
+//            RecipeViewModel.shared.getFridgeRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
+//        }
+//        currentLoadedPageNumber += 1
     }
     
     private func setup() {
