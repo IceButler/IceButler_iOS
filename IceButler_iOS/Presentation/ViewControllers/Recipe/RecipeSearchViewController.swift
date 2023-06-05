@@ -78,6 +78,8 @@ class RecipeSearchViewController: BaseViewController {
     
     private func setupNavigationBar() {
         tabBarController?.tabBar.isHidden = true
+        navigationController?.navigationBar.backgroundColor = .navigationColor
+        navigationController?.navigationBar.standardAppearance.backgroundColor = .navigationColor
         navigationItem.leftBarButtonItems?.append(UIBarButtonItem(customView: createCategorySelectionButton(category: RecipeSearchUICategory.recipeName)))
         
         if #available(iOS 13.0, *) {
