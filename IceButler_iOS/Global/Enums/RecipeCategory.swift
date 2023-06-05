@@ -8,6 +8,7 @@
 import Foundation
 
 enum RecipeCategory: String, CaseIterable {
+    case snack = "간식"
     case soup_stew_hotpot = "국/찌개/전골"
     case rice_porridge_noodles = "밥/죽/면"
     case sideDish = "반찬"
