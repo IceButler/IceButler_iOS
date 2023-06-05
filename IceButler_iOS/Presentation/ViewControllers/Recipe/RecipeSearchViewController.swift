@@ -29,7 +29,7 @@ class RecipeSearchViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         
         // 상세 화면에서 레시피 즐겨찾기 했을 경우
         if let cellIndexPath = RecipeViewModel.shared.cellIndexPathToRelaod {
@@ -43,6 +43,11 @@ class RecipeSearchViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setSearchBarRightView()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        RecipeViewModel.shared.searchRecipeList.removeAll()
     }
     
     private func fetchData() {
