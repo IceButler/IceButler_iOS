@@ -184,6 +184,7 @@ class RecipeSearchViewController: BaseViewController {
     @IBAction func didTapBackButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
         RecipeViewModel.shared.searchRecipeList.removeAll()
+        RecipeViewModel.shared.searchRecipeIsLastPage = false
     }
         
     func updateCV(indexArray: [IndexPath]) {
