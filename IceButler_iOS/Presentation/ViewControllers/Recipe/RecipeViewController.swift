@@ -28,11 +28,31 @@ class RecipeViewController: TabmanViewController {
     }
     
     @objc func didTapStarButton(sender: UIButton!) {
+        // 냉장고 미선택인 경우 레시피 조회 불가능
+        if APIManger.shared.getFridgeIdx() == -1 {
+            let alert = UIAlertController(title: "냉장고 미선택", message: "냉장고 미선택 상태입니다. 냉장고를 선택하셔야 레시피 조회가 가능합니다.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                self.navigationController?.popToRootViewController(animated: true)
+            }))
+            self.present(alert, animated: true)
+            return
+        }
+        
         guard let bookmarkRecipeViewController = storyboard!.instantiateViewController(withIdentifier: "BookmarkRecipeViewController") as? BookmarkRecipeViewController else { return }
         self.navigationController?.pushViewController(bookmarkRecipeViewController, animated: true)
     }
     
     @objc func didTapSearchButton(sender: UIButton!) {
+        // 냉장고 미선택인 경우 레시피 조회 불가능
+        if APIManger.shared.getFridgeIdx() == -1 {
+            let alert = UIAlertController(title: "냉장고 미선택", message: "냉장고 미선택 상태입니다. 냉장고를 선택하셔야 레시피 조회가 가능합니다.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { action in
+                self.navigationController?.popToRootViewController(animated: true)
+            }))
+            self.present(alert, animated: true)
+            return
+        }
+        
         guard let recipeSearchViewController = storyboard!.instantiateViewController(withIdentifier: "RecipeSearchViewController") as? RecipeSearchViewController else { return }
         self.navigationController?.pushViewController(recipeSearchViewController, animated: true)
     }
