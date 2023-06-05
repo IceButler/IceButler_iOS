@@ -39,6 +39,8 @@ class AuthMainViewController: UIViewController {
             label?.layer.shadowOpacity = 1
         }
         
+        kakaoLoginButton.layer.cornerRadius = 7
+        
         appleLoginButton.snp.makeConstraints { make in
             make.top.equalTo(kakaoLoginButton.snp.bottom).offset(15)
             make.centerX.equalToSuperview()

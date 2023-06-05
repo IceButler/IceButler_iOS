@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -43,34 +43,38 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czo-z6-hTP">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yY-bq-kSV">
                                 <rect key="frame" x="46.666666666666657" y="490" width="300" height="48"/>
+                                <color key="backgroundColor" red="0.98039215686274506" green="0.88235294117647056" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="Gdj-D1-uUM"/>
-                                    <constraint firstAttribute="height" constant="48" id="YBe-Dp-1T5"/>
+                                    <constraint firstAttribute="width" constant="300" id="T3D-Ou-1Wk"/>
+                                    <constraint firstAttribute="height" constant="48" id="gBs-ZT-XDX"/>
                                 </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="kakaoLoginIcon"/>
+                                <buttonConfiguration key="configuration" style="plain" image="logo_kakao" title="카카오 로그인" imagePadding="11">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="17"/>
+                                </buttonConfiguration>
                                 <connections>
-                                    <action selector="loginWithKakao:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="X8U-2b-QaA"/>
+                                    <action selector="loginWithKakao:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="i8p-cN-p1E"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.63921568627450975" green="0.7803921568627451" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="1yY-bq-kSV" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0ix-8Z-eJV"/>
                             <constraint firstItem="GHa-Uj-VfP" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="8uR-XG-944"/>
                             <constraint firstItem="I5O-8Q-siG" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Jy8-Sb-Gvk"/>
                             <constraint firstItem="mmO-9C-VnK" firstAttribute="top" secondItem="GHa-Uj-VfP" secondAttribute="bottom" constant="12" id="Pl8-Nj-Va4"/>
-                            <constraint firstItem="czo-z6-hTP" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="VzM-i3-cgl"/>
-                            <constraint firstItem="czo-z6-hTP" firstAttribute="top" secondItem="mmO-9C-VnK" secondAttribute="bottom" constant="76" id="ecd-WD-INm"/>
+                            <constraint firstItem="1yY-bq-kSV" firstAttribute="top" secondItem="mmO-9C-VnK" secondAttribute="bottom" constant="76" id="nqt-qa-7ds"/>
                             <constraint firstItem="GHa-Uj-VfP" firstAttribute="top" secondItem="I5O-8Q-siG" secondAttribute="bottom" constant="26" id="tIJ-p9-gJk"/>
                             <constraint firstItem="mmO-9C-VnK" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="tg5-5i-fs8"/>
                             <constraint firstItem="I5O-8Q-siG" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="100" id="z6o-zC-fTj"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="kakaoLoginButton" destination="czo-z6-hTP" id="Bni-B1-c57"/>
+                        <outlet property="kakaoLoginButton" destination="1yY-bq-kSV" id="jiz-5x-Ay8"/>
                         <outlet property="subTitleLabel" destination="GHa-Uj-VfP" id="NDd-UI-W9R"/>
                         <outlet property="titleLabel" destination="mmO-9C-VnK" id="dMp-43-zX5"/>
                     </connections>
@@ -82,6 +86,6 @@
     </scenes>
     <resources>
         <image name="iceButlerMainIcon" width="96" height="173"/>
-        <image name="kakaoLoginIcon" width="300" height="45"/>
+        <image name="logo_kakao" width="19.666666030883789" height="18.666666030883789"/>
     </resources>
 </document>
