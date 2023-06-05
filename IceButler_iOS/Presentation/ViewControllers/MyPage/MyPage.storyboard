@@ -42,9 +42,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37a-2t-iZC">
                                                 <rect key="frame" x="25" y="30" width="343" height="92"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="92T-gT-4vI">
-                                                        <rect key="frame" x="20" y="18" width="60" height="56.666666666666671"/>
-                                                        <color key="backgroundColor" red="0.16078431372549018" green="0.3529411764705882" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultProfile" translatesAutoresizingMaskIntoConstraints="NO" id="92T-gT-4vI">
+                                                        <rect key="frame" x="20" y="16" width="60" height="60"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="ICr-zz-vdb"/>
@@ -268,7 +268,7 @@
         <image name="1-1" width="15" height="21"/>
         <image name="back" width="13" height="23"/>
         <image name="chevron.right" catalog="system" width="97" height="128"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="defaultProfile" width="95" height="95"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

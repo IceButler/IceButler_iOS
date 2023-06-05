@@ -53,7 +53,7 @@ class AuthUserInfoViewController: UIViewController {
         
         userNicknameTextField.layer.cornerRadius = 10
         userNicknameCheckButton.layer.cornerRadius = 10
-        joinButton.layer.cornerRadius = 30
+        joinButton.layer.cornerRadius = 24
     }
     
     func setupNavigationBar() {
