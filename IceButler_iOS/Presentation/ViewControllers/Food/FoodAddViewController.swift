@@ -241,7 +241,7 @@ class FoodAddViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.text = "식품 추가"
         titleLabel.textAlignment = .left
-        titleLabel.font = UIFont.systemFont(ofSize: 18)
+        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         titleLabel.textColor = .white
         titleLabel.sizeToFit()
         
@@ -465,7 +465,10 @@ class FoodAddViewController: UIViewController {
     }
     
     private func setupFoodData() {
-        if currentFoodIndex == buyedFoods.count-1 { self.foodAddButton.isHidden = false }
+        if currentFoodIndex == buyedFoods.count-1 {
+            self.foodAddButton.isHidden = false
+            self.foodAddButton.backgroundColor = .availableBlue
+        }
         
         let foodData = savedFoods[currentFoodIndex]
         
