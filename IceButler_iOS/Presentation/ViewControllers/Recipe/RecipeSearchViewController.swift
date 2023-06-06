@@ -29,7 +29,7 @@ class RecipeSearchViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         
         // 상세 화면에서 레시피 즐겨찾기 했을 경우
         if let cellIndexPath = RecipeViewModel.shared.cellIndexPathToRelaod {
@@ -78,6 +78,8 @@ class RecipeSearchViewController: BaseViewController {
     
     private func setupNavigationBar() {
         tabBarController?.tabBar.isHidden = true
+        navigationController?.navigationBar.backgroundColor = .navigationColor
+        navigationController?.navigationBar.standardAppearance.backgroundColor = .navigationColor
         navigationItem.leftBarButtonItems?.append(UIBarButtonItem(customView: createCategorySelectionButton(category: RecipeSearchUICategory.recipeName)))
         
         if #available(iOS 13.0, *) {
@@ -181,6 +183,8 @@ class RecipeSearchViewController: BaseViewController {
     
     @IBAction func didTapBackButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
+        RecipeViewModel.shared.searchRecipeList.removeAll()
+        RecipeViewModel.shared.searchRecipeIsLastPage = false
     }
         
     func updateCV(indexArray: [IndexPath]) {

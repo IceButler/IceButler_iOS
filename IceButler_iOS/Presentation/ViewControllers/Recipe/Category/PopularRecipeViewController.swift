@@ -54,8 +54,12 @@ class PopularRecipeViewController: BaseViewController {
     }
     
     private func fetchData() {
+        RecipeViewModel.shared.fridgeIdxOfPopularRecipe = APIManger.shared.getFridgeIdx()
         // 냉장고 미선택인 경우 아예 레시피 조회 불가능
         if APIManger.shared.getFridgeIdx() == -1 {
+            RecipeViewModel.shared.popularRecipeIsLastPage = false
+            RecipeViewModel.shared.popularRecipeList.removeAll()
+            recipeCollectionView.reloadData()
             recipeCollectionView.setEmptyView(message: "냉장고를 선택해주세요.")
             return
         }
@@ -63,7 +67,6 @@ class PopularRecipeViewController: BaseViewController {
         if currentLoadedPageNumber == -1 {
             showLoading()
         }
-        RecipeViewModel.shared.fridgeIdxOfPopularRecipe = APIManger.shared.getFridgeIdx()
         if APIManger.shared.getIsMultiFridge() {
             RecipeViewModel.shared.fridgeTypeOfPopularRecipe = .multiUse
             RecipeViewModel.shared.getPopularRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
