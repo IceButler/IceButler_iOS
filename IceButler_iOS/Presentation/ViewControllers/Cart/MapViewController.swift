@@ -311,17 +311,16 @@ extension MapViewController {
                                                 y: self.currentLa,
                                                 completion: { [weak self] response in
             
-            if response.count > 0 {
-                self?.storeData = response
-                self?.setupStorePins(storeData: response)
-                return
-            } else {
+            if response.count == 0 {
                 let alert = UIAlertController(title: nil, message: "조회할 식료품점 정보가 없습니다!", preferredStyle: .alert)
                 let confirm = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
                     self?.navigationController?.popViewController(animated: true)
                 }
                 alert.addAction(confirm)
                 self?.present(alert, animated: true)
+            } else {
+                self?.storeData = response
+                self?.setupStorePins(storeData: response)
             }
 
         })

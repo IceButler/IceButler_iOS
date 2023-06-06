@@ -28,35 +28,43 @@ class KakaoMapService {
     func getNearStoreData(x: Double, y: Double, completion: @escaping ([KakaoStoreData]) -> Void) {
 
         var dataList: [KakaoStoreData] = []
+        
+        requestKakaoData(x: x, y: y, pageNum: 1, completion: { data in
+            dataList.append(contentsOf: data)
+            self.requestKakaoData(x: x, y: y, pageNum: 2, completion: { data in
+                dataList.append(contentsOf: data)
+                self.requestKakaoData(x: x, y: y, pageNum: 3, completion: { data in
+                    dataList.append(contentsOf: data)
+                    completion(dataList)
+                })
+            })
+        })
+        
+        
+        
+    }
+    
+    private func requestKakaoData(x: Double, y: Double, pageNum: Int, completion: @escaping ([KakaoStoreData]) -> Void) {
+        let urlStr = KakaoURL + categoryCode + page + "\(pageNum)" + radius + "&x=\(x)&y=\(y)"
+        guard let target = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        guard let url = URL(string: target) else { return }
+        
+        AF
+            .request(url, method: .get, parameters: nil, headers: self.headers)
+            .validate()
+            .responseDecodable(of: KakaoMapDataModel.self) { response in
+                switch response.result {
+                case .success(let result):
+                    print("\(pageNum) : 카카오맵 데이터 조회 성공 --> \(result.documents.count)")
+                    print(result.documents)
+                    completion(result.documents)
 
-        for i in 1...3 {
-            let urlStr = KakaoURL + categoryCode + "&" + page + "\(i)" + radius + "&x=\(x)&y=\(y)"
-            guard let target = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
-            guard let url = URL(string: target) else { return }
-            print("getNearStoreData called --> url : \(urlStr)")
-            
-            AF
-                .request(url, method: .get, parameters: nil, headers: self.headers)
-                .validate()
-                .responseDecodable(of: KakaoMapDataModel.self) { response in
-                    switch response.result {
-                    case .success(let result):
-                        print("카카오맵 데이터 조회 성공")
-                        print(result.documents)
-                        if i == 2 {
-                            completion(dataList)
-                        } else {
-                            dataList.append(contentsOf: result.documents)
-                        }
-                    case .failure(let error):
-                        print("카카오맵 데이터 조회 실패")
-                        print(error.localizedDescription)
-                        fatalError()
-                    }
+                case .failure(let error):
+                    print("카카오맵 데이터 조회 실패")
+                    print(error.localizedDescription)
+                    fatalError()
                 }
-                .resume()
-        }
-        
-        
+            }
+            .resume()
     }
 }
