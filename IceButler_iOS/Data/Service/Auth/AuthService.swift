@@ -7,6 +7,8 @@
 
 import Foundation
 import KakaoSDKUser
+import KakaoSDKCommon
+import KakaoSDKAuth
 import AuthenticationServices
 
 class AuthService {
