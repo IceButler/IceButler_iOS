@@ -8,6 +8,7 @@
 import UIKit
 import JGProgressHUD
 import CoreLocation
+import Toast_Swift
 
 class CartViewController: UIViewController {
     @IBOutlet weak var cartMainTableView: UITableView!
@@ -173,6 +174,7 @@ class CartViewController: UIViewController {
             
             let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
             guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "SelectAlertViewController") as? CompleteBuyingViewController else { return }
+            alertViewController.delegate = self
             CartViewModel.shared.removeFoodIdxes?.forEach({ idx in
                 let i = CartViewModel.shared.removeFoodIdxes?.firstIndex(of: idx) ?? 0
                 let name = CartViewModel.shared.removeFoodNames[i]
@@ -320,7 +322,12 @@ extension CartViewController: CLLocationManagerDelegate {
 extension CartViewController: AddFridgeDelegate {
     func setNewFidgeNameTitle(name: String) {
         configure()
-//        setupleftBarItems(title: name)
         FridgeViewModel.shared.getAllFoodList(fridgeIdx: APIManger.shared.getFridgeIdx())
+    }
+}
+
+extension CartViewController: CompleteBuyingDelegate {
+    func showToast(message: String) {
+        self.view.makeToast("선택한 식품을 성공적으로 냉장고에 추가하였습니다!", duration: 1.5, position: .center)
     }
 }

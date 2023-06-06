@@ -6,16 +6,23 @@
 //
 
 import UIKit
+import Toast_Swift
 
 struct BuyedFood: Equatable {
     let idx: Int
     let name: String
 }
 
+protocol CompleteBuyingDelegate {
+    func showToast(message: String)
+}
+
 class CompleteBuyingViewController: UIViewController {
     
     var completeFoods: [BuyedFood] = []
     var selectedFoods: [BuyedFood] = []
+    
+    var delegate: CompleteBuyingDelegate?
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -48,9 +55,9 @@ class CompleteBuyingViewController: UIViewController {
         let storyboard = UIStoryboard.init(name: "FoodAdd", bundle: nil)
         guard let foodAddViewController = storyboard.instantiateViewController(withIdentifier: "FoodAddViewController") as? FoodAddViewController else { return }
         
-        // TODO: 식품 추가 화면에 추가할 식품의 이름,인덱스 정보 배열 넘기기
         foodAddViewController.setAddedFoodNames(names: CartViewModel.shared.removeFoodNames)
         foodAddViewController.setBuyedFoods(foods: self.selectedFoods)
+        foodAddViewController.sceneDelegate = self
         
         completeFoods.removeAll()
         selectedFoods.removeAll()
@@ -99,5 +106,11 @@ extension CompleteBuyingViewController: UITableViewDelegate, UITableViewDataSour
         self.selectedFoods.append(completeFoods[indexPath.row])
         guard let cell = tableView.cellForRow(at: indexPath) as? CompleteBuyingTableViewCell else { return }
         cell.setSelectedFood()
+    }
+}
+
+extension CompleteBuyingViewController: FoodAddSceneDelegate {
+    func showToast(message: String) {
+        self.delegate?.showToast(message: message)
     }
 }
