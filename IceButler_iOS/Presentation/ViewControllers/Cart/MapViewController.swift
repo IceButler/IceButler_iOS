@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 import CoreLocation
 
 class MapViewController: UIViewController {
@@ -58,22 +59,40 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupLocation()
-        setupView()
-        setupMapView()
-        fetchKakaoData()
-        setupNavigationBar()
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            self.setupLocation()
+            self.setupView()
+            self.setupMapView()
+            self.fetchKakaoData()
+            self.setupNavigationBar()
+            
+            hud.dismiss(animated: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupLocation()
-        setupView()
-        setupMapView()
-        fetchKakaoData()
-        setupNavigationBar()
-        setupLayout()
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.show(in: self.view)
+            
+            self.setupLocation()
+            self.setupView()
+            self.setupMapView()
+            self.fetchKakaoData()
+            self.setupNavigationBar()
+            self.setupLayout()
+            
+            hud.dismiss(animated: true)
+        }
     }
     
     private func setupLayout() {
@@ -295,9 +314,13 @@ extension MapViewController {
             if response.count > 0 {
                 self?.storeData = response
                 self?.setupStorePins(storeData: response)
+                return
             } else {
                 let alert = UIAlertController(title: nil, message: "조회할 식료품점 정보가 없습니다!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                let confirm = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+                alert.addAction(confirm)
                 self?.present(alert, animated: true)
             }
 
