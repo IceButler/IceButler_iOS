@@ -33,10 +33,7 @@ class KakaoMapService {
             dataList.append(contentsOf: data)
             self.requestKakaoData(x: x, y: y, pageNum: 2, completion: { data in
                 dataList.append(contentsOf: data)
-                self.requestKakaoData(x: x, y: y, pageNum: 3, completion: { data in
-                    dataList.append(contentsOf: data)
-                    completion(dataList)
-                })
+                completion(dataList)
             })
         })
         
@@ -55,7 +52,7 @@ class KakaoMapService {
             .responseDecodable(of: KakaoMapDataModel.self) { response in
                 switch response.result {
                 case .success(let result):
-                    print("\(pageNum) : 카카오맵 데이터 조회 성공 --> \(result.documents.count)")
+                    print("카카오맵 데이터 조회 성공")
                     print(result.documents)
                     completion(result.documents)
 
