@@ -16,6 +16,10 @@ protocol FoodAddDelegate: AnyObject {
     func moveToFoodAddSelect()
 }
 
+protocol FoodAddSceneDelegate {
+    func showToast(message: String)
+}
+
 
 // MARK: -
 class FoodAddViewController: UIViewController {    
@@ -55,6 +59,7 @@ class FoodAddViewController: UIViewController {
     private let imagePickerController = ImagePickerController()
     
     private var delegate: FoodAddDelegate?
+     var sceneDelegate: FoodAddSceneDelegate?
     
     private var isOpenDatePicker = false
     private var isOpenCategoryView = false
@@ -675,6 +680,11 @@ class FoodAddViewController: UIViewController {
     }
     
     private func preSaveFoodInfo() {
+        if currentFoodIndex == buyedFoods.count-1 {
+            self.foodAddButton.isHidden = false
+            self.foodAddButton.backgroundColor = .availableBlue
+        }
+        
         if savedFoods.count > 0 {
             if date != nil {
                 let dateFormat = DateFormatter()
@@ -736,10 +746,8 @@ class FoodAddViewController: UIViewController {
                     print("장보기 완료 후 식품추가 요청 결과 ----> \(response)")
                     if response.statusCode == 200 {
                         RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
-                        self?.showAlert(title: "", message: "음식 등록에 성공하였습니다!")
-                        let storyboard = UIStoryboard(name: "Cart", bundle: nil)
-                        let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController")
-                        self?.navigationController?.pushViewController(cartVC, animated: true)
+                        self?.navigationController?.popToRootViewController(animated: true)
+                        self?.sceneDelegate?.showToast(message: "선택한 식품을 성공적으로 냉장고에 추가하였습니다!")
                     } else {
                         self?.showAlert(title: "", message: "음식 등록에 실패하였습니다")
                     }

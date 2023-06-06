@@ -292,9 +292,9 @@ extension MapViewController {
                                                 y: self.currentLa,
                                                 completion: { [weak self] response in
             
-            if response.documents.count > 0 {
-                self?.storeData = response.documents
-                self?.setupStorePins(storeData: response.documents)
+            if response.count > 0 {
+                self?.storeData = response
+                self?.setupStorePins(storeData: response)
             } else {
                 let alert = UIAlertController(title: nil, message: "조회할 식료품점 정보가 없습니다!", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "확인", style: .default))
