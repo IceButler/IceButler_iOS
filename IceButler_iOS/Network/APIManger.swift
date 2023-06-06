@@ -9,8 +9,8 @@ import Foundation
 import Alamofire
 import Combine
 
-private let BASE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/dev/dev-ice-bulter-main"
-private let RECIPE_URL = "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/dev/dev-ice-bulter-recipe"
+private let BASE_URL = Config.BASE_URL
+private let RECIPE_URL = Config.RECIPE_URL
 
 class APIManger: ObservableObject  {
     static let shared = APIManger()
