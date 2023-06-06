@@ -32,6 +32,7 @@
 		735584C42A062DE70077E69E /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C32A062DE70077E69E /* GraphViewModel.swift */; };
 		735584C72A062DFB0077E69E /* GraphService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C62A062DFB0077E69E /* GraphService.swift */; };
 		735584CA2A06B1A10077E69E /* GraphResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C92A06B1A10077E69E /* GraphResponseModel.swift */; };
+		737ED6632A2F004400FD5F8D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737ED6622A2F004400FD5F8D /* Config.swift */; };
 		7388C3AD29F82D81000C3606 /* ChatGptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7388C3AB29F82D81000C3606 /* ChatGptCell.swift */; };
 		7388C3AE29F82D81000C3606 /* ChatGptCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7388C3AC29F82D81000C3606 /* ChatGptCell.xib */; };
 		738CAC8529E310CF009EF9D2 /* FoodDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 738CAC8429E310CF009EF9D2 /* FoodDetail.storyboard */; };
@@ -266,6 +267,7 @@
 		735584C32A062DE70077E69E /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		735584C62A062DFB0077E69E /* GraphService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphService.swift; sourceTree = "<group>"; };
 		735584C92A06B1A10077E69E /* GraphResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphResponseModel.swift; sourceTree = "<group>"; };
+		737ED6622A2F004400FD5F8D /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		7388C3AB29F82D81000C3606 /* ChatGptCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptCell.swift; sourceTree = "<group>"; };
 		7388C3AC29F82D81000C3606 /* ChatGptCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatGptCell.xib; sourceTree = "<group>"; };
 		738CAC8429E310CF009EF9D2 /* FoodDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FoodDetail.storyboard; sourceTree = "<group>"; };
@@ -819,6 +821,7 @@
 				A28A764529D5526D00D127EA /* Extensions */,
 				73F0D27229D2E1380038BD0C /* Splash */,
 				73F0D27129D2E12C0038BD0C /* Resource */,
+				737ED6622A2F004400FD5F8D /* Config.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -1581,6 +1584,7 @@
 				73B7372329E1B2040097806F /* FoodOwnerCell.swift in Sources */,
 				73F62A5329DFDADF003D779F /* FoodCategoryCell.swift in Sources */,
 				95A398B929FD7B38009CDDDC /* FridgeType.swift in Sources */,
+				737ED6632A2F004400FD5F8D /* Config.swift in Sources */,
 				735584BB2A06244E0077E69E /* WasteGraphViewController.swift in Sources */,
 				A27C791A2A1EF5DA0003A444 /* NotificationResponseModel.swift in Sources */,
 				73F62A5829E00F94003D779F /* UIButton+.swift in Sources */,

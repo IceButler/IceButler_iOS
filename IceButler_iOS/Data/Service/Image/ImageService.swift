@@ -13,7 +13,7 @@ class ImageService {
     static let shared = ImageService()
     
     func getImageUrl(parameter: Parameters, completion: @escaping (ImageResponseModel?) -> Void) {
-        APIManger.shared.getImageUrl(url: "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/prod/presigned-url", parameter: parameter) { response in
+        APIManger.shared.getImageUrl(url: Config.IMAGE_URL, parameter: parameter) { response in
             completion(response)
         }
     }
@@ -24,7 +24,7 @@ class ImageService {
     }
     
     func getRecipeImageUrl(parameter: Parameters) async throws -> ImageResponseModel? {
-        let response = try? await APIManger.shared.getImageUrl(url: "https://za8hqdiis4.execute-api.ap-northeast-2.amazonaws.com/prod/presigned-url", parameter: parameter)
+        let response = try? await APIManger.shared.getImageUrl(url: Config.IMAGE_URL, parameter: parameter)
         return response
     }
 

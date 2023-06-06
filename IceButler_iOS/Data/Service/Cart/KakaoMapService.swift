@@ -21,7 +21,7 @@ class KakaoMapService {
     
     
     let headers: HTTPHeaders = [
-        "Authorization": "KakaoAK 7a05ed859264a63cf9577b3ac3b9924a",    /// rest api key
+        "Authorization": Config.Kakao_Map_Header,    /// rest api key
         "Accept": "application/json"
     ]
     
