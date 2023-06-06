@@ -63,7 +63,11 @@ class AddRecipeSecondViewController: BaseViewController, ReceiveFirstDataDelegat
         self.navigationController?.navigationBar.standardAppearance.backgroundColor = .navigationColor
         
         let title = UILabel()
-        title.text = "레시피 추가"
+        if isEditMode {
+            title.text = "레시피 수정"
+        } else {
+            title.text = "레시피 추가"
+        }
         title.font = .systemFont(ofSize: 18, weight: .bold)
         title.textColor = .white
         title.textAlignment = .left
