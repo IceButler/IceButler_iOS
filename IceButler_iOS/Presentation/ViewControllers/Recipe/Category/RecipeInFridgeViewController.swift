@@ -38,7 +38,7 @@ class RecipeInFridgeViewController: BaseViewController {
                 fetchData()
             }
             // 사용자가 음식 추가/수정/삭제 or 레시피 추가/수정했을 경우
-            else if RecipeViewModel.shared.needToUpdateFridgeRecipe {
+            if RecipeViewModel.shared.needToUpdateFridgeRecipe {
                 currentLoadedPageNumber = -1
                 fetchData()
                 RecipeViewModel.shared.needToUpdateRecipe(inFridge: false)
@@ -54,10 +54,19 @@ class RecipeInFridgeViewController: BaseViewController {
     }
     
     private func fetchData() {
+        RecipeViewModel.shared.fridgeIdxOfFridgeRecipe = APIManger.shared.getFridgeIdx()
+        // 냉장고 미선택인 경우 아예 레시피 조회 불가능
+        if APIManger.shared.getFridgeIdx() == -1 {
+            RecipeViewModel.shared.fridgeRecipeIsLastPage = false
+            RecipeViewModel.shared.fridgeRecipeList.removeAll()
+            recipeCollectionView.reloadData()
+            recipeCollectionView.setEmptyView(message: "냉장고를 선택해주세요.")
+            return
+        }
+
         if currentLoadedPageNumber == -1 {
             showLoading()
         }
-        RecipeViewModel.shared.fridgeIdxOfFridgeRecipe = APIManger.shared.getFridgeIdx()
         if APIManger.shared.getIsMultiFridge() {
             RecipeViewModel.shared.fridgeTypeOfFridgeRecipe = .multiUse
             RecipeViewModel.shared.getFridgeRecipeList(pageNumberToLoad: currentLoadedPageNumber + 1)
