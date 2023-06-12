@@ -3,20 +3,14 @@
 <br>
 
 ## Tech Stack
-### iOS
+### Language
 <img src="https://img.shields.io/badge/swift-orange?style=for-the-badge&logo=swift&logoColor=white">
 
-### DB
-<img src="https://img.shields.io/badge/amazon rds-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/jasypt-0769AD?style=for-the-badge&logoColor=white"> <img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white"> <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white"> <img src="https://img.shields.io/badge/amazon s3-569A31?style=for-the-badge&logo=amazons3&logoColor=white">
-
-### CI/CD
-<img src="https://img.shields.io/badge/jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"> <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> <img src="https://img.shields.io/badge/docker hub-2496ED?style=for-the-badge&logo=docker&logoColor=white"> 
-
-### Deploy
-<img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=amazon ec2&logoColor=white"> <img src="https://img.shields.io/badge/amazon sqs-FF4F8B?style=for-the-badge&logo=amazonsqs&logoColor=white"> <img src="https://img.shields.io/badge/amazon api gateway-FF4F8B?style=for-the-badge&logo=amazonapigateway&logoColor=white"> <img src="https://img.shields.io/badge/aws lambda-FF9900?style=for-the-badge&logo=awslambda&logoColor=white"> 
-
 ### Develop Tool
-<img src="https://img.shields.io/badge/intelliJ-000000?style=for-the-badge&logo=intellij idea&logoColor=white"> <img src="https://img.shields.io/badge/postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> 
+<img src="https://img.shields.io/badge/XCode-1da8e9?style=for-the-badge&logo=XCode&logoColor=white"> <img src="https://img.shields.io/badge/postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"> <img src="https://img.shields.io/badge/figma-25a183?style=for-the-badge&logo=figma&logoColor=white">  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/Firebase-186ce0?style=for-the-badge&logo=Firebase&logoColor=white"> 
+
+### SDK (Pod)
+<img src="https://img.shields.io/badge/Kingfisher-1da8e9?style=for-the-badge&logo=Kingfisher&logoColor=white"> <img src="https://img.shields.io/badge/Alamofire-FF6C37?style=for-the-badge&logo=Alamofire&logoColor=white"> <img src="https://img.shields.io/badge/Tabman-25a183?style=for-the-badge&logo=Tabman&logoColor=white">  <img src="https://img.shields.io/badge/Toast Swift-181717?style=for-the-badge&logo=Toast Swift&logoColor=white"> <img src="https://img.shields.io/badge/IQKeyboardManager-F05032?style=for-the-badge&logo=IQKeyboardManager&logoColor=white"> <img src="https://img.shields.io/badge/BSImagePicker-1da8e9?style=for-the-badge&logo=BSImagePicker&logoColor=white"> <img src="https://img.shields.io/badge/KakaoSDKUser-FF6C37?style=for-the-badge&logo=KakaoSDKUser&logoColor=white"> <img src="https://img.shields.io/badge/KakaoSDKAuth-25a183?style=for-the-badge&logo=KakaoSDKAuth&logoColor=white">  <img src="https://img.shields.io/badge/SnapKit-181717?style=for-the-badge&logo=SnapKit&logoColor=white"> <img src="https://img.shields.io/badge/Charts-F05032?style=for-the-badge&logo=Charts&logoColor=white"> <img src="https://img.shields.io/badge/JGProgressHUD-1da8e9?style=for-the-badge&logo=JGProgressHUD&logoColor=white"> 
 <br> 
 <br>
 
@@ -749,21 +743,12 @@
 
 ## iOS Architecture 
 <details>
-<summary>MAIN_SERVER</summary>
+<summary>MVVM Pattern</summary>
  
-![image](https://github.com/IceButler/IceButler_Server/assets/90203250/de9db769-11c5-45e7-8c6a-5f861bb5ff19)
+![mvvm](https://github.com/IceButler/IceButler_iOS/assets/81149634/46091df5-d2cc-4ad7-bad9-a8091ba2e9de)
     
 <br>
 </details>
-<details>
-<summary>RECIPE_SERVER</summary>
-
-![image](https://github.com/IceButler/IceButler_Server/assets/90203250/2f76bbac-2e7b-433e-b127-e592c700ef2d)
-
-<br>
-</details>
-<br><br>
-
 <br>
 
 ## Commit/PR Convention
