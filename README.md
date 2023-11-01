@@ -14,31 +14,6 @@
 <br> 
 <br>
 
-## Project Architecture
-<details>
-<summary>FINAL ARCHITECTURE</summary>
-    
-![스크린샷 2023-06-07 오전 1 09 2](https://github.com/IceButler/IceButler_Server/assets/90203250/16d4f6ad-5d01-4ecc-8fbb-4afacca7d55e)
-</details>
-
-<details>
-<summary>CI/CD</summary>
-    
-![image 370](https://github.com/IceButler/IceButler_Server/assets/90203250/cec1115d-1014-4d57-80a4-7ba44408509d)
-</details>
-
-<details>
-<summary>AWS Lambda</summary>
-    
- ![image 340](https://github.com/IceButler/IceButler_Server/assets/90203250/f215a8d5-8201-4bcb-9033-fdaad5633e2b)
-</details>
-
-<details>
-<summary>AWS SQS</summary>
-    
- ![image 397](https://github.com/IceButler/IceButler_Server/assets/90203250/6f76861e-8335-4df7-b6db-2e0790882cfe)
-</details>
-<br>
 
 ## Project Structure
 
