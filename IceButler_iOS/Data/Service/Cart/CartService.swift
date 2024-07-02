@@ -44,7 +44,6 @@ class CartService {
                                   parameter: param,
                                   completionHandler: { response in
             print("식품 추가 API 호출 결과 --> \(response)")
-            CartViewModel.shared.cartViewController?.configure()
         })
     }
     
