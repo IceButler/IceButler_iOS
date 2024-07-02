@@ -6,41 +6,17 @@
 //
 
 import UIKit
-import KakaoSDKAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions){
         
-        APIManger.shared.setupObserver()
-        AuthViewModel.shared.getUserToken()
-
-        AuthViewModel.shared.accessToken { accessToken in
-            guard let windowScene = (scene as? UIWindowScene) else { return }
-            self.window = UIWindow(windowScene: windowScene)
-            if accessToken != "" {
-                self.window?.rootViewController = DefaultTabBarController()
-            }else {
-                let authMainVC = UIStoryboard(name: "AuthMain", bundle: nil).instantiateViewController(identifier: "AuthMainViewController") as! AuthMainViewController
-                self.window?.rootViewController = UINavigationController(rootViewController: authMainVC)
-            }
-            self.window?.backgroundColor = .systemBackground
-            self.window?.makeKeyAndVisible()
-        }
-        
-       
-       
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        if let url = URLContexts.first?.url {
-            if (AuthApi.isKakaoTalkLoginUrl(url)) {
-                _ = AuthController.handleOpenUrl(url: url)
-            }
-        }
     }
 
     

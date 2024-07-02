@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import IceButler_iOS
 
 final class IceButler_iOSTests: XCTestCase {
 
