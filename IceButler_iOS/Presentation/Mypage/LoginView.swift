@@ -9,7 +9,19 @@ import SwiftUI
 
 struct LoginView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .center) {
+            Image("iceButlerMainIcon")
+                .padding(.top, 141)
+            
+            Text("냉장고를 지켜주는 나만의 집사")
+            Text("냉집사")
+            
+        }.frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .top
+        )
+        .background(Color("Blue2"))
     }
 }
 
