@@ -19,7 +19,6 @@
 		735584CA2A06B1A10077E69E /* GraphResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735584C92A06B1A10077E69E /* GraphResponseModel.swift */; };
 		738CAC8E29E32817009EF9D2 /* FoodResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CAC8D29E32817009EF9D2 /* FoodResponseModel.swift */; };
 		738CAC9029E32858009EF9D2 /* FoodService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738CAC8F29E32858009EF9D2 /* FoodService.swift */; };
-		73B7372029E160750097806F /* UICollectionViewFlowLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7371F29E160750097806F /* UICollectionViewFlowLayout+.swift */; };
 		73B7372829E24F510097806F /* FoodCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7372729E24F510097806F /* FoodCategory.swift */; };
 		73B7374929E2DCE60097806F /* FridgeResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7374829E2DCE60097806F /* FridgeResponseModel.swift */; };
 		73B7374C29E2EB570097806F /* FridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7374B29E2EB570097806F /* FridgeService.swift */; };
@@ -27,6 +26,14 @@
 		73C18A4529E3F0440037FE3A /* FoodRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C18A4429E3F0440037FE3A /* FoodRequestModel.swift */; };
 		73C491F32C33EBD200B96C1F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 73C491F22C33EBD200B96C1F /* Alamofire */; };
 		73C491F52C33EBD600B96C1F /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 73C491F42C33EBD600B96C1F /* ComposableArchitecture */; };
+		73C491FF2C358EF500B96C1F /* NanumSquareOTF_acR.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C491F72C358EF500B96C1F /* NanumSquareOTF_acR.otf */; };
+		73C492002C358EF500B96C1F /* NanumSquareL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C491F82C358EF500B96C1F /* NanumSquareL.otf */; };
+		73C492012C358EF500B96C1F /* NanumSquareOTF_acB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C491F92C358EF500B96C1F /* NanumSquareOTF_acB.otf */; };
+		73C492022C358EF500B96C1F /* NanumSquareOTF_acL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C491FA2C358EF500B96C1F /* NanumSquareOTF_acL.otf */; };
+		73C492032C358EF500B96C1F /* NanumSquareR.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C491FB2C358EF500B96C1F /* NanumSquareR.otf */; };
+		73C492042C358EF500B96C1F /* NanumSquareOTF_acEB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C491FC2C358EF500B96C1F /* NanumSquareOTF_acEB.otf */; };
+		73C492052C358EF500B96C1F /* NanumSquareEB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C491FD2C358EF500B96C1F /* NanumSquareEB.otf */; };
+		73C492062C358EF500B96C1F /* NanumSquareB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C491FE2C358EF500B96C1F /* NanumSquareB.otf */; };
 		73C8714F29F2ED44002DDB60 /* ProfileEditMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8714E29F2ED44002DDB60 /* ProfileEditMode.swift */; };
 		73CF93B029E945BF0007CB7A /* UserResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF93AF29E945BF0007CB7A /* UserResponseModel.swift */; };
 		73CF93B629E94D580007CB7A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF93B529E94D580007CB7A /* String+.swift */; };
@@ -38,15 +45,12 @@
 		73F26FC429DAA8EB009E364B /* CartResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F26FC329DAA8EB009E364B /* CartResponseModel.swift */; };
 		73F26FC629DAA94B009E364B /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F26FC529DAA94B009E364B /* CartService.swift */; };
 		73F62A3829DAB1A5003D779F /* CartRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A3729DAB1A5003D779F /* CartRequestModel.swift */; };
-		73F62A5829E00F94003D779F /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F62A5729E00F94003D779F /* UIButton+.swift */; };
 		95488DC429EADF94009AE17A /* PolicyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95488DC329EADF94009AE17A /* PolicyType.swift */; };
 		95A398B029FC0BF1009CDDDC /* RecipeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398AF29FC0BF1009CDDDC /* RecipeCategory.swift */; };
 		95A398B929FD7B38009CDDDC /* FridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398B829FD7B38009CDDDC /* FridgeType.swift */; };
 		95A398BC29FD82DD009CDDDC /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398BB29FD82DD009CDDDC /* RecipeService.swift */; };
 		95A398BF29FD8C13009CDDDC /* RecipeResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A398BE29FD8C13009CDDDC /* RecipeResponseModel.swift */; };
 		A27C791A2A1EF5DA0003A444 /* NotificationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27C79192A1EF5DA0003A444 /* NotificationResponseModel.swift */; };
-		A28A764729D5527A00D127EA /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A764629D5527A00D127EA /* UIDevice+.swift */; };
-		A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A764829D6B36E00D127EA /* UIColor+.swift */; };
 		A2DC65792A07AE8700D8C6F9 /* FridgeRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DC65782A07AE8700D8C6F9 /* FridgeRequestModel.swift */; };
 		A2EA102529F5A61D000D600B /* MyFridgeResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA102429F5A61D000D600B /* MyFridgeResponseModel.swift */; };
 /* End PBXBuildFile section */
@@ -64,12 +68,20 @@
 		735584C92A06B1A10077E69E /* GraphResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphResponseModel.swift; sourceTree = "<group>"; };
 		738CAC8D29E32817009EF9D2 /* FoodResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodResponseModel.swift; sourceTree = "<group>"; };
 		738CAC8F29E32858009EF9D2 /* FoodService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodService.swift; sourceTree = "<group>"; };
-		73B7371F29E160750097806F /* UICollectionViewFlowLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+.swift"; sourceTree = "<group>"; };
 		73B7372729E24F510097806F /* FoodCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategory.swift; sourceTree = "<group>"; };
 		73B7374829E2DCE60097806F /* FridgeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeResponseModel.swift; sourceTree = "<group>"; };
 		73B7374B29E2EB570097806F /* FridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeService.swift; sourceTree = "<group>"; };
 		73B97BCD2C3270BE00DB229F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		73C18A4429E3F0440037FE3A /* FoodRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRequestModel.swift; sourceTree = "<group>"; };
+		73C491F72C358EF500B96C1F /* NanumSquareOTF_acR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acR.otf; sourceTree = "<group>"; };
+		73C491F82C358EF500B96C1F /* NanumSquareL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareL.otf; sourceTree = "<group>"; };
+		73C491F92C358EF500B96C1F /* NanumSquareOTF_acB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acB.otf; sourceTree = "<group>"; };
+		73C491FA2C358EF500B96C1F /* NanumSquareOTF_acL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acL.otf; sourceTree = "<group>"; };
+		73C491FB2C358EF500B96C1F /* NanumSquareR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareR.otf; sourceTree = "<group>"; };
+		73C491FC2C358EF500B96C1F /* NanumSquareOTF_acEB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acEB.otf; sourceTree = "<group>"; };
+		73C491FD2C358EF500B96C1F /* NanumSquareEB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareEB.otf; sourceTree = "<group>"; };
+		73C491FE2C358EF500B96C1F /* NanumSquareB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareB.otf; sourceTree = "<group>"; };
+		73C492072C3592A300B96C1F /* IceButler_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceButler_iOS.entitlements; sourceTree = "<group>"; };
 		73C8714E29F2ED44002DDB60 /* ProfileEditMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditMode.swift; sourceTree = "<group>"; };
 		73CF93AF29E945BF0007CB7A /* UserResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponseModel.swift; sourceTree = "<group>"; };
 		73CF93B529E94D580007CB7A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -85,15 +97,12 @@
 		73F26FC329DAA8EB009E364B /* CartResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartResponseModel.swift; sourceTree = "<group>"; };
 		73F26FC529DAA94B009E364B /* CartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
 		73F62A3729DAB1A5003D779F /* CartRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRequestModel.swift; sourceTree = "<group>"; };
-		73F62A5729E00F94003D779F /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		95488DC329EADF94009AE17A /* PolicyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyType.swift; sourceTree = "<group>"; };
 		95A398AF29FC0BF1009CDDDC /* RecipeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategory.swift; sourceTree = "<group>"; };
 		95A398B829FD7B38009CDDDC /* FridgeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeType.swift; sourceTree = "<group>"; };
 		95A398BB29FD82DD009CDDDC /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
 		95A398BE29FD8C13009CDDDC /* RecipeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResponseModel.swift; sourceTree = "<group>"; };
 		A27C79192A1EF5DA0003A444 /* NotificationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationResponseModel.swift; sourceTree = "<group>"; };
-		A28A764629D5527A00D127EA /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
-		A28A764829D6B36E00D127EA /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		A2DC65782A07AE8700D8C6F9 /* FridgeRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeRequestModel.swift; sourceTree = "<group>"; };
 		A2EA102429F5A61D000D600B /* MyFridgeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFridgeResponseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -232,6 +241,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		73C491F62C358EDD00B96C1F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				73C491FE2C358EF500B96C1F /* NanumSquareB.otf */,
+				73C491FD2C358EF500B96C1F /* NanumSquareEB.otf */,
+				73C491F82C358EF500B96C1F /* NanumSquareL.otf */,
+				73C491F92C358EF500B96C1F /* NanumSquareOTF_acB.otf */,
+				73C491FC2C358EF500B96C1F /* NanumSquareOTF_acEB.otf */,
+				73C491FA2C358EF500B96C1F /* NanumSquareOTF_acL.otf */,
+				73C491F72C358EF500B96C1F /* NanumSquareOTF_acR.otf */,
+				73C491FB2C358EF500B96C1F /* NanumSquareR.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		73CF93AE29E943A50007CB7A /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +303,7 @@
 		73F0D23829D2DFFE0038BD0C /* IceButler_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				73C492072C3592A300B96C1F /* IceButler_iOS.entitlements */,
 				73F0D26929D2E0500038BD0C /* App */,
 				73DC2F3A29DAA69200F47ECD /* Data */,
 				73F0D27029D2E1260038BD0C /* Global */,
@@ -336,6 +361,7 @@
 		73F0D27129D2E12C0038BD0C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				73C491F62C358EDD00B96C1F /* Fonts */,
 				73F0D24229D2E0000038BD0C /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -425,10 +451,6 @@
 		A28A764529D5526D00D127EA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A28A764629D5527A00D127EA /* UIDevice+.swift */,
-				A28A764829D6B36E00D127EA /* UIColor+.swift */,
-				73F62A5729E00F94003D779F /* UIButton+.swift */,
-				73B7371F29E160750097806F /* UICollectionViewFlowLayout+.swift */,
 				73CF93B529E94D580007CB7A /* String+.swift */,
 			);
 			path = Extensions;
@@ -509,7 +531,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73C492002C358EF500B96C1F /* NanumSquareL.otf in Resources */,
+				73C492022C358EF500B96C1F /* NanumSquareOTF_acL.otf in Resources */,
 				73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */,
+				73C492062C358EF500B96C1F /* NanumSquareB.otf in Resources */,
+				73C492032C358EF500B96C1F /* NanumSquareR.otf in Resources */,
+				73C491FF2C358EF500B96C1F /* NanumSquareOTF_acR.otf in Resources */,
+				73C492012C358EF500B96C1F /* NanumSquareOTF_acB.otf in Resources */,
+				73C492042C358EF500B96C1F /* NanumSquareOTF_acEB.otf in Resources */,
+				73C492052C358EF500B96C1F /* NanumSquareEB.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,13 +552,11 @@
 			files = (
 				95A398BF29FD8C13009CDDDC /* RecipeResponseModel.swift in Sources */,
 				7339CD8629E68818002A6D78 /* AuthResponseModel.swift in Sources */,
-				A28A764729D5527A00D127EA /* UIDevice+.swift in Sources */,
 				73F26FC629DAA94B009E364B /* CartService.swift in Sources */,
 				73B7374C29E2EB570097806F /* FridgeService.swift in Sources */,
 				73CF93B629E94D580007CB7A /* String+.swift in Sources */,
 				95A398B929FD7B38009CDDDC /* FridgeType.swift in Sources */,
 				A27C791A2A1EF5DA0003A444 /* NotificationResponseModel.swift in Sources */,
-				73F62A5829E00F94003D779F /* UIButton+.swift in Sources */,
 				73178AC629EC40A6001C3AA4 /* UserService.swift in Sources */,
 				73F62A3829DAB1A5003D779F /* CartRequestModel.swift in Sources */,
 				735584C72A062DFB0077E69E /* GraphService.swift in Sources */,
@@ -555,10 +583,8 @@
 				73CF93B029E945BF0007CB7A /* UserResponseModel.swift in Sources */,
 				73B97BCE2C3270BE00DB229F /* LoginView.swift in Sources */,
 				7339CD8C29E78880002A6D78 /* ImageService.swift in Sources */,
-				73B7372029E160750097806F /* UICollectionViewFlowLayout+.swift in Sources */,
 				7339CD9229E79CDD002A6D78 /* AuthProvider.swift in Sources */,
 				73C8714F29F2ED44002DDB60 /* ProfileEditMode.swift in Sources */,
-				A28A764929D6B36E00D127EA /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,6 +716,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_LINK_OBJC_RUNTIME = YES;
+				CODE_SIGN_ENTITLEMENTS = IceButler_iOS/IceButler_iOS.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -739,6 +766,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_LINK_OBJC_RUNTIME = YES;
+				CODE_SIGN_ENTITLEMENTS = IceButler_iOS/IceButler_iOS.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;

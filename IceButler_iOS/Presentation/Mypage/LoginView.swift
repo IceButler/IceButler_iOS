@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AuthenticationServices
 
 struct LoginView: View {
     var body: some View {
@@ -14,7 +15,28 @@ struct LoginView: View {
                 .padding(.top, 141)
             
             Text("냉장고를 지켜주는 나만의 집사")
+                .font(.custom("NanumSquareOTFB", size: 16))
+                .foregroundStyle(.white)
+                .padding(.top, 32)
+            
             Text("냉집사")
+                .font(.custom("NanumSquareOTFB", size: 22))
+                .foregroundStyle(.white)
+                .padding(.top, 12)
+            
+            Image("kakaoLoginIcon")
+                .resizable()
+                .frame(width: UIScreen.main.bounds.width * 0.8, height: 48)
+                .padding(.top, 76)
+            
+            SignInWithAppleButton { _ in
+                
+            } onCompletion: { _ in
+                
+            }
+                .frame(width: UIScreen.main.bounds.width * 0.8, height: 48)
+                .padding(.top, 5)
+
             
         }.frame(
             maxWidth: .infinity,
