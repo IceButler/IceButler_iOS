@@ -7,8 +7,16 @@
 
 import SwiftUI
 import AuthenticationServices
+import ComposableArchitecture
 
 struct LoginView: View {
+    let store: StoreOf<LoginStore>
+    
+    init(store: StoreOf<LoginStore>) {
+        self.store = store
+    }
+    
+    
     var body: some View {
         VStack(alignment: .center) {
             Image("iceButlerMainIcon")
@@ -28,9 +36,12 @@ struct LoginView: View {
                 .resizable()
                 .frame(width: UIScreen.main.bounds.width * 0.8, height: 48)
                 .padding(.top, 76)
+                .onTapGesture {
+                    self.store.send(.kakaoLogin)
+                }
             
             SignInWithAppleButton { _ in
-                
+                self.store.send(.appleLogin)
             } onCompletion: { _ in
                 
             }
@@ -48,5 +59,7 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    LoginView(store: Store(initialState: LoginStore.State(), reducer: {
+        LoginStore()
+    }))
 }
