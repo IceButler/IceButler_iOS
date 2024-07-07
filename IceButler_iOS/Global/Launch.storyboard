@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iceButlerMainIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Ln1-Xf-ygG">
+                                <rect key="frame" x="146.66666666666666" y="299" width="100" height="176"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="RYu-6P-fxQ"/>
+                                    <constraint firstAttribute="height" constant="176" id="dQt-V2-Wes"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉장고를 지켜주는 나만의 집사" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qs4-Q6-DS3">
+                                <rect key="frame" x="100.66666666666667" y="499" width="191.66666666666663" height="18.666666666666629"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="냉집사" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3Z-n7-ebe">
+                                <rect key="frame" x="168" y="529.66666666666663" width="57.333333333333343" height="25.333333333333371"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
+                        <color key="backgroundColor" name="Blue2"/>
+                        <constraints>
+                            <constraint firstItem="Ln1-Xf-ygG" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="240" id="1WU-cM-bJ8"/>
+                            <constraint firstItem="Y3Z-n7-ebe" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="99k-5U-lKH"/>
+                            <constraint firstItem="Ln1-Xf-ygG" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bIK-zS-i5k"/>
+                            <constraint firstItem="qs4-Q6-DS3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="iOQ-7p-u3u"/>
+                            <constraint firstItem="qs4-Q6-DS3" firstAttribute="top" secondItem="Ln1-Xf-ygG" secondAttribute="bottom" constant="24" id="kSO-1g-PcH"/>
+                            <constraint firstItem="Y3Z-n7-ebe" firstAttribute="top" secondItem="qs4-Q6-DS3" secondAttribute="bottom" constant="12" id="rbG-Y8-9xS"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" name="Blue2"/>
+    <resources>
+        <image name="iceButlerMainIcon" width="96" height="173"/>
+        <namedColor name="Blue2">
+            <color red="0.63921568627450975" green="0.7803921568627451" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

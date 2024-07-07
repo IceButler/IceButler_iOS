@@ -40,10 +40,15 @@ struct LoginView: View {
                     self.store.send(.kakaoLogin)
                 }
             
-            SignInWithAppleButton { _ in
-                self.store.send(.appleLogin)
-            } onCompletion: { _ in
-                
+            SignInWithAppleButton { request in
+                request.requestedScopes = [.email]
+            } onCompletion: { result in
+                switch result {
+                    case .success(let auth):
+                    self.store.send(.appleLogin)
+                case .failure(let error):
+                    self.store.send(.appleLogin)
+                }
             }
                 .frame(width: UIScreen.main.bounds.width * 0.8, height: 48)
                 .padding(.top, 5)

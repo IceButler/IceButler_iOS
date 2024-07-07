@@ -35,12 +35,16 @@
 		73C492052C358EF500B96C1F /* NanumSquareEB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C491FD2C358EF500B96C1F /* NanumSquareEB.otf */; };
 		73C492062C358EF500B96C1F /* NanumSquareB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73C491FE2C358EF500B96C1F /* NanumSquareB.otf */; };
 		73C4920A2C3598B000B96C1F /* LoginStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C492092C3598B000B96C1F /* LoginStore.swift */; };
+		73C4920E2C3A7EE800B96C1F /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 73C4920D2C3A7EE800B96C1F /* KakaoSDKAuth */; };
+		73C492102C3A7EE800B96C1F /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 73C4920F2C3A7EE800B96C1F /* KakaoSDKCommon */; };
+		73C492122C3A7EE800B96C1F /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 73C492112C3A7EE800B96C1F /* KakaoSDKUser */; };
+		73C492142C3A84BD00B96C1F /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 73C492132C3A84BD00B96C1F /* Config.xcconfig */; };
+		73C4921B2C3A90AD00B96C1F /* IceButlerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C4921A2C3A90AD00B96C1F /* IceButlerApp.swift */; };
+		73C4921E2C3AD89400B96C1F /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73C4921D2C3AD89400B96C1F /* Launch.storyboard */; };
 		73C8714F29F2ED44002DDB60 /* ProfileEditMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8714E29F2ED44002DDB60 /* ProfileEditMode.swift */; };
 		73CF93B029E945BF0007CB7A /* UserResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF93AF29E945BF0007CB7A /* UserResponseModel.swift */; };
 		73CF93B629E94D580007CB7A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF93B529E94D580007CB7A /* String+.swift */; };
 		73DC2F3D29DAA6A400F47ECD /* APIManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC2F3C29DAA6A400F47ECD /* APIManger.swift */; };
-		73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */; };
-		73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0D23B29D2DFFE0038BD0C /* SceneDelegate.swift */; };
 		73F0D24329D2E0000038BD0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73F0D24229D2E0000038BD0C /* Assets.xcassets */; };
 		73F26FC129DAA735009E364B /* GeneralResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F26FC029DAA735009E364B /* GeneralResponseModel.swift */; };
 		73F26FC429DAA8EB009E364B /* CartResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F26FC329DAA8EB009E364B /* CartResponseModel.swift */; };
@@ -84,13 +88,15 @@
 		73C491FE2C358EF500B96C1F /* NanumSquareB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareB.otf; sourceTree = "<group>"; };
 		73C492072C3592A300B96C1F /* IceButler_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceButler_iOS.entitlements; sourceTree = "<group>"; };
 		73C492092C3598B000B96C1F /* LoginStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStore.swift; sourceTree = "<group>"; };
+		73C492132C3A84BD00B96C1F /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		73C4921A2C3A90AD00B96C1F /* IceButlerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceButlerApp.swift; sourceTree = "<group>"; };
+		73C4921C2C3AD81200B96C1F /* IceButler-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "IceButler-iOS-Info.plist"; sourceTree = SOURCE_ROOT; };
+		73C4921D2C3AD89400B96C1F /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		73C8714E29F2ED44002DDB60 /* ProfileEditMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditMode.swift; sourceTree = "<group>"; };
 		73CF93AF29E945BF0007CB7A /* UserResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponseModel.swift; sourceTree = "<group>"; };
 		73CF93B529E94D580007CB7A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		73DC2F3C29DAA6A400F47ECD /* APIManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManger.swift; sourceTree = "<group>"; };
 		73F0D23629D2DFFE0038BD0C /* IceButler_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceButler_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		73F0D23B29D2DFFE0038BD0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		73F0D24229D2E0000038BD0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73F0D25029D2E0000038BD0C /* IceButler_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceButler_iOSTests.swift; sourceTree = "<group>"; };
 		73F0D25A29D2E0000038BD0C /* IceButler_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceButler_iOSUITests.swift; sourceTree = "<group>"; };
@@ -114,8 +120,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73C492102C3A7EE800B96C1F /* KakaoSDKCommon in Frameworks */,
 				73C491F52C33EBD600B96C1F /* ComposableArchitecture in Frameworks */,
 				73C491F32C33EBD200B96C1F /* Alamofire in Frameworks */,
+				73C492122C3A7EE800B96C1F /* KakaoSDKUser in Frameworks */,
+				73C4920E2C3A7EE800B96C1F /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +282,14 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		73C492192C3A905F00B96C1F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				73C4921A2C3A90AD00B96C1F /* IceButlerApp.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		73CF93AE29E943A50007CB7A /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,8 +337,8 @@
 		73F0D23829D2DFFE0038BD0C /* IceButler_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				73C4921C2C3AD81200B96C1F /* IceButler-iOS-Info.plist */,
 				73C492072C3592A300B96C1F /* IceButler_iOS.entitlements */,
-				73F0D26929D2E0500038BD0C /* App */,
 				73DC2F3A29DAA69200F47ECD /* Data */,
 				73F0D27029D2E1260038BD0C /* Global */,
 				73DC2F3B29DAA69800F47ECD /* Network */,
@@ -347,18 +364,10 @@
 			path = IceButler_iOSUITests;
 			sourceTree = "<group>";
 		};
-		73F0D26929D2E0500038BD0C /* App */ = {
-			isa = PBXGroup;
-			children = (
-				73F0D23929D2DFFE0038BD0C /* AppDelegate.swift */,
-				73F0D23B29D2DFFE0038BD0C /* SceneDelegate.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
 		73F0D26F29D2E1130038BD0C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				73C492192C3A905F00B96C1F /* Main */,
 				73C4920B2C35A9D300B96C1F /* Coordinator */,
 				73C492082C35989C00B96C1F /* Login */,
 				73B97BCC2C32707000DB229F /* Mypage */,
@@ -369,10 +378,12 @@
 		73F0D27029D2E1260038BD0C /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				73C4921D2C3AD89400B96C1F /* Launch.storyboard */,
 				73B7372629E24F410097806F /* Enums */,
 				A28A764529D5526D00D127EA /* Extensions */,
 				73F0D27229D2E1380038BD0C /* Splash */,
 				73F0D27129D2E12C0038BD0C /* Resource */,
+				73C492132C3A84BD00B96C1F /* Config.xcconfig */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -502,6 +513,9 @@
 			packageProductDependencies = (
 				73C491F22C33EBD200B96C1F /* Alamofire */,
 				73C491F42C33EBD600B96C1F /* ComposableArchitecture */,
+				73C4920D2C3A7EE800B96C1F /* KakaoSDKAuth */,
+				73C4920F2C3A7EE800B96C1F /* KakaoSDKCommon */,
+				73C492112C3A7EE800B96C1F /* KakaoSDKUser */,
 			);
 			productName = IceButler_iOS;
 			productReference = 73F0D23629D2DFFE0038BD0C /* IceButler_iOS.app */;
@@ -524,7 +538,7 @@
 			};
 			buildConfigurationList = 73F0D23129D2DFFE0038BD0C /* Build configuration list for PBXProject "IceButler_iOS" */;
 			compatibilityVersion = "Xcode 13.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -535,6 +549,7 @@
 			packageReferences = (
 				73DE02382C33E2F00095F7DC /* XCRemoteSwiftPackageReference "Alamofire" */,
 				73DE02392C33E34E0095F7DC /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				73C4920C2C3A7EE800B96C1F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = 73F0D23729D2DFFE0038BD0C /* Products */;
 			projectDirPath = "";
@@ -556,6 +571,8 @@
 				73C492062C358EF500B96C1F /* NanumSquareB.otf in Resources */,
 				73C492032C358EF500B96C1F /* NanumSquareR.otf in Resources */,
 				73C491FF2C358EF500B96C1F /* NanumSquareOTF_acR.otf in Resources */,
+				73C4921E2C3AD89400B96C1F /* Launch.storyboard in Resources */,
+				73C492142C3A84BD00B96C1F /* Config.xcconfig in Resources */,
 				73C492012C358EF500B96C1F /* NanumSquareOTF_acB.otf in Resources */,
 				73C492042C358EF500B96C1F /* NanumSquareOTF_acEB.otf in Resources */,
 				73C492052C358EF500B96C1F /* NanumSquareEB.otf in Resources */,
@@ -589,6 +606,7 @@
 				73F26FC429DAA8EB009E364B /* CartResponseModel.swift in Sources */,
 				7339CD8929E7846A002A6D78 /* ImageResponseModel.swift in Sources */,
 				95488DC429EADF94009AE17A /* PolicyType.swift in Sources */,
+				73C4921B2C3A90AD00B96C1F /* IceButlerApp.swift in Sources */,
 				73C18A4529E3F0440037FE3A /* FoodRequestModel.swift in Sources */,
 				738CAC8E29E32817009EF9D2 /* FoodResponseModel.swift in Sources */,
 				A2EA102529F5A61D000D600B /* MyFridgeResponseModel.swift in Sources */,
@@ -596,9 +614,7 @@
 				73F26FC129DAA735009E364B /* GeneralResponseModel.swift in Sources */,
 				738CAC9029E32858009EF9D2 /* FoodService.swift in Sources */,
 				95A398BC29FD82DD009CDDDC /* RecipeService.swift in Sources */,
-				73F0D23A29D2DFFE0038BD0C /* AppDelegate.swift in Sources */,
 				7339CD9029E7997F002A6D78 /* ImageRequestModel.swift in Sources */,
-				73F0D23C29D2DFFE0038BD0C /* SceneDelegate.swift in Sources */,
 				7339CD8E29E788BE002A6D78 /* ImageDir.swift in Sources */,
 				73CF93B029E945BF0007CB7A /* UserResponseModel.swift in Sources */,
 				73B97BCE2C3270BE00DB229F /* LoginView.swift in Sources */,
@@ -731,6 +747,7 @@
 		};
 		73F0D26129D2E0000038BD0C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73C492132C3A84BD00B96C1F /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -748,7 +765,7 @@
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = IceButler_iOS/Info.plist;
+				INFOPLIST_FILE = "IceButler-iOS-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "냉집사";
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"냉집사\"에서 바코드 인식을 위해 카메라 접근을 허용해주세요.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "주변 식료품점 조회를 위해 현재 위치 정보 획득 권한이 필요합니다.";
@@ -773,6 +790,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -781,6 +799,7 @@
 		};
 		73F0D26229D2E0000038BD0C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73C492132C3A84BD00B96C1F /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -798,7 +817,7 @@
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = IceButler_iOS/Info.plist;
+				INFOPLIST_FILE = "IceButler-iOS-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "냉집사";
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"냉집사\"에서 바코드 인식을 위해 카메라 접근을 허용해주세요.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "주변 식료품점 조회를 위해 현재 위치 정보 획득 권한이 필요합니다.";
@@ -823,6 +842,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -853,6 +873,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		73C4920C2C3A7EE800B96C1F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.22.3;
+			};
+		};
 		73DE02382C33E2F00095F7DC /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -881,6 +909,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 73DE02392C33E34E0095F7DC /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		73C4920D2C3A7EE800B96C1F /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73C4920C2C3A7EE800B96C1F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		73C4920F2C3A7EE800B96C1F /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73C4920C2C3A7EE800B96C1F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		73C492112C3A7EE800B96C1F /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73C4920C2C3A7EE800B96C1F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
