@@ -7,6 +7,10 @@
 
 import Foundation
 import ComposableArchitecture
+import KakaoSDKAuth
+import KakaoSDKUser
+import KakaoSDKCommon
+import AuthenticationServices
 
 public struct LoginStore: Reducer {
     public init() {}
@@ -45,7 +49,20 @@ public struct LoginStore: Reducer {
 
 public extension LoginStore {
     private func kakaoLogin() -> Bool {
+        if UserApi.isKakaoTalkLoginAvailable() {
+            UserApi.shared.loginWithKakaoTalk { (oauthToken, error) in
+                print(oauthToken)
+                print(error)
+            }
+        }else {
+            UserApi.shared.loginWithKakaoAccount { (oauthToken, error) in
+                print(oauthToken)
+                print(error)
+            }
+        }
+        
         print("kakao login")
+        
         return false
     }
     
