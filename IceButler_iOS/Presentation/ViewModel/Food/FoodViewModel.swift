@@ -2,7 +2,7 @@
 //  FoodViewModel.swift
 //  IceButler_iOS
 //
-//  Created by 유상 on 2023/04/10.
+//  Created by 유상 on 2023/04/06.
 //
 
 import Foundation
@@ -15,14 +15,15 @@ class FoodViewModel: ObservableObject {
     
     private let foodService = FoodService()
     
-    @Published var food: FoodDetailResponseModel?
+    @Published var foodList: [Food] = []
+    @Published var selectedFood: Food?
+    @Published var isEditFood: Bool = false
     @Published var foodOwnerList: [FoodOwner] = []
     @Published var barcodeFoodInfo: BarcodeFoodResponse?
     @Published var gptFoodNames: [String] = []
     @Published var gptFoodCategories: [String] = []
     @Published var searchFoodList: [SearchFoodResponse] = []
     @Published var selectedSearchFood: SearchFoodResponse?
-    @Published var isEditFood: Bool = false
     @Published var fridgeSearchFoodList: [FridgeSearchFoodResponse] = []
     @Published var selectedFridgeSearchFood: FridgeSearchFoodResponse?
     @Published var isSelectedFood: Bool = false
@@ -36,29 +37,93 @@ class FoodViewModel: ObservableObject {
     
     var uploadedFoodImgUrl: String = "" // 테스트용
     
-    func food(completion: @escaping (FoodDetailResponseModel) -> Void) {
-        $food.sink { food in
-            if food != nil {
-                completion(food!)
+    private init() {}
+    
+    func getFoodList(userId: Int) {
+        APIManger.shared.getData(urlEndpointString: "/users/\(userId)/foods",
+                                responseDataType: FoodListResponseModel.self,
+                                parameter: nil) { [weak self] response in
+            if let data = response.data {
+                self?.foodList = data.foodList ?? []
             }
-        }.store(in: &cancelLabels)
+        }
     }
     
-    func getFood() -> FoodDetailResponseModel? {
-        return food
+    func getFoodDetail(foodIdx: Int) {
+        APIManger.shared.getData(urlEndpointString: "/foods/\(foodIdx)",
+                                responseDataType: FoodDetailResponseModel.self,
+                                parameter: nil) { [weak self] response in
+            if let data = response.data {
+                self?.selectedFood = data.food
+            }
+        }
     }
     
-    func getFood(completion: @escaping (FoodDetailResponseModel) -> Void) {
-        completion(food!)
+    func postFood(userId: Int, foodName: String, foodDetail: String, count: Int, dday: Int, foodCategory: String, foodImage: String?, completion: @escaping () -> Void) {
+        let param = FoodRequestModel(foodName: foodName,
+                                    foodDetail: foodDetail,
+                                    count: count,
+                                    dday: dday,
+                                    foodCategory: foodCategory,
+                                    foodImage: foodImage)
+        
+        APIManger.shared.postData(urlEndpointString: "/users/\(userId)/foods",
+                                 responseDataType: FoodResponseModel.self,
+                                 parameter: param) { [weak self] response in
+            if response.statusCode == 200 {
+                self?.getFoodList(userId: userId)
+                completion()
+            }
+        }
     }
     
+    func patchFood(foodIdx: Int, userId: Int, foodName: String, foodDetail: String, count: Int, dday: Int, foodCategory: String, foodImage: String?, completion: @escaping () -> Void) {
+        let param = FoodRequestModel(foodName: foodName,
+                                    foodDetail: foodDetail,
+                                    count: count,
+                                    dday: dday,
+                                    foodCategory: foodCategory,
+                                    foodImage: foodImage)
+        
+        APIManger.shared.patchData(urlEndpointString: "/foods/\(foodIdx)",
+                                  responseDataType: FoodResponseModel.self,
+                                  parameter: param) { [weak self] response in
+            if response.statusCode == 200 {
+                self?.getFoodList(userId: userId)
+                completion()
+            }
+        }
+    }
+    
+    func deleteFood(foodIdx: Int, userId: Int, completion: @escaping () -> Void) {
+        APIManger.shared.deleteData(urlEndpointString: "/foods/\(foodIdx)",
+                                   responseDataType: FoodResponseModel.self) { [weak self] response in
+            if response.statusCode == 200 {
+                self?.getFoodList(userId: userId)
+                completion()
+            }
+        }
+    }
+    
+    func getFood() -> Food? {
+        return selectedFood
+    }
+    
+    func getUploadImageUrl(imageDir: ImageDir, image: UIImage, completion: @escaping (String?) -> Void) {
+        APIManger.shared.getUploadImageUrl(imageDir: imageDir, image: image) { response in
+            if response.statusCode == 200 {
+                completion(response.data?.imageUrl)
+            } else {
+                completion(nil)
+            }
+        }
+    }
     
     func foodImage(completion: @escaping (String?) -> Void) {
-        $food.sink { food in
+        $selectedFood.sink { food in
             completion(food?.imgURL)
         }.store(in: &cancelLabels)
     }
-    
     
     func barcodeFood(completion: @escaping (BarcodeFoodResponse?) -> Void) {
         $barcodeFoodInfo.sink { barcodeFood in
@@ -281,7 +346,7 @@ class FoodViewModel: ObservableObject {
     
     
     func deleteAll() {
-        self.food = nil
+        self.selectedFood = nil
         self.foodOwnerList = []
         self.barcodeFoodInfo = nil
         self.gptFoodNames = []
@@ -410,7 +475,7 @@ extension FoodViewModel {
     
     func getFoodDetail(foodIdx: Int) {
         foodService.getAllFood(foodIdx: foodIdx) { foodDetail in
-            self.food = foodDetail
+            self.selectedFood = foodDetail
         }
     }
 
@@ -459,7 +524,6 @@ extension FoodViewModel {
             self.postFood(fridgeIdx: fridgeIdx, foodName: foodName, foodDetail: foodDetail, foodCategory: foodCategory, foodShelfLife: foodShelfLife, foodOwnerIdx: foodOwnerIdx, memo: memo, imgUrl: self.profileImgKey, completion: completion)
         }
     }
-    
 
     /// 장보기 완료 후 식품추가 요청에 필요한 이미지 업로드 요청 메소드
     func getUploadImageUrl(imageDir: ImageDir, image: UIImage, completion: @escaping (String) -> Void) {

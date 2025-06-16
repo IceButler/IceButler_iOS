@@ -8,8 +8,18 @@
 import Foundation
 
 struct MyFridgeResponseModel: Codable {
-    let fridgeList: [Fridge]?
-    let multiFridgeResList: [MultiFridgeRes]?
+    let status: Int
+    let message: String
+    let data: MyFridgeData?
+}
+
+struct MyFridgeData: Codable {
+    let fridgeList: [FridgeRes]?
+}
+
+struct FridgeRes: Codable {
+    let fridgeIdx: Int?
+    let fridgeName, comment: String?
 }
 
 struct Fridge: Codable {

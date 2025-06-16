@@ -78,7 +78,7 @@ class MyRefrigeratorViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "MyRefrigeratorTableViewCell", bundle: nil), forCellReuseIdentifier: "MyRefrigeratorTableViewCell")
+        tableView.register(UINib(nibName: "MyFridgeTableViewCell", bundle: nil), forCellReuseIdentifier: "MyFridgeTableViewCell")
     }
     
     private func fetchData() {
@@ -121,109 +121,61 @@ extension MyRefrigeratorViewController: UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let fridgeList = data?.fridgeList,
-           let multiFridgeResList = data?.multiFridgeResList {
-            return fridgeList.count + multiFridgeResList.count
+        guard let data = self.data,
+              let fridgeList = data.fridgeList else {
+            return 0
         }
-        else { return 0 }
+        return fridgeList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyRefrigeratorTableViewCell", for: indexPath) as? MyRefrigeratorTableViewCell else { return UITableViewCell() }
-        cell.selectionStyle = .none
-        cell.tag = indexPath.row
-        cell.delegate = self
-        if indexPath.row < data?.fridgeList?.count ?? 0 {
-            cell.configureFridge(data: data?.fridgeList![indexPath.row])
-        } else {
-            let frigeratorCount = data?.fridgeList?.count ?? 0
-            cell.configureMultiFridge(data: data?.multiFridgeResList![indexPath.row - frigeratorCount])
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyFridgeTableViewCell", for: indexPath) as? MyFridgeTableViewCell else {
+            return UITableViewCell()
         }
-        cell.setupViewIsHidden()
-        cell.collectionView.reloadData()
+        
+        guard let data = self.data,
+              let fridgeList = data.fridgeList else {
+            return UITableViewCell()
+        }
+        
+        cell.configure(data: fridgeList[indexPath.row])
         return cell
     }
-}
-
-extension MyRefrigeratorViewController: MyRefrigeratorTableViewCellDelegate {
-//    func didTapViewCommentButton(index: Int, isHighlighted: Bool) {
-//        if isHighlighted { tableCellHeight = 258 }
-//        else { tableCellHeight = 198 }
-//        highlightedCellIdx = index
-//        reloadTableViewAnimation()
-//        self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-//
-//    }
     
-    func didTapAnyOfView() { reloadTableViewAnimation() }
-    
-    func didTapEditButton(index: Int) {
-        guard let editViewController = storyboard?.instantiateViewController(withIdentifier: "EditMyFridgeViewController") as? EditMyFridgeViewController else { return }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditMyFridgeViewController") as? EditMyFridgeViewController else { return }
         
-        
-        if index < (data?.fridgeList?.count ?? 0) {
-            let data = data?.fridgeList![index]
-            editViewController.setFridgeIdx(index: data?.fridgeIdx ?? -1)
-            editViewController.setFridgeData(isMulti: false,
-                                             fridgeName: data?.fridgeName ?? "",
-                                             comment: data?.comment ?? "",
-                                             members: (data?.users)!,
-                                             owner: (data?.users![0])!)
-            
-        } else {
-            let idx = index - (data?.fridgeList?.count ?? 0)
-            let data = data?.multiFridgeResList![idx]
-            editViewController.setFridgeIdx(index: data?.multiFridgeIdx ?? -1)
-            editViewController.setFridgeData(isMulti: true,
-                                             fridgeName: data?.multiFridgeName ?? "",
-                                             comment: data?.comment ?? "",
-                                             members: (data?.users)!,
-                                             owner: (data?.users![0])!)
-            
+        guard let data = self.data,
+              let fridgeList = data.fridgeList else {
+            return
         }
+        
+        let idx = indexPath.row
+        editViewController.setFridgeIdx(index: fridgeList[idx].fridgeIdx ?? -1)
+        editViewController.configure(fridgeName: fridgeList[idx].fridgeName ?? "",
+                                   comment: fridgeList[idx].comment ?? "")
+        editViewController.delegate = self
+        
         self.navigationController?.pushViewController(editViewController, animated: true)
     }
     
-    func didTapDeleteButton(index: Int) {
-        var removeFridgeIdx = -1
-        var isMulti = false
-        var ownerIdx = -1
-        
-        if index < (data?.fridgeList?.count ?? 0) {
-            let data = data?.fridgeList![index]
-            removeFridgeIdx = data?.fridgeIdx ?? -1
-            isMulti = false
-            ownerIdx = (data?.users![0].userIdx)!
-        } else {
-            let idx = index - (data?.fridgeList?.count ?? 0)
-            let data = data?.multiFridgeResList![idx]
-            removeFridgeIdx = data?.multiFridgeIdx ?? -1
-            isMulti = true
-            ownerIdx = (data?.users![0].userIdx)!
-        }
-        
-        guard let alertVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
-        
-        alertVC.configure(title: "냉장고 삭제",
-                          content: "해당 냉장고를 삭제하시겠습니까?",
-                          leftButtonTitle: "취소",
-                          righttButtonTitle: "삭제",
-                          rightCompletion: {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let data = self.data,
+                  let fridgeList = data.fridgeList else {
+                return
+            }
             
-            self.dismiss(animated: false)
-            guard let infoVC = UIStoryboard(name: "Alert", bundle: nil).instantiateViewController(withIdentifier: "InfoAlertViewController") as? InfoAlertViewController else { return }
-            infoVC.delegate = self
-            infoVC.setRemoveInfo(isMulti: isMulti,
-                                 ownerIdx: ownerIdx,
-                                 removeFridgeIdx: removeFridgeIdx)
-            infoVC.modalPresentationStyle = .fullScreen
-            self.present(infoVC, animated: true)
-        },
-                          leftCompletion: { self.dismiss(animated: true) })
-        
-        alertVC.modalPresentationStyle = .overFullScreen
-        present(alertVC, animated: true)
-        
+            let idx = indexPath.row
+            removeFridgeIdx = fridgeList[idx].fridgeIdx ?? -1
+            
+            let alert = UIAlertController(title: "냉장고 삭제", message: "정말로 이 냉장고를 삭제하시겠습니까?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+            alert.addAction(UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+                self?.removeFridge()
+            })
+            present(alert, animated: true)
+        }
     }
 }
 

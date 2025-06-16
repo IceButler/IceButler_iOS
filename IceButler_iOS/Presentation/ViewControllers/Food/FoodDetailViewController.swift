@@ -2,7 +2,7 @@
 //  FoodDetailViewController.swift
 //  IceButler_iOS
 //
-//  Created by 유상 on 2023/04/10.
+//  Created by 유상 on 2023/04/06.
 //
 
 import UIKit
@@ -11,8 +11,11 @@ import JGProgressHUD
 
 class FoodDetailViewController: UIViewController {
 
+    @IBOutlet weak var foodImageView: UIImageView!
     @IBOutlet weak var foodNameLabel: UILabel!
     @IBOutlet weak var foodDetailLabel: UILabel!
+    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var ddayLabel: UILabel!
     @IBOutlet weak var foodCategoryLabel: UILabel!
     @IBOutlet weak var foodShelfLifeLabel: UILabel!
     @IBOutlet weak var foodDdayLabel: UILabel!
@@ -21,22 +24,28 @@ class FoodDetailViewController: UIViewController {
     @IBOutlet weak var foodImageCollectionView: UICollectionView!
     @IBOutlet weak var completeButton: UIButton!
     
+    var foodIdx: Int?
+    private let viewModel = FoodViewModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setup()
+        setupUI()
+        loadFoodDetail()
         setupLayout()
         setupObserver()
         setupNavigationBar()
     }
     
-    private func setup() {
-        foodImageCollectionView.dataSource = self
-        foodImageCollectionView.delegate = self
-        
-        let foodImageCell = UINib(nibName: "FoodAddImageCell", bundle: nil)
-        foodImageCollectionView.register(foodImageCell, forCellWithReuseIdentifier: "FoodAddImageCell")
+    private func setupUI() {
+        title = "음식 상세"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
+                                                          target: self,
+                                                          action: #selector(didTapEditButton))
+    }
+    
+    private func loadFoodDetail() {
+        guard let foodIdx = foodIdx else { return }
+        viewModel.getFoodDetail(foodIdx: foodIdx)
     }
     
     private func setupLayout() {
@@ -107,7 +116,6 @@ class FoodDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItems = [deleteItem, editItem]
     }
     
-    
     @objc private func backToScene() {
         navigationController?.popViewController(animated: true)
         self.tabBarController?.tabBar.isHidden = false
@@ -137,7 +145,6 @@ class FoodDetailViewController: UIViewController {
                     
                     hud.dismiss(animated: true)
                     if result {
-                        RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
                         self.view.makeToast("해당 식품이 정상적으로 섭취 처리되었습니다.", duration: 1.0, position: .center)
                         self.navigationController?.popViewController(animated: true)
                     }else {
@@ -156,7 +163,6 @@ class FoodDetailViewController: UIViewController {
                 FoodViewModel.shared.deleteFoods(foodIdx: foodIdx) { result in
                     hud.dismiss(animated: true)
                     if result {
-                        RecipeViewModel.shared.needToUpdateRecipe(inFridge: true, inPopular: true)
                         self.view.makeToast("해당 식품이 정상적으로 폐기 처리되었습니다.", duration: 1.0, position: .center)
                         self.navigationController?.popViewController(animated: true)
                     }else {
@@ -172,7 +178,14 @@ class FoodDetailViewController: UIViewController {
         alertVC.modalPresentationStyle = .overFullScreen
         
         self.present(alertVC, animated: true)
-
+    }
+    
+    @objc private func didTapEditButton() {
+        guard let food = viewModel.getFood() else { return }
+        let storyboard = UIStoryboard(name: "Food", bundle: nil)
+        guard let foodEditVC = storyboard.instantiateViewController(withIdentifier: "FoodEditViewController") as? FoodEditViewController else { return }
+        foodEditVC.food = food
+        navigationController?.pushViewController(foodEditVC, animated: true)
     }
     
     private func setupObserver() {
@@ -203,8 +216,16 @@ class FoodDetailViewController: UIViewController {
         }
     }
     
-    
-    
+    private func updateUI(with food: Food) {
+        if let imageUrl = food.imgURL {
+            foodImageView.kf.setImage(with: URL(string: imageUrl))
+        }
+        foodNameLabel.text = food.foodName
+        foodDetailLabel.text = food.foodDetail
+        countLabel.text = "\(food.count)개"
+        ddayLabel.text = "D-\(food.dday)"
+        foodCategoryLabel.text = food.foodCategory
+    }
 }
 
 extension FoodDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

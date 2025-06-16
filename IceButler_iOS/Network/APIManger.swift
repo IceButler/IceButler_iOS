@@ -10,7 +10,6 @@ import Alamofire
 import Combine
 
 private let BASE_URL = Config.BASE_URL
-private let RECIPE_URL = Config.RECIPE_URL
 
 class APIManger: ObservableObject  {
     static let shared = APIManger()
@@ -18,7 +17,6 @@ class APIManger: ObservableObject  {
     private var headers: HTTPHeaders?
     
     @Published var fridgeIdx: Int = -1
-    private var isMultiFridge: Bool = false
     
     private var cancelLabels: Set<AnyCancellable> = []
     
@@ -30,21 +28,14 @@ class APIManger: ObservableObject  {
     }
     
     func getFridgeUrl() -> String {
-        if isMultiFridge {
-            return "/multiFridges"
-        }else {
-            return "/fridges"
-        }
+        return "/fridges"
     }
 }
 
-// MARK: 냉장고 Index 및 공용/가정용 구분값의 get/set
+// MARK: 냉장고 Index의 get/set
 extension APIManger {
     func setFridgeIdx(index: Int) { fridgeIdx = index }
     func getFridgeIdx() -> Int { return fridgeIdx }
-    
-    func setIsMultiFridge(isMulti: Bool) { isMultiFridge = isMulti }
-    func getIsMultiFridge() -> Bool { return isMultiFridge }
     
     func fridgeIdx(completion: @escaping (Int) -> Void) {
         $fridgeIdx.sink { fridgeIdx in
@@ -76,7 +67,6 @@ extension APIManger {
             .resume()
     }
     
-    
     func getData<U: Decodable>(urlEndpointString: String,
                                responseDataType: U.Type,
                                parameter: Parameters?,
@@ -86,47 +76,6 @@ extension APIManger {
         
         AF
             .request(url, method: .get, parameters: parameter, encoding: URLEncoding.queryString, headers: self.headers)
-            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-                print(response)
-                switch response.result {
-                case .success(let success):
-                    completionHandler(success)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            .resume()
-    }
-    
-    func getRecipeData<U: Decodable>(urlEndpointString: String,
-                               responseDataType: U.Type,
-                               parameter: Parameters?,
-                               completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
-
-        guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
-
-        AF
-            .request(url, method: .get, parameters: parameter, encoding: URLEncoding.queryString, headers: self.headers)
-            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-                print(response)
-                switch response.result {
-                case .success(let success):
-                    completionHandler(success)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            .resume()
-    }
-    
-    func getRecipeData<U: Decodable>(urlEndpointString: String,
-                               responseDataType: U.Type,
-                               completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
-
-        guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
-
-        AF
-            .request(url, method: .get, encoding: URLEncoding.queryString, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
                 print(response)
                 switch response.result {
@@ -172,7 +121,6 @@ extension APIManger {
         AF
             .request(url, method: .post, parameters: parameter, encoder: .json, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-
                 print(response)
                 switch response.result {
                 case .success(let success):
@@ -183,69 +131,6 @@ extension APIManger {
             }
             .resume()
     }
-    
-    func postRecipeData<T: Codable, U: Decodable>(urlEndpointString: String,
-                                                  responseDataType: U.Type,
-                                                  requestDataType: T.Type,
-                                                  parameter: T?,
-                                                  completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
-        guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
-        
-        AF
-            .request(url, method: .post, parameters: parameter, encoder: .json, headers: self.headers)
-            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-                print(response)
-                switch response.result {
-                case .success(let success):
-                    completionHandler(success)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            .resume()
-    }
-    
-    func postRecipeData<U: Decodable>(urlEndpointString: String,
-                                      responseDataType: U.Type,
-                                      completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
-        guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
-        
-        AF
-            .request(url, method: .post, headers: self.headers)
-            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-                print(response)
-                switch response.result {
-                case .success(let success):
-                    completionHandler(success)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            .resume()
-    }
-    
-    func getData<T: Codable, U: Decodable>(url: String,
-                                           responseDataType: U.Type,
-                                           requestDataType: T.Type,
-                                           parameter: T?,
-                                           completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
-        
-        guard let url = URL(string: url) else { return }
-        
-        AF
-            .request(url, method: .get, parameters: parameter, headers: headers)
-            .responseDecodable(of: GeneralResponseModel<U>.self) { response in
-                print(response)
-                switch response.result {
-                case .success(let success):
-                    completionHandler(success)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            .resume()
-    }
-    
     
     func getImageUrl(url: String, parameter: Parameters?, completionHandler: @escaping (ImageResponseModel?)->Void) {
         guard let url = URL(string: url) else { return }
@@ -286,7 +171,6 @@ extension APIManger {
             }.resume()
     }
     
-    
     func putData<T: Codable, U: Decodable>(urlEndpointString: String,
                                             responseDataType: U.Type,
                                             requestDataType: T.Type,
@@ -307,7 +191,6 @@ extension APIManger {
             }
             .resume()
     }
-    
     
     func putData(url: String, data: Data, completion: @escaping () -> Void) {
         let url = URL(string: url)
@@ -371,8 +254,6 @@ extension APIManger {
             .resume()
     }
     
-    
-    
     func deleteData<U: Decodable>(urlEndpointString: String,
                                             responseDataType: U.Type,
                                             completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
@@ -397,7 +278,7 @@ extension APIManger {
     func deleteRecipeData<U: Decodable>(urlEndpointString: String,
                                             responseDataType: U.Type,
                                             completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
-        guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
+        guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
         AF
             .request(url, method: .delete, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
@@ -459,7 +340,7 @@ extension APIManger {
                                                    requestDataType: T.Type,
                                                    parameter: T?,
                                                    completionHandler: @escaping (GeneralResponseModel<U>)->Void) {
-        guard let url = URL(string: RECIPE_URL + urlEndpointString) else { return }
+        guard let url = URL(string: BASE_URL + urlEndpointString) else { return }
         AF
             .request(url, method: .patch, parameters: parameter, encoder: .json, headers: self.headers)
             .responseDecodable(of: GeneralResponseModel<U>.self) { response in
