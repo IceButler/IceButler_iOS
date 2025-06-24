@@ -4,7 +4,8 @@
       "Bash(git remote set-url:*)",
       "Bash(ssh-add:*)",
       "Bash(mkdir:*)",
-      "Bash(pod install:*)"
+      "Bash(pod install:*)",
+      "Bash(sed:*)"
     ],
     "deny": []
   }

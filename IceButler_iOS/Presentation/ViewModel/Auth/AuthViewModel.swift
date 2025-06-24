@@ -6,23 +6,32 @@
 //
 
 import Foundation
-import Combine
+import RxSwift
+import RxRelay
 import UIKit
 import Alamofire
 import AuthenticationServices
 
-class AuthViewModel: NSObject, ObservableObject {
+class AuthViewModel: NSObject {
     static let shared = AuthViewModel()
     private let authService = AuthService()
     
-    @Published var userEmail: String?
-    @Published var userNickname: String?
-    @Published var isExistence: Bool?
-    @Published var isJoin: Bool = false
-    @Published var accessToken: String?
-    @Published var isModify: Bool = false
+    private let userEmailRelay = BehaviorRelay<String?>(value: nil)
+    private let userNicknameRelay = BehaviorRelay<String?>(value: nil)
+    private let isExistenceRelay = BehaviorRelay<Bool?>(value: nil)
+    private let isJoinRelay = BehaviorRelay<Bool>(value: false)
+    private let accessTokenRelay = BehaviorRelay<String?>(value: nil)
+    private let isModifyRelay = BehaviorRelay<Bool>(value: false)
     
-    private var cancelLabels: Set<AnyCancellable> = []
+    // Public accessors
+    var userEmail: String? { userEmailRelay.value }
+    var userNickname: String? { userNicknameRelay.value }
+    var isExistence: Bool? { isExistenceRelay.value }
+    var isJoin: Bool { isJoinRelay.value }
+    var accessToken: String? { accessTokenRelay.value }
+    var isModify: Bool { isModifyRelay.value }
+    
+    private let disposeBag = DisposeBag()
     
     private var authProvider: AuthProvider?
     
@@ -36,53 +45,63 @@ class AuthViewModel: NSObject, ObservableObject {
     }
     
     func userEmail(completion: @escaping (String) -> Void) {
-        $userEmail.filter { userEmail in
-            userEmail != nil
-        }.sink { userEmail in
-            completion(userEmail!)
-        }.store(in: &cancelLabels)
+        userEmailRelay
+            .compactMap { $0 }
+            .subscribe(onNext: { email in
+                completion(email)
+            })
+            .disposed(by: disposeBag)
     }
     
     func isUserEmail(completion: @escaping () -> Void) {
-        $userEmail.filter { userEmail in
-            userEmail != nil
-        }.sink { userEmail in
-            completion()
-        }.store(in: &cancelLabels)
+        userEmailRelay
+            .compactMap { $0 }
+            .subscribe(onNext: { _ in
+                completion()
+            })
+            .disposed(by: disposeBag)
     }
     
     func userNickname(completion: @escaping (String) -> Void) {
-        $userNickname.filter { nickname in
-            nickname != nil
-        }.sink { nickname in
-            completion(nickname!)
-        }.store(in: &cancelLabels)
+        userNicknameRelay
+            .compactMap { $0 }
+            .subscribe(onNext: { nickname in
+                completion(nickname)
+            })
+            .disposed(by: disposeBag)
     }
     
     func isExistence(completion: @escaping (Bool) -> Void) {
-        $isExistence.filter { isExistence in
-            isExistence != nil
-        }.sink { isExistence in
-            completion(isExistence!)
-        }.store(in: &cancelLabels)
+        isExistenceRelay
+            .compactMap { $0 }
+            .subscribe(onNext: { isExistence in
+                completion(isExistence)
+            })
+            .disposed(by: disposeBag)
     }
     
     func isJoin(completion: @escaping (Bool) -> Void) {
-        $isJoin.sink { isJoin in
-            completion(isJoin)
-        }.store(in: &cancelLabels)
+        isJoinRelay
+            .subscribe(onNext: { isJoin in
+                completion(isJoin)
+            })
+            .disposed(by: disposeBag)
     }
     
     func isModify(completion: @escaping (Bool) -> Void) {
-        $isModify.sink { isModify in
-            completion(isModify)
-        }.store(in: &cancelLabels)
+        isModifyRelay
+            .subscribe(onNext: { isModify in
+                completion(isModify)
+            })
+            .disposed(by: disposeBag)
     }
     
     func accessToken(completion: @escaping (String) -> Void) {
-        $accessToken.sink { token in
-            completion(token ?? "")
-        }.store(in: &cancelLabels)
+        accessTokenRelay
+            .subscribe(onNext: { token in
+                completion(token ?? "")
+            })
+            .disposed(by: disposeBag)
     }
     
     
@@ -111,10 +130,10 @@ extension AuthViewModel {
         
         authService.requestLogin(parameter: parameter) { response in
             if let response = response {
-                self.accessToken = response.accessToken
+                self.accessTokenRelay.accept(response.accessToken)
                 self.setUserToken(token: response)
             }else {
-                self.userEmail = userEmail
+                self.userEmailRelay.accept(userEmail)
             }
         }
     }
@@ -124,11 +143,11 @@ extension AuthViewModel {
         let parameter = AuthNicknameRequsetModel(nickname: nickname)
         authService.requestCheckNickname(parameter: parameter) { response in
             if response != nil {
-                self.userNickname = response?.nickname
-                self.isExistence = response?.existence
+                self.userNicknameRelay.accept(response?.nickname)
+                self.isExistenceRelay.accept(response?.existence)
             }else {
-                self.userNickname = nickname
-                self.isExistence = false
+                self.userNicknameRelay.accept(nickname)
+                self.isExistenceRelay.accept(false)
             }
         }
     }
@@ -164,9 +183,9 @@ extension AuthViewModel {
         
         self.authService.joinUser(parameter: parameter) { response in
             if let response = response {
-                self.accessToken = response.accessToken
+                self.accessTokenRelay.accept(response.accessToken)
                 self.setUserToken(token: response)
-                self.isJoin = true
+                self.isJoinRelay.accept(true)
             }
         }
     }
@@ -182,7 +201,7 @@ extension AuthViewModel {
         
         self.authService.modfiyUser(parameter: parameter) {
             UserViewModel.shared.getUserInfo()
-            self.isModify = true
+            self.isModifyRelay.accept(true)
         }
     }
     
@@ -199,7 +218,7 @@ extension AuthViewModel {
             if let userTokenData = UserDefaults.standard.object(forKey: "UserToken") as? Data {
                 let decoder = JSONDecoder()
                 if let userToken = try? decoder.decode(AuthJoinUserResponseModel.self, from: userTokenData) {
-                    self.accessToken = userToken.accessToken
+                    self.accessTokenRelay.accept(userToken.accessToken)
                 }
             }
         }
@@ -214,10 +233,10 @@ extension AuthViewModel {
     }
     
     func removeAllData() {
-        self.isJoin = false
-        self.isModify = false
-        self.userEmail = nil
-        self.accessToken = nil
+        self.isJoinRelay.accept(false)
+        self.isModifyRelay.accept(false)
+        self.userEmailRelay.accept(nil)
+        self.accessTokenRelay.accept(nil)
         UserDefaults.standard.removeObject(forKey: "UserToken")
     }
 }

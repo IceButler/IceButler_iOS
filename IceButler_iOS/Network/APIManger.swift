@@ -7,19 +7,23 @@
 
 import Foundation
 import Alamofire
-import Combine
+import RxSwift
+import RxRelay
 
 private let BASE_URL = Config.BASE_URL
 private let RECIPE_URL = Config.RECIPE_URL
 
-class APIManger: ObservableObject  {
+class APIManger {
     static let shared = APIManger()
     
     private var headers: HTTPHeaders?
     
-    @Published var fridgeIdx: Int = -1
+    private let fridgeIdxRelay = BehaviorRelay<Int>(value: -1)
+    var fridgeIdx: Int {
+        return fridgeIdxRelay.value
+    }
     
-    private var cancelLabels: Set<AnyCancellable> = []
+    private let disposeBag = DisposeBag()
     
     func setupObserver() {
         AuthViewModel.shared.accessToken { token in
@@ -35,13 +39,24 @@ class APIManger: ObservableObject  {
 
 // MARK: 냉장고 Index get/set
 extension APIManger {
-    func setFridgeIdx(index: Int) { fridgeIdx = index }
-    func getFridgeIdx() -> Int { return fridgeIdx }
+    func setFridgeIdx(index: Int) { 
+        fridgeIdxRelay.accept(index)
+    }
+    
+    func getFridgeIdx() -> Int { 
+        return fridgeIdx 
+    }
+    
+    func fridgeIdxObservable() -> Observable<Int> {
+        return fridgeIdxRelay.asObservable()
+    }
     
     func fridgeIdx(completion: @escaping (Int) -> Void) {
-        $fridgeIdx.sink { fridgeIdx in
-            completion(fridgeIdx)
-        }.store(in: &cancelLabels)
+        fridgeIdxRelay
+            .subscribe(onNext: { fridgeIdx in
+                completion(fridgeIdx)
+            })
+            .disposed(by: disposeBag)
     }
 }
 

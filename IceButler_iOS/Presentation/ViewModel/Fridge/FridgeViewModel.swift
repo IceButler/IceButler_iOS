@@ -6,9 +6,10 @@
 //
 
 import Foundation
-import Combine
+import RxSwift
+import RxRelay
 
-class FridgeViewModel: ObservableObject {
+class FridgeViewModel {
     static let shared = FridgeViewModel()
     
     private let fridgeService = FridgeService()

@@ -6,9 +6,10 @@
 //
 
 import Foundation
-import Combine
+import RxSwift
+import RxRelay
 
-class UserViewModel: ObservableObject {
+class UserViewModel {
     static let shared = UserViewModel()
     private let userService = UserService()
     
