@@ -4,4 +4,7 @@
    <FileRef
       location = "group:IceButler_iOS.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
 </Workspace>

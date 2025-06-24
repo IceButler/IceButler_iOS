@@ -1,22 +1,27 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '14.0'
 
 target 'IceButler_iOS' do
-  # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for IceButler_iOS
+  # 네트워킹 & 이미지
   pod 'Kingfisher'
   pod 'Alamofire', '~> 5.2'
-  pod 'Tabman', '~> 3.0'
-  pod 'Toast-Swift', '~> 5.0.1'
+  
+  # UI & 키보드
+  pod 'SnapKit'
   pod 'IQKeyboardManager'
-  pod "BSImagePicker", "~> 3.1"
+  pod 'Toast-Swift', '~> 5.0.1'
+  pod 'JGProgressHUD'
+  
+  # 소셜 로그인
   pod 'KakaoSDKUser'
   pod 'KakaoSDKAuth'
-  pod 'SnapKit'
-  pod 'Charts'
-  pod 'JGProgressHUD'
+  
+  # ReactorKit & RxSwift (영수증 스캔 기능용)
+  pod 'ReactorKit'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxGesture'
 
   target 'IceButler_iOSTests' do
     inherit! :search_paths

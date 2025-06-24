@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ScanLimitIndicatorView: UIView {
     
@@ -107,5 +109,25 @@ class ScanLimitIndicatorView: UIView {
         }
         
         upgradeButton.isHidden = currentTier != .free
+    }
+}
+
+// MARK: - Reactive Extension
+extension Reactive where Base: ScanLimitIndicatorView {
+    var remainingScans: Binder<Int> {
+        return Binder(base) { view, count in
+            if count == -1 {
+                view.countLabel.text = "무제한 스캔"
+            } else {
+                view.countLabel.text = "남은 스캔: \(count)회"
+            }
+        }
+    }
+    
+    var currentTier: Binder<SubscriptionTier> {
+        return Binder(base) { view, tier in
+            view.titleLabel.text = tier.displayName
+            view.upgradeButton.isHidden = tier != .free
+        }
     }
 }

@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git remote set-url:*)",
       "Bash(ssh-add:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(pod install:*)"
     ],
     "deny": []
   }

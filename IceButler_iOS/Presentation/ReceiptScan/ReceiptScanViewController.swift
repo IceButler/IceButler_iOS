@@ -6,20 +6,17 @@
 //
 
 import UIKit
-// import ReactorKit
-// import RxSwift
-// import RxCocoa
-// import SnapKit
+import ReactorKit
+import RxSwift
+import RxCocoa
+import SnapKit
 
-// TODO: ReactorKit 패키지 추가 후 활성화
-// final class ReceiptScanViewController: UIViewController, View {
-final class ReceiptScanViewController: UIViewController {
+final class ReceiptScanViewController: UIViewController, View {
     
-    // typealias Reactor = ReceiptScanReactor
+    typealias Reactor = ReceiptScanReactor
     
     // MARK: - Properties
-    // var disposeBag = DisposeBag()
-    private var reactor: ReceiptScanReactor?
+    var disposeBag = DisposeBag()
     
     // MARK: - UI Components
     private let scrollView = UIScrollView()
@@ -84,7 +81,6 @@ final class ReceiptScanViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        reactor?.action.onNext(.viewDidLoad)
     }
     
     // MARK: - Setup
@@ -172,12 +168,11 @@ final class ReceiptScanViewController: UIViewController {
     
     private func setupReactor() {
         reactor = ReceiptScanReactor()
-        // TODO: ReactorKit 바인딩 추가
     }
     
     // MARK: - Actions
     @objc private func scanButtonTapped() {
-        presentCamera()
+        reactor?.action.onNext(.startScan)
     }
     
     // MARK: - Private Methods
@@ -224,8 +219,6 @@ final class ReceiptScanViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    // TODO: ReactorKit 바인딩 추가
-    /*
     // MARK: - Bind
     func bind(reactor: ReceiptScanReactor) {
         // View -> Reactor
@@ -297,38 +290,18 @@ final class ReceiptScanViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
-    */
 }
 
 // MARK: - CameraViewControllerDelegate
 extension ReceiptScanViewController: CameraViewControllerDelegate {
     func cameraViewController(_ viewController: CameraViewController, didCaptureImage image: UIImage) {
         viewController.dismiss(animated: true) { [weak self] in
-            // TODO: reactor?.action.onNext(.captureImage(image))
-            // 임시로 직접 처리
-            self?.processImage(image)
+            self?.reactor?.action.onNext(.captureImage(image))
         }
     }
     
     func cameraViewControllerDidCancel(_ viewController: CameraViewController) {
         viewController.dismiss(animated: true)
-    }
-    
-    private func processImage(_ image: UIImage) {
-        // 임시 구현 - ReactorKit 활성화 후 제거
-        processingOverlay.isHidden = false
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.processingOverlay.isHidden = true
-            
-            // Mock 데이터로 결과 표시
-            let mockItems = [
-                FoodItem(name: "우유", category: .dairy, expiryDate: Calendar.current.date(byAdding: .day, value: 7, to: Date()) ?? Date(), storageType: .refrigerator),
-                FoodItem(name: "바나나", category: .fruit, expiryDate: Calendar.current.date(byAdding: .day, value: 3, to: Date()) ?? Date(), storageType: .pantry)
-            ]
-            
-            self?.presentResults(items: mockItems)
-        }
     }
 }
 
@@ -336,14 +309,13 @@ extension ReceiptScanViewController: CameraViewControllerDelegate {
 extension ReceiptScanViewController: ScanResultsViewControllerDelegate {
     func scanResultsViewController(_ viewController: ScanResultsViewController, didConfirmItems items: [FoodItem]) {
         viewController.dismiss(animated: true) { [weak self] in
-            // TODO: reactor?.action.onNext(.addItemsToFridge)
-            print("냉장고에 \(items.count)개 아이템 추가")
+            self?.reactor?.action.onNext(.addItemsToFridge)
         }
     }
     
     func scanResultsViewControllerDidCancel(_ viewController: ScanResultsViewController) {
         viewController.dismiss(animated: true) { [weak self] in
-            // TODO: reactor?.action.onNext(.resetState)
+            self?.reactor?.action.onNext(.resetState)
         }
     }
 }

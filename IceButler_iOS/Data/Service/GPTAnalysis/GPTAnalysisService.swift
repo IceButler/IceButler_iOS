@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Combine
+import RxSwift
 
 // MARK: - GPTAnalysisService
 class GPTAnalysisService {
@@ -41,8 +41,8 @@ class GPTAnalysisService {
     }
     
     // MARK: - Public Methods
-    func analyzeFoodItems(from receiptText: String) -> AnyPublisher<[FoodItem], Error> {
-        return Future<[FoodItem], Error> { promise in
+    func analyzeFoodItems(from receiptText: String) -> Observable<[FoodItem]> {
+        return Observable.create { observer in
             let prompt = self.createAnalysisPrompt(receiptText: receiptText)
             
             self.callOpenAI(with: prompt) { result in
@@ -50,16 +50,18 @@ class GPTAnalysisService {
                 case .success(let response):
                     do {
                         let foodItems = try self.parseFoodItems(from: response)
-                        promise(.success(foodItems))
+                        observer.onNext(foodItems)
+                        observer.onCompleted()
                     } catch {
-                        promise(.failure(GPTError.parsingError))
+                        observer.onError(GPTError.parsingError)
                     }
                 case .failure(let error):
-                    promise(.failure(error))
+                    observer.onError(error)
                 }
             }
+            
+            return Disposables.create()
         }
-        .eraseToAnyPublisher()
     }
     
     // MARK: - Private Methods

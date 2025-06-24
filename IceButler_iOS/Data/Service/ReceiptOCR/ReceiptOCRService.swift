@@ -8,7 +8,7 @@
 import Foundation
 import Vision
 import UIKit
-import Combine
+import RxSwift
 
 // MARK: - ReceiptOCRService
 class ReceiptOCRService {
@@ -34,21 +34,21 @@ class ReceiptOCRService {
     }
     
     // MARK: - Public Methods
-    func extractText(from image: UIImage) -> AnyPublisher<String, Error> {
-        return Future<String, Error> { promise in
+    func extractText(from image: UIImage) -> Observable<String> {
+        return Observable.create { observer in
             guard let cgImage = image.cgImage else {
-                promise(.failure(OCRError.invalidImage))
-                return
+                observer.onError(OCRError.invalidImage)
+                return Disposables.create()
             }
             
             let request = VNRecognizeTextRequest { (request, error) in
                 if let error = error {
-                    promise(.failure(error))
+                    observer.onError(error)
                     return
                 }
                 
                 guard let observations = request.results as? [VNRecognizedTextObservation] else {
-                    promise(.failure(OCRError.noTextDetected))
+                    observer.onError(OCRError.noTextDetected)
                     return
                 }
                 
@@ -59,9 +59,10 @@ class ReceiptOCRService {
                 let fullText = recognizedStrings.joined(separator: "\n")
                 
                 if fullText.isEmpty {
-                    promise(.failure(OCRError.noTextDetected))
+                    observer.onError(OCRError.noTextDetected)
                 } else {
-                    promise(.success(fullText))
+                    observer.onNext(fullText)
+                    observer.onCompleted()
                 }
             }
             
@@ -76,11 +77,12 @@ class ReceiptOCRService {
                 do {
                     try handler.perform([request])
                 } catch {
-                    promise(.failure(OCRError.processingFailed))
+                    observer.onError(OCRError.processingFailed)
                 }
             }
+            
+            return Disposables.create()
         }
-        .eraseToAnyPublisher()
     }
     
     // MARK: - Preprocessing

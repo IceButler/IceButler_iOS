@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ProcessingOverlayView: UIView {
     
@@ -123,5 +125,26 @@ class ProcessingOverlayView: UIView {
         }
         
         messageLabel.text = message
+    }
+}
+
+// MARK: - Reactive Extension
+extension Reactive where Base: ProcessingOverlayView {
+    var isVisible: Binder<Bool> {
+        return Binder(base) { view, isVisible in
+            view.isHidden = !isVisible
+            if isVisible {
+                view.alpha = 0
+                UIView.animate(withDuration: 0.3) {
+                    view.alpha = 1
+                }
+            }
+        }
+    }
+    
+    var progress: Binder<Float> {
+        return Binder(base) { view, progress in
+            view.updateProgress(progress)
+        }
     }
 }

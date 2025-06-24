@@ -6,13 +6,11 @@
 //
 
 import Foundation
-// import ReactorKit
-// import RxSwift
+import ReactorKit
+import RxSwift
 import UIKit
 
-// TODO: ReactorKit 패키지 추가 후 활성화
-// final class ReceiptScanReactor: Reactor {
-final class ReceiptScanReactor {
+final class ReceiptScanReactor: Reactor {
     
     // MARK: - Action
     enum Action {
@@ -64,8 +62,6 @@ final class ReceiptScanReactor {
         self.initialState = State()
     }
     
-    // TODO: ReactorKit 활성화 후 주석 해제
-    /*
     // MARK: - Mutation
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
@@ -209,5 +205,4 @@ final class ReceiptScanReactor {
             .just(.setCanScan(scanLimitManager.canScan()))
         ])
     }
-    */
 }

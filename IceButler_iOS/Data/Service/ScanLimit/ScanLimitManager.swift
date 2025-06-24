@@ -6,17 +6,26 @@
 //
 
 import Foundation
-import Combine
+import RxSwift
+import RxRelay
 
 // MARK: - ScanLimitManager
-class ScanLimitManager: ObservableObject {
+class ScanLimitManager {
     static let shared = ScanLimitManager()
     
-    @Published var currentTier: SubscriptionTier = .free
-    @Published var remainingScans: Int = 5
+    private let currentTierRelay = BehaviorRelay<SubscriptionTier>(value: .free)
+    private let remainingScansRelay = BehaviorRelay<Int>(value: 5)
+    
+    var currentTier: SubscriptionTier {
+        return currentTierRelay.value
+    }
+    
+    var remainingScans: Int {
+        return remainingScansRelay.value
+    }
     
     private let userDefaults = UserDefaults.standard
-    private var cancellables = Set<AnyCancellable>()
+    private let disposeBag = DisposeBag()
     
     private enum Keys {
         static let scanCount = "monthly_scan_count"
@@ -46,7 +55,8 @@ class ScanLimitManager: ObservableObject {
         
         switch currentTier {
         case .free, .pro:
-            remainingScans -= 1
+            let newCount = remainingScans - 1
+            remainingScansRelay.accept(newCount)
             saveData()
         case .premium:
             break // Unlimited, no need to consume
@@ -65,7 +75,7 @@ class ScanLimitManager: ObservableObject {
     }
     
     func upgradeSubscription(to tier: SubscriptionTier) {
-        currentTier = tier
+        currentTierRelay.accept(tier)
         resetMonthlyLimit()
         saveData()
     }
@@ -75,7 +85,7 @@ class ScanLimitManager: ObservableObject {
         // Load subscription tier
         if let tierString = userDefaults.string(forKey: Keys.subscriptionTier),
            let tier = SubscriptionTier(rawValue: tierString) {
-            currentTier = tier
+            currentTierRelay.accept(tier)
         }
         
         // Check if monthly reset is needed
@@ -84,7 +94,8 @@ class ScanLimitManager: ObservableObject {
         } else {
             // Load remaining scans
             let savedCount = userDefaults.integer(forKey: Keys.scanCount)
-            remainingScans = max(0, currentTier.monthlyScans - savedCount)
+            let newRemaining = max(0, currentTier.monthlyScans - savedCount)
+            remainingScansRelay.accept(newRemaining)
         }
     }
     
@@ -113,29 +124,30 @@ class ScanLimitManager: ObservableObject {
     }
     
     private func resetMonthlyLimit() {
+        let newScans: Int
         switch currentTier {
         case .free:
-            remainingScans = 5
+            newScans = 5
         case .pro:
-            remainingScans = 20
+            newScans = 20
         case .premium:
-            remainingScans = -1 // Unlimited
+            newScans = -1 // Unlimited
         }
         
+        remainingScansRelay.accept(newScans)
         userDefaults.set(0, forKey: Keys.scanCount)
         userDefaults.set(Date(), forKey: Keys.lastResetDate)
     }
     
     private func setupMonthlyReset() {
         // Check for monthly reset every day at midnight
-        Timer.publish(every: 24 * 60 * 60, on: .main, in: .common)
-            .autoconnect()
-            .sink { [weak self] _ in
+        Observable<Int>.timer(.seconds(0), period: .seconds(24 * 60 * 60), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
                 if self?.shouldResetMonthly() == true {
                     self?.resetMonthlyLimit()
                 }
-            }
-            .store(in: &cancellables)
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Development/Testing Methods
@@ -144,8 +156,8 @@ class ScanLimitManager: ObservableObject {
         userDefaults.removeObject(forKey: Keys.lastResetDate)
         userDefaults.removeObject(forKey: Keys.subscriptionTier)
         
-        currentTier = .free
-        remainingScans = 5
+        currentTierRelay.accept(.free)
+        remainingScansRelay.accept(5)
     }
     
     func simulateSubscription(_ tier: SubscriptionTier) {
