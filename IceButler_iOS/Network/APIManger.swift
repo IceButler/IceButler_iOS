@@ -18,7 +18,6 @@ class APIManger: ObservableObject  {
     private var headers: HTTPHeaders?
     
     @Published var fridgeIdx: Int = -1
-    private var isMultiFridge: Bool = false
     
     private var cancelLabels: Set<AnyCancellable> = []
     
@@ -30,21 +29,14 @@ class APIManger: ObservableObject  {
     }
     
     func getFridgeUrl() -> String {
-        if isMultiFridge {
-            return "/multiFridges"
-        }else {
-            return "/fridges"
-        }
+        return "/fridges"
     }
 }
 
-// MARK: 냉장고 Index 및 공용/가정용 구분값의 get/set
+// MARK: 냉장고 Index get/set
 extension APIManger {
     func setFridgeIdx(index: Int) { fridgeIdx = index }
     func getFridgeIdx() -> Int { return fridgeIdx }
-    
-    func setIsMultiFridge(isMulti: Bool) { isMultiFridge = isMulti }
-    func getIsMultiFridge() -> Bool { return isMultiFridge }
     
     func fridgeIdx(completion: @escaping (Int) -> Void) {
         $fridgeIdx.sink { fridgeIdx in

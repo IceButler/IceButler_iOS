@@ -101,8 +101,6 @@
 		95607D712A168F5E00C1F089 /* LoadingReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95607D6F2A168F5E00C1F089 /* LoadingReusableView.swift */; };
 		95607D722A168F5E00C1F089 /* LoadingReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95607D702A168F5E00C1F089 /* LoadingReusableView.xib */; };
 		95607D742A1826E900C1F089 /* MyRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95607D732A1826E900C1F089 /* MyRecipeViewController.swift */; };
-		95928C1E2A29CB1300526D5D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 95928C1D2A29CB1300526D5D /* FirebaseAnalytics */; };
-		95928C202A29CB1300526D5D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 95928C1F2A29CB1300526D5D /* FirebaseMessaging */; };
 		95A2574E2A1AAC7300ABDC93 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2574D2A1AAC7300ABDC93 /* RecipeDetailViewController.swift */; };
 		95A257512A1B041D00ABDC93 /* RecipeDetailIngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A2574F2A1B041D00ABDC93 /* RecipeDetailIngredientCell.swift */; };
 		95A257522A1B041D00ABDC93 /* RecipeDetailIngredientCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A257502A1B041D00ABDC93 /* RecipeDetailIngredientCell.xib */; };
@@ -479,10 +477,8 @@
 			files = (
 				A29C59492A1193A300E8D227 /* WebKit.framework in Frameworks */,
 				A22B98CD2A0F503F00797C81 /* libc++.tbd in Frameworks */,
-				95928C202A29CB1300526D5D /* FirebaseMessaging in Frameworks */,
 				A22B98CC2A0F503700797C81 /* libsqlite3.tbd in Frameworks */,
 				A22B98CB2A0F502600797C81 /* libxml2.tbd in Frameworks */,
-				95928C1E2A29CB1300526D5D /* FirebaseAnalytics in Frameworks */,
 				A22B98722A0F4C4600797C81 /* QuartzCore.framework in Frameworks */,
 				A22B986E2A0F4C3500797C81 /* CoreLocation.framework in Frameworks */,
 				A22B98BB2A0F4C8600797C81 /* DaumMap.framework in Frameworks */,
@@ -1256,8 +1252,6 @@
 			);
 			name = IceButler_iOS;
 			packageProductDependencies = (
-				95928C1D2A29CB1300526D5D /* FirebaseAnalytics */,
-				95928C1F2A29CB1300526D5D /* FirebaseMessaging */,
 			);
 			productName = IceButler_iOS;
 			productReference = 73F0D23629D2DFFE0038BD0C /* IceButler_iOS.app */;
@@ -1336,7 +1330,6 @@
 			);
 			mainGroup = 73F0D22D29D2DFFE0038BD0C;
 			packageReferences = (
-				95928C1C2A29CB1300526D5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 73F0D23729D2DFFE0038BD0C /* Products */;
 			projectDirPath = "";
@@ -1452,9 +1445,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS/Pods-IceButler_iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1491,9 +1488,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IceButler_iOS-IceButler_iOSUITests/Pods-IceButler_iOS-IceButler_iOSUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2064,30 +2065,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		95928C1C2A29CB1300526D5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		95928C1D2A29CB1300526D5D /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 95928C1C2A29CB1300526D5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		95928C1F2A29CB1300526D5D /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 95928C1C2A29CB1300526D5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 73F0D22E29D2DFFE0038BD0C /* Project object */;
 }

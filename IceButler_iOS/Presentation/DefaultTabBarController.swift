@@ -10,9 +10,8 @@ import UIKit
 class DefaultTabBarController: UITabBarController {
     
     
-    private let fridgeTab = UITabBarItem(title: nil, image: UIImage(named: "main"), selectedImage: UIImage(named: "main")) // TODO: .fill 아이콘으로 변경
-    private let recipeTab = UITabBarItem(title: nil, image: UIImage(named: "recipe"), selectedImage: UIImage(named: "recipe.fill"))
-    private let cartTab = UITabBarItem(title: nil, image: UIImage(named: "cart"), selectedImage: UIImage(named: "cart.fill"))
+    private let fridgeTab = UITabBarItem(title: nil, image: UIImage(named: "main"), selectedImage: UIImage(named: "main.fill"))
+    private let receiptScanTab = UITabBarItem(title: nil, image: UIImage(systemName: "camera"), selectedImage: UIImage(systemName: "camera.fill"))
     private let mypageTab = UITabBarItem(title: nil, image: UIImage(named: "mypage"), selectedImage: UIImage(named: "mypage.fill"))
     
     override func viewDidLoad() {
@@ -50,26 +49,17 @@ class DefaultTabBarController: UITabBarController {
     private func configureTabBar() {
         self.tabBarController?.tabBar.tintColor = .black
         
-        // TODO: 레시피, 마이페이지 관련 화면 생성 후 instatiate 관련 내용 수정
         var storyboard = UIStoryboard.init(name: "Fridge", bundle: nil)
         guard let fridgeViewController = storyboard.instantiateViewController(withIdentifier: "FridgeViewController") as? FridgeViewController else { return }
         let fridge = UINavigationController(rootViewController: fridgeViewController)
         fridge.tabBarItem = fridgeTab
         
-        storyboard = UIStoryboard.init(name: "Recipe", bundle: nil)
-        guard let recipeViewController = storyboard.instantiateViewController(withIdentifier: "RecipeViewController") as? RecipeViewController else { return }
-        let recipe = UINavigationController(rootViewController: recipeViewController)
-        recipe.tabBarItem = recipeTab
-        
-        storyboard = UIStoryboard.init(name: "Cart", bundle: nil)
-        guard let cartViewController = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController else { return }
-        let cart = UINavigationController(rootViewController: cartViewController)
-        cart.tabBarItem = cartTab
-        
-//        storyboard = UIStoryboard.init(name: "AuthMain", bundle: nil)
-//        guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "AuthMainViewController") as? AuthMainViewController else { return }
-//        let mypage = UINavigationController(rootViewController: mypageViewController)
-//        mypage.tabBarItem = mypageTab
+        // 영수증 스캔 화면 (임시로 PlaceholderViewController 사용)
+        let receiptScanViewController = UIViewController()
+        receiptScanViewController.view.backgroundColor = .systemBackground
+        receiptScanViewController.title = "영수증 스캔"
+        let receiptScan = UINavigationController(rootViewController: receiptScanViewController)
+        receiptScan.tabBarItem = receiptScanTab
         
         storyboard = UIStoryboard.init(name: "MyPage", bundle: nil)
         guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "MyPageViewController") as? MyPageViewController else { return }
@@ -78,8 +68,7 @@ class DefaultTabBarController: UITabBarController {
         
         viewControllers = [
             fridge,
-            recipe,
-            cart,
+            receiptScan,
             mypage
         ]
     }
