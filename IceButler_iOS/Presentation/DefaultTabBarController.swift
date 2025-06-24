@@ -54,10 +54,8 @@ class DefaultTabBarController: UITabBarController {
         let fridge = UINavigationController(rootViewController: fridgeViewController)
         fridge.tabBarItem = fridgeTab
         
-        // 영수증 스캔 화면 (임시로 PlaceholderViewController 사용)
-        let receiptScanViewController = UIViewController()
-        receiptScanViewController.view.backgroundColor = .systemBackground
-        receiptScanViewController.title = "영수증 스캔"
+        // 영수증 스캔 화면
+        let receiptScanViewController = ReceiptScanViewController()
         let receiptScan = UINavigationController(rootViewController: receiptScanViewController)
         receiptScan.tabBarItem = receiptScanTab
         
